@@ -901,6 +901,8 @@ fetch(RAW + '/state/reviews.json?t=' + Date.now())
   .catch(() => {});
 
 const STAR = '&#9733;';
+// Reviews are hidden for now — upvotes only, to keep it simple. Flip to true to bring the review UI back.
+const SHOW_REVIEWS = false;
 
 // Compact metric strip shown on every browse card.
 function metricBadges(a) {
@@ -910,7 +912,7 @@ function metricBadges(a) {
   const bits = [];
   if (m.d) bits.push(`<span title="${m.d} download${m.d === 1 ? '' : 's'} through the jsDelivr CDN">&#8595; ${m.d}</span>`);
   if (m.u) bits.push(`<span title="${m.u} upvote${m.u === 1 ? '' : 's'}">&#9650; ${m.u}</span>`);
-  const userRevs = m.r ? m.r : 0;
+  const userRevs = SHOW_REVIEWS && m.r ? m.r : 0;
   if (userRevs) {
     const rt = m.rt ? m.rt : 0;
     bits.push(`<a href="#reviews/${encodeURIComponent(a.name)}" onclick="event.stopPropagation();openReviews('${esc(a.name)}');return false" title="Read all ${userRevs} user review${userRevs === 1 ? '' : 's'}" style="color:var(--accent);text-decoration:none">${STAR} ${rt || '–'} (${userRevs})</a>`);
@@ -938,7 +940,7 @@ function card(a) {
           <span class="cat-badge">${(a.category || '').replace(/_/g, ' ')}</span>
           <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">by ${esc(a.author)}</span>
         </span>
-        ${((ghRatings.agents?.[a.name]?.upvotes || 0) > 0 || (ghRatings.agents?.[a.name]?.downloads || 0) > 0) ? `<a href="${esc(ghRatings.agents[a.name].url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="cat-badge" style="text-decoration:none;display:inline-flex;align-items:center;gap:3px" title="GitHub Discussion — thumbs-up the post to upvote; ⬇ = unique installers">${THUMB_SVG} ${ghRatings.agents[a.name].upvotes || 0}${(ghRatings.agents[a.name].downloads || 0) > 0 ? ` &middot; &#8595;${ghRatings.agents[a.name].downloads}` : ''}</a>` : ''}
+        ${((ghRatings.agents?.[a.name]?.upvotes || 0) > 0 || (ghRatings.agents?.[a.name]?.downloads || 0) > 0) ? `<a href="${esc(ghRatings.agents[a.name].url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="cat-badge" style="text-decoration:none;display:inline-flex;align-items:center;gap:3px" title="GitHub Discussion — thumbs-up the post to upvote; ⬇ = unique installers">${(ghRatings.agents[a.name].upvotes || 0) > 0 ? `${THUMB_SVG} ${ghRatings.agents[a.name].upvotes}` : ''}${(ghRatings.agents[a.name].downloads || 0) > 0 ? `${(ghRatings.agents[a.name].upvotes || 0) > 0 ? ' &middot; ' : ''}&#8595;${ghRatings.agents[a.name].downloads}` : ''}</a>` : ''}
         ${cartBtn}
       </div>
     </div>`;
@@ -1099,8 +1101,9 @@ function metricsSection(a) {
   const cells = [
     ['Downloads', m.d ? m.d : 0, 'CDN file fetches'],
     ['Upvotes', m.u || 0, 'distinct people'],
-    ['User reviews', userRevs, userRevs && m.rt ? `${STAR} ${m.rt} average` : 'none yet']
-  ];
+    ...(SHOW_REVIEWS ? [['User reviews', userRevs, userRevs && m.rt ? `${STAR} ${m.rt} average` : 'none yet']] : [])
+  ].filter(([, v]) => v);  // main page never shows a zero — no upvotes means no upvote tile
+  if (!cells.length) return '';
   return `<div class="section">
       <h3>Metrics</h3>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
@@ -1134,6 +1137,7 @@ function reviewCard(r) {
 const REVIEW_ISSUE = name => `https://github.com/${OWNER}/${REPO_NAME}/issues/new?title=${encodeURIComponent('[RAR] review')}&body=${encodeURIComponent('```json\n{"action":"review","payload":{"agent":"' + name + '","rating":5,"text":"Your review"}}\n```')}`;
 
 function reviewsSection(a) {
+  if (!SHOW_REVIEWS) return '';
   const userRevs = userReviewsFor(a.name);
   const byDate = list => [...list].sort((x, y) => String(y.timestamp || '').localeCompare(String(x.timestamp || '')));
   const userBlock = `<div class="section" id="reviews-section">

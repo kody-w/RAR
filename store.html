@@ -4308,6 +4308,9 @@ function toggleGated() {
 // the count beside the button disagrees with the "N on GitHub" pill next to it.
 // (The opt-in "curator" heuristic overlay was retired 2026-08-18: RAR shows
 //  human upvotes and human reviews only.)
+// Reviews are hidden for now — upvotes only, to keep it simple. Flip to true to bring the review UI back.
+const SHOW_REVIEWS = false;
+
 function score(a) {
   return ghUp(a);
 }
@@ -4519,10 +4522,10 @@ function renderLeaderboard() {
   const ranked = [...allAgents].map(a => ({
     ...a, s: score(a), r: rating(a), rc: (reviews.agents?.[a.name] || []).length
   })).sort((a, b) => b.s - a.s || b.r - a.r);
-  if (!ranked.length) { document.getElementById('leaderboard-container').innerHTML = '<div class="empty-state"><h3>No human reviews yet</h3><p style="color:var(--text-dim);margin-top:8px">Browse agents in the <a href="#" onclick="switchTab(\'browse\');return false">Browse</a> tab and vote for your favorites.</p></div>'; return; }
+  if (!ranked.length) { document.getElementById('leaderboard-container').innerHTML = '<div class="empty-state"><h3>No upvotes yet</h3><p style="color:var(--text-dim);margin-top:8px">Browse agents in the <a href="#" onclick="switchTab(\'browse\');return false">Browse</a> tab and upvote your favorites.</p></div>'; return; }
 
   const srcLabel = ' <span style="font-size:.55rem;background:rgba(57,211,83,.12);color:#39d353;padding:1px 5px;border-radius:3px;font-weight:700">HUMAN</span>';
-  let h = `<table class="lb-table"><thead><tr><th>#</th><th>Agent</th><th>Tier</th><th>Category</th><th>Rating${srcLabel}</th><th>Votes${srcLabel}</th></tr></thead><tbody>`;
+  let h = `<table class="lb-table"><thead><tr><th>#</th><th>Agent</th><th>Tier</th><th>Category</th>${SHOW_REVIEWS ? `<th>Rating${srcLabel}</th>` : ''}<th>Votes${srcLabel}</th></tr></thead><tbody>`;
   ranked.slice(0, 50).forEach((a, i) => {
     const tier = a.quality_tier || 'community';
     const stars = a.r > 0 ? '&#9733;'.repeat(Math.round(a.r)) + ` ${a.r.toFixed(1)}` : '&mdash;';
@@ -4536,7 +4539,7 @@ function renderLeaderboard() {
       <td class="lb-name">${esc(a.display_name)}</td>
       <td>${sealHtml}</td>
       <td><span class="cat-badge">${a.category.replace(/_/g,' ')}</span></td>
-      <td class="lb-stars">${stars}</td>
+      ${SHOW_REVIEWS ? `<td class="lb-stars">${stars}</td>` : ''}
       <td class="lb-score">${a.s}</td></tr>`;
   });
   h += '</tbody></table>';
@@ -4859,7 +4862,7 @@ function openAgent(name) {
             <span class="cat-badge">${a.category.replace(/_/g,' ')}</span>
             ${a._stack ? `<span style="font-size:.72rem;background:rgba(88,166,255,.1);color:var(--accent);padding:2px 8px;border-radius:4px;border:1px solid rgba(88,166,255,.2);font-weight:600">${a._stack.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase())} Stack</span>` : ''}
             <span style="color:var(--text-muted);font-size:.82rem">${a._size_kb} KB &middot; ${a._lines} lines &middot; by ${esc(a.author)}</span>
-            ${avg ? `<span style="color:var(--yellow);font-size:.85rem">&#9733; ${avg} (${ar.length})</span>` : ''}
+            ${SHOW_REVIEWS && avg ? `<span style="color:var(--yellow);font-size:.85rem">&#9733; ${avg} (${ar.length})</span>` : ''}
           </div>
         </div>
       </div>
@@ -4984,7 +4987,7 @@ function openAgent(name) {
           `).join('')}
         </div>`;
       })()}
-      ${true ? `<div class="modal-section"><h3>Reviews (${ar.length})</h3>${revHtml}
+      ${SHOW_REVIEWS ? `<div class="modal-section"><h3>Reviews (${ar.length})</h3>${revHtml}
         <button class="write-review-btn" onclick="writeReview('${esc(a.name)}')">${svgIcon('pencil','#fff',14)} Write a Review</button>
       </div>` : ''}
       <div class="modal-section" style="text-align:center;padding-top:8px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
