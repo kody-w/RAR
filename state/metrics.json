@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-09-08T09:49:17Z",
+ "generated_at": "2026-09-08T17:48:45Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -9,27 +9,27 @@
   "stars": 2,
   "forks": 1,
   "watchers": 0,
-  "open_issues": 117,
-  "size_kb": 74665,
+  "open_issues": 116,
+  "size_kb": 75677,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-09-08T08:30:18Z",
+  "pushed_at": "2026-09-08T14:03:55Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
  "totals": {
-  "downloads": 2815,
-  "clones": 2743,
+  "downloads": 4703,
+  "clones": 4631,
   "cdn_hits": 72,
   "release_downloads": 0,
   "agent_file_downloads": 12,
-  "clones_excluding_ci_estimate": 951,
-  "ci_clone_estimate": 1792,
-  "page_views": 75,
-  "clone_uniques_14d": 387,
-  "view_uniques_14d": 20,
-  "clone_uniques_daily_sum": 581,
-  "view_uniques_daily_sum": 27,
-  "days_tracked": 14,
+  "clones_excluding_ci_estimate": 2895,
+  "ci_clone_estimate": 1736,
+  "page_views": 122,
+  "clone_uniques_14d": 255,
+  "view_uniques_14d": 15,
+  "clone_uniques_daily_sum": 916,
+  "view_uniques_daily_sum": 47,
+  "days_tracked": 28,
   "tracking_since": "2026-07-14",
   "agents": 1698,
   "swarms": 2,
@@ -159,87 +159,195 @@
    "clone_uniques": 0,
    "views": 0,
    "cdn": 7
+  },
+  {
+   "date": "2026-08-25",
+   "clones": 113,
+   "clone_uniques": 5,
+   "views": 4,
+   "cdn": 0
+  },
+  {
+   "date": "2026-08-26",
+   "clones": 215,
+   "clone_uniques": 21,
+   "views": 2,
+   "cdn": 0
+  },
+  {
+   "date": "2026-08-27",
+   "clones": 62,
+   "clone_uniques": 14,
+   "views": 8,
+   "cdn": 0
+  },
+  {
+   "date": "2026-08-28",
+   "clones": 258,
+   "clone_uniques": 24,
+   "views": 0,
+   "cdn": 0
+  },
+  {
+   "date": "2026-08-29",
+   "clones": 116,
+   "clone_uniques": 19,
+   "views": 5,
+   "cdn": 0
+  },
+  {
+   "date": "2026-08-30",
+   "clones": 86,
+   "clone_uniques": 17,
+   "views": 1,
+   "cdn": 0
+  },
+  {
+   "date": "2026-08-31",
+   "clones": 196,
+   "clone_uniques": 93,
+   "views": 0,
+   "cdn": 0
+  },
+  {
+   "date": "2026-09-01",
+   "clones": 202,
+   "clone_uniques": 14,
+   "views": 6,
+   "cdn": 0
+  },
+  {
+   "date": "2026-09-02",
+   "clones": 103,
+   "clone_uniques": 12,
+   "views": 8,
+   "cdn": 0
+  },
+  {
+   "date": "2026-09-03",
+   "clones": 94,
+   "clone_uniques": 25,
+   "views": 2,
+   "cdn": 0
+  },
+  {
+   "date": "2026-09-04",
+   "clones": 96,
+   "clone_uniques": 19,
+   "views": 3,
+   "cdn": 0
+  },
+  {
+   "date": "2026-09-05",
+   "clones": 103,
+   "clone_uniques": 20,
+   "views": 1,
+   "cdn": 0
+  },
+  {
+   "date": "2026-09-06",
+   "clones": 108,
+   "clone_uniques": 21,
+   "views": 5,
+   "cdn": 0
+  },
+  {
+   "date": "2026-09-07",
+   "clones": 136,
+   "clone_uniques": 31,
+   "views": 2,
+   "cdn": 0
   }
  ],
  "traffic": {
   "paths": [
    {
-    "count": 15,
     "path": "/kody-w/RAR",
     "title": "Overview",
+    "count": 12,
     "uniques": 6
    },
    {
-    "count": 4,
-    "path": "/kody-w/RAR/agents",
-    "title": "/agents",
-    "uniques": 1
-   },
-   {
-    "count": 3,
-    "path": "/kody-w/RAR/discussions/228",
-    "title": "/discussions/228",
-    "uniques": 2
-   },
-   {
-    "count": 2,
-    "path": "/kody-w/RAR/blob/main/agents/@howardh/tuftelove_agent.py",
-    "title": "/blob/main/agents/@howardh/tuftelove_agent.py",
-    "uniques": 2
-   },
-   {
-    "count": 2,
-    "path": "/kody-w/RAR/discussions/378",
-    "title": "/discussions/378",
-    "uniques": 2
-   },
-   {
-    "count": 2,
-    "path": "/kody-w/RAR/pulls",
-    "title": "/pulls",
-    "uniques": 2
-   },
-   {
-    "count": 2,
     "path": "/kody-w/RAR/tree/main/agents",
     "title": "/tree/main/agents",
+    "count": 2,
     "uniques": 2
    },
    {
+    "path": "/kody-w/RAR/blob/main/agents/@borg/borg_agent.py",
+    "title": "/blob/main/agents/@borg/borg_agent.py",
     "count": 2,
-    "path": "/kody-w/RAR/forks",
-    "title": "/forks",
     "uniques": 1
    },
    {
+    "path": "/kody-w/RAR/discussions/607",
+    "title": "/discussions/607",
     "count": 2,
-    "path": "/kody-w/RAR/issues/174",
-    "title": "/issues/174",
     "uniques": 1
    },
    {
-    "count": 2,
-    "path": "/kody-w/RAR/tree/main/agents/@aibast-agents-library/b2b_sales_stacks",
-    "title": "/tree/main/agents/@aibast-agents-library/b2b_sales_stacks",
+    "path": "/kody-w/RAR/blob/183c8aba7a7176f5c35c0b8a3f26c26e54352254/scout/bundles/cowork-cookbook-114/skills/rar-cowork-cookbook-ppt-exec-configure-and-manage-file-storage/ppt_exec_configure_and_manage_file_storage_agent.py",
+    "title": "/blob/183c8aba7a7176f5c35c0b8a3f26c26e54352254/scout/bundles/cowork-cookbook-114/skills/rar-cowork-cookbook-ppt-exec-configure-and-manage-file-storage/ppt_exec_configure_and_manage_file_storage_agent.py",
+    "count": 1,
+    "uniques": 1
+   },
+   {
+    "path": "/kody-w/RAR/blob/183c8aba7a7176f5c35c0b8a3f26c26e54352254/scout/bundles/cowork-cookbook-85/skills/rar-cowork-cookbook-dashboard-manage-file-storage/SKILL.md",
+    "title": "/blob/183c8aba7a7176f5c35c0b8a3f26c26e54352254/scout/bundles/cowork-cookbook-85/skills/rar-cowork-cookbook-dashboard-manage-file-storage/SKILL.md",
+    "count": 1,
+    "uniques": 1
+   },
+   {
+    "path": "/kody-w/RAR/blob/183c8aba7a7176f5c35c0b8a3f26c26e54352254/scout/bundles/cowork-cookbook-85/skills/rar-cowork-cookbook-dashboard-manage-file-storage/rapp/agent.lock.json",
+    "title": "/blob/183c8aba7a7176f5c35c0b8a3f26c26e54352254/scout/bundles/cowork-cookbook-85/skills/rar-cowork-cookbook-dashboard-manage-file-storage/rapp/agent.lock.json",
+    "count": 1,
+    "uniques": 1
+   },
+   {
+    "path": "/kody-w/RAR/blob/80f9989fad0aeceb745687fd2052825cd0aee4f6/scout/bundles/native-04/skills/rar-kody-w-art-generator/SKILL.md",
+    "title": "/blob/80f9989fad0aeceb745687fd2052825cd0aee4f6/scout/bundles/native-04/skills/rar-kody-w-art-generator/SKILL.md",
+    "count": 1,
+    "uniques": 1
+   },
+   {
+    "path": "/kody-w/RAR/blob/c697688e10e209fe92756b2b88efe97363a7cf4c/scout/bundles/cowork-cookbook-161/skills/rar-cowork-cookbook-scheduled-brief-plan-workforce/SKILL.md",
+    "title": "/blob/c697688e10e209fe92756b2b88efe97363a7cf4c/scout/bundles/cowork-cookbook-161/skills/rar-cowork-cookbook-scheduled-brief-plan-workforce/SKILL.md",
+    "count": 1,
+    "uniques": 1
+   },
+   {
+    "path": "/kody-w/RAR/blob/main/agents/@bill/neuron_agent.py",
+    "title": "/blob/main/agents/@bill/neuron_agent.py",
+    "count": 1,
     "uniques": 1
    }
   ],
   "referrers": [
    {
-    "count": 57,
     "referrer": "github.com",
-    "uniques": 15
+    "count": 23,
+    "uniques": 8
    },
    {
-    "count": 2,
+    "referrer": "kody-w.github.io",
+    "count": 7,
+    "uniques": 2
+   },
+   {
     "referrer": "Bing",
+    "count": 5,
+    "uniques": 1
+   },
+   {
+    "referrer": "Google",
+    "count": 1,
     "uniques": 1
    }
   ],
-  "clones_14d": 2743,
-  "views_14d": 75,
-  "live": false,
-  "as_of": "2026-07-28T19:07:50Z"
+  "clones_14d": 1888,
+  "views_14d": 47,
+  "live": true,
+  "as_of": "2026-09-08T17:48:45Z"
  },
  "cdn": {
   "total_hits": 72,
