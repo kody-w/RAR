@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-09-08T17:48:45Z",
+ "generated_at": "2026-09-09T09:52:37Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,9 +10,9 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 116,
-  "size_kb": 75677,
+  "size_kb": 101182,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-09-08T14:03:55Z",
+  "pushed_at": "2026-09-09T08:32:59Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -31,12 +31,12 @@
   "view_uniques_daily_sum": 47,
   "days_tracked": 28,
   "tracking_since": "2026-07-14",
-  "agents": 1698,
+  "agents": 1700,
   "swarms": 2,
   "publishers": 11,
   "categories": 13,
-  "total_lines": 411253,
-  "total_kb": 21412.2,
+  "total_lines": 530102,
+  "total_kb": 31056.8,
   "votes": 1,
   "upvotes": 1,
   "voters": 1,
@@ -347,12 +347,12 @@
   "clones_14d": 1888,
   "views_14d": 47,
   "live": true,
-  "as_of": "2026-09-08T17:48:45Z"
+  "as_of": "2026-09-09T09:52:37Z"
  },
  "cdn": {
   "total_hits": 72,
   "bandwidth": 3670545,
-  "rank": 2003660,
+  "rank": 2010072,
   "agent_hits": 12,
   "files": [
    {
@@ -768,6 +768,40 @@
   ],
   "newest": [
    {
+    "name": "@cat-agent-skills/breathing_room",
+    "display_name": "Breathing Room",
+    "publisher": "@cat-agent-skills",
+    "category": "general",
+    "tier": "frontier",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 262,
+    "size_kb": 12.2,
+    "added_at": "2026-09-08T16:38:03-04:00",
+    "file": "agents/@cat-agent-skills/breathing_room_agent.py",
+    "description": "Shows where your own week has room to breathe and where it does not, from your calendar and what you send: meeting density, back-to-back runs, deep-work blocks, evenings and weekends, and the load already building three to ten days out. When a day or a coming week is overloaded it points to the most movable meetings, and it recognises time off rather than reading it as a quiet week. Reports on yo\u2026"
+   },
+   {
+    "name": "@cat-agent-skills/holiday_recap",
+    "display_name": "Holiday Recap",
+    "publisher": "@cat-agent-skills",
+    "category": "productivity",
+    "tier": "frontier",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 262,
+    "size_kb": 12.3,
+    "added_at": "2026-09-08T16:38:03-04:00",
+    "file": "agents/@cat-agent-skills/holiday_recap_agent.py",
+    "description": "Catch up after annual leave in one pass \u2014 a single prioritised briefing of the mail, meetings, and Teams conversations you missed, with deep links and one-click follow-up actions."
+   },
+   {
     "name": "@kody-w/host_compat_agent",
     "display_name": "Host Compat",
     "publisher": "@kody-w",
@@ -846,8 +880,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 188,
-    "size_kb": 8.9,
+    "lines": 262,
+    "size_kb": 12.2,
     "added_at": "2026-08-28T04:52:39Z",
     "file": "agents/@cat-agent-skills/agent_performance_triage_agent.py",
     "description": "Turn a live agent's analytics and transcripts into a diagnosis and a prioritized improvement backlog."
@@ -863,8 +897,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 188,
-    "size_kb": 9.2,
+    "lines": 262,
+    "size_kb": 12.5,
     "added_at": "2026-08-28T04:52:39Z",
     "file": "agents/@cat-agent-skills/agent_red_team_agent.py",
     "description": "Adversarial assurance review for agents you own: prompt injection, oversharing, leakage and tool misuse, mapped to fixes."
@@ -880,11 +914,11 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 190,
-    "size_kb": 10.3,
+    "lines": 265,
+    "size_kb": 16.7,
     "added_at": "2026-08-28T04:52:39Z",
     "file": "agents/@cowork-cookbook/3d_warehouse_heatmap_agent.py",
-    "description": "Generates a self-contained 3D HTML visualization of warehouse bins colored by fill percentage or inventory value, navigable in any browser."
+    "description": "Reads on-hand inventory by location for one warehouse in Dynamics 365 F&SCM and returns a standalone interactive 3D HTML file of bins colored by fill percentage, labeled by item count."
    },
    {
     "name": "@cowork-cookbook/account_360_briefing",
@@ -897,11 +931,11 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 190,
-    "size_kb": 10.3,
+    "lines": 265,
+    "size_kb": 17.4,
     "added_at": "2026-08-28T04:52:39Z",
     "file": "agents/@cowork-cookbook/account_360_briefing_agent.py",
-    "description": "Assembles everything Dynamics 365 Sales knows about a named account into a single briefing document you can read before a meeting."
+    "description": "Builds a read-only Account 360 briefing pack from Dynamics 365 Sales for one named account \u2014 profile, contacts, open and closed opportunities, activity timeline, and risks \u2014 as 'account-briefing.docx'. Call before a cust"
    },
    {
     "name": "@cowork-cookbook/adaptive_card_adjust_inventory_levels",
@@ -914,11 +948,11 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 190,
-    "size_kb": 10.4,
+    "lines": 265,
+    "size_kb": 16.3,
     "added_at": "2026-08-28T04:52:39Z",
     "file": "agents/@cowork-cookbook/adaptive_card_adjust_inventory_levels_agent.py",
-    "description": "Produces a reusable Adaptive Card JSON snapshot of adjust inventory levels status for embedding in dashboards, emails, or Teams."
+    "description": "Generates a read-only Adaptive Card JSON file visualizing adjust-inventory-levels status from Dynamics 365 F&SCM (legal entity USMF), with header, KPI tiles, RAG row, and action buttons."
    },
    {
     "name": "@cowork-cookbook/adaptive_card_adjust_production_plan",
@@ -931,11 +965,11 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 190,
-    "size_kb": 10.4,
+    "lines": 265,
+    "size_kb": 16.4,
     "added_at": "2026-08-28T04:52:39Z",
     "file": "agents/@cowork-cookbook/adaptive_card_adjust_production_plan_agent.py",
-    "description": "Produces a reusable Adaptive Card JSON snapshot of adjust production plan status for embedding in dashboards, emails, or Teams."
+    "description": "Generates a read-only Adaptive Card JSON file visualizing adjust production plan status from Dynamics 365 F&SCM for a given legal entity, with header, KPI tiles, RAG row, and action buttons."
    },
    {
     "name": "@cowork-cookbook/adaptive_card_allocate_goods",
@@ -948,11 +982,11 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 190,
-    "size_kb": 10.3,
+    "lines": 265,
+    "size_kb": 16.2,
     "added_at": "2026-08-28T04:52:39Z",
     "file": "agents/@cowork-cookbook/adaptive_card_allocate_goods_agent.py",
-    "description": "Produces a reusable Adaptive Card JSON snapshot of allocate goods status for embedding in dashboards, emails, or Teams."
+    "description": "Generates a read-only Adaptive Card JSON file visualizing allocate goods status from Dynamics 365 F&SCM for a legal entity, with header, KPI tiles, RAG row, and action buttons."
    },
    {
     "name": "@cowork-cookbook/adaptive_card_analyze_and_segment_customers_and_markets",
@@ -965,11 +999,11 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 190,
-    "size_kb": 10.6,
+    "lines": 265,
+    "size_kb": 16.7,
     "added_at": "2026-08-28T04:52:39Z",
     "file": "agents/@cowork-cookbook/adaptive_card_analyze_and_segment_customers_and_markets_agent.py",
-    "description": "Produces a reusable Adaptive Card JSON snapshot of analyze and segment customers and markets status for embedding in dashboards, emails, or Teams."
+    "description": "Generates a read-only Adaptive Card JSON file summarizing customer and market segmentation status from Dynamics 365 F&SCM, with KPI tiles, RAG row, and action buttons for Teams, Outlook, or dashboards."
    },
    {
     "name": "@cowork-cookbook/adaptive_card_analyze_asset_utilization",
@@ -982,45 +1016,11 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 190,
-    "size_kb": 10.4,
+    "lines": 265,
+    "size_kb": 16.5,
     "added_at": "2026-08-28T04:52:39Z",
     "file": "agents/@cowork-cookbook/adaptive_card_analyze_asset_utilization_agent.py",
-    "description": "Produces a reusable Adaptive Card JSON snapshot of analyze asset utilization status for embedding in dashboards, emails, or Teams."
-   },
-   {
-    "name": "@cowork-cookbook/adaptive_card_analyze_customer_risk",
-    "display_name": "Analyze customer risk Status Adaptive Card",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 190,
-    "size_kb": 10.3,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/adaptive_card_analyze_customer_risk_agent.py",
-    "description": "Produces a reusable Adaptive Card JSON snapshot of analyze customer risk status for embedding in dashboards, emails, or Teams."
-   },
-   {
-    "name": "@cowork-cookbook/adaptive_card_analyze_marketing_trends",
-    "display_name": "Analyze marketing trends Status Adaptive Card",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 190,
-    "size_kb": 10.4,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/adaptive_card_analyze_marketing_trends_agent.py",
-    "description": "Produces a reusable Adaptive Card JSON snapshot of analyze marketing trends status for embedding in dashboards, emails, or Teams."
+    "description": "Generates a read-only Adaptive Card JSON file visualizing asset utilization status from Dynamics 365 F&SCM for a given legal entity, with KPI tiles, trend arrows, a RAG row, and action buttons."
    }
   ],
   "publishers": [
@@ -1030,16 +1030,16 @@
     "downloads": 0,
     "score": 0,
     "reviews": 0,
-    "lines": 281390,
+    "lines": 392465,
     "rating": 0.0
    },
    {
     "name": "@cat-agent-skills",
-    "agents": 95,
+    "agents": 97,
     "downloads": 0,
     "score": 0,
     "reviews": 0,
-    "lines": 17860,
+    "lines": 25414,
     "rating": 0.0
    },
    {
@@ -1048,7 +1048,7 @@
     "downloads": 4,
     "score": 1,
     "reviews": 1,
-    "lines": 66361,
+    "lines": 66581,
     "rating": 5.0
    },
    {
@@ -1127,7 +1127,7 @@
   "categories": [
    {
     "name": "integrations",
-    "agents": 1475,
+    "agents": 1476,
     "downloads": 0,
     "score": 0,
     "reviews": 0
@@ -1141,7 +1141,7 @@
    },
    {
     "name": "productivity",
-    "agents": 44,
+    "agents": 45,
     "downloads": 4,
     "score": 0,
     "reviews": 0
@@ -1220,7 +1220,7 @@
   "tiers": {
    "community": 1274,
    "verified": 281,
-   "frontier": 95,
+   "frontier": 97,
    "official": 46,
    "private": 2
   }
