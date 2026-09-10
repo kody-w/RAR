@@ -12,7 +12,7 @@ portfolio, projects, meetings, people, and a `rapp-projects/` frame authority).
 | File | Purpose |
 |---|---|
 | `factory_agent.py` | Drop into your local brainstem `agents/`. Plants new workspaces. |
-| `workspace_neuron_agent.py` | Tool-form neuron. Drop into `agents/@rapp/` alongside it. No install step — the brainstem's agent loader picks it up as a callable tool that returns a compact, PII-free `[Knowledge Base]` block of the spec's setup/operating rules. Also published standalone at [`agents/@rapp/workspace_neuron_agent.py`](../../agents/@rapp/workspace_neuron_agent.py). |
+| `workspace_neuron_agent.py` | Tool-form neuron. Drop into `agents/@rapp/` alongside it. No install step — the brainstem's agent loader picks it up as a callable tool that returns a compact, PII-free `[Knowledge Base]` block of the spec's setup/operating rules. Lives only under `stacks/` — not submitted to RAR's canonical `agents/` registry, which is gated by the GitHub Issue notarization workflow (see `CONSTITUTION.md`), not a pull request. |
 | `neurons/@rapp/*.neuron.json` (5 files) | Storage-form twin of the exact same knowledge, generated from the same source so the two never drift. For a CommunityRAPP-style backend: install with `install_neurons.py` (Bill Whalen's pattern, see `@bill/neuron_agent.py`) so it lands in the Web UI's system prompt automatically — no tool call needed. |
 | `rapp-workspace-starter.egg` | The template content — a `rapp/1` §9 organism egg, PII-free, `verify_egg`-clean. |
 

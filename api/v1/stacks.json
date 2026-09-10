@@ -1,7 +1,7 @@
 {
   "schema": "rar-stacks/1.0",
   "description": "Every RAR stack — a drop-in pack (agent(s) + optional .egg + pack.json sha256 manifest) that plants something bigger than a single agent: a neighborhood, a fleet controller, a lifecycle kit, or a private rapp-workspace/1.1 vault. Each stack's files are individually sha256-pinned and independently fetchable — a client can take a whole stack or cherry-pick files across stacks since every entry is a content-addressed manifest.",
-  "generated": "2026-09-10T19:19:50Z",
+  "generated": "2026-09-10T19:24:01Z",
   "count": 5,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/stacks.json",
   "stacks": [
@@ -177,7 +177,7 @@
           "raw_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/rapp-workspace-starter/factory_agent.py"
         },
         "workspace_neuron_agent.py": {
-          "purpose": "Optional, tool-form. Drop into local brainstem agents/@rapp/ alongside the factory. Injects a compact [Knowledge Base] of rapp-workspace/1.1 + rapp/1 setup and operating rules (anatomy, identity/mint-once, privacy posture, the egg contract, the frame authority) — generic and PII-free, never owner-specific. No install step; the brainstem's agent loader picks it up as a callable tool. Keeps that knowledge out of every planted workspace's CLAUDE.md/README.md prose. Also published standalone at agents/@rapp/workspace_neuron_agent.py.",
+          "purpose": "Optional, tool-form. Drop into local brainstem agents/@rapp/ alongside the factory. Injects a compact [Knowledge Base] of rapp-workspace/1.1 + rapp/1 setup and operating rules (anatomy, identity/mint-once, privacy posture, the egg contract, the frame authority) — generic and PII-free, never owner-specific. No install step; the brainstem's agent loader picks it up as a callable tool. Keeps that knowledge out of every planted workspace's CLAUDE.md/README.md prose. Lives only under stacks/ — not submitted to RAR's canonical agents/ registry, which is gated by the GitHub Issue notarization workflow (see CONSTITUTION.md), not a pull request.",
           "size": 15967,
           "sha256": "44605ba583e68fac5f3131a474ae1332f55adbd79723e78f62825e98b390d5be",
           "raw_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/rapp-workspace-starter/workspace_neuron_agent.py"

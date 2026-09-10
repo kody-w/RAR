@@ -11,7 +11,7 @@
       "sha256": "aa2b45c922d27a7ce1007313d5093ca60e5caf056600267c574b8033479de2e7"
     },
     "workspace_neuron_agent.py": {
-      "purpose": "Optional, tool-form. Drop into local brainstem agents/@rapp/ alongside the factory. Injects a compact [Knowledge Base] of rapp-workspace/1.1 + rapp/1 setup and operating rules (anatomy, identity/mint-once, privacy posture, the egg contract, the frame authority) \u2014 generic and PII-free, never owner-specific. No install step; the brainstem's agent loader picks it up as a callable tool. Keeps that knowledge out of every planted workspace's CLAUDE.md/README.md prose. Also published standalone at agents/@rapp/workspace_neuron_agent.py.",
+      "purpose": "Optional, tool-form. Drop into local brainstem agents/@rapp/ alongside the factory. Injects a compact [Knowledge Base] of rapp-workspace/1.1 + rapp/1 setup and operating rules (anatomy, identity/mint-once, privacy posture, the egg contract, the frame authority) \u2014 generic and PII-free, never owner-specific. No install step; the brainstem's agent loader picks it up as a callable tool. Keeps that knowledge out of every planted workspace's CLAUDE.md/README.md prose. Lives only under stacks/ \u2014 not submitted to RAR's canonical agents/ registry, which is gated by the GitHub Issue notarization workflow (see CONSTITUTION.md), not a pull request.",
       "size": 15967,
       "sha256": "44605ba583e68fac5f3131a474ae1332f55adbd79723e78f62825e98b390d5be"
     },

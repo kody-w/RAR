@@ -1,7 +1,7 @@
 {
   "schema": "rar-audience-map/1.0",
   "description": "Compact audience verdict per agent, for clients that already have the registry and only need to filter it. b=business, c=consumer, x=both. Absent means both.",
-  "generated": "2026-09-10T19:19:44Z",
+  "generated": "2026-09-10T19:23:35Z",
   "legend": {
     "b": "business",
     "c": "consumer",
@@ -10,9 +10,9 @@
   "counts": {
     "business_only": 408,
     "consumer_only": 3,
-    "both": 1290,
-    "in_business_mode": 1698,
-    "in_consumer_mode": 1293
+    "both": 1289,
+    "in_business_mode": 1697,
+    "in_consumer_mode": 1292
   },
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/map.json",
   "map": {
@@ -1708,7 +1708,6 @@
     "@rapp/swarm_factory_agent": "x",
     "@rapp/twin_agent": "x",
     "@rapp/vibe_builder_agent": "x",
-    "@rapp/workspace_neuron_agent": "x",
     "@rapter/hive_census_agent": "x",
     "@rapter/hive_shape_agent": "x",
     "@rapter/rapp_dogg_agent": "x",
@@ -8484,10 +8483,6 @@
       "c": 0.0
     },
     "@rapp/vibe_builder_agent": {
-      "b": 0.0,
-      "c": 0.0
-    },
-    "@rapp/workspace_neuron_agent": {
       "b": 0.0,
       "c": 0.0
     },
