@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-09-08T20:45:11Z",
-  "count": 1697,
+  "generated": "2026-09-10T19:19:44Z",
+  "count": 1698,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
     {
@@ -62084,6 +62084,43 @@
         "lines": 532,
         "size_kb": 20.2,
         "added_at": "2026-04-27T21:15:33Z"
+      }
+    },
+    {
+      "id": "rapp__workspace_neuron_agent",
+      "name": "@rapp/workspace_neuron_agent",
+      "display_name": "WorkspaceNeuron",
+      "description": "Injects a compact, PII-free Knowledge Base of rapp-workspace/1.1 setup and operating rules into the brainstem prompt — so a planted workspace's own .md files don't have to carry that generic knowledge as prose.",
+      "version": "1.0.0",
+      "publisher": "@rapp",
+      "author": "RAPP",
+      "category": "core",
+      "tags": [
+        "memory",
+        "neuron",
+        "knowledge-base",
+        "bootstrap",
+        "rapp-workspace",
+        "rapp-1",
+        "egg",
+        "frames"
+      ],
+      "quality_tier": "reference",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@rapp/workspace_neuron_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/workspace_neuron_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/workspace_neuron_agent.py",
+        "sha256": "44605ba583e68fac5f3131a474ae1332f55adbd79723e78f62825e98b390d5be"
+      },
+      "stats": {
+        "lines": 263,
+        "size_kb": 15.6,
+        "added_at": null
       }
     },
     {

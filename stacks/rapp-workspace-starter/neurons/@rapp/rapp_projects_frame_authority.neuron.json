@@ -1,0 +1,49 @@
+{
+  "schema": "rapp-neuron/1.0",
+  "id": "rapp_projects_frame_authority",
+  "name": "rapp-workspace/1.1 §8/§9 — the rapp-projects frame authority",
+  "version": "1.1.0",
+  "category": "rapp-workspace",
+  "description": "Frames-as-authority, leases, and fork recovery for multi-operator project state.",
+  "scope": "shared",
+  "author": "RAPP",
+  "memories": [
+    {
+      "memory_type": "fact",
+      "content": "Project state lives as append-only rapp/1 frame streams under rapp-projects/projects/<slug>/frames/*.json, hash-chained by prev. Boards, indexes, and status docs are DERIVED projections — regenerate them from the frames, never hand-edit them out of sync with the chain.",
+      "tags": [
+        "frames",
+        "authority",
+        "projection"
+      ]
+    },
+    {
+      "memory_type": "fact",
+      "content": "Frame kinds: project.genesis, work.punchin, work.heartbeat, work.checkpoint, work.status, work.handoff, work.takeover, work.punchout, project.verify. Every one of these is itself a frame in the chain — leases and their history are auditable, not a side-channel.",
+      "tags": [
+        "frames",
+        "kinds",
+        "leases"
+      ]
+    },
+    {
+      "memory_type": "gotcha",
+      "content": "A hive workspace (mode: hive) forces RAPP_REQUIRE_LEASE=1 — strict mode is mandatory, not optional, once more than one operator can write to the same store. Solo-mode workspaces don't need this, but should still punch in/out cleanly if they ever add a second operator later.",
+      "tags": [
+        "leases",
+        "hive",
+        "strict-mode",
+        "gotcha"
+      ]
+    },
+    {
+      "memory_type": "pattern",
+      "content": "Sync loop for a hive: pull (rebase) → verify all chains → punchin → work (frame at every phase boundary) → punchout → pre-push gate → commit → push. Push soon after punchin — an unpushed lease protects nobody. A fork (two operators pushing frames sharing a seq) is caught deterministically by chain verification; recovery is append-only (quarantine the losing frame into frames/_forked/, never delete it, re-append with recovered_from).",
+      "tags": [
+        "sync-loop",
+        "fork-recovery",
+        "pattern"
+      ]
+    }
+  ]
+}

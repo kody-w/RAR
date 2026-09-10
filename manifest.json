@@ -6,7 +6,7 @@
   "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
   "cdn_base": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main",
   "pages_base": "https://kody-w.github.io/RAR",
-  "generated": "2026-09-08T20:45:12Z",
+  "generated": "2026-09-10T19:19:44Z",
   "cors": "open — GitHub raw and jsDelivr both send Access-Control-Allow-Origin: *",
   "auth": "none",
   "stability": "Agent source paths are frozen permanently under CONSTITUTION.md Article XXIII and verified in CI on every pull request. A URL that resolves today resolves forever.",
@@ -63,6 +63,10 @@
     "pokedex": {
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/index.json",
       "description": "Federation feed consumed by the rapp-zoo. Separate shape, maintained by build_pokedex_api.py."
+    },
+    "stacks": {
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/stacks.json",
+      "description": "Drop-in stacks (agent(s) + optional rapp/1 §9 .egg + sha256-pinned pack.json) — neighborhoods, fleet/lifecycle kits, and rapp-workspace/1.1 vaults. Separate shape, maintained by build_stacks_api.py."
     }
   },
   "recipes": {

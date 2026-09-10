@@ -1,7 +1,7 @@
 {
   "schema": "rar-match/1.0",
   "description": "Precomputed use-case matching. A host application asks the user to describe a use case, tokenizes it, sums the term weights from `index`, and returns the top agents — entirely client-side, with no backend and no GitHub access.",
-  "generated": "2026-09-08T20:45:12Z",
+  "generated": "2026-09-10T19:19:44Z",
   "how_to_query": {
     "canonical": "Look up a use_cases[].id for a curated, ranked list.",
     "free_text": "Lowercase the query, split on non-alphanumerics, drop tokens of 2 characters or fewer, then for each token read index[token] (entries are 'agent_id:weight'). Sum weights per agent_id and sort descending."
@@ -17,84 +17,84 @@
           "name": "@cowork-cookbook/win_loss_theme_analysis",
           "display_name": "Win/Loss Theme Analysis",
           "audience": "both",
-          "score": 129.86
+          "score": 129.9
         },
         {
           "id": "kody-w__deal_desk_agent",
           "name": "@kody-w/deal_desk_agent",
           "display_name": "DealDesk",
           "audience": "business",
-          "score": 127.62
+          "score": 127.66
         },
         {
           "id": "cowork-cookbook__report_forecast_revenue",
           "name": "@cowork-cookbook/report_forecast_revenue",
           "display_name": "Forecast revenue Summary Report",
           "audience": "business",
-          "score": 88.63
+          "score": 88.65
         },
         {
           "id": "cowork-cookbook__teams_update_forecast_revenue",
           "name": "@cowork-cookbook/teams_update_forecast_revenue",
           "display_name": "Forecast revenue Teams Channel Update",
           "audience": "business",
-          "score": 88.63
+          "score": 88.65
         },
         {
           "id": "cowork-cookbook__opportunity_slip_risk_analysis",
           "name": "@cowork-cookbook/opportunity_slip_risk_analysis",
           "display_name": "Opportunity Slip-Risk Analysis",
           "audience": "business",
-          "score": 75.51
+          "score": 75.53
         },
         {
           "id": "cowork-cookbook__prep_for_my_1_1_with_a_seller",
           "name": "@cowork-cookbook/prep_for_my_1_1_with_a_seller",
           "display_name": "Prep for my 1:1 with a seller",
           "audience": "business",
-          "score": 69.1
+          "score": 69.12
         },
         {
           "id": "cowork-cookbook__stalled_opportunity_reengagement",
           "name": "@cowork-cookbook/stalled_opportunity_reengagement",
           "display_name": "Stalled Opportunity Re-Engagement List",
           "audience": "both",
-          "score": 62.08
+          "score": 62.1
         },
         {
           "id": "cowork-cookbook__customer_revenue_globe",
           "name": "@cowork-cookbook/customer_revenue_globe",
           "display_name": "Customer Revenue 3D Globe Visualization",
           "audience": "business",
-          "score": 59.17
+          "score": 59.19
         },
         {
           "id": "cowork-cookbook__bulk_update_forecast_sales",
           "name": "@cowork-cookbook/bulk_update_forecast_sales",
           "display_name": "Forecast sales Bulk Field Update",
           "audience": "business",
-          "score": 56.69
+          "score": 56.7
         },
         {
           "id": "cowork-cookbook__scheduled_brief_forecast_sales",
           "name": "@cowork-cookbook/scheduled_brief_forecast_sales",
           "display_name": "Forecast sales Scheduled Email Brief",
           "audience": "business",
-          "score": 56.69
+          "score": 56.7
         },
         {
           "id": "cowork-cookbook__adaptive_card_identify_opportunity",
           "name": "@cowork-cookbook/adaptive_card_identify_opportunity",
           "display_name": "Identify opportunity Status Adaptive Card",
           "audience": "both",
-          "score": 53.73
+          "score": 53.74
         },
         {
           "id": "cowork-cookbook__bulk_update_analyze_revenue",
           "name": "@cowork-cookbook/bulk_update_analyze_revenue",
           "display_name": "Analyze revenue Bulk Field Update",
           "audience": "business",
-          "score": 53.73
+          "score": 53.74
         }
       ]
     },
@@ -108,84 +108,84 @@
           "name": "@cowork-cookbook/account_360_briefing",
           "display_name": "Account 360 Briefing Pack",
           "audience": "both",
-          "score": 148.92
+          "score": 148.96
         },
         {
           "id": "cowork-cookbook__prep_for_next_customer_meeting",
           "name": "@cowork-cookbook/prep_for_next_customer_meeting",
           "display_name": "Prep for my next customer meeting",
           "audience": "business",
-          "score": 142.23
+          "score": 142.27
         },
         {
           "id": "cowork-cookbook__analyst_briefing_prep_and_rehearsal_routing",
           "name": "@cowork-cookbook/analyst_briefing_prep_and_rehearsal_routing",
           "display_name": "Analyst briefing prep and rehearsal routing",
           "audience": "both",
-          "score": 119.17
+          "score": 119.2
         },
         {
           "id": "kody-w__recon_deck_agent",
           "name": "@kody-w/recon_deck_agent",
           "display_name": "ReconDeck",
           "audience": "both",
-          "score": 106.63
+          "score": 106.66
         },
         {
           "id": "howardh__chief_of_staff_agent",
           "name": "@howardh/chief_of_staff_agent",
           "display_name": "ChiefOfStaff",
           "audience": "both",
-          "score": 102.74
+          "score": 102.76
         },
         {
           "id": "cowork-cookbook__prepare_for_a_customer_meeting_deep",
           "name": "@cowork-cookbook/prepare_for_a_customer_meeting_deep",
           "display_name": "Prepare for a customer meeting",
           "audience": "business",
-          "score": 97.45
+          "score": 97.48
         },
         {
           "id": "cowork-cookbook__build_an_account_research_brief",
           "name": "@cowork-cookbook/build_an_account_research_brief",
           "display_name": "Build an account research brief",
           "audience": "business",
-          "score": 92.57
+          "score": 92.6
         },
         {
           "id": "kody-w__deal_desk_agent",
           "name": "@kody-w/deal_desk_agent",
           "display_name": "DealDesk",
           "audience": "business",
-          "score": 73.29
+          "score": 73.31
         },
         {
           "id": "cat-agent-skills__meeting_analyzer",
           "name": "@cat-agent-skills/meeting_analyzer",
           "display_name": "Meeting Analyzer",
           "audience": "both",
-          "score": 71.66
+          "score": 71.68
         },
         {
           "id": "cowork-cookbook__prep_for_my_1_1_with_a_seller",
           "name": "@cowork-cookbook/prep_for_my_1_1_with_a_seller",
           "display_name": "Prep for my 1:1 with a seller",
           "audience": "business",
-          "score": 67.8
+          "score": 67.82
         },
         {
           "id": "cowork-cookbook__stand_up_an_account_plan_board",
           "name": "@cowork-cookbook/stand_up_an_account_plan_board",
           "display_name": "Stand up an account plan board",
           "audience": "business",
-          "score": 60.7
+          "score": 60.71
         },
         {
           "id": "cowork-cookbook__research_and_insights_alignment_recap",
           "name": "@cowork-cookbook/research_and_insights_alignment_recap",
           "display_name": "Research and insights alignment recap",
           "audience": "both",
-          "score": 54.52
+          "score": 54.53
         }
       ]
     },
@@ -199,84 +199,84 @@
           "name": "@howardh/chief_of_staff_agent",
           "display_name": "ChiefOfStaff",
           "audience": "both",
-          "score": 99.22
+          "score": 99.25
         },
         {
           "id": "cat-agent-skills__agent_performance_triage",
           "name": "@cat-agent-skills/agent_performance_triage",
           "display_name": "Agent Performance Triage",
           "audience": "both",
-          "score": 74.41
+          "score": 74.44
         },
         {
           "id": "cowork-cookbook__scheduled_brief_issue_customer_credits",
           "name": "@cowork-cookbook/scheduled_brief_issue_customer_credits",
           "display_name": "Issue customer credits Scheduled Email Brief",
           "audience": "business",
-          "score": 63.67
+          "score": 63.69
         },
         {
           "id": "cowork-cookbook__teams_update_issue_customer_credits",
           "name": "@cowork-cookbook/teams_update_issue_customer_credits",
           "display_name": "Issue customer credits Teams Channel Update",
           "audience": "business",
-          "score": 63.67
+          "score": 63.69
         },
         {
           "id": "cowork-cookbook__case_heatmap_html",
           "name": "@cowork-cookbook/case_heatmap_html",
           "display_name": "Customer Service Case Heatmap (HTML)",
           "audience": "business",
-          "score": 60.72
+          "score": 60.74
         },
         {
           "id": "cowork-cookbook__audit_coordinate_service_work_with_customer",
           "name": "@cowork-cookbook/audit_coordinate_service_work_with_customer",
           "display_name": "Coordinate service work with customer Completeness Audit",
           "audience": "business",
-          "score": 59.41
+          "score": 59.42
         },
         {
           "id": "cowork-cookbook__demo_data_coordinate_service_work_with_customer",
           "name": "@cowork-cookbook/demo_data_coordinate_service_work_with_customer",
           "display_name": "Coordinate service work with customer Demo Data Generator",
           "audience": "business",
-          "score": 59.41
+          "score": 59.42
         },
         {
           "id": "cowork-cookbook__adaptive_card_develop_support_transition_strategy",
           "name": "@cowork-cookbook/adaptive_card_develop_support_transition_strategy",
           "display_name": "Develop support transition strategy Status Adaptive Card",
           "audience": "both",
-          "score": 49.74
+          "score": 49.76
         },
         {
           "id": "cowork-cookbook__adaptive_card_provide_ongoing_support",
           "name": "@cowork-cookbook/adaptive_card_provide_ongoing_support",
           "display_name": "Provide ongoing support Status Adaptive Card",
           "audience": "both",
-          "score": 49.74
+          "score": 49.76
         },
         {
           "id": "cowork-cookbook__bulk_update_manage_support_incidents",
           "name": "@cowork-cookbook/bulk_update_manage_support_incidents",
           "display_name": "Manage support incidents Bulk Field Update",
           "audience": "both",
-          "score": 49.74
+          "score": 49.76
         },
         {
           "id": "cowork-cookbook__configure_manage_support_incidents",
           "name": "@cowork-cookbook/configure_manage_support_incidents",
           "display_name": "Manage support incidents Configuration Bulk Setup",
           "audience": "both",
-          "score": 49.74
+          "score": 49.76
         },
         {
           "id": "cowork-cookbook__dashboard_establish_support_procedures_and_policies",
           "name": "@cowork-cookbook/dashboard_establish_support_procedures_and_policies",
           "display_name": "Establish support procedures and policies Interactive HTML Dashboard",
           "audience": "both",
-          "score": 49.74
+          "score": 49.76
         }
       ]
     },
@@ -290,84 +290,84 @@
           "name": "@cat-agent-skills/vendor_contract_risk_review",
           "display_name": "Vendor Contract Risk Review",
           "audience": "business",
-          "score": 160.7
+          "score": 160.74
         },
         {
           "id": "cowork-cookbook__bulk_update_conduct_a_compliance_risk_assessment",
           "name": "@cowork-cookbook/bulk_update_conduct_a_compliance_risk_assessment",
           "display_name": "Conduct a compliance risk assessment Bulk Field Update",
           "audience": "business",
-          "score": 62.26
+          "score": 62.28
         },
         {
           "id": "cowork-cookbook__configure_conduct_a_compliance_risk_assessment",
           "name": "@cowork-cookbook/configure_conduct_a_compliance_risk_assessment",
           "display_name": "Conduct a compliance risk assessment Configuration Bulk Setup",
           "audience": "business",
-          "score": 62.26
+          "score": 62.28
         },
         {
           "id": "cowork-cookbook__commit_risk_review",
           "name": "@cowork-cookbook/commit_risk_review",
           "display_name": "Commit risk review",
           "audience": "business",
-          "score": 60.29
+          "score": 60.3
         },
         {
           "id": "discreetRappers__sharepoint_contract_analysis_agent",
           "name": "@discreetRappers/sharepoint_contract_analysis_agent",
           "display_name": "ContractAnalysis",
           "audience": "business",
-          "score": 56.77
+          "score": 56.79
         },
         {
           "id": "cowork-cookbook__dashboard_contract_suppliers_for_goods",
           "name": "@cowork-cookbook/dashboard_contract_suppliers_for_goods",
           "display_name": "Contract suppliers for goods Interactive HTML Dashboard",
           "audience": "business",
-          "score": 50.25
+          "score": 50.27
         },
         {
           "id": "cowork-cookbook__ppt_exec_contract_suppliers_for_goods",
           "name": "@cowork-cookbook/ppt_exec_contract_suppliers_for_goods",
           "display_name": "Contract suppliers for goods Executive PowerPoint Deck",
           "audience": "business",
-          "score": 50.25
+          "score": 50.27
         },
         {
           "id": "cowork-cookbook__scheduled_brief_contract_suppliers_for_services",
           "name": "@cowork-cookbook/scheduled_brief_contract_suppliers_for_services",
           "display_name": "Contract suppliers for services Scheduled Email Brief",
           "audience": "business",
-          "score": 50.25
+          "score": 50.27
         },
         {
           "id": "cowork-cookbook__teams_update_contract_suppliers_for_services",
           "name": "@cowork-cookbook/teams_update_contract_suppliers_for_services",
           "display_name": "Contract suppliers for services Teams Channel Update",
           "audience": "business",
-          "score": 50.25
+          "score": 50.27
         },
         {
           "id": "cowork-cookbook__pipeline_risk_and_next_best_actions_review",
           "name": "@cowork-cookbook/pipeline_risk_and_next_best_actions_review",
           "display_name": "Pipeline risk and next-best-actions review",
           "audience": "business",
-          "score": 50.07
+          "score": 50.08
         },
         {
           "id": "cowork-cookbook__blueprint_procurement_spend_review",
           "name": "@cowork-cookbook/blueprint_procurement_spend_review",
           "display_name": "Procurement Spend & Supplier Risk Blueprint",
           "audience": "business",
-          "score": 48.46
+          "score": 48.47
         },
         {
           "id": "cowork-cookbook__opportunity_slip_risk_analysis",
           "name": "@cowork-cookbook/opportunity_slip_risk_analysis",
           "display_name": "Opportunity Slip-Risk Analysis",
           "audience": "business",
-          "score": 48.43
+          "score": 48.44
         }
       ]
     },
@@ -381,84 +381,84 @@
           "name": "@cowork-cookbook/adaptive_card_recruit_new_talent",
           "display_name": "Recruit new talent Status Adaptive Card",
           "audience": "both",
-          "score": 99.22
+          "score": 99.25
         },
         {
           "id": "cowork-cookbook__dashboard_recruit_new_talent",
           "name": "@cowork-cookbook/dashboard_recruit_new_talent",
           "display_name": "Recruit new talent Interactive HTML Dashboard",
           "audience": "both",
-          "score": 99.22
+          "score": 99.25
         },
         {
           "id": "cowork-cookbook__adaptive_card_manage_benefits_enrollment",
           "name": "@cowork-cookbook/adaptive_card_manage_benefits_enrollment",
           "display_name": "Manage benefits enrollment Status Adaptive Card",
           "audience": "both",
-          "score": 77.76
+          "score": 77.78
         },
         {
           "id": "cowork-cookbook__demo_data_manage_benefits_enrollment",
           "name": "@cowork-cookbook/demo_data_manage_benefits_enrollment",
           "display_name": "Manage benefits enrollment Demo Data Generator",
           "audience": "both",
-          "score": 77.76
+          "score": 77.78
         },
         {
           "id": "cowork-cookbook__scheduled_brief_analyze_and_reconcile_compensation_and_benefits",
           "name": "@cowork-cookbook/scheduled_brief_analyze_and_reconcile_compensation_and_benefits",
           "display_name": "Analyze and reconcile compensation and benefits Scheduled Email Brief",
           "audience": "both",
-          "score": 77.76
+          "score": 77.78
         },
         {
           "id": "cowork-cookbook__teams_update_analyze_and_reconcile_compensation_and_benefits",
           "name": "@cowork-cookbook/teams_update_analyze_and_reconcile_compensation_and_benefits",
           "display_name": "Analyze and reconcile compensation and benefits Teams Channel Update",
           "audience": "both",
-          "score": 77.76
+          "score": 77.78
         },
         {
           "id": "cowork-cookbook__blueprint_position_and_onboarding_readiness",
           "name": "@cowork-cookbook/blueprint_position_and_onboarding_readiness",
           "display_name": "Open Position & Onboarding Readiness Blueprint",
           "audience": "business",
-          "score": 62.18
+          "score": 62.19
         },
         {
           "id": "cowork-cookbook__onboarding_checklist_generator",
           "name": "@cowork-cookbook/onboarding_checklist_generator",
           "display_name": "Onboarding Checklist Generator",
           "audience": "business",
-          "score": 62.18
+          "score": 62.19
         },
         {
           "id": "cowork-cookbook__new_customer_onboarding_automation",
           "name": "@cowork-cookbook/new_customer_onboarding_automation",
           "display_name": "New customer onboarding automation",
           "audience": "both",
-          "score": 49.74
+          "score": 49.76
         },
         {
           "id": "howardh__training_quest_agent",
           "name": "@howardh/training_quest_agent",
           "display_name": "TrainingQuest",
           "audience": "both",
-          "score": 49.74
+          "score": 49.76
         },
         {
           "id": "cowork-cookbook__audit_define_employee_career_paths",
           "name": "@cowork-cookbook/audit_define_employee_career_paths",
           "display_name": "Define employee career paths Completeness Audit",
           "audience": "business",
-          "score": 45.34
+          "score": 45.35
         },
         {
           "id": "cowork-cookbook__audit_record_employee_time",
           "name": "@cowork-cookbook/audit_record_employee_time",
           "display_name": "Record employee time Completeness Audit",
           "audience": "business",
-          "score": 45.34
+          "score": 45.35
         }
       ]
     },
@@ -472,84 +472,84 @@
           "name": "@cowork-cookbook/audit_record_cost_accounting_transactions",
           "display_name": "Record cost accounting transactions Completeness Audit",
           "audience": "business",
-          "score": 71.33
+          "score": 71.35
         },
         {
           "id": "cowork-cookbook__d365_record_to_report_define_accounting_policies",
           "name": "@cowork-cookbook/d365_record_to_report_define_accounting_policies",
           "display_name": "D365 Define accounting policies Expert",
           "audience": "both",
-          "score": 71.33
+          "score": 71.35
         },
         {
           "id": "cowork-cookbook__demo_data_record_cost_accounting_transactions",
           "name": "@cowork-cookbook/demo_data_record_cost_accounting_transactions",
           "display_name": "Record cost accounting transactions Demo Data Generator",
           "audience": "both",
-          "score": 71.33
+          "score": 71.35
         },
         {
           "id": "cowork-cookbook__report_define_asset_accounting_books",
           "name": "@cowork-cookbook/report_define_asset_accounting_books",
           "display_name": "Define asset accounting books Summary Report",
           "audience": "both",
-          "score": 71.33
+          "score": 71.35
         },
         {
           "id": "cowork-cookbook__teams_update_define_asset_accounting_books",
           "name": "@cowork-cookbook/teams_update_define_asset_accounting_books",
           "display_name": "Define asset accounting books Teams Channel Update",
           "audience": "both",
-          "score": 71.33
+          "score": 71.35
         },
         {
           "id": "cowork-cookbook__payment_proposal_review",
           "name": "@cowork-cookbook/payment_proposal_review",
           "display_name": "Payment Proposal Review",
           "audience": "business",
-          "score": 66.34
+          "score": 66.35
         },
         {
           "id": "cowork-cookbook__dashboard_define_expense_policies",
           "name": "@cowork-cookbook/dashboard_define_expense_policies",
           "display_name": "Define expense policies Interactive HTML Dashboard",
           "audience": "both",
-          "score": 62.31
+          "score": 62.33
         },
         {
           "id": "cowork-cookbook__ppt_exec_define_expense_policies",
           "name": "@cowork-cookbook/ppt_exec_define_expense_policies",
           "display_name": "Define expense policies Executive PowerPoint Deck",
           "audience": "business",
-          "score": 62.31
+          "score": 62.33
         },
         {
           "id": "cowork-cookbook__vendor_invoice_capture_skill",
           "name": "@cowork-cookbook/vendor_invoice_capture_skill",
           "display_name": "Vendor Invoice Capture Skill (packaged + scored)",
           "audience": "business",
-          "score": 60.1
+          "score": 60.11
         },
         {
           "id": "cat-agent-skills__travel_cost_estimator",
           "name": "@cat-agent-skills/travel_cost_estimator",
           "display_name": "Travel Cost Estimator",
           "audience": "both",
-          "score": 59.81
+          "score": 59.82
         },
         {
           "id": "cowork-cookbook__audit_invoice_project_transactions",
           "name": "@cowork-cookbook/audit_invoice_project_transactions",
           "display_name": "Invoice project transactions Completeness Audit",
           "audience": "business",
-          "score": 48.08
+          "score": 48.09
         },
         {
           "id": "cowork-cookbook__bulk_update_invoice_project_milestones",
           "name": "@cowork-cookbook/bulk_update_invoice_project_milestones",
           "display_name": "Invoice project milestones Bulk Field Update",
           "audience": "business",
-          "score": 48.08
+          "score": 48.09
         }
       ]
     },
@@ -563,84 +563,84 @@
           "name": "@cowork-cookbook/audit_audit_regulatory_compliance",
           "display_name": "Audit regulatory compliance Completeness Audit",
           "audience": "business",
-          "score": 139.68
+          "score": 139.71
         },
         {
           "id": "cowork-cookbook__audit_monitor_regulatory_compliance",
           "name": "@cowork-cookbook/audit_monitor_regulatory_compliance",
           "display_name": "Monitor regulatory compliance Completeness Audit",
           "audience": "business",
-          "score": 127.36
+          "score": 127.39
         },
         {
           "id": "cowork-cookbook__demo_data_audit_regulatory_compliance",
           "name": "@cowork-cookbook/demo_data_audit_regulatory_compliance",
           "display_name": "Audit regulatory compliance Demo Data Generator",
           "audience": "business",
-          "score": 110.57
+          "score": 110.6
         },
         {
           "id": "cowork-cookbook__bulk_update_develop_regulatory_compliance_strategy",
           "name": "@cowork-cookbook/bulk_update_develop_regulatory_compliance_strategy",
           "display_name": "Develop regulatory compliance strategy Bulk Field Update",
           "audience": "business",
-          "score": 94.14
+          "score": 94.17
         },
         {
           "id": "cowork-cookbook__configure_develop_regulatory_compliance_strategy",
           "name": "@cowork-cookbook/configure_develop_regulatory_compliance_strategy",
           "display_name": "Develop regulatory compliance strategy Configuration Bulk Setup",
           "audience": "business",
-          "score": 94.14
+          "score": 94.17
         },
         {
           "id": "cowork-cookbook__ppt_exec_monitor_regulatory_compliance",
           "name": "@cowork-cookbook/ppt_exec_monitor_regulatory_compliance",
           "display_name": "Monitor regulatory compliance Executive PowerPoint Deck",
           "audience": "business",
-          "score": 94.14
+          "score": 94.17
         },
         {
           "id": "cowork-cookbook__audit_implement_process_governance",
           "name": "@cowork-cookbook/audit_implement_process_governance",
           "display_name": "Implement process governance Completeness Audit",
           "audience": "business",
-          "score": 78.93
+          "score": 78.95
         },
         {
           "id": "cowork-cookbook__audit_implement_compliance_controls_and_measures",
           "name": "@cowork-cookbook/audit_implement_compliance_controls_and_measures",
           "display_name": "Implement compliance controls and measures Completeness Audit",
           "audience": "business",
-          "score": 74.39
+          "score": 74.41
         },
         {
           "id": "cowork-cookbook__adaptive_card_control_project_scope",
           "name": "@cowork-cookbook/adaptive_card_control_project_scope",
           "display_name": "Control project scope Status Adaptive Card",
           "audience": "both",
-          "score": 71.33
+          "score": 71.35
         },
         {
           "id": "cowork-cookbook__d365_plan_to_produce_control_production_quality",
           "name": "@cowork-cookbook/d365_plan_to_produce_control_production_quality",
           "display_name": "D365 Control production quality Expert",
           "audience": "both",
-          "score": 71.33
+          "score": 71.35
         },
         {
           "id": "cowork-cookbook__dashboard_control_project_scope",
           "name": "@cowork-cookbook/dashboard_control_project_scope",
           "display_name": "Control project scope Interactive HTML Dashboard",
           "audience": "both",
-          "score": 71.33
+          "score": 71.35
         },
         {
           "id": "cowork-cookbook__audit_assess_customer_credit_risk",
           "name": "@cowork-cookbook/audit_assess_customer_credit_risk",
           "display_name": "Assess customer credit risk Completeness Audit",
           "audience": "business",
-          "score": 65.5
+          "score": 65.52
         }
       ]
     },
@@ -654,84 +654,84 @@
           "name": "@cat-agent-skills/vendor_contract_risk_review",
           "display_name": "Vendor Contract Risk Review",
           "audience": "business",
-          "score": 187.77
+          "score": 187.82
         },
         {
           "id": "cowork-cookbook__blueprint_procurement_spend_review",
           "name": "@cowork-cookbook/blueprint_procurement_spend_review",
           "display_name": "Procurement Spend & Supplier Risk Blueprint",
           "audience": "business",
-          "score": 115.84
+          "score": 115.87
         },
         {
           "id": "cowork-cookbook__dashboard_plan_logistics_and_distribution",
           "name": "@cowork-cookbook/dashboard_plan_logistics_and_distribution",
           "display_name": "Plan logistics and distribution Interactive HTML Dashboard",
           "audience": "both",
-          "score": 99.22
+          "score": 99.25
         },
         {
           "id": "cowork-cookbook__ppt_exec_plan_logistics_and_distribution",
           "name": "@cowork-cookbook/ppt_exec_plan_logistics_and_distribution",
           "display_name": "Plan logistics and distribution Executive PowerPoint Deck",
           "audience": "both",
-          "score": 99.22
+          "score": 99.25
         },
         {
           "id": "cowork-cookbook__scheduled_brief_react_to_supply_chain_signals",
           "name": "@cowork-cookbook/scheduled_brief_react_to_supply_chain_signals",
           "display_name": "React to supply chain signals Scheduled Email Brief",
           "audience": "both",
-          "score": 90.95
+          "score": 90.98
         },
         {
           "id": "cowork-cookbook__teams_update_react_to_supply_chain_signals",
           "name": "@cowork-cookbook/teams_update_react_to_supply_chain_signals",
           "display_name": "React to supply chain signals Teams Channel Update",
           "audience": "both",
-          "score": 90.95
+          "score": 90.98
         },
         {
           "id": "cowork-cookbook__vendor_invoice_capture_from_email",
           "name": "@cowork-cookbook/vendor_invoice_capture_from_email",
           "display_name": "Vendor Invoice Capture from Email",
           "audience": "business",
-          "score": 84.23
+          "score": 84.25
         },
         {
           "id": "kody-w__chain_composer_agent",
           "name": "@kody-w/chain_composer_agent",
           "display_name": "Chain Composer",
           "audience": "both",
-          "score": 84.14
+          "score": 84.16
         },
         {
           "id": "cowork-cookbook__audit_return_goods_to_vendor",
           "name": "@cowork-cookbook/audit_return_goods_to_vendor",
           "display_name": "Return goods to vendor Completeness Audit",
           "audience": "business",
-          "score": 71.0
+          "score": 71.02
         },
         {
           "id": "cowork-cookbook__demo_data_return_goods_to_vendor",
           "name": "@cowork-cookbook/demo_data_return_goods_to_vendor",
           "display_name": "Return goods to vendor Demo Data Generator",
           "audience": "business",
-          "score": 71.0
+          "score": 71.02
         },
         {
           "id": "cowork-cookbook__vendor_invoice_capture_skill",
           "name": "@cowork-cookbook/vendor_invoice_capture_skill",
           "display_name": "Vendor Invoice Capture Skill (packaged + scored)",
           "audience": "business",
-          "score": 70.19
+          "score": 70.21
         },
         {
           "id": "cowork-cookbook__vendor_invoice_three_way_match_status",
           "name": "@cowork-cookbook/vendor_invoice_three_way_match_status",
           "display_name": "Vendor Invoice Three-Way Match Status Report",
           "audience": "business",
-          "score": 70.19
+          "score": 70.21
         }
       ]
     },
@@ -745,21 +745,21 @@
           "name": "@cat-agent-skills/lab_column_mapper",
           "display_name": "Lab Column Mapper",
           "audience": "both",
-          "score": 223.24
+          "score": 223.31
         },
         {
           "id": "cat-agent-skills__phi_deidentifier",
           "name": "@cat-agent-skills/phi_deidentifier",
           "display_name": "PHI De-identifier",
           "audience": "business",
-          "score": 99.22
+          "score": 99.25
         },
         {
           "id": "cat-agent-skills__global_greenwashing_claim_auditor",
           "name": "@cat-agent-skills/global_greenwashing_claim_auditor",
           "display_name": "Global Greenwashing Claim Auditor",
           "audience": "business",
-          "score": 86.46
+          "score": 86.49
         },
         {
           "id": "cat-agent-skills__blog_post_structure_pass",
@@ -787,84 +787,84 @@
           "name": "@cat-agent-skills/sharepoint_list_insight_report_generator",
           "display_name": "SharePoint List Insight Report Generator",
           "audience": "business",
-          "score": 121.23
+          "score": 121.26
         },
         {
           "id": "cowork-cookbook__report_conduct_root_cause_analysis",
           "name": "@cowork-cookbook/report_conduct_root_cause_analysis",
           "display_name": "Conduct root cause analysis Summary Report",
           "audience": "both",
-          "score": 72.03
+          "score": 72.04
         },
         {
           "id": "cowork-cookbook__report_analyze_costs",
           "name": "@cowork-cookbook/report_analyze_costs",
           "display_name": "Analyze costs Summary Report",
           "audience": "both",
-          "score": 60.18
+          "score": 60.2
         },
         {
           "id": "cowork-cookbook__report_comply_with_customer_data_regulations",
           "name": "@cowork-cookbook/report_comply_with_customer_data_regulations",
           "display_name": "Comply with customer data regulations Summary Report",
           "audience": "business",
-          "score": 53.62
+          "score": 53.63
         },
         {
           "id": "cowork-cookbook__report_manage_data_security",
           "name": "@cowork-cookbook/report_manage_data_security",
           "display_name": "Manage data security Summary Report",
           "audience": "both",
-          "score": 53.62
+          "score": 53.63
         },
         {
           "id": "cowork-cookbook__report_manage_the_recurring_synchronization_of_data",
           "name": "@cowork-cookbook/report_manage_the_recurring_synchronization_of_data",
           "display_name": "Manage the recurring synchronization of data Summary Report",
           "audience": "both",
-          "score": 53.62
+          "score": 53.63
         },
         {
           "id": "cowork-cookbook__report_develop_asset_policies",
           "name": "@cowork-cookbook/report_develop_asset_policies",
           "display_name": "Develop asset policies Summary Report",
           "audience": "both",
-          "score": 52.74
+          "score": 52.75
         },
         {
           "id": "cowork-cookbook__report_develop_budgeting_strategy",
           "name": "@cowork-cookbook/report_develop_budgeting_strategy",
           "display_name": "Develop budgeting strategy Summary Report",
           "audience": "both",
-          "score": 52.74
+          "score": 52.75
         },
         {
           "id": "cowork-cookbook__report_maintain_budgets",
           "name": "@cowork-cookbook/report_maintain_budgets",
           "display_name": "Maintain budgets Summary Report",
           "audience": "both",
-          "score": 52.74
+          "score": 52.75
         },
         {
           "id": "cowork-cookbook__report_pay_taxes",
           "name": "@cowork-cookbook/report_pay_taxes",
           "display_name": "Pay taxes Summary Report",
           "audience": "both",
-          "score": 52.74
+          "score": 52.75
         },
         {
           "id": "cowork-cookbook__report_prepare_financial_statements",
           "name": "@cowork-cookbook/report_prepare_financial_statements",
           "display_name": "Prepare financial statements Summary Report",
           "audience": "both",
-          "score": 52.74
+          "score": 52.75
         },
         {
           "id": "cowork-cookbook__report_report_on_inventory_quality",
           "name": "@cowork-cookbook/report_report_on_inventory_quality",
           "display_name": "Report on inventory quality Summary Report",
           "audience": "both",
-          "score": 52.74
+          "score": 52.75
         }
       ]
     },
@@ -878,84 +878,84 @@
           "name": "@cat-agent-skills/pdf_table_data_conversion",
           "display_name": "PDF Table Data Conversion",
           "audience": "business",
-          "score": 147.92
+          "score": 147.96
         },
         {
           "id": "cat-agent-skills__acroform_writer",
           "name": "@cat-agent-skills/acroform_writer",
           "display_name": "AcroForm Writer",
           "audience": "both",
-          "score": 107.72
+          "score": 107.75
         },
         {
           "id": "cowork-cookbook__bulk_update_classify_assets",
           "name": "@cowork-cookbook/bulk_update_classify_assets",
           "display_name": "Classify assets Bulk Field Update",
           "audience": "both",
-          "score": 99.22
+          "score": 99.25
         },
         {
           "id": "cowork-cookbook__configure_classify_assets",
           "name": "@cowork-cookbook/configure_classify_assets",
           "display_name": "Classify assets Configuration Bulk Setup",
           "audience": "both",
-          "score": 99.22
+          "score": 99.25
         },
         {
           "id": "cat-agent-skills__doc_format_converter",
           "name": "@cat-agent-skills/doc_format_converter",
           "display_name": "Universal Document Converter",
           "audience": "both",
-          "score": 96.99
+          "score": 97.02
         },
         {
           "id": "cat-agent-skills__ai_usecase_assessment",
           "name": "@cat-agent-skills/ai_usecase_assessment",
           "display_name": "AI Use Case Assessment",
           "audience": "business",
-          "score": 86.46
+          "score": 86.49
         },
         {
           "id": "cat-agent-skills__linkedin_content_system",
           "name": "@cat-agent-skills/linkedin_content_system",
           "display_name": "LinkedIn Content System",
           "audience": "both",
-          "score": 76.74
+          "score": 76.76
         },
         {
           "id": "cat-agent-skills__linkedin_content_writer",
           "name": "@cat-agent-skills/linkedin_content_writer",
           "display_name": "LinkedIn Content Writer",
           "audience": "both",
-          "score": 60.59
+          "score": 60.61
         },
         {
           "id": "cat-agent-skills__blog_content_auditor",
           "name": "@cat-agent-skills/blog_content_auditor",
           "display_name": "Blog Content Auditor",
           "audience": "both",
-          "score": 51.94
+          "score": 51.95
         },
         {
           "id": "cat-agent-skills__content_quality_auditor",
           "name": "@cat-agent-skills/content_quality_auditor",
           "display_name": "Content Quality Auditor",
           "audience": "business",
-          "score": 51.94
+          "score": 51.95
         },
         {
           "id": "cowork-cookbook__turn_a_document_into_a_visual_framework",
           "name": "@cowork-cookbook/turn_a_document_into_a_visual_framework",
           "display_name": "Turn a document or deck into a visual framework",
           "audience": "both",
-          "score": 49.53
+          "score": 49.55
         },
         {
           "id": "cowork-cookbook__turn_source_content_into_a_deck",
           "name": "@cowork-cookbook/turn_source_content_into_a_deck",
           "display_name": "Turn source content into a deck",
           "audience": "both",
-          "score": 44.85
+          "score": 44.86
         }
       ]
     },
@@ -969,84 +969,84 @@
           "name": "@cowork-cookbook/demo_data_monitor_system_performance_and_health",
           "display_name": "Monitor system performance and health Demo Data Generator",
           "audience": "both",
-          "score": 60.0
+          "score": 60.01
         },
         {
           "id": "cowork-cookbook__audit_monitor_system_performance_and_health",
           "name": "@cowork-cookbook/audit_monitor_system_performance_and_health",
           "display_name": "Monitor system performance and health Completeness Audit",
           "audience": "business",
-          "score": 58.58
+          "score": 58.6
         },
         {
           "id": "cowork-cookbook__bulk_update_monitor_system_usage",
           "name": "@cowork-cookbook/bulk_update_monitor_system_usage",
           "display_name": "Monitor system usage Bulk Field Update",
           "audience": "both",
-          "score": 58.58
+          "score": 58.6
         },
         {
           "id": "cowork-cookbook__d365_administer_to_operate_administer_system_features",
           "name": "@cowork-cookbook/d365_administer_to_operate_administer_system_features",
           "display_name": "D365 Administer system features Expert",
           "audience": "both",
-          "score": 58.58
+          "score": 58.6
         },
         {
           "id": "cowork-cookbook__dashboard_identify_critical_system_and_data",
           "name": "@cowork-cookbook/dashboard_identify_critical_system_and_data",
           "display_name": "Identify critical system and data Interactive HTML Dashboard",
           "audience": "both",
-          "score": 58.58
+          "score": 58.6
         },
         {
           "id": "cowork-cookbook__ppt_exec_identify_critical_system_and_data",
           "name": "@cowork-cookbook/ppt_exec_identify_critical_system_and_data",
           "display_name": "Identify critical system and data Executive PowerPoint Deck",
           "audience": "both",
-          "score": 58.58
+          "score": 58.6
         },
         {
           "id": "cowork-cookbook__scheduled_brief_configure_and_monitor_system_generated_numbers",
           "name": "@cowork-cookbook/scheduled_brief_configure_and_monitor_system_generated_numbers",
           "display_name": "Configure and monitor system generated numbers Scheduled Email Brief",
           "audience": "both",
-          "score": 58.58
+          "score": 58.6
         },
         {
           "id": "cowork-cookbook__scheduled_brief_monitor_system_usage",
           "name": "@cowork-cookbook/scheduled_brief_monitor_system_usage",
           "display_name": "Monitor system usage Scheduled Email Brief",
           "audience": "both",
-          "score": 58.58
+          "score": 58.6
         },
         {
           "id": "discreetRappers__sales_assistant_agent",
           "name": "@discreetRappers/sales_assistant_agent",
           "display_name": "SalesAssistant",
           "audience": "business",
-          "score": 58.24
+          "score": 58.26
         },
         {
           "id": "discreetRappers__dynamics_crud_agent",
           "name": "@discreetRappers/dynamics_crud_agent",
           "display_name": "DynamicsCRUD",
           "audience": "business",
-          "score": 50.46
+          "score": 50.48
         },
         {
           "id": "cowork-cookbook__teams_update_configure_and_monitor_system_generated_numbers",
           "name": "@cowork-cookbook/teams_update_configure_and_monitor_system_generated_numbers",
           "display_name": "Configure and monitor system generated numbers Teams Channel Update",
           "audience": "both",
-          "score": 47.58
+          "score": 47.6
         },
         {
           "id": "cat-agent-skills__lookup_dataverse_table",
           "name": "@cat-agent-skills/lookup_dataverse_table",
           "display_name": "Dataverse Table Lookup",
           "audience": "business",
-          "score": 45.62
+          "score": 45.63
         }
       ]
     },
@@ -1060,84 +1060,84 @@
           "name": "@cowork-cookbook/payment_proposal_review",
           "display_name": "Payment Proposal Review",
           "audience": "business",
-          "score": 124.02
+          "score": 124.06
         },
         {
           "id": "cowork-cookbook__build_a_customer_facing_pitch_deck_on_brand",
           "name": "@cowork-cookbook/build_a_customer_facing_pitch_deck_on_brand",
           "display_name": "Build a customer-facing pitch deck on brand",
           "audience": "both",
-          "score": 99.65
+          "score": 99.67
         },
         {
           "id": "cat-agent-skills__linkedin_content_system",
           "name": "@cat-agent-skills/linkedin_content_system",
           "display_name": "LinkedIn Content System",
           "audience": "both",
-          "score": 96.77
+          "score": 96.8
         },
         {
           "id": "cowork-cookbook__scheduled_brief_forecast_marketing_campaign_targets",
           "name": "@cowork-cookbook/scheduled_brief_forecast_marketing_campaign_targets",
           "display_name": "Forecast marketing campaign targets Scheduled Email Brief",
           "audience": "business",
-          "score": 91.56
+          "score": 91.58
         },
         {
           "id": "cowork-cookbook__develop_messaging_and_positioning",
           "name": "@cowork-cookbook/develop_messaging_and_positioning",
           "display_name": "Develop messaging and positioning",
           "audience": "both",
-          "score": 80.75
+          "score": 80.77
         },
         {
           "id": "cowork-cookbook__product_launch_customer_pitch",
           "name": "@cowork-cookbook/product_launch_customer_pitch",
           "display_name": "Product launch customer pitch",
           "audience": "both",
-          "score": 77.76
+          "score": 77.78
         },
         {
           "id": "rapp__pitch_deck_agent",
           "name": "@rapp/pitch_deck_agent",
           "display_name": "PitchDeck",
           "audience": "both",
-          "score": 77.76
+          "score": 77.78
         },
         {
           "id": "cat-agent-skills__campaign_deck_builder",
           "name": "@cat-agent-skills/campaign_deck_builder",
           "display_name": "Campaign Deck Builder",
           "audience": "both",
-          "score": 75.33
+          "score": 75.35
         },
         {
           "id": "cowork-cookbook__teams_update_forecast_marketing_campaign_targets",
           "name": "@cowork-cookbook/teams_update_forecast_marketing_campaign_targets",
           "display_name": "Forecast marketing campaign targets Teams Channel Update",
           "audience": "business",
-          "score": 75.33
+          "score": 75.35
         },
         {
           "id": "cowork-cookbook__turn_source_content_into_campaign_storytelling",
           "name": "@cowork-cookbook/turn_source_content_into_campaign_storytelling",
           "display_name": "Turn source content into a campaign storytelling deck",
           "audience": "both",
-          "score": 72.29
+          "score": 72.31
         },
         {
           "id": "cowork-cookbook__messaging_drift_audit_and_remediation",
           "name": "@cowork-cookbook/messaging_drift_audit_and_remediation",
           "display_name": "Messaging drift audit and remediation routing",
           "audience": "business",
-          "score": 71.33
+          "score": 71.35
         },
         {
           "id": "cat-agent-skills__b2b_outreach_suite",
           "name": "@cat-agent-skills/b2b_outreach_suite",
           "display_name": "B2B Outreach Suite",
           "audience": "both",
-          "score": 66.39
+          "score": 66.4
         }
       ]
     },
@@ -1151,84 +1151,84 @@
           "name": "@cowork-cookbook/dashboard_configure_monitoring_and_alert_systems",
           "display_name": "Configure monitoring and alert systems Interactive HTML Dashboard",
           "audience": "both",
-          "score": 140.19
+          "score": 140.23
         },
         {
           "id": "cowork-cookbook__ppt_exec_configure_monitoring_and_alert_systems",
           "name": "@cowork-cookbook/ppt_exec_configure_monitoring_and_alert_systems",
           "display_name": "Configure monitoring and alert systems Executive PowerPoint Deck",
           "audience": "both",
-          "score": 140.19
+          "score": 140.23
         },
         {
           "id": "cat-agent-skills__agent_performance_triage",
           "name": "@cat-agent-skills/agent_performance_triage",
           "display_name": "Agent Performance Triage",
           "audience": "both",
-          "score": 90.05
+          "score": 90.07
         },
         {
           "id": "cowork-cookbook__audit_plan_service_operations",
           "name": "@cowork-cookbook/audit_plan_service_operations",
           "display_name": "Plan service operations Completeness Audit",
           "audience": "business",
-          "score": 66.34
+          "score": 66.35
         },
         {
           "id": "cowork-cookbook__dashboard_manage_store_operations",
           "name": "@cowork-cookbook/dashboard_manage_store_operations",
           "display_name": "Manage store operations Interactive HTML Dashboard",
           "audience": "both",
-          "score": 66.34
+          "score": 66.35
         },
         {
           "id": "cowork-cookbook__ppt_exec_manage_store_operations",
           "name": "@cowork-cookbook/ppt_exec_manage_store_operations",
           "display_name": "Manage store operations Executive PowerPoint Deck",
           "audience": "both",
-          "score": 66.34
+          "score": 66.35
         },
         {
           "id": "cowork-cookbook__ppt_exec_plan_service_operations",
           "name": "@cowork-cookbook/ppt_exec_plan_service_operations",
           "display_name": "Plan service operations Executive PowerPoint Deck",
           "audience": "both",
-          "score": 66.34
+          "score": 66.35
         },
         {
           "id": "kody-w__copilot_studio_parity_deploy",
           "name": "@kody-w/copilot_studio_parity_deploy",
           "display_name": "Copilot Studio Parity Deploy",
           "audience": "both",
-          "score": 64.85
+          "score": 64.86
         },
         {
           "id": "kody-w__factory",
           "name": "@kody-w/factory",
           "display_name": "RAPP to Copilot Studio Factory",
           "audience": "both",
-          "score": 64.85
+          "score": 64.86
         },
         {
           "id": "cat-agent-skills__process_sop_architect",
           "name": "@cat-agent-skills/process_sop_architect",
           "display_name": "Process & SOP Architect",
           "audience": "both",
-          "score": 49.75
+          "score": 49.77
         },
         {
           "id": "cat-agent-skills__regulation_monitor",
           "name": "@cat-agent-skills/regulation_monitor",
           "display_name": "Regulation Monitor",
           "audience": "business",
-          "score": 40.29
+          "score": 40.31
         },
         {
           "id": "howardh__vaultmind_agent",
           "name": "@howardh/vaultmind_agent",
           "display_name": "VaultMind",
           "audience": "both",
-          "score": 40.29
+          "score": 40.31
         }
       ]
     },
@@ -1242,7 +1242,7 @@
           "name": "@kody-w/launch_to_public_agent",
           "display_name": "Launch to Public",
           "audience": "both",
-          "score": 48.08
+          "score": 48.09
         },
         {
           "id": "cat-agent-skills__call_for_speakers_digest",
@@ -1333,84 +1333,84 @@
           "name": "@kody-w/plant_seed_agent",
           "display_name": "Plant Seed",
           "audience": "both",
-          "score": 180.93
+          "score": 180.98
         },
         {
           "id": "kody-w__predictive_asset_maintenance_intelligence",
           "name": "@kody-w/predictive_asset_maintenance_intelligence",
           "display_name": "Predictive Asset Maintenance Intelligence",
           "audience": "business",
-          "score": 69.98
+          "score": 70.0
         },
         {
           "id": "cowork-cookbook__audit_plan_service_operations",
           "name": "@cowork-cookbook/audit_plan_service_operations",
           "display_name": "Plan service operations Completeness Audit",
           "audience": "business",
-          "score": 66.34
+          "score": 66.35
         },
         {
           "id": "cowork-cookbook__dashboard_manage_store_operations",
           "name": "@cowork-cookbook/dashboard_manage_store_operations",
           "display_name": "Manage store operations Interactive HTML Dashboard",
           "audience": "both",
-          "score": 66.34
+          "score": 66.35
         },
         {
           "id": "cowork-cookbook__ppt_exec_manage_store_operations",
           "name": "@cowork-cookbook/ppt_exec_manage_store_operations",
           "display_name": "Manage store operations Executive PowerPoint Deck",
           "audience": "both",
-          "score": 66.34
+          "score": 66.35
         },
         {
           "id": "cowork-cookbook__ppt_exec_plan_service_operations",
           "name": "@cowork-cookbook/ppt_exec_plan_service_operations",
           "display_name": "Plan service operations Executive PowerPoint Deck",
           "audience": "both",
-          "score": 66.34
+          "score": 66.35
         },
         {
           "id": "cowork-cookbook__bulk_update_analyze_production_quality_results",
           "name": "@cowork-cookbook/bulk_update_analyze_production_quality_results",
           "display_name": "Analyze production quality results Bulk Field Update",
           "audience": "both",
-          "score": 60.07
+          "score": 60.09
         },
         {
           "id": "cowork-cookbook__d365_plan_to_produce_control_production_quality",
           "name": "@cowork-cookbook/d365_plan_to_produce_control_production_quality",
           "display_name": "D365 Control production quality Expert",
           "audience": "both",
-          "score": 60.07
+          "score": 60.09
         },
         {
           "id": "cowork-cookbook__dashboard_report_production_quality_non_conformance",
           "name": "@cowork-cookbook/dashboard_report_production_quality_non_conformance",
           "display_name": "Report production quality non-conformance Interactive HTML Dashboard",
           "audience": "both",
-          "score": 60.07
+          "score": 60.09
         },
         {
           "id": "cowork-cookbook__ppt_exec_report_production_quality_non_conformance",
           "name": "@cowork-cookbook/ppt_exec_report_production_quality_non_conformance",
           "display_name": "Report production quality non-conformance Executive PowerPoint Deck",
           "audience": "both",
-          "score": 60.07
+          "score": 60.09
         },
         {
           "id": "cowork-cookbook__scheduled_brief_analyze_production_quality_results",
           "name": "@cowork-cookbook/scheduled_brief_analyze_production_quality_results",
           "display_name": "Analyze production quality results Scheduled Email Brief",
           "audience": "both",
-          "score": 60.07
+          "score": 60.09
         },
         {
           "id": "cat-agent-skills__content_quality_auditor",
           "name": "@cat-agent-skills/content_quality_auditor",
           "display_name": "Content Quality Auditor",
           "audience": "business",
-          "score": 55.1
+          "score": 55.12
         }
       ]
     },
@@ -1424,84 +1424,84 @@
           "name": "@kody-w/full_rapp_leviathan",
           "display_name": "FullRappLeviathan",
           "audience": "both",
-          "score": 99.22
+          "score": 99.25
         },
         {
           "id": "cat-agent-skills__stoic_negotiator",
           "name": "@cat-agent-skills/stoic_negotiator",
           "display_name": "Stoic Negotiator",
           "audience": "both",
-          "score": 74.41
+          "score": 74.44
         },
         {
           "id": "cowork-cookbook__dashboard_manage_store_operations",
           "name": "@cowork-cookbook/dashboard_manage_store_operations",
           "display_name": "Manage store operations Interactive HTML Dashboard",
           "audience": "both",
-          "score": 73.66
+          "score": 73.68
         },
         {
           "id": "cowork-cookbook__ppt_exec_manage_store_operations",
           "name": "@cowork-cookbook/ppt_exec_manage_store_operations",
           "display_name": "Manage store operations Executive PowerPoint Deck",
           "audience": "both",
-          "score": 73.66
+          "score": 73.68
         },
         {
           "id": "cowork-cookbook__product_launch_customer_pitch",
           "name": "@cowork-cookbook/product_launch_customer_pitch",
           "display_name": "Product launch customer pitch",
           "audience": "both",
-          "score": 60.8
+          "score": 60.81
         },
         {
           "id": "cowork-cookbook__adaptive_card_configure_and_manage_store_devices",
           "name": "@cowork-cookbook/adaptive_card_configure_and_manage_store_devices",
           "display_name": "Configure and manage store devices Status Adaptive Card",
           "audience": "both",
-          "score": 58.97
+          "score": 58.99
         },
         {
           "id": "cowork-cookbook__dashboard_configure_and_manage_store_devices",
           "name": "@cowork-cookbook/dashboard_configure_and_manage_store_devices",
           "display_name": "Configure and manage store devices Interactive HTML Dashboard",
           "audience": "both",
-          "score": 58.97
+          "score": 58.99
         },
         {
           "id": "rapp__rapp_publish_agent",
           "name": "@rapp/rapp_publish_agent",
           "display_name": "RappPublish",
           "audience": "both",
-          "score": 58.97
+          "score": 58.99
         },
         {
           "id": "rapp__store_navigator_agent",
           "name": "@rapp/store_navigator_agent",
           "display_name": "StoreNavigator",
           "audience": "both",
-          "score": 58.97
+          "score": 58.99
         },
         {
           "id": "rapp__swarm_factory_agent",
           "name": "@rapp/swarm_factory_agent",
           "display_name": "SwarmFactory",
           "audience": "both",
-          "score": 58.97
+          "score": 58.99
         },
         {
           "id": "cowork-cookbook__scheduled_brief_process_customer_returns_and_exchanges",
           "name": "@cowork-cookbook/scheduled_brief_process_customer_returns_and_exchanges",
           "display_name": "Process customer returns and exchanges Scheduled Email Brief",
           "audience": "business",
-          "score": 53.47
+          "score": 53.48
         },
         {
           "id": "cowork-cookbook__teams_update_process_customer_returns_and_exchanges",
           "name": "@cowork-cookbook/teams_update_process_customer_returns_and_exchanges",
           "display_name": "Process customer returns and exchanges Teams Channel Update",
           "audience": "business",
-          "score": 53.47
+          "score": 53.48
         }
       ]
     },
@@ -1515,84 +1515,84 @@
           "name": "@kody-w/power_apps_code_app_agent",
           "display_name": "PowerAppsCodeApp",
           "audience": "both",
-          "score": 167.03
+          "score": 167.08
         },
         {
           "id": "cowork-cookbook__eco_impact_analysis",
           "name": "@cowork-cookbook/eco_impact_analysis",
           "display_name": "Engineering Change Order Impact Analysis",
           "audience": "both",
-          "score": 120.62
+          "score": 120.65
         },
         {
           "id": "kody-w__host_compat_agent",
           "name": "@kody-w/host_compat_agent",
           "display_name": "Host Compat",
           "audience": "both",
-          "score": 70.19
+          "score": 70.21
         },
         {
           "id": "cowork-cookbook__adaptive_card_deploy_service_resources",
           "name": "@cowork-cookbook/adaptive_card_deploy_service_resources",
           "display_name": "Deploy service resources Status Adaptive Card",
           "audience": "both",
-          "score": 58.97
+          "score": 58.99
         },
         {
           "id": "cowork-cookbook__adaptive_card_deploy_software_releases",
           "name": "@cowork-cookbook/adaptive_card_deploy_software_releases",
           "display_name": "Deploy software releases Status Adaptive Card",
           "audience": "both",
-          "score": 58.97
+          "score": 58.99
         },
         {
           "id": "cowork-cookbook__dashboard_deploy_service_resources",
           "name": "@cowork-cookbook/dashboard_deploy_service_resources",
           "display_name": "Deploy service resources Interactive HTML Dashboard",
           "audience": "both",
-          "score": 58.97
+          "score": 58.99
         },
         {
           "id": "cowork-cookbook__dashboard_deploy_software_releases",
           "name": "@cowork-cookbook/dashboard_deploy_software_releases",
           "display_name": "Deploy software releases Interactive HTML Dashboard",
           "audience": "both",
-          "score": 58.97
+          "score": 58.99
         },
         {
           "id": "cowork-cookbook__configure_develop_code_of_conduct",
           "name": "@cowork-cookbook/configure_develop_code_of_conduct",
           "display_name": "Develop code of conduct Configuration Bulk Setup",
           "audience": "both",
-          "score": 56.15
+          "score": 56.17
         },
         {
           "id": "cowork-cookbook__report_develop_code_of_conduct",
           "name": "@cowork-cookbook/report_develop_code_of_conduct",
           "display_name": "Develop code of conduct Summary Report",
           "audience": "both",
-          "score": 56.15
+          "score": 56.17
         },
         {
           "id": "discreetRappers__rapp_pipeline_agent",
           "name": "@discreetRappers/rapp_pipeline_agent",
           "display_name": "RAPP",
           "audience": "both",
-          "score": 56.15
+          "score": 56.17
         },
         {
           "id": "cat-agent-skills__enterprise_agent_design_authority",
           "name": "@cat-agent-skills/enterprise_agent_design_authority",
           "display_name": "Enterprise Agent Design Authority (EADA)",
           "audience": "business",
-          "score": 51.29
+          "score": 51.3
         },
         {
           "id": "cat-agent-skills__vendor_contract_risk_review",
           "name": "@cat-agent-skills/vendor_contract_risk_review",
           "display_name": "Vendor Contract Risk Review",
           "audience": "business",
-          "score": 47.42
+          "score": 47.44
         }
       ]
     },
@@ -1606,84 +1606,84 @@
           "name": "@cat-agent-skills/meeting_analyzer",
           "display_name": "Meeting Analyzer",
           "audience": "both",
-          "score": 61.8
+          "score": 61.81
         },
         {
           "id": "discreetRappers__rapp_pipeline_agent",
           "name": "@discreetRappers/rapp_pipeline_agent",
           "display_name": "RAPP",
           "audience": "both",
-          "score": 58.32
+          "score": 58.33
         },
         {
           "id": "cat-agent-skills__awaiting_reply",
           "name": "@cat-agent-skills/awaiting_reply",
           "display_name": "Awaiting Reply",
           "audience": "both",
-          "score": 49.74
+          "score": 49.76
         },
         {
           "id": "cowork-cookbook__bulk_update_follow_up_on_a_case",
           "name": "@cowork-cookbook/bulk_update_follow_up_on_a_case",
           "display_name": "Follow up on a case Bulk Field Update",
           "audience": "both",
-          "score": 49.74
+          "score": 49.76
         },
         {
           "id": "cowork-cookbook__catch_up_on_follow_ups_i_owe",
           "name": "@cowork-cookbook/catch_up_on_follow_ups_i_owe",
           "display_name": "Catch up on follow-ups I owe",
           "audience": "both",
-          "score": 49.74
+          "score": 49.76
         },
         {
           "id": "cowork-cookbook__scheduled_brief_conduct_post_sale_follow_up",
           "name": "@cowork-cookbook/scheduled_brief_conduct_post_sale_follow_up",
           "display_name": "Conduct post-sale follow-up Scheduled Email Brief",
           "audience": "both",
-          "score": 49.74
+          "score": 49.76
         },
         {
           "id": "cowork-cookbook__scheduled_brief_follow_up_on_a_case",
           "name": "@cowork-cookbook/scheduled_brief_follow_up_on_a_case",
           "display_name": "Follow up on a case Scheduled Email Brief",
           "audience": "both",
-          "score": 49.74
+          "score": 49.76
         },
         {
           "id": "cowork-cookbook__teams_update_conduct_post_sale_follow_up",
           "name": "@cowork-cookbook/teams_update_conduct_post_sale_follow_up",
           "display_name": "Conduct post-sale follow-up Teams Channel Update",
           "audience": "both",
-          "score": 49.74
+          "score": 49.76
         },
         {
           "id": "cowork-cookbook__prep_for_next_customer_meeting",
           "name": "@cowork-cookbook/prep_for_next_customer_meeting",
           "display_name": "Prep for my next customer meeting",
           "audience": "business",
-          "score": 46.58
+          "score": 46.6
         },
         {
           "id": "cowork-cookbook__prepare_for_a_customer_meeting_deep",
           "name": "@cowork-cookbook/prepare_for_a_customer_meeting_deep",
           "display_name": "Prepare for a customer meeting",
           "audience": "business",
-          "score": 46.58
+          "score": 46.6
         },
         {
           "id": "howardh__chief_of_staff_agent",
           "name": "@howardh/chief_of_staff_agent",
           "display_name": "ChiefOfStaff",
           "audience": "both",
-          "score": 46.58
+          "score": 46.6
         },
         {
           "id": "cat-agent-skills__conditional_chat_reminder",
           "name": "@cat-agent-skills/conditional_chat_reminder",
           "display_name": "Conditional Chat Reminder",
           "audience": "business",
-          "score": 37.31
+          "score": 37.32
         }
       ]
     },
@@ -1697,84 +1697,84 @@
           "name": "@howardh/vaultmind_agent",
           "display_name": "VaultMind",
           "audience": "both",
-          "score": 124.43
+          "score": 124.12
         },
         {
           "id": "cat-agent-skills__institutional_knowledge",
           "name": "@cat-agent-skills/institutional_knowledge",
           "display_name": "Institutional Knowledge Archivist",
           "audience": "both",
-          "score": 113.97
+          "score": 113.07
         },
         {
           "id": "kody-w__rappterpedia_agent",
           "name": "@kody-w/rappterpedia_agent",
           "display_name": "RappterpediaAgent",
           "audience": "both",
-          "score": 107.62
+          "score": 107.54
         },
         {
           "id": "cowork-cookbook__report_manage_project_knowledge_and_documentation",
           "name": "@cowork-cookbook/report_manage_project_knowledge_and_documentation",
           "display_name": "Manage project knowledge and documentation Summary Report",
           "audience": "both",
-          "score": 95.93
+          "score": 95.49
         },
         {
           "id": "cowork-cookbook__teams_update_manage_project_knowledge_and_documentation",
           "name": "@cowork-cookbook/teams_update_manage_project_knowledge_and_documentation",
           "display_name": "Manage project knowledge and documentation Teams Channel Update",
           "audience": "both",
-          "score": 95.93
+          "score": 95.49
         },
         {
           "id": "cat-agent-skills__power_automate_documentation",
           "name": "@cat-agent-skills/power_automate_documentation",
           "display_name": "Power Automate Documentation",
           "audience": "business",
-          "score": 93.46
-        },
-        {
-          "id": "cat-agent-skills__knowledge_source_router",
-          "name": "@cat-agent-skills/knowledge_source_router",
-          "display_name": "Knowledge Source Router",
-          "audience": "business",
-          "score": 62.87
+          "score": 93.49
         },
         {
           "id": "cowork-cookbook__bulk_update_print_shipping_documentation",
           "name": "@cowork-cookbook/bulk_update_print_shipping_documentation",
           "display_name": "Print shipping documentation Bulk Field Update",
           "audience": "both",
-          "score": 62.31
+          "score": 62.33
         },
         {
           "id": "cowork-cookbook__scheduled_brief_print_shipping_documentation",
           "name": "@cowork-cookbook/scheduled_brief_print_shipping_documentation",
           "display_name": "Print shipping documentation Scheduled Email Brief",
           "audience": "both",
-          "score": 62.31
+          "score": 62.33
+        },
+        {
+          "id": "cat-agent-skills__knowledge_source_router",
+          "name": "@cat-agent-skills/knowledge_source_router",
+          "display_name": "Knowledge Source Router",
+          "audience": "business",
+          "score": 62.18
         },
         {
           "id": "cat-agent-skills__ai_usecase_assessment",
           "name": "@cat-agent-skills/ai_usecase_assessment",
           "display_name": "AI Use Case Assessment",
           "audience": "business",
-          "score": 60.31
+          "score": 60.33
         },
         {
           "id": "cat-agent-skills__knowledge_corpus_curator",
           "name": "@cat-agent-skills/knowledge_corpus_curator",
           "display_name": "Knowledge Corpus Curator",
           "audience": "business",
-          "score": 58.84
+          "score": 58.04
         },
         {
           "id": "cat-agent-skills__spend_more_time_with_friends_and_family",
           "name": "@cat-agent-skills/spend_more_time_with_friends_and_family",
           "display_name": "Spend More Time With Friends & Family",
           "audience": "business",
-          "score": 53.06
+          "score": 52.61
         }
       ]
     },
@@ -1788,84 +1788,84 @@
           "name": "@kody-w/predictive_asset_maintenance_intelligence",
           "display_name": "Predictive Asset Maintenance Intelligence",
           "audience": "business",
-          "score": 109.04
+          "score": 109.07
         },
         {
           "id": "cowork-cookbook__depreciation_forecast",
           "name": "@cowork-cookbook/depreciation_forecast",
           "display_name": "Depreciation Forecast (12 months)",
           "audience": "business",
-          "score": 103.71
+          "score": 103.73
         },
         {
           "id": "cowork-cookbook__adaptive_card_define_depreciation_and_amortization_policies",
           "name": "@cowork-cookbook/adaptive_card_define_depreciation_and_amortization_policies",
           "display_name": "Define depreciation and amortization policies Status Adaptive Card",
           "audience": "business",
-          "score": 77.76
+          "score": 77.78
         },
         {
           "id": "cowork-cookbook__dashboard_define_depreciation_and_amortization_policies",
           "name": "@cowork-cookbook/dashboard_define_depreciation_and_amortization_policies",
           "display_name": "Define depreciation and amortization policies Interactive HTML Dashboard",
           "audience": "business",
-          "score": 77.76
+          "score": 77.78
         },
         {
           "id": "cowork-cookbook__d365_design_to_retire",
           "name": "@cowork-cookbook/d365_design_to_retire",
           "display_name": "D365 Design to retire Expert",
           "audience": "both",
-          "score": 67.3
+          "score": 67.32
         },
         {
           "id": "cowork-cookbook__configure_budget_asset_maintenance",
           "name": "@cowork-cookbook/configure_budget_asset_maintenance",
           "display_name": "Budget asset maintenance Configuration Bulk Setup",
           "audience": "both",
-          "score": 66.03
+          "score": 66.05
         },
         {
           "id": "cowork-cookbook__report_budget_asset_maintenance",
           "name": "@cowork-cookbook/report_budget_asset_maintenance",
           "display_name": "Budget asset maintenance Summary Report",
           "audience": "both",
-          "score": 66.03
+          "score": 66.05
         },
         {
           "id": "rapp__twin_agent",
           "name": "@rapp/twin_agent",
           "display_name": "Twin",
           "audience": "both",
-          "score": 62.31
+          "score": 62.33
         },
         {
           "id": "cowork-cookbook__d365_design_to_retire_manage_active_products",
           "name": "@cowork-cookbook/d365_design_to_retire_manage_active_products",
           "display_name": "D365 Manage active products Expert",
           "audience": "both",
-          "score": 54.04
+          "score": 54.05
         },
         {
           "id": "cowork-cookbook__dashboard_dispose_of_obsolete_inventory",
           "name": "@cowork-cookbook/dashboard_dispose_of_obsolete_inventory",
           "display_name": "Dispose of obsolete inventory Interactive HTML Dashboard",
           "audience": "both",
-          "score": 53.65
+          "score": 53.66
         },
         {
           "id": "cowork-cookbook__ppt_exec_dispose_of_obsolete_inventory",
           "name": "@cowork-cookbook/ppt_exec_dispose_of_obsolete_inventory",
           "display_name": "Dispose of obsolete inventory Executive PowerPoint Deck",
           "audience": "both",
-          "score": 53.65
+          "score": 53.66
         },
         {
           "id": "cowork-cookbook__fixed_asset_register_audit",
           "name": "@cowork-cookbook/fixed_asset_register_audit",
           "display_name": "Fixed Asset Register Audit",
           "audience": "business",
-          "score": 51.99
+          "score": 52.0
         }
       ]
     },
@@ -1879,84 +1879,84 @@
           "name": "@cowork-cookbook/project_margin_health",
           "display_name": "Project Margin Health Report",
           "audience": "both",
-          "score": 215.24
+          "score": 215.29
         },
         {
           "id": "cowork-cookbook__field_service_daily_utilization",
           "name": "@cowork-cookbook/field_service_daily_utilization",
           "display_name": "Field Service Resource Utilization Daily Email",
           "audience": "both",
-          "score": 136.21
+          "score": 136.25
         },
         {
           "id": "cowork-cookbook__adaptive_card_manage_project_budget",
           "name": "@cowork-cookbook/adaptive_card_manage_project_budget",
           "display_name": "Manage project budget Status Adaptive Card",
           "audience": "both",
-          "score": 96.34
+          "score": 96.36
         },
         {
           "id": "cowork-cookbook__demo_data_manage_project_budget",
           "name": "@cowork-cookbook/demo_data_manage_project_budget",
           "display_name": "Manage project budget Demo Data Generator",
           "audience": "both",
-          "score": 96.34
+          "score": 96.36
         },
         {
           "id": "cowork-cookbook__d365_project_to_profit",
           "name": "@cowork-cookbook/d365_project_to_profit",
           "display_name": "D365 Project to profit Expert",
           "audience": "both",
-          "score": 87.01
+          "score": 87.03
         },
         {
           "id": "cowork-cookbook__adaptive_card_analyze_asset_utilization",
           "name": "@cowork-cookbook/adaptive_card_analyze_asset_utilization",
           "display_name": "Analyze asset utilization Status Adaptive Card",
           "audience": "both",
-          "score": 86.46
+          "score": 86.49
         },
         {
           "id": "cowork-cookbook__demo_data_analyze_asset_utilization",
           "name": "@cowork-cookbook/demo_data_analyze_asset_utilization",
           "display_name": "Analyze asset utilization Demo Data Generator",
           "audience": "both",
-          "score": 86.46
+          "score": 86.49
         },
         {
           "id": "cowork-cookbook__d365_project_to_profit_manage_project_delivery",
           "name": "@cowork-cookbook/d365_project_to_profit_manage_project_delivery",
           "display_name": "D365 Manage project delivery Expert",
           "audience": "both",
-          "score": 69.55
+          "score": 69.56
         },
         {
           "id": "cowork-cookbook__planned_order_summary",
           "name": "@cowork-cookbook/planned_order_summary",
           "display_name": "Planned Order Summary by Resource",
           "audience": "both",
-          "score": 66.34
+          "score": 66.35
         },
         {
           "id": "cowork-cookbook__demo_data_plan_projects_resources",
           "name": "@cowork-cookbook/demo_data_plan_projects_resources",
           "display_name": "Plan projects resources Demo Data Generator",
           "audience": "both",
-          "score": 54.42
+          "score": 54.44
         },
         {
           "id": "cowork-cookbook__adaptive_card_control_project_scope",
           "name": "@cowork-cookbook/adaptive_card_control_project_scope",
           "display_name": "Control project scope Status Adaptive Card",
           "audience": "both",
-          "score": 53.46
+          "score": 53.48
         },
         {
           "id": "cowork-cookbook__adaptive_card_develop_project_governance_strategy",
           "name": "@cowork-cookbook/adaptive_card_develop_project_governance_strategy",
           "display_name": "Develop project governance strategy Status Adaptive Card",
           "audience": "business",
-          "score": 53.46
+          "score": 53.48
         }
       ]
     },
@@ -1970,84 +1970,84 @@
           "name": "@cowork-cookbook/bulk_update_identify_workplace_hazards",
           "display_name": "Identify workplace hazards Bulk Field Update",
           "audience": "both",
-          "score": 77.76
+          "score": 77.78
         },
         {
           "id": "cowork-cookbook__configure_identify_workplace_hazards",
           "name": "@cowork-cookbook/configure_identify_workplace_hazards",
           "display_name": "Identify workplace hazards Configuration Bulk Setup",
           "audience": "both",
-          "score": 77.76
+          "score": 77.78
         },
         {
           "id": "cowork-cookbook__report_audit_workplace_for_safety",
           "name": "@cowork-cookbook/report_audit_workplace_for_safety",
           "display_name": "Audit workplace for safety Summary Report",
           "audience": "business",
-          "score": 77.76
+          "score": 77.78
         },
         {
           "id": "cowork-cookbook__teams_update_audit_workplace_for_safety",
           "name": "@cowork-cookbook/teams_update_audit_workplace_for_safety",
           "display_name": "Audit workplace for safety Teams Channel Update",
           "audience": "business",
-          "score": 77.76
+          "score": 77.78
         },
         {
           "id": "cowork-cookbook__d365_administer_to_operate",
           "name": "@cowork-cookbook/d365_administer_to_operate",
           "display_name": "D365 Administer to operate Expert",
           "audience": "both",
-          "score": 56.22
+          "score": 56.23
         },
         {
           "id": "kody-w__predictive_asset_maintenance_intelligence",
           "name": "@kody-w/predictive_asset_maintenance_intelligence",
           "display_name": "Predictive Asset Maintenance Intelligence",
           "audience": "business",
-          "score": 54.75
+          "score": 54.76
         },
         {
           "id": "cowork-cookbook__bulk_update_request_time_off",
           "name": "@cowork-cookbook/bulk_update_request_time_off",
           "display_name": "Request time off Bulk Field Update",
           "audience": "both",
-          "score": 49.74
+          "score": 49.76
         },
         {
           "id": "cowork-cookbook__configure_request_travel",
           "name": "@cowork-cookbook/configure_request_travel",
           "display_name": "Request travel Configuration Bulk Setup",
           "audience": "both",
-          "score": 49.74
+          "score": 49.76
         },
         {
           "id": "cowork-cookbook__scheduled_brief_request_time_off",
           "name": "@cowork-cookbook/scheduled_brief_request_time_off",
           "display_name": "Request time off Scheduled Email Brief",
           "audience": "both",
-          "score": 49.74
+          "score": 49.76
         },
         {
           "id": "rapp__drift_watcher",
           "name": "@rapp/drift_watcher",
           "display_name": "DriftWatcherAgent",
           "audience": "both",
-          "score": 49.74
+          "score": 49.76
         },
         {
           "id": "cowork-cookbook__audit_maintain_open_service_requests",
           "name": "@cowork-cookbook/audit_maintain_open_service_requests",
           "display_name": "Maintain open service requests Completeness Audit",
           "audience": "business",
-          "score": 49.05
+          "score": 49.06
         },
         {
           "id": "cowork-cookbook__configure_receive_service_requests",
           "name": "@cowork-cookbook/configure_receive_service_requests",
           "display_name": "Receive service requests Configuration Bulk Setup",
           "audience": "both",
-          "score": 49.05
+          "score": 49.06
         }
       ]
     }
@@ -2055,19 +2055,22 @@
   "index": {
     "neuron": [
       "bill__neuron_agent:6",
+      "rapp__workspace_neuron_agent:3",
       "kody-w__neuron_swarm:1"
     ],
     "memory": [
       "cat-agent-skills__style_analyzer:4",
       "kody-w__context_memory_agent:4",
       "kody-w__manage_memory_agent:4",
-      "bill__neuron_agent:3"
+      "bill__neuron_agent:3",
+      "rapp__workspace_neuron_agent:3"
     ],
     "knowledge": [
       "cat-agent-skills__institutional_knowledge:8",
       "cat-agent-skills__knowledge_corpus_curator:7",
       "cat-agent-skills__copilot_studio_knowledge_readiness:6",
       "cat-agent-skills__knowledge_source_router:6",
+      "rapp__workspace_neuron_agent:5",
       "bill__neuron_agent:4",
       "cat-agent-skills__spend_more_time_with_friends_and_family:4",
       "cowork-cookbook__adaptive_card_convert_a_case_to_a_knowledge_article:4",
@@ -2087,8 +2090,7 @@
       "cowork-cookbook__teams_update_analyze_knowledge_base_usage:4",
       "cowork-cookbook__teams_update_manage_project_knowledge_and_documentation:4",
       "howardh__vaultmind_agent:3",
-      "rapp__rapp_dogg_agent:3",
-      "rapter__rapp_dogg_agent:3"
+      "rapp__rapp_dogg_agent:3"
     ],
     "base": [
       "bill__neuron_agent:4",
@@ -2103,6 +2105,7 @@
       "cowork-cookbook__scheduled_brief_retire_knowledge_base_articles:4",
       "cowork-cookbook__teams_update_analyze_knowledge_base_usage:4",
       "rapp__basic_agent:4",
+      "rapp__workspace_neuron_agent:4",
       "howardh__vaultmind_agent:3",
       "rapp__rapp_dogg_agent:3",
       "rapter__rapp_dogg_agent:3",
@@ -2113,6 +2116,7 @@
       "bill__neuron_agent:3",
       "kody-w__install_rappter_distro_agent:3",
       "rapp__rapp_dogg_agent:3",
+      "rapp__workspace_neuron_agent:3",
       "rapter__rapp_dogg_agent:3"
     ],
     "platform": [
@@ -2276,11 +2280,13 @@
     "injects": [
       "bill__neuron_agent:1",
       "rapp__rapp_dogg_agent:1",
+      "rapp__workspace_neuron_agent:1",
       "rapter__rapp_dogg_agent:1"
     ],
     "compact": [
       "bill__neuron_agent:1",
-      "cat-agent-skills__competitive_battlecard_builder:1"
+      "cat-agent-skills__competitive_battlecard_builder:1",
+      "rapp__workspace_neuron_agent:1"
     ],
     "block": [
       "bill__neuron_agent:1",
@@ -2315,6 +2321,7 @@
       "rapp__ping_agent:1",
       "rapp__rapp_dogg_agent:1",
       "rapp__twin_agent:1",
+      "rapp__workspace_neuron_agent:1",
       "rapter__rapp_dogg_agent:1"
     ],
     "session": [
@@ -2813,6 +2820,7 @@
       "cowork-cookbook__vendor_invoice_validation:1",
       "kody-w__rappterpedia_agent:1",
       "rapp__rapp_dogg_agent:1",
+      "rapp__workspace_neuron_agent:1",
       "rapter__rapp_dogg_agent:1",
       "wildhaven__ceo_agent:1"
     ],
@@ -4180,7 +4188,8 @@
       "kody-w__legal_helper:1",
       "kody-w__neuron_swarm:1",
       "rapp__basic_agent:1",
-      "rapp__twin_agent:1"
+      "rapp__twin_agent:1",
+      "rapp__workspace_neuron_agent:1"
     ],
     "oversharing": [
       "cat-agent-skills__agent_red_team:1"
@@ -5839,7 +5848,8 @@
       "cat-agent-skills__brand_voice_pass:1"
     ],
     "generic": [
-      "cat-agent-skills__brand_voice_pass:1"
+      "cat-agent-skills__brand_voice_pass:1",
+      "rapp__workspace_neuron_agent:1"
     ],
     "phrasing": [
       "cat-agent-skills__brand_voice_pass:1"
@@ -6508,7 +6518,8 @@
       "cowork-cookbook__configure_define_operating_hours:4",
       "cowork-cookbook__report_define_operating_hours:4",
       "cowork-cookbook__scheduled_brief_define_operating_hours_and_schedule:4",
-      "cat-agent-skills__business_os:1"
+      "cat-agent-skills__business_os:1",
+      "rapp__workspace_neuron_agent:1"
     ],
     "system": [
       "cowork-cookbook__audit_monitor_system_performance_and_health:4",
@@ -8388,7 +8399,8 @@
     ],
     "free": [
       "cat-agent-skills__copilot_studio_test_planner:1",
-      "kody-w__rapp_sentinel_agent:1"
+      "kody-w__rapp_sentinel_agent:1",
+      "rapp__workspace_neuron_agent:1"
     ],
     "panel": [
       "cat-agent-skills__persona_reaction_panel:3",
@@ -12652,7 +12664,8 @@
       "kody-w__rapp_skill_bridge_agent:1"
     ],
     "prose": [
-      "cat-agent-skills__wikipedia_human_style_writing:1"
+      "cat-agent-skills__wikipedia_human_style_writing:1",
+      "rapp__workspace_neuron_agent:1"
     ],
     "avoids": [
       "cat-agent-skills__wikipedia_human_style_writing:1"
@@ -20852,6 +20865,7 @@
       "cowork-cookbook__stand_up_an_account_plan_board:3"
     ],
     "workspace": [
+      "rapp__workspace_neuron_agent:5",
       "cowork-cookbook__stand_up_a_campaign_workspace:3"
     ],
     "deliverable": [
@@ -20972,6 +20986,7 @@
     "frames": [
       "kody-w__ez_sharpen_agent:5",
       "kody-w__commons_life_agent:4",
+      "rapp__workspace_neuron_agent:3",
       "rapter__hive_census_agent:3",
       "cowork-cookbook__turn_a_document_into_a_visual_framework:1",
       "kody-w__perpetual_loop_factory:1",
@@ -21131,6 +21146,7 @@
       "kody-w__rar_installer_troubleshooter_agent:9",
       "kody-w__rapp_sdk_builder:8",
       "discreetRappers__rapp_pipeline_agent:7",
+      "rapp__workspace_neuron_agent:7",
       "kody-w__rapp_x_notary_canary_agent:6",
       "kody-w__twin_egg_hatcher:5",
       "kody-w__factory:4",
@@ -21149,8 +21165,7 @@
       "discreetRappers__copilot_studio_transpiler_agent:1",
       "discreetRappers__project_tracker_agent:1",
       "kody-w__agent_workbench:1",
-      "kody-w__bond_rhythm_agent:1",
-      "kody-w__chain_composer_agent:1"
+      "kody-w__bond_rhythm_agent:1"
     ],
     "configs": [
       "discreetRappers__agent_generator_agent:1",
@@ -22622,6 +22637,7 @@
       "rapp__egg_hatcher:4",
       "rapp__rapp:3",
       "rapp__twin_agent:3",
+      "rapp__workspace_neuron_agent:3",
       "kody-w__project_tracker_agent:1",
       "rapp__rapp_dogg_agent:1",
       "rapter__rapp_dogg_agent:1"
@@ -22657,7 +22673,8 @@
       "kody-w__prompt_extractor:1"
     ],
     "have": [
-      "kody-w__prompt_extractor:1"
+      "kody-w__prompt_extractor:1",
+      "rapp__workspace_neuron_agent:1"
     ],
     "transcribed": [
       "kody-w__prompt_extractor:1"
@@ -22667,7 +22684,8 @@
     ],
     "pii": [
       "kody-w__prototype_lock_factory_agent:4",
-      "kody-w__twin_me:4"
+      "kody-w__twin_me:4",
+      "rapp__workspace_neuron_agent:1"
     ],
     "locks": [
       "kody-w__prototype_lock_factory_agent:1"
@@ -23476,6 +23494,18 @@
     ],
     "vibebuilder": [
       "rapp__vibe_builder_agent:3"
+    ],
+    "workspaceneuron": [
+      "rapp__workspace_neuron_agent:3"
+    ],
+    "planted": [
+      "rapp__workspace_neuron_agent:1"
+    ],
+    "don": [
+      "rapp__workspace_neuron_agent:1"
+    ],
+    "carry": [
+      "rapp__workspace_neuron_agent:1"
     ],
     "hive": [
       "rapter__hive_shape_agent:7",

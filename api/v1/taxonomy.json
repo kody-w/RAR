@@ -1,6 +1,6 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-09-08T20:45:11Z",
+  "generated": "2026-09-10T19:19:44Z",
   "categories": [
     {
       "name": "integrations",
@@ -16,7 +16,7 @@
     },
     {
       "name": "core",
-      "count": 33
+      "count": 34
     },
     {
       "name": "devtools",
@@ -70,7 +70,7 @@
     },
     {
       "name": "@rapp",
-      "count": 23
+      "count": 24
     },
     {
       "name": "@discreetRappers",
@@ -121,6 +121,10 @@
     {
       "name": "private",
       "count": 2
+    },
+    {
+      "name": "reference",
+      "count": 1
     }
   ],
   "tags": [
@@ -409,8 +413,24 @@
       "count": 6
     },
     {
+      "name": "egg",
+      "count": 6
+    },
+    {
       "name": "drift",
       "count": 6
+    },
+    {
+      "name": "memory",
+      "count": 5
+    },
+    {
+      "name": "knowledge-base",
+      "count": 5
+    },
+    {
+      "name": "bootstrap",
+      "count": 5
     },
     {
       "name": "core",
@@ -487,22 +507,6 @@
     {
       "name": "twin",
       "count": 5
-    },
-    {
-      "name": "egg",
-      "count": 5
-    },
-    {
-      "name": "memory",
-      "count": 4
-    },
-    {
-      "name": "knowledge-base",
-      "count": 4
-    },
-    {
-      "name": "bootstrap",
-      "count": 4
     },
     {
       "name": "dataverse",
@@ -585,6 +589,10 @@
       "count": 4
     },
     {
+      "name": "frames",
+      "count": 4
+    },
+    {
       "name": "estate",
       "count": 4
     },
@@ -594,6 +602,10 @@
     },
     {
       "name": "publish",
+      "count": 4
+    },
+    {
+      "name": "rapp-1",
       "count": 4
     },
     {
@@ -721,10 +733,6 @@
       "count": 3
     },
     {
-      "name": "frames",
-      "count": 3
-    },
-    {
       "name": "deploy",
       "count": 3
     },
@@ -757,10 +765,6 @@
       "count": 3
     },
     {
-      "name": "rapp-1",
-      "count": 3
-    },
-    {
       "name": "engine",
       "count": 3
     },
@@ -779,6 +783,10 @@
     {
       "name": "store",
       "count": 3
+    },
+    {
+      "name": "neuron",
+      "count": 2
     },
     {
       "name": "platform",
@@ -1187,10 +1195,6 @@
     {
       "name": "daemon",
       "count": 2
-    },
-    {
-      "name": "neuron",
-      "count": 1
     },
     {
       "name": "d365",

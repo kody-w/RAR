@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAR Stacks — drop-in packs</title>
+<meta name="description" content="Browse RAR stacks: drop-in packs (agent(s) + optional rapp/1 §9 .egg + sha256-pinned manifest) that plant something bigger than a single agent — neighborhoods, fleet/lifecycle kits, and private rapp-workspace/1.1 vaults.">
+<meta property="og:title" content="RAR Stacks">
+<meta property="og:description" content="Drop-in packs, one raw-GitHub URL each. Verify-then-plant, no backend, no auth.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kody-w.github.io/RAR/stacks.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "RAR Stacks",
+  "url": "https://kody-w.github.io/RAR/stacks.html",
+  "description": "Index of RAR stacks — drop-in packs of agent(s) + optional .egg + sha256-pinned manifest.",
+  "isPartOf": {"@type": "WebSite", "name": "RAPP Agent Store", "url": "https://kody-w.github.io/RAR/"}
+}
+</script>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #21262d;
+    --border: #30363d;
+    --border-hover: #484f58;
+    --text: #e6edf3;
+    --text-dim: #8b949e;
+    --text-muted: #656d76;
+    --accent: #58a6ff;
+    --accent-bg: rgba(88,166,255,.1);
+    --green: #3fb950;
+    --green-bg: rgba(63,185,80,.12);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 24px; border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; background: var(--bg); z-index: 10;
+  }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+  .logo-mark {
+    width: 28px; height: 28px; border-radius: 6px; background: var(--accent);
+    color: #041b33; display: flex; align-items: center; justify-content: center;
+    font-weight: 800;
+  }
+  header a { color: var(--text-dim); text-decoration: none; font-size: 13.5px; margin-left: 18px; }
+  header a:hover { color: var(--text); }
+  .container { max-width: 980px; margin: 0 auto; padding: 32px 20px 64px; }
+  h1 { font-size: 26px; margin: 0 0 8px; }
+  .sub { color: var(--text-dim); margin: 0 0 28px; max-width: 640px; }
+  .sub code { background: var(--surface2); padding: 1px 6px; border-radius: 4px; font-size: 12.5px; }
+  .stack {
+    border: 1px solid var(--border); background: var(--surface);
+    border-radius: 10px; padding: 20px 22px; margin-bottom: 16px;
+  }
+  .stack:hover { border-color: var(--border-hover); }
+  .stack-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .stack-head h2 { font-size: 18px; margin: 0; }
+  .stack-head .ver { color: var(--text-muted); font-size: 12.5px; }
+  .purpose { color: var(--text-dim); margin: 10px 0 14px; font-size: 14px; }
+  .badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .badge {
+    font-size: 11.5px; padding: 3px 9px; border-radius: 999px;
+    background: var(--surface2); color: var(--text-dim); border: 1px solid var(--border);
+  }
+  .badge.spec { background: var(--accent-bg); color: var(--accent); border-color: transparent; }
+  .files { display: flex; flex-direction: column; gap: 6px; }
+  .file-row {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px; font-size: 13px; padding: 7px 10px; background: var(--surface2);
+    border-radius: 6px;
+  }
+  .file-row .fname { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--text); }
+  .file-row .fsize { color: var(--text-muted); font-size: 12px; white-space: nowrap; }
+  .file-row a { color: var(--accent); text-decoration: none; font-size: 12.5px; white-space: nowrap; }
+  .file-row a:hover { text-decoration: underline; }
+  .links { margin-top: 12px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .links a { font-size: 13px; color: var(--accent); text-decoration: none; }
+  .links a:hover { text-decoration: underline; }
+  .loading, .error { color: var(--text-dim); padding: 40px 0; text-align: center; }
+  footer { text-align: center; color: var(--text-muted); font-size: 12.5px; padding: 24px; border-top: 1px solid var(--border); }
+  footer a { color: var(--text-dim); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><div class="logo-mark">R</div><span>RAPP Agent Repository</span></div>
+  <div>
+    <a href="index.html">Agents</a>
+    <a href="discover.html">For Work</a>
+    <a href="stacks.html">Stacks</a>
+    <a href="store.html">Advanced</a>
+  </div>
+</header>
+
+<div class="container">
+  <h1>Stacks</h1>
+  <p class="sub">
+    A stack is a drop-in pack — agent(s), an optional <code>rapp/1 §9</code>
+    <code>.egg</code>, and a sha256-pinned <code>pack.json</code> — that plants
+    something bigger than a single agent: a neighborhood, a fleet/lifecycle kit,
+    or a private <code>rapp-workspace/1.1</code> vault. Every file below is
+    independently fetchable and sha256-verifiable; you can take a whole stack
+    or cherry-pick files across stacks. Machine-readable index:
+    <code>api/v1/stacks.json</code>.
+  </p>
+  <div id="stacks-root"><div class="loading">Loading stacks…</div></div>
+</div>
+
+<footer>
+  Read-only, no backend, no auth. Source:
+  <a href="https://github.com/kody-w/RAR/tree/main/stacks">github.com/kody-w/RAR/stacks</a>
+</footer>
+
+<script>
+async function main() {
+  const root = document.getElementById('stacks-root');
+  try {
+    const res = await fetch('api/v1/stacks.json?t=' + Date.now());
+    if (!res.ok) throw new Error('fetch failed: ' + res.status);
+    const data = await res.json();
+    if (!data.stacks || !data.stacks.length) {
+      root.innerHTML = '<div class="error">No stacks found.</div>';
+      return;
+    }
+    root.innerHTML = data.stacks.map(renderStack).join('');
+  } catch (e) {
+    root.innerHTML = '<div class="error">Could not load api/v1/stacks.json. '
+      + 'Try the raw file directly: <a href="https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/stacks.json" style="color:var(--accent)">stacks.json</a>.</div>';
+  }
+}
+
+function esc(s) {
+  return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function humanSize(n) {
+  if (!n && n !== 0) return '';
+  if (n < 1024) return n + ' B';
+  if (n < 1024 * 1024) return (n / 1024).toFixed(1) + ' KB';
+  return (n / (1024 * 1024)).toFixed(1) + ' MB';
+}
+
+function renderStack(s) {
+  const badges = [];
+  if (s.workspace_spec) badges.push('<span class="badge spec">' + esc(s.workspace_spec) + '</span>');
+  if (s.egg_variant) badges.push('<span class="badge">egg: ' + esc(s.egg_variant) + '</span>');
+  if (s.modes) badges.push('<span class="badge">modes: ' + esc(s.modes.join(', ')) + '</span>');
+  if (s.agents_in_pack) badges.push('<span class="badge">' + s.agents_in_pack + ' agent(s)</span>');
+  if (s.agents_in_template) badges.push('<span class="badge">' + s.agents_in_template + ' agent(s) in template</span>');
+
+  const files = Object.entries(s.files || {}).map(([fname, meta]) => (
+    '<div class="file-row">'
+      + '<span class="fname">' + esc(fname) + '</span>'
+      + '<span class="fsize">' + humanSize(meta.size) + '</span>'
+      + '<a href="' + esc(meta.raw_url) + '" target="_blank" rel="noopener">raw ↗</a>'
+    + '</div>'
+  )).join('');
+
+  return (
+    '<div class="stack">'
+      + '<div class="stack-head"><h2>' + esc(s.display_name) + '</h2>'
+      + '<span class="ver">v' + esc(s.version) + ' · ' + esc(s.slug) + '</span></div>'
+      + '<div class="badges">' + badges.join('') + '</div>'
+      + '<p class="purpose">' + esc(s.purpose) + '</p>'
+      + '<div class="files">' + files + '</div>'
+      + '<div class="links">'
+        + '<a href="' + esc(s.readme_url) + '" target="_blank" rel="noopener">README</a>'
+        + '<a href="' + esc(s.pack_url) + '" target="_blank" rel="noopener">pack.json</a>'
+        + '<a href="' + esc(s.directory_url) + '" target="_blank" rel="noopener">browse directory</a>'
+      + '</div>'
+    + '</div>'
+  );
+}
+
+main();
+</script>
+</body>
+</html>

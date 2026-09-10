@@ -1,0 +1,39 @@
+{
+  "schema": "rapp-neuron/1.0",
+  "id": "rapp_workspace_privacy",
+  "name": "rapp-workspace/1.1 — privacy & sovereignty (§6)",
+  "version": "1.1.0",
+  "category": "rapp-workspace",
+  "description": "The non-negotiable privacy posture every workspace must hold.",
+  "scope": "shared",
+  "author": "RAPP",
+  "memories": [
+    {
+      "memory_type": "fact",
+      "content": "Local-only is the default and the safest state for any workspace holding PII: no git remote at all. If a remote is ever added, it MUST be private, access-controlled, scoped to the workspace's own world, and gated by a fail-closed pre-push scan (secret scan + PII scan + world-boundary check).",
+      "tags": [
+        "privacy",
+        "remote",
+        "pre-push-gate"
+      ]
+    },
+    {
+      "memory_type": "gotcha",
+      "content": "A rapp-workspace instance is NEVER meant to be publicly hosted — it holds the owner's real, PII-bearing operating data by design. A planting/factory tool for workspaces should REFUSE a 'public' materialization mode outright, not just warn about it. Only a workspace's own generic STARTER TEMPLATE (PII-free, placeholder identity) is safe to publish.",
+      "tags": [
+        "privacy",
+        "public-mode",
+        "refusal",
+        "gotcha"
+      ]
+    },
+    {
+      "memory_type": "fact",
+      "content": "The AI operating a workspace organizes and proposes; the owner decides and executes anything irreversible or outward-facing (a push, a publish, an external send). This sovereignty rule is not optional configuration — it's part of §6 conformance.",
+      "tags": [
+        "sovereignty",
+        "owner-consent"
+      ]
+    }
+  ]
+}
