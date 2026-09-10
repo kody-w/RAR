@@ -1,0 +1,40 @@
+{
+  "schema": "rapp-neuron/1.0",
+  "id": "rapp_workspace_identity",
+  "name": "rapp-workspace/1.1 — identity (rappid, §2/§6)",
+  "version": "1.1.0",
+  "category": "rapp-workspace",
+  "description": "Minting, mint-once, and the rappid grammar.",
+  "scope": "shared",
+  "author": "RAPP",
+  "memories": [
+    {
+      "memory_type": "fact",
+      "content": "A rappid has the exact grammar rappid:@<owner>/<slug>:<64hex>, where owner and slug are lowercase, hyphen-separated labels ([a-z0-9]+(-[a-z0-9]+)*) and the tail is 64 lowercase hex characters. Keyless minting: sha256('rapp/1:rappid\\n' + uuid4_bytes).hexdigest(). Never derive a rappid from a name or any PII — it must be random, unguessable, keyless-by-default.",
+      "tags": [
+        "rappid",
+        "identity",
+        "grammar",
+        "minting"
+      ]
+    },
+    {
+      "memory_type": "gotcha",
+      "content": "Mint-once is absolute: on reading an existing rappid.json, ALWAYS reuse the stored rappid — never regenerate it, even to 'fix' something. The only time a NEW rappid is minted is when planting a brand-new workspace instance from a template (a template's own rappid.json ships an intentional placeholder that the planting tool replaces exactly once).",
+      "tags": [
+        "rappid",
+        "mint-once",
+        "gotcha"
+      ]
+    },
+    {
+      "memory_type": "fact",
+      "content": "A template meant for reuse (e.g. a starter stack) should ship an OBVIOUSLY-placeholder rappid.json value (like 'REPLACE_ME_MINT_A_FRESH_RAPPID_BEFORE_USE') rather than a fake-looking valid hash, so nobody accidentally treats an unminted template as a live identity.",
+      "tags": [
+        "rappid",
+        "template",
+        "placeholder"
+      ]
+    }
+  ]
+}

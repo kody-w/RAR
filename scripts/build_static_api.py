@@ -763,6 +763,10 @@ def main() -> int:
                 "url": f"{RAW_BASE}/api/v1/index.json",
                 "description": "Federation feed consumed by the rapp-zoo. Separate shape, maintained by build_pokedex_api.py.",
             },
+            "stacks": {
+                "url": f"{RAW_BASE}/api/v1/stacks.json",
+                "description": "Drop-in stacks (agent(s) + optional rapp/1 \u00a79 .egg + sha256-pinned pack.json) — neighborhoods, fleet/lifecycle kits, and rapp-workspace/1.1 vaults. Separate shape, maintained by build_stacks_api.py.",
+            },
         },
         "recipes": {
             "render_a_catalog": [

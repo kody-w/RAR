@@ -167,7 +167,7 @@
     "metrics": {
       "url": "{base_url}/state/metrics.json",
       "method": "GET",
-      "description": "Public registry metrics — total downloads (clones + CDN hits + release assets), leaderboards for most downloaded, most upvoted, most reviewed, and highest rated agents, plus publisher/category breakdowns. Rebuilt daily. Human dashboard at {site_url}/metrics.html.",
+      "description": "Public registry metrics \u2014 total downloads (clones + CDN hits + release assets), leaderboards for most downloaded, most upvoted, most reviewed, and highest rated agents, plus publisher/category breakdowns. Rebuilt daily. Human dashboard at {site_url}/metrics.html.",
       "auth": "none"
     },
     "review": {
@@ -206,6 +206,13 @@
       "method": "GET",
       "description": "Community ratings snapshot (rar-discussion-ratings/1.0): per-agent upvotes (positive GitHub reactions only), comment counts, and the agent's Discussion URL. One Discussion per agent, title = agent name. Upvote by adding a positive reaction to the Discussion; comment by replying in the thread. Refreshed daily.",
       "auth": "none"
+    },
+    "stacks": {
+      "url": "{base_url}/api/v1/stacks.json",
+      "method": "GET",
+      "description": "Drop-in stacks: agent(s) + optional rapp/1 \u00a79 .egg + sha256-pinned pack.json. Includes rapp-workspace-starter (plants a private rapp-workspace/1.1 vault) alongside the neighborhood/fleet/lifecycle stacks.",
+      "auth": "none",
+      "example": "{base_url}/api/v1/stacks.json"
     }
   },
   "self_submission": {

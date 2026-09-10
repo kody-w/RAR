@@ -1,0 +1,58 @@
+{
+  "schema": "rapp-rar-stack/1.0",
+  "name": "rapp-workspace-starter",
+  "display_name": "RAPP Workspace Starter",
+  "version": "1.0.0",
+  "purpose": "Drop-in pack for a chief-of-staff style private workspace, conformant to rapp-workspace/1.1: CLAUDE.md/HOME.md/PERSONA.md/where-everything-lives.md, standard sections (strategy/portfolio/projects/reference/people/meetings/connect/role), and the rapp-projects frame authority. WorkspaceFactory pulls + verify_egg()s the canonical template before planting, then re-mints a fresh rappid per instance. Newer shape than the neighborhood-starter/microsoft-365-team stacks: this plants a private organizing VAULT for one owner and one world, not an agent-team neighborhood. public mode is refused by design \u2014 a planted workspace holds real PII; only this stack's own template .egg is meant to be public. Ships with WorkspaceNeuron: a generic, PII-free Knowledge Base of the spec's setup/operating rules injected into the brainstem prompt, so a planted workspace's own .md files stay owner-specific instead of re-explaining the protocol.",
+  "files": {
+    "factory_agent.py": {
+      "purpose": "Drop into local brainstem agents/. Run WorkspaceFactory to plant a workspace.",
+      "size": 16542,
+      "sha256": "aa2b45c922d27a7ce1007313d5093ca60e5caf056600267c574b8033479de2e7"
+    },
+    "workspace_neuron_agent.py": {
+      "purpose": "Optional, tool-form. Drop into local brainstem agents/@rapp/ alongside the factory. Injects a compact [Knowledge Base] of rapp-workspace/1.1 + rapp/1 setup and operating rules (anatomy, identity/mint-once, privacy posture, the egg contract, the frame authority) \u2014 generic and PII-free, never owner-specific. No install step; the brainstem's agent loader picks it up as a callable tool. Keeps that knowledge out of every planted workspace's CLAUDE.md/README.md prose. Lives only under stacks/ \u2014 not submitted to RAR's canonical agents/ registry, which is gated by the GitHub Issue notarization workflow (see CONSTITUTION.md), not a pull request.",
+      "size": 15967,
+      "sha256": "44605ba583e68fac5f3131a474ae1332f55adbd79723e78f62825e98b390d5be"
+    },
+    "neurons/@rapp/rapp_workspace_anatomy.neuron.json": {
+      "purpose": "Optional, storage-form twin of the same knowledge (same content, generated from the same source, never drifts). For a CommunityRAPP-style backend: install with install_neurons.py so it lands in the RAPP Web UI's system prompt automatically, no tool call needed. schema/id/name/version/category/description/scope/author/memories \u2014 same shape as install_neurons.py's own @platform/*.neuron.json packs.",
+      "size": 2359,
+      "sha256": "3006d13235fcb10ed4069068a063fb3f701632a6706363102dcc2955be92989e"
+    },
+    "neurons/@rapp/rapp_workspace_identity.neuron.json": {
+      "purpose": "Storage-form neuron: mint-once identity rules. See rapp_workspace_anatomy.neuron.json for the delivery-shape note.",
+      "size": 1744,
+      "sha256": "8fcb671a49e27eae28cdab1179b0b26ea03e355784bf21a584c83e6d84bbea41"
+    },
+    "neurons/@rapp/rapp_workspace_privacy.neuron.json": {
+      "purpose": "Storage-form neuron: privacy & sovereignty rules (public mode refusal). See rapp_workspace_anatomy.neuron.json for the delivery-shape note.",
+      "size": 1669,
+      "sha256": "a738b10135398acbccc0153076c637706dde4d0079ed52af9ef5a289ed98357c"
+    },
+    "neurons/@rapp/rapp1_egg_contract.neuron.json": {
+      "purpose": "Storage-form neuron: the rapp/1 \u00a79 egg contract. See rapp_workspace_anatomy.neuron.json for the delivery-shape note.",
+      "size": 2283,
+      "sha256": "65985ab11faf85ab4f994049c9e383158d378f305966ddf754fd2fb8c1679437"
+    },
+    "neurons/@rapp/rapp_projects_frame_authority.neuron.json": {
+      "purpose": "Storage-form neuron: the rapp-projects frame authority (leases, fork recovery). See rapp_workspace_anatomy.neuron.json for the delivery-shape note.",
+      "size": 2234,
+      "sha256": "e48ff43fe7404cbf4d12e5bc79b89947299e5ce1ab58ca134a970e940c58671f"
+    },
+    "rapp-workspace-starter.egg": {
+      "purpose": "Template content (rapp/1 \u00a79 organism egg, 24 files, PII-free, verify_egg-clean). The factory pulls + verifies + customizes this at plant time.",
+      "size": 58481,
+      "sha256": "f894e3ffd76062f3b096bdf56bd6ea8f35c16f08bcc597ccd4f3806f2fae4e5c"
+    }
+  },
+  "workspace_spec": "rapp-workspace/1.1",
+  "egg_variant": "organism",
+  "modes": ["local", "private", "egg"],
+  "public_mode_refused": true,
+  "see_also": [
+    "https://github.com/kody-w/rapp-workspace",
+    "https://github.com/kody-w/RAR/blob/main/stacks/microsoft-365-team",
+    "https://github.com/kody-w/RAPP/blob/main/CONSTITUTION.md"
+  ]
+}

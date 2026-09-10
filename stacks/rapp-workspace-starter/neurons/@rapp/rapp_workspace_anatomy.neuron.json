@@ -1,0 +1,48 @@
+{
+  "schema": "rapp-neuron/1.0",
+  "id": "rapp_workspace_anatomy",
+  "name": "rapp-workspace/1.1 — required anatomy",
+  "version": "1.1.0",
+  "category": "rapp-workspace",
+  "description": "What files a conformant workspace must have and why, per SPEC.md §3.",
+  "scope": "shared",
+  "author": "RAPP",
+  "memories": [
+    {
+      "memory_type": "fact",
+      "content": "A conformant rapp-workspace/1.1 vault requires exactly six things at its root: CLAUDE.md (or the equivalent operating file for whatever assistant runs it), HOME.md (the one dashboard), a PERSONA.md-shaped owner profile, where-everything-lives.md (the estate map), README.md carrying a loud PRIVATE/NEVER PUBLISH guard, and rappid.json (the identity). Standard sections (strategy/, portfolio/, projects/, reference/, people/, meetings/) are added as the world needs them, not required.",
+      "tags": [
+        "anatomy",
+        "required-files",
+        "spec-3"
+      ]
+    },
+    {
+      "memory_type": "fact",
+      "content": "A workspace is scoped to exactly ONE world (one use-case domain). An owner running more than one world runs a SEPARATE workspace per world, never one workspace with mixed content. Cross-world content leakage is the single most common conformance failure.",
+      "tags": [
+        "world-boundary",
+        "spec-5",
+        "conformance"
+      ]
+    },
+    {
+      "memory_type": "gotcha",
+      "content": "A workspace is conformant if it keeps §3 (anatomy), §4 (two-faces data layer), §5 (world boundary), and §6 (privacy/sovereignty). A hive-mode workspace additionally MUST keep §9 (distributed operation). Don't call a workspace 'done' on file presence alone — check these four/five sections.",
+      "tags": [
+        "conformance",
+        "checklist",
+        "hive"
+      ]
+    },
+    {
+      "memory_type": "pattern",
+      "content": "When asked 'is this workspace compliant with rapp-workspace/1.1', check in this order: (1) rappid.json has a valid rappid:@owner/slug:64hex and was mint-once (never regenerated), (2) all six §3 files present, (3) README has the PRIVATE guard, (4) no git remote, or if one exists it's private + gated, (5) if rapp-projects/ exists, every stream chain-verifies with the rapp/1 reference implementation.",
+      "tags": [
+        "conformance",
+        "audit",
+        "pattern"
+      ]
+    }
+  ]
+}

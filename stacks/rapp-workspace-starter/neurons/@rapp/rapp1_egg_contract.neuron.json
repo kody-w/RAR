@@ -1,0 +1,50 @@
+{
+  "schema": "rapp-neuron/1.0",
+  "id": "rapp1_egg_contract",
+  "name": "rapp/1 §9 — the egg contract",
+  "version": "1.0.0",
+  "category": "rapp-1",
+  "description": "How to pack, address, and verify a portable rapp/1 egg — used to ship workspace templates, twins, and other organisms as one verifiable file.",
+  "scope": "shared",
+  "author": "RAPP",
+  "memories": [
+    {
+      "memory_type": "fact",
+      "content": "An egg is a ZIP (stored, not deflated) with manifest.json first, containing exactly 7 keys: schema ('rapp/1-egg'), variant, rappid, created_utc, contents (a sorted list of {path, hash}), payload, sig. Two conformant packers of the same manifest value produce byte-identical eggs.",
+      "tags": [
+        "egg",
+        "manifest",
+        "spec-9.1"
+      ]
+    },
+    {
+      "memory_type": "fact",
+      "content": "Egg variants: organism (MUST include rappid.json + soul.md), rapplication (MUST include rappid.json + exactly one root agent.py), session/invite (JSON-only, no packed files), neighborhood, estate. Pick the variant that matches what's actually inside — 'organism' is the right choice for a workspace template.",
+      "tags": [
+        "egg",
+        "variant",
+        "organism"
+      ]
+    },
+    {
+      "memory_type": "gotcha",
+      "content": "verify_egg() checks integrity (contents hash-match, sorted paths, no path traversal / zip-slip, schema+variant sanity) — it does NOT check whether the CONTENTS are wholesome. A tool that plants/unpacks an egg should always call verify_egg() first and refuse to unpack on any failure, but that's a floor, not a full content review.",
+      "tags": [
+        "egg",
+        "verify_egg",
+        "security",
+        "gotcha"
+      ]
+    },
+    {
+      "memory_type": "pattern",
+      "content": "To make a PII-free, reusable template out of a real, PII-bearing workspace: rebuild a fresh scaffold with generic {{token}} placeholders (not real names/customers/dates), pack it as an organism egg, grep-sweep the packed source for every real name before calling it done, then verify_egg() before shipping. Never just zip the real workspace and hope stripping happens later.",
+      "tags": [
+        "egg",
+        "template",
+        "pii-sweep",
+        "pattern"
+      ]
+    }
+  ]
+}

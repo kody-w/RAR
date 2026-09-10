@@ -1,0 +1,239 @@
+{
+  "schema": "rar-stacks/1.0",
+  "description": "Every RAR stack — a drop-in pack (agent(s) + optional .egg + pack.json sha256 manifest) that plants something bigger than a single agent: a neighborhood, a fleet controller, a lifecycle kit, or a private rapp-workspace/1.1 vault. Each stack's files are individually sha256-pinned and independently fetchable — a client can take a whole stack or cherry-pick files across stacks since every entry is a content-addressed manifest.",
+  "generated": "2026-09-10T19:24:01Z",
+  "count": 5,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/stacks.json",
+  "stacks": [
+    {
+      "name": "fleet-management",
+      "display_name": "Fleet Management",
+      "version": "1.0.0",
+      "purpose": "Drop-in pack that turns one brainstem into a fleet controller for a network of Mac-mini brainstems. Two files: fleet_agent.py (the SSH-driven fleet adapter — discover, authorize, exec, read, write, tail, chat any twin on any peer, mesh-exec, mesh-chat, plus brainstem-aware actions like provision_brainstem / install_agent / hatch_egg / boot_federation; AND escape-hatch actions custom / extend / cap / list_caps so the brainstem can invent new capabilities at runtime) + twin_egg_hatcher_agent.py (the generic single-file scale-aware hatcher used to deploy agents / twins / neighborhoods / containers across the fleet). Together they make the entire local mini fleet addressable from one brainstem chat. Pairs with the organism-lifecycle stack (Twin + EggHatcher) for full peer-to-peer federation. SSH key-auth required; first run of action='authorize' generates a key and emits the one-line paste command for each mini operator.",
+      "slug": "fleet-management",
+      "directory_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/fleet-management/",
+      "pack_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/fleet-management/pack.json",
+      "readme_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/fleet-management/README.md",
+      "files": {
+        "fleet_agent.py": {
+          "purpose": "Drop into local brainstem agents/. Run Fleet to drive remote minis (any number of actions: shell, files, deploys, chat, mesh, AND custom/extend for new capabilities).",
+          "size": 37761,
+          "sha256": "9b4c43f787d3bfb56d87e4f4304b96249c589b872c95b86dcce0651de43b53cc",
+          "raw_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/fleet-management/fleet_agent.py"
+        },
+        "twin_egg_hatcher_agent.py": {
+          "purpose": "Scale-aware single-file hatcher (agent / twin / neighborhood / swarm / factory / industry / estate eggs). Required on every peer mini Fleet talks to. Also useful locally for hatching .egg files from other operators.",
+          "size": 44186,
+          "sha256": "7456fc537e8b525ae9108bec87deca67e29e21f730a7ce40f3a94a705d3600aa",
+          "raw_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/fleet-management/twin_egg_hatcher_agent.py"
+        }
+      },
+      "install": {
+        "type": "agent_pack",
+        "agents": [
+          "agents/@kody-w/fleet_agent.py",
+          "agents/@kody-w/twin_egg_hatcher_agent.py"
+        ],
+        "destination": "agents/",
+        "notes": "Drop both files into your brainstem's agents/ directory. load_agents() picks them up on the next /chat — no restart. The LLM gets Fleet(...) and HatchTwinEgg(...) as tools immediately. To deploy to a peer mini: (1) Fleet(action='authorize', host='<mini>.local') and paste the printed line on the mini's terminal; (2) Fleet(action='provision_brainstem', host='<mini>.local'); (3) Fleet(action='hatch_egg', host='<mini>.local', egg_url='http://your-host:8765/some.egg'); (4) Fleet(action='boot_federation', host='<mini>.local'). Or just describe it in natural language and the brainstem composes the calls itself."
+      },
+      "workspace_spec": null,
+      "egg_variant": null,
+      "modes": null,
+      "agents_in_pack": 2,
+      "agents_in_template": null,
+      "see_also": [
+        "https://github.com/kody-w/RAPP/blob/main/pages/vault/Architecture/The%20Federated%20Twin%20Egg%20Hatcher%20Pattern.md",
+        "https://github.com/kody-w/twin-egg-hatcher",
+        "https://github.com/kody-w/aibast-twin"
+      ]
+    },
+    {
+      "name": "microsoft-365-team",
+      "display_name": "Microsoft 365 Team Starter",
+      "version": "1.0.0",
+      "purpose": "Drop-in pack for Microsoft Solution Engineers. Two files: factory_agent.py (plants new MS-themed neighborhoods under your GitHub handle in 4 modes: local/private/public/egg) + microsoft-365-team.egg (the canonical content — 11 agents including WorkIQ for M365 access, MS-stack-shaped Twin with field patterns for Copilot Studio / Power Platform / consent delays, plus the canonical workflow gate set). Sneakernet-portable per the kernel two-file rule. PII never enters the planted repo by default per PUBLIC_PRIVATE_BOUNDARY §1.5.",
+      "slug": "microsoft-365-team",
+      "directory_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/microsoft-365-team/",
+      "pack_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/microsoft-365-team/pack.json",
+      "readme_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/microsoft-365-team/README.md",
+      "files": {
+        "factory_agent.py": {
+          "purpose": "Drop into local brainstem agents/. Run NeighborhoodFactory to plant.",
+          "size": 16396,
+          "sha256": "79010b3038bca259d6e584da4e494eee71ae5b9f9140a1d8c470e6b0c36c6980",
+          "raw_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/microsoft-365-team/factory_agent.py"
+        },
+        "microsoft-365-team.egg": {
+          "purpose": "Template content (11 agents). The factory pulls + customizes this at plant time.",
+          "size": 71456,
+          "sha256": "983381582c32cad96e4af722133ab55c66004ad0570cbe422b5d583cce288f99",
+          "raw_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/microsoft-365-team/microsoft-365-team.egg"
+        }
+      },
+      "install": null,
+      "workspace_spec": null,
+      "egg_variant": null,
+      "modes": null,
+      "agents_in_pack": null,
+      "agents_in_template": 11,
+      "see_also": [
+        "https://github.com/kody-w/microsoft-365-team",
+        "https://github.com/kody-w/RAPP/blob/main/pages/docs/PUBLIC_PRIVATE_BOUNDARY.md"
+      ]
+    },
+    {
+      "name": "neighborhood-starter",
+      "display_name": "Neighborhood Starter Stack",
+      "version": "1.0.0",
+      "purpose": "The canonical starter pack for planting a new RAPP neighborhood. Two files: factory_agent.py (drops into your local brainstem; the meta-agent that plants neighborhoods) + neighborhood-starter.egg (the template content, parameterized for the user's choices). Supports four modes: local-only on-device, GitHub-private, GitHub-public, or fresh portable .egg.",
+      "slug": "neighborhood-starter",
+      "directory_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/neighborhood-starter/",
+      "pack_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/neighborhood-starter/pack.json",
+      "readme_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/neighborhood-starter/README.md",
+      "files": {
+        "factory_agent.py": {
+          "purpose": "Drop into local brainstem agents/. Run NeighborhoodFactory to plant.",
+          "size": 16396,
+          "sha256": "79010b3038bca259d6e584da4e494eee71ae5b9f9140a1d8c470e6b0c36c6980",
+          "raw_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/neighborhood-starter/factory_agent.py"
+        },
+        "neighborhood-starter.egg": {
+          "purpose": "Template content. The factory pulls + customizes this at plant time.",
+          "size": 66662,
+          "sha256": "5bc1c3987318f4ff5279f09a7932c2a616290346b311ce9390841d6b0417630e",
+          "raw_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/neighborhood-starter/neighborhood-starter.egg"
+        }
+      },
+      "install": null,
+      "workspace_spec": null,
+      "egg_variant": null,
+      "modes": null,
+      "agents_in_pack": null,
+      "agents_in_template": 10,
+      "see_also": [
+        "https://github.com/kody-w/RAPP/blob/main/pages/docs/rapplication-sdk.md",
+        "https://github.com/kody-w/RAPP/blob/main/CONSTITUTION.md"
+      ]
+    },
+    {
+      "name": "organism-lifecycle",
+      "display_name": "Organism Lifecycle",
+      "version": "1.0.0",
+      "purpose": "Two agents that turn a vanilla brainstem into a full organism host: Twin (summon/hatch/boot/stop/list/inspect — full digital-twin lifecycle) + EggHatcher (universal .egg cartridge router that introspects manifest.schema/type and dispatches to organism / rapplication / session / neighborhood / estate). Both were kernel-shipped through 2026-05-10; relocated to RAR so the base install stays minimal and operators opt in when they're ready to host sub-twins or take in eggs. Drop both files into your brainstem's agents/ and restart.",
+      "slug": "organism-lifecycle",
+      "directory_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/organism-lifecycle/",
+      "pack_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/organism-lifecycle/pack.json",
+      "readme_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/organism-lifecycle/README.md",
+      "files": {
+        "twin_agent.py": {
+          "purpose": "Full digital-twin lifecycle in one drop-in agent. Source: agents/@rapp/twin_agent.py.",
+          "source": "agents/@rapp/twin_agent.py",
+          "size": 73527,
+          "sha256": "8bdf553457025f46ad8e6c3a5c9141823f8541731a868795d30e55700da58450",
+          "raw_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/organism-lifecycle/twin_agent.py"
+        },
+        "egg_hatcher_agent.py": {
+          "purpose": "Universal .egg cartridge router. Source: agents/@rapp/egg_hatcher_agent.py.",
+          "source": "agents/@rapp/egg_hatcher_agent.py",
+          "size": 11744,
+          "sha256": "e4d415868cbc120b0c2f4ad70863883f88faaca763906e60bae5b46e1e1b50b5",
+          "raw_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/organism-lifecycle/egg_hatcher_agent.py"
+        }
+      },
+      "install": {
+        "type": "agent_pack",
+        "agents": [
+          "agents/@rapp/twin_agent.py",
+          "agents/@rapp/egg_hatcher_agent.py"
+        ],
+        "destination": "agents/",
+        "notes": "Drop both files into your brainstem's agents/ directory and restart. The LLM picks up Twin(...) and HatchEgg(...) as tools on the next /chat request."
+      },
+      "workspace_spec": null,
+      "egg_variant": null,
+      "modes": null,
+      "agents_in_pack": 2,
+      "agents_in_template": null,
+      "see_also": [
+        "https://github.com/kody-w/RAPP/blob/main/CLAUDE.md",
+        "https://github.com/kody-w/RAPP/blob/main/pages/docs/SPEC.md"
+      ]
+    },
+    {
+      "name": "rapp-workspace-starter",
+      "display_name": "RAPP Workspace Starter",
+      "version": "1.0.0",
+      "purpose": "Drop-in pack for a chief-of-staff style private workspace, conformant to rapp-workspace/1.1: CLAUDE.md/HOME.md/PERSONA.md/where-everything-lives.md, standard sections (strategy/portfolio/projects/reference/people/meetings/connect/role), and the rapp-projects frame authority. WorkspaceFactory pulls + verify_egg()s the canonical template before planting, then re-mints a fresh rappid per instance. Newer shape than the neighborhood-starter/microsoft-365-team stacks: this plants a private organizing VAULT for one owner and one world, not an agent-team neighborhood. public mode is refused by design — a planted workspace holds real PII; only this stack's own template .egg is meant to be public. Ships with WorkspaceNeuron: a generic, PII-free Knowledge Base of the spec's setup/operating rules injected into the brainstem prompt, so a planted workspace's own .md files stay owner-specific instead of re-explaining the protocol.",
+      "slug": "rapp-workspace-starter",
+      "directory_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/rapp-workspace-starter/",
+      "pack_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/rapp-workspace-starter/pack.json",
+      "readme_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/rapp-workspace-starter/README.md",
+      "files": {
+        "factory_agent.py": {
+          "purpose": "Drop into local brainstem agents/. Run WorkspaceFactory to plant a workspace.",
+          "size": 16542,
+          "sha256": "aa2b45c922d27a7ce1007313d5093ca60e5caf056600267c574b8033479de2e7",
+          "raw_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/rapp-workspace-starter/factory_agent.py"
+        },
+        "workspace_neuron_agent.py": {
+          "purpose": "Optional, tool-form. Drop into local brainstem agents/@rapp/ alongside the factory. Injects a compact [Knowledge Base] of rapp-workspace/1.1 + rapp/1 setup and operating rules (anatomy, identity/mint-once, privacy posture, the egg contract, the frame authority) — generic and PII-free, never owner-specific. No install step; the brainstem's agent loader picks it up as a callable tool. Keeps that knowledge out of every planted workspace's CLAUDE.md/README.md prose. Lives only under stacks/ — not submitted to RAR's canonical agents/ registry, which is gated by the GitHub Issue notarization workflow (see CONSTITUTION.md), not a pull request.",
+          "size": 15967,
+          "sha256": "44605ba583e68fac5f3131a474ae1332f55adbd79723e78f62825e98b390d5be",
+          "raw_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/rapp-workspace-starter/workspace_neuron_agent.py"
+        },
+        "neurons/@rapp/rapp_workspace_anatomy.neuron.json": {
+          "purpose": "Optional, storage-form twin of the same knowledge (same content, generated from the same source, never drifts). For a CommunityRAPP-style backend: install with install_neurons.py so it lands in the RAPP Web UI's system prompt automatically, no tool call needed. schema/id/name/version/category/description/scope/author/memories — same shape as install_neurons.py's own @platform/*.neuron.json packs.",
+          "size": 2359,
+          "sha256": "3006d13235fcb10ed4069068a063fb3f701632a6706363102dcc2955be92989e",
+          "raw_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/rapp-workspace-starter/neurons/@rapp/rapp_workspace_anatomy.neuron.json"
+        },
+        "neurons/@rapp/rapp_workspace_identity.neuron.json": {
+          "purpose": "Storage-form neuron: mint-once identity rules. See rapp_workspace_anatomy.neuron.json for the delivery-shape note.",
+          "size": 1744,
+          "sha256": "8fcb671a49e27eae28cdab1179b0b26ea03e355784bf21a584c83e6d84bbea41",
+          "raw_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/rapp-workspace-starter/neurons/@rapp/rapp_workspace_identity.neuron.json"
+        },
+        "neurons/@rapp/rapp_workspace_privacy.neuron.json": {
+          "purpose": "Storage-form neuron: privacy & sovereignty rules (public mode refusal). See rapp_workspace_anatomy.neuron.json for the delivery-shape note.",
+          "size": 1669,
+          "sha256": "a738b10135398acbccc0153076c637706dde4d0079ed52af9ef5a289ed98357c",
+          "raw_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/rapp-workspace-starter/neurons/@rapp/rapp_workspace_privacy.neuron.json"
+        },
+        "neurons/@rapp/rapp1_egg_contract.neuron.json": {
+          "purpose": "Storage-form neuron: the rapp/1 §9 egg contract. See rapp_workspace_anatomy.neuron.json for the delivery-shape note.",
+          "size": 2283,
+          "sha256": "65985ab11faf85ab4f994049c9e383158d378f305966ddf754fd2fb8c1679437",
+          "raw_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/rapp-workspace-starter/neurons/@rapp/rapp1_egg_contract.neuron.json"
+        },
+        "neurons/@rapp/rapp_projects_frame_authority.neuron.json": {
+          "purpose": "Storage-form neuron: the rapp-projects frame authority (leases, fork recovery). See rapp_workspace_anatomy.neuron.json for the delivery-shape note.",
+          "size": 2234,
+          "sha256": "e48ff43fe7404cbf4d12e5bc79b89947299e5ce1ab58ca134a970e940c58671f",
+          "raw_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/rapp-workspace-starter/neurons/@rapp/rapp_projects_frame_authority.neuron.json"
+        },
+        "rapp-workspace-starter.egg": {
+          "purpose": "Template content (rapp/1 §9 organism egg, 24 files, PII-free, verify_egg-clean). The factory pulls + verifies + customizes this at plant time.",
+          "size": 58481,
+          "sha256": "f894e3ffd76062f3b096bdf56bd6ea8f35c16f08bcc597ccd4f3806f2fae4e5c",
+          "raw_url": "https://raw.githubusercontent.com/kody-w/RAR/main/stacks/rapp-workspace-starter/rapp-workspace-starter.egg"
+        }
+      },
+      "install": null,
+      "workspace_spec": "rapp-workspace/1.1",
+      "egg_variant": "organism",
+      "modes": [
+        "local",
+        "private",
+        "egg"
+      ],
+      "agents_in_pack": null,
+      "agents_in_template": null,
+      "see_also": [
+        "https://github.com/kody-w/rapp-workspace",
+        "https://github.com/kody-w/RAR/blob/main/stacks/microsoft-365-team",
+        "https://github.com/kody-w/RAPP/blob/main/CONSTITUTION.md"
+      ]
+    }
+  ]
+}
