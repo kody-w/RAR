@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-09-09T09:52:37Z",
+ "generated_at": "2026-09-10T09:50:12Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,26 +10,26 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 116,
-  "size_kb": 101182,
+  "size_kb": 104268,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-09-09T08:32:59Z",
+  "pushed_at": "2026-09-10T08:34:49Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
  "totals": {
-  "downloads": 4703,
-  "clones": 4631,
+  "downloads": 5118,
+  "clones": 5046,
   "cdn_hits": 72,
   "release_downloads": 0,
   "agent_file_downloads": 12,
-  "clones_excluding_ci_estimate": 2895,
-  "ci_clone_estimate": 1736,
-  "page_views": 122,
-  "clone_uniques_14d": 255,
-  "view_uniques_14d": 15,
-  "clone_uniques_daily_sum": 916,
-  "view_uniques_daily_sum": 47,
-  "days_tracked": 28,
+  "clones_excluding_ci_estimate": 3186,
+  "ci_clone_estimate": 1860,
+  "page_views": 139,
+  "clone_uniques_14d": 271,
+  "view_uniques_14d": 20,
+  "clone_uniques_daily_sum": 967,
+  "view_uniques_daily_sum": 56,
+  "days_tracked": 30,
   "tracking_since": "2026-07-14",
   "agents": 1700,
   "swarms": 2,
@@ -257,6 +257,20 @@
    "clone_uniques": 31,
    "views": 2,
    "cdn": 0
+  },
+  {
+   "date": "2026-09-08",
+   "clones": 322,
+   "clone_uniques": 28,
+   "views": 11,
+   "cdn": 0
+  },
+  {
+   "date": "2026-09-09",
+   "clones": 93,
+   "clone_uniques": 23,
+   "views": 6,
+   "cdn": 0
   }
  ],
  "traffic": {
@@ -264,8 +278,14 @@
    {
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "count": 12,
+    "count": 11,
     "uniques": 6
+   },
+   {
+    "path": "/kody-w/RAR/discussions/430",
+    "title": "/discussions/430",
+    "count": 3,
+    "uniques": 2
    },
    {
     "path": "/kody-w/RAR/tree/main/agents",
@@ -276,6 +296,12 @@
    {
     "path": "/kody-w/RAR/blob/main/agents/@borg/borg_agent.py",
     "title": "/blob/main/agents/@borg/borg_agent.py",
+    "count": 2,
+    "uniques": 1
+   },
+   {
+    "path": "/kody-w/RAR/discussions/428",
+    "title": "/discussions/428",
     "count": 2,
     "uniques": 1
    },
@@ -308,34 +334,22 @@
     "title": "/blob/80f9989fad0aeceb745687fd2052825cd0aee4f6/scout/bundles/native-04/skills/rar-kody-w-art-generator/SKILL.md",
     "count": 1,
     "uniques": 1
-   },
-   {
-    "path": "/kody-w/RAR/blob/c697688e10e209fe92756b2b88efe97363a7cf4c/scout/bundles/cowork-cookbook-161/skills/rar-cowork-cookbook-scheduled-brief-plan-workforce/SKILL.md",
-    "title": "/blob/c697688e10e209fe92756b2b88efe97363a7cf4c/scout/bundles/cowork-cookbook-161/skills/rar-cowork-cookbook-scheduled-brief-plan-workforce/SKILL.md",
-    "count": 1,
-    "uniques": 1
-   },
-   {
-    "path": "/kody-w/RAR/blob/main/agents/@bill/neuron_agent.py",
-    "title": "/blob/main/agents/@bill/neuron_agent.py",
-    "count": 1,
-    "uniques": 1
    }
   ],
   "referrers": [
    {
     "referrer": "github.com",
-    "count": 23,
-    "uniques": 8
+    "count": 28,
+    "uniques": 9
    },
    {
     "referrer": "kody-w.github.io",
-    "count": 7,
-    "uniques": 2
+    "count": 12,
+    "uniques": 3
    },
    {
     "referrer": "Bing",
-    "count": 5,
+    "count": 3,
     "uniques": 1
    },
    {
@@ -344,15 +358,15 @@
     "uniques": 1
    }
   ],
-  "clones_14d": 1888,
-  "views_14d": 47,
+  "clones_14d": 1975,
+  "views_14d": 58,
   "live": true,
-  "as_of": "2026-09-09T09:52:37Z"
+  "as_of": "2026-09-10T09:50:12Z"
  },
  "cdn": {
   "total_hits": 72,
   "bandwidth": 3670545,
-  "rank": 2010072,
+  "rank": 2015591,
   "agent_hits": 12,
   "files": [
    {
