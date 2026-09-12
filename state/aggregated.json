@@ -15,7 +15,7 @@
       "license_url": "",
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
-      "item_count": 97,
+      "item_count": 98,
       "source_downloads": 1258
     },
     {
@@ -3617,6 +3617,34 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/create_copilot_adoption_dashboard",
+      "source_id": "cat-agent-skills",
+      "source_slug": "create-copilot-adoption-dashboard",
+      "name": "Copilot Adoption Dashboard",
+      "description": "Using exported files from MAC usage reports, build html Copilot Adoption Dashboard with integrated framework that suggest next steps",
+      "kind": "skill",
+      "tags": [
+        "copilot",
+        "adoption",
+        "data",
+        "dashboard",
+        "kpis",
+        "measure"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Sead Borovina",
+      "author_github": null,
+      "version": "1.0.0",
+      "created_at": "2026-08-05T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#create-copilot-adoption-dashboard",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/doc_format_converter",
       "source_id": "cat-agent-skills",
       "source_slug": "doc-format-converter",
@@ -4813,7 +4841,7 @@
       "url": "https://microsoft.github.io/cat-agent-skills/#scrollytelling-data",
       "source_signal": {
         "downloads": 0,
-        "rating": 7
+        "rating": 10
       }
     },
     {
@@ -132169,7 +132197,7 @@
   ],
   "totals": {
     "sources": 3,
-    "items": 1650,
+    "items": 1651,
     "source_downloads": 1258
   }
 }
