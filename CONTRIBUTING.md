@@ -75,6 +75,15 @@ The complete minimal JSON contract and hash rules are documented in
 [`api.json`](api.json). Skill catalog admission is metadata review, not a
 quality-tier promotion and not evidence of runtime or RAPP/1 conformance.
 
+## Repository Bootstrap Overlay
+
+The root workspace bootstrap is generator-managed. Do not hand-edit the block
+between `rapp-workspace-bootstrap` markers or the files recorded by
+`.rapp/bootstrap-managed.json`; refresh them with the immutable
+`rapp_workspace.py prepare` operator. Commit only the public control overlay.
+Never commit `.rapp/cache/`, `.rapp/workspace/`, `.rapp/reports/`, local owner
+identity, or workspace state.
+
 ## Quick Version
 
 ```

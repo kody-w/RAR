@@ -148,6 +148,25 @@ API on page load.
 - New and updated records use the versioned GitHub Issue front door documented
   in [`skill.md`](skill.md#8a-rar-skills-store-distinct-artifact-type).
 
+## Repository Workspace Bootstrap
+
+Trusted clones include a checksum-pinned, source-preserving local workspace
+bootstrap:
+
+```bash
+python3 .rapp/bootstrap.py audit --allow-network
+python3 .rapp/bootstrap.py bootstrap --apply \
+  --owner YOUR-LOWERCASE-OWNER --world-id YOUR-LOCAL-WORLD --allow-network
+python3 .rapp/bootstrap.py verify --allow-network
+```
+
+The public control files are `.rapp/bootstrap.py`, `.rapp/bootstrap.json`,
+`.rapp/bootstrap-managed.json`, and
+`.github/skills/rapp-workspace-bootstrap/SKILL.md`. Private cache, workspace,
+identity, and reports remain under ignored `.rapp/` directories. The bootstrap
+does not move application source, install a global runtime, or assert RAPP/1 or
+production conformance.
+
 ## The SDK
 
 `rapp_sdk.py` — zero dependencies, one file.

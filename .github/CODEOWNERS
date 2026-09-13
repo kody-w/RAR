@@ -15,6 +15,9 @@ skills/                        @kody-w
 CLAUDE.md                      @kody-w
 .claude-plugin/                @kody-w
 .github/                       @kody-w
+.rapp/bootstrap.py             @kody-w
+.rapp/bootstrap.json           @kody-w
+.rapp/bootstrap-managed.json   @kody-w
 scripts/                       @kody-w
 tests/                         @kody-w
 

@@ -6,6 +6,11 @@ __pycache__/
 .pytest_cache/
 .rar-work/
 
+# Private repository-local RAPP Workspace state
+.rapp/cache/
+.rapp/workspace/
+.rapp/reports/
+
 # IDE
 .vscode/
 .idea/

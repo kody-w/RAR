@@ -1,0 +1,10 @@
+{
+  "schema": "rapp-bootstrap-managed/1",
+  "root_skill": "skill.md",
+  "root_block_sha256": "b550e0853cc28ab7f1f8d96ad1e6d64858ba2aa979d5884ce3d3971cd8aa4f91",
+  "files": {
+    ".rapp/bootstrap.py": "ea6d7f28e671598e5f28db6d268873972388d6c37eb458b69ed9e81d6aebd3b0",
+    ".rapp/bootstrap.json": "cbfa5ada5e78a3d24feb986daafc6f0b607d53d795c826d9ff4f241fbb51ffe1",
+    ".github/skills/rapp-workspace-bootstrap/SKILL.md": "55e74e01d26b8103661bb678241c08de16904cc0a7a5e9c6364c9fc3fe4a4eea"
+  }
+}
