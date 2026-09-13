@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/rapp-crispy-singleton",
   "agent_file": "rapp_crispy_agent.py",
-  "agent_sha256": "bb90598a858eef6dbf8c231782496f596669f92706bca1454f8fd9821302a2be",
+  "agent_sha256": "d3133031a2e4ffc3be0ed282c2df7b73ca49e46e07b259dc704539904aaefe74",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappCrispyAgent",
   "host_dependencies": [],
@@ -22,7 +22,7 @@
       "local-first",
       "privacy"
     ],
-    "version": "1.5.0"
+    "version": "1.5.1"
   },
   "runtime_name": "RappCrispy",
   "schema": "rapp-agent-lock/1.0",
@@ -72,5 +72,5 @@
     "required": [],
     "type": "object"
   },
-  "version": "1.5.0"
+  "version": "1.5.1"
 }

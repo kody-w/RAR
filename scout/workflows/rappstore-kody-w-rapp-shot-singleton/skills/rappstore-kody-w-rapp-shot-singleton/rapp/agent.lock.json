@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/rapp-shot-singleton",
   "agent_file": "rapp_shot_agent.py",
-  "agent_sha256": "7ea3d9383ed9cd998d41ff64275a3b668683fe885bb8fdc56c92900c2e9bcb95",
+  "agent_sha256": "bc817f0fdf172cb4e16bbba507e8381838f444033cc0b277d0f55c679d72f61d",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappShotAgent",
   "host_dependencies": [],
@@ -21,7 +21,7 @@
       "privacy",
       "local-first"
     ],
-    "version": "1.3.0"
+    "version": "1.3.1"
   },
   "runtime_name": "RappShot",
   "schema": "rapp-agent-lock/1.0",
@@ -84,5 +84,5 @@
     "required": [],
     "type": "object"
   },
-  "version": "1.3.0"
+  "version": "1.3.1"
 }

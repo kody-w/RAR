@@ -255,7 +255,7 @@
     {
       "id": "rapp_crispy",
       "name": "RAPP Crispy",
-      "version": "1.5.0",
+      "version": "1.5.1",
       "summary": "Native macOS 14+ meeting app with graphical record/stop/cancel, app-owned microphone permissions, explicitly named Apple AVFoundation voice processing, bundled local Whisper transcription, meeting history and audio/transcript views. Optional screen/window capture is video only. Notes stay disabled…",
       "category": "productivity",
       "tags": [
@@ -268,8 +268,8 @@
       ],
       "manifest_name": "@kody-w/rapp-crispy-singleton",
       "access": "public",
-      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-crispy/40ea715d6127825aac3f922fbbe470c4bfeb69c3/rapp_crispy/singleton/rapp_crispy_agent.py",
-      "singleton_sha256": "bb90598a858eef6dbf8c231782496f596669f92706bca1454f8fd9821302a2be",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-crispy/29fcb581a6a9d10c20fdbd96d5867c27ede0d3c9/rapp_crispy/singleton/rapp_crispy_agent.py",
+      "singleton_sha256": "d3133031a2e4ffc3be0ed282c2df7b73ca49e46e07b259dc704539904aaefe74",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -297,7 +297,7 @@
     {
       "id": "rapp_rewind",
       "name": "RAPP Rewind",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "summary": "Native macOS searchable screen memory with explicit Start/Pause/Stop, app-owned ScreenCaptureKit, on-device Vision OCR, and local SQLite FTS5. Capture, OCR, indexing, and search stay on this Mac; optional RAPP host integration is separate.",
       "category": "productivity",
       "tags": [
@@ -310,15 +310,15 @@
       ],
       "manifest_name": "@kody-w/rapp-rewind-singleton",
       "access": "public",
-      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-rewind/d2b293a5198492862ff39a6956c26e56ff923bca/rapp_rewind/singleton/rapp_rewind_agent.py",
-      "singleton_sha256": "8125b7a918528e76ff0449d9e1d66208c1e5bdc5d8e7746f3a42d64f9827250d",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-rewind/6023d9b1e75b3a1401f4671d7114dab499f3cdfa/rapp_rewind/singleton/rapp_rewind_agent.py",
+      "singleton_sha256": "65e86577bd45dc30713a5b1ebb103ec411d0d2b0fa32721bec66425ee92ba947",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
     {
       "id": "rapp_shot",
       "name": "RAPP Shot",
-      "version": "1.3.0",
+      "version": "1.3.1",
       "summary": "Native macOS screenshot capture, editable annotations and crop, local Vision OCR, and opaque credential redaction with review before copying or exporting. Detection is per line and can miss secrets; inspect the final preview. Optional Python adapters integrate an already-installed app or legacy CLI.",
       "category": "productivity",
       "tags": [
@@ -331,15 +331,15 @@
       ],
       "manifest_name": "@kody-w/rapp-shot-singleton",
       "access": "public",
-      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-shot/a6f13b5119ba467d1356a9d89ca881e7dc55f306/rapp_shot/singleton/rapp_shot_agent.py",
-      "singleton_sha256": "7ea3d9383ed9cd998d41ff64275a3b668683fe885bb8fdc56c92900c2e9bcb95",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-shot/538d55f6d36fa9d0a6b7f4b323ab0480cb45a8ac/rapp_shot/singleton/rapp_shot_agent.py",
+      "singleton_sha256": "bc817f0fdf172cb4e16bbba507e8381838f444033cc0b277d0f55c679d72f61d",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
     {
       "id": "rapp_voice",
       "name": "RAPP Voice",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "summary": "Native macOS dictation with local whisper.cpp recognition, a weighted dictionary, app-aware cleanup, and safe insertion or manual-copy fallback. Optional cloud polish is off until explicitly consented.",
       "category": "productivity",
       "tags": [
@@ -352,8 +352,8 @@
       ],
       "manifest_name": "@kody-w/rapp-voice-singleton",
       "access": "public",
-      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-voice/7120b06a7bb2db598f00f355f5d58890d58d3f34/rapp_voice/singleton/rapp_voice_agent.py",
-      "singleton_sha256": "a04c1100a70545f13b0cdce6c39e24c34f55daae4aeaf8fde6b6e9e1d5b1e785",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-voice/c9be9f1936dd848030cf5f5833b1e7cb5e6b1c2b/rapp_voice/singleton/rapp_voice_agent.py",
+      "singleton_sha256": "39028adae65b34b524fc615ca4bb7a135d4bf5720c7a5bccb51328891f52b398",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
