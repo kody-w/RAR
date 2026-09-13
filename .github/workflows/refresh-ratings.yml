@@ -23,11 +23,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          # Scout provenance resolves notarized bytes through Git history.
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+
+      - name: Install projection test dependency
+        run: python -m pip install --disable-pip-version-check pytest
 
       # Idempotent: creates threads only for agents that don't have one
       # yet (new registry entries). Capped per run to stay under GitHub
@@ -85,6 +91,27 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # Commits made with GITHUB_TOKEN do not start downstream workflows.
+      # Persist every projection of the refreshed snapshots in this run:
+      # federation -> Scout -> Skills, and aggregated/ratings -> front.
+      - name: Rebuild dependent static projections
+        run: |
+          set -euo pipefail
+          python scripts/build_scout_exports.py
+          python scripts/build_skills_catalog.py
+          if ! python scripts/build_front_page.py --check; then
+            python scripts/build_front_page.py
+          fi
+
+      - name: Validate dependent static projections
+        run: |
+          set -euo pipefail
+          python -m pytest -q \
+            tests/test_scout_rapp_skill.py \
+            tests/test_skill_catalog.py \
+            tests/test_front_page.py::test_counts_agree_with_the_inputs \
+            tests/test_front_page.py::test_on_disk_file_is_current
+
       # Close the loop. Every step above COLLECTS signal; this one reports it
       # back to the place people actually land — each agent's own Discussion
       # thread, rewritten with a report card built from the snapshots just
@@ -104,22 +131,25 @@ jobs:
 
       - name: Commit snapshots if changed
         run: |
+          set -euo pipefail
           # Only stage files that exist. state/downloads.json is absent
           # until the first release with assets is cut, and an unmatched
           # pathspec would fail `git add` for every other snapshot too.
           FILES=""
           for f in state/discussion_ratings.json state/federation.json \
                    state/downloads.json api/v1/stats/downloads.json \
-                   state/aggregated.json state/orappter_demo_vault.json; do
+                   state/aggregated.json state/orappter_demo_vault.json \
+                   api/v1/front.json api/v1/skills.json \
+                   rapp_skill.md rapp_skills.md; do
             [ -f "$f" ] && FILES="$FILES $f"
           done
-          if [ -z "$FILES" ] || [ -z "$(git status --porcelain $FILES)" ]; then
+          if [ -z "$(git status --porcelain -- $FILES scout/)" ]; then
             echo "No changes; nothing to commit."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add $FILES
+          git add $FILES scout/
           git commit -m "chore(community): refresh ratings, federation + download snapshots [skip ci]"
           git pull --rebase origin main
           git push origin main

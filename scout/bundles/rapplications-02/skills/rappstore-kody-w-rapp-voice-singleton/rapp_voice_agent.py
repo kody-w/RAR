@@ -19,7 +19,7 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "rapp_voice",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": ("Local hold-to-talk dictation. whisper.cpp on-device, filler "
                     "stripping, app-aware formatting, weighted personal dictionary."),
     "author": "@kody-w",

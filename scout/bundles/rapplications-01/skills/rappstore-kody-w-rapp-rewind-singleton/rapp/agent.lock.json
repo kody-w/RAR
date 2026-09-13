@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/rapp-rewind-singleton",
   "agent_file": "rapp_rewind_agent.py",
-  "agent_sha256": "8125b7a918528e76ff0449d9e1d66208c1e5bdc5d8e7746f3a42d64f9827250d",
+  "agent_sha256": "65e86577bd45dc30713a5b1ebb103ec411d0d2b0fa32721bec66425ee92ba947",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappRewindAgent",
   "host_dependencies": [],
@@ -22,7 +22,7 @@
       "local-first",
       "privacy"
     ],
-    "version": "1.2.0"
+    "version": "1.2.1"
   },
   "runtime_name": "RappRewind",
   "schema": "rapp-agent-lock/1.0",
@@ -65,5 +65,5 @@
     "required": [],
     "type": "object"
   },
-  "version": "1.2.0"
+  "version": "1.2.1"
 }

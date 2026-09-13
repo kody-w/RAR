@@ -1,6 +1,6 @@
 {
   "createdAt": "2000-01-01T00:00:00.000Z",
-  "description": "Disabled Scout workflow projected from @kody-w/rapp-shot-singleton (1.3.0). Edit inputs or schedule before enabling.",
+  "description": "Disabled Scout workflow projected from @kody-w/rapp-shot-singleton (1.3.1). Edit inputs or schedule before enabling.",
   "enabled": false,
   "id": "3ab838db23cd6cbf",
   "lastExecutedAt": null,

@@ -12,7 +12,7 @@
   },
   "inputs": {
     "canonical_manifests": "64b03442d38d2cc1cf3620a305f1aa8ce52967d78722c7338db346e2cf45d700",
-    "scout_catalog": "bd093b6e408aaa76a73dbfb8c228bc0097372b474f6775a172fb507d8afb4793",
+    "scout_catalog": "c5fbe8d6885b439f88ecf1949581669ab00eae25ffda1be527eda946fbbdbc92",
     "scout_toaster": {
       "commit": "d54ba8484b5c5dae6406d2090c03115d12985446",
       "sha256": "d340043178aa4160f76a179b8b1086971e09207b212aff2ab2c0752b69173e17"
@@ -750,23 +750,23 @@
       ],
       "slug": "rappstore-kody-w-rapp-crispy-singleton",
       "source": {
-        "artifact_sha256": "bb90598a858eef6dbf8c231782496f596669f92706bca1454f8fd9821302a2be",
+        "artifact_sha256": "d3133031a2e4ffc3be0ed282c2df7b73ca49e46e07b259dc704539904aaefe74",
         "entrypoint": "scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-crispy-singleton/SKILL.md",
         "entrypoint_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-crispy-singleton/SKILL.md",
         "files": [
           {
             "path": "scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-crispy-singleton/SKILL.md",
-            "sha256": "9d0dbbe7b3e65f076af3d5ff9e439bb22aa8875d00ffe12327dfac9371b42114",
+            "sha256": "34455b54a4e9718b194542b47ee37b58c358feb6bed713e25e56fa37328c06e4",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-crispy-singleton/SKILL.md"
           },
           {
             "path": "scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-crispy-singleton/rapp/agent.lock.json",
-            "sha256": "a63106a867d0cfe2071d6128d3d7cee06950750f5076080acb46c735d568e391",
+            "sha256": "c68cbb093ce9eaf4abe06e0a233c1cd55523d4ed8812fd8dbaa4dfff91098be3",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-crispy-singleton/rapp/agent.lock.json"
           },
           {
             "path": "scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-crispy-singleton/rapp_crispy_agent.py",
-            "sha256": "bb90598a858eef6dbf8c231782496f596669f92706bca1454f8fd9821302a2be",
+            "sha256": "d3133031a2e4ffc3be0ed282c2df7b73ca49e46e07b259dc704539904aaefe74",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-crispy-singleton/rapp_crispy_agent.py"
           },
           {
@@ -790,7 +790,7 @@
         "rapplications",
         "scout"
       ],
-      "version": "1.5.0"
+      "version": "1.5.1"
     },
     {
       "artifact_type": "skill",
@@ -947,23 +947,23 @@
       ],
       "slug": "rappstore-kody-w-rapp-rewind-singleton",
       "source": {
-        "artifact_sha256": "8125b7a918528e76ff0449d9e1d66208c1e5bdc5d8e7746f3a42d64f9827250d",
+        "artifact_sha256": "65e86577bd45dc30713a5b1ebb103ec411d0d2b0fa32721bec66425ee92ba947",
         "entrypoint": "scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-rewind-singleton/SKILL.md",
         "entrypoint_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-rewind-singleton/SKILL.md",
         "files": [
           {
             "path": "scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-rewind-singleton/SKILL.md",
-            "sha256": "d7547a2356b7394d03bd1f478c5240150f49372464bd4183c7c88a11ce63046a",
+            "sha256": "adac6579545727484311c845689df97729b713261ef706dbbdc965d12568b8f1",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-rewind-singleton/SKILL.md"
           },
           {
             "path": "scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-rewind-singleton/rapp/agent.lock.json",
-            "sha256": "36755f05e1753eea36894d060009632e2aad54853abc538e8095aba17d3e93a9",
+            "sha256": "47030703f680c69acd65e6958c3f9aff08fd9e9480a8c0f5dd226c230e1adb5e",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-rewind-singleton/rapp/agent.lock.json"
           },
           {
             "path": "scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-rewind-singleton/rapp_rewind_agent.py",
-            "sha256": "8125b7a918528e76ff0449d9e1d66208c1e5bdc5d8e7746f3a42d64f9827250d",
+            "sha256": "65e86577bd45dc30713a5b1ebb103ec411d0d2b0fa32721bec66425ee92ba947",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-rewind-singleton/rapp_rewind_agent.py"
           },
           {
@@ -987,7 +987,7 @@
         "rapplications",
         "scout"
       ],
-      "version": "1.2.0"
+      "version": "1.2.1"
     },
     {
       "artifact_type": "skill",
@@ -1057,23 +1057,23 @@
       ],
       "slug": "rappstore-kody-w-rapp-shot-singleton",
       "source": {
-        "artifact_sha256": "7ea3d9383ed9cd998d41ff64275a3b668683fe885bb8fdc56c92900c2e9bcb95",
+        "artifact_sha256": "bc817f0fdf172cb4e16bbba507e8381838f444033cc0b277d0f55c679d72f61d",
         "entrypoint": "scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-shot-singleton/SKILL.md",
         "entrypoint_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-shot-singleton/SKILL.md",
         "files": [
           {
             "path": "scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-shot-singleton/SKILL.md",
-            "sha256": "52a707dd7cda2971e50292e6da5d4f4fd0e8e8de06bfe4c621fe042fa70eaaa1",
+            "sha256": "8d783f15db8d34c60eea9cd4d79b5c0da092b5ae03047a226beab161c07a4e9f",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-shot-singleton/SKILL.md"
           },
           {
             "path": "scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-shot-singleton/rapp/agent.lock.json",
-            "sha256": "0b78d3b69aad6eeb816aa6465b63ef00ff464af69c1a0c8177eba6cb79babea6",
+            "sha256": "7fb5ea46aaeb96499a4db94f50bd343d8b90ba98649d9786487d88fd4e448f42",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-shot-singleton/rapp/agent.lock.json"
           },
           {
             "path": "scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-shot-singleton/rapp_shot_agent.py",
-            "sha256": "7ea3d9383ed9cd998d41ff64275a3b668683fe885bb8fdc56c92900c2e9bcb95",
+            "sha256": "bc817f0fdf172cb4e16bbba507e8381838f444033cc0b277d0f55c679d72f61d",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-shot-singleton/rapp_shot_agent.py"
           },
           {
@@ -1097,7 +1097,7 @@
         "rapplications",
         "scout"
       ],
-      "version": "1.3.0"
+      "version": "1.3.1"
     },
     {
       "artifact_type": "skill",
@@ -1165,23 +1165,23 @@
       ],
       "slug": "rappstore-kody-w-rapp-voice-singleton",
       "source": {
-        "artifact_sha256": "a04c1100a70545f13b0cdce6c39e24c34f55daae4aeaf8fde6b6e9e1d5b1e785",
+        "artifact_sha256": "39028adae65b34b524fc615ca4bb7a135d4bf5720c7a5bccb51328891f52b398",
         "entrypoint": "scout/bundles/rapplications-02/skills/rappstore-kody-w-rapp-voice-singleton/SKILL.md",
         "entrypoint_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-02/skills/rappstore-kody-w-rapp-voice-singleton/SKILL.md",
         "files": [
           {
             "path": "scout/bundles/rapplications-02/skills/rappstore-kody-w-rapp-voice-singleton/SKILL.md",
-            "sha256": "34474bae9b5035d86c7099e4a24afd532e80be821b4cb23d4f0c2ab4c47bb012",
+            "sha256": "482d38530a64cfb325ac796f8dd3d2a098ee9820334cefea3470f9c4193f6f89",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-02/skills/rappstore-kody-w-rapp-voice-singleton/SKILL.md"
           },
           {
             "path": "scout/bundles/rapplications-02/skills/rappstore-kody-w-rapp-voice-singleton/rapp/agent.lock.json",
-            "sha256": "bec6a7e14cc707ed8e5994fc8afa83518925ce87f5fe1dd179c3a3dc35283d0f",
+            "sha256": "150d8b89f37f1a50bb31e88df5fbf0553732c75eda622430e2109a3d143897e3",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-02/skills/rappstore-kody-w-rapp-voice-singleton/rapp/agent.lock.json"
           },
           {
             "path": "scout/bundles/rapplications-02/skills/rappstore-kody-w-rapp-voice-singleton/rapp_voice_agent.py",
-            "sha256": "a04c1100a70545f13b0cdce6c39e24c34f55daae4aeaf8fde6b6e9e1d5b1e785",
+            "sha256": "39028adae65b34b524fc615ca4bb7a135d4bf5720c7a5bccb51328891f52b398",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-02/skills/rappstore-kody-w-rapp-voice-singleton/rapp_voice_agent.py"
           },
           {
@@ -1205,7 +1205,7 @@
         "rapplications",
         "scout"
       ],
-      "version": "1.1.0"
+      "version": "1.1.1"
     },
     {
       "artifact_type": "skill",

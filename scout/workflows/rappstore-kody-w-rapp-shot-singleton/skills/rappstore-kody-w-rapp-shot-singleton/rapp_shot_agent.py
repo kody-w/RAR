@@ -19,7 +19,7 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "rapp_shot",
-    "version": "1.3.0",
+    "version": "1.3.1",
     "description": "Capture and edit screenshots locally, with opaque credential redaction and preview review. Native requests require user confirmation; detection is not an all-clear.",
     "author": "@kody-w",
     "tags": ["screenshot", "ocr", "redaction", "privacy", "local-first"],
