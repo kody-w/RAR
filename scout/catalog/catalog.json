@@ -3633,7 +3633,7 @@
       ]
     },
     {
-      "bytes": 439892,
+      "bytes": 468126,
       "channel": "rapplications",
       "files": 32,
       "id": "rapplications-01",
@@ -3650,7 +3650,7 @@
       ]
     },
     {
-      "bytes": 391192,
+      "bytes": 396003,
       "channel": "rapplications",
       "files": 32,
       "id": "rapplications-02",
@@ -4111,17 +4111,17 @@
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "0efec5b3669bfd4660f0c2ba36be0ec19df2fc7cfa20fac0c0f71d914523e148",
+          "sha256": "9d0dbbe7b3e65f076af3d5ff9e439bb22aa8875d00ffe12327dfac9371b42114",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-crispy-singleton/SKILL.md"
         },
         {
           "path": "rapp/agent.lock.json",
-          "sha256": "96a8063ad44e37ea7178111137dc6f6097de551c56cef43f48eebb1bbdc20552",
+          "sha256": "a63106a867d0cfe2071d6128d3d7cee06950750f5076080acb46c735d568e391",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-crispy-singleton/rapp/agent.lock.json"
         },
         {
           "path": "rapp_crispy_agent.py",
-          "sha256": "4229fed6d82f92d9561fd291f4bb61e7862c710f24d0b03b43f514745f665f72",
+          "sha256": "bb90598a858eef6dbf8c231782496f596669f92706bca1454f8fd9821302a2be",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-crispy-singleton/rapp_crispy_agent.py"
         },
         {
@@ -4160,7 +4160,7 @@
             "type": "string"
           },
           "notes": {
-            "description": "Write notes via the hook. Default true. Set false for a confidential meeting: the DEFAULT hook calls `claude -p` and sends the transcript to Anthropic, and this is the only way to stop that from here.",
+            "description": "Request provider notes. Default false. Even when true, legacy hooks require CRISPY_NOTES_CONSENT=1 after reviewing the provider; the example hook sends transcripts to Anthropic. Native consent is configured separately in the graphical app.",
             "type": "boolean"
           },
           "path": {
@@ -4181,11 +4181,11 @@
       },
       "requires_env": [],
       "skill_name": "rappstore-kody-w-rapp-crispy-singleton",
-      "skill_sha256": "0efec5b3669bfd4660f0c2ba36be0ec19df2fc7cfa20fac0c0f71d914523e148",
+      "skill_sha256": "9d0dbbe7b3e65f076af3d5ff9e439bb22aa8875d00ffe12327dfac9371b42114",
       "source_commit": null,
       "source_kind": "federated-rapplication",
-      "source_sha256": "4229fed6d82f92d9561fd291f4bb61e7862c710f24d0b03b43f514745f665f72",
-      "version": "1.4.0"
+      "source_sha256": "bb90598a858eef6dbf8c231782496f596669f92706bca1454f8fd9821302a2be",
+      "version": "1.5.0"
     },
     {
       "bundle": "rapplications-01",
@@ -4274,17 +4274,17 @@
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "83b6366ea1a25ffc0000d9b6635f42dfb6a4841de42ffcedf81dabcb8c83e02e",
+          "sha256": "d7547a2356b7394d03bd1f478c5240150f49372464bd4183c7c88a11ce63046a",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-rewind-singleton/SKILL.md"
         },
         {
           "path": "rapp/agent.lock.json",
-          "sha256": "5d6c700ece349de1551f40be46d181326453c2f06e461d75e4f0222069a5487c",
+          "sha256": "36755f05e1753eea36894d060009632e2aad54853abc538e8095aba17d3e93a9",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-rewind-singleton/rapp/agent.lock.json"
         },
         {
           "path": "rapp_rewind_agent.py",
-          "sha256": "8074e7acdeb4877ba705b9ffdab99dabd4b57464b27ad38d4eb77b35e9f2dac3",
+          "sha256": "8125b7a918528e76ff0449d9e1d66208c1e5bdc5d8e7746f3a42d64f9827250d",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-rewind-singleton/rapp_rewind_agent.py"
         },
         {
@@ -4337,32 +4337,32 @@
       },
       "requires_env": [],
       "skill_name": "rappstore-kody-w-rapp-rewind-singleton",
-      "skill_sha256": "83b6366ea1a25ffc0000d9b6635f42dfb6a4841de42ffcedf81dabcb8c83e02e",
+      "skill_sha256": "d7547a2356b7394d03bd1f478c5240150f49372464bd4183c7c88a11ce63046a",
       "source_commit": null,
       "source_kind": "federated-rapplication",
-      "source_sha256": "8074e7acdeb4877ba705b9ffdab99dabd4b57464b27ad38d4eb77b35e9f2dac3",
-      "version": "1.1.0"
+      "source_sha256": "8125b7a918528e76ff0449d9e1d66208c1e5bdc5d8e7746f3a42d64f9827250d",
+      "version": "1.2.0"
     },
     {
       "bundle": "rapplications-01",
       "channel": "rapplications",
-      "description": "Screenshots that are safe to share. Captures, reads text with on-device OCR, and redacts credentials opaquely before sharing. Actions: doctor, capture, ocr, redact, annotate, list.",
+      "description": "Screenshots for review before sharing. Native capture/edit/OCR requests are staged in an installed RAPP Shot app; a user starts capture and approves the final preview before copy/export. Local OCR and opaque redaction can miss credentials. Explicit SHOT_CLI keeps the legacy backend. Actions: doctor, capture, ocr, redact, annotate, list.",
       "example_args": {},
       "federation_id": "rapp_shot",
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "86bbd08af97467be73849473d1477bd712af93dded25189adc5bcfbf3c201b98",
+          "sha256": "52a707dd7cda2971e50292e6da5d4f4fd0e8e8de06bfe4c621fe042fa70eaaa1",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-shot-singleton/SKILL.md"
         },
         {
           "path": "rapp/agent.lock.json",
-          "sha256": "873657a43e8cd5381b8da51eac6711dfca2e2f0b6329e276c4152678ebefc55b",
+          "sha256": "0b78d3b69aad6eeb816aa6465b63ef00ff464af69c1a0c8177eba6cb79babea6",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-shot-singleton/rapp/agent.lock.json"
         },
         {
           "path": "rapp_shot_agent.py",
-          "sha256": "5284459ecf14f9b7faa80f26ebefa7de33a346919ef7d32773712fa71f01b907",
+          "sha256": "7ea3d9383ed9cd998d41ff64275a3b668683fe885bb8fdc56c92900c2e9bcb95",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-01/skills/rappstore-kody-w-rapp-shot-singleton/rapp_shot_agent.py"
         },
         {
@@ -4397,7 +4397,7 @@
             "type": "string"
           },
           "copy": {
-            "description": "Put the result on the clipboard.",
+            "description": "Request clipboard output. Native mode requires final preview approval; the legacy CLI retains its copy behavior.",
             "type": "boolean"
           },
           "dry_run": {
@@ -4413,7 +4413,7 @@
             "type": "integer"
           },
           "mode": {
-            "description": "Capture mode. Only screen works headlessly.",
+            "description": "Native app: all modes require user confirmation. Legacy CLI: only screen works headlessly.",
             "enum": [
               "region",
               "window",
@@ -4435,11 +4435,11 @@
       },
       "requires_env": [],
       "skill_name": "rappstore-kody-w-rapp-shot-singleton",
-      "skill_sha256": "86bbd08af97467be73849473d1477bd712af93dded25189adc5bcfbf3c201b98",
+      "skill_sha256": "52a707dd7cda2971e50292e6da5d4f4fd0e8e8de06bfe4c621fe042fa70eaaa1",
       "source_commit": null,
       "source_kind": "federated-rapplication",
-      "source_sha256": "5284459ecf14f9b7faa80f26ebefa7de33a346919ef7d32773712fa71f01b907",
-      "version": "1.2.0"
+      "source_sha256": "7ea3d9383ed9cd998d41ff64275a3b668683fe885bb8fdc56c92900c2e9bcb95",
+      "version": "1.3.0"
     },
     {
       "bundle": "rapplications-02",
@@ -4450,17 +4450,17 @@
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "e4264a3526037beb011a55a05b912bf3416a0d50a371d00394be35cc7d798e54",
+          "sha256": "34474bae9b5035d86c7099e4a24afd532e80be821b4cb23d4f0c2ab4c47bb012",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-02/skills/rappstore-kody-w-rapp-voice-singleton/SKILL.md"
         },
         {
           "path": "rapp/agent.lock.json",
-          "sha256": "6fb1c1a0297b5a0fcf488e814297d21b1e582688f0a874f85e8829ae443886ed",
+          "sha256": "bec6a7e14cc707ed8e5994fc8afa83518925ce87f5fe1dd179c3a3dc35283d0f",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-02/skills/rappstore-kody-w-rapp-voice-singleton/rapp/agent.lock.json"
         },
         {
           "path": "rapp_voice_agent.py",
-          "sha256": "cc241dc84953742d1e6925db17f4b20065573687c7d4b71e53699a3c0df2618c",
+          "sha256": "a04c1100a70545f13b0cdce6c39e24c34f55daae4aeaf8fde6b6e9e1d5b1e785",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/rapplications-02/skills/rappstore-kody-w-rapp-voice-singleton/rapp_voice_agent.py"
         },
         {
@@ -4503,11 +4503,11 @@
       },
       "requires_env": [],
       "skill_name": "rappstore-kody-w-rapp-voice-singleton",
-      "skill_sha256": "e4264a3526037beb011a55a05b912bf3416a0d50a371d00394be35cc7d798e54",
+      "skill_sha256": "34474bae9b5035d86c7099e4a24afd532e80be821b4cb23d4f0c2ab4c47bb012",
       "source_commit": null,
       "source_kind": "federated-rapplication",
-      "source_sha256": "cc241dc84953742d1e6925db17f4b20065573687c7d4b71e53699a3c0df2618c",
-      "version": "1.0.0"
+      "source_sha256": "a04c1100a70545f13b0cdce6c39e24c34f55daae4aeaf8fde6b6e9e1d5b1e785",
+      "version": "1.1.0"
     },
     {
       "bundle": "rapplications-02",
@@ -131026,6 +131026,11 @@
       "federation_id": "spine_dag",
       "identity": "@blazingbeard/spine-dag-singleton",
       "reason": "Published singleton bytes no longer match the federation SHA-256; blocked until the upstream catalog is repaired."
+    },
+    {
+      "aggregate_id": "create-copilot-adoption-dashboard",
+      "identity": "@cat-agent-skills/create_copilot_adoption_dashboard",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
     },
     {
       "identity": "@kody-w/example_private",

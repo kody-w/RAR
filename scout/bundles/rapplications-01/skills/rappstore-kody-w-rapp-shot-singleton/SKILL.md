@@ -1,7 +1,7 @@
 ---
 name: "rappstore-kody-w-rapp-shot-singleton"
-description: "Screenshots that are safe to share. Captures, reads text with on-device OCR, and redacts credentials opaquely before sharing. Actions: doctor, capture, ocr, redact, annotate, list."
-metadata: {"projection": "rar-scout/1.0", "rar_agent": "@kody-w/rapp-shot-singleton", "rar_sha256": "5284459ecf14f9b7faa80f26ebefa7de33a346919ef7d32773712fa71f01b907", "source_kind": "federated-rapplication", "source_commit": null, "version": "1.2.0", "author": "@kody-w", "tags": ["screenshot", "ocr", "redaction", "privacy", "local-first"]}
+description: "Screenshots for review before sharing. Native capture/edit/OCR requests are staged in an installed RAPP Shot app; a user starts capture and approves the final preview before copy/export. Local OCR and opaque redaction can miss credentials. Explicit SHOT_CLI keeps the legacy backend. Actions: doctor, capture, ocr, redact, annotate, list."
+metadata: {"projection": "rar-scout/1.0", "rar_agent": "@kody-w/rapp-shot-singleton", "rar_sha256": "7ea3d9383ed9cd998d41ff64275a3b668683fe885bb8fdc56c92900c2e9bcb95", "source_kind": "federated-rapplication", "source_commit": null, "version": "1.3.0", "author": "@kody-w", "tags": ["screenshot", "ocr", "redaction", "privacy", "local-first"]}
 ---
 
 ## Microsoft Scout runtime
@@ -25,10 +25,10 @@ section are recovery guidance; Scout should prefer the verified runner.
 
 RAPP Shot — Capture, annotate and redact screenshots on-device. Finds credentials with OCR and paints them out opaquely.
 
-Runs entirely on the machine the brainstem is running on. This agent is a thin,
-allowlisted wrapper over the shot CLI that ships in the same repository: every
-action maps to one subcommand with validated arguments, so the agent cannot be
-talked into running arbitrary shell.
+Optional integration for an already-installed RAPP Shot app or legacy shot CLI.
+Native capture/edit/OCR requests are staged for user review, never silently
+captured or copied. Legacy CLI actions remain allowlisted subcommands; no shell
+is used. Installing this Python file does not install the native application.
 
 Stdlib only.
 
@@ -62,7 +62,7 @@ The typed contract this capability answers to (JSON Schema — the deterministic
       "type": "string"
     },
     "copy": {
-      "description": "Put the result on the clipboard.",
+      "description": "Request clipboard output. Native mode requires final preview approval; the legacy CLI retains its copy behavior.",
       "type": "boolean"
     },
     "dry_run": {
@@ -78,7 +78,7 @@ The typed contract this capability answers to (JSON Schema — the deterministic
       "type": "integer"
     },
     "mode": {
-      "description": "Capture mode. Only screen works headlessly.",
+      "description": "Native app: all modes require user confirmation. Legacy CLI: only screen works headlessly.",
       "enum": [
         "region",
         "window",
@@ -106,7 +106,7 @@ The typed contract this capability answers to (JSON Schema — the deterministic
 
 ## Run this — do not improvise
 
-This capability's deterministic implementation is a RAPP single-file agent, linked beside this file as `rapp_shot_agent.py` and embedded as the fenced Python below (sha256 5284459ecf14f9b7…; a byte-exact copy is also vaulted in the capsule comment at the end of this file). On a host with sandbox execution, run the linked file directly — if it is missing, write the fence contents verbatim to `rapp_shot_agent.py` first:
+This capability's deterministic implementation is a RAPP single-file agent, linked beside this file as `rapp_shot_agent.py` and embedded as the fenced Python below (sha256 7ea3d9383ed9cd99…; a byte-exact copy is also vaulted in the capsule comment at the end of this file). On a host with sandbox execution, run the linked file directly — if it is missing, write the fence contents verbatim to `rapp_shot_agent.py` first:
 
 ```bash
 python3 rapp_shot_agent.py '{"key": "value"}'      # arguments as one JSON object
@@ -119,25 +119,27 @@ Treat stdout as a tool result. If it reports missing or unresolved inputs, stop 
 ```python  # rapp:deterministic
 """RAPP Shot — Capture, annotate and redact screenshots on-device. Finds credentials with OCR and paints them out opaquely.
 
-Runs entirely on the machine the brainstem is running on. This agent is a thin,
-allowlisted wrapper over the shot CLI that ships in the same repository: every
-action maps to one subcommand with validated arguments, so the agent cannot be
-talked into running arbitrary shell.
+Optional integration for an already-installed RAPP Shot app or legacy shot CLI.
+Native capture/edit/OCR requests are staged for user review, never silently
+captured or copied. Legacy CLI actions remain allowlisted subcommands; no shell
+is used. Installing this Python file does not install the native application.
 
 Stdlib only.
 """
 
 import os
+import plistlib
 import shutil
 import subprocess
+from urllib.parse import quote, urlencode
 
 from agents.basic_agent import BasicAgent
 
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "rapp_shot",
-    "version": "1.2.0",
-    "description": "Capture, annotate and redact screenshots on-device. Finds credentials with OCR and paints them out opaquely.",
+    "version": "1.3.0",
+    "description": "Capture and edit screenshots locally, with opaque credential redaction and preview review. Native requests require user confirmation; detection is not an all-clear.",
     "author": "@kody-w",
     "tags": ["screenshot", "ocr", "redaction", "privacy", "local-first"],
     "dependencies": ["@rapp/basic_agent"],
@@ -166,13 +168,93 @@ def _cli():
     return None
 
 
+def _native_app():
+    if os.environ.get("SHOT_CLI"):
+        return None
+    candidates = [
+        os.environ.get("RAPP_SHOT_APP"),
+        "/Applications/RAPPShot.app",
+        "/Applications/RAPP Shot.app",
+        os.path.join(HOME, "Applications", "RAPPShot.app"),
+        os.path.join(HOME, "Applications", "RAPP Shot.app"),
+    ]
+    for app in candidates:
+        if not app:
+            continue
+        executable = os.path.join(app, "Contents", "MacOS", "RAPPShot")
+        if not os.access(executable, os.X_OK):
+            continue
+        try:
+            with open(os.path.join(app, "Contents", "Info.plist"), "rb") as stream:
+                info = plistlib.load(stream)
+                if isinstance(info, dict) and info.get("CFBundleIdentifier") == "io.rapp.shot":
+                    return app
+        except (OSError, ValueError, plistlib.InvalidFileException):
+            continue
+    return None
+
+
+def _native_command(app, args):
+    action = args[0]
+    executable = os.path.join(app, "Contents", "MacOS", "RAPPShot")
+    if action == "doctor":
+        return [executable, "--diagnose"], None
+    if action == "list":
+        limit = int(args[2]) if len(args) == 3 and args[1] == "--limit" else 20
+        if not 1 <= limit <= 100:
+            raise ValueError("native list limit must be 1 through 100")
+        return [executable, "--agent-list", "--limit", str(limit)], None
+    if action not in ("capture", "ocr", "redact", "annotate"):
+        raise ValueError("unsupported native action")
+    values = {"auto": "false"}
+    value_flags = {"--mode": "mode", "--name": "name", "--box": "box",
+                   "--arrow": "arrow", "--crop": "crop", "--text": "text"}
+    flags = {"--auto": "auto", "--auto-redact": "auto",
+             "--copy": "copy", "--dry-run": "dry_run"}
+    index = 1
+    while index < len(args):
+        argument = args[index]
+        if argument in flags:
+            values[flags[argument]] = "true"
+        elif argument in value_flags:
+            index += 1
+            if index >= len(args):
+                raise ValueError("missing value for " + argument)
+            values[value_flags[argument]] = args[index]
+        elif not argument.startswith("-") and "image" not in values:
+            path = os.path.expanduser(argument)
+            if not os.path.isabs(path) and not os.path.exists(path):
+                root = os.path.expanduser(os.environ.get("SHOT_HOME") or "~/.rappshot")
+                path = os.path.join(root, "shots", path if path.endswith(".png") else path + ".png")
+            values["image"] = os.path.abspath(path)
+        else:
+            raise ValueError("unsupported native argument: " + argument)
+        index += 1
+    url = "rappshot://action/" + action + "?" + urlencode(values, quote_via=quote)
+    if len(url.encode("utf-8")) > 16384:
+        raise ValueError("native action exceeds the 16 KB limit")
+    return ["/usr/bin/open", "-a", app, url], (
+        "Opened RAPP Shot with a staged " + action + " request. "
+        "Review & Apply in the app; capture requires clicking Capture, and "
+        "copy/export requires reviewing the final preview. "
+        "No capture, clipboard write, or export was performed by this request.")
+
+
 def _run(args, timeout=900):
-    exe = _cli()
+    app = _native_app()
+    notice = None
+    if app:
+        command, notice = _native_command(app, args)
+        exe = command[0]
+    else:
+        exe = _cli()
+        command = [exe] + args if exe else []
     if not exe:
-        return None, ("shot CLI not found. Install rapp-shot so that `shot` is on PATH, "
-                      "or set SHOT_CLI.")
+        return None, ("RAPP Shot not found. Install RAPPShot.app in /Applications "
+                      "(or set RAPP_SHOT_APP), or install the legacy shot CLI / set SHOT_CLI.")
     try:
-        p = subprocess.run([exe] + args, capture_output=True, text=True, timeout=timeout)
+        p = subprocess.run(command, capture_output=True, text=True,
+                           timeout=min(timeout, 30) if app else timeout)
     except FileNotFoundError as exc:
         # A traceback is not an answer. Say what is missing and how to fix it.
         return None, (f"{exe} could not be executed ({exc.strerror}). The tool is "
@@ -180,8 +262,10 @@ def _run(args, timeout=900):
                       f"./install.sh in that repo to build the shims.")
     out = (p.stdout or "").strip()
     err = (p.stderr or "").strip()
-    if p.returncode != 0 and not out:
-        return None, err or f"`{os.path.basename(exe)} {' '.join(args)}` failed with no output"
+    if p.returncode != 0:
+        return None, f"{os.path.basename(exe)} exited {p.returncode}: " + (err or out or "no output")
+    if notice:
+        return notice, None
     if not out and not err:
         # /chat must never answer with nothing — the estate contract says the
         # answer lives in `response`, and an empty response reads as a hang.
@@ -198,7 +282,7 @@ class RappShotAgent(BasicAgent):
         self.name = "RappShot"
         self.metadata = {
             "name": self.name,
-            "description": "Screenshots that are safe to share. Captures, reads text with on-device OCR, and redacts credentials opaquely before sharing. Actions: doctor, capture, ocr, redact, annotate, list.",
+            "description": "Screenshots for review before sharing. Native capture/edit/OCR requests are staged in an installed RAPP Shot app; a user starts capture and approves the final preview before copy/export. Local OCR and opaque redaction can miss credentials. Explicit SHOT_CLI keeps the legacy backend. Actions: doctor, capture, ocr, redact, annotate, list.",
             "parameters": {
                 "type": "object",
                 "properties": {
@@ -208,11 +292,11 @@ class RappShotAgent(BasicAgent):
                                "description": "What to do. Default doctor."},
                     "image": {"type": "string", "description": "Shot name or path; defaults to the most recent."},
                     "mode": {"type": "string", "enum": ["region", "window", "screen"],
-                             "description": "Capture mode. Only screen works headlessly."},
+                             "description": "Native app: all modes require user confirmation. Legacy CLI: only screen works headlessly."},
                     "name": {"type": "string", "description": "Label for the capture."},
                     "auto": {"type": "boolean", "description": "Redaction: find secrets by OCR."},
                     "dry_run": {"type": "boolean", "description": "Redaction: report without painting."},
-                    "copy": {"type": "boolean", "description": "Put the result on the clipboard."},
+                    "copy": {"type": "boolean", "description": "Request clipboard output. Native mode requires final preview approval; the legacy CLI retains its copy behavior."},
                     "box": {"type": "string", "description": "Manual region as x,y,w,h."},
                     "text": {"type": "string", "description": "Annotation text as x,y,message."},
                     "limit": {"type": "integer", "description": "Max rows for list."},
@@ -229,10 +313,11 @@ class RappShotAgent(BasicAgent):
                 mode = kwargs.get("mode") or "screen"
                 if mode not in ("region", "window", "screen"):
                     return "mode must be region, window or screen"
-                if mode in ("region", "window"):
+                if mode in ("region", "window") and not _native_app():
                     return ("region and window capture open an interactive picker, so they cannot "
-                            "run headlessly. Use mode='screen', or the Hammerspoon hotkeys.")
-                args = ["capture", "--mode", "screen"]
+                            "run headlessly with the CLI. Install the native RAPP Shot app, "
+                            "use mode='screen', or use the legacy Hammerspoon hotkeys.")
+                args = ["capture", "--mode", mode]
                 if kwargs.get("name"):
                     args += ["--name", str(kwargs["name"])]
                 if kwargs.get("auto"):
@@ -293,4 +378,4 @@ class RappShotAgent(BasicAgent):
 
 <!-- toaster:generated:end -->
 
-<!-- rci-capsule:v1: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 -->
+<!-- rci-capsule:v1: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 -->

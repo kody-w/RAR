@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/rapp-shot-singleton",
   "agent_file": "rapp_shot_agent.py",
-  "agent_sha256": "5284459ecf14f9b7faa80f26ebefa7de33a346919ef7d32773712fa71f01b907",
+  "agent_sha256": "7ea3d9383ed9cd998d41ff64275a3b668683fe885bb8fdc56c92900c2e9bcb95",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappShotAgent",
   "host_dependencies": [],
@@ -10,7 +10,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Capture, annotate and redact screenshots on-device. Finds credentials with OCR and paints them out opaquely.",
+    "description": "Capture and edit screenshots locally, with opaque credential redaction and preview review. Native requests require user confirmation; detection is not an all-clear.",
     "name": "rapp_shot",
     "requires_env": [],
     "schema": "rapp-agent/1.0",
@@ -21,7 +21,7 @@
       "privacy",
       "local-first"
     ],
-    "version": "1.2.0"
+    "version": "1.3.0"
   },
   "runtime_name": "RappShot",
   "schema": "rapp-agent-lock/1.0",
@@ -48,7 +48,7 @@
         "type": "string"
       },
       "copy": {
-        "description": "Put the result on the clipboard.",
+        "description": "Request clipboard output. Native mode requires final preview approval; the legacy CLI retains its copy behavior.",
         "type": "boolean"
       },
       "dry_run": {
@@ -64,7 +64,7 @@
         "type": "integer"
       },
       "mode": {
-        "description": "Capture mode. Only screen works headlessly.",
+        "description": "Native app: all modes require user confirmation. Legacy CLI: only screen works headlessly.",
         "enum": [
           "region",
           "window",
@@ -84,5 +84,5 @@
     "required": [],
     "type": "object"
   },
-  "version": "1.2.0"
+  "version": "1.3.0"
 }

@@ -1,18 +1,10 @@
-"""RAPP Voice — hold a key, speak, release, and cleaned text appears at your cursor.
+"""RAPP Voice: native typed actions first, legacy Hammerspoon fallback.
 
-Speech recognition is whisper.cpp bound to 127.0.0.1. Audio is captured to a
-temporary file, transcribed and discarded; it is never uploaded and never kept.
-
-Unlike the other RAPP apps this one has no CLI — the hotkey, capture and
-insertion live in Hammerspoon. So this agent talks to the running Hammerspoon
-over its local `hs` IPC socket, and to the speech server over HTTP on localhost.
-Both are on-machine.
-
-Every Lua call is a fixed, parameterless entry point on the module. The agent
-never builds Lua from user input, so it cannot be talked into evaluating
-arbitrary code inside Hammerspoon.
-
-Stdlib only.
+The native executable accepts the existing five actions as JSON on stdin. None
+can record audio, inject keys, or invoke a polish provider. When no native app
+is installed, the legacy hs / localhost backend remains available. A native
+failure is reported, not retried through a second backend with side effects.
+Stdlib only; no protocol, manifest identity, or egg changes.
 """
 
 import json
@@ -27,7 +19,7 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "rapp_voice",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": ("Local hold-to-talk dictation. whisper.cpp on-device, filler "
                     "stripping, app-aware formatting, weighted personal dictionary."),
     "author": "@kody-w",
@@ -41,6 +33,54 @@ VOICE_HOME = os.environ.get("RAPPVOICE_HOME", os.path.join(HOME, ".rappvoice"))
 DICT = os.path.join(VOICE_HOME, "dictionary.txt")
 LOG = os.path.join(VOICE_HOME, "logs", "rappvoice.log")
 ASR_PORT = int(os.environ.get("ASR_PORT", "8765"))
+
+
+def _native():
+    override = os.environ.get("RAPPVOICE_NATIVE_CLI")
+    if override:
+        return override if os.path.isfile(override) and os.access(override, os.X_OK) else None
+    candidates = [
+        "/Applications/RAPPVoice.app/Contents/MacOS/RAPPVoice",
+        "/Applications/RAPP Voice.app/Contents/MacOS/RAPPVoice",
+        os.path.join(HOME, "Applications/RAPPVoice.app/Contents/MacOS/RAPPVoice"),
+        os.path.join(HOME, "Applications/RAPP Voice.app/Contents/MacOS/RAPPVoice"),
+        shutil.which("RAPPVoice"),
+    ]
+    return next((path for path in candidates if path and os.path.isfile(path)
+                 and os.access(path, os.X_OK)), None)
+
+
+def _native_action(action, kwargs):
+    executable = _native()
+    if not executable:
+        if os.environ.get("RAPPVOICE_NATIVE_CLI"):
+            return "Native RAPP Voice override is not executable; legacy fallback was not invoked."
+        return None
+    request = {"action": action}
+    if action == "process":
+        request["text"] = kwargs.get("text")
+        request["app"] = kwargs.get("app") or "TextEdit"
+    elif action == "add_term":
+        request["term"] = kwargs.get("term")
+    try:
+        encoded = json.dumps(request)
+        if len(encoded.encode("utf-8")) > 65536:
+            return "Native action refused: request exceeds 64 KiB."
+        result = subprocess.run(
+            [executable, "--action"], input=encoded, capture_output=True,
+            text=True, timeout=30,
+        )
+        response = json.loads(result.stdout)
+        if (not isinstance(response, dict) or response.get("runtime") != "native"
+                or response.get("action") != action
+                or not isinstance(response.get("text"), str)
+                or not isinstance(response.get("ok"), bool)):
+            return "Invalid native response; legacy fallback was not invoked."
+        if result.returncode != 0 or not response["ok"]:
+            return "Native RAPP Voice action failed: " + response["text"]
+        return response["text"]
+    except (OSError, subprocess.SubprocessError, ValueError, TypeError) as exc:
+        return f"Native RAPP Voice action failed: {type(exc).__name__}: {exc}. Legacy fallback was not invoked."
 
 
 def _hs():
@@ -97,7 +137,7 @@ def _read_dict():
 
 
 class RappVoiceAgent(BasicAgent):
-    """Local hold-to-talk dictation, driven through Hammerspoon."""
+    """Local dictation actions, preferring the native app over legacy hs."""
 
     ACTIONS = ("doctor", "dictionary", "add_term", "stats", "process")
 
@@ -234,6 +274,11 @@ class RappVoiceAgent(BasicAgent):
     def perform(self, **kwargs):
         action = (kwargs.get("action") or "doctor").strip().lower()
         try:
+            if action not in self.ACTIONS:
+                return "unknown action '%s'. Try: %s" % (action, ", ".join(self.ACTIONS))
+            native = _native_action(action, kwargs)
+            if native is not None:
+                return native
             if action == "doctor":
                 return self._doctor()
             if action == "dictionary":

@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/rapp-crispy-singleton",
   "agent_file": "rapp_crispy_agent.py",
-  "agent_sha256": "4229fed6d82f92d9561fd291f4bb61e7862c710f24d0b03b43f514745f665f72",
+  "agent_sha256": "bb90598a858eef6dbf8c231782496f596669f92706bca1454f8fd9821302a2be",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappCrispyAgent",
   "host_dependencies": [],
@@ -10,7 +10,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Local-first meeting stack: record, RNNoise denoise, local whisper.cpp transcription and hook-driven notes.",
+    "description": "Secondary integration for the RAPP Crispy native macOS app, with preserved optional legacy processing and consent-gated provider notes.",
     "name": "rapp_crispy",
     "requires_env": [],
     "schema": "rapp-agent/1.0",
@@ -22,7 +22,7 @@
       "local-first",
       "privacy"
     ],
-    "version": "1.4.0"
+    "version": "1.5.0"
   },
   "runtime_name": "RappCrispy",
   "schema": "rapp-agent-lock/1.0",
@@ -53,7 +53,7 @@
         "type": "string"
       },
       "notes": {
-        "description": "Write notes via the hook. Default true. Set false for a confidential meeting: the DEFAULT hook calls `claude -p` and sends the transcript to Anthropic, and this is the only way to stop that from here.",
+        "description": "Request provider notes. Default false. Even when true, legacy hooks require CRISPY_NOTES_CONSENT=1 after reviewing the provider; the example hook sends transcripts to Anthropic. Native consent is configured separately in the graphical app.",
         "type": "boolean"
       },
       "path": {
@@ -72,5 +72,5 @@
     "required": [],
     "type": "object"
   },
-  "version": "1.4.0"
+  "version": "1.5.0"
 }
