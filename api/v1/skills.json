@@ -2,8 +2,8 @@
   "artifact_type": "skill-catalog",
   "counts": {
     "generated_projections": 1718,
-    "reviewed_submissions": 0,
-    "total": 1718
+    "reviewed_submissions": 1,
+    "total": 1719
   },
   "description": "Static catalog of reviewed portable skills and generated Scout projections. Skill artifact kind is independent from protocol conformance; catalog admission never implies runtime or authenticated RAPP/1 compliance.",
   "hashing": {
@@ -11,18 +11,124 @@
     "manifest": "sha256-canonical-json-v1"
   },
   "inputs": {
-    "canonical_manifests": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "canonical_manifests": "64b03442d38d2cc1cf3620a305f1aa8ce52967d78722c7338db346e2cf45d700",
     "scout_catalog": "bd093b6e408aaa76a73dbfb8c228bc0097372b474f6775a172fb507d8afb4793",
     "scout_toaster": {
       "commit": "d54ba8484b5c5dae6406d2090c03115d12985446",
       "sha256": "d340043178aa4160f76a179b8b1086971e09207b212aff2ab2c0752b69173e17"
     },
-    "skill_lifecycle": "d106087fcaf59464bdf7bbb523e97cf2f999e21a126e58674859a78d8c25588c"
+    "skill_lifecycle": "a19b8ff8be92d1fdc628b77f338e0255262affd002aa2ccc75c2cf872c0319fe"
   },
   "schema": "rar-skills-catalog/1.0",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/skills.json",
   "site_url": "https://kody-w.github.io/RAR/skills.html",
   "skills": [
+    {
+      "artifact_type": "skill",
+      "author": "kody-w",
+      "catalog_origin": "reviewed-submission",
+      "category": "devtools",
+      "compatibility": {
+        "rapp_protocol": "optional"
+      },
+      "description": "Audit and modernize an application with source-preserving private workspace bootstrap, pinned current RAPP/1 diagnostics, and an explicit host review, repair and publication workflow.",
+      "display_name": "RAPP Workspace Refresh",
+      "install": {
+        "destination": "skills/rapp-workspace-refresh",
+        "entrypoint": "SKILL.md",
+        "strategy": "copy-files",
+        "verify": "sha256-before-use"
+      },
+      "license": "MIT",
+      "manifest": {
+        "hash_algorithm": "sha256-canonical-json-v1",
+        "path": "skills/@kody-w/rapp-workspace-refresh/manifest.json",
+        "sha256": "fdac1ab20b25d84a6c7ff1fd6907b4783f7d5f975f3c70bcc2aad1e45aff63ab",
+        "url": "https://raw.githubusercontent.com/kody-w/RAR/main/skills/@kody-w/rapp-workspace-refresh/manifest.json"
+      },
+      "name": "@kody-w/rapp-workspace-refresh",
+      "namespace": "@kody-w",
+      "protocol_conformance": {
+        "evidence": [],
+        "profile": "RAPP/1",
+        "status": "not_assessed"
+      },
+      "relationships": [],
+      "review": {
+        "accepted_at": "2026-09-13T16:28:55.289666+00:00",
+        "receipt": "rar_skill_f4255b23af547a2aa6d79a1abad069d226df836d0a1fd80c99861993b16c519e",
+        "revision_id": "f4255b23af547a2aa6d79a1abad069d226df836d0a1fd80c99861993b16c519e",
+        "status": "notarized"
+      },
+      "search_terms": [
+        "kody",
+        "rapp",
+        "workspace",
+        "refresh",
+        "audit",
+        "modernize",
+        "an",
+        "application",
+        "source",
+        "preserving",
+        "private",
+        "bootstrap",
+        "pinned",
+        "current",
+        "diagnostics",
+        "explicit",
+        "host",
+        "review",
+        "repair",
+        "publication",
+        "workflow",
+        "local",
+        "first",
+        "devtools"
+      ],
+      "slug": "rapp-workspace-refresh",
+      "source": {
+        "entrypoint": "skills/rapp-workspace-refresh/SKILL.md",
+        "entrypoint_url": "https://raw.githubusercontent.com/kody-w/rapp-tools/39ed0a355aa5922c958fda79ec0f95c27b4a5109/skills/rapp-workspace-refresh/SKILL.md",
+        "files": [
+          {
+            "media_type": "text/markdown",
+            "path": "skills/rapp-workspace-refresh/SKILL.md",
+            "sha256": "192f3d21b9715c410934d9c2517f5233a184f8798e4062bfcb2f550f579008a8",
+            "url": "https://raw.githubusercontent.com/kody-w/rapp-tools/39ed0a355aa5922c958fda79ec0f95c27b4a5109/skills/rapp-workspace-refresh/SKILL.md"
+          },
+          {
+            "media_type": "text/plain",
+            "path": "skills/rapp-workspace-refresh/LICENSE",
+            "sha256": "fca150ce338dbcf5a0e3fd0b5446c4674556b1a4432425105b9c01c661cd9a72",
+            "url": "https://raw.githubusercontent.com/kody-w/rapp-tools/39ed0a355aa5922c958fda79ec0f95c27b4a5109/skills/rapp-workspace-refresh/LICENSE"
+          },
+          {
+            "media_type": "text/x-python",
+            "path": "skills/rapp-workspace-refresh/scripts/agent.py",
+            "sha256": "47ba1ee059449758ef56ecdcd944d5e0521df4a23e9d30f14caacaccf5e2a4c9",
+            "url": "https://raw.githubusercontent.com/kody-w/rapp-tools/39ed0a355aa5922c958fda79ec0f95c27b4a5109/skills/rapp-workspace-refresh/scripts/agent.py"
+          },
+          {
+            "media_type": "text/x-python",
+            "path": "skills/rapp-workspace-refresh/scripts/run.py",
+            "sha256": "8d6cc7c145c772a5f9ac580f38cf28d5ca2b2a76c57813b5409a606115a6cff5",
+            "url": "https://raw.githubusercontent.com/kody-w/rapp-tools/39ed0a355aa5922c958fda79ec0f95c27b4a5109/skills/rapp-workspace-refresh/scripts/run.py"
+          }
+        ],
+        "hash_algorithm": "sha256",
+        "repository": "kody-w/rapp-tools",
+        "revision": "39ed0a355aa5922c958fda79ec0f95c27b4a5109"
+      },
+      "tags": [
+        "workspace",
+        "refresh",
+        "bootstrap",
+        "rapp-1",
+        "local-first"
+      ],
+      "version": "0.1.0"
+    },
     {
       "artifact_type": "skill",
       "author": "RAR Scout projection",

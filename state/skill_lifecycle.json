@@ -1,5 +1,18 @@
 {
   "schema": "rar-skill-lifecycle/1.0",
-  "skills": {},
-  "updated_at": ""
+  "skills": {
+    "@kody-w/rapp-workspace-refresh": {
+      "status": "active",
+      "version": "0.1.0",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "skills/@kody-w/rapp-workspace-refresh/manifest.json",
+      "sha256": "fdac1ab20b25d84a6c7ff1fd6907b4783f7d5f975f3c70bcc2aad1e45aff63ab",
+      "source_repository": "kody-w/rapp-tools",
+      "source_revision": "39ed0a355aa5922c958fda79ec0f95c27b4a5109",
+      "latest_receipt": "rar_skill_f4255b23af547a2aa6d79a1abad069d226df836d0a1fd80c99861993b16c519e",
+      "updated_at": "2026-09-13T16:28:55.289666+00:00"
+    }
+  },
+  "updated_at": "2026-09-13T16:28:55.289666+00:00"
 }

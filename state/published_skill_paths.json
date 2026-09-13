@@ -1,5 +1,10 @@
 {
-  "schema": "rar-published-skill-paths/1.0",
-  "count": 0,
-  "paths": {}
+  "count": 1,
+  "paths": {
+    "skills/@kody-w/rapp-workspace-refresh/manifest.json": {
+      "first_seen": "2026-09-13T16:28:55Z",
+      "name": "@kody-w/rapp-workspace-refresh"
+    }
+  },
+  "schema": "rar-published-skill-paths/1.0"
 }
