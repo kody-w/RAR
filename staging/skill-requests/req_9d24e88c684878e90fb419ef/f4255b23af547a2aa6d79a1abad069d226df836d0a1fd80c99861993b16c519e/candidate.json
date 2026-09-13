@@ -1,0 +1,57 @@
+{
+  "artifact_type": "skill",
+  "author": "kody-w",
+  "category": "devtools",
+  "compatibility": {
+    "rapp_protocol": "optional"
+  },
+  "description": "Audit and modernize an application with source-preserving private workspace bootstrap, pinned current RAPP/1 diagnostics, and an explicit host review, repair and publication workflow.",
+  "display_name": "RAPP Workspace Refresh",
+  "install": {
+    "destination": "skills/rapp-workspace-refresh",
+    "strategy": "copy-files"
+  },
+  "license": "MIT",
+  "name": "@kody-w/rapp-workspace-refresh",
+  "protocol_conformance": {
+    "evidence": [],
+    "profile": "RAPP/1",
+    "status": "not_assessed"
+  },
+  "schema": "rar-skill/1.0",
+  "source": {
+    "entrypoint": "skills/rapp-workspace-refresh/SKILL.md",
+    "files": [
+      {
+        "media_type": "text/markdown",
+        "path": "skills/rapp-workspace-refresh/SKILL.md",
+        "sha256": "192f3d21b9715c410934d9c2517f5233a184f8798e4062bfcb2f550f579008a8"
+      },
+      {
+        "media_type": "text/plain",
+        "path": "skills/rapp-workspace-refresh/LICENSE",
+        "sha256": "fca150ce338dbcf5a0e3fd0b5446c4674556b1a4432425105b9c01c661cd9a72"
+      },
+      {
+        "media_type": "text/x-python",
+        "path": "skills/rapp-workspace-refresh/scripts/agent.py",
+        "sha256": "47ba1ee059449758ef56ecdcd944d5e0521df4a23e9d30f14caacaccf5e2a4c9"
+      },
+      {
+        "media_type": "text/x-python",
+        "path": "skills/rapp-workspace-refresh/scripts/run.py",
+        "sha256": "8d6cc7c145c772a5f9ac580f38cf28d5ca2b2a76c57813b5409a606115a6cff5"
+      }
+    ],
+    "repository": "kody-w/rapp-tools",
+    "revision": "39ed0a355aa5922c958fda79ec0f95c27b4a5109"
+  },
+  "tags": [
+    "workspace",
+    "refresh",
+    "bootstrap",
+    "rapp-1",
+    "local-first"
+  ],
+  "version": "0.1.0"
+}
