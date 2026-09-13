@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-09-12T09:26:04Z",
+ "generated_at": "2026-09-13T10:22:06Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,26 +10,26 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 117,
-  "size_kb": 111778,
+  "size_kb": 116125,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-09-12T08:18:02Z",
+  "pushed_at": "2026-09-13T08:42:29Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
  "totals": {
-  "downloads": 5359,
-  "clones": 5287,
+  "downloads": 5446,
+  "clones": 5374,
   "cdn_hits": 72,
   "release_downloads": 0,
   "agent_file_downloads": 12,
-  "clones_excluding_ci_estimate": 3303,
-  "ci_clone_estimate": 1984,
-  "page_views": 163,
-  "clone_uniques_14d": 300,
-  "view_uniques_14d": 21,
-  "clone_uniques_daily_sum": 1030,
-  "view_uniques_daily_sum": 60,
-  "days_tracked": 32,
+  "clones_excluding_ci_estimate": 3328,
+  "ci_clone_estimate": 2046,
+  "page_views": 164,
+  "clone_uniques_14d": 299,
+  "view_uniques_14d": 20,
+  "clone_uniques_daily_sum": 1045,
+  "view_uniques_daily_sum": 61,
+  "days_tracked": 33,
   "tracking_since": "2026-07-14",
   "agents": 1700,
   "swarms": 2,
@@ -285,6 +285,13 @@
    "clone_uniques": 32,
    "views": 2,
    "cdn": 0
+  },
+  {
+   "date": "2026-09-12",
+   "clones": 87,
+   "clone_uniques": 15,
+   "views": 1,
+   "cdn": 0
   }
  ],
  "traffic": {
@@ -292,8 +299,8 @@
    {
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "count": 13,
-    "uniques": 5
+    "count": 11,
+    "uniques": 4
    },
    {
     "path": "/kody-w/RAR/tree/main/stacks/rapp-workspace-starter",
@@ -344,8 +351,8 @@
     "uniques": 1
    },
    {
-    "path": "/kody-w/RAR/blob/183c8aba7a7176f5c35c0b8a3f26c26e54352254/scout/bundles/cowork-cookbook-114/skills/rar-cowork-cookbook-ppt-exec-configure-and-manage-file-storage/ppt_exec_configure_and_manage_file_storage_agent.py",
-    "title": "/blob/183c8aba7a7176f5c35c0b8a3f26c26e54352254/scout/bundles/cowork-cookbook-114/skills/rar-cowork-cookbook-ppt-exec-configure-and-manage-file-storage/ppt_exec_configure_and_manage_file_storage_agent.py",
+    "path": "/kody-w/RAR/blob/80f9989fad0aeceb745687fd2052825cd0aee4f6/scout/bundles/native-04/skills/rar-kody-w-art-generator/SKILL.md",
+    "title": "/blob/80f9989fad0aeceb745687fd2052825cd0aee4f6/scout/bundles/native-04/skills/rar-kody-w-art-generator/SKILL.md",
     "count": 1,
     "uniques": 1
    }
@@ -353,7 +360,7 @@
   "referrers": [
    {
     "referrer": "github.com",
-    "count": 28,
+    "count": 27,
     "uniques": 9
    },
    {
@@ -372,15 +379,15 @@
     "uniques": 1
    }
   ],
-  "clones_14d": 1896,
-  "views_14d": 74,
+  "clones_14d": 1867,
+  "views_14d": 70,
   "live": true,
-  "as_of": "2026-09-12T09:26:04Z"
+  "as_of": "2026-09-13T10:22:06Z"
  },
  "cdn": {
   "total_hits": 72,
   "bandwidth": 3670545,
-  "rank": 2028530,
+  "rank": 2037082,
   "agent_hits": 12,
   "files": [
    {

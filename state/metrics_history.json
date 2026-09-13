@@ -131,18 +131,22 @@
   "2026-09-11": {
    "count": 112,
    "uniques": 32
+  },
+  "2026-09-12": {
+   "count": 87,
+   "uniques": 15
   }
  },
  "last_known": {
-  "at": "2026-09-12T09:26:04Z",
-  "clone_uniques_14d": 300,
-  "clones_14d": 1896,
+  "at": "2026-09-13T10:22:06Z",
+  "clone_uniques_14d": 299,
+  "clones_14d": 1867,
   "paths": [
    {
-    "count": 13,
+    "count": 11,
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "uniques": 5
+    "uniques": 4
    },
    {
     "count": 5,
@@ -194,14 +198,14 @@
    },
    {
     "count": 1,
-    "path": "/kody-w/RAR/blob/183c8aba7a7176f5c35c0b8a3f26c26e54352254/scout/bundles/cowork-cookbook-114/skills/rar-cowork-cookbook-ppt-exec-configure-and-manage-file-storage/ppt_exec_configure_and_manage_file_storage_agent.py",
-    "title": "/blob/183c8aba7a7176f5c35c0b8a3f26c26e54352254/scout/bundles/cowork-cookbook-114/skills/rar-cowork-cookbook-ppt-exec-configure-and-manage-file-storage/ppt_exec_configure_and_manage_file_storage_agent.py",
+    "path": "/kody-w/RAR/blob/80f9989fad0aeceb745687fd2052825cd0aee4f6/scout/bundles/native-04/skills/rar-kody-w-art-generator/SKILL.md",
+    "title": "/blob/80f9989fad0aeceb745687fd2052825cd0aee4f6/scout/bundles/native-04/skills/rar-kody-w-art-generator/SKILL.md",
     "uniques": 1
    }
   ],
   "referrers": [
    {
-    "count": 28,
+    "count": 27,
     "referrer": "github.com",
     "uniques": 9
    },
@@ -221,8 +225,8 @@
     "uniques": 1
    }
   ],
-  "view_uniques_14d": 21,
-  "views_14d": 74
+  "view_uniques_14d": 20,
+  "views_14d": 70
  },
  "snapshots": [
   {
@@ -1274,6 +1278,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 60,
    "views_all_time": 163
+  },
+  {
+   "at": "2026-09-13T10:22:06Z",
+   "cdn_all_time": 72,
+   "clone_uniques_all_time": 1045,
+   "clones_all_time": 5374,
+   "days_tracked": 33,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 61,
+   "views_all_time": 164
   }
  ],
  "views": {
@@ -1403,6 +1417,10 @@
   },
   "2026-09-11": {
    "count": 2,
+   "uniques": 1
+  },
+  "2026-09-12": {
+   "count": 1,
    "uniques": 1
   }
  }
