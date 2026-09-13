@@ -10,6 +10,7 @@ Stdlib only.
 """
 
 import os
+import plistlib
 import shutil
 import subprocess
 
@@ -18,7 +19,7 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "rapp_rewind",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "A local, searchable memory of everything that has been on your screen.",
     "author": "@kody-w",
     "tags": ["screen", "ocr", "search", "memory", "local-first", "privacy"],
@@ -40,6 +41,32 @@ _CANDIDATES = [
     os.path.join(HOME, "Documents", "Fable5", "rapp-rewind", "rewind"),
 ]
 
+_NATIVE_APPS = [
+    os.environ.get("REWIND_NATIVE_APP"),
+    "/Applications/RAPP Rewind.app",
+    "/Applications/RAPPRewind.app",
+    os.path.join(HOME, "Applications", "RAPP Rewind.app"),
+    os.path.join(HOME, "Applications", "RAPPRewind.app"),
+]
+
+
+def _native():
+    for candidate in _NATIVE_APPS:
+        if not candidate or not candidate.lower().endswith(".app"):
+            continue
+        bundle = os.path.realpath(os.path.expanduser(candidate))
+        executable = os.path.join(bundle, "Contents", "MacOS", "RAPPRewind")
+        if not os.path.realpath(executable).startswith(bundle + os.sep):
+            continue
+        try:
+            with open(os.path.join(bundle, "Contents", "Info.plist"), "rb") as handle:
+                info = plistlib.load(handle)
+            if info.get("CFBundleIdentifier") == "io.rapp.rewind" and os.access(executable, os.X_OK):
+                return executable, bundle
+        except (OSError, ValueError, plistlib.InvalidFileException):
+            continue
+    return None
+
 
 def _cli():
     for c in _CANDIDATES:
@@ -49,12 +76,24 @@ def _cli():
 
 
 def _run(args, timeout=900):
-    exe = _cli()
+    native = None if os.environ.get("REWIND_CLI") else _native()
+    exe = native[0] if native else _cli()
     if not exe:
-        return None, ("rewind CLI not found. Install rapp-rewind so that `rewind` is on PATH, "
-                      "or set REWIND_CLI.")
+        return None, ("RAPP Rewind was not found. Install the native app in Applications, "
+                      "set REWIND_NATIVE_APP to its .app path, or install the compatibility "
+                      "`rewind` CLI / set REWIND_CLI.")
     try:
-        p = subprocess.run([exe] + args, capture_output=True, text=True, timeout=timeout)
+        if native:
+            assessment = subprocess.run(
+                ["/usr/sbin/spctl", "--assess", "--type", "execute", native[1]],
+                capture_output=True, text=True, timeout=30)
+            if assessment.returncode != 0:
+                return None, ("macOS has not approved this RAPP Rewind app for execution. "
+                              "Open the installed app normally and resolve its signing/"
+                              "Gatekeeper warning, or explicitly select your compatibility "
+                              "CLI with REWIND_CLI. No security setting was changed.")
+        command = [exe] + (["--rewind-command"] if native else []) + args
+        p = subprocess.run(command, capture_output=True, text=True, timeout=timeout)
     except FileNotFoundError as exc:
         # A traceback is not an answer. Say what is missing and how to fix it.
         return None, (f"{exe} could not be executed ({exc.strerror}). The tool is "

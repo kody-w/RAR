@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/rapp-voice-singleton",
   "agent_file": "rapp_voice_agent.py",
-  "agent_sha256": "cc241dc84953742d1e6925db17f4b20065573687c7d4b71e53699a3c0df2618c",
+  "agent_sha256": "a04c1100a70545f13b0cdce6c39e24c34f55daae4aeaf8fde6b6e9e1d5b1e785",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappVoiceAgent",
   "host_dependencies": [],
@@ -21,7 +21,7 @@
       "local-first",
       "privacy"
     ],
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "runtime_name": "RappVoice",
   "schema": "rapp-agent-lock/1.0",
@@ -54,5 +54,5 @@
     "required": [],
     "type": "object"
   },
-  "version": "1.0.0"
+  "version": "1.1.0"
 }

@@ -12,6 +12,7 @@ affiliation or endorsement.
 | Contribution | Path |
 |---|---|
 | New, updated, restored, or deleted canonical `agent.py` | Versioned GitHub Issue mutation and immutable receipt |
+| New or updated portable skill catalog record | Versioned GitHub Issue mutation with `resource.kind: "skill"` |
 | Registry tooling, tests, docs, marketplace metadata, source adapters | Pull request |
 | Bug report | [Bug report form](https://github.com/kody-w/RAR/issues/new?template=bug_report.yml) |
 | Feature request | [Feature request form](https://github.com/kody-w/RAR/issues/new?template=feature_request.yml) |
@@ -43,6 +44,45 @@ For marketplace changes, run:
 python scripts/build_scout_exports.py
 pytest -q tests/test_scout_rapp_skill.py
 ```
+
+## Contributing a Portable Skill
+
+Portable skills are not agent `.py` entries. They have a distinct static store
+at [`skills.html`](skills.html), a machine catalog at
+[`api/v1/skills.json`](api/v1/skills.json), and reviewed metadata under
+`skills/@publisher/skill-slug/manifest.json`.
+
+Do not hand-edit `api/v1/skills.json`, and do not add a live manifest directly
+by pull request. Submit a `rar-change-request/1.0` GitHub Issue command with:
+
+- `resource.kind: "skill"`
+- a namespaced lowercase kebab-case ID
+- `operation: "create"` plus `if_none_match: "*"` or `operation: "update"`
+  plus the current canonical manifest SHA-256 as `if_match`
+- a complete `rar-skill/1.0` artifact
+- a full 40-character Git commit for the source repository
+- every file path and raw-byte SHA-256, including `SKILL.md`
+- `artifact_type: "skill"`
+- `protocol_conformance.status: "not_assessed"`
+
+The source repository owner must match the publisher namespace. RAR fetches
+and hashes the pinned files, but never imports or executes them. Exact fetched
+bytes and the deterministic manifest are staged for review; an `approved`
+label applies only to that Issue revision.
+
+The complete minimal JSON contract and hash rules are documented in
+[`skill.md`](skill.md#8a-rar-skills-store-distinct-artifact-type) and
+[`api.json`](api.json). Skill catalog admission is metadata review, not a
+quality-tier promotion and not evidence of runtime or RAPP/1 conformance.
+
+## Repository Bootstrap Overlay
+
+The root workspace bootstrap is generator-managed. Do not hand-edit the block
+between `rapp-workspace-bootstrap` markers or the files recorded by
+`.rapp/bootstrap-managed.json`; refresh them with the immutable
+`rapp_workspace.py prepare` operator. Commit only the public control overlay.
+Never commit `.rapp/cache/`, `.rapp/workspace/`, `.rapp/reports/`, local owner
+identity, or workspace state.
 
 ## Quick Version
 

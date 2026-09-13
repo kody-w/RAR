@@ -55,6 +55,7 @@ API_DIR = REPO_ROOT / "api" / "v1"
 AUDIENCE_DIR = API_DIR / "audience"
 MANIFEST = REPO_ROOT / "manifest.json"
 MARKETPLACES = REPO_ROOT / "marketplaces.json"
+SKILLS_CATALOG = API_DIR / "skills.json"
 
 OWNER = "kody-w"
 REPO = "RAR"
@@ -268,6 +269,12 @@ def lean_record(agent: dict, audience: str) -> dict:
     name = agent.get("name", "")
     rel = agent.get("_file", "")
     return {
+        "artifact_type": "agent",
+        "protocol_conformance": {
+            "profile": None,
+            "status": "not_assessed",
+            "evidence": [],
+        },
         "id": agent_id(name),
         "name": name,
         "display_name": agent.get("display_name", ""),
@@ -523,6 +530,18 @@ def main() -> int:
     ):
         print("marketplaces.json has the wrong schema", file=sys.stderr)
         return 1
+    skills_source = {"counts": {"total": 0}}
+    if SKILLS_CATALOG.exists():
+        try:
+            skills_source = json.loads(
+                SKILLS_CATALOG.read_text(encoding="utf-8")
+            )
+        except (OSError, json.JSONDecodeError):
+            print("api/v1/skills.json is invalid", file=sys.stderr)
+            return 1
+        if skills_source.get("schema") != "rar-skills-catalog/1.0":
+            print("api/v1/skills.json has the wrong schema", file=sys.stderr)
+            return 1
 
     # Classify and shape.
     records, audience_detail = [], {}
@@ -706,6 +725,14 @@ def main() -> int:
                 "url": f"{RAW_BASE}/api/v1/catalog.json",
                 "description": "Every agent as a lean record. One fetch renders a full catalog.",
             },
+            "skills": {
+                "url": f"{RAW_BASE}/api/v1/skills.json",
+                "description": (
+                    "Portable skills and generated Scout projections. Every "
+                    "record is artifact_type=skill, carries file hashes, and "
+                    "reports protocol conformance separately."
+                ),
+            },
             "business": {
                 "url": f"{RAW_BASE}/api/v1/audience/business.json",
                 "description": "Pre-curated enterprise slice. Safe to surface without further filtering.",
@@ -778,6 +805,12 @@ def main() -> int:
                 "Take source.raw from the agent record.",
                 "GET it — the response body is the complete agent. The file is the package.",
                 "Optionally verify against source.sha256.",
+            ],
+            "install_a_skill": [
+                f"GET {RAW_BASE}/api/v1/skills.json",
+                "Select an artifact_type=skill record.",
+                "Fetch every source.files[].url and verify source.files[].sha256.",
+                "Copy the verified files according to install; catalog admission is not runtime or protocol certification.",
             ],
         },
     }

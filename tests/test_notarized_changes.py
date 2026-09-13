@@ -1,3 +1,4 @@
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -19,6 +20,16 @@ SOURCE = b'''__manifest__ = {
     "category": "general",
 }
 '''
+
+SKILL = json.dumps(
+    {
+        "schema": "rar-skill/1.0",
+        "artifact_type": "skill",
+        "name": "@test/example-skill",
+        "version": "1.0.0",
+    },
+    sort_keys=True,
+).encode()
 
 
 def evidence(tmp_path: Path, *, action: str, status: str):
@@ -105,3 +116,63 @@ def test_digest_tampering_fails(tmp_path):
         receipts_dir=receipts,
     )
     assert any("digest" in error for error in errors)
+
+
+def skill_evidence(tmp_path: Path):
+    digest = hashlib.sha256(SKILL).hexdigest()
+    revision = "b" * 64
+    receipts = tmp_path / "skill-receipts"
+    receipts.mkdir()
+    path = "skills/@test/example-skill/manifest.json"
+    (receipts / f"{revision}.json").write_text(json.dumps({
+        "schema": "rar-skill-receipt/1.0",
+        "id": f"rar_skill_{revision}",
+        "action": "skill.create",
+        "skill": "@test/example-skill",
+        "canonical_path": path,
+        "artifact": {"digest": digest},
+    }))
+    lifecycle = {
+        "skills": {
+            "@test/example-skill": {
+                "status": "active",
+                "canonical_path": path,
+                "sha256": digest,
+                "latest_receipt": f"rar_skill_{revision}",
+            }
+        }
+    }
+    return lifecycle, receipts, path
+
+
+def test_skill_change_requires_matching_front_door_receipt(tmp_path):
+    lifecycle, receipts, path = skill_evidence(tmp_path)
+    assert check.validate_skill_change(
+        status="A",
+        path=path,
+        current_content=SKILL,
+        lifecycle=lifecycle,
+        receipts_dir=receipts,
+    ) == []
+
+
+def test_direct_skill_change_without_lifecycle_fails(tmp_path):
+    errors = check.validate_skill_change(
+        status="A",
+        path="skills/@test/example-skill/manifest.json",
+        current_content=SKILL,
+        lifecycle={"skills": {}},
+        receipts_dir=tmp_path,
+    )
+    assert any("without skill lifecycle evidence" in error for error in errors)
+
+
+def test_skill_manifest_deletion_is_never_a_supported_mutation(tmp_path):
+    errors = check.validate_skill_change(
+        status="D",
+        path="skills/@test/example-skill/manifest.json",
+        current_content=None,
+        lifecycle={"skills": {}},
+        receipts_dir=tmp_path,
+    )
+    assert any("cannot be deleted" in error for error in errors)

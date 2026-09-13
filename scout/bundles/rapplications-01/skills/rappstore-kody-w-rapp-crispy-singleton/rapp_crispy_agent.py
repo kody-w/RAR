@@ -1,10 +1,10 @@
 """RAPP Crispy — a local-first meeting stack as a rapplication.
 
-Record a meeting, denoise it, transcribe it and summarise it entirely on the
-machine the brainstem is running on. No audio and no transcript ever leaves the
-host: denoising is ffmpeg's RNNoise filter, transcription is a local
-whisper.cpp server on 127.0.0.1, and summarisation goes through a user-owned
-shell hook the user points wherever they like.
+Record, enhance and transcribe locally. Prefer installed native app controls
+for capture; keep the legacy headless algorithms available explicitly.
+Optional notes require provider consent: the example claude hook sends the
+transcript to Anthropic. Neither missing consent nor a provider blocks local
+audio or transcription.
 
 Everything lands under ~/.rappcrispy/meetings/<timestamp>/ as plain files.
 
@@ -22,12 +22,14 @@ Stdlib only. Shells out to ffmpeg; talks to the local ASR over HTTP.
 
 import json
 import os
+import plistlib
 import re
 import shutil
 import subprocess
 import time
 import urllib.error
 import urllib.request
+from urllib.parse import quote, urlencode
 import wave
 
 from agents.basic_agent import BasicAgent
@@ -35,10 +37,10 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "rapp_crispy",
-    "version": "1.4.0",
+    "version": "1.5.0",
     "description": (
-        "Local-first meeting stack: record, RNNoise denoise, local whisper.cpp "
-        "transcription and hook-driven notes."
+        "Secondary integration for the RAPP Crispy native macOS app, with "
+        "preserved optional legacy processing and consent-gated provider notes."
     ),
     "author": "@kody-w",
     "tags": ["meetings", "audio", "denoise", "transcription", "local-first", "privacy"],
@@ -83,6 +85,72 @@ def _ffmpeg():
 
 def _run(args, timeout=1800):
     return subprocess.run(args, capture_output=True, text=True, timeout=timeout)
+
+
+def _native_app():
+    """Discover a real signed-or-development bundle, never a PATH shell launcher.
+
+    CRISPY_BACKEND=legacy preserves headless/CLI workflows. A native record/run
+    request only prepares visible controls; the user must press Record in-app.
+    """
+    backend = os.environ.get("CRISPY_BACKEND", "auto")
+    if backend == "legacy":
+        return None
+    if backend not in ("auto", "native"):
+        raise ValueError("CRISPY_BACKEND must be auto, native, or legacy")
+    explicit = os.environ.get("RAPP_CRISPY_APP")
+    candidates = [explicit] if explicit else [
+        "/Applications/RAPP Crispy.app", "/Applications/RAPPCrispy.app",
+        os.path.join(HOME, "Applications", "RAPP Crispy.app"),
+        os.path.join(HOME, "Applications", "RAPPCrispy.app"),
+    ]
+    for candidate in candidates:
+        try:
+            with open(os.path.join(candidate, "Contents", "Info.plist"), "rb") as handle:
+                info = plistlib.load(handle)
+            binary = os.path.join(candidate, "Contents", "MacOS", "RAPPCrispy")
+            if info.get("CFBundleIdentifier") == "io.rapp.crispy" \
+                    and info.get("CFBundleExecutable") == "RAPPCrispy" \
+                    and os.path.isfile(binary) and os.access(binary, os.X_OK):
+                return os.path.abspath(candidate), os.path.abspath(binary)
+        except (OSError, ValueError, plistlib.InvalidFileException):
+            continue
+    if explicit or backend == "native":
+        raise RuntimeError("No valid RAPP Crispy native app found. Install the complete app or explicitly select CRISPY_BACKEND=legacy.")
+    return None
+
+
+def _native_recording_url(kwargs):
+    name = kwargs.get("name") or ""
+    seconds = kwargs.get("seconds")
+    screen = kwargs.get("screen", False)
+    if not isinstance(name, str) or len(name) > 200 or any(ord(c) < 32 or ord(c) == 127 for c in name):
+        raise ValueError("name must be at most 200 characters without control characters")
+    if seconds is not None and (type(seconds) is not int or not 1 <= seconds <= 86400):
+        raise ValueError("seconds must be an integer between 1 and 86400")
+    if type(screen) is not bool:
+        raise ValueError("screen must be a boolean")
+    query = {"name": name, "screen": "true" if screen else "false"}
+    if seconds is not None:
+        query["seconds"] = str(seconds)
+    return "rappcrispy://prepare-recording?" + urlencode(query, quote_via=quote)
+
+
+def _meeting_audio(directory):
+    candidates = []
+    metadata = os.path.join(directory, "native-meeting.json")
+    if os.path.exists(metadata):
+        with open(metadata, encoding="utf-8") as handle:
+            record = json.load(handle)
+        candidates.extend([record.get("enhancedAudioFilename"), record.get("audioFilename")])
+    candidates.extend(["mic.denoised.wav", "mic.wav", "mic.voiceprocessed.wav", "microphone.caf"])
+    for name in candidates:
+        if not isinstance(name, str) or not name or name != os.path.basename(name) or name in (".", ".."):
+            continue
+        path = os.path.join(directory, name)
+        if os.path.dirname(os.path.realpath(path)) == os.path.realpath(directory) and os.path.isfile(path):
+            return path
+    return None
 
 
 def _wav_seconds(path):
@@ -187,7 +255,9 @@ def _dictionary():
     terms, subs = [], []
     if not os.path.exists(path):
         return terms, subs
-    for raw in open(path, encoding="utf-8", errors="replace").read().splitlines():
+    with open(path, encoding="utf-8", errors="replace") as handle:
+        lines = handle.read().splitlines()
+    for raw in lines:
         t = raw.strip()
         if not t or t.startswith("#"):
             continue
@@ -267,10 +337,11 @@ class RappCrispyAgent(BasicAgent):
                     "path": {"type": "string", "description": "WAV path for denoise/transcribe."},
                     "screen": {"type": "boolean", "description": "Also capture screen video."},
                     "notes": {"type": "boolean", "description":
-                              "Write notes via the hook. Default true. Set false "
-                              "for a confidential meeting: the DEFAULT hook calls "
-                              "`claude -p` and sends the transcript to Anthropic, "
-                              "and this is the only way to stop that from here."},
+                              "Request provider notes. Default false. Even when "
+                              "true, legacy hooks require CRISPY_NOTES_CONSENT=1 "
+                              "after reviewing the provider; the example hook "
+                              "sends transcripts to Anthropic. Native consent is "
+                              "configured separately in the graphical app."},
                 },
                 "required": [],
             },
@@ -421,13 +492,11 @@ class RappCrispyAgent(BasicAgent):
         return text, f"transcribed {len(chunks)} chunk(s)"
 
     # -------------------------------------------------------------------- notes
-    def _notes(self, d, run_hook=True):
+    def _notes(self, d, run_hook=False):
         if not os.path.isdir(d):
             return f"no such meeting: {d}"
-        src = os.path.join(d, "mic.denoised.wav")
-        if not os.path.exists(src):
-            src = os.path.join(d, "mic.wav")
-        if not os.path.exists(src):
+        src = _meeting_audio(d)
+        if not src:
             return f"no audio in {d}"
         tpath = os.path.join(d, "transcript.txt")
         if not (os.path.exists(tpath) and os.path.getsize(tpath) > 2):
@@ -436,7 +505,8 @@ class RappCrispyAgent(BasicAgent):
                 return msg
             with open(tpath, "w") as fh:
                 fh.write(text)
-        transcript = open(tpath, encoding="utf-8", errors="replace").read()
+        with open(tpath, encoding="utf-8", errors="replace") as handle:
+            transcript = handle.read()
         words = len(transcript.split())
         if words < 3:
             return f"transcript has {words} words — not enough speech to summarise"
@@ -448,6 +518,10 @@ class RappCrispyAgent(BasicAgent):
                     f"your request — the hook was never called, so the transcript "
                     f"did not leave this machine.")
         hook = os.path.join(HOOKS, "notes.sh")
+        if os.environ.get("CRISPY_NOTES_CONSENT") != "1":
+            return (f"transcript.txt kept ({words} words). Notes DISABLED: review "
+                    f"{hook} and its destination, then explicitly set "
+                    "CRISPY_NOTES_CONSENT=1 to authorize that provider.")
         if not os.access(hook, os.X_OK):
             return (f"transcript.txt written ({words} words). No notes hook at "
                     f"{hook}, so no summary. The hook takes a transcript path as "
@@ -460,6 +534,10 @@ class RappCrispyAgent(BasicAgent):
             return (f"transcript.txt written ({words} words); notes hook failed: "
                     f"{(p.stderr or '')[:300]}")
         npath = os.path.join(d, "notes.md")
+        if os.path.isfile(npath):
+            revisions = os.path.join(d, ".revisions")
+            os.makedirs(revisions, exist_ok=True)
+            shutil.copy2(npath, os.path.join(revisions, f"notes.{time.time_ns()}.md"))
         with open(npath, "w") as fh:
             fh.write(p.stdout)
         self._log(f"notes dir={d} words={words}")
@@ -476,7 +554,7 @@ class RappCrispyAgent(BasicAgent):
                 continue
             rows.append({
                 "meeting": m,
-                "seconds": _wav_seconds(os.path.join(d, "mic.wav")),
+                "seconds": _wav_seconds(_meeting_audio(d) or os.path.join(d, "mic.wav")),
                 "denoised": os.path.exists(os.path.join(d, "mic.denoised.wav")),
                 "transcript": os.path.exists(os.path.join(d, "transcript.txt")),
                 "notes": os.path.exists(os.path.join(d, "notes.md")),
@@ -597,9 +675,35 @@ class RappCrispyAgent(BasicAgent):
         return json.dumps(out, indent=2)
 
     # ------------------------------------------------------------------ perform
+    def _native_dispatch(self, action, kwargs):
+        if action not in ("doctor", "live_status", "record", "run"):
+            return None
+        installation = _native_app()
+        if not installation:
+            return None
+        app, binary = installation
+        if action in ("doctor", "live_status"):
+            response = _run([binary, "--diagnostics-json"], timeout=20)
+            if response.returncode != 0:
+                return f"native diagnostics failed: {(response.stderr or '')[:400]}"
+            json.loads(response.stdout)  # malformed output is an error, never an empty success
+            return response.stdout
+        url = _native_recording_url(kwargs)
+        response = _run(["/usr/bin/open", "-a", app, url], timeout=20)
+        if response.returncode != 0:
+            return f"could not open native recording controls: {(response.stderr or '')[:400]}"
+        return ("Opened RAPP Crispy recording controls. Capture has NOT started. "
+                "Review the selected microphone, explicitly choose any screen/window, "
+                "then press Record in the app. Notes remain disabled unless approved "
+                "and requested there. For existing headless workflows explicitly use "
+                "CRISPY_BACKEND=legacy.")
+
     def perform(self, **kwargs):
         action = (kwargs.get("action") or "doctor").strip().lower()
         try:
+            native = self._native_dispatch(action, kwargs)
+            if native is not None:
+                return native
             if action == "doctor":
                 return self._doctor()
             if action == "list":
@@ -634,7 +738,7 @@ class RappCrispyAgent(BasicAgent):
                 if not m:
                     return "notes needs `meeting` (a folder name from action=list)"
                 d = m if os.path.isdir(m) else os.path.join(MEETINGS, m)
-                return self._notes(d, kwargs.get("notes", True))
+                return self._notes(d, kwargs.get("notes", False))
             if action == "record":
                 d = self._record(kwargs.get("seconds"), kwargs.get("name"),
                                  bool(kwargs.get("screen")))
@@ -646,7 +750,7 @@ class RappCrispyAgent(BasicAgent):
                     return d
                 dn, dmsg = self._denoise(os.path.join(d, "mic.wav"),
                                          os.path.join(d, "mic.denoised.wav"))
-                return f"{dmsg}\n\n{self._notes(d, kwargs.get('notes', True))}"
+                return f"{dmsg}\n\n{self._notes(d, kwargs.get('notes', False))}"
             return (f"unknown action '{action}'. Try: doctor, record, denoise, "
                     f"transcribe, notes, run, list, read, bench, live_status")
         except subprocess.TimeoutExpired:

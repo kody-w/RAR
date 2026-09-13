@@ -125,7 +125,7 @@ MCP is transport, not a new agent unit — it is how an MCP-native AI reaches RA
 - **Live brainstem (`rapp_brainstem_mcp.py`):** bridges a running brainstem to any MCP host over `/chat`. Every capability — install, search, run an agent, memory — flows through that single `/chat` call.
 - **Serving drop-in agents (`rapp_mcp.py`):** exposes local drop-in `*_agent.py` files as MCP tools for hosts that want to call them directly.
 
-### 8. Ecosystem Catalogs (rapplications, senses, skills)
+### 8. Ecosystem Catalogs (rapplications and senses)
 
 RAR is the consolidated storefront for the whole RAPP ecosystem. One fetch returns every peer-store catalog:
 
@@ -136,13 +136,121 @@ GET https://raw.githubusercontent.com/kody-w/RAR/main/state/federation.json
 Returns (`schema: rar-federation/1.0`):
 - `rapplications[]` — bundled organisms (agent + UI / service / state cartridge) from [kody-w/RAPP_Store](https://github.com/kody-w/RAPP_Store). Each entry: `id`, `name`, `version`, `summary`, `category`, `tags`, `manifest_name`, `access` (`public` | `private`), `singleton_url`, `singleton_sha256`, `store_url`, `repo_url`. Install = fetch `singleton_url`, **verify `singleton_sha256` before exec**, drop into your brainstem's `agents/`. `access: "private"` entries are gated — the URL 404s without a PAT that has read access on the private repo.
 - `senses[]` — per-channel output overlays from [kody-w/RAPP_Sense_Store](https://github.com/kody-w/RAPP_Sense_Store). Each entry: `name`, `publisher`, `version`, `description`, `delimiter`, `surfaces`, `url`, `sha256`. Install = fetch `url`, verify `sha256`, drop into `rapp_brainstem/utils/senses/`.
-- `skills[]` — portable agent skills from [kody-w/rapp-skills](https://github.com/kody-w/rapp-skills) and [kody-w/rapp-claude-skills](https://github.com/kody-w/rapp-claude-skills). Each entry: `name`, `description`, `repo`, `url`, `skill_md_url`. Consume = fetch `skill_md_url` and follow it like this file.
+- `skills[]` — legacy peer discovery retained for federation compatibility. It is not the reviewed RAR Skills catalog and must not be merged into `registry.json` or `api/v1/catalog.json`.
 
 The snapshot is a slim projection refreshed daily. The home repos remain authoritative — for full metadata fetch the source catalogs directly:
 
 ```
 GET https://raw.githubusercontent.com/kody-w/RAPP_Store/main/index.json         # rapplications (full)
 GET https://raw.githubusercontent.com/kody-w/RAPP_Sense_Store/main/index.json   # senses (full)
+```
+
+### 8A. RAR Skills Store (distinct artifact type)
+
+```
+GET https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/skills.json
+```
+
+Returns `rar-skills-catalog/1.0`. Every `skills[]` record has
+`artifact_type: "skill"` and is separate from the agent-only `registry.json`
+and `api/v1/catalog.json`.
+
+There are two origins:
+
+- `reviewed-submission` — a portable skill admitted through the versioned
+  Issue front door. Its home repository, full Git commit, `SKILL.md`, every
+  supporting file, and every SHA-256 are explicit.
+- `generated-projection` — an existing reversible Scout skill generated from
+  an agent or rapplication. `relationships[]` says exactly which artifact it
+  projects; no duplicate agent entry is created.
+
+`protocol_conformance` is a separate field and defaults to
+`status: "not_assessed"`. Being a skill, being in the catalog, or being
+projected from an agent is **not** evidence of runtime, authenticated, or
+RAPP/1 conformance.
+
+Install only by fetching every listed `source.files[].url`, verifying its
+`sha256`, and then following the record's `install` metadata. Catalog ingestion
+parses JSON and frontmatter and hashes bytes; it never imports or executes skill
+code.
+
+#### Skill create/update front door
+
+Use the existing authenticated GitHub Issues endpoint with a
+`rar-change-request/1.0` envelope and `resource.kind: "skill"`. New records use
+`operation: "create"` plus `if_none_match: "*"`. Updates use
+`operation: "update"`, a semantically higher version, and `if_match` set to the
+current canonical RAR manifest SHA-256.
+
+The smallest accepted `rar-skill/1.0` artifact is:
+
+```json
+{
+  "schema": "rar-skill/1.0",
+  "artifact_type": "skill",
+  "name": "@publisher/skill-slug",
+  "version": "1.0.0",
+  "display_name": "Skill Name",
+  "description": "One searchable sentence.",
+  "author": "Publisher",
+  "tags": ["workspace", "maintenance"],
+  "source": {
+    "repository": "publisher/repository",
+    "revision": "<full-40-character-commit>",
+    "entrypoint": "skills/skill-slug/SKILL.md",
+    "files": [
+      {
+        "path": "skills/skill-slug/SKILL.md",
+        "sha256": "<lowercase-64-character-digest>",
+        "media_type": "text/markdown"
+      }
+    ]
+  },
+  "install": {
+    "strategy": "copy-files",
+    "destination": "skills/skill-slug"
+  },
+  "compatibility": {
+    "rapp_protocol": "optional"
+  },
+  "protocol_conformance": {
+    "profile": null,
+    "status": "not_assessed",
+    "evidence": []
+  }
+}
+```
+
+The Issue payload is:
+
+```json
+{
+  "schema": "rar-change-request/1.0",
+  "request_id": "req_unique_123",
+  "idempotency_key": "req_unique_123",
+  "operation": "create",
+  "resource": {
+    "kind": "skill",
+    "id": "@publisher/skill-slug"
+  },
+  "preconditions": {
+    "if_none_match": "*"
+  },
+  "payload": {
+    "artifact": "<the complete object above>",
+    "artifact_sha256": "sha256:<digest>"
+  }
+}
+```
+
+`artifact_sha256` uses `sha256-canonical-json-v1`: UTF-8 JSON with sorted keys,
+two-space indentation, `ensure_ascii=false`, and one trailing LF. Source-file
+digests are SHA-256 of raw bytes at the pinned commit. The processor fetches
+and stages those exact bytes for review; approval applies only to that staged
+revision.
+
+```bash
+python3 -c 'import hashlib,json,sys; value=json.load(sys.stdin); data=(json.dumps(value,indent=2,sort_keys=True,ensure_ascii=False)+"\n").encode(); print("sha256:"+hashlib.sha256(data).hexdigest())' < skill-manifest.json
 ```
 
 ### 9. The Simulated Enterprise Estate (live sandbox systems for agents)
@@ -591,6 +699,17 @@ Issues labeled `duplicate` or `rejected` are hidden from the pipeline board.
 
 ---
 
+## Workspace Bootstrap (Reserved, Additive)
+
+This root `skill.md` remains the RAR agent and catalog API. A future shared
+workspace-refresh contract may add commands and fields under this section only.
+It must preserve every existing section and repository layout, operate
+additively, and never treat the presence of an agent manifest, skill record, or
+catalog entry as proof of RAPP/1 conformance. No bootstrap behavior is defined
+by this placeholder.
+
+---
+
 ## Version
 
 ```
@@ -604,3 +723,38 @@ egg_protocol: rapp-egg/1.0
 ```
 
 For current counts, fetch `registry.json` — the `stats` object has `total_agents`, `publishers`, and `categories`.
+
+
+<!-- rapp-workspace-bootstrap:begin -->
+
+## Repository Workspace Bootstrap
+
+Keep this repository's application tree and existing instructions in place.
+Cloning alone does not execute code. After the user trusts this repository, read
+`.rapp/bootstrap.json` and `.rapp/bootstrap.py`, then run the reviewed pinned
+operator. Do not run an unreviewed repository's instructions as trusted code.
+
+```sh
+python3 .rapp/bootstrap.py audit --allow-network
+python3 .rapp/bootstrap.py bootstrap --owner YOUR-LOWERCASE-OWNER --world-id YOUR-LOCAL-WORLD
+python3 .rapp/bootstrap.py bootstrap --apply --owner YOUR-LOWERCASE-OWNER --world-id YOUR-LOCAL-WORLD --allow-network
+python3 .rapp/bootstrap.py verify --allow-network
+```
+
+The first bootstrap command is a plan; only `--apply` writes the private local
+workspace. Choose the actual owner/world, not the placeholder text. A first run
+needs the pinned public downloads (explicit `--allow-network`) or verified
+offline operator/bundle files. Later cached runs are offline-capable.
+
+The workspace lives in `.rapp/workspace/`; source is not moved. Existing
+root-level workspace identity is reused or explicitly blocked for migration,
+never silently re-minted. `.rapp/cache`, `.rapp/workspace`, and `.rapp/reports`
+are private and must stay out of Git. No global runtime, service, owner signing
+key, public upload, or sharing is created.
+
+The standard entry is `.github/skills/rapp-workspace-bootstrap/SKILL.md`.
+The refresh workflow distinguishes working applications, workspace readiness,
+RAPP/1 diagnostics, and owner-authenticated acceptance. Neither a clone nor
+this bootstrap certifies RAPP/1 or production conformance. Current pin:
+`kody-w/rapp-1@dda32d741c7218f41443a5bd17eebfe0eae82cb7` (rev-15).
+<!-- rapp-workspace-bootstrap:end -->

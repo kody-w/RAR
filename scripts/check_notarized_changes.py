@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Require receipt evidence for every changed active agent artifact."""
+"""Require receipt evidence for changed canonical agent and skill artifacts."""
 
 from __future__ import annotations
 
@@ -96,6 +96,58 @@ def validate_agent_change(
     return errors
 
 
+def validate_skill_change(
+    *,
+    status: str,
+    path: str,
+    current_content: bytes | None,
+    lifecycle: dict,
+    receipts_dir: Path,
+) -> list[str]:
+    if status == "D" or current_content is None:
+        return [f"{path}: published skill manifests cannot be deleted"]
+    try:
+        manifest = json.loads(current_content.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        return [f"{path}: changed skill manifest is invalid: {exc}"]
+    name = manifest.get("name", "")
+    if manifest.get("artifact_type") != "skill":
+        return [f"{path}: changed skill artifact_type must be skill"]
+    record = lifecycle.get("skills", {}).get(name)
+    if not record:
+        return [f"{path}: {name} changed without skill lifecycle evidence"]
+    receipt_id = str(record.get("latest_receipt", ""))
+    if not receipt_id.startswith("rar_skill_"):
+        return [f"{path}: {name} changed without a RAR skill receipt"]
+    receipt_path = receipts_dir / f"{receipt_id.removeprefix('rar_skill_')}.json"
+    if not receipt_path.exists():
+        return [f"{path}: receipt {receipt_id} is missing"]
+    try:
+        receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        return [f"{path}: receipt {receipt_id} is unreadable: {exc}"]
+
+    digest = hashlib.sha256(current_content).hexdigest()
+    errors = []
+    if record.get("status") != "active":
+        errors.append(f"{path}: skill lacks active lifecycle")
+    if record.get("canonical_path") != path:
+        errors.append(f"{path}: lifecycle canonical path does not match")
+    if record.get("sha256") != digest:
+        errors.append(f"{path}: skill lifecycle digest does not match bytes")
+    if receipt.get("schema") != "rar-skill-receipt/1.0":
+        errors.append(f"{path}: skill receipt schema is invalid")
+    if receipt.get("action") not in {"skill.create", "skill.update"}:
+        errors.append(f"{path}: skill receipt action is invalid")
+    if receipt.get("skill") != name:
+        errors.append(f"{path}: skill receipt identity does not match manifest")
+    if receipt.get("canonical_path") != path:
+        errors.append(f"{path}: skill receipt canonical path does not match")
+    if receipt.get("artifact", {}).get("digest") != digest:
+        errors.append(f"{path}: skill receipt digest does not match bytes")
+    return errors
+
+
 def _git(repo_root: Path, *args: str) -> str:
     return subprocess.check_output(
         ["git", *args],
@@ -123,6 +175,8 @@ def main() -> int:
     repo_root = Path(args.repo_root).resolve()
     lifecycle_file = repo_root / "state" / "agent_lifecycle.json"
     receipts_dir = repo_root / "state" / "receipts"
+    skill_lifecycle_file = repo_root / "state" / "skill_lifecycle.json"
+    skill_receipts_dir = repo_root / "state" / "skill-receipts"
     base = args.base
     if not base or set(base) == {"0"}:
         base = _git(repo_root, "rev-parse", "HEAD^").strip()
@@ -130,6 +184,11 @@ def main() -> int:
     lifecycle = {"agents": {}}
     if lifecycle_file.exists():
         lifecycle = json.loads(lifecycle_file.read_text(encoding="utf-8"))
+    skill_lifecycle = {"skills": {}}
+    if skill_lifecycle_file.exists():
+        skill_lifecycle = json.loads(
+            skill_lifecycle_file.read_text(encoding="utf-8")
+        )
 
     all_changes = _git(repo_root, "diff", "--name-status", base, "HEAD")
     if args.pull_request:
@@ -139,17 +198,24 @@ def main() -> int:
             for path in paths:
                 if (
                     path.startswith("agents/")
+                    or (
+                        path.startswith("skills/@")
+                        and path.endswith("/manifest.json")
+                    )
                     or path == "registry.json"
                     or path.startswith("staging/requests/")
+                    or path.startswith("staging/skill-requests/")
                     or path == "state/agent_lifecycle.json"
                     or path.startswith("state/receipts/")
+                    or path.startswith("state/skill-receipts/")
                     or path.startswith("state/requests/")
+                    or path.startswith("state/skill-requests/")
                 ):
                     protected.append(path)
         if protected:
             for path in sorted(set(protected)):
                 print(
-                    f"ERROR {path}: canonical agent/lifecycle state must use "
+                    f"ERROR {path}: canonical notarized state must use "
                     "the GitHub Issue notarization workflow, not a pull request"
                 )
             return 1
@@ -175,7 +241,7 @@ def main() -> int:
             changes.append((status, fields[-1]))
 
     errors = []
-    checked = 0
+    checked_agents = 0
     for status, path in changes:
         if not (
             path.endswith(".py")
@@ -193,13 +259,53 @@ def main() -> int:
             lifecycle=lifecycle,
             receipts_dir=receipts_dir,
         ))
-        checked += 1
+        checked_agents += 1
+
+    skill_output = _git(
+        repo_root,
+        "diff",
+        "--name-status",
+        base,
+        "HEAD",
+        "--",
+        "skills/",
+    )
+    skill_changes = []
+    for line in skill_output.splitlines():
+        fields = line.split("\t")
+        status = fields[0][0]
+        if status == "R" and len(fields) == 3:
+            skill_changes.extend([("D", fields[1]), ("A", fields[2])])
+        elif len(fields) >= 2:
+            skill_changes.append((status, fields[-1]))
+    checked_skills = 0
+    for status, path in skill_changes:
+        if not (
+            path.startswith("skills/@")
+            and path.endswith("/manifest.json")
+        ):
+            continue
+        current_path = repo_root / path
+        current = current_path.read_bytes() if current_path.exists() else None
+        errors.extend(
+            validate_skill_change(
+                status=status,
+                path=path,
+                current_content=current,
+                lifecycle=skill_lifecycle,
+                receipts_dir=skill_receipts_dir,
+            )
+        )
+        checked_skills += 1
 
     if errors:
         for error in errors:
             print(f"ERROR {error}")
         return 1
-    print(f"OK {checked} changed agent artifact(s) carry matching RAR receipts")
+    print(
+        f"OK {checked_agents} changed agent artifact(s) and "
+        f"{checked_skills} changed skill manifest(s) carry matching receipts"
+    )
     return 0
 
 

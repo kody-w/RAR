@@ -9,6 +9,7 @@ on:
       # rebuild, so the registry silently omitted it until an unrelated push.
       - 'agents/**/*.py.stub'
       - 'agents/**/*.py.card'
+      - 'skills/**'
       # build_registry.py reads these and folds them into registry.json
       # (tombstones, per-agent _lifecycle/_receipt, the release ledger). They
       # were not triggers, so minting receipts left the committed registry
@@ -16,12 +17,16 @@ on:
       # then fail every night on a difference nobody could act on.
       - 'state/agent_lifecycle.json'
       - 'state/receipts/**'
+      - 'state/skill_lifecycle.json'
+      - 'state/skill-receipts/**'
       - 'state/releases.json'
       - 'state/maintainer_migrations.json'
       - 'build_registry.py'
       - 'scripts/apply_maintainer_migrations.py'
       - 'scripts/mint_maintainer_receipts.py'
       - 'scripts/check_near_duplicates.py'
+      - 'scripts/build_skills_catalog.py'
+      - 'scripts/check_skill_url_stability.py'
       - 'rar.config.json'
       - 'marketplaces.json'
       - '.github/workflows/build-registry.yml'
@@ -29,6 +34,10 @@ on:
     paths:
       - 'agents/**/*.py'
       - 'agents/**/*.py.card'
+      - 'skills/**'
+      - 'scripts/build_skills_catalog.py'
+      - 'scripts/check_skill_url_stability.py'
+      - 'api/v1/skills.json'
   workflow_dispatch:
 
 permissions:
@@ -52,6 +61,9 @@ jobs:
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
         run: python scripts/check_notarized_changes.py --base "$BASE_SHA"
+
+      - name: Verify published skill URLs
+        run: python scripts/check_skill_url_stability.py
 
       - name: Rhyme check changed agents (near-duplicate gate)
         if: github.event_name == 'push'
@@ -106,6 +118,10 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: python scripts/check_url_stability.py --update
 
+      - name: Record new skills in the permanent URL ledger
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: python scripts/check_skill_url_stability.py --update
+
       - name: Rebuild the per-agent Pokedex API
         run: python scripts/build_pokedex_api.py
 
@@ -115,7 +131,9 @@ jobs:
       # so it is rebuilt in the same step that rebuilds the registry.
       # Additive by construction: it refuses to write api/v1/index.json.
       - name: Rebuild the headless static API
-        run: python scripts/build_static_api.py
+        run: |
+          python scripts/build_skills_catalog.py
+          python scripts/build_static_api.py
 
       # Static commit-dates sidecar: index.html reads this instead of making
       # up to 16 unauthenticated GitHub API calls per visitor. CI has the full
@@ -139,9 +157,11 @@ jobs:
                   agents/@rapter/rapp_dogg_agent.py \
                   state/agent_lifecycle.json state/receipts \
                   registry.json state/published_paths.json \
+                  state/published_skill_paths.json \
                   state/agent_commit_dates.json \
                   manifest.json api/v1/catalog.json api/v1/taxonomy.json \
                   api/v1/match.json api/v1/marketplaces.json \
+                  api/v1/skills.json \
                   api/v1/status.json api/v1/badge.json \
                   api/v1/audience api/v1/index.json api/v1/agent api/v1/sprite
           git diff --cached --quiet || git commit -m "Auto-build registry.json [skip ci]"

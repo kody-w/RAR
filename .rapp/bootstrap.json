@@ -1,0 +1,29 @@
+{
+  "schema": "rapp-repository-bootstrap/1",
+  "operator": {
+    "version": "0.1.0",
+    "url": "https://raw.githubusercontent.com/kody-w/rapp-tools/b0e37eb3c67e309f342629e0ec96dea2688a5951/rapp_workspace.py",
+    "sha256": "47ba1ee059449758ef56ecdcd944d5e0521df4a23e9d30f14caacaccf5e2a4c9",
+    "bytes": 83980,
+    "source_commit": "b0e37eb3c67e309f342629e0ec96dea2688a5951"
+  },
+  "authority": {
+    "repository": "kody-w/rapp-1",
+    "commit": "dda32d741c7218f41443a5bd17eebfe0eae82cb7",
+    "revision": "rev-15",
+    "frame_hash": "83ca275f35cca96e43d75c99d338326c1a39b2240eabf57eb7c29ac96cc90818",
+    "spec_sha256": "348e7d5baa94aaf2ce4c5354f3cb261f389298a04af65e271a686d3b62f7c384",
+    "spec_bytes": 79692,
+    "bootstrap_sha256": "1666e44acf532f854d4bf74868c9af9f9b362055692189ac858a7c8b52dcd5bb",
+    "verifier_sha256": "4a4c19912063d5ce15cec69b1aca0cebf5df122fb1c481f357f1cf21bc0a07ff",
+    "profile": "exact-integer-reference"
+  },
+  "workspace_source": {
+    "repository": "kody-w/rapp-workspace",
+    "commit": "44f6f124c47ed610b32e4d78f596b9b099669657",
+    "filename": "workspace.zip",
+    "sha256": "e940960cf245da5e3f603148c32d0337d42369578db1430ade1ce562c68e9793",
+    "bytes": 1389750
+  },
+  "local_only": true
+}

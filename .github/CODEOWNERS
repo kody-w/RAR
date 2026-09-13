@@ -10,9 +10,14 @@ SECURITY.md                    @kody-w
 SUPPORT.md                     @kody-w
 rar.config.json                @kody-w
 skill.md                       @kody-w
+skills.html                    @kody-w
+skills/                        @kody-w
 CLAUDE.md                      @kody-w
 .claude-plugin/                @kody-w
 .github/                       @kody-w
+.rapp/bootstrap.py             @kody-w
+.rapp/bootstrap.json           @kody-w
+.rapp/bootstrap-managed.json   @kody-w
 scripts/                       @kody-w
 tests/                         @kody-w
 
@@ -29,3 +34,4 @@ agents/@aibast-agents-library/ @kody-w
 
 # Registry output — auto-generated, admin only
 registry.json                  @kody-w
+api/v1/skills.json             @kody-w

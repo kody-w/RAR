@@ -1,0 +1,258 @@
+name: Notarize Skill Catalog Mutation
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: rar-notary-main
+  cancel-in-progress: false
+
+jobs:
+  notarize:
+    runs-on: ubuntu-latest
+    if: >
+      github.event.label.name == 'approved' &&
+      github.event.issue.state == 'open' &&
+      contains(github.event.issue.labels.*.name, 'skill-submission')
+    steps:
+      - name: Authorize approver
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data } = await github.rest.repos.getCollaboratorPermissionLevel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              username: context.actor,
+            });
+            if (!['admin', 'maintain'].includes(data.permission)) {
+              core.setFailed(
+                `@${context.actor} has ${data.permission} permission; maintain or admin is required`
+              );
+            }
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install focused test dependency
+        run: python -m pip install --disable-pip-version-check pytest
+
+      - name: Synchronize main
+        run: git pull --ff-only origin main
+
+      - name: Fetch exact approved Issue revision
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          mkdir -p .rar-work
+          gh api "repos/${{ github.repository }}/issues/${ISSUE_NUMBER}" \
+            > .rar-work/current_issue.json
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import os
+
+          current = json.load(open(".rar-work/current_issue.json", encoding="utf-8"))
+          original = json.load(open(os.environ["GITHUB_EVENT_PATH"], encoding="utf-8"))
+          labels = {
+              label["name"] if isinstance(label, dict) else str(label)
+              for label in current.get("labels", [])
+          }
+          if current.get("state") != "open":
+              raise SystemExit("Issue is no longer open")
+          if not {"approved", "skill-submission"} <= labels:
+              raise SystemExit("Current issue is no longer an approved skill submission")
+          original_body = (original.get("issue") or {}).get("body") or ""
+          current_body = current.get("body") or ""
+          if hashlib.sha256(original_body.encode()).digest() != hashlib.sha256(
+              current_body.encode()
+          ).digest():
+              raise SystemExit("Issue body changed after approval was applied")
+          json.dump(
+              {
+                  "issue": current,
+                  "repository": original.get("repository", {}),
+                  "sender": original.get("sender", {}),
+              },
+              open(".rar-work/approval_event.json", "w", encoding="utf-8"),
+          )
+          PY
+
+      - name: Apply exact staged skill revision
+        id: apply
+        run: >
+          python scripts/apply_skill_mutation.py
+          --event-path .rar-work/approval_event.json
+
+      - name: Rebuild and validate static skill surfaces
+        if: steps.apply.outputs.already_applied != 'true'
+        run: |
+          set -euo pipefail
+          python scripts/check_skill_url_stability.py --update
+          python scripts/build_skills_catalog.py
+          python scripts/build_static_api.py
+          python -m pytest -q \
+            tests/test_skill_catalog.py \
+            tests/test_skill_submission.py \
+            tests/test_skill_url_stability.py \
+            tests/test_process_issues.py \
+            tests/test_apply_agent_mutation.py \
+            tests/test_federation_build.py \
+            tests/test_marketplace_catalog.py
+
+      - name: Commit notarized skill mutation
+        id: commit
+        if: steps.apply.outputs.already_applied != 'true'
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          SKILL: ${{ steps.apply.outputs.skill }}
+          REVISION_ID: ${{ steps.apply.outputs.revision_id }}
+          RECEIPT: ${{ steps.apply.outputs.receipt }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api "repos/${{ github.repository }}/issues/${ISSUE_NUMBER}" \
+            > .rar-work/precommit_issue.json
+          python3 - <<'PY'
+          import hashlib
+          import json
+
+          approved = json.load(open(".rar-work/approval_event.json", encoding="utf-8"))
+          current = json.load(open(".rar-work/precommit_issue.json", encoding="utf-8"))
+          labels = {
+              label["name"] if isinstance(label, dict) else str(label)
+              for label in current.get("labels", [])
+          }
+          if current.get("state") != "open" or not {
+              "approved", "skill-submission"
+          } <= labels:
+              raise SystemExit("Issue is no longer approved before commit")
+          approved_hash = hashlib.sha256(
+              ((approved.get("issue") or {}).get("body") or "").encode()
+          ).digest()
+          current_hash = hashlib.sha256((current.get("body") or "").encode()).digest()
+          if approved_hash != current_hash:
+              raise SystemExit("Issue body changed before notarization commit")
+          PY
+          git config user.name "RAPP Registry Bot"
+          git config user.email "rapp-bot@users.noreply.github.com"
+          git add skills/ staging/ state/skill_lifecycle.json \
+                  state/skill-receipts state/skill-requests \
+                  state/published_skill_paths.json \
+                  api/v1/skills.json api/v1/catalog.json api/v1/taxonomy.json \
+                  api/v1/match.json api/v1/marketplaces.json api/v1/status.json \
+                  api/v1/badge.json api/v1/audience manifest.json
+          test -n "$(git diff --cached --name-only)"
+          git commit \
+            -m "Notarize ${SKILL} from #${ISSUE_NUMBER}" \
+            -m "RAR-Skill-Revision: ${REVISION_ID}" \
+            -m "RAR-Skill-Receipt: ${RECEIPT}" \
+            -m "RAR-Issue: #${ISSUE_NUMBER}" \
+            -m "RAR-Approved-By: ${{ github.event.sender.id }}"
+          git push origin HEAD:main
+          commit_sha=$(git rev-parse HEAD)
+          git fetch origin main
+          git merge-base --is-ancestor "$commit_sha" origin/main
+          echo "commit_sha=$commit_sha" >> "$GITHUB_OUTPUT"
+
+      - name: Resolve publication commit
+        id: publication
+        env:
+          RECEIPT: ${{ steps.apply.outputs.receipt }}
+          COMMIT_SHA: ${{ steps.commit.outputs.commit_sha }}
+        run: |
+          set -euo pipefail
+          commit_sha="$COMMIT_SHA"
+          if [ -z "$commit_sha" ]; then
+            commit_sha=$(git log -1 --format=%H -- "$RECEIPT")
+          fi
+          test -n "$commit_sha"
+          echo "commit_sha=$commit_sha" >> "$GITHUB_OUTPUT"
+
+      - name: Publish skill notarization receipt
+        uses: actions/github-script@v7
+        env:
+          SKILL: ${{ steps.apply.outputs.skill }}
+          REVISION_ID: ${{ steps.apply.outputs.revision_id }}
+          RECEIPT: ${{ steps.apply.outputs.receipt }}
+          COMMIT_SHA: ${{ steps.publication.outputs.commit_sha }}
+        with:
+          script: |
+            const issueNumber = context.issue.number;
+            const marker = `<!-- rar-skill-receipt:v1 revision=${process.env.REVISION_ID} event=applied -->`;
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              per_page: 100,
+            });
+            if (!comments.some(comment => (comment.body || '').includes(marker))) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                body: `${marker}\n✅ **RAR skill notarization complete.**\n\n` +
+                  `- Skill: \`${process.env.SKILL}\`\n` +
+                  `- Revision: \`${process.env.REVISION_ID}\`\n` +
+                  `- Receipt: \`${process.env.RECEIPT}\`\n` +
+                  `- Commit: \`${process.env.COMMIT_SHA}\`\n\n` +
+                  `The receipt binds the reviewed metadata, pinned source commit, and every staged file hash. It does not assert protocol conformance.`,
+              });
+            }
+            for (const name of ['pending-review', 'failed', 'conflict']) {
+              try {
+                await github.rest.issues.removeLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber,
+                  name,
+                });
+              } catch (error) {
+                if (error.status !== 404) throw error;
+              }
+            }
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              labels: ['approved', 'notarized'],
+            });
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              state: 'closed',
+            });
+
+      - name: Report skill notarization failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: ['failed'],
+            });
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: '❌ Skill notarization failed before publication. Correct the failure, then remove and re-add `approved` to reconcile the same staged revision.',
+            });
+
+      - name: Remove workflow scratch files
+        if: always()
+        run: rm -rf .rar-work

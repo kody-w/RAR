@@ -1,6 +1,6 @@
 {
   "createdAt": "2000-01-01T00:00:00.000Z",
-  "description": "Disabled Scout workflow projected from @kody-w/rapp-crispy-singleton (1.4.0). Edit inputs or schedule before enabling.",
+  "description": "Disabled Scout workflow projected from @kody-w/rapp-crispy-singleton (1.5.0). Edit inputs or schedule before enabling.",
   "enabled": false,
   "id": "dcdd200eef7038e5",
   "lastExecutedAt": null,

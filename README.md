@@ -14,7 +14,7 @@ optional client, never a requirement.
 See [`TRADEMARKS.md`](TRADEMARKS.md) for the mark definition, correct `™`
 usage, public first-use evidence, and legal-registration handoff.
 
-**[Install Brainstem](https://github.com/kody-w/rapp-installer)** | **[Try vSandbox](https://kody-w.github.io/RAR/virtual-brainstem.html)** | **[Agent Store](https://kody-w.github.io/RAR/)** | **[FAQ](https://kody-w.github.io/RAR/faq.html)** | **[Whitepaper](https://kody-w.github.io/RAR/whitepaper.html)**
+**[Install Brainstem](https://github.com/kody-w/rapp-installer)** | **[Try vSandbox](https://kody-w.github.io/RAR/virtual-brainstem.html)** | **[Agent Store](https://kody-w.github.io/RAR/)** | **[Skills Store](https://kody-w.github.io/RAR/skills.html)** | **[FAQ](https://kody-w.github.io/RAR/faq.html)** | **[Whitepaper](https://kody-w.github.io/RAR/whitepaper.html)**
 
 > **Need a bundled rapplication** (agent + UI / service / state) **rather than a single file?** Browse **[kody-w/RAPP_Store](https://kody-w.github.io/RAPP_Store/)** — the catalog of packaged rapplications. Per [Constitution Article XXVII](https://github.com/kody-w/RAPP/blob/main/CONSTITUTION.md#article-xxvii--rar-holds-files-the-rapp-store-holds-bundles): bare agents live here in RAR; bundles live in the rapp store.
 
@@ -133,6 +133,40 @@ The store (`index.html`) is a single HTML file. Open it in any browser.
 - **Workbench** — write agents in the browser, validate, preview as card
 - **Submit** — publish through the UI or the SDK
 
+## The Skills Store
+
+Portable skills are cataloged separately from executable agent `.py` files.
+[`skills.html`](https://kody-w.github.io/RAR/skills.html) reads the committed
+[`api/v1/skills.json`](api/v1/skills.json) snapshot and never calls the GitHub
+API on page load.
+
+- Reviewed skills point to a full source commit and hash every file.
+- Existing Scout projections identify their source agent or rapplication
+  explicitly; they do not create duplicate agent registry entries.
+- `artifact_type` and `protocol_conformance` are separate. Catalog admission
+  does not claim runtime, authenticated, quality-tier, or RAPP/1 compliance.
+- New and updated records use the versioned GitHub Issue front door documented
+  in [`skill.md`](skill.md#8a-rar-skills-store-distinct-artifact-type).
+
+## Repository Workspace Bootstrap
+
+Trusted clones include a checksum-pinned, source-preserving local workspace
+bootstrap:
+
+```bash
+python3 .rapp/bootstrap.py audit --allow-network
+python3 .rapp/bootstrap.py bootstrap --apply \
+  --owner YOUR-LOWERCASE-OWNER --world-id YOUR-LOCAL-WORLD --allow-network
+python3 .rapp/bootstrap.py verify --allow-network
+```
+
+The public control files are `.rapp/bootstrap.py`, `.rapp/bootstrap.json`,
+`.rapp/bootstrap-managed.json`, and
+`.github/skills/rapp-workspace-bootstrap/SKILL.md`. Private cache, workspace,
+identity, and reports remain under ignored `.rapp/` directories. The bootstrap
+does not move application source, install a global runtime, or assert RAPP/1 or
+production conformance.
+
 ## The SDK
 
 `rapp_sdk.py` — zero dependencies, one file.
@@ -204,6 +238,7 @@ it names every other endpoint, so one URL is the only thing worth hardcoding.
 |----------|----------------|
 | `manifest.json` | Discovery root. Start here. |
 | `api/v1/catalog.json` | Every agent as a lean record — one fetch renders a whole catalog |
+| `api/v1/skills.json` | Distinct skill records and explicit agent/rapplication projections, with immutable revisions and file hashes |
 | `api/v1/audience/business.json` | Pre-curated enterprise slice, safe to surface unfiltered |
 | `api/v1/audience/consumer.json` | Pre-curated individual slice |
 | `api/v1/audience/map.json` | Just the audience verdict per agent (~14KB) if you already hold the catalog |

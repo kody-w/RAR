@@ -2,6 +2,7 @@
 snapshot: peer-store catalogs projected into state/federation.json)."""
 
 import importlib.util
+import hashlib
 import sys
 from pathlib import Path
 
@@ -46,3 +47,31 @@ def test_clip_truncates(fed):
 
 def test_clip_collapses_whitespace(fed):
     assert fed.clip("  a\n  b\t c ") == "a b c"
+
+
+def test_federated_skill_projection_is_commit_and_hash_pinned(
+    fed,
+    monkeypatch,
+):
+    commit = "a" * 40
+    markdown = (
+        b"---\nname: portable-skill\n"
+        b"description: A portable skill.\n---\n"
+    )
+    monkeypatch.setattr(fed, "SKILL_REPOS", [("owner/repo", "skills")])
+
+    def fake_json(url):
+        if "/commits/main" in url:
+            return {"sha": commit}
+        assert f"?ref={commit}" in url
+        return [{"type": "dir", "name": "portable-skill"}]
+
+    monkeypatch.setattr(fed, "fetch_json", fake_json)
+    monkeypatch.setattr(fed, "fetch_bytes", lambda _url: markdown)
+    [record] = fed.build_skills()
+    assert record["artifact_type"] == "skill"
+    assert record["catalog_origin"] == "federated-unreviewed"
+    assert record["source_revision"] == commit
+    assert record["skill_md_sha256"] == hashlib.sha256(markdown).hexdigest()
+    assert f"/{commit}/" in record["skill_md_url"]
+    assert record["protocol_conformance"]["status"] == "not_assessed"

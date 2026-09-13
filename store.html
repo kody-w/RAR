@@ -2469,6 +2469,7 @@
     <button class="nav-btn" data-tab="stream" onclick="switchTab('stream')">Stream</button>
     <button class="nav-btn" data-tab="swarms" onclick="switchTab('swarms')">Swarms</button>
     <button class="nav-btn" data-tab="ecosystem" onclick="switchTab('ecosystem')">Ecosystem</button>
+    <a class="nav-btn" href="skills.html" style="text-decoration:none">Skills</a>
     <button class="nav-btn" data-tab="market" onclick="switchTab('market')">Market</button>
 
     <button class="nav-btn" data-tab="workbench" onclick="switchTab('workbench')">Workbench</button>
@@ -2617,14 +2618,15 @@
     </div>
   </div>
 
-  <!-- Ecosystem — federated peer stores (RAPP_Store, Sense Store, Skills) -->
+  <!-- Ecosystem — federated peer stores (RAPP_Store and Sense Store) -->
   <div class="panel" id="panel-ecosystem">
     <div style="text-align:center;margin-bottom:20px">
       <div style="color:var(--text-muted);font-size:.78rem;text-transform:uppercase;letter-spacing:2px">One Storefront, Every Store</div>
       <h2 style="font-size:1.4rem;font-weight:800;margin:4px 0">RAPP ECOSYSTEM</h2>
       <p style="color:var(--text-dim);font-size:.88rem;max-width:560px;margin:8px auto 0">
-        Rapplications (bundled agent + UI/service/state), Senses (per-channel output overlays),
-        and portable Skills — browsed here, hosted in their home repos.
+        Rapplications (bundled agent + UI/service/state) and Senses
+        (per-channel output overlays) are browsed here.
+        Portable skills have their own distinct <a href="skills.html">RAR Skills Store</a>.
         Refreshed daily into <code>state/federation.json</code>.
       </p>
     </div>
@@ -3276,7 +3278,7 @@ let reviews = { agents: {} };
 // upvotes = positive reactions, comments = the thread. Baked at
 // refresh time into state/discussion_ratings.json.
 let ghRatings = { agents: {} };
-// Federated peer-store catalog (rapplications, senses, skills) —
+// Federated peer-store catalog (rapplications and senses) —
 // snapshot of state/federation.json, rebuilt daily by refresh-ratings.yml.
 let federation = null;
 let _holoCards = {}; // agent_name → full HOLO card data (loaded from cards/holo_cards.json)
@@ -4458,7 +4460,6 @@ function renderEcosystem() {
   }
   const rapps = federation.rapplications || [];
   const senses = federation.senses || [];
-  const skills = federation.skills || [];
 
   const rappCards = rapps.map(r => `
     <div class="agent-card">
@@ -4495,24 +4496,10 @@ function renderEcosystem() {
       </div>
     </div>`).join('');
 
-  const skillCards = skills.map(k => `
-    <div class="agent-card">
-      <div class="card-top"><span class="card-title">${esc(k.name)}</span><span class="tier tier-community">skill</span></div>
-      <div class="card-ns">${esc(k.repo)}</div>
-      <div class="card-desc">${esc(k.description)}</div>
-      <div class="card-footer">
-        <div class="card-meta"><span class="cat-badge">portable skill</span></div>
-        <div style="display:flex;gap:6px;align-items:center">
-          <button class="add-cart-btn" style="font-size:.7rem;padding:2px 6px" onclick="copyFedUrl('${esc(k.skill_md_url)}', this)" title="Copy SKILL.md URL">copy skill.md</button>
-          <a class="add-cart-btn" style="font-size:.7rem;padding:2px 6px;text-decoration:none" href="${esc(k.url)}" target="_blank" rel="noopener">open &#8599;</a>
-        </div>
-      </div>
-    </div>`).join('');
-
   el.innerHTML =
     ecoSection(`Rapplications (${rapps.length})`, 'bundled agent + UI / service / state cartridge', 'https://github.com/kody-w/RAPP_Store', rappCards || '<div class="empty-state"><p>None in snapshot.</p></div>') +
     ecoSection(`Senses (${senses.length})`, 'per-channel output overlays for the brainstem', 'https://github.com/kody-w/RAPP_Sense_Store', senseCards || '<div class="empty-state"><p>None in snapshot.</p></div>') +
-    ecoSection(`Skills (${skills.length})`, 'portable agent skills for Claude Code + non-RAPP systems', 'https://github.com/kody-w/rapp-skills', skillCards || '<div class="empty-state"><p>None in snapshot.</p></div>');
+    '<div style="text-align:center;color:var(--text-dim);font-size:.84rem">Portable skills are cataloged separately by artifact type in the <a href="skills.html">RAR Skills Store</a>.</div>';
 }
 
 // ═══════════════════════════════════════════════════════

@@ -388,6 +388,7 @@ header {
     <a class="get-started" href="virtual-brainstem.html">Get Started</a>
     <a class="adv-link" href="front.html">Front Page</a>
     <a class="adv-link" href="discover.html">For Work</a>
+    <a class="adv-link" href="skills.html">Skills</a>
     <a class="adv-link" href="metrics.html">Metrics</a>
     <a class="adv-link" href="submit.html">Submit</a>
     <a class="adv-link" href="admin.html">Admin</a>
@@ -455,7 +456,7 @@ header {
   <div id="grid">
     <div class="loading"><div class="spinner"></div>Loading agents...</div>
   </div>
-  <!-- Ecosystem — federated peer stores (rapplications, senses, skills)
+  <!-- Ecosystem — federated peer stores (rapplications and senses)
        browsed here, hosted in their home repos; state/federation.json -->
   <div id="ecosystem-section" style="display:none;margin-top:36px"></div>
 </div>
@@ -765,7 +766,7 @@ fetch(RAW + '/state/discussion_ratings.json')
   .then(d => { if (d && d.agents) { ghRatings = d; if (allAgents.length) render(); } })
   .catch(() => {});
 
-// Federated peer-store catalog (rapplications, senses, skills) —
+// Federated peer-store catalog (rapplications and senses) —
 // one storefront, content stays in its home repo. Same snapshot the
 // full store's Ecosystem tab reads.
 let federation = null;
@@ -790,8 +791,7 @@ function renderEcosystemIndex() {
 
   const rapps = (federation.rapplications || []).filter(r => matches([r.name, r.summary, r.category, ...(r.tags||[])].join(' ')));
   const senses = (federation.senses || []).filter(s => matches([s.name, s.description, ...(s.surfaces||[])].join(' ')));
-  const skills = (federation.skills || []).filter(k => matches([k.name, k.description].join(' ')));
-  if (!rapps.length && !senses.length && !skills.length) { el.style.display = 'none'; return; }
+  if (!rapps.length && !senses.length) { el.style.display = 'none'; return; }
 
   const section = (title, subtitle, homeUrl, cards) => cards ? `
     <div style="margin-bottom:24px">
@@ -835,22 +835,6 @@ function renderEcosystemIndex() {
       </div>
     </div>`).join('');
 
-  const skillCards = skills.map(k => `
-    <div class="agent-card" style="cursor:default">
-      <div class="card-name">${esc(k.name)}</div>
-      <div class="card-desc">${esc(k.description)}</div>
-      <div class="card-footer">
-        <span style="display:flex;gap:8px;align-items:center;min-width:0">
-          <span class="cat-badge">skill</span>
-          <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(k.repo)}</span>
-        </span>
-        <span style="display:flex;gap:6px">
-          <button class="add-cart-btn" onclick="copyFedUrl('${esc(k.skill_md_url)}', this)" title="Copy SKILL.md URL">copy</button>
-          <a class="add-cart-btn" style="text-decoration:none" href="${esc(k.url)}" target="_blank" rel="noopener" title="Open the skill folder">&#8599;</a>
-        </span>
-      </div>
-    </div>`).join('');
-
   el.style.display = 'block';
   el.innerHTML = `
     <div style="border-top:1px solid var(--border);padding-top:20px">
@@ -860,7 +844,10 @@ function renderEcosystemIndex() {
       </div>
       ${section(`Rapplications (${rapps.length})`, 'bundled agent + UI / service / state', 'https://github.com/kody-w/RAPP_Store', rappCards)}
       ${section(`Senses (${senses.length})`, 'per-channel output overlays', 'https://github.com/kody-w/RAPP_Sense_Store', senseCards)}
-      ${section(`Skills (${skills.length})`, 'portable agent skills', 'https://github.com/kody-w/rapp-skills', skillCards)}
+      <div style="text-align:center;color:var(--text-dim);font-size:.82rem">
+        Portable skills have a separate artifact catalog:
+        <a href="skills.html">open the RAR Skills Store</a>.
+      </div>
     </div>`;
 }
 

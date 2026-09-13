@@ -35,6 +35,12 @@
       "description": "Machine-readable skill interface. Full documentation for autonomous agents.",
       "auth": "none"
     },
+    "skills_catalog": {
+      "url": "{base_url}/api/v1/skills.json",
+      "method": "GET",
+      "description": "Distinct static Skills catalog (rar-skills-catalog/1.0). Every entry has artifact_type=skill, namespaced identity, immutable source revision and file hashes, install metadata, and protocol conformance reported as a separate non-inferred field.",
+      "auth": "none"
+    },
     "submit_agent": {
       "url": "https://api.github.com/repos/kody-w/RAR/issues",
       "method": "POST",
@@ -143,6 +149,100 @@
           }
         }
       },
+      "submit_skill": {
+        "url": "https://api.github.com/repos/kody-w/RAR/issues",
+        "method": "POST",
+        "description": "Stage a new portable skill catalog record for review. RAR fetches but never executes the exact files at the pinned Git commit, verifies every SHA-256, and binds approval to the staged revision.",
+        "auth": "GITHUB_TOKEN (Bearer)",
+        "command": {
+          "schema": "rar-change-request/1.0",
+          "request_id": "req_<uuid>",
+          "idempotency_key": "req_<uuid>",
+          "operation": "create",
+          "resource": {
+            "kind": "skill",
+            "id": "@publisher/skill-slug"
+          },
+          "preconditions": {
+            "if_none_match": "*"
+          },
+          "payload": {
+            "artifact": {
+              "schema": "rar-skill/1.0",
+              "artifact_type": "skill",
+              "name": "@publisher/skill-slug",
+              "version": "1.0.0",
+              "display_name": "Skill Name",
+              "description": "One searchable sentence.",
+              "author": "Publisher",
+              "tags": [
+                "workspace",
+                "maintenance"
+              ],
+              "source": {
+                "repository": "publisher/repository",
+                "revision": "<full-40-character-commit>",
+                "entrypoint": "skills/skill-slug/SKILL.md",
+                "files": [
+                  {
+                    "path": "skills/skill-slug/SKILL.md",
+                    "sha256": "<lowercase-64-character-digest>",
+                    "media_type": "text/markdown"
+                  }
+                ]
+              },
+              "install": {
+                "strategy": "copy-files",
+                "destination": "skills/skill-slug"
+              },
+              "compatibility": {
+                "rapp_protocol": "optional"
+              },
+              "protocol_conformance": {
+                "profile": null,
+                "status": "not_assessed",
+                "evidence": []
+              }
+            },
+            "artifact_sha256": "sha256:<digest-of-deterministically-rendered-artifact>"
+          }
+        },
+        "issue": {
+          "title": "[RAR] CREATE skill @publisher/skill-slug",
+          "body": "```json\n{serialized command}\n```"
+        }
+      },
+      "read_skill": {
+        "url": "{base_url}/api/v1/skills.json",
+        "method": "GET",
+        "description": "Read accepted skills and generated projections from the committed static snapshot. Canonical reviewed records also expose their manifest path and hash.",
+        "auth": "none"
+      },
+      "update_skill": {
+        "url": "https://api.github.com/repos/kody-w/RAR/issues",
+        "method": "POST",
+        "description": "Stage a semantically higher skill version. The current canonical skill manifest SHA-256 is mandatory as if_match; the replacement must pin a full source commit and every file hash.",
+        "auth": "GITHUB_TOKEN (Bearer)",
+        "command": {
+          "schema": "rar-change-request/1.0",
+          "operation": "update",
+          "resource": {
+            "kind": "skill",
+            "id": "@publisher/skill-slug"
+          },
+          "preconditions": {
+            "if_match": "sha256:<current-canonical-manifest-digest>"
+          },
+          "payload": {
+            "artifact": "<complete rar-skill/1.0 object>",
+            "artifact_sha256": "sha256:<new-canonical-manifest-digest>"
+          }
+        },
+        "issue": {
+          "title": "[RAR] UPDATE skill @publisher/skill-slug",
+          "body": "```json\n{serialized command}\n```"
+        }
+      },
       "issue": {
         "title": "[RAR] RESTORE agent @publisher/slug_agent",
         "body": "```json\n{serialized command}\n```"
@@ -198,7 +298,7 @@
     "federation_catalog": {
       "url": "{base_url}/state/federation.json",
       "method": "GET",
-      "description": "Consolidated ecosystem catalog (rar-federation/1.0): rapplications (kody-w/RAPP_Store bundles), senses (kody-w/RAPP_Sense_Store output overlays), and portable skills (kody-w/rapp-skills, kody-w/rapp-claude-skills). Slim daily projection; home repos are authoritative. Verify each entry's sha256 before exec.",
+      "description": "Consolidated ecosystem catalog (rar-federation/1.0): rapplications, senses, and legacy federated skill discovery. Federated skill records are commit/hash pinned but unreviewed; use endpoints.skills_catalog for accepted RAR skills and explicit generated projections. Home repos remain authoritative.",
       "auth": "none"
     },
     "discussion_ratings": {
@@ -245,7 +345,11 @@
     "algorithm": "sha256-lf-v1",
     "input": "UTF-8 agent source after replacing every CRLF byte pair with LF. No other Unicode, whitespace, or newline normalization is performed.",
     "encoding": "lowercase 64-character hexadecimal",
-    "rule": "The source embedded or fetched by the processor is canonicalized before digest verification, staging, receipt generation, registry projection, federation, and installation checks."
+    "rule": "Agent source embedded or fetched by the processor is canonicalized before digest verification, staging, receipt generation, registry projection, federation, and installation checks.",
+    "skills": {
+      "manifest": "sha256-canonical-json-v1: UTF-8 JSON rendered with sorted keys, two-space indentation, ensure_ascii=false, and one trailing LF",
+      "files": "Raw source bytes at the pinned Git commit, SHA-256 with no text normalization"
+    }
   },
   "offline": {
     "description": "RAPP is local-first. Everything works offline.",
