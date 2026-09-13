@@ -25,6 +25,7 @@ yaml = pytest.importorskip("yaml")
 REPO_ROOT = Path(__file__).resolve().parent.parent
 WORKFLOWS = REPO_ROOT / ".github" / "workflows"
 AGGREGATE = WORKFLOWS / "aggregate.yml"
+REFRESH = WORKFLOWS / "refresh-ratings.yml"
 
 
 def _load(name: str, path: Path):
@@ -67,6 +68,8 @@ BUILDERS = (
     "build_static_api.py",
     "build_pokedex_api.py",
     "build_front_page.py",
+    "build_scout_exports.py",
+    "build_skills_catalog.py",
     "build_federation.py",
     "crawl_sources.py",
     "generate_aggregated_agents.py",
@@ -92,6 +95,11 @@ def _runs_on_dispatch(condition) -> bool:
         return True
     text = str(condition)
     if "github.event_name" not in text:
+        return True
+    if (
+        "github.event_name != 'pull_request'" in text
+        or 'github.event_name != "pull_request"' in text
+    ):
         return True
     return "workflow_dispatch" in text
 
@@ -309,12 +317,93 @@ def test_aggregation_regenerates_notarizes_and_indexes_source_containers():
     assert "build_pokedex_api.py" in registry
     assert "build_static_api.py" in registry
     publish = str(
-        named["Publish commit-pinned Scout projection"].get("run") or ""
+        named["Publish commit-pinned Scout and Skills projections"].get("run")
+        or ""
     )
     assert "git pull --ff-only origin main" in publish
     assert "build_scout_exports.py" in publish
+    assert "build_skills_catalog.py" in publish
     assert "tests/test_scout_rapp_skill.py" in publish
-    assert "git add rapp_skill.md rapp_skills.md scout/" in publish
+    assert "tests/test_skill_catalog.py" in publish
+    assert (
+        publish.index("build_scout_exports.py")
+        < publish.index("build_skills_catalog.py")
+        < publish.index("tests/test_scout_rapp_skill.py")
+        < publish.index("git add rapp_skill.md rapp_skills.md scout/ api/v1/skills.json")
+    )
+    assert "set -euo pipefail" in publish
+    assert "git push origin main" in publish
+
+
+def test_community_refresh_persists_dependent_projections_in_order():
+    steps = _steps(REFRESH, "refresh")
+    named = {step.get("name"): step for step in steps}
+    checkout = named["Checkout"]
+    assert (checkout.get("with") or {}).get("fetch-depth") == 0
+
+    projection = str(
+        named["Rebuild dependent static projections"].get("run") or ""
+    )
+    assert (
+        projection.index("build_scout_exports.py")
+        < projection.index("build_skills_catalog.py")
+        < projection.index("build_front_page.py --check")
+    )
+    assert "set -euo pipefail" in projection
+    assert (
+        "if ! python scripts/build_front_page.py --check; then"
+        in projection
+    )
+
+    validation = str(
+        named["Validate dependent static projections"].get("run") or ""
+    )
+    for test_file in (
+        "tests/test_scout_rapp_skill.py",
+        "tests/test_skill_catalog.py",
+        "tests/test_front_page.py::test_counts_agree_with_the_inputs",
+        "tests/test_front_page.py::test_on_disk_file_is_current",
+    ):
+        assert test_file in validation
+    assert "tests/test_front_page.py\n" not in validation
+    assert "set -euo pipefail" in validation
+    assert not named["Rebuild dependent static projections"].get(
+        "continue-on-error"
+    )
+    assert not named["Validate dependent static projections"].get(
+        "continue-on-error"
+    )
+
+    names = [step.get("name") for step in steps]
+    assert names.index("Rebuild federation snapshot") < names.index(
+        "Rebuild dependent static projections"
+    )
+    assert names.index("Crawl aggregated sources") < names.index(
+        "Rebuild dependent static projections"
+    )
+    assert names.index("Rebuild dependent static projections") < names.index(
+        "Validate dependent static projections"
+    ) < names.index("Commit snapshots if changed")
+
+
+def test_community_refresh_commit_allowlist_is_projection_complete():
+    steps = _steps(REFRESH, "refresh")
+    named = {step.get("name"): step for step in steps}
+    commit = str(named["Commit snapshots if changed"].get("run") or "")
+    for path in (
+        "state/federation.json",
+        "state/aggregated.json",
+        "api/v1/front.json",
+        "api/v1/skills.json",
+        "rapp_skill.md",
+        "rapp_skills.md",
+    ):
+        assert path in commit
+    assert "git status --porcelain -- $FILES scout/" in commit
+    assert "git add $FILES scout/" in commit
+    assert "set -euo pipefail" in commit
+    assert "git pull --rebase origin main" in commit
+    assert "git push origin main" in commit
 
 
 def _dead_source(tmp_path: Path):
