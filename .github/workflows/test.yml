@@ -27,6 +27,10 @@ jobs:
           python-version: '3.11'
       - name: Verify every published agent URL still resolves
         run: python scripts/check_url_stability.py
+      - name: Verify every published skill URL still resolves
+        run: python scripts/check_skill_url_stability.py
+      - name: Verify the committed Skills catalog projection
+        run: python scripts/build_skills_catalog.py --check
 
   # ─── SMOKE (fast gate — runs on every PR) ───────────────────────
   smoke:

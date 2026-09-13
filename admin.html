@@ -393,7 +393,9 @@ function timeAgo(iso) {
 }
 
 function extractAgentName(title) {
-  const m = title.match(/\[AGENT\]\s*(@[\w-]+\/[\w_-]+)/);
+  const m = title.match(
+    /\[(?:AGENT|RAR)\]\s*(?:(?:CREATE|UPDATE)\s+(?:agent|skill)\s+)?(@[\w-]+\/[\w_-]+)/
+  );
   return m ? m[1] : null;
 }
 
@@ -477,7 +479,7 @@ function authHeaders() {
 async function approveIssue(num) {
   if (!ghToken) return showToast('Sign in first', 'error');
   try {
-    // Add approved label — triggers approve-agent.yml automatically
+    // The submission label routes approval to the agent or skill notary.
     const labelResp = await fetch(`${API}/issues/${num}/labels`, {
       method: 'POST', headers: { ...authHeaders(), 'Content-Type': 'application/json' },
       body: JSON.stringify({ labels: ['approved'] })
@@ -650,7 +652,14 @@ async function loadPipeline() {
     const closedIssues = await closedRes.json();
     const all = [...openIssues, ...closedIssues]
       .filter(i => !i.pull_request)
-      .filter(i => i.title.startsWith('[AGENT]'))
+      .filter(i => {
+        const labels = (i.labels || []).map(
+          label => typeof label === 'string' ? label : label.name
+        );
+        return i.title.startsWith('[AGENT]') ||
+          labels.includes('agent-submission') ||
+          labels.includes('skill-submission');
+      })
       .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
     const buckets = { pending: [], review: [], merged: [], failed: [] };

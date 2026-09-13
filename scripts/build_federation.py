@@ -21,6 +21,7 @@ Usage:
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import sys
@@ -60,12 +61,12 @@ def fetch_json(url: str):
         return json.loads(resp.read().decode("utf-8"))
 
 
-def fetch_text(url: str) -> str:
+def fetch_bytes(url: str) -> bytes:
     req = urllib.request.Request(
         url, headers={"User-Agent": "rar-federation/1.0"}
     )
     with urllib.request.urlopen(req, timeout=30) as resp:
-        return resp.read().decode("utf-8", errors="replace")
+        return resp.read()
 
 
 def clip(text: str) -> str:
@@ -157,7 +158,22 @@ def build_skills() -> list[dict] | None:
     out = []
     any_source_ok = False
     for repo, subdir in SKILL_REPOS:
-        listing_url = f"https://api.github.com/repos/{repo}/contents/{subdir}"
+        try:
+            commit = str(
+                fetch_json(
+                    f"https://api.github.com/repos/{repo}/commits/main"
+                ).get("sha", "")
+            )
+        except (OSError, ValueError, urllib.error.URLError) as exc:
+            warn(f"{repo} commit resolution failed: {exc}")
+            continue
+        if not re.fullmatch(r"[0-9a-f]{40}", commit):
+            warn(f"{repo} returned an invalid main commit")
+            continue
+        listing_url = (
+            f"https://api.github.com/repos/{repo}/contents/{subdir}"
+            f"?ref={commit}"
+        )
         try:
             entries = fetch_json(listing_url)
         except (OSError, ValueError, urllib.error.URLError) as exc:
@@ -170,20 +186,32 @@ def build_skills() -> list[dict] | None:
             folder = entry.get("name", "")
             base = f"{subdir}/{folder}" if subdir else folder
             raw = (
-                f"https://raw.githubusercontent.com/{repo}/main/"
+                f"https://raw.githubusercontent.com/{repo}/{commit}/"
                 f"{base}/SKILL.md"
             )
             try:
-                fm = parse_frontmatter(fetch_text(raw))
-            except (OSError, urllib.error.URLError):
+                raw_bytes = fetch_bytes(raw)
+                markdown = raw_bytes.decode("utf-8")
+                fm = parse_frontmatter(markdown)
+            except (OSError, UnicodeDecodeError, urllib.error.URLError):
                 continue  # folder without a SKILL.md — not a skill
+            digest = hashlib.sha256(raw_bytes).hexdigest()
             out.append(
                 {
+                    "artifact_type": "skill",
+                    "catalog_origin": "federated-unreviewed",
                     "name": fm.get("name") or folder,
                     "description": clip(fm.get("description")),
                     "repo": repo,
-                    "url": f"https://github.com/{repo}/tree/main/{base}",
+                    "url": f"https://github.com/{repo}/tree/{commit}/{base}",
                     "skill_md_url": raw,
+                    "source_revision": commit,
+                    "skill_md_sha256": digest,
+                    "protocol_conformance": {
+                        "profile": None,
+                        "status": "not_assessed",
+                        "evidence": [],
+                    },
                 }
             )
     if not any_source_ok:

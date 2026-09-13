@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAR Skills Store</title>
+<meta name="description" content="Discover hash-pinned portable skills without mixing them into the RAR agent registry.">
+<style>
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface2: #21262d;
+  --border: #30363d;
+  --text: #e6edf3;
+  --dim: #8b949e;
+  --muted: #656d76;
+  --accent: #58a6ff;
+  --green: #3fb950;
+  --purple: #bc8cff;
+  --orange: #d29922;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100vh; color: var(--text); background: var(--bg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+header {
+  position: sticky; top: 0; z-index: 10; display: flex; align-items: center;
+  justify-content: space-between; gap: 18px; padding: 14px 28px;
+  background: rgba(22,27,34,.96); border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+.brand { display: flex; align-items: center; gap: 10px; color: var(--text); font-weight: 800; }
+.mark {
+  width: 34px; height: 34px; display: grid; place-items: center; border-radius: 9px;
+  background: linear-gradient(135deg, var(--purple), var(--accent)); color: white;
+}
+nav { display: flex; flex-wrap: wrap; gap: 12px; font-size: .86rem; }
+main { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: 54px 0 72px; }
+.hero { text-align: center; max-width: 780px; margin: 0 auto 32px; }
+.eyebrow { color: var(--purple); text-transform: uppercase; letter-spacing: .16em; font-size: .72rem; font-weight: 800; }
+h1 { margin: 8px 0 10px; font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.05; }
+.hero p { color: var(--dim); line-height: 1.65; margin: 0 auto; }
+.notice {
+  margin: 22px auto 0; padding: 12px 15px; max-width: 720px; text-align: left;
+  border: 1px solid rgba(88,166,255,.28); border-radius: 10px;
+  background: rgba(88,166,255,.07); color: var(--dim); font-size: .84rem;
+}
+.notice strong { color: var(--text); }
+.toolbar {
+  display: grid; grid-template-columns: minmax(240px, 1fr) auto auto;
+  gap: 10px; margin: 28px 0 16px;
+}
+input, select, button, .button {
+  min-height: 42px; border: 1px solid var(--border); border-radius: 9px;
+  background: var(--surface); color: var(--text); font: inherit; padding: 9px 12px;
+}
+input:focus, select:focus { outline: 1px solid var(--accent); border-color: var(--accent); }
+button, .button { cursor: pointer; }
+.button { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
+.button:hover { text-decoration: none; border-color: var(--accent); }
+.stats { color: var(--dim); font-size: .84rem; margin-bottom: 18px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.card {
+  display: flex; flex-direction: column; min-height: 260px; padding: 18px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+}
+.card:hover { border-color: #484f58; }
+.badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.badge {
+  border: 1px solid var(--border); border-radius: 999px; padding: 3px 8px;
+  color: var(--dim); background: var(--surface2); font-size: .68rem; font-weight: 700;
+}
+.badge.kind { color: var(--purple); border-color: rgba(188,140,255,.32); }
+.badge.reviewed { color: var(--green); border-color: rgba(63,185,80,.32); }
+.badge.projected { color: var(--orange); border-color: rgba(210,153,34,.32); }
+.card h2 { margin: 0 0 4px; font-size: 1.04rem; overflow-wrap: anywhere; }
+.identity { color: var(--muted); font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: .72rem; }
+.description { color: var(--dim); font-size: .86rem; line-height: 1.55; margin: 14px 0; flex: 1; }
+.meta { display: grid; gap: 5px; color: var(--muted); font-size: .73rem; }
+.meta strong { color: var(--dim); font-weight: 650; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.actions a, .actions button {
+  min-height: 34px; padding: 6px 10px; font-size: .75rem; background: var(--surface2);
+}
+.empty {
+  grid-column: 1 / -1; padding: 54px 20px; text-align: center; color: var(--dim);
+  border: 1px dashed var(--border); border-radius: 12px;
+}
+#load-more { display: none; margin: 18px auto 0; }
+.front-door {
+  margin-top: 42px; padding: 24px; border: 1px solid var(--border);
+  border-radius: 12px; background: linear-gradient(135deg, rgba(188,140,255,.08), rgba(88,166,255,.05));
+}
+.front-door h2 { margin: 0 0 8px; }
+.front-door p { color: var(--dim); line-height: 1.55; }
+code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+@media (max-width: 720px) {
+  header { padding: 12px 16px; align-items: flex-start; }
+  nav { justify-content: flex-end; }
+  main { padding-top: 34px; }
+  .toolbar { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<header>
+  <a class="brand" href="index.html"><span class="mark">R</span><span>RAR Skills</span></a>
+  <nav>
+    <a href="index.html">Agents</a>
+    <a href="store.html">Advanced Store</a>
+    <a href="api/v1/skills.json">JSON Catalog</a>
+    <a href="skill.md#8a-rar-skills-store-distinct-artifact-type">Submission Contract</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">A distinct artifact catalog</div>
+    <h1>Portable skills, never disguised as agents.</h1>
+    <p>
+      Search reviewed skill records and reversible Scout projections. Every file is
+      hash-pinned. Generated projections point back to their source agent or
+      rapplication instead of creating duplicate registry entries.
+    </p>
+    <div class="notice">
+      <strong>Artifact kind is not protocol conformance.</strong>
+      A catalog entry says what the artifact is and where its exact bytes live.
+      It does not claim runtime, authentication, quality-tier, or RAPP/1 compliance.
+    </div>
+  </section>
+
+  <section class="toolbar" aria-label="Skill filters">
+    <input id="search" type="search" placeholder="Search skills, namespaces, tags, or related agents" autocomplete="off">
+    <select id="origin" aria-label="Catalog origin">
+      <option value="all">All origins</option>
+      <option value="reviewed-submission">Reviewed submissions</option>
+      <option value="generated-projection">Generated projections</option>
+    </select>
+    <select id="compatibility" aria-label="RAPP protocol requirement">
+      <option value="all">Any protocol requirement</option>
+      <option value="optional">RAPP optional</option>
+      <option value="required">RAPP required</option>
+      <option value="not-applicable">RAPP not applicable</option>
+      <option value="unspecified">Unspecified</option>
+    </select>
+  </section>
+  <div class="stats" id="stats">Loading committed skill snapshot…</div>
+  <section class="grid" id="grid"></section>
+  <button id="load-more" type="button">Load more skills</button>
+
+  <section class="front-door">
+    <h2>Submit or update a skill</h2>
+    <p>
+      Publish the skill in its home repository first. Then submit one
+      <code>rar-change-request/1.0</code> Issue that pins the full commit,
+      complete file list, and SHA-256 for every file. RAR stages those exact
+      bytes for maintainer review and never executes them during ingestion.
+    </p>
+    <div class="actions">
+      <a class="button" href="skill.md#8a-rar-skills-store-distinct-artifact-type">Read exact contract</a>
+      <a class="button" href="https://github.com/kody-w/RAR/issues/new?title=%5BRAR%5D%20CREATE%20skill%20%40publisher%2Fskill-slug">Open submission Issue</a>
+    </div>
+  </section>
+</main>
+
+<script>
+const CATALOG_PATH = 'api/v1/skills.json';
+let catalog = { skills: [], counts: {} };
+let renderLimit = 240;
+
+function esc(value) {
+  const node = document.createElement('div');
+  node.textContent = String(value ?? '');
+  return node.innerHTML;
+}
+
+function shortRevision(value) {
+  return /^[0-9a-f]{40}$/.test(value || '') ? value.slice(0, 12) : 'content hashes';
+}
+
+function related(record) {
+  const rel = (record.relationships || [])[0];
+  return rel ? `${rel.type.replaceAll('_', ' ')} ${rel.artifact_type} ${rel.name}` : 'standalone skill';
+}
+
+function installCommand(record) {
+  const install = record.install || {};
+  if (install.strategy === 'scout-import') {
+    return install.import_url || '';
+  }
+  const destination = install.destination || `skills/${record.slug}`;
+  const entrypoint = record.source?.entrypoint || '';
+  const sourceRoot = entrypoint.split('/').slice(0, -1).join('/');
+  const commands = [`mkdir -p '${destination}'`];
+  for (const file of record.source?.files || []) {
+    const relative = sourceRoot && file.path.startsWith(sourceRoot + '/')
+      ? file.path.slice(sourceRoot.length + 1)
+      : file.path.split('/').slice(-1)[0];
+    const target = `${destination}/${relative}`;
+    const parent = target.split('/').slice(0, -1).join('/');
+    commands.push(`mkdir -p '${parent}'`);
+    commands.push(`curl -fsSL '${file.url}' -o '${target}'`);
+    commands.push(`printf '%s  %s\\n' '${file.sha256}' '${target}' | shasum -a 256 -c -`);
+  }
+  return commands.join('\n');
+}
+
+async function copyInstall(recordName) {
+  const record = catalog.skills.find(item => item.name === recordName);
+  if (!record) return;
+  const text = installCommand(record);
+  try {
+    await navigator.clipboard.writeText(text);
+    document.getElementById('stats').textContent = `Copied install metadata for ${record.name}. Verify every published SHA-256 before use.`;
+  } catch {
+    window.prompt('Copy install metadata:', text);
+  }
+}
+
+function render() {
+  const query = document.getElementById('search').value.trim().toLowerCase();
+  const origin = document.getElementById('origin').value;
+  const compatibility = document.getElementById('compatibility').value;
+  const rows = catalog.skills.filter(record => {
+    if (origin !== 'all' && record.catalog_origin !== origin) return false;
+    const requirement = record.compatibility?.rapp_protocol || 'unspecified';
+    if (compatibility !== 'all' && requirement !== compatibility) return false;
+    if (!query) return true;
+    return [
+      record.name, record.display_name, record.description, record.author,
+      record.category, ...(record.tags || []), ...(record.search_terms || []),
+      related(record),
+    ].join(' ').toLowerCase().includes(query);
+  });
+
+  const visible = rows.slice(0, renderLimit);
+  document.getElementById('stats').textContent =
+    `${visible.length.toLocaleString()} of ${rows.length.toLocaleString()} matching · ${(catalog.counts?.reviewed_submissions || 0).toLocaleString()} reviewed · ${(catalog.counts?.generated_projections || 0).toLocaleString()} generated projections`;
+  const grid = document.getElementById('grid');
+  const more = document.getElementById('load-more');
+  if (!rows.length) {
+    grid.innerHTML = '<div class="empty">No skills match these filters.</div>';
+    more.style.display = 'none';
+    return;
+  }
+  grid.innerHTML = visible.map(record => {
+    const conformance = record.protocol_conformance || { status: 'not_assessed' };
+    const source = record.source || {};
+    const originClass = record.catalog_origin === 'reviewed-submission' ? 'reviewed' : 'projected';
+    const originLabel = record.catalog_origin === 'reviewed-submission' ? 'reviewed revision' : 'generated projection';
+    const sourceLink = source.entrypoint_url
+      ? `<a href="${esc(source.entrypoint_url)}">View SKILL.md</a>`
+      : '';
+    return `
+      <article class="card">
+        <div class="badges">
+          <span class="badge kind">skill</span>
+          <span class="badge ${originClass}">${originLabel}</span>
+          <span class="badge">conformance: ${esc(conformance.status || 'not_assessed')}</span>
+        </div>
+        <h2>${esc(record.display_name || record.slug)}</h2>
+        <div class="identity">${esc(record.name)} · v${esc(record.version)}</div>
+        <div class="description">${esc(record.description || 'No description provided.')}</div>
+        <div class="meta">
+          <div><strong>Relationship:</strong> ${esc(related(record))}</div>
+          <div><strong>Source:</strong> ${esc(source.repository || 'RAR projection')} @ ${esc(shortRevision(source.revision))}</div>
+          <div><strong>Files:</strong> ${(source.files || []).length} hash-pinned</div>
+          <div><strong>Install:</strong> ${esc(record.install?.strategy || 'copy-files')}</div>
+        </div>
+        <div class="actions">
+          ${sourceLink}
+          <button onclick='copyInstall(${JSON.stringify(record.name)})'>Copy install metadata</button>
+        </div>
+      </article>`;
+  }).join('');
+  more.style.display = visible.length < rows.length ? 'block' : 'none';
+}
+
+async function init() {
+  try {
+    const response = await fetch(CATALOG_PATH, { cache: 'no-store' });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    catalog = await response.json();
+    if (catalog.schema !== 'rar-skills-catalog/1.0') {
+      throw new Error('unsupported catalog schema');
+    }
+    render();
+  } catch (error) {
+    document.getElementById('stats').textContent = 'Skills catalog unavailable.';
+    document.getElementById('grid').innerHTML =
+      `<div class="empty">Could not read the committed static snapshot: ${esc(error.message)}</div>`;
+  }
+}
+
+for (const id of ['search', 'origin', 'compatibility']) {
+  document.getElementById(id).addEventListener(id === 'search' ? 'input' : 'change', () => {
+    renderLimit = 240;
+    render();
+  });
+}
+document.getElementById('load-more').addEventListener('click', () => {
+  renderLimit += 240;
+  render();
+});
+init();
+</script>
+</body>
+</html>

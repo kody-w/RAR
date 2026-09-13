@@ -9,6 +9,9 @@ Supported actions:
   vote           - Upvote an agent (RAR tracks upvotes only)
   review         - Submit a text review with rating
   submit_agent   - Submit a community agent.py for inclusion
+  skill.create   - Stage a pinned portable skill record for review
+  skill.read     - Read an accepted skill record
+  skill.update   - Stage a higher pinned skill version for review
 
 Usage (called by GitHub Actions):
   python scripts/process_issues.py --event-path $GITHUB_EVENT_PATH
@@ -31,16 +34,23 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
+import build_skills_catalog as skill_catalog
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 STATE_DIR = REPO_ROOT / "state"
 AGENTS_DIR = REPO_ROOT / "agents"
+SKILLS_DIR = REPO_ROOT / "skills"
 STAGING_DIR = REPO_ROOT / "staging"
 VOTES_FILE = STATE_DIR / "votes.json"
 REVIEWS_FILE = STATE_DIR / "reviews.json"
 LIFECYCLE_FILE = STATE_DIR / "agent_lifecycle.json"
+SKILL_LIFECYCLE_FILE = STATE_DIR / "skill_lifecycle.json"
+SKILL_STAGING_DIR = STAGING_DIR / "skill-requests"
+SKILL_REQUESTS_DIR = STATE_DIR / "skill-requests"
 
 CHANGE_REQUEST_SCHEMA = "rar-change-request/1.0"
 RECEIPT_SCHEMA = "rar-receipt/1.0"
+SKILL_REQUEST_SCHEMA = "rar-skill-change/1.0"
 
 REQUIRED_MANIFEST_FIELDS = [
     "schema", "name", "version", "display_name",
@@ -202,6 +212,46 @@ def mutation_revision_id(data: dict) -> str:
     )
 
 
+SKILL_MUTATION_REVISION_FIELDS = (
+    "schema",
+    "request_id",
+    "client_request_id",
+    "idempotency_key",
+    "client_command_sha256",
+    "action",
+    "resource_kind",
+    "skill",
+    "actor_id",
+    "source_body_sha256",
+    "manifest_sha256",
+    "candidate_version",
+    "source_repository",
+    "source_revision",
+    "source_files_sha256",
+    "base_sha256",
+    "base_version",
+    "base_lifecycle_sha256",
+    "base_lifecycle_version",
+    "base_lifecycle_receipt",
+    "publisher",
+    "slug",
+    "canonical_path",
+)
+
+
+def skill_mutation_revision_basis(data: dict) -> dict:
+    return {
+        field: data.get(field, "")
+        for field in SKILL_MUTATION_REVISION_FIELDS
+    }
+
+
+def skill_mutation_revision_id(data: dict) -> str:
+    return sha256_bytes(
+        canonical_json(skill_mutation_revision_basis(data)).encode("utf-8")
+    )
+
+
 def normalize_change_request(data: dict) -> dict:
     """Adapt the versioned CRUD envelope to the legacy action/payload shape."""
     if data.get("schema") != CHANGE_REQUEST_SCHEMA:
@@ -219,15 +269,40 @@ def normalize_change_request(data: dict) -> dict:
         }
 
     resource = data.get("resource") or {}
-    if resource.get("kind") != "agent":
+    resource_kind = resource.get("kind")
+    if resource_kind not in {"agent", "skill"}:
         return {
             "action": "invalid",
             "payload": {
-                "_normalization_error": "resource.kind must be 'agent'"
+                "_normalization_error": (
+                    "resource.kind must be 'agent' or 'skill'"
+                )
+            },
+        }
+    if resource_kind == "skill" and operation not in {"create", "read", "update"}:
+        return {
+            "action": "invalid",
+            "payload": {
+                "_normalization_error": (
+                    "skill resources support create, read, and update"
+                )
             },
         }
     preconditions = data.get("preconditions") or {}
     body_payload = data.get("payload") or {}
+    if resource_kind == "skill":
+        payload = {
+            "skill": resource.get("id", ""),
+            "manifest": body_payload.get("artifact"),
+            "manifest_sha256": body_payload.get("artifact_sha256", ""),
+            "if_match": preconditions.get("if_match", ""),
+            "if_none_match": preconditions.get("if_none_match", ""),
+            "request_id": data.get("request_id", ""),
+            "idempotency_key": data.get("idempotency_key", ""),
+            "_versioned": True,
+        }
+        return {"action": f"skill.{operation}", "payload": payload}
+
     source = body_payload.get("source") or {}
     payload = {
         "agent": resource.get("id", ""),
@@ -928,9 +1003,14 @@ def _stage_request(
 
 
 def cancel_issue_requests(issue_number: int, actor_id: int | str) -> dict:
-    cancelled = []
-    request_root = STAGING_DIR / "requests"
-    if request_root.exists():
+    cancelled: list[dict] = []
+    roots = [
+        (STAGING_DIR / "requests", STATE_DIR / "requests", "agent"),
+        (SKILL_STAGING_DIR, SKILL_REQUESTS_DIR, "skill"),
+    ]
+    for request_root, archive_root, resource_kind in roots:
+        if not request_root.exists():
+            continue
         for request_file in list(request_root.glob("*/*/request.json")):
             request = json.loads(request_file.read_text(encoding="utf-8"))
             if (
@@ -941,20 +1021,32 @@ def cancel_issue_requests(issue_number: int, actor_id: int | str) -> dict:
             request["status"] = "cancelled"
             request["cancelled_at"] = now_iso()
             archive = (
-                STATE_DIR
-                / "requests"
+                archive_root
                 / request["request_id"]
                 / f"{request['revision_id']}.json"
             )
             save_json(archive, request)
             shutil.rmtree(request_file.parent)
-            cancelled.append(request["revision_id"])
+            cancelled.append(
+                {
+                    "revision_id": request["revision_id"],
+                    "resource_kind": resource_kind,
+                }
+            )
+    kinds = {item["resource_kind"] for item in cancelled}
+    action = (
+        f"{next(iter(kinds))}.cancel"
+        if len(kinds) == 1
+        else ("artifact.cancel" if kinds else "skipped")
+    )
     return {
         "ok": True,
-        "action": "agent.cancel" if cancelled else "skipped",
+        "action": action,
         "status": "cancelled" if cancelled else "skipped",
-        "revision_id": cancelled[-1] if cancelled else "",
-        "cancelled_revisions": cancelled,
+        "revision_id": cancelled[-1]["revision_id"] if cancelled else "",
+        "cancelled_revisions": [
+            item["revision_id"] for item in cancelled
+        ],
     }
 
 
@@ -1501,6 +1593,490 @@ def handle_delete_agent(payload: dict, user: str) -> dict:
 
 
 # ──────────────────────────────────────────────────────────────────────
+# Skill artifact handlers
+# ──────────────────────────────────────────────────────────────────────
+
+def _normalize_skill_identity(
+    name: str,
+    user: str,
+) -> tuple[str, str, str] | tuple[None, None, str]:
+    parsed = skill_catalog.parse_skill_name(name)
+    if not parsed:
+        return (
+            None,
+            None,
+            "Skill name must be @publisher/lowercase-kebab-case",
+        )
+    publisher, slug = parsed
+    expected_publisher = f"@{user}"
+    publisher_key = publisher.casefold()
+    user_key = user.casefold()
+    is_reserved_brand = publisher_key in BRAND_ALLOWLIST
+    is_self = (
+        publisher_key == expected_publisher.casefold()
+        and not is_reserved_brand
+    )
+    is_allowlisted_brand = (
+        is_reserved_brand
+        and user_key
+        in {
+            allowed.casefold()
+            for allowed in BRAND_ALLOWLIST[publisher_key]
+        }
+    )
+    if publisher_key == "@rar-scout":
+        return None, None, "@rar-scout is reserved for generated projections"
+    if not (is_self or is_allowlisted_brand):
+        return (
+            None,
+            None,
+            f"Publisher must be '{expected_publisher}' (your GitHub username). "
+            f"Got '{publisher}'.",
+        )
+    canonical_publisher = expected_publisher if is_self else publisher_key
+    return canonical_publisher, slug, ""
+
+
+def resolve_registered_skill(name: str) -> tuple[Path, dict] | None:
+    if not SKILLS_DIR.exists():
+        return None
+    for path in sorted(SKILLS_DIR.glob("@*/*/manifest.json")):
+        try:
+            manifest = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+            continue
+        if str(manifest.get("name", "")).casefold() != name.casefold():
+            continue
+        errors = skill_catalog.validate_manifest(
+            manifest,
+            expected_path=path,
+        )
+        if not errors:
+            return path, manifest
+    return None
+
+
+def _skill_source_files_digest(manifest: dict) -> str:
+    files = [
+        {
+            "path": item["path"],
+            "sha256": skill_catalog.normalize_digest(item["sha256"]),
+        }
+        for item in manifest["source"]["files"]
+    ]
+    return sha256_bytes(canonical_json(files).encode("utf-8"))
+
+
+def _skill_client_command_sha256(
+    *,
+    action: str,
+    skill: str,
+    actor_id: int | str,
+    manifest_digest: str,
+    payload: dict,
+) -> str:
+    command = {
+        "action": action,
+        "resource_kind": "skill",
+        "skill": skill,
+        "actor_id": actor_id,
+        "manifest_sha256": manifest_digest,
+        "if_match": _normalize_digest(payload.get("if_match", "")),
+        "if_none_match": str(payload.get("if_none_match") or ""),
+    }
+    return sha256_bytes(canonical_json(command).encode("utf-8"))
+
+
+def _idempotent_skill_request_result(
+    *,
+    context: dict,
+    client_command_sha256: str,
+) -> dict | None:
+    if not context["idempotency_key"]:
+        return None
+    roots = [SKILL_STAGING_DIR, SKILL_REQUESTS_DIR]
+    for root in roots:
+        if not root.exists():
+            continue
+        pattern = "*/*/request.json" if root == SKILL_STAGING_DIR else "*/*.json"
+        for existing_file in root.glob(pattern):
+            existing = json.loads(existing_file.read_text(encoding="utf-8"))
+            if (
+                existing.get("idempotency_key") == context["idempotency_key"]
+                and str(existing.get("actor_id")) == str(context["actor_id"])
+                and str(existing.get("repository_id"))
+                == str(context["repository_id"])
+            ):
+                if existing.get("client_command_sha256") != client_command_sha256:
+                    return {
+                        "error": "Idempotency key conflicts with another command"
+                    }
+                same_issue = (
+                    existing.get("issue_number") == context.get("issue_number")
+                    and existing.get("issue_node_id") == context.get("issue_node_id")
+                )
+                if (
+                    existing.get("status") == "pending_review"
+                    and same_issue
+                    and existing.get("source_body_sha256")
+                    != context.get("source_body_sha256")
+                ):
+                    return None
+                return {
+                    "ok": True,
+                    "action": existing["action"],
+                    "artifact": existing["skill"],
+                    "skill": existing["skill"],
+                    "resource_kind": "skill",
+                    "request_id": existing["request_id"],
+                    "revision_id": existing["revision_id"],
+                    "manifest_sha256": existing.get("manifest_sha256", ""),
+                    "file": str(existing_file.relative_to(REPO_ROOT)),
+                    "status": (
+                        "pending_review"
+                        if existing.get("status") == "pending_review" and same_issue
+                        else "duplicate"
+                    ),
+                }
+    return None
+
+
+def _stage_skill_request(
+    *,
+    action: str,
+    skill: str,
+    publisher: str,
+    slug: str,
+    manifest: dict,
+    source_files: dict[str, bytes],
+    user: str,
+    payload: dict,
+    base_file: Path | None,
+    base_lifecycle: dict | None,
+) -> dict:
+    try:
+        context = _request_context(payload, user)
+    except ValueError as exc:
+        return {"error": str(exc)}
+
+    candidate_bytes = skill_catalog.render_manifest(manifest)
+    candidate_digest = sha256_bytes(candidate_bytes)
+    base_sha256 = ""
+    base_version = ""
+    if base_file is not None and base_file.exists():
+        base_sha256 = sha256_bytes(base_file.read_bytes())
+        try:
+            base_manifest = json.loads(base_file.read_text(encoding="utf-8"))
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+            return {"error": "Existing skill manifest is invalid"}
+        base_version = str(base_manifest.get("version") or "")
+
+    expected = _normalize_digest(payload.get("if_match", ""))
+    if expected and expected != base_sha256:
+        return {
+            "error": (
+                f"Precondition failed for {skill}: expected sha256:{expected}, "
+                f"current is sha256:{base_sha256 or 'absent'}"
+            )
+        }
+
+    lifecycle = base_lifecycle or {}
+    client_command_sha256 = _skill_client_command_sha256(
+        action=action,
+        skill=skill,
+        actor_id=context["actor_id"],
+        manifest_digest=candidate_digest,
+        payload=payload,
+    )
+    duplicate = _idempotent_skill_request_result(
+        context=context,
+        client_command_sha256=client_command_sha256,
+    )
+    if duplicate is not None:
+        return duplicate
+
+    source = manifest["source"]
+    revision_basis = {
+        "schema": SKILL_REQUEST_SCHEMA,
+        "request_id": context["request_id"],
+        "client_request_id": context["client_request_id"],
+        "idempotency_key": context["idempotency_key"],
+        "client_command_sha256": client_command_sha256,
+        "action": action,
+        "resource_kind": "skill",
+        "skill": skill,
+        "actor_id": context["actor_id"],
+        "source_body_sha256": context["source_body_sha256"],
+        "manifest_sha256": candidate_digest,
+        "candidate_version": manifest["version"],
+        "source_repository": source["repository"],
+        "source_revision": source["revision"],
+        "source_files_sha256": _skill_source_files_digest(manifest),
+        "base_sha256": base_sha256,
+        "base_version": base_version,
+        "base_lifecycle_sha256": str(lifecycle.get("sha256", "")),
+        "base_lifecycle_version": str(lifecycle.get("version", "")),
+        "base_lifecycle_receipt": str(lifecycle.get("latest_receipt", "")),
+        "publisher": publisher,
+        "slug": slug,
+        "canonical_path": f"skills/{publisher}/{slug}/manifest.json",
+    }
+    revision_id = skill_mutation_revision_id(revision_basis)
+    request_dir = (
+        SKILL_STAGING_DIR / context["request_id"] / revision_id
+    )
+    request_file = request_dir / "request.json"
+    candidate_file = request_dir / "candidate.json"
+    source_dir = request_dir / "source"
+    request = {
+        **revision_basis,
+        "revision_id": revision_id,
+        "status": "pending_review",
+        "issue_number": context["issue_number"],
+        "issue_node_id": context["issue_node_id"],
+        "repository_id": context["repository_id"],
+        "actor_login": context["actor_login"],
+        "issue_updated_at": context["issue_updated_at"],
+        "created_at": now_iso(),
+    }
+
+    if request_file.exists():
+        existing = json.loads(request_file.read_text(encoding="utf-8"))
+        comparable_existing = {
+            key: value
+            for key, value in existing.items()
+            if key not in {"created_at", "issue_updated_at"}
+        }
+        comparable_request = {
+            key: value
+            for key, value in request.items()
+            if key not in {"created_at", "issue_updated_at"}
+        }
+        staged_files_match = (
+            candidate_file.exists()
+            and candidate_file.read_bytes() == candidate_bytes
+            and all(
+                (source_dir / path).is_file()
+                and (source_dir / path).read_bytes() == content
+                for path, content in source_files.items()
+            )
+        )
+        if comparable_existing != comparable_request or not staged_files_match:
+            return {"error": "Existing staged skill revision is not immutable"}
+        return {
+            "ok": True,
+            "action": action,
+            "artifact": skill,
+            "skill": skill,
+            "resource_kind": "skill",
+            "request_id": context["request_id"],
+            "revision_id": revision_id,
+            "manifest_sha256": candidate_digest,
+            "file": str(request_file.relative_to(REPO_ROOT)),
+            "status": "pending_review",
+        }
+
+    request_dir.mkdir(parents=True, exist_ok=True)
+    candidate_file.write_bytes(candidate_bytes)
+    for path, content in source_files.items():
+        target = source_dir / path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(content)
+    request_file.write_text(
+        json.dumps(request, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+    archive_dir = SKILL_REQUESTS_DIR / context["request_id"]
+    for sibling in request_dir.parent.iterdir():
+        if sibling == request_dir or not sibling.is_dir():
+            continue
+        old_request_file = sibling / "request.json"
+        if not old_request_file.exists():
+            continue
+        old_request = json.loads(old_request_file.read_text(encoding="utf-8"))
+        old_request["status"] = "superseded"
+        old_request["superseded_by"] = revision_id
+        old_request["superseded_at"] = now_iso()
+        archive_dir.mkdir(parents=True, exist_ok=True)
+        save_json(
+            archive_dir / f"{old_request['revision_id']}.json",
+            old_request,
+        )
+        shutil.rmtree(sibling)
+
+    return {
+        "ok": True,
+        "action": action,
+        "artifact": skill,
+        "skill": skill,
+        "resource_kind": "skill",
+        "request_id": context["request_id"],
+        "revision_id": revision_id,
+        "manifest_sha256": candidate_digest,
+        "file": str(request_file.relative_to(REPO_ROOT)),
+        "status": "pending_review",
+    }
+
+
+def handle_submit_skill(payload: dict, user: str, operation: str) -> dict:
+    manifest = payload.get("manifest")
+    if not isinstance(manifest, dict):
+        return {"error": "Skill artifact metadata is required"}
+    errors = skill_catalog.validate_manifest(manifest)
+    if errors:
+        return {"error": f"Skill validation failed: {'; '.join(errors)}"}
+
+    requested_name = str(payload.get("skill") or "")
+    if requested_name.casefold() != str(manifest["name"]).casefold():
+        return {
+            "error": (
+                f"Request resource '{requested_name}' does not match "
+                f"skill manifest '{manifest['name']}'"
+            )
+        }
+    publisher, slug, identity_error = _normalize_skill_identity(
+        manifest["name"],
+        user,
+    )
+    if identity_error:
+        return {"error": identity_error}
+    name = f"{publisher}/{slug}"
+    manifest = {**manifest, "name": name}
+
+    repository_owner = manifest["source"]["repository"].split("/", 1)[0]
+    if repository_owner.casefold() != publisher.lstrip("@").casefold():
+        return {
+            "error": (
+                "source.repository owner must match the skill publisher "
+                "namespace"
+            )
+        }
+
+    declared_digest = _normalize_digest(payload.get("manifest_sha256", ""))
+    if not re.fullmatch(r"[0-9a-f]{64}", declared_digest):
+        return {
+            "error": (
+                "Versioned skill submissions require a valid artifact_sha256"
+            )
+        }
+    candidate_digest = skill_catalog.manifest_sha256(manifest)
+    if declared_digest != candidate_digest:
+        return {
+            "error": (
+                f"Skill manifest digest mismatch: declared sha256:"
+                f"{declared_digest}, actual sha256:{candidate_digest}"
+            )
+        }
+
+    resolved = resolve_registered_skill(name)
+    canonical_file = (
+        resolved[0]
+        if resolved
+        else SKILLS_DIR / publisher / slug / "manifest.json"
+    )
+    lifecycle_records = load_json(SKILL_LIFECYCLE_FILE).get("skills", {})
+    lifecycle = lifecycle_records.get(name, {})
+    context_actor_id = (payload.get("_context") or {}).get("actor_id")
+    if (
+        lifecycle.get("owner_github_id") is not None
+        and str(lifecycle.get("owner_github_id")) != str(context_actor_id)
+    ):
+        return {"error": "GitHub numeric owner identity does not match skill owner"}
+
+    if operation == "create":
+        if canonical_file.exists() or lifecycle.get("status") == "active":
+            return {"error": f"{name} already exists"}
+        if payload.get("if_none_match") != "*":
+            return {"error": "Versioned skill create requires if_none_match='*'"}
+    elif operation == "update":
+        if not canonical_file.exists():
+            return {"error": f"{name} does not exist; use create"}
+        if not re.fullmatch(
+            r"[0-9a-f]{64}",
+            _normalize_digest(payload.get("if_match", "")),
+        ):
+            return {
+                "error": "Versioned skill update requires a valid if_match SHA256"
+            }
+        existing_manifest = resolved[1] if resolved else {}
+        old_version = str(existing_manifest.get("version") or "")
+        old_key = skill_catalog.semver_key(old_version)
+        new_key = skill_catalog.semver_key(manifest["version"])
+        if old_key is None or new_key is None or new_key <= old_key:
+            return {
+                "error": (
+                    f"Version {manifest['version']} must be greater than "
+                    f"existing {old_version}"
+                )
+            }
+    else:
+        return {"error": f"Unsupported skill operation '{operation}'"}
+
+    try:
+        source_files = skill_catalog.fetch_source_files(manifest)
+    except skill_catalog.SkillMetadataError as exc:
+        return {"error": f"Skill source validation failed: {exc}"}
+
+    return _stage_skill_request(
+        action=f"skill.{operation}",
+        skill=name,
+        publisher=publisher,
+        slug=slug,
+        manifest=manifest,
+        source_files=source_files,
+        user=user,
+        payload=payload,
+        base_file=canonical_file if canonical_file.exists() else None,
+        base_lifecycle=lifecycle,
+    )
+
+
+def handle_read_skill(payload: dict, user: str) -> dict:
+    del user
+    name = str(payload.get("skill") or "")
+    if not skill_catalog.parse_skill_name(name):
+        return {"error": "Skill name must be @publisher/lowercase-kebab-case"}
+    resolved = resolve_registered_skill(name)
+    lifecycle_records = load_json(SKILL_LIFECYCLE_FILE).get("skills", {})
+    if not resolved:
+        lifecycle_name = next(
+            (
+                key
+                for key in lifecycle_records
+                if key.casefold() == name.casefold()
+            ),
+            name,
+        )
+        return {
+            "ok": True,
+            "action": "skill.read",
+            "artifact": lifecycle_name,
+            "skill": lifecycle_name,
+            "resource_kind": "skill",
+            "status": lifecycle_records.get(
+                lifecycle_name,
+                {},
+            ).get("status", "not_found"),
+            "lifecycle": lifecycle_records.get(lifecycle_name, {}),
+        }
+    path, manifest = resolved
+    canonical_name = manifest["name"]
+    return {
+        "ok": True,
+        "action": "skill.read",
+        "artifact": canonical_name,
+        "skill": canonical_name,
+        "resource_kind": "skill",
+        "status": "active",
+        "version": manifest["version"],
+        "sha256": sha256_bytes(path.read_bytes()),
+        "file": str(path.relative_to(REPO_ROOT)),
+        "lifecycle": lifecycle_records.get(canonical_name, {}),
+    }
+
+
+# ──────────────────────────────────────────────────────────────────────
 # Dispatcher
 # ──────────────────────────────────────────────────────────────────────
 
@@ -1519,6 +2095,13 @@ HANDLERS = {
     "agent.restore": lambda payload, user: _handle_code_operation(
         payload, user, "restore"
     ),
+    "skill.create": lambda payload, user: handle_submit_skill(
+        payload, user, "create"
+    ),
+    "skill.read": handle_read_skill,
+    "skill.update": lambda payload, user: handle_submit_skill(
+        payload, user, "update"
+    ),
 }
 
 
@@ -1529,10 +2112,13 @@ def process(data: dict, user: str) -> dict:
     raw_payload = data.get("payload", {})
     if not isinstance(raw_payload, dict):
         return {"error": "payload must be a JSON object"}
-    if action.startswith("agent.") and raw_payload.get("_versioned") is not True:
+    if (
+        action.startswith(("agent.", "skill."))
+        and raw_payload.get("_versioned") is not True
+    ):
         return {
             "error": (
-                "Internal agent actions require a validated "
+                "Internal artifact actions require a validated "
                 f"{CHANGE_REQUEST_SCHEMA} envelope"
             )
         }
@@ -1628,6 +2214,8 @@ def main() -> int:
         "agent.update",
         "agent.delete",
         "agent.restore",
+        "skill.create",
+        "skill.update",
         "vote",
         "review",
     }:
@@ -1656,6 +2244,8 @@ def main() -> int:
             for key in (
                 "action",
                 "agent",
+                "artifact",
+                "resource_kind",
                 "request_id",
                 "revision_id",
                 "status",

@@ -98,6 +98,7 @@ jobs:
         if: >
           steps.process.outputs.success == 'true' &&
           steps.process.outputs.action != 'agent.read' &&
+          steps.process.outputs.action != 'skill.read' &&
           steps.process.outputs.action != 'skipped'
         env:
           ISSUE_NUM: ${{ github.event.issue.number || github.event.inputs.issue_number }}
@@ -146,6 +147,8 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number || github.event.inputs.issue_number }}
           ACTION: ${{ steps.process.outputs.action }}
           AGENT: ${{ steps.process.outputs.agent }}
+          ARTIFACT: ${{ steps.process.outputs.artifact }}
+          RESOURCE_KIND: ${{ steps.process.outputs.resource_kind }}
           REQUEST_ID: ${{ steps.process.outputs.request_id }}
           REVISION_ID: ${{ steps.process.outputs.revision_id }}
           STATUS: ${{ steps.process.outputs.status }}
@@ -156,6 +159,9 @@ jobs:
             const crypto = require('crypto');
             const issueNumber = Number(process.env.ISSUE_NUMBER);
             if (!issueNumber) return;
+            const artifact = process.env.ARTIFACT || process.env.AGENT;
+            const resourceKind = process.env.RESOURCE_KIND ||
+              ((process.env.ACTION || '').startsWith('skill.') ? 'skill' : 'agent');
             const { data: issue } = await github.rest.issues.get({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -210,7 +216,7 @@ jobs:
             if (!comments.some(comment => (comment.body || '').includes(marker))) {
               const body = pending
                 ? `${marker}\n📋 **Validated and staged for review.**\n\n` +
-                  `- Agent: \`${process.env.AGENT}\`\n` +
+                  `- ${resourceKind === 'skill' ? 'Skill' : 'Agent'}: \`${artifact}\`\n` +
                   `- Request: \`${process.env.REQUEST_ID}\`\n` +
                   `- Revision: \`${process.env.REVISION_ID}\`\n\n` +
                   `Approval applies only to these exact staged bytes.`
@@ -225,6 +231,7 @@ jobs:
             }
             const removable = [
               'approved', 'conflict', 'failed',
+              'agent-submission', 'skill-submission',
             ];
             for (const name of removable) {
               try {
@@ -239,11 +246,32 @@ jobs:
               }
             }
             if (pending) {
+              const submissionLabel = resourceKind === 'skill'
+                ? 'skill-submission'
+                : 'agent-submission';
+              if (submissionLabel === 'skill-submission') {
+                try {
+                  await github.rest.issues.getLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    name: submissionLabel,
+                  });
+                } catch (error) {
+                  if (error.status !== 404) throw error;
+                  await github.rest.issues.createLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    name: submissionLabel,
+                    color: '8250df',
+                    description: 'Portable skill metadata awaiting exact-revision review',
+                  });
+                }
+              }
               await github.rest.issues.addLabels({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: issueNumber,
-                labels: ['pending-review', 'agent-submission'],
+                labels: ['pending-review', submissionLabel],
               });
             } else {
               await github.rest.issues.addLabels({
