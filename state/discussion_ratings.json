@@ -5838,6 +5838,216 @@
       "url": "https://github.com/kody-w/RAR/discussions/925",
       "number": 925
     },
+    "@cowork-cookbook/bulk_update_analyze_project_metrics": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/927",
+      "number": 927
+    },
+    "@cowork-cookbook/bulk_update_analyze_rebates_and_incentives": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/928",
+      "number": 928
+    },
+    "@cowork-cookbook/bulk_update_analyze_revenue": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/929",
+      "number": 929
+    },
+    "@cowork-cookbook/bulk_update_analyze_service_profitability": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/930",
+      "number": 930
+    },
+    "@cowork-cookbook/bulk_update_analyze_sourcing_market": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/931",
+      "number": 931
+    },
+    "@cowork-cookbook/bulk_update_analyze_supply_purchase_plan": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/932",
+      "number": 932
+    },
+    "@cowork-cookbook/bulk_update_assess_product_portfolio": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/933",
+      "number": 933
+    },
+    "@cowork-cookbook/bulk_update_assess_software_releases": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/934",
+      "number": 934
+    },
+    "@cowork-cookbook/bulk_update_classify_assets": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/935",
+      "number": 935
+    },
+    "@cowork-cookbook/bulk_update_clean_up_and_archive_background_jobs": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/936",
+      "number": 936
+    },
+    "@cowork-cookbook/bulk_update_collect_interest": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/937",
+      "number": 937
+    },
+    "@cowork-cookbook/bulk_update_conduct_a_compliance_risk_assessment": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/938",
+      "number": 938
+    },
+    "@cowork-cookbook/bulk_update_conduct_competitive_analysis": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/939",
+      "number": 939
+    },
+    "@cowork-cookbook/bulk_update_conduct_research": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/940",
+      "number": 940
+    },
     "@discreetRappers/agent_generator_agent": {
       "upvotes": 0,
       "downloads": 0,

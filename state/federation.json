@@ -255,21 +255,21 @@
     {
       "id": "rapp_crispy",
       "name": "RAPP Crispy",
-      "version": "1.4.0",
-      "summary": "A local-first meeting stack. Records a meeting, removes background noise with DeepFilterNet3 (or RNNoise), transcribes it on a whisper.cpp server bound to 127.0.0.1, and writes Summary / Decisions / Action items / Open questions through a hook you own. Also puts a denoised virtual microphone in fro…",
+      "version": "1.5.0",
+      "summary": "Native macOS 14+ meeting app with graphical record/stop/cancel, app-owned microphone permissions, explicitly named Apple AVFoundation voice processing, bundled local Whisper transcription, meeting history and audio/transcript views. Optional screen/window capture is video only. Notes stay disabled…",
       "category": "productivity",
       "tags": [
-        "deepfilternet",
         "denoise",
         "has-ui",
         "local-first",
         "meetings",
-        "noise-cancellation"
+        "macos",
+        "native"
       ],
       "manifest_name": "@kody-w/rapp-crispy-singleton",
       "access": "public",
-      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-crispy/main/rapp_crispy/singleton/rapp_crispy_agent.py",
-      "singleton_sha256": "4229fed6d82f92d9561fd291f4bb61e7862c710f24d0b03b43f514745f665f72",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-crispy/40ea715d6127825aac3f922fbbe470c4bfeb69c3/rapp_crispy/singleton/rapp_crispy_agent.py",
+      "singleton_sha256": "bb90598a858eef6dbf8c231782496f596669f92706bca1454f8fd9821302a2be",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -297,8 +297,8 @@
     {
       "id": "rapp_rewind",
       "name": "RAPP Rewind",
-      "version": "1.1.0",
-      "summary": "A local, searchable memory of everything that has been on your screen. Captures on an interval, reads the text with Apple's on-device Vision OCR, and indexes it in SQLite FTS5 so you can search what you saw. Nothing leaves the machine: there is no network call anywhere in the capture, OCR, index or…",
+      "version": "1.2.0",
+      "summary": "Native macOS searchable screen memory with explicit Start/Pause/Stop, app-owned ScreenCaptureKit, on-device Vision OCR, and local SQLite FTS5. Capture, OCR, indexing, and search stay on this Mac; optional RAPP host integration is separate.",
       "category": "productivity",
       "tags": [
         "rapplication",
@@ -310,16 +310,16 @@
       ],
       "manifest_name": "@kody-w/rapp-rewind-singleton",
       "access": "public",
-      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-rewind/main/rapp_rewind/singleton/rapp_rewind_agent.py",
-      "singleton_sha256": "8074e7acdeb4877ba705b9ffdab99dabd4b57464b27ad38d4eb77b35e9f2dac3",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-rewind/d2b293a5198492862ff39a6956c26e56ff923bca/rapp_rewind/singleton/rapp_rewind_agent.py",
+      "singleton_sha256": "8125b7a918528e76ff0449d9e1d66208c1e5bdc5d8e7746f3a42d64f9827250d",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
     {
       "id": "rapp_shot",
       "name": "RAPP Shot",
-      "version": "1.2.0",
-      "summary": "Capture, annotate and redact screenshots entirely on-device. Finds credentials in the pixels with Apple's Vision OCR and paints them out opaquely BEFORE the image is shared. Redaction is a solid fill, never a blur, because blur and pixelation are reversible often enough to have leaked real credenti…",
+      "version": "1.3.0",
+      "summary": "Native macOS screenshot capture, editable annotations and crop, local Vision OCR, and opaque credential redaction with review before copying or exporting. Detection is per line and can miss secrets; inspect the final preview. Optional Python adapters integrate an already-installed app or legacy CLI.",
       "category": "productivity",
       "tags": [
         "rapplication",
@@ -331,16 +331,16 @@
       ],
       "manifest_name": "@kody-w/rapp-shot-singleton",
       "access": "public",
-      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-shot/main/rapp_shot/singleton/rapp_shot_agent.py",
-      "singleton_sha256": "5284459ecf14f9b7faa80f26ebefa7de33a346919ef7d32773712fa71f01b907",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-shot/a6f13b5119ba467d1356a9d89ca881e7dc55f306/rapp_shot/singleton/rapp_shot_agent.py",
+      "singleton_sha256": "7ea3d9383ed9cd998d41ff64275a3b668683fe885bb8fdc56c92900c2e9bcb95",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
     {
       "id": "rapp_voice",
       "name": "RAPP Voice",
-      "version": "1.0.0",
-      "summary": "Hold a key anywhere on macOS, speak, release, and cleaned-up text appears at your cursor. Speech recognition runs on-device via whisper.cpp; your voice never leaves the machine. Filler stripping, app-aware formatting and a weighted personal dictionary.",
+      "version": "1.1.0",
+      "summary": "Native macOS dictation with local whisper.cpp recognition, a weighted dictionary, app-aware cleanup, and safe insertion or manual-copy fallback. Optional cloud polish is off until explicitly consented.",
       "category": "productivity",
       "tags": [
         "rapplication",
@@ -352,8 +352,8 @@
       ],
       "manifest_name": "@kody-w/rapp-voice-singleton",
       "access": "public",
-      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-voice/main/rapp_voice/singleton/rapp_voice_agent.py",
-      "singleton_sha256": "cc241dc84953742d1e6925db17f4b20065573687c7d4b71e53699a3c0df2618c",
+      "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-voice/7120b06a7bb2db598f00f355f5d58890d58d3f34/rapp_voice/singleton/rapp_voice_agent.py",
+      "singleton_sha256": "a04c1100a70545f13b0cdce6c39e24c34f55daae4aeaf8fde6b6e9e1d5b1e785",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
