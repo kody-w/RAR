@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-09-14T10:46:32Z",
+ "generated_at": "2026-09-15T10:09:46Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -9,27 +9,27 @@
   "stars": 2,
   "forks": 1,
   "watchers": 0,
-  "open_issues": 118,
-  "size_kb": 121320,
+  "open_issues": 119,
+  "size_kb": 123816,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-09-14T09:28:37Z",
+  "pushed_at": "2026-09-15T07:03:57Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
  "totals": {
-  "downloads": 5605,
-  "clones": 5533,
+  "downloads": 5713,
+  "clones": 5641,
   "cdn_hits": 72,
   "release_downloads": 0,
   "agent_file_downloads": 12,
-  "clones_excluding_ci_estimate": 3425,
-  "ci_clone_estimate": 2108,
-  "page_views": 167,
-  "clone_uniques_14d": 313,
-  "view_uniques_14d": 19,
-  "clone_uniques_daily_sum": 1078,
-  "view_uniques_daily_sum": 62,
-  "days_tracked": 34,
+  "clones_excluding_ci_estimate": 3471,
+  "ci_clone_estimate": 2170,
+  "page_views": 172,
+  "clone_uniques_14d": 256,
+  "view_uniques_14d": 22,
+  "clone_uniques_daily_sum": 1114,
+  "view_uniques_daily_sum": 66,
+  "days_tracked": 35,
   "tracking_since": "2026-07-14",
   "agents": 1700,
   "swarms": 2,
@@ -299,6 +299,13 @@
    "clone_uniques": 33,
    "views": 3,
    "cdn": 0
+  },
+  {
+   "date": "2026-09-14",
+   "clones": 108,
+   "clone_uniques": 36,
+   "views": 5,
+   "cdn": 0
   }
  ],
  "traffic": {
@@ -306,7 +313,7 @@
    {
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "count": 12,
+    "count": 13,
     "uniques": 4
    },
    {
@@ -319,6 +326,12 @@
     "path": "/kody-w/RAR/discussions/430",
     "title": "/discussions/430",
     "count": 3,
+    "uniques": 2
+   },
+   {
+    "path": "/kody-w/RAR/discussions",
+    "title": "/discussions",
+    "count": 2,
     "uniques": 2
    },
    {
@@ -356,19 +369,13 @@
     "title": "/discussions/607",
     "count": 2,
     "uniques": 1
-   },
-   {
-    "path": "/kody-w/RAR/discussions/785",
-    "title": "/discussions/785",
-    "count": 2,
-    "uniques": 1
    }
   ],
   "referrers": [
    {
     "referrer": "github.com",
-    "count": 27,
-    "uniques": 9
+    "count": 28,
+    "uniques": 10
    },
    {
     "referrer": "kody-w.github.io",
@@ -386,15 +393,15 @@
     "uniques": 1
    }
   ],
-  "clones_14d": 1940,
-  "views_14d": 72,
+  "clones_14d": 1852,
+  "views_14d": 77,
   "live": true,
-  "as_of": "2026-09-14T10:46:32Z"
+  "as_of": "2026-09-15T10:09:46Z"
  },
  "cdn": {
   "total_hits": 72,
   "bandwidth": 3670545,
-  "rank": 2043894,
+  "rank": 2050371,
   "agent_hits": 12,
   "files": [
    {
