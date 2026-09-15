@@ -15,7 +15,7 @@
       "license_url": "",
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
-      "item_count": 98,
+      "item_count": 99,
       "source_downloads": 1258
     },
     {
@@ -382,7 +382,7 @@
       "stack": "building_permit_processing",
       "vertical": "slg_government",
       "upstream_path": "agents/@aibast-agents-library/slg_government_stacks/building_permit_processing_stack/building_permit_processing_agent.py",
-      "upstream_sha256": "55a5cfa3e015b62579d0edf4171f080f22500eb89a5e7c25947dae93f0f79e7c"
+      "upstream_sha256": "9f674001f6b1318fb9e3eb78d888d7a6e05b7a5549c106262b317e5716991192"
     },
     {
       "ref": "@aibast-library/care_gap_closure",
@@ -3783,7 +3783,8 @@
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#explainer-video",
       "source_signal": {
-        "downloads": 0
+        "downloads": 0,
+        "rating": 1
       }
     },
     {
@@ -4842,6 +4843,32 @@
       "source_signal": {
         "downloads": 0,
         "rating": 10
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/sharepoint_file_creation",
+      "source_id": "cat-agent-skills",
+      "source_slug": "sharepoint-file-creation",
+      "name": "SharePoint File Creation",
+      "description": "Generate a requested file, enforce a safe pre-upload size gate, and upload it to SharePoint without streaming bytes through the model.",
+      "kind": "skill",
+      "tags": [
+        "sharepoint",
+        "files",
+        "upload",
+        "microsoft-365"
+      ],
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "author": "Lewis Baybutt",
+      "author_github": "lewisdoesdev",
+      "version": "1.0.1",
+      "created_at": "2026-09-14T00:00:00.000Z",
+      "has_bundle": false,
+      "url": "https://microsoft.github.io/cat-agent-skills/#sharepoint-file-creation",
+      "source_signal": {
+        "downloads": 0
       }
     },
     {
@@ -132197,7 +132224,7 @@
   ],
   "totals": {
     "sources": 3,
-    "items": 1651,
+    "items": 1652,
     "source_downloads": 1258
   }
 }

@@ -6258,6 +6258,216 @@
       "url": "https://github.com/kody-w/RAR/discussions/957",
       "number": 957
     },
+    "@cowork-cookbook/bulk_update_define_product_categories": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/959",
+      "number": 959
+    },
+    "@cowork-cookbook/bulk_update_define_project_scope": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/960",
+      "number": 960
+    },
+    "@cowork-cookbook/bulk_update_define_sales_channels": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/961",
+      "number": 961
+    },
+    "@cowork-cookbook/bulk_update_define_sales_quotations": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/962",
+      "number": 962
+    },
+    "@cowork-cookbook/bulk_update_define_service_risk_management_strategy": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/963",
+      "number": 963
+    },
+    "@cowork-cookbook/bulk_update_define_testing_approach": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/964",
+      "number": 964
+    },
+    "@cowork-cookbook/bulk_update_define_warehouse_processes": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/965",
+      "number": 965
+    },
+    "@cowork-cookbook/bulk_update_depreciate_assets": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/966",
+      "number": 966
+    },
+    "@cowork-cookbook/bulk_update_design_formulas": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/967",
+      "number": 967
+    },
+    "@cowork-cookbook/bulk_update_determine_business_process_flow": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/968",
+      "number": 968
+    },
+    "@cowork-cookbook/bulk_update_develop_a_disaster_recovery_plan": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/969",
+      "number": 969
+    },
+    "@cowork-cookbook/bulk_update_develop_long_range_plan": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/970",
+      "number": 970
+    },
+    "@cowork-cookbook/bulk_update_develop_maintenance_strategy": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/971",
+      "number": 971
+    },
+    "@cowork-cookbook/bulk_update_develop_marketing_strategy": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/972",
+      "number": 972
+    },
     "@discreetRappers/agent_generator_agent": {
       "upvotes": 0,
       "downloads": 0,

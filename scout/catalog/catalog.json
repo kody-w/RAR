@@ -131033,6 +131033,11 @@
       "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
     },
     {
+      "aggregate_id": "sharepoint-file-creation",
+      "identity": "@cat-agent-skills/sharepoint_file_creation",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
       "identity": "@kody-w/example_private",
       "reason": "gated stub has no public executable bytes"
     },
