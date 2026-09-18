@@ -3732,6 +3732,7 @@
       "url": "https://microsoft.github.io/cat-agent-skills/#eu-greenwashing-analysis",
       "source_signal": {
         "downloads": 0,
+        "rating": 1,
         "featured": true
       }
     },
@@ -4722,7 +4723,7 @@
       "url": "https://microsoft.github.io/cat-agent-skills/#redlining-content",
       "source_signal": {
         "downloads": 81,
-        "rating": 2,
+        "rating": 3,
         "featured": true
       }
     },
