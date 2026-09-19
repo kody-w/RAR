@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-09-18T09:52:25Z",
+ "generated_at": "2026-09-19T09:35:36Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,26 +10,26 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 119,
-  "size_kb": 110196,
+  "size_kb": 113342,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-09-18T08:40:44Z",
+  "pushed_at": "2026-09-19T08:32:47Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
  "totals": {
-  "downloads": 6024,
-  "clones": 5952,
+  "downloads": 6147,
+  "clones": 6075,
   "cdn_hits": 72,
   "release_downloads": 0,
   "agent_file_downloads": 12,
-  "clones_excluding_ci_estimate": 3596,
-  "ci_clone_estimate": 2356,
-  "page_views": 190,
-  "clone_uniques_14d": 275,
-  "view_uniques_14d": 24,
-  "clone_uniques_daily_sum": 1207,
-  "view_uniques_daily_sum": 72,
-  "days_tracked": 38,
+  "clones_excluding_ci_estimate": 3657,
+  "ci_clone_estimate": 2418,
+  "page_views": 197,
+  "clone_uniques_14d": 287,
+  "view_uniques_14d": 27,
+  "clone_uniques_daily_sum": 1246,
+  "view_uniques_daily_sum": 76,
+  "days_tracked": 39,
   "tracking_since": "2026-07-14",
   "agents": 1700,
   "swarms": 2,
@@ -327,6 +327,13 @@
    "clone_uniques": 24,
    "views": 13,
    "cdn": 0
+  },
+  {
+   "date": "2026-09-18",
+   "clones": 123,
+   "clone_uniques": 39,
+   "views": 7,
+   "cdn": 0
   }
  ],
  "traffic": {
@@ -334,8 +341,8 @@
    {
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "count": 15,
-    "uniques": 6
+    "count": 14,
+    "uniques": 7
    },
    {
     "path": "/kody-w/RAR/tree/main/stacks/rapp-workspace-starter",
@@ -395,8 +402,8 @@
   "referrers": [
    {
     "referrer": "github.com",
-    "count": 20,
-    "uniques": 12
+    "count": 23,
+    "uniques": 13
    },
    {
     "referrer": "kody-w.github.io",
@@ -405,7 +412,7 @@
    },
    {
     "referrer": "Bing",
-    "count": 5,
+    "count": 2,
     "uniques": 2
    },
    {
@@ -414,15 +421,15 @@
     "uniques": 1
    }
   ],
-  "clones_14d": 1764,
-  "views_14d": 79,
+  "clones_14d": 1791,
+  "views_14d": 83,
   "live": true,
-  "as_of": "2026-09-18T09:52:25Z"
+  "as_of": "2026-09-19T09:35:36Z"
  },
  "cdn": {
   "total_hits": 72,
   "bandwidth": 3670545,
-  "rank": 2067457,
+  "rank": 2072543,
   "agent_hits": 12,
   "files": [
    {
