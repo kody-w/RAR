@@ -15,7 +15,7 @@
       "license_url": "",
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
-      "item_count": 99,
+      "item_count": 103,
       "source_downloads": 1258
     },
     {
@@ -3446,6 +3446,34 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/copilot_studio_adaptive_card_builder",
+      "source_id": "cat-agent-skills",
+      "source_slug": "copilot-studio-adaptive-card-builder",
+      "name": "Copilot Studio Adaptive Card Builder",
+      "description": "Build a validated, paste-ready Adaptive Card package for Copilot Studio standard-harness agents, with wiring, mappings, accessibility guidance, sample data, and a text fallback.",
+      "kind": "skill",
+      "tags": [
+        "copilot-studio",
+        "adaptive-cards",
+        "maker",
+        "accessibility",
+        "validation",
+        "power-fx"
+      ],
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "author": "Marc Pascal Solling",
+      "author_github": "MarcPmedC",
+      "version": "1.0.0",
+      "created_at": "2026-09-03T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#copilot-studio-adaptive-card-builder",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/copilot_studio_agent_test",
       "source_id": "cat-agent-skills",
       "source_slug": "copilot-studio-agent-test",
@@ -3584,6 +3612,36 @@
       "created_at": "2026-07-18T00:00:00.000Z",
       "has_bundle": false,
       "url": "https://microsoft.github.io/cat-agent-skills/#copilot-studio-topic-blueprint",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/cowork_plugin_engineer",
+      "source_id": "cat-agent-skills",
+      "source_slug": "cowork-plugin-engineer",
+      "name": "Copilot Cowork Plugin Engineer",
+      "description": "Create, import, validate, authenticate, package, evaluate, and troubleshoot Microsoft Copilot Cowork plugins with repeatable engineering guardrails.",
+      "kind": "skill",
+      "tags": [
+        "cowork",
+        "plugins",
+        "skills",
+        "mcp",
+        "oauth",
+        "validation",
+        "evaluations",
+        "developer-tools"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Srinivas Varukala",
+      "author_github": "svarukala",
+      "version": "1.1.0",
+      "created_at": "2026-08-31T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#cowork-plugin-engineer",
       "source_signal": {
         "downloads": 0
       }
@@ -4494,12 +4552,13 @@
       ],
       "author": "Rafael Lopez Alcaraz",
       "author_github": "rafalcaraz",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "created_at": "2026-07-19T00:00:00.000Z",
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#phi-deidentifier",
       "source_signal": {
-        "downloads": 0
+        "downloads": 0,
+        "featured": true
       }
     },
     {
@@ -4786,6 +4845,35 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/root_cause_analysis",
+      "source_id": "cat-agent-skills",
+      "source_slug": "root-cause-analysis",
+      "name": "Root Cause Analysis",
+      "description": "Diagnose the true cause of a problem \u2014 not just its symptoms \u2014 using structured techniques like 5 Whys, Fishbone diagrams, and contributing factor analysis.",
+      "kind": "skill",
+      "tags": [
+        "problem-solving",
+        "analysis",
+        "decision-making",
+        "investigation",
+        "debugging"
+      ],
+      "platforms": [
+        "Cowork",
+        "Copilot Studio",
+        "Scout"
+      ],
+      "author": "Nayananshu Garai",
+      "author_github": "N-Garai",
+      "version": "1.0.0",
+      "created_at": "2026-08-04T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#root-cause-analysis",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/route_map_visualizer",
       "source_id": "cat-agent-skills",
       "source_slug": "route-map-visualizer",
@@ -4844,6 +4932,33 @@
       "source_signal": {
         "downloads": 0,
         "rating": 10
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/semantic_pdf_image_extractor",
+      "source_id": "cat-agent-skills",
+      "source_slug": "semantic-pdf-image-extractor",
+      "name": "Semantic PDF Image Extractor",
+      "description": "Extract meaningful photos, diagrams, charts, maps, screenshots, and other visual evidence from PDFs with context, provenance, quality checks, and duplicate detection.",
+      "kind": "skill",
+      "tags": [
+        "pdf",
+        "images",
+        "document-processing",
+        "computer-vision",
+        "knowledge-retrieval"
+      ],
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "author": "Bas",
+      "author_github": "basvb1992",
+      "version": "1.0.0",
+      "created_at": null,
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#semantic-pdf-image-extractor",
+      "source_signal": {
+        "downloads": 0
       }
     },
     {
@@ -132225,7 +132340,7 @@
   ],
   "totals": {
     "sources": 3,
-    "items": 1652,
+    "items": 1656,
     "source_downloads": 1258
   }
 }
