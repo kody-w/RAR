@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-09-21T10:49:32Z",
+ "generated_at": "2026-09-22T10:05:04Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,26 +10,26 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 119,
-  "size_kb": 120867,
+  "size_kb": 123850,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-09-21T09:30:43Z",
+  "pushed_at": "2026-09-22T07:10:30Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
  "totals": {
-  "downloads": 6342,
-  "clones": 6270,
+  "downloads": 6400,
+  "clones": 6328,
   "cdn_hits": 72,
   "release_downloads": 0,
   "agent_file_downloads": 12,
-  "clones_excluding_ci_estimate": 3728,
-  "ci_clone_estimate": 2542,
-  "page_views": 202,
-  "clone_uniques_14d": 301,
-  "view_uniques_14d": 28,
-  "clone_uniques_daily_sum": 1296,
-  "view_uniques_daily_sum": 81,
-  "days_tracked": 41,
+  "clones_excluding_ci_estimate": 3892,
+  "ci_clone_estimate": 2436,
+  "page_views": 203,
+  "clone_uniques_14d": 292,
+  "view_uniques_14d": 27,
+  "clone_uniques_daily_sum": 1308,
+  "view_uniques_daily_sum": 82,
+  "days_tracked": 42,
   "tracking_since": "2026-07-14",
   "agents": 1700,
   "swarms": 2,
@@ -348,6 +348,13 @@
    "clone_uniques": 23,
    "views": 2,
    "cdn": 0
+  },
+  {
+   "date": "2026-09-21",
+   "clones": 58,
+   "clone_uniques": 12,
+   "views": 1,
+   "cdn": 0
   }
  ],
  "traffic": {
@@ -355,8 +362,8 @@
    {
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "count": 15,
-    "uniques": 7
+    "count": 14,
+    "uniques": 6
    },
    {
     "path": "/kody-w/RAR/tree/main/stacks/rapp-workspace-starter",
@@ -407,8 +414,8 @@
     "uniques": 1
    },
    {
-    "path": "/kody-w/RAR/blob/80f9989fad0aeceb745687fd2052825cd0aee4f6/scout/bundles/native-04/skills/rar-kody-w-art-generator/SKILL.md",
-    "title": "/blob/80f9989fad0aeceb745687fd2052825cd0aee4f6/scout/bundles/native-04/skills/rar-kody-w-art-generator/SKILL.md",
+    "path": "/kody-w/RAR/blob/c352b61ee111103df69881d385be0a4011c5b1b1/agents/@borg/borg_agent.py.card",
+    "title": "/blob/c352b61ee111103df69881d385be0a4011c5b1b1/agents/@borg/borg_agent.py.card",
     "count": 1,
     "uniques": 1
    }
@@ -416,13 +423,13 @@
   "referrers": [
    {
     "referrer": "github.com",
-    "count": 20,
-    "uniques": 13
+    "count": 19,
+    "uniques": 12
    },
    {
     "referrer": "kody-w.github.io",
-    "count": 11,
-    "uniques": 4
+    "count": 10,
+    "uniques": 3
    },
    {
     "referrer": "Bing",
@@ -430,15 +437,15 @@
     "uniques": 2
    }
   ],
-  "clones_14d": 1775,
-  "views_14d": 82,
+  "clones_14d": 1697,
+  "views_14d": 81,
   "live": true,
-  "as_of": "2026-09-21T10:49:32Z"
+  "as_of": "2026-09-22T10:05:04Z"
  },
  "cdn": {
   "total_hits": 72,
   "bandwidth": 3670545,
-  "rank": 2086639,
+  "rank": 2096309,
   "agent_hits": 12,
   "files": [
    {
