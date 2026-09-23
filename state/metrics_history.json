@@ -1,7 +1,8 @@
 {
  "cdn": {
   "2026-07-09": 65,
-  "2026-08-01": 7
+  "2026-08-01": 7,
+  "2026-09-21": 12
  },
  "clones": {
   "2026-07-14": {
@@ -171,30 +172,28 @@
   "2026-09-21": {
    "count": 58,
    "uniques": 12
+  },
+  "2026-09-22": {
+   "count": 96,
+   "uniques": 21
   }
  },
  "last_known": {
-  "at": "2026-09-22T10:05:04Z",
-  "clone_uniques_14d": 292,
-  "clones_14d": 1697,
+  "at": "2026-09-23T10:05:01Z",
+  "clone_uniques_14d": 291,
+  "clones_14d": 1471,
   "paths": [
    {
-    "count": 14,
+    "count": 13,
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "uniques": 6
+    "uniques": 5
    },
    {
     "count": 5,
     "path": "/kody-w/RAR/tree/main/stacks/rapp-workspace-starter",
     "title": "/tree/main/stacks/rapp-workspace-starter",
     "uniques": 1
-   },
-   {
-    "count": 2,
-    "path": "/kody-w/RAR/discussions",
-    "title": "/discussions",
-    "uniques": 2
    },
    {
     "count": 2,
@@ -216,12 +215,6 @@
    },
    {
     "count": 2,
-    "path": "/kody-w/RAR/discussions/430",
-    "title": "/discussions/430",
-    "uniques": 1
-   },
-   {
-    "count": 2,
     "path": "/kody-w/RAR/discussions/440",
     "title": "/discussions/440",
     "uniques": 1
@@ -237,18 +230,30 @@
     "path": "/kody-w/RAR/blob/c352b61ee111103df69881d385be0a4011c5b1b1/agents/@borg/borg_agent.py.card",
     "title": "/blob/c352b61ee111103df69881d385be0a4011c5b1b1/agents/@borg/borg_agent.py.card",
     "uniques": 1
+   },
+   {
+    "count": 1,
+    "path": "/kody-w/RAR/blob/c352b61ee111103df69881d385be0a4011c5b1b1/agents/@rarbookworld/bookfactory_agent.py",
+    "title": "/blob/c352b61ee111103df69881d385be0a4011c5b1b1/agents/@rarbookworld/bookfactory_agent.py",
+    "uniques": 1
+   },
+   {
+    "count": 1,
+    "path": "/kody-w/RAR/blob/c352b61ee111103df69881d385be0a4011c5b1b1/agents/@wildhaven/bellows_agent.py",
+    "title": "/blob/c352b61ee111103df69881d385be0a4011c5b1b1/agents/@wildhaven/bellows_agent.py",
+    "uniques": 1
    }
   ],
   "referrers": [
    {
-    "count": 19,
+    "count": 13,
     "referrer": "github.com",
-    "uniques": 12
+    "uniques": 9
    },
    {
-    "count": 10,
+    "count": 8,
     "referrer": "kody-w.github.io",
-    "uniques": 3
+    "uniques": 2
    },
    {
     "count": 2,
@@ -256,8 +261,8 @@
     "uniques": 2
    }
   ],
-  "view_uniques_14d": 27,
-  "views_14d": 81
+  "view_uniques_14d": 21,
+  "views_14d": 70
  },
  "snapshots": [
   {
@@ -1409,6 +1414,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 82,
    "views_all_time": 203
+  },
+  {
+   "at": "2026-09-23T10:05:01Z",
+   "cdn_all_time": 84,
+   "clone_uniques_all_time": 1329,
+   "clones_all_time": 6424,
+   "days_tracked": 43,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 82,
+   "views_all_time": 203
   }
  ],
  "views": {
@@ -1579,6 +1594,10 @@
   "2026-09-21": {
    "count": 1,
    "uniques": 1
+  },
+  "2026-09-22": {
+   "count": 0,
+   "uniques": 0
   }
  }
 }

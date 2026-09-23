@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-09-22T10:05:04Z",
+ "generated_at": "2026-09-23T10:05:01Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,26 +10,26 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 119,
-  "size_kb": 123850,
+  "size_kb": 127626,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-09-22T07:10:30Z",
+  "pushed_at": "2026-09-23T09:00:52Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
  "totals": {
-  "downloads": 6400,
-  "clones": 6328,
-  "cdn_hits": 72,
+  "downloads": 6508,
+  "clones": 6424,
+  "cdn_hits": 84,
   "release_downloads": 0,
   "agent_file_downloads": 12,
-  "clones_excluding_ci_estimate": 3892,
-  "ci_clone_estimate": 2436,
+  "clones_excluding_ci_estimate": 3930,
+  "ci_clone_estimate": 2494,
   "page_views": 203,
-  "clone_uniques_14d": 292,
-  "view_uniques_14d": 27,
-  "clone_uniques_daily_sum": 1308,
+  "clone_uniques_14d": 291,
+  "view_uniques_14d": 21,
+  "clone_uniques_daily_sum": 1329,
   "view_uniques_daily_sum": 82,
-  "days_tracked": 42,
+  "days_tracked": 43,
   "tracking_since": "2026-07-14",
   "agents": 1700,
   "swarms": 2,
@@ -354,6 +354,13 @@
    "clones": 58,
    "clone_uniques": 12,
    "views": 1,
+   "cdn": 12
+  },
+  {
+   "date": "2026-09-22",
+   "clones": 96,
+   "clone_uniques": 21,
+   "views": 0,
    "cdn": 0
   }
  ],
@@ -362,20 +369,14 @@
    {
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "count": 14,
-    "uniques": 6
+    "count": 13,
+    "uniques": 5
    },
    {
     "path": "/kody-w/RAR/tree/main/stacks/rapp-workspace-starter",
     "title": "/tree/main/stacks/rapp-workspace-starter",
     "count": 5,
     "uniques": 1
-   },
-   {
-    "path": "/kody-w/RAR/discussions",
-    "title": "/discussions",
-    "count": 2,
-    "uniques": 2
    },
    {
     "path": "/kody-w/RAR/issues",
@@ -396,12 +397,6 @@
     "uniques": 1
    },
    {
-    "path": "/kody-w/RAR/discussions/430",
-    "title": "/discussions/430",
-    "count": 2,
-    "uniques": 1
-   },
-   {
     "path": "/kody-w/RAR/discussions/440",
     "title": "/discussions/440",
     "count": 2,
@@ -418,18 +413,30 @@
     "title": "/blob/c352b61ee111103df69881d385be0a4011c5b1b1/agents/@borg/borg_agent.py.card",
     "count": 1,
     "uniques": 1
+   },
+   {
+    "path": "/kody-w/RAR/blob/c352b61ee111103df69881d385be0a4011c5b1b1/agents/@rarbookworld/bookfactory_agent.py",
+    "title": "/blob/c352b61ee111103df69881d385be0a4011c5b1b1/agents/@rarbookworld/bookfactory_agent.py",
+    "count": 1,
+    "uniques": 1
+   },
+   {
+    "path": "/kody-w/RAR/blob/c352b61ee111103df69881d385be0a4011c5b1b1/agents/@wildhaven/bellows_agent.py",
+    "title": "/blob/c352b61ee111103df69881d385be0a4011c5b1b1/agents/@wildhaven/bellows_agent.py",
+    "count": 1,
+    "uniques": 1
    }
   ],
   "referrers": [
    {
     "referrer": "github.com",
-    "count": 19,
-    "uniques": 12
+    "count": 13,
+    "uniques": 9
    },
    {
     "referrer": "kody-w.github.io",
-    "count": 10,
-    "uniques": 3
+    "count": 8,
+    "uniques": 2
    },
    {
     "referrer": "Bing",
@@ -437,15 +444,15 @@
     "uniques": 2
    }
   ],
-  "clones_14d": 1697,
-  "views_14d": 81,
+  "clones_14d": 1471,
+  "views_14d": 70,
   "live": true,
-  "as_of": "2026-09-22T10:05:04Z"
+  "as_of": "2026-09-23T10:05:01Z"
  },
  "cdn": {
-  "total_hits": 72,
-  "bandwidth": 3670545,
-  "rank": 2096309,
+  "total_hits": 84,
+  "bandwidth": 3798270,
+  "rank": 1916971,
   "agent_hits": 12,
   "files": [
    {
@@ -480,6 +487,30 @@
    },
    {
     "file": "/agents/@borg/hacker_news_agent.py",
+    "hits": 3,
+    "agent": null,
+    "kind": "asset"
+   },
+   {
+    "file": "/scout/bundles/native-09/skills/rar-kody-w-plant-seed/plant_seed_agent.py",
+    "hits": 3,
+    "agent": null,
+    "kind": "asset"
+   },
+   {
+    "file": "/scout/bundles/native-09/skills/rar-kody-w-plant-seed/rapp/agent.lock.json",
+    "hits": 3,
+    "agent": null,
+    "kind": "asset"
+   },
+   {
+    "file": "/scout/bundles/native-09/skills/rar-kody-w-plant-seed/scripts/run_agent.py",
+    "hits": 3,
+    "agent": null,
+    "kind": "asset"
+   },
+   {
+    "file": "/scout/bundles/native-09/skills/rar-kody-w-plant-seed/SKILL.md",
     "hits": 3,
     "agent": null,
     "kind": "asset"
