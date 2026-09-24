@@ -176,18 +176,22 @@
   "2026-09-22": {
    "count": 96,
    "uniques": 21
+  },
+  "2026-09-23": {
+   "count": 130,
+   "uniques": 31
   }
  },
  "last_known": {
-  "at": "2026-09-23T10:05:01Z",
-  "clone_uniques_14d": 291,
-  "clones_14d": 1471,
+  "at": "2026-09-24T10:10:03Z",
+  "clone_uniques_14d": 301,
+  "clones_14d": 1508,
   "paths": [
    {
-    "count": 13,
+    "count": 14,
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "uniques": 5
+    "uniques": 6
    },
    {
     "count": 5,
@@ -209,12 +213,6 @@
    },
    {
     "count": 2,
-    "path": "/kody-w/RAR/blob/main/agents/@cowork-cookbook/adaptive_card_adjust_inventory_levels_agent.py",
-    "title": "/blob/main/agents/@cowork-cookbook/adaptive_card_adjust_inventory_levels_agent.py",
-    "uniques": 1
-   },
-   {
-    "count": 2,
     "path": "/kody-w/RAR/discussions/440",
     "title": "/discussions/440",
     "uniques": 1
@@ -223,6 +221,12 @@
     "count": 2,
     "path": "/kody-w/RAR/discussions/785",
     "title": "/discussions/785",
+    "uniques": 1
+   },
+   {
+    "count": 1,
+    "path": "/kody-w/RAR/blob/69ffbb85b7b2006141557f92e2f4b978554c9e70/scout/bundles/cowork-cookbook-111/skills/rar-cowork-cookbook-period-close-checklist/SKILL.md",
+    "title": "/blob/69ffbb85b7b2006141557f92e2f4b978554c9e70/scout/bundles/cowork-cookbook-111/skills/rar-cowork-cookbook-period-close-checklist/SKILL.md",
     "uniques": 1
    },
    {
@@ -251,7 +255,7 @@
     "uniques": 9
    },
    {
-    "count": 8,
+    "count": 4,
     "referrer": "kody-w.github.io",
     "uniques": 2
    },
@@ -261,8 +265,8 @@
     "uniques": 2
    }
   ],
-  "view_uniques_14d": 21,
-  "views_14d": 70
+  "view_uniques_14d": 23,
+  "views_14d": 68
  },
  "snapshots": [
   {
@@ -1424,6 +1428,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 82,
    "views_all_time": 203
+  },
+  {
+   "at": "2026-09-24T10:10:03Z",
+   "cdn_all_time": 84,
+   "clone_uniques_all_time": 1360,
+   "clones_all_time": 6554,
+   "days_tracked": 44,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 86,
+   "views_all_time": 207
   }
  ],
  "views": {
@@ -1598,6 +1612,10 @@
   "2026-09-22": {
    "count": 0,
    "uniques": 0
+  },
+  "2026-09-23": {
+   "count": 4,
+   "uniques": 4
   }
  }
 }

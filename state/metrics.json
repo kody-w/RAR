@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-09-23T10:05:01Z",
+ "generated_at": "2026-09-24T10:10:03Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -9,27 +9,27 @@
   "stars": 2,
   "forks": 1,
   "watchers": 0,
-  "open_issues": 119,
-  "size_kb": 127626,
+  "open_issues": 120,
+  "size_kb": 107916,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-09-23T09:00:52Z",
+  "pushed_at": "2026-09-24T08:56:42Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
  "totals": {
-  "downloads": 6508,
-  "clones": 6424,
+  "downloads": 6638,
+  "clones": 6554,
   "cdn_hits": 84,
   "release_downloads": 0,
   "agent_file_downloads": 12,
-  "clones_excluding_ci_estimate": 3930,
-  "ci_clone_estimate": 2494,
-  "page_views": 203,
-  "clone_uniques_14d": 291,
-  "view_uniques_14d": 21,
-  "clone_uniques_daily_sum": 1329,
-  "view_uniques_daily_sum": 82,
-  "days_tracked": 43,
+  "clones_excluding_ci_estimate": 4002,
+  "ci_clone_estimate": 2552,
+  "page_views": 207,
+  "clone_uniques_14d": 301,
+  "view_uniques_14d": 23,
+  "clone_uniques_daily_sum": 1360,
+  "view_uniques_daily_sum": 86,
+  "days_tracked": 44,
   "tracking_since": "2026-07-14",
   "agents": 1700,
   "swarms": 2,
@@ -362,6 +362,13 @@
    "clone_uniques": 21,
    "views": 0,
    "cdn": 0
+  },
+  {
+   "date": "2026-09-23",
+   "clones": 130,
+   "clone_uniques": 31,
+   "views": 4,
+   "cdn": 0
   }
  ],
  "traffic": {
@@ -369,8 +376,8 @@
    {
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "count": 13,
-    "uniques": 5
+    "count": 14,
+    "uniques": 6
    },
    {
     "path": "/kody-w/RAR/tree/main/stacks/rapp-workspace-starter",
@@ -391,12 +398,6 @@
     "uniques": 1
    },
    {
-    "path": "/kody-w/RAR/blob/main/agents/@cowork-cookbook/adaptive_card_adjust_inventory_levels_agent.py",
-    "title": "/blob/main/agents/@cowork-cookbook/adaptive_card_adjust_inventory_levels_agent.py",
-    "count": 2,
-    "uniques": 1
-   },
-   {
     "path": "/kody-w/RAR/discussions/440",
     "title": "/discussions/440",
     "count": 2,
@@ -406,6 +407,12 @@
     "path": "/kody-w/RAR/discussions/785",
     "title": "/discussions/785",
     "count": 2,
+    "uniques": 1
+   },
+   {
+    "path": "/kody-w/RAR/blob/69ffbb85b7b2006141557f92e2f4b978554c9e70/scout/bundles/cowork-cookbook-111/skills/rar-cowork-cookbook-period-close-checklist/SKILL.md",
+    "title": "/blob/69ffbb85b7b2006141557f92e2f4b978554c9e70/scout/bundles/cowork-cookbook-111/skills/rar-cowork-cookbook-period-close-checklist/SKILL.md",
+    "count": 1,
     "uniques": 1
    },
    {
@@ -435,7 +442,7 @@
    },
    {
     "referrer": "kody-w.github.io",
-    "count": 8,
+    "count": 4,
     "uniques": 2
    },
    {
@@ -444,15 +451,15 @@
     "uniques": 2
    }
   ],
-  "clones_14d": 1471,
-  "views_14d": 70,
+  "clones_14d": 1508,
+  "views_14d": 68,
   "live": true,
-  "as_of": "2026-09-23T10:05:01Z"
+  "as_of": "2026-09-24T10:10:03Z"
  },
  "cdn": {
   "total_hits": 84,
   "bandwidth": 3798270,
-  "rank": 1916971,
+  "rank": 1926922,
   "agent_hits": 12,
   "files": [
    {
