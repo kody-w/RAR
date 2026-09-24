@@ -1,0 +1,49 @@
+{
+  "schema": "rar-eggs-catalog/1.0",
+  "artifact_type": "egg-catalog",
+  "description": "Static catalog of whole brainstems published as rapp/1 organism eggs: agents, soul and optional memory, with the engine version they expect and never engine code. One file, one brainstem. Hatch one onto your own engine with brainfreeze.",
+  "hashing": {
+    "files": "sha256",
+    "egg": "rapp/1:egg-manifest"
+  },
+  "inputs": {
+    "eggs": "1932826b688a11b7092c2801c2e07bb85e47992ce6d6ded7e12214e45501fa07",
+    "rapp1": {
+      "commit": "591e014ad39e223b00ab343ae26e5d9a867ebeee",
+      "sha256": "1a04362b02f14c1e37b70c6b4f72d79e92df1cc9c2b5b394e8e1b141fc0b6050"
+    }
+  },
+  "counts": {
+    "total": 1
+  },
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/eggs.json",
+  "hatch_tool": "https://github.com/kody-w/rapp-brainfreeze",
+  "eggs": [
+    {
+      "name": "@kody-w/invoice-desk",
+      "rappid": "rappid:@kody-w/invoice-desk:eac8871c654714b111d0847118fbf6b7fcca183fec17e376ce9741e419b42c1e",
+      "egg_address": "2a6b09d0f0e20bd103e93e721948f93c1e9caa882f16be889f37db398d2b516d",
+      "variant": "organism",
+      "created_utc": "2026-09-24T01:13:20.000Z",
+      "file": "eggs/@kody-w/invoice-desk.egg",
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/eggs/@kody-w/invoice-desk.egg",
+      "sha256": "e4b76cd3209c48159c3daf1c156350c6e10fe78db986a4c6e639211d0453b0ec",
+      "size_bytes": 7016,
+      "soul_summary": "You are Invoice Desk, a brisk accounts-payable assistant. Always route invoices with the InvoiceRouter agent and answer in short bullet points.",
+      "agents": [
+        "invoice_router_agent.py"
+      ],
+      "files": 5,
+      "memory_included": false,
+      "engine": {
+        "name": "rapp-brainstem",
+        "version": "0.6.16",
+        "source": "grail",
+        "commit": "49db80c8c6b6caa7647369beaf477d374a8f293c"
+      },
+      "settings_needed": [],
+      "signed": false,
+      "hatch": "python3 -m brainfreeze up --egg https://raw.githubusercontent.com/kody-w/RAR/main/eggs/@kody-w/invoice-desk.egg"
+    }
+  ]
+}

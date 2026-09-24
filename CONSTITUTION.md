@@ -1102,4 +1102,57 @@ The plugin is `rapp`. The marketplace tells you where it lives.
 
 ---
 
-*Ratified on initial repo creation. Amended to reflect the Agent Store, three universal card faces (Icon / Full Art / ASCII), companion cards, the forge, the complete agent card definition and hatching lifecycle, the .py.card shell format, deck extensions (.py.card.DeckName) and hotloading, local-first agents workspaces, Frontier tier, federation, local-first AI, the simplicity audit, the SuperSeed Chain, federation authentication, the Free Shade Principle, and agent-operated stewardship. Amended 2026-05-11 to retire the "binder" abstraction — the `agents/` directory IS the workspace. Amended 2026-05-25 to add Article XXI — the Kited Neighborhood (**vTwin · Kited · Tethered · the String · Kited Neighborhood · Neighbor · Scan-to-Join · Sealed · Doorman**, and the **kite mark**), specified in [`NEIGHBORHOOD_PROTOCOL.md`](NEIGHBORHOOD_PROTOCOL.md). The single file is the law. The card is the agent. The agent is the file. The seed is the tree. The steward speaks through the agent. The twin is kited; the line is sealed; scan to join. Amended 2026-08-02 to add Article XXIII — the Permanent URL Contract, enforced by `state/published_paths.json` and `scripts/check_url_stability.py`. The path is a promise. Amended 2026-08-27 to add Article XXIV — the Static Data Covenant: pages read committed static data, never the GitHub API; the API is a CI harvester or an authenticated write channel, nothing else. The snapshot is the interface. Clarified 2026-08-27 (§XXIV.5): the visitor-directed lookup — the visitor names the target at the moment of use — is the one sanctioned live read, declared in-code, never on page load. Amended 2026-08-27 to add Article XXV — the constitutional `rapp@x` marketplace identity across Scout, GitHub Copilot CLI, and Claude Code. The plugin is `rapp`; the marketplace tells you where it lives. Clarified 2026-08-28 (§XXIII.2): superseded copies stay at their paths but are withheld from every lookup via `state/superseded.json`. Clarified 2026-08-28 (§XXIII.3): retirement is a tombstone stub at the same path — the path resolves, the agent does not run.*
+## Article XXVI — Eggs: One File, One Brainstem
+
+An agent is one file. A whole brainstem is one file too: an **egg**.
+
+```
+eggs/@yourname/your-slug.egg    ← this is the entire brainstem
+```
+
+### What an egg is
+
+A published egg is a rapp/1 **`organism`** egg, exactly as the RAPP egg spec
+defines it ([rapp-1 SPEC §9](https://github.com/kody-w/rapp-1/blob/main/SPEC.md)):
+a byte-reproducible file holding a brainstem's `soul.md`, its `agents/`, and
+optionally its memory, with every file hashed and the egg named by a minted
+`rappid`. Its payload records the engine version it expects.
+
+### What an egg is not
+
+- **Not engine code.** An egg never carries `brainstem.py` or any other file at
+  its root that runs as the engine. It hatches onto the receiver's own engine,
+  so nobody runs engine code downloaded from the registry.
+- **Not secrets or sign-in.** No `.env`, `.copilot_token`, `.copilot_session`,
+  `.copilot_pending` or `.brainstem_secret`, anywhere in the egg.
+- **Not a conversation.** Conversations travel as separate `session` eggs and
+  are not listed.
+
+### Rules
+
+1. The path is the identity: `eggs/@<owner>/<slug>.egg` must match the egg's
+   rappid (`rappid:@<owner>/<slug>:…`). Namespace ownership (Article III) applies.
+2. Every egg is verified with the RAPP reference implementation, vendored
+   verbatim as `scripts/rapp1.py`, and read, never executed.
+3. At most 5 MiB per egg.
+4. `scripts/build_eggs_catalog.py` builds `api/v1/eggs.json`, the static catalog
+   (Article XXIV). A pull request carrying an egg that breaks any rule fails CI.
+5. The path is permanent once published (Article XXIII). A new version replaces
+   the file at the same path; the catalog records each version's egg address.
+
+### Hatching
+
+```bash
+python3 -m brainfreeze up --egg https://raw.githubusercontent.com/kody-w/RAR/main/eggs/@yourname/your-slug.egg
+```
+
+[brainfreeze](https://github.com/kody-w/rapp-brainfreeze) verifies the egg,
+hatches it onto the grail engine at the version it expects, mints a fresh
+instance identity and records the egg it was `grown_from`. Laying one:
+`python3 -m brainfreeze egg <brainstem> --owner <you> --slug <slug> --no-memory`.
+
+The agent is the file. The brainstem is the egg.
+
+---
+
+*Ratified on initial repo creation. Amended to reflect the Agent Store, three universal card faces (Icon / Full Art / ASCII), companion cards, the forge, the complete agent card definition and hatching lifecycle, the .py.card shell format, deck extensions (.py.card.DeckName) and hotloading, local-first agents workspaces, Frontier tier, federation, local-first AI, the simplicity audit, the SuperSeed Chain, federation authentication, the Free Shade Principle, and agent-operated stewardship. Amended 2026-05-11 to retire the "binder" abstraction — the `agents/` directory IS the workspace. Amended 2026-05-25 to add Article XXI — the Kited Neighborhood (**vTwin · Kited · Tethered · the String · Kited Neighborhood · Neighbor · Scan-to-Join · Sealed · Doorman**, and the **kite mark**), specified in [`NEIGHBORHOOD_PROTOCOL.md`](NEIGHBORHOOD_PROTOCOL.md). The single file is the law. The card is the agent. The agent is the file. The seed is the tree. The steward speaks through the agent. The twin is kited; the line is sealed; scan to join. Amended 2026-08-02 to add Article XXIII — the Permanent URL Contract, enforced by `state/published_paths.json` and `scripts/check_url_stability.py`. The path is a promise. Amended 2026-08-27 to add Article XXIV — the Static Data Covenant: pages read committed static data, never the GitHub API; the API is a CI harvester or an authenticated write channel, nothing else. The snapshot is the interface. Clarified 2026-08-27 (§XXIV.5): the visitor-directed lookup — the visitor names the target at the moment of use — is the one sanctioned live read, declared in-code, never on page load. Amended 2026-08-27 to add Article XXV — the constitutional `rapp@x` marketplace identity across Scout, GitHub Copilot CLI, and Claude Code. The plugin is `rapp`; the marketplace tells you where it lives. Clarified 2026-08-28 (§XXIII.2): superseded copies stay at their paths but are withheld from every lookup via `state/superseded.json`. Clarified 2026-08-28 (§XXIII.3): retirement is a tombstone stub at the same path — the path resolves, the agent does not run. Amended 2026-09-23 to add Article XXVI — Eggs: one file, one brainstem. A whole brainstem is published as one rapp/1 organism egg under `eggs/@owner/slug.egg`, verified with the vendored reference implementation, never carrying engine code or secrets, and cataloged in `api/v1/eggs.json`. The brainstem is the egg.*

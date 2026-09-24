@@ -36,6 +36,13 @@ Every agent is **one `.py` file** — no separate manifest, no README, no subdir
 
 Path convention: `agents/@publisher/agent_slug_agent.py` (lowercase snake_case)
 
+## Eggs (Article XXVI)
+
+A whole brainstem is one file: `eggs/@owner/<slug>.egg`, a rapp/1 `organism` egg (soul, agents, optional
+memory; never engine code or secrets). `python scripts/build_eggs_catalog.py` verifies every egg with the
+vendored reference implementation (`scripts/rapp1.py`, never edit it) and writes `api/v1/eggs.json`;
+`--check` verifies only. Lay and hatch eggs with [brainfreeze](https://github.com/kody-w/rapp-brainfreeze).
+
 ## Agent `__manifest__` Schema
 
 Required fields: `schema`, `name`, `version`, `display_name`, `description`, `author`, `tags`, `category`.

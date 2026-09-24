@@ -1,0 +1,7 @@
+{
+  "file": "scripts/rapp1.py",
+  "source": "https://github.com/kody-w/rapp-1/blob/591e014ad39e223b00ab343ae26e5d9a867ebeee/rapp.py",
+  "commit": "591e014ad39e223b00ab343ae26e5d9a867ebeee",
+  "sha256": "1a04362b02f14c1e37b70c6b4f72d79e92df1cc9c2b5b394e8e1b141fc0b6050",
+  "note": "Imported verbatim, never edited: the RAPP reference implementation (canonical JSON, hashes, rappid mint, egg pack/read/verify). Update by re-copying and re-recording the commit and sha256."
+}
