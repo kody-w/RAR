@@ -1,5 +1,9 @@
 # RAR — RAPP Agent Registry
 
+<!-- rapp1:network-header:start -->
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/RAR.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/RAR.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+<!-- rapp1:network-header:end -->
+
 > **Spec:** `rapp-registry/1.0` — the canonical agent registry + minting authority (peer to RAPP_Store/RAPP_Sense_Store).
 
 **The open single-file agent ecosystem.** Browse, build, collect, and share AI agents. Every agent is one `.py` file.
