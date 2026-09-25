@@ -69,13 +69,19 @@ jobs:
           python rappterpedia/dream_catcher.py produce \
             --stream "$STREAM" \
             --frame "$FRAME" \
-            --ticks "$TICKS"
+            --ticks "$TICKS" \
+            --out-dir delta-out
 
       - name: Upload delta artifact
+        # Only the delta this stream produced, written into its own empty
+        # directory, so a delta of the same name already committed to
+        # stream_deltas/ is never uploaded in its place. Merged deltas live
+        # folded in stream_deltas/bundles/, which the merge job already has.
         uses: actions/upload-artifact@v4
         with:
           name: delta-${{ matrix.stream }}
-          path: rappterpedia/stream_deltas/
+          path: delta-out/frame-${{ needs.get-frame.outputs.frame }}-${{ matrix.stream }}.json
+          if-no-files-found: error
 
   # ── Dream Catcher Merge: additive, deterministic, collision-free ──
   merge:
@@ -95,13 +101,18 @@ jobs:
           path: delta-output
           pattern: delta-*
 
+      # collect never overwrites a delta: one whose name is already taken, by
+      # a delta committed before this frame ran, goes in under the next free
+      # name, and both merge.
       - name: Collect deltas into stream_deltas/
         run: |
-          mkdir -p rappterpedia/stream_deltas
-          find delta-output -name "*.json" -exec cp {} rappterpedia/stream_deltas/ \;
+          python rappterpedia/dream_catcher.py collect --from delta-output
           echo "Deltas collected:"
           ls -la rappterpedia/stream_deltas/
 
+      # Merge (and the refill merge after it) folds every loose delta of a
+      # merged frame into stream_deltas/bundles/, losslessly; the commit below
+      # records the bundles and the removal of any loose copies.
       - name: "Dream Catcher merge (frame ${{ needs.get-frame.outputs.frame }})"
         run: |
           python rappterpedia/dream_catcher.py merge --frame "${{ needs.get-frame.outputs.frame }}"
