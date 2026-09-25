@@ -12,8 +12,8 @@
     },
     "microsoft-365-team.egg": {
       "purpose": "Template content (11 agents). The factory pulls + customizes this at plant time.",
-      "size": 71456,
-      "sha256": "983381582c32cad96e4af722133ab55c66004ad0570cbe422b5d583cce288f99"
+      "size": 202942,
+      "sha256": "bd5dc14d7892800bce72ae1f8b3ff303ffd5e693f9d4da1632e9867a26d6531d"
     }
   },
   "agents_in_template": 11,
