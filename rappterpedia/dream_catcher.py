@@ -94,16 +94,12 @@ DELTA_NAME = re.compile(r"^frame-(\d+)-(.*)\.json$")
 BUNDLE_NAME = re.compile(r"^frames-(\d+)-(\d+)(?:-part(\d+))?\.json$")
 
 # Deltas the fold leaves exactly where they are, byte for byte, until their owner
-# has reviewed their text: it quotes local tool output, and folding would copy
-# that into a new file. To redact one, edit it in place or delete it, then remove
-# its name here; an edited delta folds on the next merge.
-HELD_LOOSE = frozenset({
-    "frame-101-review-borg-cardsmith_agent.json",
-    "frame-101-review-discreetRappers-copilot_studio_transpiler.json",
-    "frame-101-review-discreetRappers-rapp_pipeline.json",
-    "frame-101-review-kody-agent_workbench.json",
-    "frame-101-review-kody-rar_remote_agent.json",
-})
+# has reviewed their text (for example text that quotes local tool output, which
+# folding would copy into a new file). To redact one, edit it in place or delete
+# it, then remove its name here in the same change; an edited delta folds on the
+# next merge. The five frame-101 review deltas once held here were deleted by
+# kody-w/RAR#1133: they quoted local tool paths. They remain in git history.
+HELD_LOOSE = frozenset()
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

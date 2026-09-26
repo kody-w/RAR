@@ -90,15 +90,17 @@ checker still reads every bundle.
 Nothing is lost: each original file's bytes are `json.dumps(delta, indent=2)`,
 and a loose file is removed only after the bundle written to disk reproduces
 those bytes and their SHA-256. A delta that cannot be reproduced byte for byte,
-or that carries a top-level `spec`, stays loose, as do the five one-off
-`frame-101-review-*` deltas named in `HELD_LOOSE` in `dream_catcher.py`: their
-text quotes local tool output that folding would copy into a new file, so they
-stay exactly as they are until their owner reviews them. To redact one, the
-owner edits the file in place or deletes it, then drops its name from
-`HELD_LOOSE`. An edited delta folds on the next merge if it is still in the
-generator's format (`json.dumps(delta, indent=2)`, no trailing newline);
-otherwise it just stays loose. Folding is idempotent, so any loose delta that
-an older heartbeat committed to `main` folds on the next merge.
+or that carries a top-level `spec`, stays loose, as does any delta named in
+`HELD_LOOSE` in `dream_catcher.py`: a held delta stays exactly as it is until
+its owner has reviewed its text (for example text that quotes local tool
+output, which folding would copy into a new file). To redact one, the owner
+edits the file in place or deletes it, then drops its name from `HELD_LOOSE` in
+the same change. The five one-off `frame-101-review-*` deltas that were held
+this way were deleted by kody-w/RAR#1133, because they quoted local tool paths;
+they remain in git history. An edited delta folds on the next merge if it is
+still in the generator's format (`json.dumps(delta, indent=2)`, no trailing
+newline); otherwise it just stays loose. Folding is idempotent, so any loose
+delta that an older heartbeat committed to `main` folds on the next merge.
 
 No writer overwrites a delta. `produce`, `cycle` and `refill` write
 `frame-<N>-<stream>.json` only if no loose or bundled delta has that name, and
