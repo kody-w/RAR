@@ -329,6 +329,29 @@ def test_extract_never_overwrites_and_never_writes_into_stream_deltas(dc, tmp_pa
             dc.extract_bundled_deltas(inside)
     assert _loose(dc) == [] and not (dc.DELTAS_DIR / "copies").exists()
 
+
+def test_extract_refuses_stream_deltas_however_the_path_is_spelled(dc, tmp_path):
+    """The refusal compares folders, not spellings. A symlink to stream_deltas/, a path through
+    `..`, and, on a case-insensitive file system (the macOS and Windows default), a path in other
+    letter case all name the same folder, and all are refused before anything is written."""
+    _state(dc, 5)
+    dc.save_json(dc.DELTAS_DIR / "frame-5-alpha.json", _delta(5, "alpha"))
+    dc.fold_merged_deltas()
+    alias = tmp_path / "alias"
+    alias.symlink_to(dc.DELTAS_DIR, target_is_directory=True)
+    spellings = [alias, alias / "copies", dc.DELTAS_DIR / "missing" / ".." / "copies"]
+    variant = dc.DELTAS_DIR.parent / dc.DELTAS_DIR.name.swapcase()
+    if variant.exists() and os.path.samefile(variant, dc.DELTAS_DIR):
+        parent_variant = dc.DELTAS_DIR.parent.parent / dc.DELTAS_DIR.parent.name.upper() / dc.DELTAS_DIR.name
+        spellings += [variant, variant / "copies", dc.BUNDLES_DIR.parent / dc.BUNDLES_DIR.name.upper(), parent_variant]
+
+    for spelling in spellings:
+        with pytest.raises(ValueError):
+            dc.extract_bundled_deltas(spelling)
+
+    assert sorted(p.name for p in dc.DELTAS_DIR.iterdir()) == ["bundles"]
+    assert [p.name for p in dc.BUNDLES_DIR.iterdir()] == ["frames-000000-000099.json"]
+
 def test_committed_bundles_are_well_formed_and_reproduce_their_digests():
     seen = {}
     loose = {p.name for p in repo_dc.DELTAS_DIR.glob("frame-*.json")}

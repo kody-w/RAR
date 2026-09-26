@@ -840,16 +840,27 @@ def print_fold_report(report: dict):
         print(f"  [KEPT LOOSE] {name}: {why}")
 
 
+def _is_or_inside(path, folder: Path) -> bool:
+    """Whether path is folder or inside it, judged by folder identity, not spelling.
+
+    A symlink, a `..`, or other letter case on a case-insensitive file system names
+    the same folder. path need not exist: its nearest existing ancestor decides."""
+    if not folder.is_dir():
+        return False
+    probe = Path(path).resolve()
+    return any(candidate.exists() and os.path.samefile(candidate, folder)
+               for candidate in (probe, *probe.parents))
+
+
 def extract_bundled_deltas(out_dir) -> int:
     """Write every bundled delta back out as its original file, byte for byte.
 
     It never overwrites: a file already there with exactly those bytes is left as
     it is, and a different file of that name stops the extract (FileExistsError).
-    It refuses stream_deltas/ and anything inside it, where the copies would sit
-    beside the bundles as loose duplicates."""
+    It refuses stream_deltas/ and anything inside it, however the path is spelled,
+    where the copies would sit beside the bundles as loose duplicates."""
     out = Path(out_dir)
-    deltas = DELTAS_DIR.resolve()
-    if out.resolve() == deltas or deltas in out.resolve().parents:
+    if _is_or_inside(out, DELTAS_DIR):
         raise ValueError(f"extract writes copies, never into {DELTAS_DIR}; choose another directory")
     out.mkdir(parents=True, exist_ok=True)
     written = 0
