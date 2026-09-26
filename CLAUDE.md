@@ -156,19 +156,17 @@ python rappterpedia/dream_catcher.py extract --out some/dir
 python rappterpedia/dream_catcher.py collect --from delta-output
 ```
 
-### Multi-Model LLM Support
+### LLM Support
 
-The engine supports multiple LLM backends per stream:
+The heartbeat can use the Copilot CLI when the runner is authenticated for Copilot requests, or an explicitly configured local Ollama model. If no LLM backend is available, it falls back to rules-as-data templates.
 
 ```bash
-# GitHub Models (default)
-GITHUB_TOKEN=xxx python rappterpedia/dream_catcher.py produce --stream cloud-1
+# Copilot CLI (uses the runner's gh copilot auth)
+python rappterpedia/dream_catcher.py produce --stream cloud-1
 
-# Ollama local (Gemma, Llama, Mistral — free, no rate limits)
+# Ollama local (Gemma, Llama, Mistral — opt-in)
 OLLAMA_MODEL=gemma3:4b python rappterpedia/dream_catcher.py produce --stream local-1
 ```
-
-Falls back to rules-as-data templates when no LLM is available.
 
 ### Echo-Driven Frames
 

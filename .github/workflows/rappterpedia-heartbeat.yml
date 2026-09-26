@@ -60,7 +60,6 @@ jobs:
         # Interpolated straight into the shell it was an injection vector, so
         # every value now arrives through env and is quoted at use.
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FRAME: ${{ needs.get-frame.outputs.frame }}
           TICKS: ${{ github.event.inputs.ticks || '3' }}
           STREAM: ${{ matrix.stream }}
@@ -118,8 +117,6 @@ jobs:
           python rappterpedia/dream_catcher.py merge --frame "${{ needs.get-frame.outputs.frame }}"
 
       - name: "Refill bare articles"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           FRAME="${{ needs.get-frame.outputs.frame }}"
           python rappterpedia/dream_catcher.py refill --frame "$FRAME" --batch 5

@@ -39,45 +39,13 @@ try:
     HAS_LLM = True
 except ImportError:
     HAS_LLM = False
-    # Inline fallback — stdlib only, uses GitHub Models directly
-    import urllib.request
-    import urllib.error
 
     class LLMRateLimitError(RuntimeError): pass
     class ContentFilterError(RuntimeError): pass
 
     def llm_generate(system: str, user: str, max_tokens: int = 500,
                      temperature: float = 0.8, **kwargs) -> str:
-        token = os.environ.get("GITHUB_TOKEN", "")
-        if not token:
-            # Try gh CLI
-            try:
-                result = subprocess.run(["gh", "auth", "token"], capture_output=True, text=True, timeout=5)
-                if result.returncode == 0:
-                    token = result.stdout.strip()
-            except Exception:
-                pass
-        if not token:
-            raise RuntimeError("No GITHUB_TOKEN available for LLM")
-
-        payload = json.dumps({
-            "model": os.environ.get("RAPPTERVERSE_MODEL", "openai/gpt-4.1-mini"),
-            "messages": [
-                {"role": "system", "content": system},
-                {"role": "user", "content": user},
-            ],
-            "temperature": temperature,
-            "max_tokens": max_tokens,
-        }).encode()
-        req = urllib.request.Request(
-            "https://models.github.ai/inference/chat/completions",
-            data=payload,
-            headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
-            method="POST",
-        )
-        with urllib.request.urlopen(req, timeout=60) as resp:
-            data = json.loads(resp.read())
-        return data["choices"][0]["message"]["content"].strip()
+        raise RuntimeError("No LLM backend configured")
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
