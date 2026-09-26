@@ -32,6 +32,24 @@ jobs:
       - name: Verify the committed Skills catalog projection
         run: python scripts/build_skills_catalog.py --check
 
+  # ─── RAPP/1 BOUNDED SCAN (the conformance checker must finish) ──
+  # kody-w/rapp-1's rapp_check.py stops after a fixed number of files and
+  # then reports all of RAR as DRIFT, whatever the artifacts say. This fails
+  # at 90% of every bound, while there is still room to act. It is a job of
+  # its own that nothing needs: a red budget never skips the rest of the
+  # suite, and approval and aggregation, which run the unit tests before
+  # they commit, never gate on it. Nightly measures it too, because bot
+  # commits never start this workflow. See docs/RAPP1-CONFORMANCE.md.
+  rapp-scan-budget:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify RAR stays inside the RAPP/1 checker's bounded scan
+        run: python scripts/check_rapp_scan_budget.py
+
   # ─── SMOKE (fast gate — runs on every PR) ───────────────────────
   smoke:
     runs-on: ubuntu-latest

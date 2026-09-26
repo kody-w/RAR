@@ -19,14 +19,43 @@ production scales without collision.
 
 == USAGE ==
 
-  # Worker produces a delta (called by each fleet worker)
-  python rappterpedia/dream_catcher.py produce --stream alpha --frame 42
+  # Worker produces a delta (called by each fleet worker, into its own directory)
+  python rappterpedia/dream_catcher.py produce --stream alpha --frame 42 --out-dir delta-out
+
+  # Copy the workers' deltas in, never overwriting one (called by merge job)
+  python rappterpedia/dream_catcher.py collect --from delta-output
 
   # Merge all deltas for a frame (called by merge job)
   python rappterpedia/dream_catcher.py merge --frame 42
 
   # Full cycle: produce + merge (single machine)
   python rappterpedia/dream_catcher.py cycle --streams 5 --frame 42
+
+  # Fold loose deltas of merged frames into bundles (merge does this itself)
+  python rappterpedia/dream_catcher.py fold
+
+  # Re-materialize every bundled delta as its original file, byte for byte
+  python rappterpedia/dream_catcher.py extract --out some/dir
+
+== DELTA BUNDLES ==
+
+  A delta stays a loose file (stream_deltas/frame-<N>-<stream>.json) until its
+  frame has merged. Merge then folds it into the bundle for its 100-frame window
+  (stream_deltas/bundles/frames-001500-001599.json), keyed by its original file
+  name, with the SHA-256 of its original bytes. A bundle never exceeds
+  BUNDLE_MAX_BYTES, which keeps it inside the 1 MiB ceiling that RAPP/1 frame
+  discovery reads. Nothing is dropped: each file's exact bytes are
+  json.dumps(delta, indent=2), and a loose file is removed only after the
+  written bundle reproduces them. Anything that does not reproduce stays loose,
+  as does any delta named in HELD_LOOSE.
+
+  A delta file name is written once. produce, cycle and refill write
+  frame-<N>-<stream>.json only if no loose or bundled delta has that name, and
+  otherwise the next free "frame-<N>-<stream> 2.json", " 3.json" and so on, so a
+  delta committed before its frame ran survives, and merges, beside the new one.
+  collect copies deltas in the same way; a delta already there, byte for byte,
+  is not copied again. produce --out-dir writes into an empty directory instead.
+  extract never overwrites a file either, and never writes into stream_deltas/.
 
 == OLLAMA SUPPORT ==
 
@@ -36,9 +65,12 @@ production scales without collision.
 
 from __future__ import annotations
 
+import fnmatch
+import hashlib
 import json
 import os
 import random
+import re
 import subprocess
 import sys
 import time
@@ -50,8 +82,28 @@ from pathlib import Path
 BASE_DIR = Path(__file__).parent
 RAR_DIR = BASE_DIR.parent
 DELTAS_DIR = BASE_DIR / "stream_deltas"
+BUNDLES_DIR = DELTAS_DIR / "bundles"
 STATE_FILE = BASE_DIR / "rappterpedia_state.json"
 EXPORT_FILE = BASE_DIR / "rappterpedia_export.json"
+
+BUNDLE_SCHEMA = "rappterpedia-delta-bundle/1.0"
+BUNDLE_WINDOW = 100
+BUNDLE_MAX_BYTES = 768 * 1024
+BUNDLE_FILE_BYTES = "json.dumps(delta, indent=2) as UTF-8, no trailing newline; sha256 is over those bytes"
+DELTA_NAME = re.compile(r"^frame-(\d+)-(.*)\.json$")
+BUNDLE_NAME = re.compile(r"^frames-(\d+)-(\d+)(?:-part(\d+))?\.json$")
+
+# Deltas the fold leaves exactly where they are, byte for byte, until their owner
+# has reviewed their text: it quotes local tool output, and folding would copy
+# that into a new file. To redact one, edit it in place or delete it, then remove
+# its name here; an edited delta folds on the next merge.
+HELD_LOOSE = frozenset({
+    "frame-101-review-borg-cardsmith_agent.json",
+    "frame-101-review-discreetRappers-copilot_studio_transpiler.json",
+    "frame-101-review-discreetRappers-rapp_pipeline.json",
+    "frame-101-review-kody-agent_workbench.json",
+    "frame-101-review-kody-rar_remote_agent.json",
+})
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -556,6 +608,349 @@ def produce_delta(stream_id: str, frame: int, ticks: int = 3) -> dict:
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Delta Bundles — merged deltas folded losslessly, one file per window
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+def delta_file_bytes(delta) -> bytes:
+    """The exact bytes save_json writes for a delta, so the bytes of every loose delta file."""
+    return json.dumps(delta, indent=2).encode("utf-8")
+
+
+def _reject_constant(token):
+    raise ValueError(f"non-standard JSON constant {token}")
+
+
+def _bundle_window(frame: int) -> tuple[int, int]:
+    first = frame - frame % BUNDLE_WINDOW
+    return first, first + BUNDLE_WINDOW - 1
+
+
+def _bundle_file_name(first: int, last: int, part: int) -> str:
+    suffix = "" if part == 1 else f"-part{part}"
+    return f"frames-{first:06d}-{last:06d}{suffix}.json"
+
+
+def _new_bundle(first: int, last: int) -> dict:
+    return {"schema": BUNDLE_SCHEMA, "first_frame": first, "last_frame": last,
+            "file_bytes": BUNDLE_FILE_BYTES, "deltas": {}, "sha256": {}}
+
+
+def _bundle_text(bundle: dict) -> str:
+    return json.dumps(bundle, indent=2)
+
+
+def _entry_order(name: str) -> tuple[int, str]:
+    return int(DELTA_NAME.match(name).group(1)), name
+
+
+def bundle_paths() -> list[Path]:
+    """Every bundle file, in name order."""
+    if not BUNDLES_DIR.is_dir():
+        return []
+    return sorted(p for p in BUNDLES_DIR.iterdir()
+                  if BUNDLE_NAME.match(p.name) and p.is_file() and not p.is_symlink())
+
+
+def load_bundle(path) -> dict:
+    """Read one bundle, refusing anything that is not a bundle of the window its name claims."""
+    path = Path(path)
+    bundle = json.loads(path.read_bytes())
+    match = BUNDLE_NAME.match(path.name)
+    if (
+        not match
+        or not isinstance(bundle, dict)
+        or bundle.get("schema") != BUNDLE_SCHEMA
+        or bundle.get("first_frame") != int(match.group(1))
+        or bundle.get("last_frame") != int(match.group(2))
+        or not isinstance(bundle.get("deltas"), dict)
+        or not isinstance(bundle.get("sha256"), dict)
+        or set(bundle["deltas"]) != set(bundle["sha256"])
+    ):
+        raise ValueError(f"{path.name} is not a {BUNDLE_SCHEMA} bundle for its window")
+    for name in bundle["deltas"]:
+        named = DELTA_NAME.match(name)
+        if (
+            not named
+            or any(bad in name for bad in ("/", "\\", "\x00"))
+            or not bundle["first_frame"] <= int(named.group(1)) <= bundle["last_frame"]
+        ):
+            raise ValueError(f"{path.name}: {name!r} is not a delta file name inside its window")
+    return bundle
+
+
+def load_frame_deltas(frame: int) -> list[tuple[str, dict]]:
+    """Every delta for one frame, bundled or still loose, as (file name, delta) in name order.
+
+    Selects exactly what glob(f"frame-{frame}-*.json") selected before bundles existed.
+    A loose file wins over a bundled entry of the same name, just as a newer file of that
+    name always replaced the older one."""
+    pattern = f"frame-{frame}-*.json"
+    found = {}
+    for path in bundle_paths():
+        match = BUNDLE_NAME.match(path.name)
+        if int(match.group(1)) <= frame <= int(match.group(2)):
+            for name, delta in load_bundle(path)["deltas"].items():
+                if fnmatch.fnmatchcase(name, pattern):
+                    found[name] = delta
+    for path in DELTAS_DIR.glob(pattern):
+        found[path.name] = load_json(path)
+    return sorted(found.items())
+
+
+def _unfoldable(raw: bytes) -> str | None:
+    """Why a loose delta has to stay loose, or None when a bundle can reproduce it exactly."""
+    try:
+        value = json.loads(raw, parse_constant=_reject_constant)
+    except ValueError as exc:
+        return f"not strict JSON ({exc})"
+    if not isinstance(value, dict):
+        return "not a JSON object"
+    if "spec" in value:
+        return "carries a top-level spec, so it stays visible to RAPP/1 frame discovery"
+    if delta_file_bytes(value) != raw:
+        return "its bytes are not json.dumps(delta, indent=2)"
+    return None
+
+
+def _fits(bundle: dict) -> bool:
+    return len(_bundle_text(bundle).encode("utf-8")) <= BUNDLE_MAX_BYTES
+
+
+def _with_entries(bundle: dict, entries) -> dict:
+    """A copy of the bundle that also holds entries, kept in (frame, name) order."""
+    deltas, digests = dict(bundle["deltas"]), dict(bundle["sha256"])
+    for name, value, raw in entries:
+        deltas[name] = value
+        digests[name] = hashlib.sha256(raw).hexdigest()
+    order = sorted(deltas, key=_entry_order)
+    return {**bundle, "deltas": {n: deltas[n] for n in order},
+            "sha256": {n: digests[n] for n in order}}
+
+
+def _place(bundles: dict, first: int, last: int, entries: list) -> tuple[dict, list]:
+    """Add a window's entries to its newest bundle part, opening the next part on overflow.
+
+    Returns ({bundle file name: entries placed there}, [entries no bundle can hold])."""
+    parts = sorted((int(BUNDLE_NAME.match(name).group(3) or 1), name) for name, bundle in bundles.items()
+                   if (bundle["first_frame"], bundle["last_frame"]) == (first, last))
+    part, name = parts[-1] if parts else (1, _bundle_file_name(first, last, 1))
+    bundle = bundles.get(name) or _new_bundle(first, last)
+    trial = _with_entries(bundle, entries)
+    if _fits(trial):
+        bundles[name] = trial
+        return {name: list(entries)}, []
+    placed, too_big = {}, []
+    for entry in entries:
+        trial = _with_entries(bundle, [entry])
+        if not _fits(trial):
+            trial = _with_entries(_new_bundle(first, last), [entry])
+            if not _fits(trial):
+                too_big.append(entry)
+                continue
+            part += 1
+            name = _bundle_file_name(first, last, part)
+        bundle = bundles[name] = trial
+        placed.setdefault(name, []).append(entry)
+    return placed, too_big
+
+
+def _write_atomic(path: Path, text: str):
+    partial = path.with_name(path.name + ".partial")
+    partial.write_text(text, encoding="utf-8")
+    os.replace(partial, path)
+
+
+def fold_merged_deltas(through_frame: int | None = None) -> dict:
+    """Fold loose deltas of merged frames into bundles, losslessly and idempotently.
+
+    Every loose delta whose frame is at or below the merged boundary (default: the
+    state's tick_count) moves into the bundle of its window, keyed by its original
+    file name. Loose files are removed only after the bundles on disk have been re-read
+    and reproduce each file's exact bytes and SHA-256. A delta of a frame that has not
+    merged yet, one no bundle could reproduce byte for byte, or one in HELD_LOOSE stays
+    loose. Running it again changes nothing."""
+    if through_frame is None:
+        through_frame = load_json(STATE_FILE).get("tick_count", 0)
+    report = {"folded": 0, "kept": {}, "written": []}
+    bundles = {path.name: load_bundle(path) for path in bundle_paths()}
+    home = {name: bundle_name for bundle_name, bundle in bundles.items() for name in bundle["deltas"]}
+    windows, duplicates = {}, []
+    for path in sorted(DELTAS_DIR.glob("frame-*.json")):
+        match = DELTA_NAME.match(path.name)
+        if not match or path.is_symlink() or not path.is_file() or int(match.group(1)) > through_frame:
+            continue
+        if path.name in HELD_LOOSE:
+            report["kept"][path.name] = "held loose for owner review (HELD_LOOSE)"
+            continue
+        raw = path.read_bytes()
+        why = _unfoldable(raw)
+        if why:
+            report["kept"][path.name] = why
+        elif path.name in home:
+            kept = bundles[home[path.name]]
+            if (delta_file_bytes(kept["deltas"][path.name]) == raw
+                    and kept["sha256"][path.name] == hashlib.sha256(raw).hexdigest()):
+                duplicates.append(path)
+            else:
+                report["kept"][path.name] = f"differs from the copy already in {home[path.name]}"
+        else:
+            window = _bundle_window(int(match.group(1)))
+            windows.setdefault(window, []).append((path.name, json.loads(raw), raw))
+
+    placed = {}
+    for (first, last), entries in sorted(windows.items()):
+        entries.sort(key=lambda entry: _entry_order(entry[0]))
+        done, too_big = _place(bundles, first, last, entries)
+        for name, items in done.items():
+            placed.setdefault(name, []).extend(items)
+        for entry in too_big:
+            report["kept"][entry[0]] = f"too large for a {BUNDLE_MAX_BYTES}-byte bundle"
+
+    if placed:
+        BUNDLES_DIR.mkdir(parents=True, exist_ok=True)
+    for name in sorted(placed):
+        _write_atomic(BUNDLES_DIR / name, _bundle_text(bundles[name]))
+        report["written"].append(name)
+    for name, items in placed.items():
+        path = BUNDLES_DIR / name
+        on_disk = load_bundle(path)
+        if path.stat().st_size > BUNDLE_MAX_BYTES:
+            raise RuntimeError(f"{name} exceeds {BUNDLE_MAX_BYTES} bytes; loose deltas left in place")
+        for delta_name, _, raw in items:
+            if (delta_name not in on_disk["deltas"]
+                    or delta_file_bytes(on_disk["deltas"][delta_name]) != raw
+                    or on_disk["sha256"][delta_name] != hashlib.sha256(raw).hexdigest()):
+                raise RuntimeError(f"{name} does not reproduce {delta_name}; loose deltas left in place")
+
+    for items in placed.values():
+        for delta_name, _, _ in items:
+            (DELTAS_DIR / delta_name).unlink()
+            report["folded"] += 1
+    for path in duplicates:
+        path.unlink()
+        report["folded"] += 1
+    return report
+
+
+def print_fold_report(report: dict):
+    if report["folded"]:
+        print(f"  Folded {report['folded']} merged deltas into bundles "
+              f"({', '.join(report['written']) or 'already bundled'})")
+    for name, why in sorted(report["kept"].items()):
+        print(f"  [KEPT LOOSE] {name}: {why}")
+
+
+def extract_bundled_deltas(out_dir) -> int:
+    """Write every bundled delta back out as its original file, byte for byte.
+
+    It never overwrites: a file already there with exactly those bytes is left as
+    it is, and a different file of that name stops the extract (FileExistsError).
+    It refuses stream_deltas/ and anything inside it, where the copies would sit
+    beside the bundles as loose duplicates."""
+    out = Path(out_dir)
+    deltas = DELTAS_DIR.resolve()
+    if out.resolve() == deltas or deltas in out.resolve().parents:
+        raise ValueError(f"extract writes copies, never into {DELTAS_DIR}; choose another directory")
+    out.mkdir(parents=True, exist_ok=True)
+    written = 0
+    for path in bundle_paths():
+        bundle = load_bundle(path)
+        for name, delta in bundle["deltas"].items():
+            data = delta_file_bytes(delta)
+            if hashlib.sha256(data).hexdigest() != bundle["sha256"][name]:
+                raise ValueError(f"{path.name}: {name} does not reproduce its recorded sha256")
+            target = out / name
+            if not _create(target, data) and (
+                    target.is_symlink() or not target.is_file() or target.read_bytes() != data):
+                raise FileExistsError(f"{target} already exists with other content; extract never overwrites")
+            written += 1
+    return written
+
+
+def _taken_delta_names() -> tuple[dict, dict]:
+    """({loose delta name: path}, {bundled delta name: delta}) as they are now."""
+    loose = {path.name: path for path in DELTAS_DIR.glob("frame-*.json")} if DELTAS_DIR.is_dir() else {}
+    bundled = {}
+    for path in bundle_paths():
+        bundled.update(load_bundle(path)["deltas"])
+    return loose, bundled
+
+
+def _holds(name: str, raw: bytes, loose: dict, bundled: dict) -> bool:
+    """Whether a loose or bundled delta of this name has exactly these bytes."""
+    path = loose.get(name)
+    if path is not None and path.is_file() and not path.is_symlink() and path.read_bytes() == raw:
+        return True
+    return name in bundled and delta_file_bytes(bundled[name]) == raw
+
+
+def _names_for(name: str):
+    """name, then "<stem> 2.json", "<stem> 3.json" and so on."""
+    yield name
+    stem, k = name[: -len(".json")], 2
+    while True:
+        yield f"{stem} {k}.json"
+        k += 1
+
+
+def _create(path: Path, raw: bytes) -> bool:
+    """Write a new file; False, and nothing written, if the name already exists."""
+    try:
+        with open(path, "xb") as handle:
+            handle.write(raw)
+    except FileExistsError:
+        return False
+    return True
+
+
+def save_new_delta(frame: int, stream: str, delta, out_dir=None) -> Path:
+    """Write a new delta and return its path, never overwriting any delta.
+
+    Into stream_deltas/ it goes under frame-<N>-<stream>.json, or the next free
+    "frame-<N>-<stream> <k>.json" if a loose or bundled delta already has that
+    name. With out_dir it is out_dir/frame-<N>-<stream>.json, which must not
+    exist yet (FileExistsError)."""
+    name, raw = f"frame-{frame}-{stream}.json", delta_file_bytes(delta)
+    if out_dir is not None:
+        path = Path(out_dir) / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        if not _create(path, raw):
+            raise FileExistsError(f"{path} already exists; a delta is written once")
+        return path
+    DELTAS_DIR.mkdir(parents=True, exist_ok=True)
+    loose, bundled = _taken_delta_names()
+    for candidate in _names_for(name):
+        if candidate not in loose and candidate not in bundled and _create(DELTAS_DIR / candidate, raw):
+            return DELTAS_DIR / candidate
+
+
+def collect_deltas(source) -> dict:
+    """Copy every frame-*.json delta under source into stream_deltas/, never overwriting one.
+
+    A delta already there with exactly these bytes, loose or bundled, under its
+    name or one of its "<stem> <k>.json" names, is not copied again. Any other
+    delta goes in under its name, or under the next free one if a different
+    delta has it. Returns {"collected": {source: stored name}, "present":
+    {source: name}}."""
+    report = {"collected": {}, "present": {}}
+    DELTAS_DIR.mkdir(parents=True, exist_ok=True)
+    loose, bundled = _taken_delta_names()
+    for path in sorted(Path(source).rglob("frame-*.json")):
+        if path.is_symlink() or not path.is_file() or not DELTA_NAME.match(path.name):
+            continue
+        raw = path.read_bytes()
+        for candidate in _names_for(path.name):
+            if _holds(candidate, raw, loose, bundled):
+                report["present"][str(path)] = candidate
+                break
+            if candidate not in loose and candidate not in bundled and _create(DELTAS_DIR / candidate, raw):
+                loose[candidate] = DELTAS_DIR / candidate
+                report["collected"][str(path)] = candidate
+                break
+    return report
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # Dream Catcher Merge — additive, deterministic, collision-free
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -574,9 +969,9 @@ def merge_deltas(frame: int) -> dict:
     existing_article_pks = {a.get("pk", a.get("id", "")) for a in state.get("articles", [])}
     existing_thread_pks = {t.get("pk", t.get("id", "")) for t in state.get("threads", [])}
 
-    # Find all delta files for this frame
-    delta_files = sorted(DELTAS_DIR.glob(f"frame-{frame}-*.json"))
-    if not delta_files:
+    # Find all deltas for this frame, loose or already folded into a bundle
+    frame_deltas = load_frame_deltas(frame)
+    if not frame_deltas:
         print(f"  No deltas found for frame {frame}")
         return state
 
@@ -584,8 +979,7 @@ def merge_deltas(frame: int) -> dict:
     new_threads = 0
     new_reviews = 0
 
-    for delta_path in delta_files:
-        delta = load_json(delta_path)
+    for _, delta in frame_deltas:
         stream = delta.get("stream_id", "?")
 
         for article in delta.get("articles_created", []):
@@ -650,6 +1044,8 @@ def merge_deltas(frame: int) -> dict:
     print(f"    +{new_articles} articles, +{new_threads} threads, +{new_reviews} reviews")
     print(f"    Total: {len(state['articles'])} articles, {len(state['threads'])} threads")
 
+    print_fold_report(fold_merged_deltas(frame))
+
     return state
 
 
@@ -671,6 +1067,8 @@ def main():
     p_produce.add_argument("--stream", required=True, help="Stream ID (alpha, bravo, etc.)")
     p_produce.add_argument("--frame", type=int, default=0, help="Frame number (0=auto)")
     p_produce.add_argument("--ticks", type=int, default=3, help="Ticks per delta")
+    p_produce.add_argument("--out-dir", default=None,
+                           help="Write the delta into this directory instead of stream_deltas/ (it must not hold it yet)")
 
     p_merge = sub.add_parser("merge", help="Merge all deltas for a frame")
     p_merge.add_argument("--frame", type=int, default=0, help="Frame number (0=auto)")
@@ -685,15 +1083,24 @@ def main():
     p_refill.add_argument("--frame", type=int, default=0, help="Frame number (0=auto)")
     p_refill.add_argument("--batch", type=int, default=5, help="Articles per batch")
 
+    p_fold = sub.add_parser("fold", help="Fold loose deltas of merged frames into bundles")
+    p_fold.add_argument("--through-frame", type=int, default=0,
+                        help="Last frame to fold (0=the state's tick_count)")
+
+    p_extract = sub.add_parser("extract", help="Write every bundled delta back out as its original file")
+    p_extract.add_argument("--out", required=True, help="Directory to write the delta files into")
+
+    p_collect = sub.add_parser("collect", help="Copy deltas into stream_deltas/ without overwriting any")
+    p_collect.add_argument("--from", dest="source", required=True,
+                           help="Directory searched for frame-*.json deltas (for example downloaded artifacts)")
+
     args = parser.parse_args()
 
     if args.command == "produce":
         frame = args.frame or get_current_frame()
         print(f"Dream Catcher: producing delta for stream {args.stream}, frame {frame}")
         delta = produce_delta(args.stream, frame, args.ticks)
-        DELTAS_DIR.mkdir(parents=True, exist_ok=True)
-        delta_path = DELTAS_DIR / f"frame-{frame}-{args.stream}.json"
-        save_json(delta_path, delta)
+        delta_path = save_new_delta(frame, args.stream, delta, out_dir=args.out_dir)
         a = len(delta["articles_created"])
         t = len(delta["threads_created"])
         r = len(delta["reviews_created"])
@@ -711,11 +1118,10 @@ def main():
         print(f"Dream Catcher: full cycle, frame {frame}, {len(streams)} streams")
         print(f"{'=' * 50}")
 
-        DELTAS_DIR.mkdir(parents=True, exist_ok=True)
         for stream in streams:
             print(f"\n  Stream {stream}...")
             delta = produce_delta(stream, frame, args.ticks)
-            save_json(DELTAS_DIR / f"frame-{frame}-{stream}.json", delta)
+            save_new_delta(frame, stream, delta)
             a = len(delta["articles_created"])
             t = len(delta["threads_created"])
             r = len(delta["reviews_created"])
@@ -729,14 +1135,34 @@ def main():
         frame = args.frame or get_current_frame()
         print(f"Dream Catcher: refill bare articles, frame {frame}, batch {args.batch}")
         delta = produce_refill_delta(args.stream, frame, args.batch)
-        DELTAS_DIR.mkdir(parents=True, exist_ok=True)
-        delta_path = DELTAS_DIR / f"frame-{frame}-{args.stream}.json"
-        save_json(delta_path, delta)
+        delta_path = save_new_delta(frame, args.stream, delta)
         a = len(delta["articles_created"])
         print(f"  Refill delta saved: {a} articles enriched")
         print(f"  Path: {delta_path}")
         print(f"  Merging...")
         merge_deltas(frame)
+
+    elif args.command == "fold":
+        print("Dream Catcher: fold merged deltas into bundles")
+        report = fold_merged_deltas(args.through_frame or None)
+        print_fold_report(report)
+        if not report["folded"] and not report["kept"]:
+            print("  Nothing to fold")
+
+    elif args.command == "extract":
+        count = extract_bundled_deltas(args.out)
+        print(f"Dream Catcher: extracted {count} bundled deltas into {args.out}")
+
+    elif args.command == "collect":
+        print(f"Dream Catcher: collect deltas from {args.source}")
+        report = collect_deltas(args.source)
+        for source, name in report["collected"].items():
+            renamed = "" if Path(source).name == name else f" (the name {Path(source).name} is taken)"
+            print(f"  Collected {name}{renamed}")
+        for source, name in report["present"].items():
+            print(f"  Already present: {name}")
+        if not report["collected"] and not report["present"]:
+            print("  No deltas found")
 
     else:
         parser.print_help()

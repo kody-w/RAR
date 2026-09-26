@@ -164,6 +164,24 @@ jobs:
           print('✓ Security scan passed')
           "
 
+      # The RAPP/1 bounded-scan budget (docs/RAPP1-CONFORMANCE.md). The Test
+      # Suite checks it on every pull request and push, but the commits bots
+      # push to main never start the Test Suite, so it is measured here as
+      # well. Last, and not gated on the steps above: it cannot hide their
+      # failures, and they cannot hide it. Its summary always goes to the job
+      # log, and into the log the failure issue quotes only when it trips, so
+      # an OK summary never crowds another step's failure out of that excerpt.
+      - name: RAPP/1 bounded-scan budget
+        if: ${{ !cancelled() }}
+        shell: bash
+        run: |
+          if python scripts/check_rapp_scan_budget.py > /tmp/rapp_scan_budget.txt 2>&1; then
+            cat /tmp/rapp_scan_budget.txt
+          else
+            tee -a /tmp/test_output.txt < /tmp/rapp_scan_budget.txt
+            exit 1
+          fi
+
       - name: Open issue on failure
         if: failure()
         uses: actions/github-script@v7
