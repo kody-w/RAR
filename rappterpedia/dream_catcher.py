@@ -75,7 +75,6 @@ import subprocess
 import sys
 import time
 import urllib.request
-import urllib.error
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -105,40 +104,6 @@ HELD_LOOSE = frozenset()
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # LLM Backends — multi-stream intelligence
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-def _get_token():
-    token = os.environ.get("GITHUB_TOKEN", "")
-    if not token:
-        try:
-            r = subprocess.run(["gh", "auth", "token"], capture_output=True, text=True, timeout=5)
-            if r.returncode == 0:
-                token = r.stdout.strip()
-        except Exception:
-            pass
-    return token
-
-
-def llm_github(system: str, user: str, max_tokens: int = 500) -> str:
-    """GitHub Models API backend."""
-    token = _get_token()
-    if not token:
-        raise RuntimeError("No GITHUB_TOKEN")
-    model = os.environ.get("RAPPTERVERSE_MODEL", "openai/gpt-4.1-mini")
-    payload = json.dumps({
-        "model": model,
-        "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
-        "temperature": 0.85, "max_tokens": max_tokens,
-    }).encode()
-    req = urllib.request.Request(
-        "https://models.github.ai/inference/chat/completions",
-        data=payload,
-        headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
-        method="POST",
-    )
-    with urllib.request.urlopen(req, timeout=60) as resp:
-        data = json.loads(resp.read())
-    return data["choices"][0]["message"]["content"].strip()
-
 
 def llm_ollama(system: str, user: str, max_tokens: int = 500) -> str:
     """Ollama local backend — Gemma 4, Llama, Mistral, etc."""
@@ -192,11 +157,9 @@ def llm_copilot(system: str, user: str, max_tokens: int = 500) -> str:
 
 
 def llm_generate(system: str, user: str, max_tokens: int = 500) -> str | None:
-    """Try all LLM backends. The GitHub Copilot CLI is tried first (preferred backend).
-    Fallback: Copilot CLI → GitHub Models → Ollama."""
+    """Try configured LLM backends, then return None for rules-as-data fallback."""
     backends = [
-        ("copilot", llm_copilot),    # first (preferred backend)
-        ("github", llm_github),       # Second — rate-limited
+        ("copilot", llm_copilot),
     ]
     if os.environ.get("OLLAMA_MODEL", ""):
         backends.append(("ollama", llm_ollama))
