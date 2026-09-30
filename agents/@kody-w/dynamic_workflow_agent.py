@@ -24,6 +24,8 @@ workflow and the engine - a single file that can be shared and cannot lose its w
     DynamicWorkflow(action="run", name="adversarial-fleet", preset="my-round")
     DynamicWorkflow(action="status", run_id="adversarial-fleet-20260930-130200-ab12")
     DynamicWorkflow(action="resume", run_id="...")   # after a crash or a restart
+    DynamicWorkflow(action="run", name="reflect", preset="gemini", replay_from="<run id>")  # rerun an improved
+                                                     # workflow: identical settled agent calls are not spent again
 
 CLI: python3 dynamic_workflow_agent.py <action> [--name N] [--run-id R] [--preset P] [--args JSON | --args-file F]
      [--meta-file F --run-file F] [--max-concurrent N] [--keep-mcp]
@@ -506,7 +508,7 @@ await joinSession({ workflows });
 # ---- builtins (mount rewrites this block) ----
 BUILTINS = {
     'adversarial-fleet': {
-        "version": "1.0.0",
+        "version": '1.0.0',
         "meta": json.loads(r'''{"name": "adversarial-fleet", "description": "Governed subagent fleet built on RAR @rapp/swarm_factory's harness rules. Steps: a preflight gate; one reviewer per dimension; one refuter per finding (Sol, with Opus fallback); a triage barrier that dedupes findings into build units, plus seeds; one builder per unit in its own git worktree, test-first; an A/B prover gate with one bounded revision. Returns a ledger. args: {repo, base, frozen, brief, scratch_root, build_root, product?, user?, dimensions?:[{key,focus}], seeds?:[{unit_id,title,plan,files?}], elsewhere?:[{unit_id,title}], branch_prefix?, test_prefix?, trailers?, models?}. Saved in the RAPP DynamicWorkflow library (RAR @kody-w/dynamic_workflow_agent).", "phases": [{"title": "Preflight"}, {"title": "Review + refute"}, {"title": "Triage"}, {"title": "Build + prove"}, {"title": "Ledger"}], "argsSchema": {"type": "object", "required": ["repo", "base", "frozen", "brief", "scratch_root", "build_root"], "properties": {"repo": {"type": "string"}, "base": {"type": "string"}, "frozen": {"type": "string"}, "brief": {"type": "string"}, "scratch_root": {"type": "string"}, "build_root": {"type": "string"}, "product": {"type": "string"}, "user": {"type": "string"}, "branch_prefix": {"type": "string"}, "test_prefix": {"type": "string"}, "trailers": {"type": "string"}, "dimensions": {"type": "array", "items": {"type": "object", "required": ["key", "focus"], "properties": {"key": {"type": "string"}, "focus": {"type": "string"}}}}, "seeds": {"type": "array", "items": {"type": "object", "required": ["unit_id", "title", "plan"], "properties": {"unit_id": {"type": "string"}, "title": {"type": "string"}, "plan": {"type": "string"}, "files": {"type": "array", "items": {"type": "string"}}}}}, "elsewhere": {"type": "array", "items": {"type": "object"}}, "models": {"type": "object"}}}}'''),
         "run": r'''async (ctx) => {
   const A = ctx.args || {};
@@ -965,7 +967,7 @@ BUILTINS = {
 }''',
     },
     'reflect': {
-        "version": "1.0.0",
+        "version": '1.0.1',
         "meta": json.loads(r'''{"name": "reflect", "description": "Reverse-engineer a locally run AI tool so RAPP Buzz can record it, with the tool itself as the only source of truth. Steps: a preflight gate; four recon lenses at once (docs, disk, code, process); a hook map; a Sol refuter demonstrates every hook on real data, or it is dropped; an optional governor gate (pause); one builder writes <tool>_beside_agent.py test-first per the RAPP Buzz beside contract (docs/BESIDE.md); a prover gate with one bounded revision. args: {tool, about, roots:{name:[paths]}, contract, template, check_cmd ('{file}' = the agent), out_dir, scratch_root, needs?, gate?, product?, user?, models?}. Saved in the RAPP DynamicWorkflow library (RAR @kody-w/dynamic_workflow_agent).", "phases": [{"title": "Preflight"}, {"title": "Recon"}, {"title": "Hook map"}, {"title": "Refute"}, {"title": "Governor gate"}, {"title": "Build + prove"}, {"title": "Ledger"}], "argsSchema": {"type": "object", "required": ["tool", "about", "roots", "contract", "template", "check_cmd", "out_dir", "scratch_root"], "properties": {"tool": {"type": "string"}, "about": {"type": "string"}, "roots": {"type": "object"}, "contract": {"type": "string"}, "template": {"type": "string"}, "check_cmd": {"type": "string"}, "out_dir": {"type": "string"}, "scratch_root": {"type": "string"}, "needs": {"type": "array", "items": {"type": "string"}}, "gate": {"type": "boolean"}, "product": {"type": "string"}, "user": {"type": "string"}, "models": {"type": "object"}}}}'''),
         "run": r'''async (ctx) => {
   const A = ctx.args || {};
@@ -1122,9 +1124,10 @@ BUILTINS = {
     " 3. Implement look(). Stdlib only, read-only, fast (seconds), deterministic created_at.",
     " 4. Run the tests: they must pass. Run the contract check: " + A.check_cmd.replace("{file}", agentFile) + " - it must pass.",
     " 5. Dry-run look() on the REAL data (read-only) and report only counts of lines per kind and state, plus 8-character id prefixes.",
+    "A hook whose status is 'corrected' was demonstrated on real data but overstated: its verdict.corrected SUPERSEDES the hook's own claims - build from the correction, and handle the cases the refuter's reason names.",
     "Declare in covers which needs it serves and in gaps which it cannot. If the hooks cannot support a correct agent, return status 'declined' with the reason.",
     "",
-    "The refuted hook map (only hooks that held) (JSON):",
+    "The hook map after refutation (hooks that held, and hooks corrected by their refuter) (JSON):",
     JSON.stringify({ map: map, hooks: hooks }, null, 1),
     "",
     RULES,
@@ -1201,12 +1204,14 @@ BUILTINS = {
     const r = await tiered(refutePrompt(h), "refute:" + h.id, "refute", VERDICT_SCHEMA);
     const v = r.value;
     if (v === null) failed("refute", "refute:" + h.id);
-    const status = v === null ? "error" : v.holds === true && v.demonstrated === true ? "holds" : v.holds === true ? "undemonstrated" : "refuted";
+    // Real but overstated is not refuted: a hook demonstrated on real data with a correction is built from the correction.
+    const corrected = v !== null && v.holds !== true && v.demonstrated === true && typeof v.corrected === "string" && v.corrected.trim().length >= 20;
+    const status = v === null ? "error" : v.holds === true && v.demonstrated === true ? "holds" : corrected ? "corrected" : v.holds === true ? "undemonstrated" : "refuted";
     ctx.log("refute:" + h.id + " -> " + status + (v ? " - " + oneLine(v.reason, 100) : ""));
     return Object.assign({}, h, { status: status, verdict: v, refuted_by: r.model });
   }));
   ledger.hooks = judged.filter((x) => x !== null);
-  const held = ledger.hooks.filter((h) => h.status === "holds");
+  const held = ledger.hooks.filter((h) => h.status === "holds" || h.status === "corrected");
   if (!held.length) {
     ctx.log("No hook survived refutation - nothing to build on");
     return JSON.parse(JSON.stringify(Object.assign({ status: "halted", reason: "no hook survived" }, ledger)));
@@ -1214,7 +1219,7 @@ BUILTINS = {
 
   if (A.gate === true) {
     ctx.phase("Governor gate");
-    ctx.log("Paused for the governor: " + held.length + " hook(s) held. Review the ledger, then resume the run to build.");
+    ctx.log("Paused for the governor: " + held.length + " hook(s) to build on (" + ledger.hooks.filter((h) => h.status === "corrected").length + " corrected). Review the ledger, then resume the run to build.");
     await ctx.pause("hook-map-reviewed");
   }
 
@@ -1266,6 +1271,7 @@ BUILTINS = {
     lenses_ok: ledger.recon.length,
     hooks: hooks.length,
     held: held.length,
+    corrected: ledger.hooks.filter((h) => h.status === "corrected").length,
     refuted: ledger.hooks.filter((h) => h.status === "refuted").length,
     outcome: outcome,
     agent_file: b && b.agent_file ? b.agent_file : agentFile,
@@ -1586,7 +1592,32 @@ def act_install_copilot(**_):
             "note": "Copilot CLI sessions with experimental features on (copilot --experimental, or /experimental on once) load it at start: each saved workflow is a native Dynamic Workflow there"}
 
 
-def act_run(name=None, args=None, preset=None, max_concurrent=None, agent_timeout_s=None, keep_mcp=False, **_):
+def _replay_journal(run_dir, replay_from):
+    """Seed a new run's journal with the SETTLED agent results of an earlier run. A result is keyed by its exact
+    prompt and options, so only identical calls replay - an improved workflow re-spends nothing it did not change.
+    Steps and pauses are never carried: their keys are author names, not content."""
+    src = os.path.join(_run_dir(replay_from), "journal.jsonl")
+    n = 0
+    out = []
+    try:
+        with open(src, encoding="utf-8") as f:
+            for line in f:
+                try:
+                    e = json.loads(line)
+                except ValueError:
+                    continue
+                if e.get("kind") == "agent" and e.get("key"):
+                    out.append(json.dumps(e) + "\n")
+                    n += 1
+    except OSError:
+        pass
+    if out:
+        with open(os.path.join(run_dir, "journal.jsonl"), "w", encoding="utf-8") as f:
+            f.writelines(out)
+    return n
+
+
+def act_run(name=None, args=None, preset=None, max_concurrent=None, agent_timeout_s=None, keep_mcp=False, replay_from=None, **_):
     doc = _load(name)
     merged = {}
     if preset:
@@ -1602,16 +1633,19 @@ def act_run(name=None, args=None, preset=None, max_concurrent=None, agent_timeou
     copilot = _tool("copilot", "RAPP_WORKFLOWS_COPILOT")
     if not copilot:
         raise WorkflowError("GitHub Copilot CLI (copilot) is not installed - subagents run as copilot -p sessions")
+    if replay_from:
+        _run_dir(replay_from)
     run_id = "%s-%s-%s" % (doc["name"], time.strftime("%Y%m%d-%H%M%S"), secrets.token_hex(2))
     run_dir = os.path.join(_dir("runs"), run_id)
     os.makedirs(run_dir)
+    replayed = _replay_journal(run_dir, replay_from) if replay_from else 0
     options = {"max_concurrent": int(max_concurrent or 8), "agent_timeout_s": int(agent_timeout_s or 14400),
                "copilot": copilot, "extra_flags": [] if keep_mcp else _mcp_flags()}
     _write_json(os.path.join(run_dir, "run.json"), {
         "run_id": run_id, "args": merged, "options": options, "preset": preset or None,
         "workflow": {"name": doc["name"], "version": doc.get("version"), "sha256": doc.get("sha256"), "run": doc["run"]}})
     pid = _start(run_dir)
-    return {"started": run_id, "engine_pid": pid, "run_dir": run_dir,
+    return {"started": run_id, "engine_pid": pid, "run_dir": run_dir, "replayable_results": replayed,
             "next": "action=status run_id=%s (it keeps running on its own; after a crash or restart: action=resume)" % run_id}
 
 
@@ -1816,6 +1850,7 @@ class DynamicWorkflowAgent(BasicAgent):
                     "meta": {"type": "object", "description": "for save: {name, description, phases, argsSchema?}"},
                     "run": {"type": "string", "description": "for save: the workflow body, async (ctx) => { ... }"},
                     "max_concurrent": {"type": "integer", "description": "for run: subagents at once (default 8)"},
+                    "replay_from": {"type": "string", "description": "for run: an earlier run whose settled identical agent calls are reused"},
                     "agents_dir": {"type": "string", "description": "optional, for mount/unmount - leave it out: it defaults to the agents/ folder this Brainstem loaded me from"},
                 },
                 "required": ["action"],
@@ -1851,10 +1886,11 @@ def main(argv=None):
     p.add_argument("--force", action="store_true")
     p.add_argument("--lines", type=int, default=14)
     p.add_argument("--agents-dir")
+    p.add_argument("--replay-from")
     a = p.parse_args(argv)
     kw = {"name": a.name, "run_id": a.run_id, "preset": a.preset, "max_concurrent": a.max_concurrent,
           "agent_timeout_s": a.agent_timeout_s, "keep_mcp": a.keep_mcp, "force": a.force, "lines": a.lines,
-          "agents_dir": a.agents_dir}
+          "agents_dir": a.agents_dir, "replay_from": a.replay_from}
     if a.args_file:
         with open(a.args_file, encoding="utf-8") as f:
             kw["args"] = json.load(f)

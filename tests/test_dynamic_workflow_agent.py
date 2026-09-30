@@ -244,6 +244,23 @@ class EngineTest(Base):
         self.assertIn("bad args", self.act("status", run_id=run_id)["error"])
 
 
+    def test_replay_from_reuses_identical_settled_calls_and_nothing_else(self):
+        self.plan({"same": [{"reply": "first"}], "changed": [{"reply": "v1"}, {"reply": "v2"}]})
+        self.save("rr", """async (ctx) => ({ a: await ctx.agent("same prompt", { label: "same" }), b: await ctx.agent("old prompt", { label: "changed" }), s: await ctx.step("k", () => 1) })""")
+        first = self.start("rr")
+        self.wait(first)
+        self.save("rr", """async (ctx) => ({ a: await ctx.agent("same prompt", { label: "same" }), b: await ctx.agent("new prompt", { label: "changed" }), s: await ctx.step("k", () => 2) })""")
+        out = self.act("run", name="rr", replay_from=first)
+        self.runs.append(out["started"])
+        self.assertEqual(out["replayable_results"], 2)
+        st = self.wait(out["started"])
+        self.assertEqual(self.result(out["started"]), {"a": "first", "b": "v2", "s": 2})
+        self.assertEqual((len(self.calls("same")), len(self.calls("changed"))), (1, 2))
+        self.assertEqual(st["agents"]["replayed"], 1)
+        with self.assertRaises(self.m.WorkflowError):
+            self.act("run", name="rr", replay_from="no-such-run")
+
+
 class CrashTest(Base):
     """The engine is killed mid-run (a crash, a restart): nothing finished is redone and nothing running is lost."""
 
