@@ -4,6 +4,7 @@ first are reported together (one wake, not many). For every PROVEN unit it runs 
 on the exact commit the prover proved, and logs it to gov-ledger.jsonl. Remembers what it reported (watch.seen).
 State (seen events, the governor ledger) lives in ~/.rapp/workflows/governor/.
 Usage: python3 scripts/dynamic_workflow/governor/watch.py [max_seconds]    (RAPP_WORKFLOWS_AGENT=<agent.py> overrides)"""
+import calendar
 import json
 import os
 import re
@@ -37,10 +38,31 @@ def status(run_id):
         return None
 
 
+def started_at(run_id):
+    """When the run's first attempt started (epoch s). A line logged within REPLAY_S of it is a result replayed from
+    another run's journal (replay takes no time; a real agent takes minutes): already reported where it happened."""
+    try:
+        st = json.load(open(os.path.join(RUNS, run_id, "state.json")))
+        return calendar.timegm(time.strptime(st["started_at"][:19], "%Y-%m-%dT%H:%M:%S"))
+    except (OSError, ValueError, KeyError):
+        return None
+
+
+def line_time(e):
+    try:
+        return calendar.timegm(time.strptime(e["t"][:19], "%Y-%m-%dT%H:%M:%S"))
+    except (KeyError, ValueError):
+        return None
+
+
+REPLAY_S = 5
+
+
 def events():
     found = []
     for run_id in sorted(os.listdir(RUNS)):
         st = status(run_id)
+        t0 = started_at(run_id)
         if st in ("completed", "error", "paused", "interrupted", "cancelled", "halted"):
             found.append(("status %s %s" % (run_id, st), run_id, "%s is %s" % (run_id, st)))
         try:
@@ -51,7 +73,9 @@ def events():
                     except ValueError:
                         continue
                     if ACT.search(e.get("text", "")):
-                        found.append(("%s#%d" % (run_id, n), run_id, e["text"]))
+                        lt = line_time(e)
+                        replayed = t0 is not None and lt is not None and 0 <= lt - t0 < REPLAY_S and "-> " in e["text"]
+                        found.append(("%s#%d" % (run_id, n), run_id, e["text"] if not replayed else None))
         except OSError:
             pass
     if os.path.exists(NATIVE):
@@ -81,6 +105,14 @@ def gov_ab(run_id, slug):
     commit = proven_commit(run_id, slug)
     if not commit or not args.get("repo") or not args.get("base"):
         return "GOVERNOR A/B SKIPPED for %s: no commit or repo/base in the run" % slug
+    if os.path.exists(LEDGER):  # the same commit against the same base was already checked: the answer stands
+        for line in open(LEDGER):
+            try:
+                g = json.loads(line).get("governor") or ""
+            except ValueError:
+                continue
+            if g.startswith("GOVERNOR A/B HOLDS") and (" %s " % commit[:7]) in (" " + g.replace("  ", " ")) and ("base %s:" % args["base"]) in g:
+                return g + "  (already checked)"
     r = subprocess.run(["/usr/bin/python3", os.path.join(HERE, "gov_ab.py"), args["repo"], args["base"], commit, os.path.join(STATE, "ab")],
                        capture_output=True, text=True, timeout=7200)
     return "GOVERNOR " + ((r.stdout or r.stderr).strip().splitlines() or ["?"])[-1] + "  [unit %s]" % slug
@@ -100,6 +132,8 @@ while True:
         seen.add(key)
         with open(SEEN, "a") as f:
             f.write(key + "\n")
+        if text is None:  # replayed from another run's journal: reported where it happened
+            continue
         out.append("%s  %s" % (run_id[-9:], text[:230]))
         log({"run": run_id, "event": text[:600]})
         m = PROVEN.match(text)

@@ -1,5 +1,7 @@
-"""Governor's A/B for one proven branch: the tests the branch ADDED must pass on the branch and fail on the base.
-Runs both in clean exports (git archive), never in a builder's worktree. Prints one line; exit 0 iff the A/B holds.
+"""Governor's A/B for one proven branch: the tests the branch ADDED must pass on the branch and fail on the base
+SOURCE. The base tree is the branch's own export with every changed non-test file put back as the base had it
+(files the branch added outside tests/ removed) - the branch's test code, helpers included, runs against the base's
+code. Both run in clean exports (git archive), never in a builder's worktree. Prints one line; exit 0 iff it holds.
 Usage: python3 gov_ab.py <repo> <base> <branch-or-commit> [scratch_dir]"""
 import os
 import re
@@ -45,14 +47,25 @@ modules = [p[:-3].replace("/", ".") for p in added]
 name = re.sub(r"[^A-Za-z0-9_.-]+", "-", ref)
 fix_dir, base_dir = os.path.join(scratch, name + "-fix"), os.path.join(scratch, name + "-base")
 export(ref, fix_dir)
-export(base, base_dir)
-for p in added:
-    shutil.copy(os.path.join(fix_dir, p), os.path.join(base_dir, p))
+export(ref, base_dir)
+put_back = 0
+for row in git("diff", "--name-status", "--no-renames", base + ".." + ref).splitlines():
+    st, path = row.split("\t", 1)
+    if path.startswith("tests/"):
+        continue
+    target = os.path.join(base_dir, path)
+    if st == "A":
+        os.remove(target)
+    else:
+        os.makedirs(os.path.dirname(target), exist_ok=True)
+        with open(target, "wb") as f:
+            f.write(subprocess.run(["git", "-C", repo, "show", "%s:%s" % (base, path)], capture_output=True, check=True).stdout)
+    put_back += 1
 fix_ok, fix_line = run(fix_dir, modules)
 base_ok, base_line = run(base_dir, modules)
 holds = fix_ok and not base_ok
-print("%s  %s  | fix: %s | base %s: %s | %s" % (
-    "A/B HOLDS" if holds else "A/B DOES NOT HOLD", ref, fix_line, base, base_line, " ".join(modules)))
+print("%s  %s  | fix: %s | base %s (%d source files put back): %s | %s" % (
+    "A/B HOLDS" if holds else "A/B DOES NOT HOLD", ref, fix_line, base, put_back, base_line, " ".join(modules)))
 shutil.rmtree(fix_dir, ignore_errors=True)
 shutil.rmtree(base_dir, ignore_errors=True)
 sys.exit(0 if holds else 1)
