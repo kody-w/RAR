@@ -104,7 +104,7 @@ const ENGINE_VERSION = "1.0.0";
 const RUN_DIR = path.resolve(process.argv[2] || ".");
 const F = (n) => path.join(RUN_DIR, n);
 const spec = JSON.parse(fs.readFileSync(F("run.json"), "utf8"));
-const OPT = Object.assign({ max_concurrent: 8, agent_timeout_s: 14400, copilot: "copilot", cwd: F("cwd"), extra_flags: [], env: {} }, spec.options || {});
+const OPT = Object.assign({ max_concurrent: 8, agent_timeout_s: 14400, transient_backoff_s: 30, copilot: "copilot", cwd: F("cwd"), extra_flags: [], env: {} }, spec.options || {});
 const OPTION_KEYS = ["label", "schema", "model", "agent", "reasoningEffort", "contextTier"];
 const MAX_TRIES = 4;
 const SESSION_RE = /\/\.copilot\/session-state\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\//;
@@ -355,6 +355,16 @@ async function runAgent(key, prompt, opts) {
       if (text == null && !rec.session_id && rec.tries < MAX_TRIES) text = await spawnCopilot(rec, first, opts, null);
     } else {
       text = await spawnCopilot(rec, first, opts, null);
+    }
+    // The CLI failing (a model or network outage, a limit - a non-zero exit, not a signal) is not the subagent's
+    // answer: continue its own session, context kept, with backoff, before the call counts as failed.
+    while (text == null && !controller.signal.aborted && rec.status === "exited" && typeof rec.exit === "number" && rec.exit !== 0 && !rec.signal && rec.session_id && rec.tries < MAX_TRIES) {
+      const wait = OPT.transient_backoff_s * rec.tries;
+      progress("log", (rec.label || "agent") + ": the CLI failed (exit " + rec.exit + ") - continuing its own session " + rec.session_id.slice(0, 8) + " in " + wait + " s");
+      await sleep(wait * 1000);
+      if (controller.signal.aborted) break;
+      state.agents.resumed += 1;
+      text = await spawnCopilot(rec, CONTINUE + (opts.schema ? schemaTail(opts.schema) : ""), opts, rec.session_id);
     }
     if (text == null) {
       if (controller.signal.aborted) throw hardError("the run was stopped");
@@ -1595,10 +1605,13 @@ def act_install_copilot(**_):
 def _replay_journal(run_dir, replay_from):
     """Seed a new run's journal with the SETTLED agent results of an earlier run. A result is keyed by its exact
     prompt and options, so only identical calls replay - an improved workflow re-spends nothing it did not change.
-    Steps and pauses are never carried: their keys are author names, not content."""
-    src = os.path.join(_run_dir(replay_from), "journal.jsonl")
+    Steps and pauses are never carried: their keys are author names, not content. The records of calls that never
+    settled (an outage, a crash) are carried too, so the new run continues their own sessions, context kept."""
+    src_dir = _run_dir(replay_from)
+    src = os.path.join(src_dir, "journal.jsonl")
     n = 0
     out = []
+    settled = set()
     try:
         with open(src, encoding="utf-8") as f:
             for line in f:
@@ -1608,13 +1621,21 @@ def _replay_journal(run_dir, replay_from):
                     continue
                 if e.get("kind") == "agent" and e.get("key"):
                     out.append(json.dumps(e) + "\n")
+                    settled.add(e["key"])
                     n += 1
     except OSError:
         pass
     if out:
         with open(os.path.join(run_dir, "journal.jsonl"), "w", encoding="utf-8") as f:
             f.writelines(out)
-    return n
+    carried = 0
+    agents = os.path.join(src_dir, "agents")
+    for name in sorted(os.listdir(agents)) if os.path.isdir(agents) else []:
+        rec = _read_json(os.path.join(agents, name)) if name.endswith(".json") else None
+        if rec and rec.get("key") and rec["key"] not in settled and rec.get("status") == "exited" and rec.get("session_id"):
+            _write_json(os.path.join(run_dir, "agents", name), rec)
+            carried += 1
+    return n, carried
 
 
 def act_run(name=None, args=None, preset=None, max_concurrent=None, agent_timeout_s=None, keep_mcp=False, replay_from=None, **_):
@@ -1634,18 +1655,21 @@ def act_run(name=None, args=None, preset=None, max_concurrent=None, agent_timeou
     if not copilot:
         raise WorkflowError("GitHub Copilot CLI (copilot) is not installed - subagents run as copilot -p sessions")
     if replay_from:
-        _run_dir(replay_from)
+        if _state(_run_dir(replay_from)).get("status") == "running":
+            raise WorkflowError("run %s is still running - replay from it once it has settled (or cancel it)" % replay_from)
     run_id = "%s-%s-%s" % (doc["name"], time.strftime("%Y%m%d-%H%M%S"), secrets.token_hex(2))
     run_dir = os.path.join(_dir("runs"), run_id)
     os.makedirs(run_dir)
-    replayed = _replay_journal(run_dir, replay_from) if replay_from else 0
+    replayed, carried = _replay_journal(run_dir, replay_from) if replay_from else (0, 0)
     options = {"max_concurrent": int(max_concurrent or 8), "agent_timeout_s": int(agent_timeout_s or 14400),
+               "transient_backoff_s": float(os.environ.get("RAPP_WORKFLOWS_BACKOFF_S", "30")),
                "copilot": copilot, "extra_flags": [] if keep_mcp else _mcp_flags()}
     _write_json(os.path.join(run_dir, "run.json"), {
         "run_id": run_id, "args": merged, "options": options, "preset": preset or None,
         "workflow": {"name": doc["name"], "version": doc.get("version"), "sha256": doc.get("sha256"), "run": doc["run"]}})
     pid = _start(run_dir)
     return {"started": run_id, "engine_pid": pid, "run_dir": run_dir, "replayable_results": replayed,
+            "continued_sessions": carried,
             "next": "action=status run_id=%s (it keeps running on its own; after a crash or restart: action=resume)" % run_id}
 
 

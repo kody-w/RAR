@@ -44,7 +44,7 @@ class Base(unittest.TestCase):
             "RAPP_WORKFLOWS_HOME": os.path.join(self.tmp, "wf"), "RAPP_WORKFLOWS_COPILOT": FAKE,
             "COPILOT_EXTENSIONS_DIR": os.path.join(self.tmp, "ext"), "FAKE_STATE": os.path.join(self.tmp, "fake-state"),
             "FAKE_LOG": os.path.join(self.tmp, "fake.log"), "FAKE_HOME": os.path.join(self.tmp, "home"),
-            "FAKE_PLAN": os.path.join(self.tmp, "plan.json")})
+            "FAKE_PLAN": os.path.join(self.tmp, "plan.json"), "RAPP_WORKFLOWS_BACKOFF_S": "0"})
         self.m = load()
         self.plan({})
         self.runs = []
@@ -215,6 +215,33 @@ class EngineTest(Base):
         st = self.wait(run_id)
         self.assertEqual((st["status"], self.result(run_id)), ("completed", {"got": None}))
         self.assertEqual(st["agents"]["failed"], 1)
+        # a CLI that keeps failing is continued in its own session up to the bound, then the call is a failure
+        f = self.calls("f")
+        self.assertEqual(len(f), 4)
+        self.assertEqual([c["continue"] for c in f], [False, True, True, True])
+        self.assertEqual(len({c["resume"] for c in f[1:]}), 1)
+
+    def test_an_outage_continues_the_agents_own_session_and_keeps_its_answer(self):
+        self.plan({"x": [{"reply": "", "exit": 1}, {"reply": "done"}]})
+        self.save("outage", "async (ctx) => ({ got: await ctx.agent('p', { label: 'x' }) })")
+        run_id = self.start("outage")
+        st = self.wait(run_id)
+        self.assertEqual(self.result(run_id), {"got": "done"})
+        first, again = self.calls("x")
+        rec = self.records(run_id)[0]
+        self.assertEqual((again["resume"], again["continue"]), (rec["session_id"], True))
+        self.assertEqual((st["agents"]["failed"], st["agents"]["resumed"]), (0, 1))
+
+    @unittest.skipUnless(HAVE_LSOF, "naming a running session needs lsof")
+    def test_an_agent_killed_by_its_timeout_is_not_continued(self):
+        self.plan({"t": [{"reply": "late", "sleep": 60}]})
+        self.save("slow2", "async (ctx) => ({ got: await ctx.agent('p', { label: 't' }) })")
+        run_id = self.start("slow2", agent_timeout_s=8)
+        self.wait(run_id, timeout=120)
+        self.assertEqual(self.result(run_id), {"got": None})
+        rec = self.records(run_id)[0]
+        self.assertTrue(rec.get("session_id"), "the session was named before the timeout, so continuing it was possible")
+        self.assertEqual((rec.get("signal"), len(self.calls("t"))), ("SIGTERM", 1))
 
     def test_parallel_pipeline_and_nested_workflow_semantics(self):
         self.save("sem", """async (ctx) => {
@@ -243,6 +270,26 @@ class EngineTest(Base):
         self.assertEqual(st["status"], "error")
         self.assertIn("bad args", self.act("status", run_id=run_id)["error"])
 
+
+    def test_replay_from_continues_the_sessions_an_outage_cut_short(self):
+        os.environ["RAPP_WORKFLOWS_BACKOFF_S"] = "600"
+        self.plan({"w": [{"reply": "", "exit": 1}, {"reply": "finished"}], "ok": [{"reply": "fine"}]})
+        self.save("cut", "async (ctx) => ({ a: await ctx.agent('a', { label: 'ok' }), w: await ctx.agent('w', { label: 'w' }) })")
+        first = self.start("cut")
+        self.wait_for("the outage to be seen", lambda: "continuing its own session" in open(os.path.join(self.run_dir(first), "progress.jsonl")).read())
+        with self.assertRaises(self.m.WorkflowError):
+            self.act("run", name="cut", replay_from=first)
+        os.kill(self.state(first)["pid"], signal.SIGKILL)
+        sid = [r for r in self.records(first) if r["label"] == "w"][0]["session_id"]
+        os.environ["RAPP_WORKFLOWS_BACKOFF_S"] = "0"
+        out = self.act("run", name="cut", replay_from=first)
+        self.runs.append(out["started"])
+        self.assertEqual((out["replayable_results"], out["continued_sessions"]), (1, 1))
+        st = self.wait(out["started"])
+        self.assertEqual(self.result(out["started"]), {"a": "fine", "w": "finished"})
+        w = self.calls("w")
+        self.assertEqual((len(w), w[1]["resume"], w[1]["continue"]), (2, sid, True))
+        self.assertEqual(len(self.calls("ok")), 1)
 
     def test_replay_from_reuses_identical_settled_calls_and_nothing_else(self):
         self.plan({"same": [{"reply": "first"}], "changed": [{"reply": "v1"}, {"reply": "v2"}]})

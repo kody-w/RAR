@@ -14,7 +14,7 @@ const ENGINE_VERSION = "1.0.0";
 const RUN_DIR = path.resolve(process.argv[2] || ".");
 const F = (n) => path.join(RUN_DIR, n);
 const spec = JSON.parse(fs.readFileSync(F("run.json"), "utf8"));
-const OPT = Object.assign({ max_concurrent: 8, agent_timeout_s: 14400, copilot: "copilot", cwd: F("cwd"), extra_flags: [], env: {} }, spec.options || {});
+const OPT = Object.assign({ max_concurrent: 8, agent_timeout_s: 14400, transient_backoff_s: 30, copilot: "copilot", cwd: F("cwd"), extra_flags: [], env: {} }, spec.options || {});
 const OPTION_KEYS = ["label", "schema", "model", "agent", "reasoningEffort", "contextTier"];
 const MAX_TRIES = 4;
 const SESSION_RE = /\/\.copilot\/session-state\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\//;
@@ -265,6 +265,16 @@ async function runAgent(key, prompt, opts) {
       if (text == null && !rec.session_id && rec.tries < MAX_TRIES) text = await spawnCopilot(rec, first, opts, null);
     } else {
       text = await spawnCopilot(rec, first, opts, null);
+    }
+    // The CLI failing (a model or network outage, a limit - a non-zero exit, not a signal) is not the subagent's
+    // answer: continue its own session, context kept, with backoff, before the call counts as failed.
+    while (text == null && !controller.signal.aborted && rec.status === "exited" && typeof rec.exit === "number" && rec.exit !== 0 && !rec.signal && rec.session_id && rec.tries < MAX_TRIES) {
+      const wait = OPT.transient_backoff_s * rec.tries;
+      progress("log", (rec.label || "agent") + ": the CLI failed (exit " + rec.exit + ") - continuing its own session " + rec.session_id.slice(0, 8) + " in " + wait + " s");
+      await sleep(wait * 1000);
+      if (controller.signal.aborted) break;
+      state.agents.resumed += 1;
+      text = await spawnCopilot(rec, CONTINUE + (opts.schema ? schemaTail(opts.schema) : ""), opts, rec.session_id);
     }
     if (text == null) {
       if (controller.signal.aborted) throw hardError("the run was stopped");
