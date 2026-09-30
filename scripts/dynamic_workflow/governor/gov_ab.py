@@ -31,12 +31,18 @@ def export(rev, into):
             t.extractall(into)
 
 
-def run(tree, modules):
+def run(tree, modules, files):
+    """The repo's own runner: a tests/ package (RAPP Buzz) runs with the system python's unittest; a tests/ folder
+    without one (RAR-style, sibling imports) runs with pytest."""
     env = dict(os.environ, PYTHONDONTWRITEBYTECODE="1")
-    r = subprocess.run(["/usr/bin/python3", "-m", "unittest"] + modules, cwd=tree, capture_output=True, text=True, env=env, timeout=3600)
-    tail = [l for l in r.stderr.strip().splitlines() if l.strip()]
-    ran = next((l for l in reversed(tail) if l.startswith("Ran ")), "Ran ? tests")
-    return r.returncode == 0, ran.split(" in ")[0] + " -> " + (tail[-1] if tail else "?")
+    if os.path.exists(os.path.join(tree, "tests", "__init__.py")):
+        r = subprocess.run(["/usr/bin/python3", "-m", "unittest"] + modules, cwd=tree, capture_output=True, text=True, env=env, timeout=3600)
+        tail = [l for l in r.stderr.strip().splitlines() if l.strip()]
+        ran = next((l for l in reversed(tail) if l.startswith("Ran ")), "Ran ? tests")
+        return r.returncode == 0, ran.split(" in ")[0] + " -> " + (tail[-1] if tail else "?")
+    r = subprocess.run(["python3", "-m", "pytest", "-q", "-p", "no:cacheprovider"] + files, cwd=tree, capture_output=True, text=True, env=env, timeout=3600)
+    tail = [l for l in r.stdout.strip().splitlines() if l.strip()]
+    return r.returncode == 0, "pytest -> " + (tail[-1] if tail else "?")
 
 
 added = [p for p in git("diff", "--name-only", "--diff-filter=A", base + ".." + ref, "--", "tests").split() if re.match(r"tests/test_[^/]+\.py$", p)]
@@ -61,8 +67,8 @@ for row in git("diff", "--name-status", "--no-renames", base + ".." + ref).split
         with open(target, "wb") as f:
             f.write(subprocess.run(["git", "-C", repo, "show", "%s:%s" % (base, path)], capture_output=True, check=True).stdout)
     put_back += 1
-fix_ok, fix_line = run(fix_dir, modules)
-base_ok, base_line = run(base_dir, modules)
+fix_ok, fix_line = run(fix_dir, modules, added)
+base_ok, base_line = run(base_dir, modules, added)
 holds = fix_ok and not base_ok
 print("%s  %s  | fix: %s | base %s (%d source files put back): %s | %s" % (
     "A/B HOLDS" if holds else "A/B DOES NOT HOLD", ref, fix_line, base, put_back, base_line, " ".join(modules)))
