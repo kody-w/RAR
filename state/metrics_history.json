@@ -209,29 +209,33 @@
   "2026-09-30": {
    "count": 93,
    "uniques": 25
+  },
+  "2026-10-01": {
+   "count": 140,
+   "uniques": 44
   }
  },
  "last_known": {
-  "at": "2026-10-01T11:40:30Z",
-  "clone_uniques_14d": 285,
-  "clones_14d": 3547,
+  "at": "2026-10-02T11:10:13Z",
+  "clone_uniques_14d": 306,
+  "clones_14d": 3598,
   "paths": [
    {
-    "count": 10,
+    "count": 6,
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "uniques": 6
-   },
-   {
-    "count": 3,
-    "path": "/kody-w/RAR/tree/main/agents",
-    "title": "/tree/main/agents",
-    "uniques": 3
+    "uniques": 5
    },
    {
     "count": 2,
     "path": "/kody-w/RAR/issues",
     "title": "/issues",
+    "uniques": 2
+   },
+   {
+    "count": 2,
+    "path": "/kody-w/RAR/tree/main/agents",
+    "title": "/tree/main/agents",
     "uniques": 2
    },
    {
@@ -254,26 +258,26 @@
    },
    {
     "count": 1,
-    "path": "/kody-w/RAR/blob/c352b61ee111103df69881d385be0a4011c5b1b1/agents/@borg/borg_agent.py.card",
-    "title": "/blob/c352b61ee111103df69881d385be0a4011c5b1b1/agents/@borg/borg_agent.py.card",
-    "uniques": 1
-   },
-   {
-    "count": 1,
-    "path": "/kody-w/RAR/blob/c352b61ee111103df69881d385be0a4011c5b1b1/agents/@rarbookworld/bookfactory_agent.py",
-    "title": "/blob/c352b61ee111103df69881d385be0a4011c5b1b1/agents/@rarbookworld/bookfactory_agent.py",
-    "uniques": 1
-   },
-   {
-    "count": 1,
-    "path": "/kody-w/RAR/blob/c352b61ee111103df69881d385be0a4011c5b1b1/agents/@wildhaven/bellows_agent.py",
-    "title": "/blob/c352b61ee111103df69881d385be0a4011c5b1b1/agents/@wildhaven/bellows_agent.py",
-    "uniques": 1
-   },
-   {
-    "count": 1,
     "path": "/kody-w/RAR/blob/caa619395f28b75cb7d6031113c7d977e268a86e/scout/bundles/cowork-cookbook-120/skills/rar-cowork-cookbook-ppt-exec-identify-service-trends/SKILL.md",
     "title": "/blob/caa619395f28b75cb7d6031113c7d977e268a86e/scout/bundles/cowork-cookbook-120/skills/rar-cowork-cookbook-ppt-exec-identify-service-trends/SKILL.md",
+    "uniques": 1
+   },
+   {
+    "count": 1,
+    "path": "/kody-w/RAR/blob/e0e1c26856873c1ef6cd79dd93414939aa135b9e/docs/api/v1/cards/CORE--aibast-agents-library-maintenance-scheduling-0001.json",
+    "title": "/blob/e0e1c26856873c1ef6cd79dd93414939aa135b9e/docs/api/v1/cards/CORE--aibast-agents-library-maintenance-scheduling-0001.json",
+    "uniques": 1
+   },
+   {
+    "count": 1,
+    "path": "/kody-w/RAR/blob/main/README.md",
+    "title": "/blob/main/README.md",
+    "uniques": 1
+   },
+   {
+    "count": 1,
+    "path": "/kody-w/RAR/blob/main/agents/@cat-agent-skills/exam_prep_learning_plan_builder_agent.py",
+    "title": "/blob/main/agents/@cat-agent-skills/exam_prep_learning_plan_builder_agent.py",
     "uniques": 1
    }
   ],
@@ -285,17 +289,12 @@
    },
    {
     "count": 1,
-    "referrer": "Bing",
-    "uniques": 1
-   },
-   {
-    "count": 1,
     "referrer": "kody-w.github.io",
     "uniques": 1
    }
   ],
   "view_uniques_14d": 22,
-  "views_14d": 51
+  "views_14d": 39
  },
  "snapshots": [
   {
@@ -1537,6 +1536,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 95,
    "views_all_time": 228
+  },
+  {
+   "at": "2026-10-02T11:10:13Z",
+   "cdn_all_time": 90,
+   "clone_uniques_all_time": 1596,
+   "clones_all_time": 9550,
+   "days_tracked": 52,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 96,
+   "views_all_time": 229
   }
  ],
  "views": {
@@ -1743,6 +1752,10 @@
   "2026-09-30": {
    "count": 5,
    "uniques": 3
+  },
+  "2026-10-01": {
+   "count": 1,
+   "uniques": 1
   }
  }
 }
