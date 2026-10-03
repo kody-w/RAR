@@ -213,30 +213,34 @@
   "2026-10-01": {
    "count": 140,
    "uniques": 44
+  },
+  "2026-10-02": {
+   "count": 104,
+   "uniques": 29
   }
  },
  "last_known": {
-  "at": "2026-10-02T11:10:13Z",
-  "clone_uniques_14d": 306,
-  "clones_14d": 3598,
+  "at": "2026-10-03T10:29:05Z",
+  "clone_uniques_14d": 296,
+  "clones_14d": 3579,
   "paths": [
    {
-    "count": 6,
+    "count": 5,
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "uniques": 5
+    "uniques": 4
    },
    {
-    "count": 2,
-    "path": "/kody-w/RAR/issues",
-    "title": "/issues",
-    "uniques": 2
+    "count": 3,
+    "path": "/kody-w/RAR/tree/main",
+    "title": "/tree/main",
+    "uniques": 3
    },
    {
-    "count": 2,
+    "count": 3,
     "path": "/kody-w/RAR/tree/main/agents",
     "title": "/tree/main/agents",
-    "uniques": 2
+    "uniques": 3
    },
    {
     "count": 2,
@@ -276,16 +280,21 @@
    },
    {
     "count": 1,
-    "path": "/kody-w/RAR/blob/main/agents/@cat-agent-skills/exam_prep_learning_plan_builder_agent.py",
-    "title": "/blob/main/agents/@cat-agent-skills/exam_prep_learning_plan_builder_agent.py",
+    "path": "/kody-w/RAR/blob/main/agents/@cat-agent-skills/clt_hr_assistant_agent.py",
+    "title": "/blob/main/agents/@cat-agent-skills/clt_hr_assistant_agent.py",
     "uniques": 1
    }
   ],
   "referrers": [
    {
-    "count": 8,
+    "count": 6,
     "referrer": "github.com",
-    "uniques": 7
+    "uniques": 6
+   },
+   {
+    "count": 1,
+    "referrer": "Bing",
+    "uniques": 1
    },
    {
     "count": 1,
@@ -293,8 +302,8 @@
     "uniques": 1
    }
   ],
-  "view_uniques_14d": 22,
-  "views_14d": 39
+  "view_uniques_14d": 20,
+  "views_14d": 38
  },
  "snapshots": [
   {
@@ -1546,6 +1555,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 96,
    "views_all_time": 229
+  },
+  {
+   "at": "2026-10-03T10:29:05Z",
+   "cdn_all_time": 90,
+   "clone_uniques_all_time": 1625,
+   "clones_all_time": 9654,
+   "days_tracked": 53,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 98,
+   "views_all_time": 235
   }
  ],
  "views": {
@@ -1756,6 +1775,10 @@
   "2026-10-01": {
    "count": 1,
    "uniques": 1
+  },
+  "2026-10-02": {
+   "count": 6,
+   "uniques": 2
   }
  }
 }

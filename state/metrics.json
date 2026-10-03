@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-10-02T11:10:13Z",
+ "generated_at": "2026-10-03T10:29:05Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,26 +10,26 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 12,
-  "size_kb": 114904,
+  "size_kb": 116959,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-10-02T10:14:05Z",
+  "pushed_at": "2026-10-03T07:24:32Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
  "totals": {
-  "downloads": 9640,
-  "clones": 9550,
+  "downloads": 9744,
+  "clones": 9654,
   "cdn_hits": 90,
   "release_downloads": 0,
   "agent_file_downloads": 12,
-  "clones_excluding_ci_estimate": 6534,
-  "ci_clone_estimate": 3016,
-  "page_views": 229,
-  "clone_uniques_14d": 306,
-  "view_uniques_14d": 22,
-  "clone_uniques_daily_sum": 1596,
-  "view_uniques_daily_sum": 96,
-  "days_tracked": 52,
+  "clones_excluding_ci_estimate": 6580,
+  "ci_clone_estimate": 3074,
+  "page_views": 235,
+  "clone_uniques_14d": 296,
+  "view_uniques_14d": 20,
+  "clone_uniques_daily_sum": 1625,
+  "view_uniques_daily_sum": 98,
+  "days_tracked": 53,
   "tracking_since": "2026-07-14",
   "agents": 1700,
   "swarms": 2,
@@ -425,6 +425,13 @@
    "clone_uniques": 44,
    "views": 1,
    "cdn": 0
+  },
+  {
+   "date": "2026-10-02",
+   "clones": 104,
+   "clone_uniques": 29,
+   "views": 6,
+   "cdn": 0
   }
  ],
  "traffic": {
@@ -432,20 +439,20 @@
    {
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "count": 6,
-    "uniques": 5
+    "count": 5,
+    "uniques": 4
    },
    {
-    "path": "/kody-w/RAR/issues",
-    "title": "/issues",
-    "count": 2,
-    "uniques": 2
+    "path": "/kody-w/RAR/tree/main",
+    "title": "/tree/main",
+    "count": 3,
+    "uniques": 3
    },
    {
     "path": "/kody-w/RAR/tree/main/agents",
     "title": "/tree/main/agents",
-    "count": 2,
-    "uniques": 2
+    "count": 3,
+    "uniques": 3
    },
    {
     "path": "/kody-w/RAR/discussions",
@@ -484,8 +491,8 @@
     "uniques": 1
    },
    {
-    "path": "/kody-w/RAR/blob/main/agents/@cat-agent-skills/exam_prep_learning_plan_builder_agent.py",
-    "title": "/blob/main/agents/@cat-agent-skills/exam_prep_learning_plan_builder_agent.py",
+    "path": "/kody-w/RAR/blob/main/agents/@cat-agent-skills/clt_hr_assistant_agent.py",
+    "title": "/blob/main/agents/@cat-agent-skills/clt_hr_assistant_agent.py",
     "count": 1,
     "uniques": 1
    }
@@ -493,8 +500,13 @@
   "referrers": [
    {
     "referrer": "github.com",
-    "count": 8,
-    "uniques": 7
+    "count": 6,
+    "uniques": 6
+   },
+   {
+    "referrer": "Bing",
+    "count": 1,
+    "uniques": 1
    },
    {
     "referrer": "kody-w.github.io",
@@ -502,15 +514,15 @@
     "uniques": 1
    }
   ],
-  "clones_14d": 3598,
-  "views_14d": 39,
+  "clones_14d": 3579,
+  "views_14d": 38,
   "live": true,
-  "as_of": "2026-10-02T11:10:13Z"
+  "as_of": "2026-10-03T10:29:05Z"
  },
  "cdn": {
   "total_hits": 90,
   "bandwidth": 4076442,
-  "rank": 1907680,
+  "rank": 1915577,
   "agent_hits": 12,
   "files": [
    {
