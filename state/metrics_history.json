@@ -217,12 +217,16 @@
   "2026-10-02": {
    "count": 104,
    "uniques": 29
+  },
+  "2026-10-03": {
+   "count": 87,
+   "uniques": 15
   }
  },
  "last_known": {
-  "at": "2026-10-03T10:29:05Z",
-  "clone_uniques_14d": 296,
-  "clones_14d": 3579,
+  "at": "2026-10-04T11:09:44Z",
+  "clone_uniques_14d": 287,
+  "clones_14d": 3557,
   "paths": [
    {
     "count": 5,
@@ -287,9 +291,9 @@
   ],
   "referrers": [
    {
-    "count": 6,
+    "count": 5,
     "referrer": "github.com",
-    "uniques": 6
+    "uniques": 5
    },
    {
     "count": 1,
@@ -302,8 +306,8 @@
     "uniques": 1
    }
   ],
-  "view_uniques_14d": 20,
-  "views_14d": 38
+  "view_uniques_14d": 17,
+  "views_14d": 35
  },
  "snapshots": [
   {
@@ -1565,6 +1569,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 98,
    "views_all_time": 235
+  },
+  {
+   "at": "2026-10-04T11:09:44Z",
+   "cdn_all_time": 90,
+   "clone_uniques_all_time": 1640,
+   "clones_all_time": 9741,
+   "days_tracked": 54,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 98,
+   "views_all_time": 235
   }
  ],
  "views": {
@@ -1779,6 +1793,10 @@
   "2026-10-02": {
    "count": 6,
    "uniques": 2
+  },
+  "2026-10-03": {
+   "count": 0,
+   "uniques": 0
   }
  }
 }
