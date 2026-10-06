@@ -3,7 +3,8 @@
   "2026-07-09": 65,
   "2026-08-01": 7,
   "2026-09-21": 12,
-  "2026-09-26": 6
+  "2026-09-26": 6,
+  "2026-10-04": 4
  },
  "clones": {
   "2026-07-14": {
@@ -225,12 +226,16 @@
   "2026-10-04": {
    "count": 118,
    "uniques": 33
+  },
+  "2026-10-05": {
+   "count": 89,
+   "uniques": 25
   }
  },
  "last_known": {
-  "at": "2026-10-05T12:22:09Z",
-  "clone_uniques_14d": 296,
-  "clones_14d": 3589,
+  "at": "2026-10-06T12:05:13Z",
+  "clone_uniques_14d": 303,
+  "clones_14d": 3620,
   "paths": [
    {
     "count": 4,
@@ -249,6 +254,12 @@
     "path": "/kody-w/RAR/tree/main/agents",
     "title": "/tree/main/agents",
     "uniques": 3
+   },
+   {
+    "count": 3,
+    "path": "/kody-w/RAR/stargazers",
+    "title": "/stargazers",
+    "uniques": 1
    },
    {
     "count": 2,
@@ -282,22 +293,16 @@
    },
    {
     "count": 1,
-    "path": "/kody-w/RAR/blob/main/README.md",
-    "title": "/blob/main/README.md",
-    "uniques": 1
-   },
-   {
-    "count": 1,
-    "path": "/kody-w/RAR/blob/main/agents/@cat-agent-skills/clt_hr_assistant_agent.py",
-    "title": "/blob/main/agents/@cat-agent-skills/clt_hr_assistant_agent.py",
+    "path": "/kody-w/RAR/blob/main/CLAUDE.md",
+    "title": "/blob/main/CLAUDE.md",
     "uniques": 1
    }
   ],
   "referrers": [
    {
-    "count": 4,
+    "count": 6,
     "referrer": "github.com",
-    "uniques": 4
+    "uniques": 5
    },
    {
     "count": 1,
@@ -311,7 +316,7 @@
    }
   ],
   "view_uniques_14d": 16,
-  "views_14d": 34
+  "views_14d": 36
  },
  "snapshots": [
   {
@@ -1593,6 +1598,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 99,
    "views_all_time": 236
+  },
+  {
+   "at": "2026-10-06T12:05:13Z",
+   "cdn_all_time": 94,
+   "clone_uniques_all_time": 1698,
+   "clones_all_time": 9948,
+   "days_tracked": 56,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 101,
+   "views_all_time": 239
   }
  ],
  "views": {
@@ -1815,6 +1830,10 @@
   "2026-10-04": {
    "count": 1,
    "uniques": 1
+  },
+  "2026-10-05": {
+   "count": 3,
+   "uniques": 2
   }
  }
 }

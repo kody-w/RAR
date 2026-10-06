@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-10-05T12:22:09Z",
+ "generated_at": "2026-10-06T12:05:13Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,26 +10,26 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 12,
-  "size_kb": 121080,
+  "size_kb": 109017,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-10-05T08:03:40Z",
+  "pushed_at": "2026-10-06T08:25:08Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
  "totals": {
-  "downloads": 9949,
-  "clones": 9859,
-  "cdn_hits": 90,
+  "downloads": 10042,
+  "clones": 9948,
+  "cdn_hits": 94,
   "release_downloads": 0,
   "agent_file_downloads": 12,
-  "clones_excluding_ci_estimate": 6669,
-  "ci_clone_estimate": 3190,
-  "page_views": 236,
-  "clone_uniques_14d": 296,
+  "clones_excluding_ci_estimate": 6700,
+  "ci_clone_estimate": 3248,
+  "page_views": 239,
+  "clone_uniques_14d": 303,
   "view_uniques_14d": 16,
-  "clone_uniques_daily_sum": 1673,
-  "view_uniques_daily_sum": 99,
-  "days_tracked": 55,
+  "clone_uniques_daily_sum": 1698,
+  "view_uniques_daily_sum": 101,
+  "days_tracked": 56,
   "tracking_since": "2026-07-14",
   "agents": 1700,
   "swarms": 2,
@@ -445,6 +445,13 @@
    "clones": 118,
    "clone_uniques": 33,
    "views": 1,
+   "cdn": 4
+  },
+  {
+   "date": "2026-10-05",
+   "clones": 89,
+   "clone_uniques": 25,
+   "views": 3,
    "cdn": 0
   }
  ],
@@ -467,6 +474,12 @@
     "title": "/tree/main/agents",
     "count": 3,
     "uniques": 3
+   },
+   {
+    "path": "/kody-w/RAR/stargazers",
+    "title": "/stargazers",
+    "count": 3,
+    "uniques": 1
    },
    {
     "path": "/kody-w/RAR/discussions",
@@ -499,14 +512,8 @@
     "uniques": 1
    },
    {
-    "path": "/kody-w/RAR/blob/main/README.md",
-    "title": "/blob/main/README.md",
-    "count": 1,
-    "uniques": 1
-   },
-   {
-    "path": "/kody-w/RAR/blob/main/agents/@cat-agent-skills/clt_hr_assistant_agent.py",
-    "title": "/blob/main/agents/@cat-agent-skills/clt_hr_assistant_agent.py",
+    "path": "/kody-w/RAR/blob/main/CLAUDE.md",
+    "title": "/blob/main/CLAUDE.md",
     "count": 1,
     "uniques": 1
    }
@@ -514,8 +521,8 @@
   "referrers": [
    {
     "referrer": "github.com",
-    "count": 4,
-    "uniques": 4
+    "count": 6,
+    "uniques": 5
    },
    {
     "referrer": "Bing",
@@ -528,15 +535,15 @@
     "uniques": 1
    }
   ],
-  "clones_14d": 3589,
-  "views_14d": 34,
+  "clones_14d": 3620,
+  "views_14d": 36,
   "live": true,
-  "as_of": "2026-10-05T12:22:09Z"
+  "as_of": "2026-10-06T12:05:13Z"
  },
  "cdn": {
-  "total_hits": 90,
-  "bandwidth": 4076442,
-  "rank": 1930858,
+  "total_hits": 94,
+  "bandwidth": 4141807,
+  "rank": 1884447,
   "agent_hits": 12,
   "files": [
    {
