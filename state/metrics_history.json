@@ -4,7 +4,8 @@
   "2026-08-01": 7,
   "2026-09-21": 12,
   "2026-09-26": 6,
-  "2026-10-04": 4
+  "2026-10-04": 4,
+  "2026-10-05": 330
  },
  "clones": {
   "2026-07-14": {
@@ -230,18 +231,22 @@
   "2026-10-05": {
    "count": 89,
    "uniques": 25
+  },
+  "2026-10-06": {
+   "count": 76,
+   "uniques": 16
   }
  },
  "last_known": {
-  "at": "2026-10-06T12:05:13Z",
-  "clone_uniques_14d": 303,
-  "clones_14d": 3620,
+  "at": "2026-10-07T11:50:51Z",
+  "clone_uniques_14d": 299,
+  "clones_14d": 3600,
   "paths": [
    {
-    "count": 4,
+    "count": 5,
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "uniques": 3
+    "uniques": 4
    },
    {
     "count": 3,
@@ -257,14 +262,14 @@
    },
    {
     "count": 3,
-    "path": "/kody-w/RAR/stargazers",
-    "title": "/stargazers",
+    "path": "/kody-w/RAR/discussions",
+    "title": "/discussions",
     "uniques": 1
    },
    {
-    "count": 2,
-    "path": "/kody-w/RAR/discussions",
-    "title": "/discussions",
+    "count": 3,
+    "path": "/kody-w/RAR/stargazers",
+    "title": "/stargazers",
     "uniques": 1
    },
    {
@@ -281,6 +286,12 @@
    },
    {
     "count": 1,
+    "path": "/kody-w/RAR/blob/c352b61ee111103df69881d385be0a4011c5b1b1/agents/@borg/borg_agent.py.card",
+    "title": "/blob/c352b61ee111103df69881d385be0a4011c5b1b1/agents/@borg/borg_agent.py.card",
+    "uniques": 1
+   },
+   {
+    "count": 1,
     "path": "/kody-w/RAR/blob/caa619395f28b75cb7d6031113c7d977e268a86e/scout/bundles/cowork-cookbook-120/skills/rar-cowork-cookbook-ppt-exec-identify-service-trends/SKILL.md",
     "title": "/blob/caa619395f28b75cb7d6031113c7d977e268a86e/scout/bundles/cowork-cookbook-120/skills/rar-cowork-cookbook-ppt-exec-identify-service-trends/SKILL.md",
     "uniques": 1
@@ -290,19 +301,13 @@
     "path": "/kody-w/RAR/blob/e0e1c26856873c1ef6cd79dd93414939aa135b9e/docs/api/v1/cards/CORE--aibast-agents-library-maintenance-scheduling-0001.json",
     "title": "/blob/e0e1c26856873c1ef6cd79dd93414939aa135b9e/docs/api/v1/cards/CORE--aibast-agents-library-maintenance-scheduling-0001.json",
     "uniques": 1
-   },
-   {
-    "count": 1,
-    "path": "/kody-w/RAR/blob/main/CLAUDE.md",
-    "title": "/blob/main/CLAUDE.md",
-    "uniques": 1
    }
   ],
   "referrers": [
    {
-    "count": 6,
+    "count": 8,
     "referrer": "github.com",
-    "uniques": 5
+    "uniques": 7
    },
    {
     "count": 1,
@@ -315,8 +320,8 @@
     "uniques": 1
    }
   ],
-  "view_uniques_14d": 16,
-  "views_14d": 36
+  "view_uniques_14d": 18,
+  "views_14d": 39
  },
  "snapshots": [
   {
@@ -1608,6 +1613,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 101,
    "views_all_time": 239
+  },
+  {
+   "at": "2026-10-07T11:50:51Z",
+   "cdn_all_time": 424,
+   "clone_uniques_all_time": 1714,
+   "clones_all_time": 10024,
+   "days_tracked": 57,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 104,
+   "views_all_time": 242
   }
  ],
  "views": {
@@ -1834,6 +1849,10 @@
   "2026-10-05": {
    "count": 3,
    "uniques": 2
+  },
+  "2026-10-06": {
+   "count": 3,
+   "uniques": 3
   }
  }
 }
