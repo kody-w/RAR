@@ -1,8 +1,11 @@
 {
   "slug": "brainstem-for-work",
   "title": "Brainstem for Work",
-  "description": "The same Brainstem, set up like a work tool: a quiet setup, a clean emblem, and plain language.",
+  "description": "A Brainstem set up like a work tool: plain business language, a quiet setup, and an Agenda agent.",
   "author": "kody-w",
-  "tags": ["work", "starter"],
-  "egg": "eggs/brainstem-for-work/3b888852f304.egg"
+  "tags": [
+    "work",
+    "agenda"
+  ],
+  "egg": "eggs/brainstem-for-work/6a1e44020d4b.egg"
 }

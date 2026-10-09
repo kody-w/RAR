@@ -1,7 +1,7 @@
 {
   "schema": "rapp-incubator/1.0",
   "spec": "rapp-static-api/1.0",
-  "generated": "2026-10-09T00:15:15Z",
+  "generated": "2026-10-09T00:26:21Z",
   "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main/incubator/",
   "pages_base": "https://kody-w.github.io/RAR/incubator/",
   "summary": {
@@ -12,24 +12,24 @@
     {
       "slug": "brainstem-for-work",
       "title": "Brainstem for Work",
-      "description": "The same Brainstem, set up like a work tool: a quiet setup, a clean emblem, and plain language.",
+      "description": "A Brainstem set up like a work tool: plain business language, a quiet setup, and an Agenda agent.",
       "author": "kody-w",
       "tags": [
         "work",
-        "starter"
+        "agenda"
       ],
       "style": "business",
       "variant": "organism",
-      "address": "c8f5b99b0cee2a35515c280eb9f9f5133b9317ca7edb83d6ab1c7bc68934862f",
+      "address": "8b5adbd3cf775e3639d06afd088d24d4af68aabd294721c25322f4e34e74efcd",
       "rappid": "rappid:@kody-w/brainstem-for-work:341915e54831ee5b5c6211016f172404a882ec54794682e51e1adb807ff17406",
-      "sha256": "3b888852f304023f93c250e7a30c8256f91f28297e2d64318a8783d81ea9af7e",
-      "size": 597353,
-      "files": 23,
+      "sha256": "6a1e44020d4bf5846ca0ee6e7bfb3c874657963d9b7fcc769f809084c9945e27",
+      "size": 597081,
+      "files": 24,
       "kernel": "0.6.16",
       "rules": "rev-18",
-      "path": "eggs/brainstem-for-work/3b888852f304.egg",
-      "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/incubator/eggs/brainstem-for-work/3b888852f304.egg",
-      "url": "https://kody-w.github.io/RAR/incubator/eggs/brainstem-for-work/3b888852f304.egg"
+      "path": "eggs/brainstem-for-work/6a1e44020d4b.egg",
+      "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/incubator/eggs/brainstem-for-work/6a1e44020d4b.egg",
+      "url": "https://kody-w.github.io/RAR/incubator/eggs/brainstem-for-work/6a1e44020d4b.egg"
     },
     {
       "slug": "brainstem",
@@ -42,16 +42,16 @@
       ],
       "style": "playful",
       "variant": "organism",
-      "address": "5cf9d18fc6c73e97807b36299b7da0a24e2bd2d48e672d72d7dd39c3734b870d",
+      "address": "670d7b7e58df5b8bda8b5fde4f753e74f084b3a3a6ed9d3ce259b5650dd6bb0d",
       "rappid": "rappid:@kody-w/rapp-egg:eaac5598606ba9e7fe5cfef01bcffda6a2a07df801dc56b518883bc0b4f752e0",
-      "sha256": "275bcfa5bad97528f0967bb0bae0da06c0fce25360b26557467ac09e77eaeda9",
-      "size": 597323,
+      "sha256": "eebd5b8ec25a2cc495832ee460f1edcf28a6653c8bc1ea5392893a10897c64b1",
+      "size": 599771,
       "files": 23,
       "kernel": "0.6.16",
       "rules": "rev-18",
-      "path": "eggs/brainstem/275bcfa5bad9.egg",
-      "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/incubator/eggs/brainstem/275bcfa5bad9.egg",
-      "url": "https://kody-w.github.io/RAR/incubator/eggs/brainstem/275bcfa5bad9.egg"
+      "path": "eggs/brainstem/eebd5b8ec25a.egg",
+      "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/incubator/eggs/brainstem/eebd5b8ec25a.egg",
+      "url": "https://kody-w.github.io/RAR/incubator/eggs/brainstem/eebd5b8ec25a.egg"
     }
   ]
 }
