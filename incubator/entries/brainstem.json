@@ -1,0 +1,11 @@
+{
+  "slug": "brainstem",
+  "title": "Brainstem",
+  "description": "The everyday Brainstem: the link between how you think and how an AI thinks, with memory built in.",
+  "author": "kody-w",
+  "tags": [
+    "starter",
+    "memory"
+  ],
+  "egg": "eggs/brainstem/eebd5b8ec25a.egg"
+}
