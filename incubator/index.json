@@ -1,0 +1,57 @@
+{
+  "schema": "rapp-incubator/1.0",
+  "spec": "rapp-static-api/1.0",
+  "generated": "2026-10-09T00:15:15Z",
+  "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main/incubator/",
+  "pages_base": "https://kody-w.github.io/RAR/incubator/",
+  "summary": {
+    "eggs": 2,
+    "problems": 0
+  },
+  "eggs": [
+    {
+      "slug": "brainstem-for-work",
+      "title": "Brainstem for Work",
+      "description": "The same Brainstem, set up like a work tool: a quiet setup, a clean emblem, and plain language.",
+      "author": "kody-w",
+      "tags": [
+        "work",
+        "starter"
+      ],
+      "style": "business",
+      "variant": "organism",
+      "address": "c8f5b99b0cee2a35515c280eb9f9f5133b9317ca7edb83d6ab1c7bc68934862f",
+      "rappid": "rappid:@kody-w/brainstem-for-work:341915e54831ee5b5c6211016f172404a882ec54794682e51e1adb807ff17406",
+      "sha256": "3b888852f304023f93c250e7a30c8256f91f28297e2d64318a8783d81ea9af7e",
+      "size": 597353,
+      "files": 23,
+      "kernel": "0.6.16",
+      "rules": "rev-18",
+      "path": "eggs/brainstem-for-work/3b888852f304.egg",
+      "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/incubator/eggs/brainstem-for-work/3b888852f304.egg",
+      "url": "https://kody-w.github.io/RAR/incubator/eggs/brainstem-for-work/3b888852f304.egg"
+    },
+    {
+      "slug": "brainstem",
+      "title": "Brainstem",
+      "description": "The everyday Brainstem: the link between how you think and how an AI thinks, with memory built in.",
+      "author": "kody-w",
+      "tags": [
+        "starter",
+        "memory"
+      ],
+      "style": "playful",
+      "variant": "organism",
+      "address": "5cf9d18fc6c73e97807b36299b7da0a24e2bd2d48e672d72d7dd39c3734b870d",
+      "rappid": "rappid:@kody-w/rapp-egg:eaac5598606ba9e7fe5cfef01bcffda6a2a07df801dc56b518883bc0b4f752e0",
+      "sha256": "275bcfa5bad97528f0967bb0bae0da06c0fce25360b26557467ac09e77eaeda9",
+      "size": 597323,
+      "files": 23,
+      "kernel": "0.6.16",
+      "rules": "rev-18",
+      "path": "eggs/brainstem/275bcfa5bad9.egg",
+      "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/incubator/eggs/brainstem/275bcfa5bad9.egg",
+      "url": "https://kody-w.github.io/RAR/incubator/eggs/brainstem/275bcfa5bad9.egg"
+    }
+  ]
+}
