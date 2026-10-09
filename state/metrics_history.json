@@ -239,12 +239,16 @@
   "2026-10-07": {
    "count": 109,
    "uniques": 19
+  },
+  "2026-10-08": {
+   "count": 123,
+   "uniques": 26
   }
  },
  "last_known": {
-  "at": "2026-10-08T12:05:58Z",
-  "clone_uniques_14d": 294,
-  "clones_14d": 3579,
+  "at": "2026-10-09T11:57:55Z",
+  "clone_uniques_14d": 300,
+  "clones_14d": 3612,
   "paths": [
    {
     "count": 4,
@@ -266,20 +270,14 @@
    },
    {
     "count": 3,
-    "path": "/kody-w/RAR/discussions",
-    "title": "/discussions",
-    "uniques": 1
-   },
-   {
-    "count": 3,
     "path": "/kody-w/RAR/stargazers",
     "title": "/stargazers",
     "uniques": 1
    },
    {
-    "count": 1,
-    "path": "/kody-w/RAR/blob/606d41a1409fa1ea7b5b293e1e1dec1365e32177/scout/bundles/cowork-cookbook-81/skills/rar-cowork-cookbook-dashboard-develop-new-products/SKILL.md",
-    "title": "/blob/606d41a1409fa1ea7b5b293e1e1dec1365e32177/scout/bundles/cowork-cookbook-81/skills/rar-cowork-cookbook-dashboard-develop-new-products/SKILL.md",
+    "count": 2,
+    "path": "/kody-w/RAR/discussions",
+    "title": "/discussions",
     "uniques": 1
    },
    {
@@ -305,6 +303,12 @@
     "path": "/kody-w/RAR/blob/main/README.md",
     "title": "/blob/main/README.md",
     "uniques": 1
+   },
+   {
+    "count": 1,
+    "path": "/kody-w/RAR/blob/main/agents/@cat-agent-skills/clt_hr_assistant_agent.py",
+    "title": "/blob/main/agents/@cat-agent-skills/clt_hr_assistant_agent.py",
+    "uniques": 1
    }
   ],
   "referrers": [
@@ -324,8 +328,8 @@
     "uniques": 1
    }
   ],
-  "view_uniques_14d": 14,
-  "views_14d": 35
+  "view_uniques_14d": 13,
+  "views_14d": 33
  },
  "snapshots": [
   {
@@ -1637,6 +1641,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 104,
    "views_all_time": 242
+  },
+  {
+   "at": "2026-10-09T11:57:55Z",
+   "cdn_all_time": 424,
+   "clone_uniques_all_time": 1759,
+   "clones_all_time": 10256,
+   "days_tracked": 59,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 104,
+   "views_all_time": 242
   }
  ],
  "views": {
@@ -1869,6 +1883,10 @@
    "uniques": 3
   },
   "2026-10-07": {
+   "count": 0,
+   "uniques": 0
+  },
+  "2026-10-08": {
    "count": 0,
    "uniques": 0
   }

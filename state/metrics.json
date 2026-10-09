@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-10-08T12:05:58Z",
+ "generated_at": "2026-10-09T11:57:55Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,26 +10,26 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 12,
-  "size_kb": 111502,
+  "size_kb": 113524,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-10-08T04:43:45Z",
+  "pushed_at": "2026-10-09T08:17:01Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
  "totals": {
-  "downloads": 10557,
-  "clones": 10133,
+  "downloads": 10680,
+  "clones": 10256,
   "cdn_hits": 424,
   "release_downloads": 0,
   "agent_file_downloads": 276,
-  "clones_excluding_ci_estimate": 6769,
-  "ci_clone_estimate": 3364,
+  "clones_excluding_ci_estimate": 6834,
+  "ci_clone_estimate": 3422,
   "page_views": 242,
-  "clone_uniques_14d": 294,
-  "view_uniques_14d": 14,
-  "clone_uniques_daily_sum": 1733,
+  "clone_uniques_14d": 300,
+  "view_uniques_14d": 13,
+  "clone_uniques_daily_sum": 1759,
   "view_uniques_daily_sum": 104,
-  "days_tracked": 58,
+  "days_tracked": 59,
   "tracking_since": "2026-07-14",
   "agents": 1700,
   "swarms": 2,
@@ -467,6 +467,13 @@
    "clone_uniques": 19,
    "views": 0,
    "cdn": 0
+  },
+  {
+   "date": "2026-10-08",
+   "clones": 123,
+   "clone_uniques": 26,
+   "views": 0,
+   "cdn": 0
   }
  ],
  "traffic": {
@@ -490,21 +497,15 @@
     "uniques": 3
    },
    {
-    "path": "/kody-w/RAR/discussions",
-    "title": "/discussions",
-    "count": 3,
-    "uniques": 1
-   },
-   {
     "path": "/kody-w/RAR/stargazers",
     "title": "/stargazers",
     "count": 3,
     "uniques": 1
    },
    {
-    "path": "/kody-w/RAR/blob/606d41a1409fa1ea7b5b293e1e1dec1365e32177/scout/bundles/cowork-cookbook-81/skills/rar-cowork-cookbook-dashboard-develop-new-products/SKILL.md",
-    "title": "/blob/606d41a1409fa1ea7b5b293e1e1dec1365e32177/scout/bundles/cowork-cookbook-81/skills/rar-cowork-cookbook-dashboard-develop-new-products/SKILL.md",
-    "count": 1,
+    "path": "/kody-w/RAR/discussions",
+    "title": "/discussions",
+    "count": 2,
     "uniques": 1
    },
    {
@@ -530,6 +531,12 @@
     "title": "/blob/main/README.md",
     "count": 1,
     "uniques": 1
+   },
+   {
+    "path": "/kody-w/RAR/blob/main/agents/@cat-agent-skills/clt_hr_assistant_agent.py",
+    "title": "/blob/main/agents/@cat-agent-skills/clt_hr_assistant_agent.py",
+    "count": 1,
+    "uniques": 1
    }
   ],
   "referrers": [
@@ -549,15 +556,15 @@
     "uniques": 1
    }
   ],
-  "clones_14d": 3579,
-  "views_14d": 35,
+  "clones_14d": 3612,
+  "views_14d": 33,
   "live": true,
-  "as_of": "2026-10-08T12:05:58Z"
+  "as_of": "2026-10-09T11:57:55Z"
  },
  "cdn": {
   "total_hits": 424,
   "bandwidth": 5918080,
-  "rank": 766044,
+  "rank": 770508,
   "agent_hits": 276,
   "files": [
    {
