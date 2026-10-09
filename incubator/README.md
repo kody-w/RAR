@@ -1,8 +1,7 @@
 # The RAPP incubator
 
 Eggs for the Brainstem, ready to unwrap. Each egg is one file that holds a complete Brainstem: the engine, its
-personality, its abilities, and the rules it checks itself against. Unwrap one in the **Hatch Brainstem** app, or with
-`python3 <file>.egg`.
+personality, its abilities, and the rules it checks itself against. Unwrap one with `python3 <file>.egg`.
 
 - **Index:** [`index.json`](index.json) (`rapp-incubator/1.0`), also at
   `https://kody-w.github.io/RAR/incubator/index.json`
@@ -11,7 +10,7 @@ personality, its abilities, and the rules it checks itself against. Unwrap one i
 
 ## Share an egg
 
-1. In the Hatch Brainstem app, open **More → Wrap it back up**, or build one with `build_egg.py`.
+1. Build a rapp/1 egg (section 9: an `organism` egg).
 2. Add the egg as `incubator/eggs/<slug>/<first 12 hex of its sha256>.egg`.
 3. Add `incubator/entries/<slug>.json`:
    ```json
