@@ -243,12 +243,16 @@
   "2026-10-08": {
    "count": 123,
    "uniques": 26
+  },
+  "2026-10-09": {
+   "count": 202,
+   "uniques": 31
   }
  },
  "last_known": {
-  "at": "2026-10-09T11:57:55Z",
-  "clone_uniques_14d": 300,
-  "clones_14d": 3612,
+  "at": "2026-10-10T11:14:22Z",
+  "clone_uniques_14d": 309,
+  "clones_14d": 3153,
   "paths": [
    {
     "count": 4,
@@ -328,8 +332,8 @@
     "uniques": 1
    }
   ],
-  "view_uniques_14d": 13,
-  "views_14d": 33
+  "view_uniques_14d": 12,
+  "views_14d": 32
  },
  "snapshots": [
   {
@@ -1651,6 +1655,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 104,
    "views_all_time": 242
+  },
+  {
+   "at": "2026-10-10T11:14:22Z",
+   "cdn_all_time": 424,
+   "clone_uniques_all_time": 1790,
+   "clones_all_time": 10458,
+   "days_tracked": 60,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 104,
+   "views_all_time": 242
   }
  ],
  "views": {
@@ -1887,6 +1901,10 @@
    "uniques": 0
   },
   "2026-10-08": {
+   "count": 0,
+   "uniques": 0
+  },
+  "2026-10-09": {
    "count": 0,
    "uniques": 0
   }
