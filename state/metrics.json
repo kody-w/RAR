@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-10-10T11:14:22Z",
+ "generated_at": "2026-10-11T11:27:50Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,26 +10,26 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 12,
-  "size_kb": 114773,
+  "size_kb": 116827,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-10-10T10:21:26Z",
+  "pushed_at": "2026-10-11T08:06:42Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
  "totals": {
-  "downloads": 10882,
-  "clones": 10458,
+  "downloads": 11004,
+  "clones": 10580,
   "cdn_hits": 424,
   "release_downloads": 0,
   "agent_file_downloads": 276,
-  "clones_excluding_ci_estimate": 6978,
-  "ci_clone_estimate": 3480,
-  "page_views": 242,
-  "clone_uniques_14d": 309,
-  "view_uniques_14d": 12,
-  "clone_uniques_daily_sum": 1790,
-  "view_uniques_daily_sum": 104,
-  "days_tracked": 60,
+  "clones_excluding_ci_estimate": 7042,
+  "ci_clone_estimate": 3538,
+  "page_views": 243,
+  "clone_uniques_14d": 280,
+  "view_uniques_14d": 13,
+  "clone_uniques_daily_sum": 1817,
+  "view_uniques_daily_sum": 105,
+  "days_tracked": 61,
   "tracking_since": "2026-07-14",
   "agents": 1700,
   "swarms": 2,
@@ -481,6 +481,13 @@
    "clone_uniques": 31,
    "views": 0,
    "cdn": 0
+  },
+  {
+   "date": "2026-10-10",
+   "clones": 122,
+   "clone_uniques": 27,
+   "views": 1,
+   "cdn": 0
   }
  ],
  "traffic": {
@@ -549,8 +556,8 @@
   "referrers": [
    {
     "referrer": "github.com",
-    "count": 8,
-    "uniques": 7
+    "count": 9,
+    "uniques": 8
    },
    {
     "referrer": "Bing",
@@ -563,15 +570,15 @@
     "uniques": 1
    }
   ],
-  "clones_14d": 3153,
-  "views_14d": 32,
+  "clones_14d": 1894,
+  "views_14d": 33,
   "live": true,
-  "as_of": "2026-10-10T11:14:22Z"
+  "as_of": "2026-10-11T11:27:50Z"
  },
  "cdn": {
   "total_hits": 424,
   "bandwidth": 5918080,
-  "rank": 773590,
+  "rank": 776514,
   "agent_hits": 276,
   "files": [
    {
