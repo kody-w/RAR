@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-10-12T13:16:43Z",
+ "generated_at": "2026-10-13T12:46:43Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,26 +10,26 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 12,
-  "size_kb": 118486,
+  "size_kb": 119719,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-10-12T08:24:13Z",
+  "pushed_at": "2026-10-13T08:48:58Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
  "totals": {
-  "downloads": 11504,
-  "clones": 11080,
+  "downloads": 11574,
+  "clones": 11150,
   "cdn_hits": 424,
   "release_downloads": 0,
   "agent_file_downloads": 276,
-  "clones_excluding_ci_estimate": 7484,
-  "ci_clone_estimate": 3596,
-  "page_views": 244,
-  "clone_uniques_14d": 278,
-  "view_uniques_14d": 13,
-  "clone_uniques_daily_sum": 1844,
-  "view_uniques_daily_sum": 106,
-  "days_tracked": 62,
+  "clones_excluding_ci_estimate": 7496,
+  "ci_clone_estimate": 3654,
+  "page_views": 255,
+  "clone_uniques_14d": 283,
+  "view_uniques_14d": 15,
+  "clone_uniques_daily_sum": 1860,
+  "view_uniques_daily_sum": 110,
+  "days_tracked": 63,
   "tracking_since": "2026-07-14",
   "agents": 1700,
   "swarms": 2,
@@ -495,33 +495,52 @@
    "clone_uniques": 27,
    "views": 1,
    "cdn": 0
+  },
+  {
+   "date": "2026-10-12",
+   "clones": 70,
+   "clone_uniques": 16,
+   "views": 11,
+   "cdn": 0
   }
  ],
  "traffic": {
   "paths": [
    {
-    "path": "/kody-w/RAR",
-    "title": "Overview",
+    "path": "/kody-w/RAR/stargazers",
+    "title": "/stargazers",
     "count": 4,
-    "uniques": 3
+    "uniques": 1
    },
    {
-    "path": "/kody-w/RAR/tree/main",
-    "title": "/tree/main",
+    "path": "/kody-w/RAR",
+    "title": "Overview",
     "count": 3,
     "uniques": 3
    },
    {
-    "path": "/kody-w/RAR/stargazers",
-    "title": "/stargazers",
+    "path": "/kody-w/RAR/blob/main/sources.json",
+    "title": "/blob/main/sources.json",
     "count": 3,
     "uniques": 1
    },
    {
-    "path": "/kody-w/RAR/tree/main/agents",
-    "title": "/tree/main/agents",
+    "path": "/kody-w/RAR/tree/main",
+    "title": "/tree/main",
     "count": 2,
     "uniques": 2
+   },
+   {
+    "path": "/kody-w/RAR/blob/main/skill.md",
+    "title": "/blob/main/skill.md",
+    "count": 2,
+    "uniques": 1
+   },
+   {
+    "path": "/kody-w/RAR/blob/main/skills.html",
+    "title": "/blob/main/skills.html",
+    "count": 2,
+    "uniques": 1
    },
    {
     "path": "/kody-w/RAR/blob/c352b61ee111103df69881d385be0a4011c5b1b1/agents/@borg/borg_agent.py.card",
@@ -546,46 +565,29 @@
     "title": "/blob/main/agents/@cat-agent-skills/clt_hr_assistant_agent.py",
     "count": 1,
     "uniques": 1
-   },
-   {
-    "path": "/kody-w/RAR/blob/main/agents/@rapp/pitch_deck_agent.py",
-    "title": "/blob/main/agents/@rapp/pitch_deck_agent.py",
-    "count": 1,
-    "uniques": 1
-   },
-   {
-    "path": "/kody-w/RAR/blob/main/rapp_skills.md",
-    "title": "/blob/main/rapp_skills.md",
-    "count": 1,
-    "uniques": 1
    }
   ],
   "referrers": [
    {
     "referrer": "github.com",
-    "count": 9,
-    "uniques": 8
+    "count": 11,
+    "uniques": 9
    },
    {
     "referrer": "Bing",
-    "count": 1,
-    "uniques": 1
-   },
-   {
-    "referrer": "kody-w.github.io",
-    "count": 1,
-    "uniques": 1
+    "count": 3,
+    "uniques": 2
    }
   ],
-  "clones_14d": 1908,
-  "views_14d": 27,
+  "clones_14d": 1894,
+  "views_14d": 32,
   "live": true,
-  "as_of": "2026-10-12T13:16:43Z"
+  "as_of": "2026-10-13T12:46:43Z"
  },
  "cdn": {
   "total_hits": 424,
   "bandwidth": 5918080,
-  "rank": 779138,
+  "rank": 781920,
   "agent_hits": 276,
   "files": [
    {
