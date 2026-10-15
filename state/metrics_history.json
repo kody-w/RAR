@@ -263,30 +263,34 @@
   "2026-10-13": {
    "count": 77,
    "uniques": 23
+  },
+  "2026-10-14": {
+   "count": 68,
+   "uniques": 13
   }
  },
  "last_known": {
-  "at": "2026-10-14T10:18:49Z",
-  "clone_uniques_14d": 298,
-  "clones_14d": 1910,
+  "at": "2026-10-15T10:03:07Z",
+  "clone_uniques_14d": 284,
+  "clones_14d": 1885,
   "paths": [
-   {
-    "count": 4,
-    "path": "/kody-w/RAR/stargazers",
-    "title": "/stargazers",
-    "uniques": 1
-   },
-   {
-    "count": 3,
-    "path": "/kody-w/RAR",
-    "title": "Overview",
-    "uniques": 3
-   },
    {
     "count": 3,
     "path": "/kody-w/RAR/blob/main/sources.json",
     "title": "/blob/main/sources.json",
     "uniques": 1
+   },
+   {
+    "count": 3,
+    "path": "/kody-w/RAR/stargazers",
+    "title": "/stargazers",
+    "uniques": 1
+   },
+   {
+    "count": 2,
+    "path": "/kody-w/RAR",
+    "title": "Overview",
+    "uniques": 2
    },
    {
     "count": 2,
@@ -333,9 +337,9 @@
   ],
   "referrers": [
    {
-    "count": 11,
+    "count": 10,
     "referrer": "github.com",
-    "uniques": 9
+    "uniques": 8
    },
    {
     "count": 3,
@@ -343,8 +347,8 @@
     "uniques": 2
    }
   ],
-  "view_uniques_14d": 15,
-  "views_14d": 32
+  "view_uniques_14d": 13,
+  "views_14d": 27
  },
  "snapshots": [
   {
@@ -1716,6 +1720,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 110,
    "views_all_time": 255
+  },
+  {
+   "at": "2026-10-15T10:03:07Z",
+   "cdn_all_time": 424,
+   "clone_uniques_all_time": 1896,
+   "clones_all_time": 11295,
+   "days_tracked": 65,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 110,
+   "views_all_time": 255
   }
  ],
  "views": {
@@ -1972,6 +1986,10 @@
    "uniques": 4
   },
   "2026-10-13": {
+   "count": 0,
+   "uniques": 0
+  },
+  "2026-10-14": {
    "count": 0,
    "uniques": 0
   }

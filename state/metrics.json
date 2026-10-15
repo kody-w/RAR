@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-10-14T10:18:49Z",
+ "generated_at": "2026-10-15T10:03:07Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,26 +10,26 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 12,
-  "size_kb": 121379,
+  "size_kb": 107915,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-10-14T09:12:05Z",
+  "pushed_at": "2026-10-15T08:45:00Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
  "totals": {
-  "downloads": 11651,
-  "clones": 11227,
+  "downloads": 11719,
+  "clones": 11295,
   "cdn_hits": 424,
   "release_downloads": 0,
   "agent_file_downloads": 276,
-  "clones_excluding_ci_estimate": 7515,
-  "ci_clone_estimate": 3712,
+  "clones_excluding_ci_estimate": 7525,
+  "ci_clone_estimate": 3770,
   "page_views": 255,
-  "clone_uniques_14d": 298,
-  "view_uniques_14d": 15,
-  "clone_uniques_daily_sum": 1883,
+  "clone_uniques_14d": 284,
+  "view_uniques_14d": 13,
+  "clone_uniques_daily_sum": 1896,
   "view_uniques_daily_sum": 110,
-  "days_tracked": 64,
+  "days_tracked": 65,
   "tracking_since": "2026-07-14",
   "agents": 1700,
   "swarms": 2,
@@ -509,27 +509,34 @@
    "clone_uniques": 23,
    "views": 0,
    "cdn": 0
+  },
+  {
+   "date": "2026-10-14",
+   "clones": 68,
+   "clone_uniques": 13,
+   "views": 0,
+   "cdn": 0
   }
  ],
  "traffic": {
   "paths": [
    {
+    "path": "/kody-w/RAR/blob/main/sources.json",
+    "title": "/blob/main/sources.json",
+    "count": 3,
+    "uniques": 1
+   },
+   {
     "path": "/kody-w/RAR/stargazers",
     "title": "/stargazers",
-    "count": 4,
+    "count": 3,
     "uniques": 1
    },
    {
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "count": 3,
-    "uniques": 3
-   },
-   {
-    "path": "/kody-w/RAR/blob/main/sources.json",
-    "title": "/blob/main/sources.json",
-    "count": 3,
-    "uniques": 1
+    "count": 2,
+    "uniques": 2
    },
    {
     "path": "/kody-w/RAR/tree/main",
@@ -577,8 +584,8 @@
   "referrers": [
    {
     "referrer": "github.com",
-    "count": 11,
-    "uniques": 9
+    "count": 10,
+    "uniques": 8
    },
    {
     "referrer": "Bing",
@@ -586,15 +593,15 @@
     "uniques": 2
    }
   ],
-  "clones_14d": 1910,
-  "views_14d": 32,
+  "clones_14d": 1885,
+  "views_14d": 27,
   "live": true,
-  "as_of": "2026-10-14T10:18:49Z"
+  "as_of": "2026-10-15T10:03:07Z"
  },
  "cdn": {
   "total_hits": 424,
   "bandwidth": 5918080,
-  "rank": 785465,
+  "rank": 788447,
   "agent_hits": 276,
   "files": [
    {
