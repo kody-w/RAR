@@ -5,7 +5,8 @@
   "2026-09-21": 12,
   "2026-09-26": 6,
   "2026-10-04": 4,
-  "2026-10-05": 330
+  "2026-10-05": 330,
+  "2026-10-14": 27
  },
  "clones": {
   "2026-07-14": {
@@ -267,12 +268,16 @@
   "2026-10-14": {
    "count": 68,
    "uniques": 13
+  },
+  "2026-10-15": {
+   "count": 100,
+   "uniques": 25
   }
  },
  "last_known": {
-  "at": "2026-10-15T10:03:07Z",
-  "clone_uniques_14d": 284,
-  "clones_14d": 1885,
+  "at": "2026-10-16T09:55:23Z",
+  "clone_uniques_14d": 268,
+  "clones_14d": 1845,
   "paths": [
    {
     "count": 3,
@@ -318,12 +323,6 @@
    },
    {
     "count": 1,
-    "path": "/kody-w/RAR/blob/e0e1c26856873c1ef6cd79dd93414939aa135b9e/docs/api/v1/cards/CORE--aibast-agents-library-maintenance-scheduling-0001.json",
-    "title": "/blob/e0e1c26856873c1ef6cd79dd93414939aa135b9e/docs/api/v1/cards/CORE--aibast-agents-library-maintenance-scheduling-0001.json",
-    "uniques": 1
-   },
-   {
-    "count": 1,
     "path": "/kody-w/RAR/blob/main/CLAUDE.md",
     "title": "/blob/main/CLAUDE.md",
     "uniques": 1
@@ -333,13 +332,19 @@
     "path": "/kody-w/RAR/blob/main/agents/@cat-agent-skills/clt_hr_assistant_agent.py",
     "title": "/blob/main/agents/@cat-agent-skills/clt_hr_assistant_agent.py",
     "uniques": 1
+   },
+   {
+    "count": 1,
+    "path": "/kody-w/RAR/blob/main/rapp_skills.md",
+    "title": "/blob/main/rapp_skills.md",
+    "uniques": 1
    }
   ],
   "referrers": [
    {
-    "count": 10,
+    "count": 9,
     "referrer": "github.com",
-    "uniques": 8
+    "uniques": 7
    },
    {
     "count": 3,
@@ -347,8 +352,8 @@
     "uniques": 2
    }
   ],
-  "view_uniques_14d": 13,
-  "views_14d": 27
+  "view_uniques_14d": 12,
+  "views_14d": 26
  },
  "snapshots": [
   {
@@ -1730,6 +1735,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 110,
    "views_all_time": 255
+  },
+  {
+   "at": "2026-10-16T09:55:23Z",
+   "cdn_all_time": 451,
+   "clone_uniques_all_time": 1921,
+   "clones_all_time": 11395,
+   "days_tracked": 66,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 110,
+   "views_all_time": 255
   }
  ],
  "views": {
@@ -1990,6 +2005,10 @@
    "uniques": 0
   },
   "2026-10-14": {
+   "count": 0,
+   "uniques": 0
+  },
+  "2026-10-15": {
    "count": 0,
    "uniques": 0
   }

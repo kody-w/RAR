@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-10-15T10:03:07Z",
+ "generated_at": "2026-10-16T09:55:23Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,26 +10,26 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 12,
-  "size_kb": 107915,
+  "size_kb": 109969,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-10-15T08:45:00Z",
+  "pushed_at": "2026-10-16T08:40:29Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
  "totals": {
-  "downloads": 11719,
-  "clones": 11295,
-  "cdn_hits": 424,
+  "downloads": 11846,
+  "clones": 11395,
+  "cdn_hits": 451,
   "release_downloads": 0,
-  "agent_file_downloads": 276,
-  "clones_excluding_ci_estimate": 7525,
-  "ci_clone_estimate": 3770,
+  "agent_file_downloads": 273,
+  "clones_excluding_ci_estimate": 7567,
+  "ci_clone_estimate": 3828,
   "page_views": 255,
-  "clone_uniques_14d": 284,
-  "view_uniques_14d": 13,
-  "clone_uniques_daily_sum": 1896,
+  "clone_uniques_14d": 268,
+  "view_uniques_14d": 12,
+  "clone_uniques_daily_sum": 1921,
   "view_uniques_daily_sum": 110,
-  "days_tracked": 65,
+  "days_tracked": 66,
   "tracking_since": "2026-07-14",
   "agents": 1700,
   "swarms": 2,
@@ -515,6 +515,13 @@
    "clones": 68,
    "clone_uniques": 13,
    "views": 0,
+   "cdn": 27
+  },
+  {
+   "date": "2026-10-15",
+   "clones": 100,
+   "clone_uniques": 25,
+   "views": 0,
    "cdn": 0
   }
  ],
@@ -563,12 +570,6 @@
     "uniques": 1
    },
    {
-    "path": "/kody-w/RAR/blob/e0e1c26856873c1ef6cd79dd93414939aa135b9e/docs/api/v1/cards/CORE--aibast-agents-library-maintenance-scheduling-0001.json",
-    "title": "/blob/e0e1c26856873c1ef6cd79dd93414939aa135b9e/docs/api/v1/cards/CORE--aibast-agents-library-maintenance-scheduling-0001.json",
-    "count": 1,
-    "uniques": 1
-   },
-   {
     "path": "/kody-w/RAR/blob/main/CLAUDE.md",
     "title": "/blob/main/CLAUDE.md",
     "count": 1,
@@ -579,13 +580,19 @@
     "title": "/blob/main/agents/@cat-agent-skills/clt_hr_assistant_agent.py",
     "count": 1,
     "uniques": 1
+   },
+   {
+    "path": "/kody-w/RAR/blob/main/rapp_skills.md",
+    "title": "/blob/main/rapp_skills.md",
+    "count": 1,
+    "uniques": 1
    }
   ],
   "referrers": [
    {
     "referrer": "github.com",
-    "count": 10,
-    "uniques": 8
+    "count": 9,
+    "uniques": 7
    },
    {
     "referrer": "Bing",
@@ -593,16 +600,16 @@
     "uniques": 2
    }
   ],
-  "clones_14d": 1885,
-  "views_14d": 27,
+  "clones_14d": 1845,
+  "views_14d": 26,
   "live": true,
-  "as_of": "2026-10-15T10:03:07Z"
+  "as_of": "2026-10-16T09:55:23Z"
  },
  "cdn": {
-  "total_hits": 424,
-  "bandwidth": 5918080,
-  "rank": 788447,
-  "agent_hits": 276,
+  "total_hits": 451,
+  "bandwidth": 6360652,
+  "rank": 768946,
+  "agent_hits": 273,
   "files": [
    {
     "file": "/registry.json",
@@ -617,6 +624,12 @@
     "kind": "agent"
    },
    {
+    "file": "/agents/@aibast-agents-library/healthcare_stacks/staff_credentialing_stack/staff_credentialing_agent.py",
+    "hits": 5,
+    "agent": null,
+    "kind": "asset"
+   },
+   {
     "file": "/agents/@kody-w/agent_team_agent.py",
     "hits": 4,
     "agent": "@kody-w/agent_team_agent",
@@ -624,6 +637,18 @@
    },
    {
     "file": "/.github/ISSUE_TEMPLATE/config.yml",
+    "hits": 3,
+    "agent": null,
+    "kind": "asset"
+   },
+   {
+    "file": "/.github/workflows/approve-agent-batch.yml",
+    "hits": 3,
+    "agent": null,
+    "kind": "asset"
+   },
+   {
+    "file": "/.github/workflows/rappterpedia-heartbeat.yml",
     "hits": 3,
     "agent": null,
     "kind": "asset"
@@ -641,7 +666,19 @@
     "kind": "asset"
    },
    {
-    "file": "/agents/@aibast-agents-library/healthcare_stacks/staff_credentialing_stack/staff_credentialing_agent.py",
+    "file": "/agents/@aibast-agents-library/energy_stacks/asset_maintenance_forecast_stack/asset_maintenance_forecast_agent.py",
+    "hits": 3,
+    "agent": null,
+    "kind": "asset"
+   },
+   {
+    "file": "/agents/@aibast-agents-library/manufacturing_stacks/maintenance_scheduling_stack/maintenance_scheduling_agent.py",
+    "hits": 3,
+    "agent": null,
+    "kind": "asset"
+   },
+   {
+    "file": "/agents/@aibast-agents-library/professional_services_stacks/client_health_score_stack/client_health_score_agent.py",
     "hits": 3,
     "agent": null,
     "kind": "asset"
@@ -651,6 +688,12 @@
     "hits": 3,
     "agent": null,
     "kind": "asset"
+   },
+   {
+    "file": "/agents/@cat-agent-skills/lab_column_mapper_agent.py",
+    "hits": 3,
+    "agent": "@cat-agent-skills/lab_column_mapper",
+    "kind": "agent"
    },
    {
     "file": "/agents/@cowork-cookbook/adaptive_card_configure_and_manage_geofencing_and_geolocation_settings_agent.py",
@@ -807,42 +850,6 @@
     "hits": 3,
     "agent": "@cowork-cookbook/configure_conduct_a_compliance_risk_assessment",
     "kind": "agent"
-   },
-   {
-    "file": "/agents/@cowork-cookbook/configure_conduct_business_performance_reviews_agent.py",
-    "hits": 3,
-    "agent": "@cowork-cookbook/configure_conduct_business_performance_reviews",
-    "kind": "agent"
-   },
-   {
-    "file": "/agents/@cowork-cookbook/configure_configure_and_manage_iot_devices_agent.py",
-    "hits": 3,
-    "agent": "@cowork-cookbook/configure_configure_and_manage_iot_devices",
-    "kind": "agent"
-   },
-   {
-    "file": "/agents/@cowork-cookbook/configure_configure_and_manage_search_agent.py",
-    "hits": 3,
-    "agent": "@cowork-cookbook/configure_configure_and_manage_search",
-    "kind": "agent"
-   },
-   {
-    "file": "/agents/@cowork-cookbook/configure_configure_monitor_and_send_emails_agent.py",
-    "hits": 3,
-    "agent": "@cowork-cookbook/configure_configure_monitor_and_send_emails",
-    "kind": "agent"
-   },
-   {
-    "file": "/agents/@cowork-cookbook/configure_create_a_case_manually_agent.py",
-    "hits": 3,
-    "agent": "@cowork-cookbook/configure_create_a_case_manually",
-    "kind": "agent"
-   },
-   {
-    "file": "/agents/@cowork-cookbook/configure_create_and_track_service_level_agreements_agent.py",
-    "hits": 3,
-    "agent": "@cowork-cookbook/configure_create_and_track_service_level_agreements",
-    "kind": "agent"
    }
   ]
  },
@@ -921,6 +928,23 @@
     "added_at": "2026-05-05T10:49:27-04:00",
     "file": "agents/@kody-w/agent_team_agent.py",
     "description": "Turns a project goal into an outcome frame, persona route, and paste-ready GitHub issue body for the Agent Team Starter Kit in one LLM call."
+   },
+   {
+    "name": "@cat-agent-skills/lab_column_mapper",
+    "display_name": "Lab Column Mapper",
+    "publisher": "@cat-agent-skills",
+    "category": "general",
+    "tier": "frontier",
+    "downloads": 3,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 262,
+    "size_kb": 12.9,
+    "added_at": "2026-07-31T22:43:16-04:00",
+    "file": "agents/@cat-agent-skills/lab_column_mapper_agent.py",
+    "description": "When a health system's lab results ingestion pipeline hits an unknown column header, this skill semantically matches the source column against the canonical clinical schema (LOINC-anchored), scoped by lab and clinical domain, and writes a suggested mapping to a Dataverse review queue for a clinical informatics steward to approve."
    },
    {
     "name": "@cowork-cookbook/adaptive_card_configure_and_manage_geofencing_and_geolocation_settings",
@@ -1125,23 +1149,6 @@
     "added_at": "2026-08-28T04:52:39Z",
     "file": "agents/@cowork-cookbook/configure_adjust_notifications_and_alerts_agent.py",
     "description": "Bulk-applies notification and alert configuration changes in Dynamics 365 F&SCM from an attached Excel file: validates every row, returns a validation workbook, waits for your approval, then emits a before/after confirma"
-   },
-   {
-    "name": "@cowork-cookbook/configure_allocate_or_assign_software_licenses",
-    "display_name": "Allocate or assign software licenses Configuration Bulk Setup",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "community",
-    "downloads": 3,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 265,
-    "size_kb": 17.2,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/configure_allocate_or_assign_software_licenses_agent.py",
-    "description": "Bulk-applies software license allocation/assignment changes in Dynamics 365 F&SCM from an attached Excel file: validates every row, returns a validation workbook, waits for approval, then applies and emits before/after c"
    }
   ],
   "most_upvoted": [
@@ -1701,7 +1708,7 @@
    {
     "name": "@cowork-cookbook",
     "agents": 1481,
-    "downloads": 264,
+    "downloads": 258,
     "score": 0,
     "reviews": 0,
     "lines": 392465,
@@ -1710,7 +1717,7 @@
    {
     "name": "@cat-agent-skills",
     "agents": 97,
-    "downloads": 0,
+    "downloads": 3,
     "score": 0,
     "reviews": 0,
     "lines": 25414,
@@ -1802,14 +1809,14 @@
    {
     "name": "integrations",
     "agents": 1476,
-    "downloads": 264,
+    "downloads": 258,
     "score": 0,
     "reviews": 0
    },
    {
     "name": "general",
     "agents": 64,
-    "downloads": 0,
+    "downloads": 3,
     "score": 0,
     "reviews": 0
    },
@@ -1900,6 +1907,13 @@
   }
  },
  "agent_metrics": {
+  "@cat-agent-skills/lab_column_mapper": {
+   "d": 3,
+   "u": 0,
+   "s": 0,
+   "r": 0,
+   "rt": 0.0
+  },
   "@cowork-cookbook/adaptive_card_configure_and_manage_geofencing_and_geolocation_settings": {
    "d": 3,
    "u": 0,
@@ -2496,20 +2510,6 @@
    "rt": 0.0
   },
   "@cowork-cookbook/configure_purchase_assets": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_re_assign_case_to_another_team_individual": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_receive_service_requests": {
    "d": 3,
    "u": 0,
    "s": 0,
