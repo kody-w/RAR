@@ -3356,7 +3356,7 @@
       ]
     },
     {
-      "bytes": 619951,
+      "bytes": 634395,
       "channel": "native",
       "files": 32,
       "id": "native-13",
@@ -129457,7 +129457,7 @@
     {
       "bundle": "native-13",
       "channel": "native",
-      "description": "Creates new RAPP agents or swarms from natural-language descriptions. By default it ADAPTS a real published agent from the public microsoft/aibast-agents-library (sha256-verified) instead of generating code from scratch. Actions: 'create' adapts a template into a single agent, 'templates' searches the published templates, 'swarm' creates a multi-agent pipeline, 'list' shows generated agents, 'delete' removes one, 'preview' dry-runs generation, 'submit' prepares a RAR registry submission. Call when the user wants to teach the brainstem something new, create a custom agent, or build an agent swarm.",
+      "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback.",
       "example_args": {
         "action": "create",
         "description": "An agent that researches an enterprise account before a sales call"
@@ -129465,17 +129465,17 @@
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "fe5767b74a9dab20025fabab71feb78210039e88ecb381aafb7d9ab5f54a7b90",
+          "sha256": "2835fa99d694dae9e045142ed01ff5660f13ae99ef230810800d0d2baf8d54ed",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-learn-new/SKILL.md"
         },
         {
           "path": "learn_new_agent.py",
-          "sha256": "f9a108cd377b5b91d9288f56ee9f91c57717595c9cfb1e98b4952200c6806dfc",
+          "sha256": "7f2540f9c39bd60b93a8cc3059768c839cf4555acd8779ed3c167c61e33eaafe",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-learn-new/learn_new_agent.py"
         },
         {
           "path": "rapp/agent.lock.json",
-          "sha256": "4168f0b32db4d60ce40a8b6998ab9b175a394c5fc80b5e4941320fed0cbab138",
+          "sha256": "484f9b794e534b0dab44918e1f3111d48867b2b8c9d5a59e0a34d86d06535d45",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-learn-new/rapp/agent.lock.json"
         },
         {
@@ -129488,90 +129488,17 @@
       "import_url": "https://github.com/kody-w/RAR/tree/main/scout/bundles/native-13",
       "linked_agent": "learn_new_agent.py",
       "parameters": {
-        "properties": {
-          "action": {
-            "description": "Action to perform.",
-            "enum": [
-              "create",
-              "templates",
-              "swarm",
-              "list",
-              "delete",
-              "preview",
-              "submit"
-            ],
-            "type": "string"
-          },
-          "agents_in_swarm": {
-            "description": "For swarm: comma-separated sub-agent roles (e.g. 'researcher,writer,editor').",
-            "type": "string"
-          },
-          "category": {
-            "description": "Agent category for the registry.",
-            "enum": [
-              "general",
-              "productivity",
-              "sales",
-              "support",
-              "data",
-              "automation",
-              "integrations",
-              "devtools",
-              "pipeline"
-            ],
-            "type": "string"
-          },
-          "description": {
-            "description": "Natural language description of what the new agent should do.",
-            "type": "string"
-          },
-          "name": {
-            "description": "Name for the new agent (optional, will be generated from description).",
-            "type": "string"
-          },
-          "namespace": {
-            "description": "RAR namespace for submission (e.g. @myname). Defaults to @rapp.",
-            "type": "string"
-          },
-          "output_dir": {
-            "description": "Directory to write the generated agent into. Defaults to this brainstem's agents/ directory.",
-            "type": "string"
-          },
-          "query": {
-            "description": "Natural language query that may contain the agent description.",
-            "type": "string"
-          },
-          "refresh": {
-            "description": "Force a refetch of the published template registry, ignoring the cache TTL.",
-            "type": "boolean"
-          },
-          "requires_env": {
-            "description": "Comma-separated env vars the agent needs (e.g. 'API_KEY,WEBHOOK_URL').",
-            "type": "string"
-          },
-          "source": {
-            "description": "Where the new agent comes from. 'template' (default) adapts a verified published agent; 'scratch' uses the built-in string templates. Scratch is also the automatic fallback when offline or when nothing matches well.",
-            "enum": [
-              "template",
-              "scratch"
-            ],
-            "type": "string"
-          },
-          "template": {
-            "description": "Explicit published template to adapt (e.g. 'account-intelligence' or '@aibast-agents-library/account-intelligence'). Overrides automatic selection. Use action='templates' to see what exists.",
-            "type": "string"
-          }
-        },
+        "properties": {},
         "required": [],
         "type": "object"
       },
       "requires_env": [],
       "skill_name": "rar-rapp-learn-new",
-      "skill_sha256": "fe5767b74a9dab20025fabab71feb78210039e88ecb381aafb7d9ab5f54a7b90",
-      "source_commit": "797681a7ca943fafc935d533fedd008ce2305420",
+      "skill_sha256": "2835fa99d694dae9e045142ed01ff5660f13ae99ef230810800d0d2baf8d54ed",
+      "source_commit": "d14ad46c566f809379da94f3ff9f4ee6413008e1",
       "source_kind": "rar-agent",
-      "source_sha256": "f9a108cd377b5b91d9288f56ee9f91c57717595c9cfb1e98b4952200c6806dfc",
-      "version": "3.1.0"
+      "source_sha256": "7f2540f9c39bd60b93a8cc3059768c839cf4555acd8779ed3c167c61e33eaafe",
+      "version": "3.2.0"
     },
     {
       "bundle": "native-14",

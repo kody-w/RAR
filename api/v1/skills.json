@@ -12,7 +12,7 @@
   },
   "inputs": {
     "canonical_manifests": "64b03442d38d2cc1cf3620a305f1aa8ce52967d78722c7338db346e2cf45d700",
-    "scout_catalog": "f8598e1d6ac0f562c9d4b954b74e79ba519db6f9c9264dac5af82e63e4cfbabd",
+    "scout_catalog": "52e8ecf48b09cf9dd813331346596ad5cee4c02a04014e6bcce224840ad452f1",
     "scout_toaster": {
       "commit": "d54ba8484b5c5dae6406d2090c03115d12985446",
       "sha256": "d340043178aa4160f76a179b8b1086971e09207b212aff2ab2c0752b69173e17"
@@ -184101,7 +184101,7 @@
       "catalog_origin": "generated-projection",
       "category": "projection",
       "compatibility": {},
-      "description": "Creates new RAPP agents or swarms from natural-language descriptions. By default it ADAPTS a real published agent from the public microsoft/aibast-agents-library (sha256-verified) instead of generating code from scratch. Actions: 'create' adapts a template into a single agent, 'templates' searches the published templates, 'swarm' creates a multi-agent pipeline, 'list' shows generated agents, 'delete' removes one, 'preview' dry-runs generation, 'submit' prepares a RAR registry submission. Call when the user wants to teach the brainstem something new, create a custom agent, or build an agent swarm.",
+      "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback.",
       "display_name": "rar-rapp-learn-new",
       "install": {
         "bundle": "native-13",
@@ -184133,16 +184133,11 @@
         "learn",
         "new",
         "creates",
+        "single",
+        "file",
         "agents",
-        "or",
-        "swarms",
-        "natural",
-        "language",
-        "descriptions",
         "by",
-        "default",
-        "it",
-        "adapts",
+        "adapting",
         "real",
         "published",
         "agent",
@@ -184152,34 +184147,39 @@
         "library",
         "sha256",
         "verified",
-        "instead",
-        "of",
-        "generating",
-        "code",
-        "scratch",
-        "actions",
-        "create",
-        "template"
+        "mit",
+        "attributed",
+        "mutated",
+        "not",
+        "regenerated",
+        "or",
+        "source",
+        "chat",
+        "saves",
+        "an",
+        "model",
+        "wrote",
+        "only"
       ],
       "slug": "rar-rapp-learn-new",
       "source": {
-        "artifact_sha256": "f9a108cd377b5b91d9288f56ee9f91c57717595c9cfb1e98b4952200c6806dfc",
+        "artifact_sha256": "7f2540f9c39bd60b93a8cc3059768c839cf4555acd8779ed3c167c61e33eaafe",
         "entrypoint": "scout/bundles/native-13/skills/rar-rapp-learn-new/SKILL.md",
         "entrypoint_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-learn-new/SKILL.md",
         "files": [
           {
             "path": "scout/bundles/native-13/skills/rar-rapp-learn-new/SKILL.md",
-            "sha256": "fe5767b74a9dab20025fabab71feb78210039e88ecb381aafb7d9ab5f54a7b90",
+            "sha256": "2835fa99d694dae9e045142ed01ff5660f13ae99ef230810800d0d2baf8d54ed",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-learn-new/SKILL.md"
           },
           {
             "path": "scout/bundles/native-13/skills/rar-rapp-learn-new/learn_new_agent.py",
-            "sha256": "f9a108cd377b5b91d9288f56ee9f91c57717595c9cfb1e98b4952200c6806dfc",
+            "sha256": "7f2540f9c39bd60b93a8cc3059768c839cf4555acd8779ed3c167c61e33eaafe",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-learn-new/learn_new_agent.py"
           },
           {
             "path": "scout/bundles/native-13/skills/rar-rapp-learn-new/rapp/agent.lock.json",
-            "sha256": "4168f0b32db4d60ce40a8b6998ab9b175a394c5fc80b5e4941320fed0cbab138",
+            "sha256": "484f9b794e534b0dab44918e1f3111d48867b2b8c9d5a59e0a34d86d06535d45",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-learn-new/rapp/agent.lock.json"
           },
           {
@@ -184189,7 +184189,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "797681a7ca943fafc935d533fedd008ce2305420",
+        "input_revision": "d14ad46c566f809379da94f3ff9f4ee6413008e1",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -184203,7 +184203,7 @@
         "projection",
         "scout"
       ],
-      "version": "3.1.0"
+      "version": "3.2.0"
     },
     {
       "artifact_type": "skill",
