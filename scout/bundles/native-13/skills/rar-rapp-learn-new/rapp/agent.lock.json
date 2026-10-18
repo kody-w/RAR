@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/learn_new",
   "agent_file": "learn_new_agent.py",
-  "agent_sha256": "9104535d15333d9a30543d94483df7bad958a61c4b4c00e492fc627fe3b21741",
+  "agent_sha256": "f9a108cd377b5b91d9288f56ee9f91c57717595c9cfb1e98b4952200c6806dfc",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "LearnNewAgent",
   "host_dependencies": [],
@@ -32,7 +32,7 @@
       "templates",
       "aibast"
     ],
-    "version": "3.0.1"
+    "version": "3.1.0"
   },
   "runtime_name": "LearnNew",
   "schema": "rapp-agent-lock/1.0",
@@ -114,5 +114,5 @@
     "required": [],
     "type": "object"
   },
-  "version": "3.0.1"
+  "version": "3.1.0"
 }

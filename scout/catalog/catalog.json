@@ -3356,7 +3356,7 @@
       ]
     },
     {
-      "bytes": 616816,
+      "bytes": 619951,
       "channel": "native",
       "files": 32,
       "id": "native-13",
@@ -129465,17 +129465,17 @@
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "b1d3e72a925e0575e218c07c5b8cb70b2d543e45ff5da50904efe8b009f3def8",
+          "sha256": "fe5767b74a9dab20025fabab71feb78210039e88ecb381aafb7d9ab5f54a7b90",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-learn-new/SKILL.md"
         },
         {
           "path": "learn_new_agent.py",
-          "sha256": "9104535d15333d9a30543d94483df7bad958a61c4b4c00e492fc627fe3b21741",
+          "sha256": "f9a108cd377b5b91d9288f56ee9f91c57717595c9cfb1e98b4952200c6806dfc",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-learn-new/learn_new_agent.py"
         },
         {
           "path": "rapp/agent.lock.json",
-          "sha256": "583b158c36a7dd0965a1afdcb5f634a9b17cbd85ffd1fd183add6a17319b64c5",
+          "sha256": "4168f0b32db4d60ce40a8b6998ab9b175a394c5fc80b5e4941320fed0cbab138",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-learn-new/rapp/agent.lock.json"
         },
         {
@@ -129567,11 +129567,11 @@
       },
       "requires_env": [],
       "skill_name": "rar-rapp-learn-new",
-      "skill_sha256": "b1d3e72a925e0575e218c07c5b8cb70b2d543e45ff5da50904efe8b009f3def8",
-      "source_commit": "b4ba983328bbb00340c62a83332318dc0ffc22aa",
+      "skill_sha256": "fe5767b74a9dab20025fabab71feb78210039e88ecb381aafb7d9ab5f54a7b90",
+      "source_commit": "797681a7ca943fafc935d533fedd008ce2305420",
       "source_kind": "rar-agent",
-      "source_sha256": "9104535d15333d9a30543d94483df7bad958a61c4b4c00e492fc627fe3b21741",
-      "version": "3.0.1"
+      "source_sha256": "f9a108cd377b5b91d9288f56ee9f91c57717595c9cfb1e98b4952200c6806dfc",
+      "version": "3.1.0"
     },
     {
       "bundle": "native-14",
