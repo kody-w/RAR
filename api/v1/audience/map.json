@@ -1,7 +1,7 @@
 {
   "schema": "rar-audience-map/1.0",
   "description": "Compact audience verdict per agent, for clients that already have the registry and only need to filter it. b=business, c=consumer, x=both. Absent means both.",
-  "generated": "2026-09-28T02:46:21Z",
+  "generated": "2026-10-18T12:48:57Z",
   "legend": {
     "b": "business",
     "c": "consumer",
@@ -10,9 +10,9 @@
   "counts": {
     "business_only": 408,
     "consumer_only": 3,
-    "both": 1289,
-    "in_business_mode": 1697,
-    "in_consumer_mode": 1292
+    "both": 1290,
+    "in_business_mode": 1698,
+    "in_consumer_mode": 1293
   },
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/map.json",
   "map": {
@@ -1640,6 +1640,7 @@
     "@kody-w/example_private": "x",
     "@kody-w/ez_sharpen_agent": "x",
     "@kody-w/factory": "x",
+    "@kody-w/first_hour_agent": "x",
     "@kody-w/flight_recorder": "x",
     "@kody-w/full_rapp_leviathan": "x",
     "@kody-w/git_warehouse_agent": "x",
@@ -8212,6 +8213,10 @@
     },
     "@kody-w/factory": {
       "b": 1.5,
+      "c": 0.0
+    },
+    "@kody-w/first_hour_agent": {
+      "b": 0.0,
       "c": 0.0
     },
     "@kody-w/flight_recorder": {
