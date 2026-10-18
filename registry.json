@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-10-18T21:44:44.471045+00:00",
+  "generated_at": "2026-10-18T22:02:05.355672+00:00",
   "stats": {
     "total_agents": 1701,
     "total_swarms": 2,
@@ -170094,7 +170094,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@rapp/learn_new",
-      "version": "3.0.1",
+      "version": "3.1.0",
       "display_name": "LearnNew",
       "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); built-in scratch templates remain as an explicit fallback.",
       "author": "RAPP",
@@ -170121,32 +170121,36 @@
       },
       "_file": "agents/@rapp/learn_new_agent.py",
       "_install_filename": "rar_rapp_learn_new_agent.py",
-      "_sha256": "9104535d15333d9a30543d94483df7bad958a61c4b4c00e492fc627fe3b21741",
+      "_sha256": "f9a108cd377b5b91d9288f56ee9f91c57717595c9cfb1e98b4952200c6806dfc",
       "_lifecycle": "notarized",
-      "_receipt": "rar_cc3830f8c6800a05f05a96ba96603d46ffd592a044b6c1de92cf886e0ca78dde",
+      "_receipt": "rar_5151b590dad57b3c0feda73e65800b9310bf1d9c6c60348837cf1defadf71ae5",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
       },
       "_provenance": {
-        "issue": null,
+        "issue": 1476,
         "submitted_by": "kody-w",
         "accepted_by": "kody-w",
         "checks": [
           "manifest",
+          "namespace",
           "content_sha256",
+          "base_precondition",
+          "security_scan",
           "registry_build",
+          "card_forge",
           "full_test_suite"
         ]
       },
       "_seed": 2538772095262668015,
-      "_size_kb": 80.3,
-      "_lines": 1963,
+      "_size_kb": 81.4,
+      "_lines": 1973,
       "_has_card": true,
       "_added_at": "2026-04-20T12:38:45-04:00",
       "_first_commit_sha": "1e4054692e4a9b1edc6ff96245ef02af9bb4f9b3",
       "_latest_commit_sha": "b4ba983328bbb00340c62a83332318dc0ffc22aa",
-      "_card_sha256": "9e9ba3284b79a95be20d6aa8d78c12833f6393fcd85ef007469a6c1f46e5d46a",
+      "_card_sha256": "a37c42ae71b23f5295cf2997b293b29683af3e10cc8e7e48f027e98583b22ced",
       "_seed_aliases": [
         2538772095262403840
       ]

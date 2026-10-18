@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-10-18T21:32:36Z",
+  "generated": "2026-10-18T21:57:31Z",
   "counts": {
     "native": 1701,
     "aggregated": 78,
@@ -2119,7 +2119,7 @@
           "channels": {},
           "tier": "official",
           "age_days": 181,
-          "lines": 1963,
+          "lines": 1973,
           "has_card": true
         },
         "source": null
@@ -2128,7 +2128,7 @@
         "no community feedback yet - scored at the population median",
         "official tier",
         "added 181 days ago",
-        "1963 lines",
+        "1973 lines",
         "has a rendered card"
       ]
     },

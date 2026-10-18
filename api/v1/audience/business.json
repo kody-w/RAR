@@ -2,7 +2,7 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-10-18T21:44:56Z",
+  "generated": "2026-10-18T21:56:41Z",
   "count": 1698,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
@@ -71736,7 +71736,7 @@
       "name": "@rapp/learn_new",
       "display_name": "LearnNew",
       "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); built-in scratch templates remain as an explicit fallback.",
-      "version": "3.0.1",
+      "version": "3.1.0",
       "publisher": "@rapp",
       "author": "RAPP",
       "category": "core",
@@ -71759,11 +71759,11 @@
         "path": "agents/@rapp/learn_new_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/learn_new_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/learn_new_agent.py",
-        "sha256": "9104535d15333d9a30543d94483df7bad958a61c4b4c00e492fc627fe3b21741"
+        "sha256": "f9a108cd377b5b91d9288f56ee9f91c57717595c9cfb1e98b4952200c6806dfc"
       },
       "stats": {
-        "lines": 1963,
-        "size_kb": 80.3,
+        "lines": 1973,
+        "size_kb": 81.4,
         "added_at": "2026-04-20T12:38:45-04:00"
       }
     },

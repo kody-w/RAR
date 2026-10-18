@@ -3,6 +3,11 @@
   "actor_id": 1735900,
   "actor_login": "kody-w",
   "agent": "@rapp/learn_new",
+  "applied_at": "2026-10-18T21:52:24.945876+00:00",
+  "approved_by": {
+    "github_id": 1735900,
+    "github_login": "kody-w"
+  },
   "base_lifecycle_receipt": "rar_cc3830f8c6800a05f05a96ba96603d46ffd592a044b6c1de92cf886e0ca78dde",
   "base_lifecycle_sha256": "9104535d15333d9a30543d94483df7bad958a61c4b4c00e492fc627fe3b21741",
   "base_lifecycle_version": "3.0.1",
@@ -22,6 +27,7 @@
   "issue_updated_at": "2026-10-18T21:06:36Z",
   "publisher": "@rapp",
   "reason": "",
+  "receipt": "rar_5151b590dad57b3c0feda73e65800b9310bf1d9c6c60348837cf1defadf71ae5",
   "repository_id": 1200565697,
   "request_id": "req_fd3b1e8261eb463bfbe4f681",
   "revision_id": "5151b590dad57b3c0feda73e65800b9310bf1d9c6c60348837cf1defadf71ae5",
@@ -29,5 +35,5 @@
   "slug": "learn_new_agent",
   "source_body_sha256": "e91a172e4a8ee00989208120089bac4891aea46d66330a05e098a6dfd883a1f4",
   "source_url": "https://gist.githubusercontent.com/kody-w/1e95740c57b9e830d3258c4a40dc1d81/raw/8772a5c8f4c1e9a4c8343616dc532fb6ff5fab74/learn_new_agent.py",
-  "status": "pending_review"
+  "status": "applied"
 }

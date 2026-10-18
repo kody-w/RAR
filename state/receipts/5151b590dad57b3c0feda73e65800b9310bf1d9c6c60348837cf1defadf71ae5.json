@@ -1,0 +1,50 @@
+{
+  "acceptance": {
+    "checks": [
+      "manifest",
+      "namespace",
+      "content_sha256",
+      "base_precondition",
+      "security_scan",
+      "registry_build",
+      "card_forge",
+      "full_test_suite"
+    ],
+    "github_id": 1735900,
+    "github_login": "kody-w",
+    "policy": "rar-notary/1.0",
+    "workflow_run": "39169711734"
+  },
+  "action": "agent.update",
+  "agent": "@rapp/learn_new",
+  "artifact": {
+    "algorithm": "sha256-lf-v1",
+    "digest": "f9a108cd377b5b91d9288f56ee9f91c57717595c9cfb1e98b4952200c6806dfc"
+  },
+  "canonical_path": "agents/@rapp/learn_new_agent.py",
+  "controller": {
+    "github_id": 1735900,
+    "github_login": "kody-w"
+  },
+  "created_at": "2026-10-18T21:52:24.945876+00:00",
+  "id": "rar_5151b590dad57b3c0feda73e65800b9310bf1d9c6c60348837cf1defadf71ae5",
+  "issuer": "github:kody-w/RAR",
+  "previous": {
+    "digest": "9104535d15333d9a30543d94483df7bad958a61c4b4c00e492fc627fe3b21741",
+    "receipt": "rar_cc3830f8c6800a05f05a96ba96603d46ffd592a044b6c1de92cf886e0ca78dde",
+    "version": "3.0.1"
+  },
+  "quality_tier": "official",
+  "request_id": "req_fd3b1e8261eb463bfbe4f681",
+  "revision_id": "5151b590dad57b3c0feda73e65800b9310bf1d9c6c60348837cf1defadf71ae5",
+  "schema": "rar-receipt/1.0",
+  "status": "notarized",
+  "submission": {
+    "github_id": 1735900,
+    "github_login": "kody-w",
+    "issue_node_id": "I_kwDOR48twc8AAAABYIKOyA",
+    "issue_number": 1476,
+    "source_body_sha256": "e91a172e4a8ee00989208120089bac4891aea46d66330a05e098a6dfd883a1f4"
+  },
+  "version": "3.1.0"
+}
