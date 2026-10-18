@@ -1,7 +1,7 @@
 {
   "schema": "rar-match/1.0",
   "description": "Precomputed use-case matching. A host application asks the user to describe a use case, tokenizes it, sums the term weights from `index`, and returns the top agents — entirely client-side, with no backend and no GitHub access.",
-  "generated": "2026-10-18T22:06:35Z",
+  "generated": "2026-10-18T23:19:11Z",
   "how_to_query": {
     "canonical": "Look up a use_cases[].id for a curated, ranked list.",
     "free_text": "Lowercase the query, split on non-alphanumerics, drop tokens of 2 characters or fewer, then for each token read index[token] (entries are 'agent_id:weight'). Sum weights per agent_id and sort descending."
@@ -3717,7 +3717,8 @@
       "cat-agent-skills__copilot_studio_topic_blueprint:1",
       "cat-agent-skills__persona_reaction_panel:1",
       "kody-w__matrix_arena_agent:1",
-      "kody-w__transcript2prototype:1"
+      "kody-w__transcript2prototype:1",
+      "rapp__learn_new:1"
     ],
     "set": [
       "cowork-cookbook__dashboard_set_employee_growth_goals:4",
@@ -4181,6 +4182,7 @@
       "kody-w__legal_helper:1",
       "kody-w__neuron_swarm:1",
       "rapp__basic_agent:1",
+      "rapp__learn_new:1",
       "rapp__twin_agent:1"
     ],
     "oversharing": [
@@ -4687,6 +4689,7 @@
     ],
     "chat": [
       "cat-agent-skills__conditional_chat_reminder:3",
+      "rapp__learn_new:2",
       "cat-agent-skills__ai_usecase_assessment:1",
       "cat-agent-skills__copilot_agent_advisor:1",
       "cat-agent-skills__iterative_file_editing:1",
@@ -9863,6 +9866,7 @@
       "kody-w__project_tracker_agent:1",
       "kody-w__twin_me:1",
       "rapp__basic_agent:1",
+      "rapp__learn_new:1",
       "rapp__rapp_publish_agent:1",
       "rapp__twin_agent:1",
       "rapter__hive_shape_agent:1"
@@ -11064,6 +11068,7 @@
       "cat-agent-skills__wcag_power_platform:1",
       "cowork-cookbook__roi_and_value_selling_artifact:1",
       "kody-w__skill_toaster_agent:1",
+      "rapp__learn_new:1",
       "rapter__hive_census_agent:1"
     ],
     "dax": [
@@ -23315,6 +23320,12 @@
       "rapp__learn_new:1"
     ],
     "regenerated": [
+      "rapp__learn_new:1"
+    ],
+    "wrote": [
+      "rapp__learn_new:1"
+    ],
+    "passes": [
       "rapp__learn_new:1"
     ],
     "scratch": [
