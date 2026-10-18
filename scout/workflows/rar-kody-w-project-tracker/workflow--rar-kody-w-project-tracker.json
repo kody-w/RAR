@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-07-24T16:53:40.000Z",
+  "createdAt": "2026-10-09T08:17:00.000Z",
   "description": "Disabled Scout workflow projected from @kody-w/project_tracker_agent (1.0.0). Edit inputs or schedule before enabling.",
   "enabled": false,
   "id": "f0cea8b574e99878",
@@ -34,5 +34,5 @@
   ],
   "teamsNotify": "auto",
   "triggerType": "schedule",
-  "updatedAt": "2026-07-24T16:53:40.000Z"
+  "updatedAt": "2026-10-09T08:17:00.000Z"
 }

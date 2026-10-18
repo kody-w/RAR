@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-04-27T21:52:47.000Z",
+  "createdAt": "2026-10-09T08:17:00.000Z",
   "description": "Disabled Scout workflow projected from @rapp/store_navigator_agent (0.1.4). Edit inputs or schedule before enabling.",
   "enabled": false,
   "id": "9d37010824507ee4",
@@ -34,5 +34,5 @@
   ],
   "teamsNotify": "auto",
   "triggerType": "schedule",
-  "updatedAt": "2026-04-27T21:52:47.000Z"
+  "updatedAt": "2026-10-09T08:17:00.000Z"
 }

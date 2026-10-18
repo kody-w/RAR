@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-04-19T22:58:15.000Z",
+  "createdAt": "2026-10-09T08:17:00.000Z",
   "description": "Disabled Scout workflow projected from @rarbookworld/bookfactory (0.4.1). Edit inputs or schedule before enabling.",
   "enabled": false,
   "id": "2f0ccc320c7f77bf",
@@ -34,5 +34,5 @@
   ],
   "teamsNotify": "auto",
   "triggerType": "schedule",
-  "updatedAt": "2026-04-19T22:58:15.000Z"
+  "updatedAt": "2026-10-09T08:17:00.000Z"
 }

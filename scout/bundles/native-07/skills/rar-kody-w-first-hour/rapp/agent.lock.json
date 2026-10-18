@@ -1,0 +1,42 @@
+{
+  "agent": "@kody-w/first_hour_agent",
+  "agent_file": "first_hour_agent.py",
+  "agent_sha256": "61dd52033a67e19c2c88909a379cfd2a855a1c18f76065ecde2bb330a3681997",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "FirstHourAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "@kody-w",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Walks you through your first hour with your Brainstem, one step at a time.",
+    "display_name": "FirstHour",
+    "name": "@kody-w/first_hour_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "first-hour",
+      "learn",
+      "getting-started"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "FirstHour",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "step": {
+        "description": "Which step, 1 to 6. Use 1 to start.",
+        "maximum": 6,
+        "minimum": 1,
+        "type": "integer"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

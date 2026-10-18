@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-05-05T12:57:33.000Z",
+  "createdAt": "2026-10-09T08:17:00.000Z",
   "description": "Disabled Scout workflow projected from @kody-w/perpetual_loop_factory (1.0.3). Edit inputs or schedule before enabling.",
   "enabled": false,
   "id": "0873c03fbe9e79ea",
@@ -34,5 +34,5 @@
   ],
   "teamsNotify": "auto",
   "triggerType": "schedule",
-  "updatedAt": "2026-05-05T12:57:33.000Z"
+  "updatedAt": "2026-10-09T08:17:00.000Z"
 }

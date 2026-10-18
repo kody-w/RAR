@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-04-20T16:38:45.000Z",
+  "createdAt": "2026-10-09T08:17:00.000Z",
   "description": "Disabled Scout workflow projected from @rapp/swarm_factory_agent (0.3.1). Edit inputs or schedule before enabling.",
   "enabled": false,
   "id": "17820d259a71b6fa",
@@ -34,5 +34,5 @@
   ],
   "teamsNotify": "auto",
   "triggerType": "schedule",
-  "updatedAt": "2026-04-20T16:38:45.000Z"
+  "updatedAt": "2026-10-09T08:17:00.000Z"
 }

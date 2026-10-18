@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-05-16T20:33:02.000Z",
+  "createdAt": "2026-10-09T08:17:00.000Z",
   "description": "Disabled Scout workflow projected from @kody-w/rapp_leviathan_factory (0.3.0). Edit inputs or schedule before enabling.",
   "enabled": false,
   "id": "f56a67ccb54a7004",
@@ -34,5 +34,5 @@
   ],
   "teamsNotify": "auto",
   "triggerType": "schedule",
-  "updatedAt": "2026-05-16T20:33:02.000Z"
+  "updatedAt": "2026-10-09T08:17:00.000Z"
 }
