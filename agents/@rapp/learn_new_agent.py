@@ -43,6 +43,9 @@ Env:
   RAPP_LEARN_CACHE_DIR  — where the registry cache lives (default ~/.rapp-learn-new)
   RAPP_LEARN_OFFLINE=1  — never touch the network (cache-only / scratch)
   RAPP_LEARN_NO_LLM=1   — never shell out to `copilot` for naming/body generation
+  RAPP_LEARN_REGISTRY_URL      — another template library in the same registry.json shape
+  RAPP_LEARN_TEMPLATE_BASE     — the base its "_file" paths resolve against (file:// works)
+  RAPP_LEARN_TEMPLATE_REPO / _REPO_URL / _BRANCH / _LICENSE — how adapted files name that source
 """
 
 import ast
@@ -66,7 +69,7 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/learn_new",
-    "version": "3.0.1",
+    "version": "3.1.0",
     "display_name": "LearnNew",
     "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); built-in scratch templates remain as an explicit fallback.",
     "author": "RAPP",
@@ -81,13 +84,17 @@ __manifest__ = {
 
 # ── Published template source ────────────────────────────────────────────
 # PUBLIC + MIT licensed. Fetched at runtime; never vendored into this repo.
-TEMPLATE_REPO = "microsoft/aibast-agents-library"
-TEMPLATE_BRANCH = "main"
-TEMPLATE_RAW_BASE = "https://raw.githubusercontent.com/%s/%s/" % (TEMPLATE_REPO, TEMPLATE_BRANCH)
-TEMPLATE_REGISTRY_URL = TEMPLATE_RAW_BASE + "registry.json"
-TEMPLATE_REPO_URL = "https://github.com/%s" % TEMPLATE_REPO
-TEMPLATE_LICENSE = "MIT License, Copyright (c) Microsoft (see %s/blob/%s/LICENSE)" % (
-    TEMPLATE_REPO_URL, TEMPLATE_BRANCH)
+# Another library in the same registry.json shape can be the template source instead
+# (RAPP_LEARN_REGISTRY_URL; file:// works for a local library). Unset, nothing changes.
+TEMPLATE_REPO = os.environ.get("RAPP_LEARN_TEMPLATE_REPO") or "microsoft/aibast-agents-library"
+TEMPLATE_BRANCH = os.environ.get("RAPP_LEARN_TEMPLATE_BRANCH") or "main"
+TEMPLATE_RAW_BASE = os.environ.get("RAPP_LEARN_TEMPLATE_BASE") or \
+    "https://raw.githubusercontent.com/%s/%s/" % (TEMPLATE_REPO, TEMPLATE_BRANCH)
+TEMPLATE_REGISTRY_URL = os.environ.get("RAPP_LEARN_REGISTRY_URL") or TEMPLATE_RAW_BASE + "registry.json"
+TEMPLATE_REPO_URL = os.environ.get("RAPP_LEARN_TEMPLATE_REPO_URL") or "https://github.com/%s" % TEMPLATE_REPO
+TEMPLATE_LICENSE = os.environ.get("RAPP_LEARN_TEMPLATE_LICENSE") or \
+    "MIT License, Copyright (c) Microsoft (see %s/blob/%s/LICENSE)" % (TEMPLATE_REPO_URL, TEMPLATE_BRANCH)
+DEFAULT_REGISTRY_URL = "https://raw.githubusercontent.com/microsoft/aibast-agents-library/main/registry.json"
 
 # A cached registry older than this is refetched; if the refetch fails the
 # cache is still usable but is reported as STALE, never as current.
@@ -701,8 +708,11 @@ if __name__ == "__main__":
         "nothing changed" (network-unchanged) are deliberately distinct.
         """
         cdir = self._cache_dir()
-        cache_f = cdir / "aibast-registry.json"
-        meta_f = cdir / "aibast-registry.meta.json"
+        # One cache per source, so switching libraries never serves another library's index.
+        stem = "aibast-registry" if TEMPLATE_REGISTRY_URL == DEFAULT_REGISTRY_URL else \
+            "registry-" + hashlib.sha256(TEMPLATE_REGISTRY_URL.encode()).hexdigest()[:16]
+        cache_f = cdir / (stem + ".json")
+        meta_f = cdir / (stem + ".meta.json")
 
         cached_meta = {}
         if meta_f.exists():
