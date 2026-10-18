@@ -30,7 +30,7 @@ def digest(data: bytes) -> str:
 def test_repository_migration_inputs_match_exact_pre_or_post_hashes():
     config = json.loads(CONFIG.read_text())
     assert config["schema"] == "rar-maintainer-migrations/1.0"
-    assert len(config["migrations"]) == 4
+    assert len(config["migrations"]) == 3
     for migration in config["migrations"]:
         path = ROOT / migration["path"]
         current = digest(path.read_bytes())

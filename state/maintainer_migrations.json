@@ -28,19 +28,6 @@
       "note": "Publish the existing aibast schema-prefix behavior under a fresh patch version."
     },
     {
-      "agent": "@rapp/learn_new",
-      "path": "agents/@rapp/learn_new_agent.py",
-      "expected_sha256": "65e84770685bea5e8ebe996416f1825aab9a824a3d4ef05db7a592dbff69c7a8",
-      "target_sha256": "9104535d15333d9a30543d94483df7bad958a61c4b4c00e492fc627fe3b21741",
-      "replacements": [
-        {
-          "old": "\"version\": \"3.0.0\"",
-          "new": "\"version\": \"3.0.1\""
-        }
-      ],
-      "note": "Publish the already-shipped LearnNew v3 behavior under a registry-distinct patch version."
-    },
-    {
       "agent": "@rapter/rapp_dogg_agent",
       "path": "agents/@rapter/rapp_dogg_agent.py",
       "expected_sha256": "950a2053be11b6b2ff4c0abc0e7bf46709a449762f5da26d8179129f83babab5",
