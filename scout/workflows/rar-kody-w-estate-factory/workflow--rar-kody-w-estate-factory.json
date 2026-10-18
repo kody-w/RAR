@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-10-09T08:17:00.000Z",
+  "createdAt": "2026-05-16T20:30:24.000Z",
   "description": "Disabled Scout workflow projected from @kody-w/estate_factory (0.1.2). Edit inputs or schedule before enabling.",
   "enabled": false,
   "id": "4264c61b2579e045",
@@ -34,5 +34,5 @@
   ],
   "teamsNotify": "auto",
   "triggerType": "schedule",
-  "updatedAt": "2026-10-09T08:17:00.000Z"
+  "updatedAt": "2026-05-16T20:30:24.000Z"
 }

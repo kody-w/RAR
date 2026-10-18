@@ -125531,7 +125531,7 @@
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "a81a17b317f5daebeeea29c39292507b70b74fc9c0f17bed7930769a9e979c9f",
+          "sha256": "852a5d1c6b1275dfc5a912dcb3910190b2d2e50e6f376d3be28769e75b113502",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-07/skills/rar-kody-w-first-hour/SKILL.md"
         },
         {
@@ -125567,8 +125567,8 @@
       },
       "requires_env": [],
       "skill_name": "rar-kody-w-first-hour",
-      "skill_sha256": "a81a17b317f5daebeeea29c39292507b70b74fc9c0f17bed7930769a9e979c9f",
-      "source_commit": "4d986fee1ec211bc0a1357f4df8671625bbf45a6",
+      "skill_sha256": "852a5d1c6b1275dfc5a912dcb3910190b2d2e50e6f376d3be28769e75b113502",
+      "source_commit": "9c74e2746f3c7ad967bba5618a4b12763742f74c",
       "source_kind": "rar-agent",
       "source_sha256": "61dd52033a67e19c2c88909a379cfd2a855a1c18f76065ecde2bb330a3681997",
       "version": "1.0.0"

@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-10-09T08:17:00.000Z",
+  "createdAt": "2026-06-08T00:27:02.000Z",
   "description": "Disabled Scout workflow projected from @kody-w/copilot_studio_deploy_agent (1.2.0). Edit inputs or schedule before enabling.",
   "enabled": false,
   "id": "14d9ab00a5fb0e72",
@@ -34,5 +34,5 @@
   ],
   "teamsNotify": "auto",
   "triggerType": "schedule",
-  "updatedAt": "2026-10-09T08:17:00.000Z"
+  "updatedAt": "2026-06-08T00:27:02.000Z"
 }

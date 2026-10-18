@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-10-09T08:17:00.000Z",
+  "createdAt": "2026-05-11T14:53:36.000Z",
   "description": "Disabled Scout workflow projected from @rapp/egg_hatcher (1.1.1). Edit inputs or schedule before enabling.",
   "enabled": false,
   "id": "a2744b9cec26dc34",
@@ -34,5 +34,5 @@
   ],
   "teamsNotify": "auto",
   "triggerType": "schedule",
-  "updatedAt": "2026-10-09T08:17:00.000Z"
+  "updatedAt": "2026-05-11T14:53:36.000Z"
 }

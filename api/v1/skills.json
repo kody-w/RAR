@@ -12,7 +12,7 @@
   },
   "inputs": {
     "canonical_manifests": "64b03442d38d2cc1cf3620a305f1aa8ce52967d78722c7338db346e2cf45d700",
-    "scout_catalog": "f0bd2f1756d946a82808bf79a6f973125aecd4634703b49b0680bfbd3f835481",
+    "scout_catalog": "2c0be93e84ba45f4de1763093f43f0edc0eb8a0f5699747c4f3e4d0c32153f02",
     "scout_toaster": {
       "commit": "d54ba8484b5c5dae6406d2090c03115d12985446",
       "sha256": "d340043178aa4160f76a179b8b1086971e09207b212aff2ab2c0752b69173e17"
@@ -178495,7 +178495,7 @@
         "files": [
           {
             "path": "scout/bundles/native-07/skills/rar-kody-w-first-hour/SKILL.md",
-            "sha256": "a81a17b317f5daebeeea29c39292507b70b74fc9c0f17bed7930769a9e979c9f",
+            "sha256": "852a5d1c6b1275dfc5a912dcb3910190b2d2e50e6f376d3be28769e75b113502",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-07/skills/rar-kody-w-first-hour/SKILL.md"
           },
           {
@@ -178515,7 +178515,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "4d986fee1ec211bc0a1357f4df8671625bbf45a6",
+        "input_revision": "9c74e2746f3c7ad967bba5618a4b12763742f74c",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
