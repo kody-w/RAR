@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-10-18T09:42:16Z",
+ "generated_at": "2026-10-19T10:54:29Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -9,34 +9,34 @@
   "stars": 5,
   "forks": 1,
   "watchers": 0,
-  "open_issues": 13,
-  "size_kb": 114951,
+  "open_issues": 12,
+  "size_kb": 112875,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-10-18T08:28:24Z",
+  "pushed_at": "2026-10-19T09:29:40Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
  "totals": {
-  "downloads": 12150,
-  "clones": 11699,
+  "downloads": 12365,
+  "clones": 11914,
   "cdn_hits": 451,
   "release_downloads": 0,
   "agent_file_downloads": 273,
-  "clones_excluding_ci_estimate": 7755,
-  "ci_clone_estimate": 3944,
-  "page_views": 255,
-  "clone_uniques_14d": 278,
-  "view_uniques_14d": 10,
-  "clone_uniques_daily_sum": 1979,
-  "view_uniques_daily_sum": 110,
-  "days_tracked": 68,
+  "clones_excluding_ci_estimate": 7912,
+  "ci_clone_estimate": 4002,
+  "page_views": 257,
+  "clone_uniques_14d": 273,
+  "view_uniques_14d": 11,
+  "clone_uniques_daily_sum": 2015,
+  "view_uniques_daily_sum": 112,
+  "days_tracked": 69,
   "tracking_since": "2026-07-14",
-  "agents": 1700,
+  "agents": 1701,
   "swarms": 2,
   "publishers": 11,
   "categories": 13,
-  "total_lines": 530102,
-  "total_kb": 31056.8,
+  "total_lines": 530409,
+  "total_kb": 31072.7,
   "votes": 1,
   "upvotes": 1,
   "voters": 1,
@@ -537,6 +537,13 @@
    "clone_uniques": 32,
    "views": 0,
    "cdn": 0
+  },
+  {
+   "date": "2026-10-18",
+   "clones": 215,
+   "clone_uniques": 36,
+   "views": 2,
+   "cdn": 0
   }
  ],
  "traffic": {
@@ -556,6 +563,12 @@
    {
     "path": "/kody-w/RAR",
     "title": "Overview",
+    "count": 2,
+    "uniques": 2
+   },
+   {
+    "path": "/kody-w/RAR/discussions",
+    "title": "/discussions",
     "count": 2,
     "uniques": 2
    },
@@ -590,14 +603,8 @@
     "uniques": 1
    },
    {
-    "path": "/kody-w/RAR/discussions",
-    "title": "/discussions",
-    "count": 1,
-    "uniques": 1
-   },
-   {
-    "path": "/kody-w/RAR/discussions/1316",
-    "title": "/discussions/1316",
+    "path": "/kody-w/RAR/compare/learn-new-template-source",
+    "title": "/compare/learn-new-template-source",
     "count": 1,
     "uniques": 1
    }
@@ -614,15 +621,15 @@
     "uniques": 1
    }
   ],
-  "clones_14d": 1958,
-  "views_14d": 20,
+  "clones_14d": 2055,
+  "views_14d": 21,
   "live": true,
-  "as_of": "2026-10-18T09:42:16Z"
+  "as_of": "2026-10-19T10:54:29Z"
  },
  "cdn": {
   "total_hits": 451,
   "bandwidth": 6360652,
-  "rank": 775354,
+  "rank": 778623,
   "agent_hits": 273,
   "files": [
    {
@@ -920,11 +927,11 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 1963,
-    "size_kb": 80.3,
+    "lines": 2184,
+    "size_kb": 92.3,
     "added_at": "2026-04-20T12:38:45-04:00",
     "file": "agents/@rapp/learn_new_agent.py",
-    "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); built-in scratch templates remain as an explicit fallback."
+    "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback."
    },
    {
     "name": "@kody-w/agent_team_agent",
@@ -1393,6 +1400,23 @@
     "description": "Analyzes contract documents in Azure File Storage with Azure OpenAI \u2014 clause extraction, risk flagging, and comparison."
    },
    {
+    "name": "@rapp/learn_new",
+    "display_name": "LearnNew",
+    "publisher": "@rapp",
+    "category": "core",
+    "tier": "official",
+    "downloads": 8,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 2184,
+    "size_kb": 92.3,
+    "added_at": "2026-04-20T12:38:45-04:00",
+    "file": "agents/@rapp/learn_new_agent.py",
+    "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback."
+   },
+   {
     "name": "@discreetRappers/copilot_studio_transpiler_agent",
     "display_name": "CopilotStudioTranspiler",
     "publisher": "@discreetRappers",
@@ -1408,23 +1432,6 @@
     "added_at": "2026-04-06T16:39:03-04:00",
     "file": "agents/@discreetRappers/copilot_studio_transpiler_agent.py",
     "description": "Transpiles RAPP Python agents to fully native Copilot Studio solutions without Azure Function dependency."
-   },
-   {
-    "name": "@rapp/learn_new",
-    "display_name": "LearnNew",
-    "publisher": "@rapp",
-    "category": "core",
-    "tier": "official",
-    "downloads": 8,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 1963,
-    "size_kb": 80.3,
-    "added_at": "2026-04-20T12:38:45-04:00",
-    "file": "agents/@rapp/learn_new_agent.py",
-    "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); built-in scratch templates remain as an explicit fallback."
    },
    {
     "name": "@rapp/twin_agent",
@@ -1462,6 +1469,23 @@
    }
   ],
   "newest": [
+   {
+    "name": "@kody-w/first_hour_agent",
+    "display_name": "FirstHour",
+    "publisher": "@kody-w",
+    "category": "core",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 86,
+    "size_kb": 3.9,
+    "added_at": "2026-10-18T01:10:16-04:00",
+    "file": "agents/@kody-w/first_hour_agent.py",
+    "description": "Walks you through your first hour with your Brainstem, one step at a time."
+   },
    {
     "name": "@cat-agent-skills/breathing_room",
     "display_name": "Breathing Room",
@@ -1699,23 +1723,6 @@
     "added_at": "2026-08-28T04:52:39Z",
     "file": "agents/@cowork-cookbook/adaptive_card_analyze_and_segment_customers_and_markets_agent.py",
     "description": "Generates a read-only Adaptive Card JSON file summarizing customer and market segmentation status from Dynamics 365 F&SCM, with KPI tiles, RAG row, and action buttons for Teams, Outlook, or dashboards."
-   },
-   {
-    "name": "@cowork-cookbook/adaptive_card_analyze_asset_utilization",
-    "display_name": "Analyze asset utilization Status Adaptive Card",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "verified",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 265,
-    "size_kb": 16.5,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/adaptive_card_analyze_asset_utilization_agent.py",
-    "description": "Generates a read-only Adaptive Card JSON file visualizing asset utilization status from Dynamics 365 F&SCM for a given legal entity, with KPI tiles, trend arrows, a RAG row, and action buttons."
    }
   ],
   "publishers": [
@@ -1739,11 +1746,11 @@
    },
    {
     "name": "@kody-w",
-    "agents": 68,
+    "agents": 69,
     "downloads": 4,
     "score": 1,
     "reviews": 1,
-    "lines": 66581,
+    "lines": 66667,
     "rating": 5.0
    },
    {
@@ -1752,7 +1759,7 @@
     "downloads": 8,
     "score": 0,
     "reviews": 0,
-    "lines": 16195,
+    "lines": 16416,
     "rating": 0.0
    },
    {
@@ -1843,7 +1850,7 @@
    },
    {
     "name": "core",
-    "agents": 33,
+    "agents": 34,
     "downloads": 8,
     "score": 1,
     "reviews": 0
@@ -1913,7 +1920,7 @@
    }
   ],
   "tiers": {
-   "community": 1274,
+   "community": 1275,
    "verified": 281,
    "frontier": 97,
    "official": 46,
