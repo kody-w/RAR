@@ -28,6 +28,13 @@ file name, and the test call, run in a separate process, returns that text.
 Otherwise nothing is written and the reason goes back to the model to fix.
 Without source='chat', nothing about the other paths changes.
 
+v3.3 — NO SILENT SKELETONS. When no published template can be used (no
+confident match, offline, fetch failed, no hash), create/preview no longer
+write a placeholder agent that only echoes its query. They write nothing and
+answer status "needs_code" with the reason and how to write the agent with
+source='chat'. An explicit source='scratch' and swarms are unchanged;
+RAPP_LEARN_SCRATCH_FALLBACK=1 restores the old fallback.
+
 Scratch generation from the built-in string templates is still available,
 but it is now an explicit choice (source='scratch') and the honest fallback
 when the network is unavailable or nothing matches well. Every response
@@ -51,6 +58,7 @@ Env:
   RAPP_LEARN_CACHE_DIR  — where the registry cache lives (default ~/.rapp-learn-new)
   RAPP_LEARN_OFFLINE=1  — never touch the network (cache-only / scratch)
   RAPP_LEARN_NO_LLM=1   — never shell out to `copilot` for naming/body generation
+  RAPP_LEARN_SCRATCH_FALLBACK=1 — when no template can be used, write a scratch agent (the pre-3.3 fallback)
   RAPP_LEARN_REGISTRY_URL      — another template library in the same registry.json shape
   RAPP_LEARN_TEMPLATE_BASE     — the base its "_file" paths resolve against (file:// works)
   RAPP_LEARN_TEMPLATE_REPO / _REPO_URL / _BRANCH / _LICENSE — how adapted files name that source
@@ -78,7 +86,7 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/learn_new",
-    "version": "3.2.0",
+    "version": "3.3.0",
     "display_name": "LearnNew",
     "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback.",
     "author": "RAPP",
@@ -618,8 +626,14 @@ if __name__ == "__main__":
             else:
                 fallback_reason = tpl.get("reason")
 
+        if agent_code is None and source_mode != 'scratch' \
+                and os.environ.get("RAPP_LEARN_SCRATCH_FALLBACK") != "1":
+            # No template could be used. A scratch file here would only echo its query
+            # and look like success, so write nothing and ask for the real code.
+            return self._needs_code(description, name, fallback_reason, template_report, write)
+
         if agent_code is None:
-            # Scratch path: explicit choice, or the honest fallback.
+            # Scratch path: explicit choice, or the pre-3.3 fallback (RAPP_LEARN_SCRATCH_FALLBACK=1).
             if not name:
                 name = self._generate_name(description)
             name = self._sanitize_name(name)
@@ -808,6 +822,33 @@ if __name__ == "__main__":
         if output_dir:
             return Path(output_dir).expanduser()
         return self.agents_dir
+
+    def _needs_code(self, description, name, reason, report, write):
+        why = {
+            "offline": "the published template registry could not be reached and no cached copy is available",
+            "no_match": "no published template matched this request with enough confidence (best score %s < %s)"
+                        % ((report or {}).get("best_score"), MIN_MATCH_SCORE),
+            "fetch_failed": "the chosen template could not be downloaded",
+            "no_expected_hash": "the chosen template has no published sha256, so it could not be verified",
+        }.get(reason, "no published template could be used (%s)" % reason)
+        suggested = self._sanitize_name(name) if name else self._generate_name(description)
+        return json.dumps({
+            "status": "needs_code",
+            "action": "create" if write else "preview",
+            "generator": "none",
+            "reason": reason,
+            "message": (
+                "Nothing was written: %s, and a placeholder agent would not do the job. "
+                "Write the agent yourself: call LearnNew again with action='create', source='chat', "
+                "name (CamelCase, e.g. %s), code (the complete file, in the shape the 'code' parameter "
+                "describes), test_args (one realistic call) and expect (text its correct answer contains). "
+                "It is saved only if that test passes. To browse templates instead use action='templates'; "
+                "for a placeholder file anyway use source='scratch'." % (why, suggested)
+            ),
+            "suggested_name": suggested,
+            "description": (description or "")[:200],
+            "template_selection": report,
+        }, indent=2)
 
     def _fallback_message(self, reason, report):
         reg = (report or {}).get("registry", {})

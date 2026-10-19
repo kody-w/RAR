@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-10-18T23:28:27.829068+00:00",
+  "generated_at": "2026-10-19T01:01:27.686044+00:00",
   "stats": {
     "total_agents": 1701,
     "total_swarms": 2,
@@ -170094,7 +170094,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@rapp/learn_new",
-      "version": "3.2.0",
+      "version": "3.3.0",
       "display_name": "LearnNew",
       "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback.",
       "author": "RAPP",
@@ -170121,15 +170121,15 @@
       },
       "_file": "agents/@rapp/learn_new_agent.py",
       "_install_filename": "rar_rapp_learn_new_agent.py",
-      "_sha256": "7f2540f9c39bd60b93a8cc3059768c839cf4555acd8779ed3c167c61e33eaafe",
+      "_sha256": "c610a51c8958901dd8bf40f74de2ee4a6fd3f0d36bd52df6252da6c523ae8418",
       "_lifecycle": "notarized",
-      "_receipt": "rar_a1a5ac73c4116dcfd55e7f2abaf505a4d01d86ad8eb4a7864876df5f4acce2e0",
+      "_receipt": "rar_6bc31d2d092132904074868b24fb06a0a87c67951d56995b058187e48faef269",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
       },
       "_provenance": {
-        "issue": 1492,
+        "issue": 1493,
         "submitted_by": "kody-w",
         "accepted_by": "kody-w",
         "checks": [
@@ -170144,13 +170144,13 @@
         ]
       },
       "_seed": 2538772095262668015,
-      "_size_kb": 89.7,
-      "_lines": 2143,
+      "_size_kb": 92.3,
+      "_lines": 2184,
       "_has_card": true,
       "_added_at": "2026-04-20T12:38:45-04:00",
       "_first_commit_sha": "1e4054692e4a9b1edc6ff96245ef02af9bb4f9b3",
       "_latest_commit_sha": "d14ad46c566f809379da94f3ff9f4ee6413008e1",
-      "_card_sha256": "912ff1fbe560296a41c247b80a5f5d91efa3c1835ff745146bda153ac0c3581f",
+      "_card_sha256": "088b81f4015adaacfa6c7eacd5e53a71222a4626b7648d1a4d80d39771737124",
       "_seed_aliases": [
         2538772095262403840
       ]

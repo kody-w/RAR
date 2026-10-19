@@ -1,7 +1,7 @@
 {
   "schema": "rar-catalog/1.0",
   "description": "Every agent in RAR as a lean record. Fetch this one file to render a complete browsable catalog with no further requests, no backend, no authentication and no GitHub account.",
-  "generated": "2026-10-18T23:30:18Z",
+  "generated": "2026-10-19T00:56:16Z",
   "count": 1701,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/catalog.json",
   "agents": [
@@ -71853,7 +71853,7 @@
       "name": "@rapp/learn_new",
       "display_name": "LearnNew",
       "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback.",
-      "version": "3.2.0",
+      "version": "3.3.0",
       "publisher": "@rapp",
       "author": "RAPP",
       "category": "core",
@@ -71876,11 +71876,11 @@
         "path": "agents/@rapp/learn_new_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/learn_new_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/learn_new_agent.py",
-        "sha256": "7f2540f9c39bd60b93a8cc3059768c839cf4555acd8779ed3c167c61e33eaafe"
+        "sha256": "c610a51c8958901dd8bf40f74de2ee4a6fd3f0d36bd52df6252da6c523ae8418"
       },
       "stats": {
-        "lines": 2143,
-        "size_kb": 89.7,
+        "lines": 2184,
+        "size_kb": 92.3,
         "added_at": "2026-04-20T12:38:45-04:00"
       }
     },
