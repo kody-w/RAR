@@ -12,7 +12,7 @@
   },
   "inputs": {
     "canonical_manifests": "64b03442d38d2cc1cf3620a305f1aa8ce52967d78722c7338db346e2cf45d700",
-    "scout_catalog": "52e8ecf48b09cf9dd813331346596ad5cee4c02a04014e6bcce224840ad452f1",
+    "scout_catalog": "138bdade9344e74bbd35f3f467d26eb5508cdc2712fa70a63c3cd6dd16155fec",
     "scout_toaster": {
       "commit": "d54ba8484b5c5dae6406d2090c03115d12985446",
       "sha256": "d340043178aa4160f76a179b8b1086971e09207b212aff2ab2c0752b69173e17"
@@ -184163,23 +184163,23 @@
       ],
       "slug": "rar-rapp-learn-new",
       "source": {
-        "artifact_sha256": "7f2540f9c39bd60b93a8cc3059768c839cf4555acd8779ed3c167c61e33eaafe",
+        "artifact_sha256": "c610a51c8958901dd8bf40f74de2ee4a6fd3f0d36bd52df6252da6c523ae8418",
         "entrypoint": "scout/bundles/native-13/skills/rar-rapp-learn-new/SKILL.md",
         "entrypoint_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-learn-new/SKILL.md",
         "files": [
           {
             "path": "scout/bundles/native-13/skills/rar-rapp-learn-new/SKILL.md",
-            "sha256": "2835fa99d694dae9e045142ed01ff5660f13ae99ef230810800d0d2baf8d54ed",
+            "sha256": "78661c3d02ef0e757a9d005aab318003c5870f917056357930408ab702d36fee",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-learn-new/SKILL.md"
           },
           {
             "path": "scout/bundles/native-13/skills/rar-rapp-learn-new/learn_new_agent.py",
-            "sha256": "7f2540f9c39bd60b93a8cc3059768c839cf4555acd8779ed3c167c61e33eaafe",
+            "sha256": "c610a51c8958901dd8bf40f74de2ee4a6fd3f0d36bd52df6252da6c523ae8418",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-learn-new/learn_new_agent.py"
           },
           {
             "path": "scout/bundles/native-13/skills/rar-rapp-learn-new/rapp/agent.lock.json",
-            "sha256": "484f9b794e534b0dab44918e1f3111d48867b2b8c9d5a59e0a34d86d06535d45",
+            "sha256": "66ef11fcc86ef9a3ee368e237361d71559c8fc74f185dc31638a98f775321f84",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-learn-new/rapp/agent.lock.json"
           },
           {
@@ -184189,7 +184189,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "d14ad46c566f809379da94f3ff9f4ee6413008e1",
+        "input_revision": "100291a4fa04c3446c132a053d8af64bde3cc6d6",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -184203,7 +184203,7 @@
         "projection",
         "scout"
       ],
-      "version": "3.2.0"
+      "version": "3.3.0"
     },
     {
       "artifact_type": "skill",
