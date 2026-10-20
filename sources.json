@@ -45,7 +45,8 @@
       "license_url": "https://github.com/seangalliher/Coworkcookbook/blob/main/LICENSE",
       "license_note": "Recipe content is CC BY 4.0 (share and adapt with attribution) and code is MIT. RAR carries each recipe's prompt, prerequisites, steps and expected output verbatim with attribution, so the toasted agent runs the real recipe; bundles and screenshots stay upstream.",
       "carry_bodies": true,
-      "enabled": true
+      "enabled": false,
+      "disabled_reason": "Archived as noise (Kody, 2026-10-20); hosted copies withheld via state/superseded.json."
     },
     {
       "id": "aibast-agents-library",

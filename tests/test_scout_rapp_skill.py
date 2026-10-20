@@ -180,7 +180,8 @@ def test_plural_skill_has_hotload_and_bootstrap_contract():
 
 
 def test_every_primary_skill_is_reversible_and_exactly_pinned():
-    assert len(CATALOG["skills"]) >= 300
+    # Floor guards against a collapsed catalog; ~238 real skills remain after the 2026-10-20 Cowork Cookbook archive.
+    assert len(CATALOG["skills"]) >= 200
     for record in CATALOG["skills"]:
         directory = primary_skill_dir(record)
         skill_path = directory / "SKILL.md"
