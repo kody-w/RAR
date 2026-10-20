@@ -97,6 +97,10 @@ def build_rapplications() -> list[dict] | None:
                 "access": str(app.get("access", "public")),
                 "singleton_url": str(app.get("singleton_url", "")),
                 "singleton_sha256": str(app.get("singleton_sha256", "")),
+                # Complete applications (rapp-application/2.0) install as a whole package, not one file.
+                "application_schema": str(app.get("application_schema", "")),
+                "application_url": str(app.get("application_url", "")),
+                "egg_url": str(app.get("egg_url", "")),
                 "store_url": "https://kody-w.github.io/RAPP_Store/",
                 "repo_url": "https://github.com/kody-w/RAPP_Store",
             }
