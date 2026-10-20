@@ -1,18 +1,14 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-10-19T01:06:24Z",
+  "generated": "2026-10-20T22:34:38Z",
   "categories": [
-    {
-      "name": "integrations",
-      "count": 1476
-    },
-    {
-      "name": "general",
-      "count": 64
-    },
     {
       "name": "productivity",
       "count": 45
+    },
+    {
+      "name": "general",
+      "count": 43
     },
     {
       "name": "core",
@@ -23,16 +19,20 @@
       "count": 27
     },
     {
+      "name": "integrations",
+      "count": 19
+    },
+    {
       "name": "pipeline",
       "count": 18
     },
     {
-      "name": "analysis",
-      "count": 12
-    },
-    {
       "name": "creative",
       "count": 10
+    },
+    {
+      "name": "analysis",
+      "count": 9
     },
     {
       "name": "platform",
@@ -56,10 +56,6 @@
     }
   ],
   "publishers": [
-    {
-      "name": "@cowork-cookbook",
-      "count": 1481
-    },
     {
       "name": "@cat-agent-skills",
       "count": 97
@@ -103,20 +99,20 @@
   ],
   "quality_tiers": [
     {
-      "name": "community",
-      "count": 1275
-    },
-    {
-      "name": "verified",
-      "count": 281
-    },
-    {
       "name": "frontier",
       "count": 97
     },
     {
+      "name": "community",
+      "count": 67
+    },
+    {
       "name": "official",
       "count": 46
+    },
+    {
+      "name": "verified",
+      "count": 8
     },
     {
       "name": "private",
@@ -125,160 +121,12 @@
   ],
   "tags": [
     {
-      "name": "industry_solution",
-      "count": 1481
-    },
-    {
-      "name": "business_process",
-      "count": 1481
-    },
-    {
-      "name": "integration",
-      "count": 1459
-    },
-    {
-      "name": "prompt",
-      "count": 1444
-    },
-    {
-      "name": "intermediate",
-      "count": 1434
-    },
-    {
-      "name": "dynamics_365_erp",
-      "count": 1413
-    },
-    {
-      "name": "administer_to_operate",
-      "count": 268
-    },
-    {
-      "name": "audit",
-      "count": 161
-    },
-    {
-      "name": "report",
-      "count": 152
-    },
-    {
-      "name": "dashboard",
-      "count": 148
-    },
-    {
-      "name": "scheduled_brief",
-      "count": 148
-    },
-    {
-      "name": "teams_update",
-      "count": 138
-    },
-    {
-      "name": "bulk_update",
-      "count": 137
-    },
-    {
-      "name": "ppt_exec",
-      "count": 135
-    },
-    {
-      "name": "adaptive_card",
-      "count": 133
-    },
-    {
-      "name": "configure",
-      "count": 129
-    },
-    {
-      "name": "demo_data",
-      "count": 126
-    },
-    {
-      "name": "hire_to_retire",
-      "count": 116
-    },
-    {
-      "name": "record_to_report",
-      "count": 106
-    },
-    {
-      "name": "forecast_to_plan",
-      "count": 93
-    },
-    {
-      "name": "source_to_pay",
-      "count": 93
-    },
-    {
-      "name": "order_to_cash",
-      "count": 91
-    },
-    {
-      "name": "acquire_to_dispose",
-      "count": 90
-    },
-    {
-      "name": "inventory_to_deliver",
-      "count": 85
-    },
-    {
-      "name": "concept_to_market",
-      "count": 82
-    },
-    {
-      "name": "other",
-      "count": 81
-    },
-    {
-      "name": "project_to_profit",
-      "count": 77
-    },
-    {
-      "name": "case_to_resolution",
-      "count": 77
-    },
-    {
-      "name": "service_to_deliver",
-      "count": 77
-    },
-    {
-      "name": "prospect_to_quote",
-      "count": 76
-    },
-    {
-      "name": "plan_to_produce",
-      "count": 65
-    },
-    {
-      "name": "design_to_retire",
-      "count": 65
-    },
-    {
       "name": "productivity",
       "count": 42
     },
     {
-      "name": "advanced",
-      "count": 33
-    },
-    {
-      "name": "prompt_skill",
-      "count": 33
-    },
-    {
-      "name": "read_only",
-      "count": 24
-    },
-    {
       "name": "automation",
-      "count": 21
-    },
-    {
-      "name": "dynamics_365_sales",
-      "count": 21
-    },
-    {
-      "name": "work_management",
-      "count": 20
+      "count": 18
     },
     {
       "name": "content",
@@ -287,10 +135,6 @@
     {
       "name": "writing",
       "count": 15
-    },
-    {
-      "name": "beginner",
-      "count": 14
     },
     {
       "name": "rapplication",
@@ -317,10 +161,6 @@
       "count": 12
     },
     {
-      "name": "fabric_iq",
-      "count": 10
-    },
-    {
       "name": "meta",
       "count": 10
     },
@@ -335,10 +175,6 @@
     {
       "name": "video",
       "count": 9
-    },
-    {
-      "name": "analysis",
-      "count": 8
     },
     {
       "name": "presentations",
@@ -393,15 +229,15 @@
       "count": 6
     },
     {
+      "name": "audit",
+      "count": 6
+    },
+    {
       "name": "design",
       "count": 6
     },
     {
       "name": "power_platform",
-      "count": 6
-    },
-    {
-      "name": "miro",
       "count": 6
     },
     {
@@ -414,6 +250,10 @@
     },
     {
       "name": "core",
+      "count": 5
+    },
+    {
+      "name": "analysis",
       "count": 5
     },
     {
@@ -445,15 +285,7 @@
       "count": 5
     },
     {
-      "name": "blueprint",
-      "count": 5
-    },
-    {
       "name": "visualization",
-      "count": 5
-    },
-    {
-      "name": "monday_com",
       "count": 5
     },
     {
@@ -558,10 +390,6 @@
     },
     {
       "name": "sales",
-      "count": 4
-    },
-    {
-      "name": "prompt_blueprint",
       "count": 4
     },
     {
@@ -813,6 +641,10 @@
       "count": 2
     },
     {
+      "name": "report",
+      "count": 2
+    },
+    {
       "name": "follow_up",
       "count": 2
     },
@@ -929,6 +761,10 @@
       "count": 2
     },
     {
+      "name": "dashboard",
+      "count": 2
+    },
+    {
       "name": "skills",
       "count": 2
     },
@@ -962,10 +798,6 @@
     },
     {
       "name": "briefing",
-      "count": 2
-    },
-    {
-      "name": "prezi",
       "count": 2
     },
     {
@@ -1034,6 +866,10 @@
     },
     {
       "name": "virtual-world",
+      "count": 2
+    },
+    {
+      "name": "integration",
       "count": 2
     },
     {
@@ -1322,6 +1158,166 @@
     },
     {
       "name": "work_life_balance",
+      "count": 1
+    },
+    {
+      "name": "deep_work",
+      "count": 1
+    },
+    {
+      "name": "self_service",
+      "count": 1
+    },
+    {
+      "name": "uat",
+      "count": 1
+    },
+    {
+      "name": "business",
+      "count": 1
+    },
+    {
+      "name": "problem_solving",
+      "count": 1
+    },
+    {
+      "name": "project_planning",
+      "count": 1
+    },
+    {
+      "name": "skill_generation",
+      "count": 1
+    },
+    {
+      "name": "adventure",
+      "count": 1
+    },
+    {
+      "name": "game",
+      "count": 1
+    },
+    {
+      "name": "narration",
+      "count": 1
+    },
+    {
+      "name": "clipchamp",
+      "count": 1
+    },
+    {
+      "name": "tts",
+      "count": 1
+    },
+    {
+      "name": "rh",
+      "count": 1
+    },
+    {
+      "name": "folha",
+      "count": 1
+    },
+    {
+      "name": "clt",
+      "count": 1
+    },
+    {
+      "name": "brasil",
+      "count": 1
+    },
+    {
+      "name": "trabalhista",
+      "count": 1
+    },
+    {
+      "name": "rescisao",
+      "count": 1
+    },
+    {
+      "name": "inss",
+      "count": 1
+    },
+    {
+      "name": "irrf",
+      "count": 1
+    },
+    {
+      "name": "comparison",
+      "count": 1
+    },
+    {
+      "name": "reminders",
+      "count": 1
+    },
+    {
+      "name": "abstract",
+      "count": 1
+    },
+    {
+      "name": "decision_support",
+      "count": 1
+    },
+    {
+      "name": "weekly",
+      "count": 1
+    },
+    {
+      "name": "cowork",
+      "count": 1
+    },
+    {
+      "name": "agent_design",
+      "count": 1
+    },
+    {
+      "name": "licensing",
+      "count": 1
+    },
+    {
+      "name": "rag",
+      "count": 1
+    },
+    {
+      "name": "readiness",
+      "count": 1
+    },
+    {
+      "name": "eval",
+      "count": 1
+    },
+    {
+      "name": "regression",
+      "count": 1
+    },
+    {
+      "name": "blueprint",
+      "count": 1
+    },
+    {
+      "name": "topics",
+      "count": 1
+    },
+    {
+      "name": "adaptive_card",
+      "count": 1
+    },
+    {
+      "name": "conversion",
+      "count": 1
+    },
+    {
+      "name": "office",
+      "count": 1
+    },
+    {
+      "name": "design_review",
+      "count": 1
+    },
+    {
+      "name": "eu_regulation",
+      "count": 1
+    },
+    {
+      "name": "marketing_review",
       "count": 1
     }
   ]
