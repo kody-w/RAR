@@ -12,7 +12,7 @@
   },
   "inputs": {
     "canonical_manifests": "64b03442d38d2cc1cf3620a305f1aa8ce52967d78722c7338db346e2cf45d700",
-    "scout_catalog": "138bdade9344e74bbd35f3f467d26eb5508cdc2712fa70a63c3cd6dd16155fec",
+    "scout_catalog": "ea7eabfa72099999ce14a6897bcf16425acf7c5ac3ba88110975f4cabd688d04",
     "scout_toaster": {
       "commit": "d54ba8484b5c5dae6406d2090c03115d12985446",
       "sha256": "d340043178aa4160f76a179b8b1086971e09207b212aff2ab2c0752b69173e17"

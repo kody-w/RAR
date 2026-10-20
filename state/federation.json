@@ -106,6 +106,27 @@
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
     {
+      "id": "dock_scotty",
+      "name": "RAPP Dock / Scotty",
+      "version": "1.0.0",
+      "summary": "Scotty runs five real open-source apps in local Docker from chat or its UI: Scrapling page scrapes, Presenton decks, OpenSEO projects (paid data off), Dify answers from your documents and OpenShorts captioned clips. Installed five-job acceptance passed on the previous build; this revision-9 build w…",
+      "category": "platform",
+      "tags": [
+        "rapplication",
+        "chat-operated",
+        "local-docker",
+        "ui",
+        "scrapling",
+        "presenton"
+      ],
+      "manifest_name": "",
+      "access": "public",
+      "singleton_url": "",
+      "singleton_sha256": "",
+      "store_url": "https://kody-w.github.io/RAPP_Store/",
+      "repo_url": "https://github.com/kody-w/RAPP_Store"
+    },
+    {
       "id": "json_doctor",
       "name": "JSON Doctor",
       "version": "1.0.0",

@@ -131011,6 +131011,11 @@
       "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
     },
     {
+      "aggregate_id": "copilot-studio-mcp-readiness",
+      "identity": "@cat-agent-skills/copilot_studio_mcp_readiness",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
       "aggregate_id": "cowork-plugin-engineer",
       "identity": "@cat-agent-skills/cowork_plugin_engineer",
       "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
@@ -131018,6 +131023,21 @@
     {
       "aggregate_id": "create-copilot-adoption-dashboard",
       "identity": "@cat-agent-skills/create_copilot_adoption_dashboard",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
+      "aggregate_id": "inbox-triage",
+      "identity": "@cat-agent-skills/inbox_triage",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
+      "aggregate_id": "kql-grounded-queries",
+      "identity": "@cat-agent-skills/kql_grounded_queries",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
+      "aggregate_id": "qr-code-builder",
+      "identity": "@cat-agent-skills/qr_code_builder",
       "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
     },
     {
@@ -131036,6 +131056,21 @@
       "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
     },
     {
+      "aggregate_id": "study-flashcards",
+      "identity": "@cat-agent-skills/study_flashcards",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
+      "aggregate_id": "template-based-document-generation",
+      "identity": "@cat-agent-skills/template_based_document_generation",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
+      "aggregate_id": "d365-finance-legal-entity-implementation",
+      "identity": "@cowork-cookbook/d365_finance_legal_entity_implementation",
+      "reason": "aggregated Cowork Cookbook recipe is not notarized in RAR yet"
+    },
+    {
       "identity": "@kody-w/example_private",
       "reason": "gated stub has no public executable bytes"
     },
@@ -131051,6 +131086,11 @@
       "federation_id": "cockpit",
       "identity": "@wildhaven/cockpit",
       "reason": "federated rapplication is not public"
+    },
+    {
+      "federation_id": "dock_scotty",
+      "identity": "dock_scotty",
+      "reason": "federated rapplication has no singleton_url to fetch"
     }
   ],
   "toaster": {
