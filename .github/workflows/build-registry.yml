@@ -16,6 +16,7 @@ on:
       # stale with nothing to rebuild it — and the nightly drift gate would
       # then fail every night on a difference nobody could act on.
       - 'state/agent_lifecycle.json'
+      - 'state/superseded.json'
       - 'state/receipts/**'
       - 'state/skill_lifecycle.json'
       - 'state/skill-receipts/**'
