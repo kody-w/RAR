@@ -18,8 +18,14 @@ import time
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-RAW = "https://raw.githubusercontent.com/kody-w/RAR/main/incubator/"
-PAGES = "https://kody-w.github.io/RAR/incubator/"
+# A private or template instance publishes its own addresses: read them from its rar.config.json (main RAR otherwise).
+try:
+    _cfg = json.loads((HERE.parent / "rar.config.json").read_text())
+    _OWNER, _REPO = _cfg.get("owner") or "kody-w", _cfg.get("repo") or "RAR"
+except (OSError, ValueError):
+    _OWNER, _REPO = "kody-w", "RAR"
+RAW = f"https://raw.githubusercontent.com/{_OWNER}/{_REPO}/main/incubator/"
+PAGES = f"https://{_OWNER}.github.io/{_REPO}/incubator/"
 REQUIRED = ("slug", "title", "description", "author", "egg")
 
 
