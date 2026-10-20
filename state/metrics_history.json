@@ -284,23 +284,21 @@
   "2026-10-18": {
    "count": 215,
    "uniques": 36
+  },
+  "2026-10-19": {
+   "count": 145,
+   "uniques": 47
   }
  },
  "last_known": {
-  "at": "2026-10-19T10:54:29Z",
-  "clone_uniques_14d": 273,
-  "clones_14d": 2055,
+  "at": "2026-10-20T10:10:01Z",
+  "clone_uniques_14d": 290,
+  "clones_14d": 2111,
   "paths": [
    {
     "count": 3,
     "path": "/kody-w/RAR/blob/main/sources.json",
     "title": "/blob/main/sources.json",
-    "uniques": 1
-   },
-   {
-    "count": 3,
-    "path": "/kody-w/RAR/stargazers",
-    "title": "/stargazers",
     "uniques": 1
    },
    {
@@ -335,12 +333,6 @@
    },
    {
     "count": 1,
-    "path": "/kody-w/RAR/blob/main/CLAUDE.md",
-    "title": "/blob/main/CLAUDE.md",
-    "uniques": 1
-   },
-   {
-    "count": 1,
     "path": "/kody-w/RAR/blob/main/stats.html",
     "title": "/blob/main/stats.html",
     "uniques": 1
@@ -350,11 +342,23 @@
     "path": "/kody-w/RAR/compare/learn-new-template-source",
     "title": "/compare/learn-new-template-source",
     "uniques": 1
+   },
+   {
+    "count": 1,
+    "path": "/kody-w/RAR/discussions/1316",
+    "title": "/discussions/1316",
+    "uniques": 1
+   },
+   {
+    "count": 1,
+    "path": "/kody-w/RAR/discussions/1340",
+    "title": "/discussions/1340",
+    "uniques": 1
    }
   ],
   "referrers": [
    {
-    "count": 8,
+    "count": 6,
     "referrer": "github.com",
     "uniques": 6
    },
@@ -364,8 +368,8 @@
     "uniques": 1
    }
   ],
-  "view_uniques_14d": 11,
-  "views_14d": 21
+  "view_uniques_14d": 10,
+  "views_14d": 18
  },
  "snapshots": [
   {
@@ -1787,6 +1791,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 112,
    "views_all_time": 257
+  },
+  {
+   "at": "2026-10-20T10:10:01Z",
+   "cdn_all_time": 451,
+   "clone_uniques_all_time": 2062,
+   "clones_all_time": 12059,
+   "days_tracked": 70,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 112,
+   "views_all_time": 257
   }
  ],
  "views": {
@@ -2065,6 +2079,10 @@
   "2026-10-18": {
    "count": 2,
    "uniques": 2
+  },
+  "2026-10-19": {
+   "count": 0,
+   "uniques": 0
   }
  }
 }
