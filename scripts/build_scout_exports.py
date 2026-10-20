@@ -651,6 +651,8 @@ def _federated_unfetchable_reason(entry):
     """A store entry without a singleton address (e.g. a newer store schema) is
     skipped with a reason instead of failing the whole daily refresh."""
     if not str(entry.get("singleton_url") or "").strip():
+        if str(entry.get("application_schema") or "").startswith("rapp-application/2"):
+            return "complete application: installs as a whole package (egg), not a single-file skill"
         return "federated rapplication has no singleton_url to fetch"
     return None
 
