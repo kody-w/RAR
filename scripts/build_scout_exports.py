@@ -982,6 +982,18 @@ def build(check=False):
                             "container agent to Toast reversibly"
                         ),
                     })
+                elif (
+                    reference.startswith("@cowork-cookbook/")
+                    and reference not in registry_names
+                ):
+                    skipped.append({
+                        "identity": reference,
+                        "aggregate_id": item.get("source_slug"),
+                        "reason": (
+                            "aggregated Cowork Cookbook recipe is not notarized "
+                            "in RAR yet"
+                        ),
+                    })
 
         if config.get("include_federated_rapplications", True):
             excluded_federation = config.get("exclude_federation") or {}
