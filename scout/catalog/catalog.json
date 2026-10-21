@@ -17965,7 +17965,7 @@
     {
       "federation_id": "dock_scotty",
       "identity": "dock_scotty",
-      "reason": "federated rapplication has no singleton_url to fetch"
+      "reason": "complete application: installs as a whole package (egg), not a single-file skill"
     }
   ],
   "toaster": {

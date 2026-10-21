@@ -19,6 +19,9 @@
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/agent_team/singleton/agent_team_agent.py",
       "singleton_sha256": "c950b295557f7d25471aeff87b5caac9b51cf49633d9f71108c6e80d24db947f",
+      "application_schema": "",
+      "application_url": "",
+      "egg_url": "None",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -39,6 +42,9 @@
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/bookfactory/singleton/bookfactory_agent.py",
       "singleton_sha256": "7419619b65eacd27dbfa418f391ba755b9d30fffbf084be211cfa011286b73d9",
+      "application_schema": "",
+      "application_url": "",
+      "egg_url": "None",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -60,6 +66,9 @@
       "access": "private",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store_Private/main/apps/@wildhaven/cockpit/singleton/cockpit_agent.py",
       "singleton_sha256": "c77195ef84de42e4c1a13c509d0262e6c44c1ee2e27abcb26673bec40eb753ef",
+      "application_schema": "",
+      "application_url": "",
+      "egg_url": "None",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -81,6 +90,9 @@
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@bill/coe_starter_kit/singleton/coe_starter_kit_agent.py",
       "singleton_sha256": "50a04db67238b2bedd3817fa3ab4225032fb050531671b5dde126881efac4fbe",
+      "application_schema": "",
+      "application_url": "",
+      "egg_url": "None",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -102,6 +114,9 @@
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/csv_surgeon/singleton/csv_surgeon_agent.py",
       "singleton_sha256": "4d500fd77ebdc677d2860167748f06d1280bfd10de365f759e3b0e9a682b4076",
+      "application_schema": "",
+      "application_url": "",
+      "egg_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/api/v1/egg/csv_surgeon.egg",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -123,6 +138,9 @@
       "access": "public",
       "singleton_url": "",
       "singleton_sha256": "",
+      "application_schema": "rapp-application/2.0",
+      "application_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/apps/@kody-w/dock_scotty/manifest.json",
+      "egg_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/api/v1/egg/dock_scotty-1.0.0-0df25928ffade880d912bb76907ad78f85506ed1c170f6f9056a6fe770601972.egg",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -144,6 +162,9 @@
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/json_doctor/singleton/json_doctor_agent.py",
       "singleton_sha256": "e532be574326b108ede0dbbd7d3c012cf275c9f2aee51793864c45546938f20e",
+      "application_schema": "",
+      "application_url": "",
+      "egg_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/api/v1/egg/json_doctor.egg",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -165,6 +186,9 @@
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/log_detective/singleton/log_detective_agent.py",
       "singleton_sha256": "5d3b06228dddc510fb3a84a30b1e3517387d52388cdf66e6879e4be9e5c7a81f",
+      "application_schema": "",
+      "application_url": "",
+      "egg_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/api/v1/egg/log_detective.egg",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -186,6 +210,9 @@
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/markdown_medic/singleton/markdown_medic_agent.py",
       "singleton_sha256": "68c349d82161b59278bb31dbbafad199f23d1cabba2487c9d0d79f0dfc68882f",
+      "application_schema": "",
+      "application_url": "",
+      "egg_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/api/v1/egg/markdown_medic.egg",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -207,6 +234,9 @@
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/apps/@kody-w/novell/singleton/novell_agent.py",
       "singleton_sha256": "3c49a6cb033ecdc343190e57d36476840b11af4eb7500eb5638df5f9d5fccf91",
+      "application_schema": "",
+      "application_url": "",
+      "egg_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/apps/@kody-w/novell/eggs/novell.rapp.egg",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -228,6 +258,9 @@
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/pii_scout/singleton/pii_scout_agent.py",
       "singleton_sha256": "fcdbbcc12a04f5f7aebc69d619895c2edf7872354ac03821c0665b7818683513",
+      "application_schema": "",
+      "application_url": "",
+      "egg_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/api/v1/egg/pii_scout.egg",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -249,6 +282,9 @@
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/project_tracker/singleton/project_tracker_agent.py",
       "singleton_sha256": "b6270faf10379411b7a0065a91b571299bbb3f9a8c6072d041f24580c70d7e7c",
+      "application_schema": "",
+      "application_url": "",
+      "egg_url": "",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -270,6 +306,9 @@
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/rapp_commons/singleton/commons_agent.py",
       "singleton_sha256": "039a2cb71500ed29a0d765c0bed1fdf18f97a4147f18b81e488ca759ab99f063",
+      "application_schema": "",
+      "application_url": "",
+      "egg_url": "None",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -291,6 +330,9 @@
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-crispy/29fcb581a6a9d10c20fdbd96d5867c27ede0d3c9/rapp_crispy/singleton/rapp_crispy_agent.py",
       "singleton_sha256": "d3133031a2e4ffc3be0ed282c2df7b73ca49e46e07b259dc704539904aaefe74",
+      "application_schema": "",
+      "application_url": "",
+      "egg_url": "",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -312,6 +354,9 @@
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/rapp_god_forum/singleton/forum_agent.py",
       "singleton_sha256": "b5a98826f4698b0082dc1c5164af0ed4441f64be9bd2571b505f859ce8a08f04",
+      "application_schema": "",
+      "application_url": "",
+      "egg_url": "None",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -333,6 +378,9 @@
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-rewind/6023d9b1e75b3a1401f4671d7114dab499f3cdfa/rapp_rewind/singleton/rapp_rewind_agent.py",
       "singleton_sha256": "65e86577bd45dc30713a5b1ebb103ec411d0d2b0fa32721bec66425ee92ba947",
+      "application_schema": "",
+      "application_url": "",
+      "egg_url": "",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -354,6 +402,9 @@
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-shot/538d55f6d36fa9d0a6b7f4b323ab0480cb45a8ac/rapp_shot/singleton/rapp_shot_agent.py",
       "singleton_sha256": "bc817f0fdf172cb4e16bbba507e8381838f444033cc0b277d0f55c679d72f61d",
+      "application_schema": "",
+      "application_url": "",
+      "egg_url": "",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -375,6 +426,9 @@
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-voice/c9be9f1936dd848030cf5f5833b1e7cb5e6b1c2b/rapp_voice/singleton/rapp_voice_agent.py",
       "singleton_sha256": "39028adae65b34b524fc615ca4bb7a135d4bf5720c7a5bccb51328891f52b398",
+      "application_schema": "",
+      "application_url": "",
+      "egg_url": "",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -396,6 +450,9 @@
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@blazingbeard/spine_dag/singleton/spine_dag_agent.py",
       "singleton_sha256": "3f71c8e61bc69f8553bbdaecaf6dd5bdf78b7df29702fbd26ef0c53fc1246776",
+      "application_schema": "",
+      "application_url": "",
+      "egg_url": "None",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -417,6 +474,9 @@
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/apps/@kody-w/thoughtbox/singleton/thoughtbox_agent.py",
       "singleton_sha256": "d93b56abcc578d8299df787816142c3d0553a018d45e611ad54ac453bf11933b",
+      "application_schema": "",
+      "application_url": "",
+      "egg_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/api/v1/egg/thoughtbox.egg",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -438,6 +498,9 @@
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/toaster/singleton/toaster_agent.py",
       "singleton_sha256": "d4d540104c288152b2761b7890aaf263e58af286acaf702d09422b6f3f198e16",
+      "application_schema": "",
+      "application_url": "",
+      "egg_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/api/v1/egg/toaster.egg",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -459,6 +522,9 @@
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/apps/@kody-w/vibe-coding-loop/singleton/vibe_coding_loop_agent.py",
       "singleton_sha256": "fcbba7d2b73f340e1bdcf27a263e9f7a50b9d5ae117af80496cfcda287847b1d",
+      "application_schema": "",
+      "application_url": "",
+      "egg_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/api/v1/egg/vibe-coding-loop.egg",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     },
@@ -480,6 +546,9 @@
       "access": "public",
       "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@wildhaven/wildhaven_ceo/singleton/wildhaven_ceo_agent.py",
       "singleton_sha256": "63ba8bea6a3fa294de04fcc385a257e24c6a14e768ed6e9546fe32a22a594d22",
+      "application_schema": "",
+      "application_url": "",
+      "egg_url": "None",
       "store_url": "https://kody-w.github.io/RAPP_Store/",
       "repo_url": "https://github.com/kody-w/RAPP_Store"
     }
