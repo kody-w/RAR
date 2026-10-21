@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-10-20T10:10:01Z",
+ "generated_at": "2026-10-21T10:17:41Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -9,34 +9,34 @@
   "stars": 5,
   "forks": 1,
   "watchers": 0,
-  "open_issues": 13,
-  "size_kb": 114519,
+  "open_issues": 14,
+  "size_kb": 116759,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-10-20T06:58:42Z",
+  "pushed_at": "2026-10-21T09:02:19Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
  "totals": {
-  "downloads": 12510,
-  "clones": 12059,
+  "downloads": 12864,
+  "clones": 12413,
   "cdn_hits": 451,
   "release_downloads": 0,
-  "agent_file_downloads": 273,
-  "clones_excluding_ci_estimate": 7999,
-  "ci_clone_estimate": 4060,
-  "page_views": 257,
-  "clone_uniques_14d": 290,
-  "view_uniques_14d": 10,
-  "clone_uniques_daily_sum": 2062,
-  "view_uniques_daily_sum": 112,
-  "days_tracked": 70,
+  "agent_file_downloads": 15,
+  "clones_excluding_ci_estimate": 8295,
+  "ci_clone_estimate": 4118,
+  "page_views": 258,
+  "clone_uniques_14d": 322,
+  "view_uniques_14d": 8,
+  "clone_uniques_daily_sum": 2126,
+  "view_uniques_daily_sum": 113,
+  "days_tracked": 71,
   "tracking_since": "2026-07-14",
-  "agents": 1701,
+  "agents": 220,
   "swarms": 2,
-  "publishers": 11,
+  "publishers": 10,
   "categories": 13,
-  "total_lines": 530409,
-  "total_kb": 31072.7,
+  "total_lines": 137944,
+  "total_kb": 6394.6,
   "votes": 1,
   "upvotes": 1,
   "voters": 1,
@@ -551,6 +551,13 @@
    "clone_uniques": 47,
    "views": 0,
    "cdn": 0
+  },
+  {
+   "date": "2026-10-20",
+   "clones": 354,
+   "clone_uniques": 64,
+   "views": 1,
+   "cdn": 0
   }
  ],
  "traffic": {
@@ -560,18 +567,6 @@
     "title": "/blob/main/sources.json",
     "count": 3,
     "uniques": 1
-   },
-   {
-    "path": "/kody-w/RAR",
-    "title": "Overview",
-    "count": 2,
-    "uniques": 2
-   },
-   {
-    "path": "/kody-w/RAR/discussions",
-    "title": "/discussions",
-    "count": 2,
-    "uniques": 2
    },
    {
     "path": "/kody-w/RAR/blob/main/skill.md",
@@ -586,8 +581,8 @@
     "uniques": 1
    },
    {
-    "path": "/kody-w/RAR/blob/c352b61ee111103df69881d385be0a4011c5b1b1/agents/@borg/borg_agent.py.card",
-    "title": "/blob/c352b61ee111103df69881d385be0a4011c5b1b1/agents/@borg/borg_agent.py.card",
+    "path": "/kody-w/RAR",
+    "title": "Overview",
     "count": 1,
     "uniques": 1
    },
@@ -604,6 +599,12 @@
     "uniques": 1
    },
    {
+    "path": "/kody-w/RAR/discussions",
+    "title": "/discussions",
+    "count": 1,
+    "uniques": 1
+   },
+   {
     "path": "/kody-w/RAR/discussions/1316",
     "title": "/discussions/1316",
     "count": 1,
@@ -614,13 +615,19 @@
     "title": "/discussions/1340",
     "count": 1,
     "uniques": 1
+   },
+   {
+    "path": "/kody-w/RAR/discussions/925",
+    "title": "/discussions/925",
+    "count": 1,
+    "uniques": 1
    }
   ],
   "referrers": [
    {
     "referrer": "github.com",
-    "count": 6,
-    "uniques": 6
+    "count": 4,
+    "uniques": 4
    },
    {
     "referrer": "Bing",
@@ -628,16 +635,16 @@
     "uniques": 1
    }
   ],
-  "clones_14d": 2111,
-  "views_14d": 18,
+  "clones_14d": 2389,
+  "views_14d": 16,
   "live": true,
-  "as_of": "2026-10-20T10:10:01Z"
+  "as_of": "2026-10-21T10:17:41Z"
  },
  "cdn": {
   "total_hits": 451,
   "bandwidth": 6360652,
-  "rank": 782456,
-  "agent_hits": 273,
+  "rank": 786181,
+  "agent_hits": 15,
   "files": [
    {
     "file": "/registry.json",
@@ -726,158 +733,158 @@
    {
     "file": "/agents/@cowork-cookbook/adaptive_card_configure_and_manage_geofencing_and_geolocation_settings_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/adaptive_card_configure_and_manage_geofencing_and_geolocation_settings",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/adaptive_card_configure_and_manage_store_devices_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/adaptive_card_configure_and_manage_store_devices",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/adaptive_card_configure_and_manage_surveys_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/adaptive_card_configure_and_manage_surveys",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/audit_configure_and_administer_workflows_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/audit_configure_and_administer_workflows",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/audit_configure_and_manage_copilot_capabilities_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/audit_configure_and_manage_copilot_capabilities",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/audit_configure_and_manage_file_storage_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/audit_configure_and_manage_file_storage",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/audit_configure_and_manage_reporting_and_analytics_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/audit_configure_and_manage_reporting_and_analytics",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/bulk_update_configure_and_maintain_electronically_generated_documents_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/bulk_update_configure_and_maintain_electronically_generated_documents",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/bulk_update_configure_and_manage_agents_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/bulk_update_configure_and_manage_agents",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/bulk_update_configure_and_management_office_apps_and_add_ins_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/bulk_update_configure_and_management_office_apps_and_add_ins",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/bulk_update_enable_and_configure_audit_logs_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/bulk_update_enable_and_configure_audit_logs",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/configure_adjust_notifications_and_alerts_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/configure_adjust_notifications_and_alerts",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/configure_allocate_or_assign_software_licenses_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/configure_allocate_or_assign_software_licenses",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/configure_analyze_account_payable_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/configure_analyze_account_payable",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/configure_analyze_and_segment_goods_and_services_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/configure_analyze_and_segment_goods_and_services",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/configure_analyze_fixed_assets_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/configure_analyze_fixed_assets",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/configure_analyze_product_quality_data_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/configure_analyze_product_quality_data",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/configure_analyze_revenue_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/configure_analyze_revenue",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/configure_analyze_service_profitability_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/configure_analyze_service_profitability",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/configure_analyze_sourcing_market_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/configure_analyze_sourcing_market",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/configure_analyze_supply_purchase_plan_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/configure_analyze_supply_purchase_plan",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/configure_budget_asset_maintenance_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/configure_budget_asset_maintenance",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/configure_budget_fixed_assets_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/configure_budget_fixed_assets",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/configure_cancel_supplier_payments_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/configure_cancel_supplier_payments",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/configure_comply_with_customer_data_regulations_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/configure_comply_with_customer_data_regulations",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    },
    {
     "file": "/agents/@cowork-cookbook/configure_conduct_a_compliance_risk_assessment_agent.py",
     "hits": 3,
-    "agent": "@cowork-cookbook/configure_conduct_a_compliance_risk_assessment",
-    "kind": "agent"
+    "agent": null,
+    "kind": "asset"
    }
   ]
  },
@@ -973,210 +980,6 @@
     "added_at": "2026-07-31T22:43:16-04:00",
     "file": "agents/@cat-agent-skills/lab_column_mapper_agent.py",
     "description": "When a health system's lab results ingestion pipeline hits an unknown column header, this skill semantically matches the source column against the canonical clinical schema (LOINC-anchored), scoped by lab and clinical domain, and writes a suggested mapping to a Dataverse review queue for a clinical informatics steward to approve."
-   },
-   {
-    "name": "@cowork-cookbook/adaptive_card_configure_and_manage_geofencing_and_geolocation_settings",
-    "display_name": "Configure and manage geofencing and geolocation settings Status Adaptive Card",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "verified",
-    "downloads": 3,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 265,
-    "size_kb": 17.0,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/adaptive_card_configure_and_manage_geofencing_and_geolocation_settings_agent.py",
-    "description": "Generates a read-only Adaptive Card JSON file summarizing geofencing and geolocation settings status from Dynamics 365 F&SCM, with header, 3-5 KPI tiles, a RAG row, and action buttons."
-   },
-   {
-    "name": "@cowork-cookbook/adaptive_card_configure_and_manage_store_devices",
-    "display_name": "Configure and manage store devices Status Adaptive Card",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "verified",
-    "downloads": 3,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 265,
-    "size_kb": 17.0,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/adaptive_card_configure_and_manage_store_devices_agent.py",
-    "description": "Generates a read-only Adaptive Card JSON file summarizing store device configuration and management status from Dynamics 365 F&SCM, with KPI tiles, a RAG row, and action buttons."
-   },
-   {
-    "name": "@cowork-cookbook/adaptive_card_configure_and_manage_surveys",
-    "display_name": "Configure and manage surveys Status Adaptive Card",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "verified",
-    "downloads": 3,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 265,
-    "size_kb": 16.5,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/adaptive_card_configure_and_manage_surveys_agent.py",
-    "description": "Generates a read-only Adaptive Card JSON file visualizing configure-and-manage-surveys status from Dynamics 365 F&SCM (legal entity USMF), with KPI tiles, RAG row, and action buttons."
-   },
-   {
-    "name": "@cowork-cookbook/audit_configure_and_administer_workflows",
-    "display_name": "Configure and administer workflows Completeness Audit",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "verified",
-    "downloads": 3,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 265,
-    "size_kb": 16.8,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/audit_configure_and_administer_workflows_agent.py",
-    "description": "Audits Dynamics 365 F&SCM workflow configuration records in a given legal entity for completeness and policy compliance, returning a read-only Excel workbook with one sheet per finding category plus a summary."
-   },
-   {
-    "name": "@cowork-cookbook/audit_configure_and_manage_copilot_capabilities",
-    "display_name": "Configure and manage copilot capabilities Completeness Audit",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "verified",
-    "downloads": 3,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 265,
-    "size_kb": 16.9,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/audit_configure_and_manage_copilot_capabilities_agent.py",
-    "description": "Audits configure and manage copilot capabilities records in Dynamics 365 F&SCM (legal entity USMF) for completeness and policy compliance, returning a read-only Excel workbook with one sheet per finding category plus a S"
-   },
-   {
-    "name": "@cowork-cookbook/audit_configure_and_manage_file_storage",
-    "display_name": "Configure and manage file storage Completeness Audit",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "verified",
-    "downloads": 3,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 265,
-    "size_kb": 16.8,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/audit_configure_and_manage_file_storage_agent.py",
-    "description": "Runs a read-only completeness and policy audit of file storage configuration records in Dynamics 365 F&SCM for a given legal entity, returning an Excel workbook with one sheet per finding category plus a Summary sheet of"
-   },
-   {
-    "name": "@cowork-cookbook/audit_configure_and_manage_reporting_and_analytics",
-    "display_name": "Configure and manage reporting and analytics Completeness Audit",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "verified",
-    "downloads": 3,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 265,
-    "size_kb": 17.0,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/audit_configure_and_manage_reporting_and_analytics_agent.py",
-    "description": "Runs a read-only completeness and policy audit of Dynamics 365 F&SCM reporting-and-analytics configuration records for a given legal entity, returning an Excel workbook with one sheet per finding category plus a Summary"
-   },
-   {
-    "name": "@cowork-cookbook/bulk_update_configure_and_maintain_electronically_generated_documents",
-    "display_name": "Configure and maintain electronically generated documents Bulk Field Update",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "community",
-    "downloads": 3,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 265,
-    "size_kb": 17.4,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/bulk_update_configure_and_maintain_electronically_generated_documents_agent.py",
-    "description": "Applies a bulk field update to electronically generated document configuration records in Dynamics 365 F&SCM (legal entity USMF, sandbox) from a supplied list of record IDs and new values, producing a dry-run preview wor"
-   },
-   {
-    "name": "@cowork-cookbook/bulk_update_configure_and_manage_agents",
-    "display_name": "Configure and manage agents Bulk Field Update",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "community",
-    "downloads": 3,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 265,
-    "size_kb": 16.8,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/bulk_update_configure_and_manage_agents_agent.py",
-    "description": "Applies a bulk field update to configure-and-manage-agents records in Dynamics 365 F&SCM (legal entity USMF, sandbox) from a supplied list of record IDs and new values, producing a dry-run preview workbook for approval b"
-   },
-   {
-    "name": "@cowork-cookbook/bulk_update_configure_and_management_office_apps_and_add_ins",
-    "display_name": "Configure and management office apps and add-ins Bulk Field Update",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "community",
-    "downloads": 3,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 265,
-    "size_kb": 17.2,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/bulk_update_configure_and_management_office_apps_and_add_ins_agent.py",
-    "description": "Runs a bulk field update on Office apps and add-ins configuration records in Dynamics 365 F&SCM (legal entity USMF, sandbox) via the Cowork D365 ERP plugin, producing a dry-run preview workbook, pausing for approval, the"
-   },
-   {
-    "name": "@cowork-cookbook/bulk_update_enable_and_configure_audit_logs",
-    "display_name": "Enable and configure audit logs Bulk Field Update",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "community",
-    "downloads": 3,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 265,
-    "size_kb": 16.8,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/bulk_update_enable_and_configure_audit_logs_agent.py",
-    "description": "Runs a bulk field update on audit log configuration records in Dynamics 365 F&SCM (legal entity USMF, sandbox) via the Cowork D365 ERP plugin: returns a dry-run preview workbook, waits for approval, then applies changes."
-   },
-   {
-    "name": "@cowork-cookbook/configure_adjust_notifications_and_alerts",
-    "display_name": "Adjust notifications and alerts Configuration Bulk Setup",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "community",
-    "downloads": 3,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 265,
-    "size_kb": 17.1,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/configure_adjust_notifications_and_alerts_agent.py",
-    "description": "Bulk-applies notification and alert configuration changes in Dynamics 365 F&SCM from an attached Excel file: validates every row, returns a validation workbook, waits for your approval, then emits a before/after confirma"
    }
   ],
   "most_upvoted": [
@@ -1630,118 +1433,109 @@
     "description": "Adversarial assurance review for agents you own: prompt injection, oversharing, leakage and tool misuse, mapped to fixes."
    },
    {
-    "name": "@cowork-cookbook/3d_warehouse_heatmap",
-    "display_name": "3D Warehouse Inventory Heatmap (HTML)",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
+    "name": "@rapp/forge_provenance_agent",
+    "display_name": "Forge Provenance",
+    "publisher": "@rapp",
+    "category": "core",
+    "tier": "official",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 265,
+    "size_kb": 11.7,
+    "added_at": "2026-08-26T17:29:33-04:00",
+    "file": "agents/@kody-w/forge_provenance_agent.py",
+    "description": "Stamp a forged artifact bundle with the fingerprint of the RAPP agent it came from, then prove later that it never drifted. Reports per file: current, STALE (source moved), HAND-EDITED (derived file was edited and the edit will be lost), MISSING, or UNSTAMPED (provenance unknown, which never renders as healthy). Fingerprints the agent's declarative surface, read with ast and never imported, so a comment change does not cry wolf but a description change does."
+   },
+   {
+    "name": "@rapter/hive_census_agent",
+    "display_name": "Hive Census",
+    "publisher": "@rapter",
+    "category": "core",
     "tier": "verified",
     "downloads": 0,
     "up": 0,
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 265,
-    "size_kb": 16.7,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/3d_warehouse_heatmap_agent.py",
-    "description": "Reads on-hand inventory by location for one warehouse in Dynamics 365 F&SCM and returns a standalone interactive 3D HTML file of bins colored by fill percentage, labeled by item count."
+    "lines": 222,
+    "size_kb": 9.9,
+    "added_at": "2026-08-26T17:18:46-04:00",
+    "file": "agents/@rapter/hive_census_agent.py",
+    "description": "Emit this box's census as deterministic static JSON \u2014 protocol revision, anchor hash, resident populations, posture, trust \u2014 computed from local filesystem and git facts with NO language-model call. Byte-stable for the same inputs, sorted and string-valued so it drops straight into a rapp/1 frame payload and two boxes computing the same census produce the same hash. Counts things, never names them."
    },
    {
-    "name": "@cowork-cookbook/account_360_briefing",
-    "display_name": "Account 360 Briefing Pack",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "community",
+    "name": "@rapter/hive_shape_agent",
+    "display_name": "Hive Shape",
+    "publisher": "@rapter",
+    "category": "core",
+    "tier": "verified",
     "downloads": 0,
     "up": 0,
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 265,
-    "size_kb": 17.4,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/account_360_briefing_agent.py",
-    "description": "Builds a read-only Account 360 briefing pack from Dynamics 365 Sales for one named account \u2014 profile, contacts, open and closed opportunities, activity timeline, and risks \u2014 as 'account-briefing.docx'. Call before a cust"
+    "lines": 338,
+    "size_kb": 14.7,
+    "added_at": "2026-08-26T17:18:46-04:00",
+    "file": "agents/@rapter/hive_shape_agent.py",
+    "description": "Look at every cubby in a hive at once and report its SHAPE \u2014 divergence (who disagrees about what the world is), silence (who did not answer, always named), mass (where the population actually lives), and spread (how unlike each other the members are). Private by construction: publishes nothing, writes no frame, and leaves the picture on the operator's machine."
    },
    {
-    "name": "@cowork-cookbook/adaptive_card_adjust_inventory_levels",
-    "display_name": "Adjust inventory levels Status Adaptive Card",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "community",
+    "name": "@rapter/rapp_dogg_agent",
+    "display_name": "RapterBox RAPP DOGG",
+    "publisher": "@rapter",
+    "category": "core",
+    "tier": "verified",
     "downloads": 0,
     "up": 0,
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 265,
-    "size_kb": 16.3,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/adaptive_card_adjust_inventory_levels_agent.py",
-    "description": "Generates a read-only Adaptive Card JSON file visualizing adjust-inventory-levels status from Dynamics 365 F&SCM (legal entity USMF), with header, KPI tiles, RAG row, and action buttons."
+    "lines": 797,
+    "size_kb": 40.6,
+    "added_at": "2026-08-26T17:18:46-04:00",
+    "file": "agents/@rapter/rapp_dogg_agent.py",
+    "description": "Hotload one file and a brainstem knows rapp/1 exactly instead of guessing. Pulls the current protocol canon \u2014 frame rules, identity minting law, kind families, egg determinism, the exchange contract, and the vocabulary with each term's status \u2014 from a public, static, unauthenticated DOGG anchor, and injects it into the system prompt every turn. Read-only: installs nothing, executes nothing it fetches."
    },
    {
-    "name": "@cowork-cookbook/adaptive_card_adjust_production_plan",
-    "display_name": "Adjust production plan Status Adaptive Card",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "community",
+    "name": "@rapp/rapp_dogg_agent",
+    "display_name": "RAPP DOGG",
+    "publisher": "@rapp",
+    "category": "core",
+    "tier": "official",
     "downloads": 0,
     "up": 0,
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 265,
-    "size_kb": 16.4,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/adaptive_card_adjust_production_plan_agent.py",
-    "description": "Generates a read-only Adaptive Card JSON file visualizing adjust production plan status from Dynamics 365 F&SCM for a given legal entity, with header, KPI tiles, RAG row, and action buttons."
+    "lines": 812,
+    "size_kb": 41.7,
+    "added_at": "2026-08-26T16:49:28-04:00",
+    "file": "agents/@rapp/rapp_dogg_agent.py",
+    "description": "Hotload one file and a brainstem knows rapp/1 exactly instead of guessing. Pulls the current protocol canon \u2014 frame rules, identity minting law, kind families, egg determinism, the exchange contract, and the vocabulary with each term's status \u2014 from a public, static, unauthenticated DOGG anchor, and injects it into the system prompt every turn. Read-only: installs nothing, executes nothing it fetches."
    },
    {
-    "name": "@cowork-cookbook/adaptive_card_allocate_goods",
-    "display_name": "Allocate goods Status Adaptive Card",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "community",
+    "name": "@cat-agent-skills/action_items_todo",
+    "display_name": "Action Items to To Do",
+    "publisher": "@cat-agent-skills",
+    "category": "productivity",
+    "tier": "frontier",
     "downloads": 0,
     "up": 0,
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 265,
-    "size_kb": 16.2,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/adaptive_card_allocate_goods_agent.py",
-    "description": "Generates a read-only Adaptive Card JSON file visualizing allocate goods status from Dynamics 365 F&SCM for a legal entity, with header, KPI tiles, RAG row, and action buttons."
-   },
-   {
-    "name": "@cowork-cookbook/adaptive_card_analyze_and_segment_customers_and_markets",
-    "display_name": "Analyze and segment customers and markets Status Adaptive Card",
-    "publisher": "@cowork-cookbook",
-    "category": "integrations",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 265,
-    "size_kb": 16.7,
-    "added_at": "2026-08-28T04:52:39Z",
-    "file": "agents/@cowork-cookbook/adaptive_card_analyze_and_segment_customers_and_markets_agent.py",
-    "description": "Generates a read-only Adaptive Card JSON file summarizing customer and market segmentation status from Dynamics 365 F&SCM, with KPI tiles, RAG row, and action buttons for Teams, Outlook, or dashboards."
+    "lines": 262,
+    "size_kb": 12.4,
+    "added_at": "2026-08-23T19:15:32-04:00",
+    "file": "agents/@cat-agent-skills/action_items_todo_agent.py",
+    "description": "Watches your Teams chats, meeting transcripts, and Outlook mail for things people actually asked you to do, and files each one as a Microsoft To Do task with a due date, priority, and source link."
    }
   ],
   "publishers": [
-   {
-    "name": "@cowork-cookbook",
-    "agents": 1481,
-    "downloads": 258,
-    "score": 0,
-    "reviews": 0,
-    "lines": 392465,
-    "rating": 0.0
-   },
    {
     "name": "@cat-agent-skills",
     "agents": 97,
@@ -1835,23 +1629,16 @@
   ],
   "categories": [
    {
-    "name": "integrations",
-    "agents": 1476,
-    "downloads": 258,
+    "name": "productivity",
+    "agents": 45,
+    "downloads": 4,
     "score": 0,
     "reviews": 0
    },
    {
     "name": "general",
-    "agents": 64,
+    "agents": 43,
     "downloads": 3,
-    "score": 0,
-    "reviews": 0
-   },
-   {
-    "name": "productivity",
-    "agents": 45,
-    "downloads": 4,
     "score": 0,
     "reviews": 0
    },
@@ -1870,6 +1657,13 @@
     "reviews": 1
    },
    {
+    "name": "integrations",
+    "agents": 19,
+    "downloads": 0,
+    "score": 0,
+    "reviews": 0
+   },
+   {
     "name": "pipeline",
     "agents": 18,
     "downloads": 0,
@@ -1877,15 +1671,15 @@
     "reviews": 0
    },
    {
-    "name": "analysis",
-    "agents": 12,
+    "name": "creative",
+    "agents": 10,
     "downloads": 0,
     "score": 0,
     "reviews": 0
    },
    {
-    "name": "creative",
-    "agents": 10,
+    "name": "analysis",
+    "agents": 9,
     "downloads": 0,
     "score": 0,
     "reviews": 0
@@ -1927,617 +1721,15 @@
    }
   ],
   "tiers": {
-   "community": 1275,
-   "verified": 281,
    "frontier": 97,
+   "community": 67,
    "official": 46,
+   "verified": 8,
    "private": 2
   }
  },
  "agent_metrics": {
   "@cat-agent-skills/lab_column_mapper": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/adaptive_card_configure_and_manage_geofencing_and_geolocation_settings": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/adaptive_card_configure_and_manage_store_devices": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/adaptive_card_configure_and_manage_surveys": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/audit_configure_and_administer_workflows": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/audit_configure_and_manage_copilot_capabilities": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/audit_configure_and_manage_file_storage": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/audit_configure_and_manage_reporting_and_analytics": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/bulk_update_configure_and_maintain_electronically_generated_documents": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/bulk_update_configure_and_manage_agents": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/bulk_update_configure_and_management_office_apps_and_add_ins": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/bulk_update_enable_and_configure_audit_logs": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_adjust_notifications_and_alerts": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_allocate_or_assign_software_licenses": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_analyze_account_payable": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_analyze_and_segment_goods_and_services": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_analyze_fixed_assets": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_analyze_product_quality_data": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_analyze_revenue": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_analyze_service_profitability": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_analyze_sourcing_market": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_analyze_supply_purchase_plan": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_budget_asset_maintenance": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_budget_fixed_assets": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_cancel_supplier_payments": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_comply_with_customer_data_regulations": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_conduct_a_compliance_risk_assessment": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_conduct_business_performance_reviews": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_configure_and_manage_iot_devices": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_configure_and_manage_search": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_configure_monitor_and_send_emails": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_create_a_case_manually": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_create_and_track_service_level_agreements": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_create_solution_blueprint": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_define_learning_paths": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_define_operating_hours": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_define_posting_policies": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_define_project_stakeholders": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_define_sales_channels": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_define_service_risk_management_strategy": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_define_warehouse_processes": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_depreciate_assets": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_design_formulas": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_develop_a_disaster_recovery_plan": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_develop_asset_policies": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_develop_code_of_conduct": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_develop_regulatory_compliance_strategy": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_develop_sales_catalogs": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_develop_scenario_and_contingency_plans": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_develop_supplier_segments": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_develop_training_materials": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_discover_suppliers": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_ensure_client_approval_and_sign_off": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_furlough_workers": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_identify_background_jobs": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_identify_workplace_hazards": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_implement_application_lifecycle_management_alm_strategies": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_implement_new_features": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_maintain_fixed_assets": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_manage_active_services": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_manage_cases_and_requests": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_manage_open_purchases": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_manage_procurement_spend": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_manage_product_pricing": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_manage_sales_order_holds": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_manage_service_accounts_and_certificates": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_manage_signatures_and_signing_limits": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_manage_support_incidents": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_manage_the_recurring_synchronization_of_data": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_map_value_streams": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_measure_warehouse_performance": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_model_service_capacity": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_monitor_financial_ratios_and_metrics": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_onboard_new_contractors": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_oversee_active_campaigns": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_perform_corrective_maintenance": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_plan_physical_capacity": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_plan_procurement": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_plan_product_transitions": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_plan_projects": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_plan_workforce_capacity": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_plan_workforce_development": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_prioritize_notifications": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_process_allocations": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_process_customer_rebates": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_promote_employees": {
-   "d": 3,
-   "u": 0,
-   "s": 0,
-   "r": 0,
-   "rt": 0.0
-  },
-  "@cowork-cookbook/configure_purchase_assets": {
    "d": 3,
    "u": 0,
    "s": 0,
