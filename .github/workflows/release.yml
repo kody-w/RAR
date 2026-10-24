@@ -37,6 +37,10 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
+        with:
+          # the receipt tests check referenced commits with git cat-file; a shallow
+          # checkout cannot see them (test.yml's full job already fetches everything)
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
