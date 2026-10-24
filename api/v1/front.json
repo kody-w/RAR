@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-10-24T04:16:54Z",
+  "generated": "2026-10-24T04:29:06Z",
   "counts": {
     "native": 223,
     "aggregated": 98,
@@ -80,7 +80,7 @@
         "interop",
         "drift"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Frapp_dogg_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rapp_dogg_agent.py",
       "source": null,
@@ -202,7 +202,7 @@
         "rules_as_data",
         "toaster"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fskill_toaster_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/skill_toaster_agent.py",
       "source": null,
@@ -262,7 +262,7 @@
         "trifecta",
         "devtools"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Frapp_sentinel_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_sentinel_agent.py",
       "source": null,
@@ -389,7 +389,7 @@
         "interop",
         "drift"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapter%2Frapp_dogg_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapter/rapp_dogg_agent.py",
       "source": null,
@@ -447,7 +447,7 @@
         "integration",
         "converter"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fconnected_solution_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/connected_solution_agent.py",
       "source": null,
@@ -574,7 +574,7 @@
         "twin",
         "m365"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Ftranscript2prototype",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/transcript2prototype_agent.py",
       "source": null,
@@ -634,7 +634,7 @@
         "creative",
         "autonomous"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fkody2day_studio_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/kody2day_studio_agent.py",
       "source": null,
@@ -759,7 +759,7 @@
         "alignment",
         "audit"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fdrift",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/drift_agent.py",
       "source": null,
@@ -821,7 +821,7 @@
         "spec",
         "universal"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Frapp",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rapp_agent.py",
       "source": null,
@@ -880,7 +880,7 @@
         "merge",
         "curation"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Frar_steward",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rar_steward_agent.py",
       "source": null,
@@ -1006,7 +1006,7 @@
         "catch-up",
         "news"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fkody2day_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/kody2day_agent.py",
       "source": null,
@@ -1064,7 +1064,7 @@
         "frame",
         "builder"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Frapp_sdk_builder",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_sdk_builder_agent.py",
       "source": null,
@@ -1191,7 +1191,7 @@
         "testing",
         "publishing"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fagent_workbench",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/agent_workbench_agent.py",
       "source": null,
@@ -1247,7 +1247,7 @@
         "install",
         "discovery"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fgithub_agent_library_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/github_agent_library_agent.py",
       "source": null,
@@ -1372,7 +1372,7 @@
         "bootstrap",
         "organism"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Finstall_rappter_distro_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/install_rappter_distro_agent.py",
       "source": null,
@@ -1430,7 +1430,7 @@
         "rappterpedia",
         "engine"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Frappterpedia_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rappterpedia_agent.py",
       "source": null,
@@ -1555,7 +1555,7 @@
         "voting",
         "community"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Frar_remote_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rar_remote_agent.py",
       "source": null,
@@ -1614,7 +1614,7 @@
         "sharepoint",
         "workiq"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fworkiq",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/workiq_agent.py",
       "source": null,
@@ -1674,7 +1674,7 @@
         "verification",
         "m365"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fforge_provenance_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/forge_provenance_agent.py",
       "source": null,
@@ -1799,7 +1799,7 @@
         "rules-as-data",
         "heartbeat"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Frappter_engine_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rappter_engine_agent.py",
       "source": null,
@@ -1859,7 +1859,7 @@
         "estate",
         "local-first"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Ftwin_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/twin_agent.py",
       "source": null,
@@ -1985,7 +1985,7 @@
         "education",
         "creative"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Feducation_shorts_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/education_shorts_agent.py",
       "source": null,
@@ -2045,7 +2045,7 @@
         "construct",
         "show-off-the-power"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40wildhaven%2Fbellows_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/bellows_agent.py",
       "source": null,
@@ -2169,7 +2169,7 @@
         "exec-brief-pipeline",
         "singleton"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fexec_brief_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/exec_brief_agent.py",
       "source": null,
@@ -2226,7 +2226,7 @@
         "rappterbook-engine",
         "singleton"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fmoment_factory_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/moment_factory_agent.py",
       "source": null,
@@ -2284,7 +2284,7 @@
         "html",
         "executive"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fpitch_deck_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/pitch_deck_agent.py",
       "source": null,
@@ -2411,7 +2411,7 @@
         "store",
         "registry"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Frapp_publish_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rapp_publish_agent.py",
       "source": null,
@@ -2468,7 +2468,7 @@
         "bundler",
         "publish"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Frapplication_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rapplication_agent.py",
       "source": null,
@@ -2591,7 +2591,7 @@
         "builder",
         "rapplication"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fvibe_builder_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/vibe_builder_agent.py",
       "source": null,
@@ -2651,7 +2651,7 @@
         "observability",
         "private"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapter%2Fhive_shape_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapter/hive_shape_agent.py",
       "source": null,
@@ -2780,7 +2780,7 @@
         "alignment",
         "operator-mediated"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fdrift_watcher",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/drift_watcher_agent.py",
       "source": null,
@@ -2838,7 +2838,7 @@
         "tdd",
         "pipeline"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Ffleet_commander",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/fleet_commander_agent.py",
       "source": null,
@@ -2966,7 +2966,7 @@
         "templates",
         "aibast"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Flearn_new",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/learn_new_agent.py",
       "source": null,
@@ -3023,7 +3023,7 @@
         "swarm-factory",
         "store"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fswarm_factory_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/swarm_factory_agent.py",
       "source": null,
@@ -3085,7 +3085,7 @@
         "interop",
         "compat"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fhost_compat_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/host_compat_agent.py",
       "source": null,
@@ -3211,7 +3211,7 @@
         "deterministic",
         "toasted"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Frar_installer_troubleshooter_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rar_installer_troubleshooter_agent.py",
       "source": null,
@@ -3268,7 +3268,7 @@
         "rapplication",
         "productivity"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Frapp_projects",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_projects_agent.py",
       "source": null,
@@ -3394,7 +3394,7 @@
         "long-conversations",
         "pi"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fself_compact_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/self_compact_agent.py",
       "source": null,
@@ -3451,7 +3451,7 @@
         "discovery",
         "rapplication"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fstore_navigator_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/store_navigator_agent.py",
       "source": null,
@@ -3575,7 +3575,7 @@
         "append-only",
         "offline"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fthread_tracker_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/thread_tracker_agent.py",
       "source": null,
@@ -3633,7 +3633,7 @@
         "operator-mediated",
         "platform"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Flaunch_to_public_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/launch_to_public_agent.py",
       "source": null,
@@ -3758,7 +3758,7 @@
         "append-only",
         "offline"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fparallel_dimensions_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/parallel_dimensions_agent.py",
       "source": null,
@@ -3817,7 +3817,7 @@
         "grail",
         "operator-mediated"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fplant_seed_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/plant_seed_agent.py",
       "source": null,
@@ -3874,7 +3874,7 @@
         "testing",
         "automation"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fwindows_vm_install_lab_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/windows_vm_install_lab_agent.py",
       "source": null,
@@ -4001,7 +4001,7 @@
         "pipeline",
         "factory"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fcopilot_studio_parity_deploy",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_parity_deploy_agent.py",
       "source": null,
@@ -4061,7 +4061,7 @@
         "x402",
         "enterprise"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Ffull_rapp_leviathan",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/full_rapp_leviathan_agent.py",
       "source": null,
@@ -4186,7 +4186,7 @@
         "deployment",
         "parity"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Ffactory",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/factory_agent.py",
       "source": null,
@@ -4245,7 +4245,7 @@
         "frames",
         "shape"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapter%2Fhive_census_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapter/hive_census_agent.py",
       "source": null,
@@ -4371,7 +4371,7 @@
         "handoff",
         "no_pii"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fprototype_lock_factory_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/prototype_lock_factory_agent.py",
       "source": null,
@@ -4429,7 +4429,7 @@
         "rapplication",
         "lifecycle"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fegg_hatcher",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/egg_hatcher_agent.py",
       "source": null,
@@ -4486,7 +4486,7 @@
         "extraction",
         "vision"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fprompt_extractor",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/prompt_extractor.py",
       "source": null,
@@ -4612,7 +4612,7 @@
         "web",
         "assimilation"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40borg%2Fborg_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@borg/borg_agent.py.card",
       "source": null,
@@ -4669,7 +4669,7 @@
         "aibast",
         "rapplication"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fproject_tracker_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/project_tracker_agent.py",
       "source": null,
@@ -4799,7 +4799,7 @@
         "vite",
         "react"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fpower_apps_code_app_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/power_apps_code_app_agent.py",
       "source": null,
@@ -4857,7 +4857,7 @@
         "determinism",
         "roundtrip"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Frapp_skill_bridge_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_skill_bridge_agent.py",
       "source": null,
@@ -4986,7 +4986,7 @@
         "daemon",
         "caesura"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40wildhaven%2Fpenumbra_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/penumbra_agent.py",
       "source": null,
@@ -5044,7 +5044,7 @@
         "operator-mediated",
         "meta"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fchain_composer_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/chain_composer_agent.py",
       "source": null,
@@ -5169,7 +5169,7 @@
         "storage",
         "persistence"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fmanage_memory_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/manage_memory_agent.py",
       "source": null,
@@ -5229,7 +5229,7 @@
         "authoring",
         "assimilated"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fcopilot_studio_forge_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_forge_agent.py",
       "source": null,
@@ -5289,7 +5289,7 @@
         "pipeline",
         "crm"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fdeal_desk_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/deal_desk_agent.py",
       "source": null,
@@ -5416,7 +5416,7 @@
         "leadership",
         "stewardship"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40wildhaven%2Fceo_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/ceo_agent.py",
       "source": null,
@@ -5477,7 +5477,7 @@
         "generator",
         "design"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fmicrosoft_deck_studio_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/microsoft_deck_studio_agent.py",
       "source": null,
@@ -5604,7 +5604,7 @@
         "azure-openai",
         "creative"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fart_generator_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/art_generator_agent.py",
       "source": null,
@@ -5662,7 +5662,7 @@
         "bond-pulse",
         "rhythm"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fbond_rhythm_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/bond_rhythm_agent.py",
       "source": null,
@@ -5792,7 +5792,7 @@
         "local-first",
         "ownership"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fflight_recorder",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/flight_recorder_agent.py",
       "source": null,
@@ -5849,7 +5849,7 @@
         "event-stream",
         "sign"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fcommons_post",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/commons_post_agent.py",
       "source": null,
@@ -5978,7 +5978,7 @@
         "federation",
         "rapp"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Ftwin_me",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/twin_me_agent.py",
       "source": null,
@@ -6034,7 +6034,7 @@
         "context",
         "recall"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fcontext_memory_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/context_memory_agent.py",
       "source": null,
@@ -6102,7 +6102,7 @@
         "blastbox",
         "connected-agents"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fcopilot_studio_deploy_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_deploy_agent.py",
       "source": null,
@@ -6231,7 +6231,7 @@
         "briefing",
         "multi-agent"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Frecon_deck_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/recon_deck_agent.py",
       "source": null,
@@ -6286,7 +6286,7 @@
         "learn",
         "getting-started"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Ffirst_hour_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/first_hour_agent.py",
       "source": null,
@@ -6412,7 +6412,7 @@
         "read-only",
         "data-sloshing"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Frappterbook_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rappterbook_agent.py",
       "source": null,
@@ -6471,7 +6471,7 @@
         "presentation",
         "prompt_to_video"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40howardh%2Fprompt_to_video_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/prompt_to_video_agent.py",
       "source": null,
@@ -6600,7 +6600,7 @@
         "ssl",
         "tech-stack"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40howardh%2Frecon_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/recon_agent.py",
       "source": null,
@@ -6658,7 +6658,7 @@
         "interactive",
         "gamification"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40howardh%2Ftraining_quest_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/training_quest_agent.py",
       "source": null,
@@ -6718,7 +6718,7 @@
         "accessibility",
         "data-visualization"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40howardh%2Ftuftelove_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/tuftelove_agent.py",
       "source": null,
@@ -6843,7 +6843,7 @@
         "scheduling",
         "monitoring"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40howardh%2Fvaultmind_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/vaultmind_agent.py",
       "source": null,
@@ -6900,7 +6900,7 @@
         "grid",
         "field-service"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fpredictive_asset_maintenance_intelligence",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/predictive_asset_maintenance_intelligence_agent.py",
       "source": null,
@@ -7028,7 +7028,7 @@
         "single-file",
         "rapp"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Ftwin_egg_hatcher",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/twin_egg_hatcher_agent.py",
       "source": null,
@@ -7085,7 +7085,7 @@
         "neighborhood",
         "publish"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Festate_outbound",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/estate_outbound_agent.py",
       "source": null,
@@ -7213,7 +7213,7 @@
         "composite",
         "rapplication"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fbakeoff_factory",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/bakeoff_factory_agent.py",
       "source": null,
@@ -7271,7 +7271,7 @@
         "rapplication",
         "singleton"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Festate_factory",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/estate_factory_agent.py",
       "source": null,
@@ -7397,7 +7397,7 @@
         "fidelity",
         "ezsharpen"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fez_sharpen_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ez_sharpen_agent.py",
       "source": null,
@@ -7456,7 +7456,7 @@
         "self-correcting",
         "kaizen"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fperpetual_loop_factory",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/perpetual_loop_factory_agent.py",
       "source": null,
@@ -7514,7 +7514,7 @@
         "three-js",
         "summon"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fhologram_dogg",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/hologram_dogg_agent.py",
       "source": null,
@@ -7640,7 +7640,7 @@
         "determinism",
         "ark"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fbuzzsaw",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/buzzsaw.py",
       "source": null,
@@ -7697,7 +7697,7 @@
         "blog",
         "idempotent"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fwp_publish_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/wp_publish_agent.py",
       "source": null,
@@ -7824,7 +7824,7 @@
         "triage",
         "meeting-prep"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40howardh%2Fchief_of_staff_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/chief_of_staff_agent.py",
       "source": null,
@@ -7881,7 +7881,7 @@
         "singleton",
         "rapplication"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rarbookworld%2Fbookfactory",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/bookfactory_agent.py",
       "source": null,
@@ -8006,7 +8006,7 @@
         "singleton",
         "rapplication"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rarbookworld%2Fmomentfactory",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/momentfactory_agent.py",
       "source": null,
@@ -8065,7 +8065,7 @@
         "ensemble",
         "brainstem"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fneuron_swarm",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/neuron_swarm_agent.py",
       "source": null,
@@ -8121,7 +8121,7 @@
         "scaffolding",
         "auto-generate"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40discreetRappers%2Fagent_generator_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/agent_generator_agent.py",
       "source": null,
@@ -8246,7 +8246,7 @@
         "copilot-studio",
         "multi-platform"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40discreetRappers%2Fagent_transpiler_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/agent_transpiler_agent.py",
       "source": null,
@@ -8303,7 +8303,7 @@
         "visualization",
         "mermaid"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40discreetRappers%2Farchitecture_diagram_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/architecture_diagram_agent.py",
       "source": null,
@@ -8428,7 +8428,7 @@
         "native",
         "no-code"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40discreetRappers%2Fcopilot_studio_transpiler_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/copilot_studio_transpiler_agent.py",
       "source": null,
@@ -8485,7 +8485,7 @@
         "json",
         "scripted"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40discreetRappers%2Fdemo_script_generator_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/demo_script_generator_agent.py",
       "source": null,
@@ -8610,7 +8610,7 @@
         "templates",
         "microsoft"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40discreetRappers%2Fpowerpoint_generator_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/powerpoint_generator_agent.py",
       "source": null,
@@ -8665,7 +8665,7 @@
         "project-management",
         "tracking"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40discreetRappers%2Fproject_tracker_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/project_tracker_agent.py",
       "source": null,
@@ -8792,7 +8792,7 @@
         "code-gen",
         "quality-gates"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40discreetRappers%2Frapp_pipeline_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/rapp_pipeline_agent.py",
       "source": null,
@@ -8848,7 +8848,7 @@
         "crm",
         "natural-language"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40discreetRappers%2Fsales_assistant_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/sales_assistant_agent.py",
       "source": null,
@@ -8905,7 +8905,7 @@
         "interactive",
         "sales"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40discreetRappers%2Fscripted_demo_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/scripted_demo_agent.py",
       "source": null,
@@ -9030,7 +9030,7 @@
         "analysis",
         "legal"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40discreetRappers%2Fsharepoint_contract_analysis_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/sharepoint_contract_analysis_agent.py",
       "source": null,
@@ -9085,7 +9085,7 @@
         "news",
         "http"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fhacker_news",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/hacker_news_agent.py",
       "source": null,
@@ -9210,7 +9210,7 @@
         "receipts",
         "virtual-world"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fcommons_show_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/commons_show_agent.py",
       "source": null,
@@ -9267,7 +9267,7 @@
         "lifeplayer",
         "digital-organism"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fcommons_life_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/commons_life_agent.py",
       "source": null,
@@ -9390,7 +9390,7 @@
         "smoke-test",
         "minimal"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fping_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/ping_agent.py",
       "source": null,
@@ -9451,7 +9451,7 @@
         "d365",
         "power-platform"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40bill%2Fneuron_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@bill/neuron_agent.py",
       "source": null,
@@ -9579,7 +9579,7 @@
         "azure",
         "planning"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fagent_team_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/agent_team_agent.py",
       "source": null,
@@ -9635,7 +9635,7 @@
         "browser",
         "media"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fplay_youtube_video_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/play_youtube_video_agent.py",
       "source": null,
@@ -9690,7 +9690,7 @@
         "base-class",
         "required"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fbasic_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/basic_agent.py",
       "source": null,
@@ -9815,7 +9815,7 @@
         "deep_work",
         "self_service"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fbreathing_room",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/breathing_room_agent.py",
       "source": {
@@ -9891,7 +9891,7 @@
         "summarization",
         "catch_up"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fholiday_recap",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/holiday_recap_agent.py",
       "source": {
@@ -10032,7 +10032,7 @@
         "crud",
         "microsoft"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40discreetRappers%2Fdynamics_crud_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/dynamics_crud_agent.py",
       "source": null,
@@ -10089,7 +10089,7 @@
         "playwright",
         "webrtc"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fmatrix_arena_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/matrix_arena_agent.py",
       "source": null,
@@ -10214,7 +10214,7 @@
         "trading-cards",
         "sneakernet"
       ],
-      "audience": null,
+      "audience": "consumer",
       "url": "https://kody-w.github.io/RAR/#agent/%40howardh%2Fcardsmith_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/cardsmith_agent.py",
       "source": null,
@@ -10271,7 +10271,7 @@
         "single-file-html",
         "loop"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fvibe_coding_loop",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/vibe_coding_loop_agent.py",
       "source": null,
@@ -10331,7 +10331,7 @@
         "assessment",
         "monitoring"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fagent_performance_triage",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/agent_performance_triage_agent.py",
       "source": {
@@ -10475,7 +10475,7 @@
         "risk",
         "assessment"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fagent_red_team",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/agent_red_team_agent.py",
       "source": {
@@ -10551,7 +10551,7 @@
         "microsoft_365",
         "action_items"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Faction_items_todo",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/action_items_todo_agent.py",
       "source": {
@@ -10695,7 +10695,7 @@
         "clipchamp",
         "tts"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fclipchamp_video",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/clipchamp_video_agent.py",
       "source": {
@@ -10767,7 +10767,7 @@
         "training",
         "communication"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fexplainer_video",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/explainer_video_agent.py",
       "source": {
@@ -10909,7 +10909,7 @@
         "agents",
         "tournament"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Farena_compete_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/arena_compete_agent.py",
       "source": null,
@@ -10966,7 +10966,7 @@
         "architecture",
         "advisor"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fcopilot_agent_advisor",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/copilot_agent_advisor_agent.py",
       "source": {
@@ -11109,7 +11109,7 @@
         "writing",
         "audit"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fcowork_use_case_one_pager",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/cowork_use_case_one_pager_agent.py",
       "source": {
@@ -11185,7 +11185,7 @@
         "geojson",
         "kml"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Froute_map_visualizer",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/route_map_visualizer_agent.py",
       "source": {
@@ -11261,7 +11261,7 @@
         "power_pages",
         "web"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fwcag_power_platform",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/wcag_power_platform_agent.py",
       "source": {
@@ -11404,7 +11404,7 @@
         "work_patterns",
         "analytics"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fwork_iq_signalboard",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/work_iq_signalboard_agent.py",
       "source": {
@@ -11477,7 +11477,7 @@
         "double-jump",
         "self-improvement"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fdouble_jump_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/double_jump_agent.py",
       "source": null,
@@ -11602,7 +11602,7 @@
         "warehouse",
         "devtools"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fgit_warehouse_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/git_warehouse_agent.py",
       "source": null,
@@ -11661,7 +11661,7 @@
         "design",
         "ffmpeg"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fbooth_loop_video",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/booth_loop_video_agent.py",
       "source": {
@@ -11804,7 +11804,7 @@
         "power_platform",
         "automation"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fbrowser_uat_analyst",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/browser_uat_analyst_agent.py",
       "source": {
@@ -11878,7 +11878,7 @@
         "agents",
         "power_platform"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fcopilot_studio_agent_test",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/copilot_studio_agent_test_agent.py",
       "source": {
@@ -12021,7 +12021,7 @@
         "governance",
         "licensing"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fcopilot_studio_harness_picker",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/copilot_studio_harness_picker_agent.py",
       "source": {
@@ -12097,7 +12097,7 @@
         "readiness",
         "assessment"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fcopilot_studio_knowledge_readiness",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/copilot_studio_knowledge_readiness_agent.py",
       "source": {
@@ -12173,7 +12173,7 @@
         "csv",
         "analysis"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fmonte_carlo_analysis",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/monte_carlo_analysis_agent.py",
       "source": {
@@ -12318,7 +12318,7 @@
         "batna",
         "zopa"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fstoic_negotiator",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/stoic_negotiator_agent.py",
       "source": {
@@ -12392,7 +12392,7 @@
         "finance",
         "productivity"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Ftravel_cost_estimator",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/travel_cost_estimator_agent.py",
       "source": {
@@ -12532,7 +12532,7 @@
         "copilot",
         "routing"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fwhat_to_use_when",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/what_to_use_when_agent.py",
       "source": {
@@ -12606,7 +12606,7 @@
         "integration",
         "m365"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fcopilot_studio_probe_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_probe_agent.py",
       "source": null,
@@ -12733,7 +12733,7 @@
         "deck",
         "pipeline"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40howardh%2Fmarkdown_to_slides_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/markdown_to_slides_agent.py",
       "source": null,
@@ -12791,7 +12791,7 @@
         "quality",
         "scripts"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Faccessibility_pass",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/accessibility_pass_agent.py",
       "source": {
@@ -12864,7 +12864,7 @@
         "python",
         "documents"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Facroform_writer",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/acroform_writer_agent.py",
       "source": {
@@ -13006,7 +13006,7 @@
         "go_live",
         "decision_making"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fagent_evaluation_designer",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/agent_evaluation_designer_agent.py",
       "source": {
@@ -13080,7 +13080,7 @@
         "snapshots",
         "scripts"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fagent_harness_explorer",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/agent_harness_explorer_agent.py",
       "source": {
@@ -13223,7 +13223,7 @@
         "content",
         "productivity"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fai_demo_assistant",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/ai_demo_assistant_agent.py",
       "source": {
@@ -13294,7 +13294,7 @@
         "process_improvement",
         "agentic_workflow"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fai_first_process_redesign",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/ai_first_process_redesign_agent.py",
       "source": {
@@ -13439,7 +13439,7 @@
         "html",
         "intake"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fai_usecase_assessment",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/ai_usecase_assessment_agent.py",
       "source": {
@@ -13513,7 +13513,7 @@
         "content",
         "privacy"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fanonymised_case_study_writer",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/anonymised_case_study_writer_agent.py",
       "source": {
@@ -13658,7 +13658,7 @@
         "reminder",
         "multilingual"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fawaiting_reply",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/awaiting_reply_agent.py",
       "source": {
@@ -13732,7 +13732,7 @@
         "marketing",
         "content"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fb2b_outreach_suite",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/b2b_outreach_suite_agent.py",
       "source": {
@@ -13806,7 +13806,7 @@
         "seo",
         "productivity"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fblog_content_auditor",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/blog_content_auditor_agent.py",
       "source": {
@@ -13949,7 +13949,7 @@
         "structure",
         "productivity"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fblog_post_structure_pass",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/blog_post_structure_pass_agent.py",
       "source": {
@@ -14023,7 +14023,7 @@
         "documents",
         "presentations"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fbrand_template_enforcer",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/brand_template_enforcer_agent.py",
       "source": {
@@ -14164,7 +14164,7 @@
         "authoring",
         "productivity"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fbrand_voice_pass",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/brand_voice_pass_agent.py",
       "source": {
@@ -14239,7 +14239,7 @@
         "governance",
         "skill_generation"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fbusiness_os",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/business_os_agent.py",
       "source": {
@@ -14380,7 +14380,7 @@
         "conference",
         "automation"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fcall_for_speakers_digest",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/call_for_speakers_digest_agent.py",
       "source": {
@@ -14453,7 +14453,7 @@
         "automation",
         "scripts"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fcampaign_deck_builder",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/campaign_deck_builder_agent.py",
       "source": {
@@ -14525,7 +14525,7 @@
         "matplotlib",
         "scripts"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fchart_builder",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/chart_builder_agent.py",
       "source": {
@@ -14664,7 +14664,7 @@
         "game",
         "python"
       ],
-      "audience": null,
+      "audience": "consumer",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fclassic_text_adventure",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/classic_text_adventure_agent.py",
       "source": {
@@ -14740,7 +14740,7 @@
         "inss",
         "irrf"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fclt_hr_assistant",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/clt_hr_assistant_agent.py",
       "source": {
@@ -14878,7 +14878,7 @@
         "documents",
         "productivity"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fcommenting_content",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/commenting_content_agent.py",
       "source": {
@@ -14949,7 +14949,7 @@
         "productivity",
         "comparison"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fcompetitive_battlecard_builder",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/competitive_battlecard_builder_agent.py",
       "source": {
@@ -15090,7 +15090,7 @@
         "follow_up",
         "productivity"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fconditional_chat_reminder",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/conditional_chat_reminder_agent.py",
       "source": {
@@ -15164,7 +15164,7 @@
         "content",
         "productivity"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fconference_session_abstract_pack",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/conference_session_abstract_pack_agent.py",
       "source": {
@@ -15306,7 +15306,7 @@
         "productivity",
         "governance"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fcontent_quality_auditor",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/content_quality_auditor_agent.py",
       "source": {
@@ -15381,7 +15381,7 @@
         "weekly",
         "teams"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fcopilot_agents_news_scout",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/copilot_agents_news_scout_agent.py",
       "source": {
@@ -15453,7 +15453,7 @@
         "regression",
         "agent"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fcopilot_studio_test_planner",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/copilot_studio_test_planner_agent.py",
       "source": {
@@ -15596,7 +15596,7 @@
         "orchestration",
         "adaptive_card"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fcopilot_studio_topic_blueprint",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/copilot_studio_topic_blueprint_agent.py",
       "source": {
@@ -15670,7 +15670,7 @@
         "office",
         "scripts"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fdoc_format_converter",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/doc_format_converter_agent.py",
       "source": {
@@ -15812,7 +15812,7 @@
         "design_review",
         "copilot_studio"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fenterprise_agent_design_authority",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/enterprise_agent_design_authority_agent.py",
       "source": {
@@ -15886,7 +15886,7 @@
         "marketing_review",
         "esg"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Feu_greenwashing_analysis",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/eu_greenwashing_analysis_agent.py",
       "source": {
@@ -16025,7 +16025,7 @@
         "productivity",
         "learning"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fexam_prep_learning_plan_builder",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/exam_prep_learning_plan_builder_agent.py",
       "source": {
@@ -16099,7 +16099,7 @@
         "charts",
         "scripts"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fgantt_chart_generator",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/gantt_chart_generator_agent.py",
       "source": {
@@ -16242,7 +16242,7 @@
         "ssml",
         "news"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fgenerating_podcast_script",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/generating_podcast_script_agent.py",
       "source": {
@@ -16318,7 +16318,7 @@
         "united_kingdom",
         "documents"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fglobal_greenwashing_claim_auditor",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/global_greenwashing_claim_auditor_agent.py",
       "source": {
@@ -16391,7 +16391,7 @@
         "download",
         "productivity"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fgrab_my_files",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/grab_my_files_agent.py",
       "source": {
@@ -16532,7 +16532,7 @@
         "refinement",
         "brainstorming"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fidea_refiner",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/idea_refiner_agent.py",
       "source": {
@@ -16607,7 +16607,7 @@
         "documentation",
         "productivity"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Finstitutional_knowledge",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/institutional_knowledge_agent.py",
       "source": {
@@ -16748,7 +16748,7 @@
         "collaboration",
         "productivity"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fiterative_file_editing",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/iterative_file_editing_agent.py",
       "source": {
@@ -16823,7 +16823,7 @@
         "uploads",
         "excel"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fknowledge_corpus_curator",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/knowledge_corpus_curator_agent.py",
       "source": {
@@ -16964,7 +16964,7 @@
         "metadata",
         "grounding"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fknowledge_source_router",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/knowledge_source_router_agent.py",
       "source": {
@@ -17040,7 +17040,7 @@
         "loinc",
         "azure_ai_search"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Flab_column_mapper",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/lab_column_mapper_agent.py",
       "source": {
@@ -17113,7 +17113,7 @@
         "marketing",
         "content"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Flinkedin_content_system",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/linkedin_content_system_agent.py",
       "source": {
@@ -17253,7 +17253,7 @@
         "writing",
         "content"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Flinkedin_content_writer",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/linkedin_content_writer_agent.py",
       "source": {
@@ -17326,7 +17326,7 @@
         "power_platform",
         "crm"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Flookup_dataverse_table",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/lookup_dataverse_table_agent.py",
       "source": {
@@ -17470,7 +17470,7 @@
         "business_applications",
         "data_ai"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fmct_excellence_iq",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/mct_excellence_iq_agent.py",
       "source": {
@@ -17545,7 +17545,7 @@
         "productivity",
         "communication"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fmeeting_analyzer",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/meeting_analyzer_agent.py",
       "source": {
@@ -17689,7 +17689,7 @@
         "microsoft_365_copilot",
         "foundry"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fmicrosoft_ai_platform_advisor",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/microsoft_ai_platform_advisor_agent.py",
       "source": {
@@ -17763,7 +17763,7 @@
         "productivity",
         "microsoft_365"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fown_voice_builder",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/own_voice_builder_agent.py",
       "source": {
@@ -17906,7 +17906,7 @@
         "teams",
         "insights"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fpattern_radar",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/pattern_radar_agent.py",
       "source": {
@@ -17980,7 +17980,7 @@
         "content",
         "insights"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fpattern_radar_automation",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/pattern_radar_automation_agent.py",
       "source": {
@@ -18055,7 +18055,7 @@
         "tables",
         "sharepoint"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fpdf_table_data_conversion",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/pdf_table_data_conversion_agent.py",
       "source": {
@@ -18196,7 +18196,7 @@
         "personas",
         "qa"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fpersona_reaction_panel",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/persona_reaction_panel_agent.py",
       "source": {
@@ -18272,7 +18272,7 @@
         "compliance",
         "scripts"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fphi_deidentifier",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/phi_deidentifier_agent.py",
       "source": {
@@ -18413,7 +18413,7 @@
         "content",
         "social_media"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fpov_line_generator",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/pov_line_generator_agent.py",
       "source": {
@@ -18486,7 +18486,7 @@
         "assessment",
         "governance"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fpower_automate_desktop_assessment",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/power_automate_desktop_assessment_agent.py",
       "source": {
@@ -18626,7 +18626,7 @@
         "audit",
         "governance"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fpower_automate_documentation",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/power_automate_documentation_agent.py",
       "source": {
@@ -18700,7 +18700,7 @@
         "review",
         "fabric"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fpower_bi_model_review",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/power_bi_model_review_agent.py",
       "source": {
@@ -18840,7 +18840,7 @@
         "python",
         "charts"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fpowerpoint_deck_designer",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/powerpoint_deck_designer_agent.py",
       "source": {
@@ -18913,7 +18913,7 @@
         "writing",
         "productivity"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fpresentation_talk_track_builder",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/presentation_talk_track_builder_agent.py",
       "source": {
@@ -18986,7 +18986,7 @@
         "powerpoint",
         "productivity"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fprocess_sop_architect",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/process_sop_architect_agent.py",
       "source": {
@@ -19124,7 +19124,7 @@
         "documents",
         "productivity"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fredlining_content",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/redlining_content_agent.py",
       "source": {
@@ -19197,7 +19197,7 @@
         "dashboard",
         "research"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fregulation_monitor",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/regulation_monitor_agent.py",
       "source": {
@@ -19338,7 +19338,7 @@
         "productivity",
         "writing"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Frich_html_presentation",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/rich_html_presentation_agent.py",
       "source": {
@@ -19410,7 +19410,7 @@
         "storytelling",
         "reporting"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fscrollytelling_data",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/scrollytelling_data_agent.py",
       "source": {
@@ -19551,7 +19551,7 @@
         "tables",
         "data"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fsharepoint_list_formatter",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/sharepoint_list_formatter_agent.py",
       "source": {
@@ -19624,7 +19624,7 @@
         "report",
         "html"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fsharepoint_list_insight_report_generator",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/sharepoint_list_insight_report_generator_agent.py",
       "source": {
@@ -19697,7 +19697,7 @@
         "productivity",
         "agent"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fskill_authoring_coach",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/skill_authoring_coach_agent.py",
       "source": {
@@ -19837,7 +19837,7 @@
         "out_of_office",
         "knowledge"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fspend_more_time_with_friends_and_family",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/spend_more_time_with_friends_and_family_agent.py",
       "source": {
@@ -19911,7 +19911,7 @@
         "memory",
         "productivity"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fstyle_analyzer",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/style_analyzer_agent.py",
       "source": {
@@ -20054,7 +20054,7 @@
         "json",
         "productivity"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Ftool_tracer",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/tool_tracer_agent.py",
       "source": {
@@ -20126,7 +20126,7 @@
         "teams",
         "out_of_office"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fvacation_urgent_forwarder",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/vacation_urgent_forwarder_agent.py",
       "source": {
@@ -20268,7 +20268,7 @@
         "vendor_management",
         "review"
       ],
-      "audience": null,
+      "audience": "business",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fvendor_contract_risk_review",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/vendor_contract_risk_review_agent.py",
       "source": {
@@ -20343,7 +20343,7 @@
         "design",
         "consulting"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fwhiteboard_to_infographic",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/whiteboard_to_infographic_agent.py",
       "source": {
@@ -20486,7 +20486,7 @@
         "ai_detection",
         "wikipedia"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fwikipedia_human_style_writing",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/wikipedia_human_style_writing_agent.py",
       "source": {
@@ -20561,7 +20561,7 @@
         "briefing",
         "multilingual"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40cat-agent-skills%2Fwork_brief",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/work_brief_agent.py",
       "source": {
@@ -20632,7 +20632,7 @@
         "notary",
         "rapp_x"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Frapp_x_notary_canary_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_x_notary_canary_agent.py",
       "source": null,
@@ -20757,7 +20757,7 @@
         "playwright",
         "second-life"
       ],
-      "audience": null,
+      "audience": "consumer",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fsecond_life_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/second_life_agent.py",
       "source": null,
@@ -20813,7 +20813,7 @@
         "power-automate",
         "microsoft"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40discreetRappers%2Femail_drafting_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/email_drafting_agent.py",
       "source": null,
@@ -20936,7 +20936,7 @@
         "compatibility",
         "leviathan"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Frapp_leviathan_factory",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_leviathan_factory_agent.py",
       "source": null,
@@ -20991,7 +20991,7 @@
         "hello-world",
         "starter"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fhello_world_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/hello_world_agent.py",
       "source": null,
@@ -21114,7 +21114,7 @@
         "private",
         "stub"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fexample_private",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/private/example_private_agent.py.stub",
       "source": null,
@@ -21170,7 +21170,7 @@
         "stub",
         "operator-personal"
       ],
-      "audience": null,
+      "audience": "both",
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Flegal_helper",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/legal_helper_agent.py.stub",
       "source": null,
