@@ -1,0 +1,14 @@
+{
+  "schema": "rar-releases/1.0",
+  "releases": [
+    {
+      "release_name": "Autumn 2026",
+      "release_type": "seasonal",
+      "tag": "v2.0.0",
+      "timestamp": "2026-10-24T04:43:52.505933+00:00",
+      "agent_count": 223,
+      "publishers": 10,
+      "integrity_seal": "1529921e4a973ef5"
+    }
+  ]
+}

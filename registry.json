@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-10-24T04:16:49.177980+00:00",
+  "generated_at": "2026-10-24T04:44:15.047600+00:00",
   "stats": {
     "total_agents": 223,
     "total_swarms": 2,
@@ -13641,6 +13641,26 @@
       }
     ],
     "note": "withheld agents remain at their published paths; they are omitted from every lookup"
+  },
+  "releases": [
+    {
+      "release_name": "Autumn 2026",
+      "release_type": "seasonal",
+      "tag": "v2.0.0",
+      "timestamp": "2026-10-24T04:43:52.505933+00:00",
+      "agent_count": 223,
+      "publishers": 10,
+      "integrity_seal": "1529921e4a973ef5"
+    }
+  ],
+  "latest_release": {
+    "release_name": "Autumn 2026",
+    "release_type": "seasonal",
+    "tag": "v2.0.0",
+    "timestamp": "2026-10-24T04:43:52.505933+00:00",
+    "agent_count": 223,
+    "publishers": 10,
+    "integrity_seal": "1529921e4a973ef5"
   },
   "instance": {
     "role": "main",
