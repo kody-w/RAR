@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-10-24T04:10:15Z",
-  "count": 219,
+  "generated": "2026-10-24T04:12:45Z",
+  "count": 220,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
     {
@@ -6502,6 +6502,46 @@
         "lines": 363,
         "size_kb": 18.8,
         "added_at": "2026-06-26T23:08:53-04:00"
+      }
+    },
+    {
+      "artifact_type": "agent",
+      "protocol_conformance": {
+        "profile": null,
+        "status": "not_assessed",
+        "evidence": []
+      },
+      "id": "kody-w__parallel_dimensions_agent",
+      "name": "@kody-w/parallel_dimensions_agent",
+      "display_name": "Parallel Dimensions",
+      "description": "Tracks independent what-if branches, detects conflicting assertions, and merges only compatible dimensions using an append-only local record.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "kody-w",
+      "category": "productivity",
+      "tags": [
+        "planning",
+        "what-if",
+        "branches",
+        "append-only",
+        "offline"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/parallel_dimensions_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/parallel_dimensions_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/parallel_dimensions_agent.py",
+        "sha256": "ad3d5af03678ded14558a1f449a5ba4002e15dbb1ee101c37349da16ba7b2c2b"
+      },
+      "stats": {
+        "lines": 258,
+        "size_kb": 9.4,
+        "added_at": null
       }
     },
     {

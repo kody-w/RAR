@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-10-24T04:09:52.585876+00:00",
+  "generated_at": "2026-10-24T04:15:25.908648+00:00",
   "stats": {
-    "total_agents": 222,
+    "total_agents": 223,
     "total_swarms": 2,
     "total_stubs": 2,
     "publishers": 10,
@@ -10023,6 +10023,59 @@
       "_first_commit_sha": "2d3ff59c24ab9bab9ad09d02bcc07ec95a3d5caf",
       "_latest_commit_sha": "026f18b4093e3ec07c2f359dd9618438e020a0be",
       "_card_sha256": "8dec4e2140d8b7b95689190ea2c40e301fa06208fb5194bb0df4b15dd4103a38"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/parallel_dimensions_agent",
+      "version": "1.0.0",
+      "display_name": "Parallel Dimensions",
+      "description": "Tracks independent what-if branches, detects conflicting assertions, and merges only compatible dimensions using an append-only local record.",
+      "author": "kody-w",
+      "tags": [
+        "planning",
+        "what-if",
+        "branches",
+        "append-only",
+        "offline"
+      ],
+      "category": "productivity",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@kody-w/parallel_dimensions_agent.py",
+      "_install_filename": "rar_kody_w_parallel_dimensions_agent.py",
+      "_sha256": "ad3d5af03678ded14558a1f449a5ba4002e15dbb1ee101c37349da16ba7b2c2b",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_0a5f9aed49e9702012fd2c582e410a8381612d44c4361285224e33d7192bc220",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": 655,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "namespace",
+          "content_sha256",
+          "base_precondition",
+          "security_scan",
+          "registry_build",
+          "card_forge",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 16388639859734625007,
+      "_size_kb": 9.4,
+      "_lines": 258,
+      "_has_card": true,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null,
+      "_card_sha256": "b60e1c98ba43b813b0cf0ab0b577bc5254088af77e319136e60399768898b377"
     },
     {
       "schema": "rapp-agent/1.0",

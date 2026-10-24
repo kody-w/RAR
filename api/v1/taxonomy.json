@@ -1,10 +1,10 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-10-24T04:10:15Z",
+  "generated": "2026-10-24T04:12:45Z",
   "categories": [
     {
       "name": "productivity",
-      "count": 46
+      "count": 47
     },
     {
       "name": "general",
@@ -62,7 +62,7 @@
     },
     {
       "name": "@kody-w",
-      "count": 71
+      "count": 72
     },
     {
       "name": "@rapp",
@@ -104,7 +104,7 @@
     },
     {
       "name": "community",
-      "count": 69
+      "count": 70
     },
     {
       "name": "official",
@@ -289,6 +289,10 @@
       "count": 5
     },
     {
+      "name": "planning",
+      "count": 5
+    },
+    {
       "name": "visualization",
       "count": 5
     },
@@ -374,10 +378,6 @@
     },
     {
       "name": "compliance",
-      "count": 4
-    },
-    {
-      "name": "planning",
       "count": 4
     },
     {
@@ -949,6 +949,14 @@
       "count": 2
     },
     {
+      "name": "append-only",
+      "count": 2
+    },
+    {
+      "name": "offline",
+      "count": 2
+    },
+    {
       "name": "codegen",
       "count": 2
     },
@@ -1310,14 +1318,6 @@
     },
     {
       "name": "office",
-      "count": 1
-    },
-    {
-      "name": "design_review",
-      "count": 1
-    },
-    {
-      "name": "eu_regulation",
       "count": 1
     }
   ]

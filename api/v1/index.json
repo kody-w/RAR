@@ -3,8 +3,8 @@
   "name": "RAR Pok\u00e9dex API",
   "description": "Static catalog API for bare RAPP agents (single-file Python, BasicAgent subclass, perform()). Mirrors the RAPP_Store API shape so the rapp-zoo can browse all federation stores with the same client code. Each entry has a sprite, a downloadable .py (and .card holocard if shipped), lineage back to the species root, and stats (lines, size, sha256).",
   "version": "1.0.0",
-  "generated_at": "2026-10-24T04:09:58Z",
-  "count": 222,
+  "generated_at": "2026-10-24T04:12:45Z",
+  "count": 223,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/index.json",
   "agents": [
     {
@@ -2085,6 +2085,19 @@
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__neuron_swarm.json",
       "sprite": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__neuron_swarm.svg",
       "py": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__neuron_swarm.py",
+      "card": null
+    },
+    {
+      "id": "kody-w__parallel_dimensions_agent",
+      "name": "Parallel Dimensions",
+      "rar_name": "@kody-w/parallel_dimensions_agent",
+      "publisher": "@kody-w",
+      "category": "productivity",
+      "version": "1.0.0",
+      "has_card": true,
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__parallel_dimensions_agent.json",
+      "sprite": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__parallel_dimensions_agent.svg",
+      "py": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__parallel_dimensions_agent.py",
       "card": null
     },
     {
