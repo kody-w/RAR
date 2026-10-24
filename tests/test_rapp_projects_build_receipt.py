@@ -127,7 +127,14 @@ def test_ten_frame_build_receipt_is_exact_and_linked():
     frames = json.loads(RECEIPT.read_text(encoding="utf-8"))
 
     assert isinstance(frames, list)
-    assert len(frames) == 11
+    # Ten immutable build frames, one publication reconciliation, then one
+    # dependency reconciliation per rapp_skill foundation move. Append-only.
+    assert len(frames) >= 11
+    dependency_frames = frames[11:]
+    assert all(
+        frame["payload"]["name"] == "dependency-reconciliation"
+        for frame in dependency_frames
+    )
     assert [frame["frame_hash"] for frame in frames[:10]] == (
         PREFIX_FRAME_HASHES
     )
@@ -137,10 +144,12 @@ def test_ten_frame_build_receipt_is_exact_and_linked():
         separators=(",", ":"),
     ).encode("utf-8")
     assert hashlib.sha256(prefix).hexdigest() == PREFIX_SHA256
-    assert [frame["seq"] for frame in frames] == list(range(11))
-    assert [frame["payload"]["frame"] for frame in frames] == list(range(1, 12))
+    assert [frame["seq"] for frame in frames] == list(range(len(frames)))
+    assert [frame["payload"]["frame"] for frame in frames] == (
+        list(range(1, len(frames) + 1))
+    )
     assert [frame["payload"]["source_commit"] for frame in frames] == (
-        SOURCE_COMMITS
+        SOURCE_COMMITS + [SOURCE_COMMITS[-1]] * len(dependency_frames)
     )
     assert len({frame["stream_id"] for frame in frames}) == 1
     assert re.fullmatch(
@@ -190,14 +199,14 @@ def test_ten_frame_build_receipt_is_exact_and_linked():
         assert frame_utc >= datetime.fromisoformat(committed_at)
         previous = frame
 
-    reconciliation = frames[-1]["payload"]["reconciliation"]
-    assert frames[-2]["payload_hash"] == PRIOR_PAYLOAD_HASH
-    assert frames[-2]["payload"]["evidence"]["api_sha256"] == PRIOR_API_SHA256
-    assert frames[-1]["prev"] == PRIOR_PAYLOAD_HASH
-    assert frames[-1]["utc"] == "2026-09-01T00:25:56.072Z"
-    assert frames[-1]["payload_hash"] == RECONCILIATION_PAYLOAD_HASH
-    assert frames[-1]["frame_hash"] == RECONCILIATION_FRAME_HASH
-    assert frames[-1]["payload"]["evidence"]["api_sha256"] == (
+    reconciliation = frames[10]["payload"]["reconciliation"]
+    assert frames[9]["payload_hash"] == PRIOR_PAYLOAD_HASH
+    assert frames[9]["payload"]["evidence"]["api_sha256"] == PRIOR_API_SHA256
+    assert frames[10]["prev"] == PRIOR_PAYLOAD_HASH
+    assert frames[10]["utc"] == "2026-09-01T00:25:56.072Z"
+    assert frames[10]["payload_hash"] == RECONCILIATION_PAYLOAD_HASH
+    assert frames[10]["frame_hash"] == RECONCILIATION_FRAME_HASH
+    assert frames[10]["payload"]["evidence"]["api_sha256"] == (
         POST_HOLO_API_SHA256
     )
     assert reconciliation == {
@@ -209,6 +218,43 @@ def test_ten_frame_build_receipt_is_exact_and_linked():
         "prior_frame_hash": PREFIX_FRAME_HASHES[-1],
         "post_holo_card_sha256": POST_HOLO_CARD_SHA256,
     }
+
+    # Each dependency frame changes exactly the rapp_skill binding and names
+    # the binding it replaced; everything else is carried forward untouched.
+    binding_keys = {
+        "rapp_skill_version",
+        "rapp_skill_source_sha256",
+        "rapp_skill_skill_sha256",
+    }
+    for before, frame in zip(frames[10:], dependency_frames):
+        payload = frame["payload"]
+        expected = json.loads(json.dumps(before["payload"]))
+        expected["frame"] = payload["frame"]
+        expected["name"] = "dependency-reconciliation"
+        expected["evidence"].update(
+            {key: payload["evidence"][key] for key in binding_keys}
+        )
+        expected["reconciliation"] = {
+            "reason": (
+                "The rapp_skill foundation this publication was proven "
+                "against moved; bind the receipt to the version the catalog "
+                "publishes now."
+            ),
+            "prior_frame_hash": before["frame_hash"],
+            "prior_rapp_skill_version": (
+                before["payload"]["evidence"]["rapp_skill_version"]
+            ),
+            "prior_rapp_skill_source_sha256": (
+                before["payload"]["evidence"]["rapp_skill_source_sha256"]
+            ),
+            "prior_rapp_skill_skill_sha256": (
+                before["payload"]["evidence"]["rapp_skill_skill_sha256"]
+            ),
+        }
+        assert payload == expected
+        assert payload["evidence"]["rapp_skill_version"] != (
+            before["payload"]["evidence"]["rapp_skill_version"]
+        )
 
 
 def test_build_receipt_binds_the_generated_publication():
@@ -297,7 +343,7 @@ def test_build_receipt_binds_the_generated_publication():
     assert evidence["rapp_sdk_sha256"] == (
         "aba04a57390d98276eadd9c7decd821bb53549730daec3491cffee45ada48eb2"
     )
-    assert evidence["rapp_skill_version"] == "1.3.1"
+    assert evidence["rapp_skill_version"] == rapp_skill_record["version"]
     assert evidence["rapp_skill_source_sha256"] == (
         rapp_skill_record["source_sha256"]
     )

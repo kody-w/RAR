@@ -74,10 +74,10 @@ def canonical_card_sha256(card: dict) -> str:
 
 
 def validate_prefix(frames: list[dict]) -> dict:
-    if len(frames) not in {10, 11}:
+    if len(frames) < 10:
         raise RuntimeError(
             "Expected the immutable ten-frame receipt, optionally followed by "
-            "its one reconciliation frame"
+            "its one reconciliation frame and any dependency reconciliations"
         )
     actual_hashes = tuple(frame.get("frame_hash") for frame in frames[:10])
     if actual_hashes != EXPECTED_PREFIX_FRAME_HASHES:
@@ -175,8 +175,8 @@ def main() -> int:
     module = load_agent_module()
     frames = json.loads(RECEIPT.read_text(encoding="utf-8"))
     prior = validate_prefix(frames)
-    if len(frames) == 11:
-        validate_reconciliation(module, prior, frames[-1])
+    if len(frames) >= 11:
+        validate_reconciliation(module, prior, frames[10])
         print("RAPP Projects publication reconciliation is already exact")
         return 0
 
