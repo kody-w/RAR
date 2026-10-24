@@ -1,0 +1,44 @@
+{
+  "agent": "@kody-w/self_compact_agent",
+  "agent_file": "self_compact_agent.py",
+  "agent_sha256": "ad47db5e49459bdc85e90cf7a6a1fa7201061b358925ae5d7290b8c32a790c9e",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "SelfCompactAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "@kody-w",
+    "based_on": "disler/self-compact-pi-agent",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "The brainstem compacts its own context: a gauge on every chat, hints as it fills, and at the cutoff every other tool waits until the model writes a note to itself that survives when old turns drop out.",
+    "display_name": "SelfCompact",
+    "example_call": {
+      "args": {
+        "action": "view"
+      }
+    },
+    "name": "@kody-w/self_compact_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "context",
+      "memory",
+      "compaction",
+      "handoff",
+      "long-conversations",
+      "pi"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "SelfCompact",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {},
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}
