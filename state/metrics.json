@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-10-23T10:12:02Z",
+ "generated_at": "2026-10-24T09:36:55Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -9,34 +9,34 @@
   "stars": 5,
   "forks": 1,
   "watchers": 0,
-  "open_issues": 14,
-  "size_kb": 122273,
+  "open_issues": 12,
+  "size_kb": 114268,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-10-23T08:59:30Z",
+  "pushed_at": "2026-10-24T08:33:21Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
  "totals": {
-  "downloads": 13048,
-  "clones": 12597,
+  "downloads": 13171,
+  "clones": 12712,
   "cdn_hits": 451,
-  "release_downloads": 0,
+  "release_downloads": 8,
   "agent_file_downloads": 15,
-  "clones_excluding_ci_estimate": 8363,
-  "ci_clone_estimate": 4234,
+  "clones_excluding_ci_estimate": 8420,
+  "ci_clone_estimate": 4292,
   "page_views": 259,
-  "clone_uniques_14d": 310,
+  "clone_uniques_14d": 314,
   "view_uniques_14d": 9,
-  "clone_uniques_daily_sum": 2167,
+  "clone_uniques_daily_sum": 2201,
   "view_uniques_daily_sum": 114,
-  "days_tracked": 73,
+  "days_tracked": 74,
   "tracking_since": "2026-07-14",
-  "agents": 220,
+  "agents": 223,
   "swarms": 2,
   "publishers": 10,
   "categories": 13,
-  "total_lines": 137944,
-  "total_kb": 6394.6,
+  "total_lines": 138763,
+  "total_kb": 6426.2,
   "votes": 1,
   "upvotes": 1,
   "voters": 1,
@@ -572,6 +572,13 @@
    "clone_uniques": 18,
    "views": 1,
    "cdn": 0
+  },
+  {
+   "date": "2026-10-23",
+   "clones": 115,
+   "clone_uniques": 34,
+   "views": 0,
+   "cdn": 0
   }
  ],
  "traffic": {
@@ -649,15 +656,15 @@
     "uniques": 1
    }
   ],
-  "clones_14d": 2341,
+  "clones_14d": 2254,
   "views_14d": 17,
   "live": true,
-  "as_of": "2026-10-23T10:12:02Z"
+  "as_of": "2026-10-24T09:36:55Z"
  },
  "cdn": {
   "total_hits": 451,
   "bandwidth": 6360652,
-  "rank": 795330,
+  "rank": 799432,
   "agent_hits": 15,
   "files": [
    {
@@ -903,9 +910,1127 @@
   ]
  },
  "releases": {
-  "total_downloads": 0,
-  "count": 1,
+  "total_downloads": 8,
+  "count": 2,
   "releases": [
+   {
+    "tag": "v2.0.0",
+    "name": "Autumn 2026 (v2.0.0)",
+    "published_at": "2026-10-24T04:44:17Z",
+    "downloads": 8,
+    "assets": [
+     {
+      "name": "rar_bill_neuron_agent.py",
+      "downloads": 0,
+      "size": 28386
+     },
+     {
+      "name": "rar_borg_borg_agent.py",
+      "downloads": 0,
+      "size": 40703
+     },
+     {
+      "name": "rar_cat_agent_skills_accessibility_pass_agent.py",
+      "downloads": 0,
+      "size": 12811
+     },
+     {
+      "name": "rar_cat_agent_skills_acroform_writer_agent.py",
+      "downloads": 0,
+      "size": 12461
+     },
+     {
+      "name": "rar_cat_agent_skills_action_items_todo_agent.py",
+      "downloads": 0,
+      "size": 12666
+     },
+     {
+      "name": "rar_cat_agent_skills_agent_evaluation_designer_agent.py",
+      "downloads": 0,
+      "size": 13005
+     },
+     {
+      "name": "rar_cat_agent_skills_agent_harness_explorer_agent.py",
+      "downloads": 0,
+      "size": 12806
+     },
+     {
+      "name": "rar_cat_agent_skills_agent_performance_triage_agent.py",
+      "downloads": 0,
+      "size": 12542
+     },
+     {
+      "name": "rar_cat_agent_skills_agent_red_team_agent.py",
+      "downloads": 0,
+      "size": 12828
+     },
+     {
+      "name": "rar_cat_agent_skills_ai_demo_assistant_agent.py",
+      "downloads": 0,
+      "size": 12739
+     },
+     {
+      "name": "rar_cat_agent_skills_ai_first_process_redesign_agent.py",
+      "downloads": 0,
+      "size": 11901
+     },
+     {
+      "name": "rar_cat_agent_skills_ai_usecase_assessment_agent.py",
+      "downloads": 0,
+      "size": 13067
+     },
+     {
+      "name": "rar_cat_agent_skills_anonymised_case_study_writer_agent.py",
+      "downloads": 0,
+      "size": 12609
+     },
+     {
+      "name": "rar_cat_agent_skills_awaiting_reply_agent.py",
+      "downloads": 0,
+      "size": 12863
+     },
+     {
+      "name": "rar_cat_agent_skills_b2b_outreach_suite_agent.py",
+      "downloads": 0,
+      "size": 12831
+     },
+     {
+      "name": "rar_cat_agent_skills_blog_content_auditor_agent.py",
+      "downloads": 0,
+      "size": 12503
+     },
+     {
+      "name": "rar_cat_agent_skills_blog_post_structure_pass_agent.py",
+      "downloads": 0,
+      "size": 12538
+     },
+     {
+      "name": "rar_cat_agent_skills_booth_loop_video_agent.py",
+      "downloads": 0,
+      "size": 12668
+     },
+     {
+      "name": "rar_cat_agent_skills_brand_template_enforcer_agent.py",
+      "downloads": 0,
+      "size": 12641
+     },
+     {
+      "name": "rar_cat_agent_skills_brand_voice_pass_agent.py",
+      "downloads": 0,
+      "size": 12453
+     },
+     {
+      "name": "rar_cat_agent_skills_breathing_room_agent.py",
+      "downloads": 0,
+      "size": 12529
+     },
+     {
+      "name": "rar_cat_agent_skills_browser_uat_analyst_agent.py",
+      "downloads": 0,
+      "size": 13105
+     },
+     {
+      "name": "rar_cat_agent_skills_business_os_agent.py",
+      "downloads": 0,
+      "size": 13327
+     },
+     {
+      "name": "rar_cat_agent_skills_call_for_speakers_digest_agent.py",
+      "downloads": 0,
+      "size": 13272
+     },
+     {
+      "name": "rar_cat_agent_skills_campaign_deck_builder_agent.py",
+      "downloads": 0,
+      "size": 12555
+     },
+     {
+      "name": "rar_cat_agent_skills_chart_builder_agent.py",
+      "downloads": 0,
+      "size": 12439
+     },
+     {
+      "name": "rar_cat_agent_skills_classic_text_adventure_agent.py",
+      "downloads": 0,
+      "size": 11944
+     },
+     {
+      "name": "rar_cat_agent_skills_clipchamp_video_agent.py",
+      "downloads": 0,
+      "size": 12774
+     },
+     {
+      "name": "rar_cat_agent_skills_clt_hr_assistant_agent.py",
+      "downloads": 0,
+      "size": 12494
+     },
+     {
+      "name": "rar_cat_agent_skills_commenting_content_agent.py",
+      "downloads": 0,
+      "size": 12326
+     },
+     {
+      "name": "rar_cat_agent_skills_competitive_battlecard_builder_agent.py",
+      "downloads": 0,
+      "size": 13128
+     },
+     {
+      "name": "rar_cat_agent_skills_conditional_chat_reminder_agent.py",
+      "downloads": 0,
+      "size": 12701
+     },
+     {
+      "name": "rar_cat_agent_skills_conference_session_abstract_pack_agent.py",
+      "downloads": 0,
+      "size": 12606
+     },
+     {
+      "name": "rar_cat_agent_skills_content_quality_auditor_agent.py",
+      "downloads": 0,
+      "size": 12847
+     },
+     {
+      "name": "rar_cat_agent_skills_copilot_agents_news_scout_agent.py",
+      "downloads": 0,
+      "size": 12854
+     },
+     {
+      "name": "rar_cat_agent_skills_copilot_agent_advisor_agent.py",
+      "downloads": 0,
+      "size": 12950
+     },
+     {
+      "name": "rar_cat_agent_skills_copilot_studio_agent_test_agent.py",
+      "downloads": 0,
+      "size": 12831
+     },
+     {
+      "name": "rar_cat_agent_skills_copilot_studio_harness_picker_agent.py",
+      "downloads": 0,
+      "size": 12806
+     },
+     {
+      "name": "rar_cat_agent_skills_copilot_studio_knowledge_readiness_agent.py",
+      "downloads": 0,
+      "size": 13300
+     },
+     {
+      "name": "rar_cat_agent_skills_copilot_studio_test_planner_agent.py",
+      "downloads": 0,
+      "size": 12297
+     },
+     {
+      "name": "rar_cat_agent_skills_copilot_studio_topic_blueprint_agent.py",
+      "downloads": 0,
+      "size": 13009
+     },
+     {
+      "name": "rar_cat_agent_skills_cowork_use_case_one_pager_agent.py",
+      "downloads": 0,
+      "size": 12581
+     },
+     {
+      "name": "rar_cat_agent_skills_doc_format_converter_agent.py",
+      "downloads": 0,
+      "size": 12616
+     },
+     {
+      "name": "rar_cat_agent_skills_enterprise_agent_design_authority_agent.py",
+      "downloads": 0,
+      "size": 12999
+     },
+     {
+      "name": "rar_cat_agent_skills_eu_greenwashing_analysis_agent.py",
+      "downloads": 0,
+      "size": 13133
+     },
+     {
+      "name": "rar_cat_agent_skills_exam_prep_learning_plan_builder_agent.py",
+      "downloads": 0,
+      "size": 12866
+     },
+     {
+      "name": "rar_cat_agent_skills_explainer_video_agent.py",
+      "downloads": 0,
+      "size": 12437
+     },
+     {
+      "name": "rar_cat_agent_skills_gantt_chart_generator_agent.py",
+      "downloads": 0,
+      "size": 12767
+     },
+     {
+      "name": "rar_cat_agent_skills_generating_podcast_script_agent.py",
+      "downloads": 0,
+      "size": 12717
+     },
+     {
+      "name": "rar_cat_agent_skills_global_greenwashing_claim_auditor_agent.py",
+      "downloads": 0,
+      "size": 13013
+     },
+     {
+      "name": "rar_cat_agent_skills_grab_my_files_agent.py",
+      "downloads": 0,
+      "size": 12634
+     },
+     {
+      "name": "rar_cat_agent_skills_holiday_recap_agent.py",
+      "downloads": 0,
+      "size": 12598
+     },
+     {
+      "name": "rar_cat_agent_skills_idea_refiner_agent.py",
+      "downloads": 0,
+      "size": 12791
+     },
+     {
+      "name": "rar_cat_agent_skills_institutional_knowledge_agent.py",
+      "downloads": 0,
+      "size": 12935
+     },
+     {
+      "name": "rar_cat_agent_skills_iterative_file_editing_agent.py",
+      "downloads": 0,
+      "size": 13045
+     },
+     {
+      "name": "rar_cat_agent_skills_knowledge_corpus_curator_agent.py",
+      "downloads": 0,
+      "size": 12959
+     },
+     {
+      "name": "rar_cat_agent_skills_knowledge_source_router_agent.py",
+      "downloads": 0,
+      "size": 12045
+     },
+     {
+      "name": "rar_cat_agent_skills_lab_column_mapper_agent.py",
+      "downloads": 0,
+      "size": 13240
+     },
+     {
+      "name": "rar_cat_agent_skills_linkedin_content_system_agent.py",
+      "downloads": 0,
+      "size": 12539
+     },
+     {
+      "name": "rar_cat_agent_skills_linkedin_content_writer_agent.py",
+      "downloads": 0,
+      "size": 12543
+     },
+     {
+      "name": "rar_cat_agent_skills_lookup_dataverse_table_agent.py",
+      "downloads": 0,
+      "size": 12722
+     },
+     {
+      "name": "rar_cat_agent_skills_mct_excellence_iq_agent.py",
+      "downloads": 0,
+      "size": 13121
+     },
+     {
+      "name": "rar_cat_agent_skills_meeting_analyzer_agent.py",
+      "downloads": 0,
+      "size": 13054
+     },
+     {
+      "name": "rar_cat_agent_skills_microsoft_ai_platform_advisor_agent.py",
+      "downloads": 0,
+      "size": 13059
+     },
+     {
+      "name": "rar_cat_agent_skills_monte_carlo_analysis_agent.py",
+      "downloads": 0,
+      "size": 12722
+     },
+     {
+      "name": "rar_cat_agent_skills_own_voice_builder_agent.py",
+      "downloads": 0,
+      "size": 12696
+     },
+     {
+      "name": "rar_cat_agent_skills_pattern_radar_agent.py",
+      "downloads": 0,
+      "size": 12645
+     },
+     {
+      "name": "rar_cat_agent_skills_pattern_radar_automation_agent.py",
+      "downloads": 0,
+      "size": 12859
+     },
+     {
+      "name": "rar_cat_agent_skills_pdf_table_data_conversion_agent.py",
+      "downloads": 0,
+      "size": 12800
+     },
+     {
+      "name": "rar_cat_agent_skills_persona_reaction_panel_agent.py",
+      "downloads": 0,
+      "size": 13011
+     },
+     {
+      "name": "rar_cat_agent_skills_phi_deidentifier_agent.py",
+      "downloads": 0,
+      "size": 12903
+     },
+     {
+      "name": "rar_cat_agent_skills_pov_line_generator_agent.py",
+      "downloads": 0,
+      "size": 12494
+     },
+     {
+      "name": "rar_cat_agent_skills_powerpoint_deck_designer_agent.py",
+      "downloads": 0,
+      "size": 12972
+     },
+     {
+      "name": "rar_cat_agent_skills_power_automate_desktop_assessment_agent.py",
+      "downloads": 0,
+      "size": 12935
+     },
+     {
+      "name": "rar_cat_agent_skills_power_automate_documentation_agent.py",
+      "downloads": 0,
+      "size": 13194
+     },
+     {
+      "name": "rar_cat_agent_skills_power_bi_model_review_agent.py",
+      "downloads": 0,
+      "size": 12960
+     },
+     {
+      "name": "rar_cat_agent_skills_presentation_talk_track_builder_agent.py",
+      "downloads": 0,
+      "size": 13010
+     },
+     {
+      "name": "rar_cat_agent_skills_process_sop_architect_agent.py",
+      "downloads": 0,
+      "size": 12586
+     },
+     {
+      "name": "rar_cat_agent_skills_redlining_content_agent.py",
+      "downloads": 0,
+      "size": 12382
+     },
+     {
+      "name": "rar_cat_agent_skills_regulation_monitor_agent.py",
+      "downloads": 0,
+      "size": 13322
+     },
+     {
+      "name": "rar_cat_agent_skills_rich_html_presentation_agent.py",
+      "downloads": 0,
+      "size": 12623
+     },
+     {
+      "name": "rar_cat_agent_skills_route_map_visualizer_agent.py",
+      "downloads": 0,
+      "size": 12585
+     },
+     {
+      "name": "rar_cat_agent_skills_scrollytelling_data_agent.py",
+      "downloads": 0,
+      "size": 12332
+     },
+     {
+      "name": "rar_cat_agent_skills_sharepoint_list_formatter_agent.py",
+      "downloads": 0,
+      "size": 12638
+     },
+     {
+      "name": "rar_cat_agent_skills_sharepoint_list_insight_report_generator_agent.py",
+      "downloads": 0,
+      "size": 13231
+     },
+     {
+      "name": "rar_cat_agent_skills_skill_authoring_coach_agent.py",
+      "downloads": 0,
+      "size": 12589
+     },
+     {
+      "name": "rar_cat_agent_skills_spend_more_time_with_friends_and_family_agent.py",
+      "downloads": 0,
+      "size": 13031
+     },
+     {
+      "name": "rar_cat_agent_skills_stoic_negotiator_agent.py",
+      "downloads": 0,
+      "size": 12971
+     },
+     {
+      "name": "rar_cat_agent_skills_style_analyzer_agent.py",
+      "downloads": 0,
+      "size": 12709
+     },
+     {
+      "name": "rar_cat_agent_skills_tool_tracer_agent.py",
+      "downloads": 0,
+      "size": 12558
+     },
+     {
+      "name": "rar_cat_agent_skills_travel_cost_estimator_agent.py",
+      "downloads": 0,
+      "size": 13043
+     },
+     {
+      "name": "rar_cat_agent_skills_vacation_urgent_forwarder_agent.py",
+      "downloads": 0,
+      "size": 12799
+     },
+     {
+      "name": "rar_cat_agent_skills_vendor_contract_risk_review_agent.py",
+      "downloads": 0,
+      "size": 13059
+     },
+     {
+      "name": "rar_cat_agent_skills_wcag_power_platform_agent.py",
+      "downloads": 0,
+      "size": 12896
+     },
+     {
+      "name": "rar_cat_agent_skills_what_to_use_when_agent.py",
+      "downloads": 0,
+      "size": 12657
+     },
+     {
+      "name": "rar_cat_agent_skills_whiteboard_to_infographic_agent.py",
+      "downloads": 0,
+      "size": 12693
+     },
+     {
+      "name": "rar_cat_agent_skills_wikipedia_human_style_writing_agent.py",
+      "downloads": 0,
+      "size": 12648
+     },
+     {
+      "name": "rar_cat_agent_skills_work_brief_agent.py",
+      "downloads": 0,
+      "size": 12430
+     },
+     {
+      "name": "rar_cat_agent_skills_work_iq_signalboard_agent.py",
+      "downloads": 0,
+      "size": 12647
+     },
+     {
+      "name": "rar_discreetrappers_agent_generator_agent.py",
+      "downloads": 0,
+      "size": 49126
+     },
+     {
+      "name": "rar_discreetrappers_agent_transpiler_agent.py",
+      "downloads": 0,
+      "size": 40092
+     },
+     {
+      "name": "rar_discreetrappers_architecture_diagram_agent.py",
+      "downloads": 0,
+      "size": 39283
+     },
+     {
+      "name": "rar_discreetrappers_copilot_studio_transpiler_agent.py",
+      "downloads": 0,
+      "size": 90630
+     },
+     {
+      "name": "rar_discreetrappers_demo_script_generator_agent.py",
+      "downloads": 0,
+      "size": 59793
+     },
+     {
+      "name": "rar_discreetrappers_dynamics_crud_agent.py",
+      "downloads": 0,
+      "size": 21686
+     },
+     {
+      "name": "rar_discreetrappers_email_drafting_agent.py",
+      "downloads": 0,
+      "size": 6151
+     },
+     {
+      "name": "rar_discreetrappers_powerpoint_generator_agent.py",
+      "downloads": 0,
+      "size": 62736
+     },
+     {
+      "name": "rar_discreetrappers_project_tracker_agent.py",
+      "downloads": 0,
+      "size": 40094
+     },
+     {
+      "name": "rar_discreetrappers_rapp_pipeline_agent.py",
+      "downloads": 0,
+      "size": 124478
+     },
+     {
+      "name": "rar_discreetrappers_sales_assistant_agent.py",
+      "downloads": 0,
+      "size": 27422
+     },
+     {
+      "name": "rar_discreetrappers_scripted_demo_agent.py",
+      "downloads": 0,
+      "size": 55524
+     },
+     {
+      "name": "rar_discreetrappers_sharepoint_contract_analysis_agent.py",
+      "downloads": 0,
+      "size": 122778
+     },
+     {
+      "name": "rar_howardh_cardsmith_agent.py",
+      "downloads": 0,
+      "size": 32911
+     },
+     {
+      "name": "rar_howardh_chief_of_staff_agent.py",
+      "downloads": 0,
+      "size": 33257
+     },
+     {
+      "name": "rar_howardh_markdown_to_slides_agent.py",
+      "downloads": 0,
+      "size": 8071
+     },
+     {
+      "name": "rar_howardh_prompt_to_video_agent.py",
+      "downloads": 0,
+      "size": 26881
+     },
+     {
+      "name": "rar_howardh_recon_agent.py",
+      "downloads": 0,
+      "size": 33005
+     },
+     {
+      "name": "rar_howardh_training_quest_agent.py",
+      "downloads": 0,
+      "size": 46650
+     },
+     {
+      "name": "rar_howardh_tuftelove_agent.py",
+      "downloads": 0,
+      "size": 29008
+     },
+     {
+      "name": "rar_howardh_vaultmind_agent.py",
+      "downloads": 0,
+      "size": 149640
+     },
+     {
+      "name": "rar_kody_w_agent_team_agent.py",
+      "downloads": 0,
+      "size": 16160
+     },
+     {
+      "name": "rar_kody_w_agent_workbench_agent.py",
+      "downloads": 0,
+      "size": 29865
+     },
+     {
+      "name": "rar_kody_w_arena_compete_agent.py",
+      "downloads": 0,
+      "size": 13653
+     },
+     {
+      "name": "rar_kody_w_art_generator_agent.py",
+      "downloads": 0,
+      "size": 11474
+     },
+     {
+      "name": "rar_kody_w_bakeoff_factory_agent.py",
+      "downloads": 0,
+      "size": 37067
+     },
+     {
+      "name": "rar_kody_w_bond_rhythm_agent.py",
+      "downloads": 0,
+      "size": 15474
+     },
+     {
+      "name": "rar_kody_w_buzzsaw_agent.py",
+      "downloads": 0,
+      "size": 15776
+     },
+     {
+      "name": "rar_kody_w_chain_composer_agent.py",
+      "downloads": 0,
+      "size": 17302
+     },
+     {
+      "name": "rar_kody_w_commons_life_agent.py",
+      "downloads": 0,
+      "size": 21567
+     },
+     {
+      "name": "rar_kody_w_commons_show_agent.py",
+      "downloads": 0,
+      "size": 20798
+     },
+     {
+      "name": "rar_kody_w_connected_solution_agent.py",
+      "downloads": 0,
+      "size": 130850
+     },
+     {
+      "name": "rar_kody_w_context_memory_agent.py",
+      "downloads": 0,
+      "size": 8628
+     },
+     {
+      "name": "rar_kody_w_copilot_studio_deploy_agent.py",
+      "downloads": 0,
+      "size": 453476
+     },
+     {
+      "name": "rar_kody_w_copilot_studio_forge_agent.py",
+      "downloads": 0,
+      "size": 224172
+     },
+     {
+      "name": "rar_kody_w_copilot_studio_parity_deploy_agent.py",
+      "downloads": 0,
+      "size": 268833
+     },
+     {
+      "name": "rar_kody_w_copilot_studio_probe_agent.py",
+      "downloads": 0,
+      "size": 7210
+     },
+     {
+      "name": "rar_kody_w_deal_desk_agent.py",
+      "downloads": 0,
+      "size": 10315
+     },
+     {
+      "name": "rar_kody_w_double_jump_agent.py",
+      "downloads": 0,
+      "size": 12754
+     },
+     {
+      "name": "rar_kody_w_education_shorts_agent.py",
+      "downloads": 0,
+      "size": 15293
+     },
+     {
+      "name": "rar_kody_w_estate_factory_agent.py",
+      "downloads": 0,
+      "size": 38215
+     },
+     {
+      "name": "rar_kody_w_ez_sharpen_agent.py",
+      "downloads": 0,
+      "size": 26427
+     },
+     {
+      "name": "rar_kody_w_factory_agent.py",
+      "downloads": 0,
+      "size": 18585
+     },
+     {
+      "name": "rar_kody_w_first_hour_agent.py",
+      "downloads": 0,
+      "size": 4022
+     },
+     {
+      "name": "rar_kody_w_flight_recorder_agent.py",
+      "downloads": 0,
+      "size": 23195
+     },
+     {
+      "name": "rar_kody_w_full_rapp_leviathan_agent.py",
+      "downloads": 0,
+      "size": 49706
+     },
+     {
+      "name": "rar_kody_w_github_agent_library_agent.py",
+      "downloads": 0,
+      "size": 44740
+     },
+     {
+      "name": "rar_kody_w_git_warehouse_agent.py",
+      "downloads": 0,
+      "size": 12266
+     },
+     {
+      "name": "rar_kody_w_hello_world_agent.py",
+      "downloads": 8,
+      "size": 1267
+     },
+     {
+      "name": "rar_kody_w_hologram_dogg_agent.py",
+      "downloads": 0,
+      "size": 8430
+     },
+     {
+      "name": "rar_kody_w_host_compat_agent.py",
+      "downloads": 0,
+      "size": 82627
+     },
+     {
+      "name": "rar_kody_w_install_rappter_distro_agent.py",
+      "downloads": 0,
+      "size": 37272
+     },
+     {
+      "name": "rar_kody_w_kody2day_agent.py",
+      "downloads": 0,
+      "size": 14844
+     },
+     {
+      "name": "rar_kody_w_kody2day_studio_agent.py",
+      "downloads": 0,
+      "size": 17414
+     },
+     {
+      "name": "rar_kody_w_launch_to_public_agent.py",
+      "downloads": 0,
+      "size": 35298
+     },
+     {
+      "name": "rar_kody_w_manage_memory_agent.py",
+      "downloads": 0,
+      "size": 11051
+     },
+     {
+      "name": "rar_kody_w_matrix_arena_agent.py",
+      "downloads": 0,
+      "size": 14373
+     },
+     {
+      "name": "rar_kody_w_microsoft_deck_studio_agent.py",
+      "downloads": 0,
+      "size": 38991
+     },
+     {
+      "name": "rar_kody_w_neuron_swarm_agent.py",
+      "downloads": 0,
+      "size": 19203
+     },
+     {
+      "name": "rar_kody_w_parallel_dimensions_agent.py",
+      "downloads": 0,
+      "size": 9662
+     },
+     {
+      "name": "rar_kody_w_perpetual_loop_factory_agent.py",
+      "downloads": 0,
+      "size": 55617
+     },
+     {
+      "name": "rar_kody_w_plant_seed_agent.py",
+      "downloads": 0,
+      "size": 27105
+     },
+     {
+      "name": "rar_kody_w_play_youtube_video_agent.py",
+      "downloads": 0,
+      "size": 5114
+     },
+     {
+      "name": "rar_kody_w_power_apps_code_app_agent.py",
+      "downloads": 0,
+      "size": 40559
+     },
+     {
+      "name": "rar_kody_w_predictive_asset_maintenance_intelligence_agent.py",
+      "downloads": 0,
+      "size": 55313
+     },
+     {
+      "name": "rar_kody_w_project_tracker_agent.py",
+      "downloads": 0,
+      "size": 27588
+     },
+     {
+      "name": "rar_kody_w_prompt_extractor_agent.py",
+      "downloads": 0,
+      "size": 28300
+     },
+     {
+      "name": "rar_kody_w_prototype_lock_factory_agent.py",
+      "downloads": 0,
+      "size": 17419
+     },
+     {
+      "name": "rar_kody_w_rappterbook_agent.py",
+      "downloads": 0,
+      "size": 6460
+     },
+     {
+      "name": "rar_kody_w_rappterpedia_agent.py",
+      "downloads": 0,
+      "size": 24798
+     },
+     {
+      "name": "rar_kody_w_rappter_engine_agent.py",
+      "downloads": 0,
+      "size": 17866
+     },
+     {
+      "name": "rar_kody_w_rapp_leviathan_factory_agent.py",
+      "downloads": 0,
+      "size": 2366
+     },
+     {
+      "name": "rar_kody_w_rapp_projects_agent.py",
+      "downloads": 0,
+      "size": 152085
+     },
+     {
+      "name": "rar_kody_w_rapp_sdk_builder_agent.py",
+      "downloads": 0,
+      "size": 19719
+     },
+     {
+      "name": "rar_kody_w_rapp_sentinel_agent.py",
+      "downloads": 0,
+      "size": 21865
+     },
+     {
+      "name": "rar_kody_w_rapp_skill_bridge_agent.py",
+      "downloads": 0,
+      "size": 59185
+     },
+     {
+      "name": "rar_kody_w_rapp_x_notary_canary_agent.py",
+      "downloads": 0,
+      "size": 1345
+     },
+     {
+      "name": "rar_kody_w_rar_installer_troubleshooter_agent.py",
+      "downloads": 0,
+      "size": 107959
+     },
+     {
+      "name": "rar_kody_w_rar_remote_agent.py",
+      "downloads": 0,
+      "size": 61098
+     },
+     {
+      "name": "rar_kody_w_recon_deck_agent.py",
+      "downloads": 0,
+      "size": 7080
+     },
+     {
+      "name": "rar_kody_w_second_life_agent.py",
+      "downloads": 0,
+      "size": 5722
+     },
+     {
+      "name": "rar_kody_w_self_compact_agent.py",
+      "downloads": 0,
+      "size": 13485
+     },
+     {
+      "name": "rar_kody_w_skill_toaster_agent.py",
+      "downloads": 0,
+      "size": 44925
+     },
+     {
+      "name": "rar_kody_w_thread_tracker_agent.py",
+      "downloads": 0,
+      "size": 9231
+     },
+     {
+      "name": "rar_kody_w_transcript2prototype_agent.py",
+      "downloads": 0,
+      "size": 397197
+     },
+     {
+      "name": "rar_kody_w_twin_egg_hatcher_agent.py",
+      "downloads": 0,
+      "size": 33006
+     },
+     {
+      "name": "rar_kody_w_twin_me_agent.py",
+      "downloads": 0,
+      "size": 33909
+     },
+     {
+      "name": "rar_kody_w_vibe_coding_loop_agent.py",
+      "downloads": 0,
+      "size": 15038
+     },
+     {
+      "name": "rar_kody_w_windows_vm_install_lab_agent.py",
+      "downloads": 0,
+      "size": 50633
+     },
+     {
+      "name": "rar_kody_w_workiq_agent.py",
+      "downloads": 0,
+      "size": 21094
+     },
+     {
+      "name": "rar_kody_w_wp_publish_agent.py",
+      "downloads": 0,
+      "size": 12040
+     },
+     {
+      "name": "rar_rapp_basic_agent.py",
+      "downloads": 0,
+      "size": 1345
+     },
+     {
+      "name": "rar_rapp_commons_post_agent.py",
+      "downloads": 0,
+      "size": 10127
+     },
+     {
+      "name": "rar_rapp_drift_agent.py",
+      "downloads": 0,
+      "size": 37190
+     },
+     {
+      "name": "rar_rapp_drift_watcher_agent.py",
+      "downloads": 0,
+      "size": 20651
+     },
+     {
+      "name": "rar_rapp_egg_hatcher_agent.py",
+      "downloads": 0,
+      "size": 14802
+     },
+     {
+      "name": "rar_rapp_estate_outbound_agent.py",
+      "downloads": 0,
+      "size": 6851
+     },
+     {
+      "name": "rar_rapp_exec_brief_agent.py",
+      "downloads": 0,
+      "size": 27830
+     },
+     {
+      "name": "rar_rapp_fleet_commander_agent.py",
+      "downloads": 0,
+      "size": 31840
+     },
+     {
+      "name": "rar_rapp_forge_provenance_agent.py",
+      "downloads": 0,
+      "size": 11937
+     },
+     {
+      "name": "rar_rapp_hacker_news_agent.py",
+      "downloads": 0,
+      "size": 4327
+     },
+     {
+      "name": "rar_rapp_learn_new_agent.py",
+      "downloads": 0,
+      "size": 94526
+     },
+     {
+      "name": "rar_rapp_moment_factory_agent.py",
+      "downloads": 0,
+      "size": 24175
+     },
+     {
+      "name": "rar_rapp_ping_agent.py",
+      "downloads": 0,
+      "size": 1206
+     },
+     {
+      "name": "rar_rapp_pitch_deck_agent.py",
+      "downloads": 0,
+      "size": 57344
+     },
+     {
+      "name": "rar_rapp_rapplication_agent.py",
+      "downloads": 0,
+      "size": 23785
+     },
+     {
+      "name": "rar_rapp_rapp_agent.py",
+      "downloads": 0,
+      "size": 176712
+     },
+     {
+      "name": "rar_rapp_rapp_dogg_agent.py",
+      "downloads": 0,
+      "size": 42721
+     },
+     {
+      "name": "rar_rapp_rapp_publish_agent.py",
+      "downloads": 0,
+      "size": 21116
+     },
+     {
+      "name": "rar_rapp_rar_steward_agent.py",
+      "downloads": 0,
+      "size": 23975
+     },
+     {
+      "name": "rar_rapp_store_navigator_agent.py",
+      "downloads": 0,
+      "size": 17005
+     },
+     {
+      "name": "rar_rapp_swarm_factory_agent.py",
+      "downloads": 0,
+      "size": 41393
+     },
+     {
+      "name": "rar_rapp_twin_agent.py",
+      "downloads": 0,
+      "size": 73629
+     },
+     {
+      "name": "rar_rapp_vibe_builder_agent.py",
+      "downloads": 0,
+      "size": 20680
+     },
+     {
+      "name": "rar_rapter_hive_census_agent.py",
+      "downloads": 0,
+      "size": 10138
+     },
+     {
+      "name": "rar_rapter_hive_shape_agent.py",
+      "downloads": 0,
+      "size": 15084
+     },
+     {
+      "name": "rar_rapter_rapp_dogg_agent.py",
+      "downloads": 0,
+      "size": 41596
+     },
+     {
+      "name": "rar_rarbookworld_bookfactory_agent.py",
+      "downloads": 0,
+      "size": 38438
+     },
+     {
+      "name": "rar_rarbookworld_momentfactory_agent.py",
+      "downloads": 0,
+      "size": 24471
+     },
+     {
+      "name": "rar_wildhaven_bellows_agent.py",
+      "downloads": 0,
+      "size": 19285
+     },
+     {
+      "name": "rar_wildhaven_ceo_agent.py",
+      "downloads": 0,
+      "size": 13543
+     },
+     {
+      "name": "rar_wildhaven_penumbra_agent.py",
+      "downloads": 0,
+      "size": 10794
+     },
+     {
+      "name": "release-assets.json",
+      "downloads": 0,
+      "size": 19181
+     }
+    ]
+   },
    {
     "tag": "v1.0.0",
     "name": "v1.0.0 \u2014 ecosystem snapshot",
@@ -1294,6 +2419,57 @@
   ],
   "newest": [
    {
+    "name": "@kody-w/parallel_dimensions_agent",
+    "display_name": "Parallel Dimensions",
+    "publisher": "@kody-w",
+    "category": "productivity",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 258,
+    "size_kb": 9.4,
+    "added_at": "2026-10-24T04:16:07Z",
+    "file": "agents/@kody-w/parallel_dimensions_agent.py",
+    "description": "Tracks independent what-if branches, detects conflicting assertions, and merges only compatible dimensions using an append-only local record."
+   },
+   {
+    "name": "@kody-w/thread_tracker_agent",
+    "display_name": "Thread Tracker",
+    "publisher": "@kody-w",
+    "category": "productivity",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 267,
+    "size_kb": 9.0,
+    "added_at": "2026-10-24T04:09:13Z",
+    "file": "agents/@kody-w/thread_tracker_agent.py",
+    "description": "Routes remarks into durable local topic threads, lists open work, and parks or closes threads without deleting their history."
+   },
+   {
+    "name": "@kody-w/self_compact_agent",
+    "display_name": "SelfCompact",
+    "publisher": "@kody-w",
+    "category": "core",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 294,
+    "size_kb": 13.2,
+    "added_at": "2026-10-24T04:02:39Z",
+    "file": "agents/@kody-w/self_compact_agent.py",
+    "description": "The brainstem compacts its own context: a gauge on every chat, hints as it fills, and at the cutoff every other tool waits until the model writes a note to itself that survives when old turns drop out."
+   },
+   {
     "name": "@kody-w/first_hour_agent",
     "display_name": "FirstHour",
     "publisher": "@kody-w",
@@ -1496,57 +2672,6 @@
     "added_at": "2026-08-26T17:18:46-04:00",
     "file": "agents/@rapter/hive_shape_agent.py",
     "description": "Look at every cubby in a hive at once and report its SHAPE \u2014 divergence (who disagrees about what the world is), silence (who did not answer, always named), mass (where the population actually lives), and spread (how unlike each other the members are). Private by construction: publishes nothing, writes no frame, and leaves the picture on the operator's machine."
-   },
-   {
-    "name": "@rapter/rapp_dogg_agent",
-    "display_name": "RapterBox RAPP DOGG",
-    "publisher": "@rapter",
-    "category": "core",
-    "tier": "verified",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 797,
-    "size_kb": 40.6,
-    "added_at": "2026-08-26T17:18:46-04:00",
-    "file": "agents/@rapter/rapp_dogg_agent.py",
-    "description": "Hotload one file and a brainstem knows rapp/1 exactly instead of guessing. Pulls the current protocol canon \u2014 frame rules, identity minting law, kind families, egg determinism, the exchange contract, and the vocabulary with each term's status \u2014 from a public, static, unauthenticated DOGG anchor, and injects it into the system prompt every turn. Read-only: installs nothing, executes nothing it fetches."
-   },
-   {
-    "name": "@rapp/rapp_dogg_agent",
-    "display_name": "RAPP DOGG",
-    "publisher": "@rapp",
-    "category": "core",
-    "tier": "official",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 812,
-    "size_kb": 41.7,
-    "added_at": "2026-08-26T16:49:28-04:00",
-    "file": "agents/@rapp/rapp_dogg_agent.py",
-    "description": "Hotload one file and a brainstem knows rapp/1 exactly instead of guessing. Pulls the current protocol canon \u2014 frame rules, identity minting law, kind families, egg determinism, the exchange contract, and the vocabulary with each term's status \u2014 from a public, static, unauthenticated DOGG anchor, and injects it into the system prompt every turn. Read-only: installs nothing, executes nothing it fetches."
-   },
-   {
-    "name": "@cat-agent-skills/action_items_todo",
-    "display_name": "Action Items to To Do",
-    "publisher": "@cat-agent-skills",
-    "category": "productivity",
-    "tier": "frontier",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 262,
-    "size_kb": 12.4,
-    "added_at": "2026-08-23T19:15:32-04:00",
-    "file": "agents/@cat-agent-skills/action_items_todo_agent.py",
-    "description": "Watches your Teams chats, meeting transcripts, and Outlook mail for things people actually asked you to do, and files each one as a Microsoft To Do task with a due date, priority, and source link."
    }
   ],
   "publishers": [
@@ -1561,11 +2686,11 @@
    },
    {
     "name": "@kody-w",
-    "agents": 69,
+    "agents": 72,
     "downloads": 4,
     "score": 1,
     "reviews": 1,
-    "lines": 66667,
+    "lines": 67486,
     "rating": 5.0
    },
    {
@@ -1644,7 +2769,7 @@
   "categories": [
    {
     "name": "productivity",
-    "agents": 45,
+    "agents": 47,
     "downloads": 4,
     "score": 0,
     "reviews": 0
@@ -1658,7 +2783,7 @@
    },
    {
     "name": "core",
-    "agents": 34,
+    "agents": 35,
     "downloads": 8,
     "score": 1,
     "reviews": 0
@@ -1736,7 +2861,7 @@
   ],
   "tiers": {
    "frontier": 97,
-   "community": 67,
+   "community": 70,
    "official": 46,
    "verified": 8,
    "private": 2
