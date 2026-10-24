@@ -1,9 +1,9 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-10-24T04:03:03.040761+00:00",
+  "generated_at": "2026-10-24T04:08:35.012923+00:00",
   "stats": {
-    "total_agents": 221,
+    "total_agents": 222,
     "total_swarms": 2,
     "total_stubs": 2,
     "publishers": 10,
@@ -11210,6 +11210,59 @@
       "_first_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080",
       "_latest_commit_sha": "597f0992f4120ddef24dd8686c5720a9ba5b59ab",
       "_card_sha256": "8e668f73b3d460734f5c938dafb40ae217826fa5eec7af9fbc5874539b43c94c"
+    },
+    {
+      "schema": "rapp-agent/1.0",
+      "name": "@kody-w/thread_tracker_agent",
+      "version": "1.0.0",
+      "display_name": "Thread Tracker",
+      "description": "Routes remarks into durable local topic threads, lists open work, and parks or closes threads without deleting their history.",
+      "author": "kody-w",
+      "tags": [
+        "threads",
+        "notes",
+        "routing",
+        "append-only",
+        "offline"
+      ],
+      "category": "productivity",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@kody-w/thread_tracker_agent.py",
+      "_install_filename": "rar_kody_w_thread_tracker_agent.py",
+      "_sha256": "dcf4d630cab0eaa9a6919e052cb14429416a1607f4e581a397a58430c7f8ad98",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_a4e49b5c8bf6c4fe6c2e9c8db846d4f5de9544098195d727c13aeadf2b502362",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": 657,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "namespace",
+          "content_sha256",
+          "base_precondition",
+          "security_scan",
+          "registry_build",
+          "card_forge",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 7558442555223451474,
+      "_size_kb": 9.0,
+      "_lines": 267,
+      "_has_card": true,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null,
+      "_card_sha256": "60ecfa27a811ece67f0037dfe88bbdf7a9332f6888d312bff831ce5299f71fb1"
     },
     {
       "schema": "rapp-agent/1.0",

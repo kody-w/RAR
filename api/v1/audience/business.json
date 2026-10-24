@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-10-24T04:03:19Z",
-  "count": 218,
+  "generated": "2026-10-24T04:05:57Z",
+  "count": 219,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
     {
@@ -7407,6 +7407,46 @@
         "lines": 907,
         "size_kb": 43.9,
         "added_at": "2026-08-01T21:33:29-04:00"
+      }
+    },
+    {
+      "artifact_type": "agent",
+      "protocol_conformance": {
+        "profile": null,
+        "status": "not_assessed",
+        "evidence": []
+      },
+      "id": "kody-w__thread_tracker_agent",
+      "name": "@kody-w/thread_tracker_agent",
+      "display_name": "Thread Tracker",
+      "description": "Routes remarks into durable local topic threads, lists open work, and parks or closes threads without deleting their history.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "kody-w",
+      "category": "productivity",
+      "tags": [
+        "threads",
+        "notes",
+        "routing",
+        "append-only",
+        "offline"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/thread_tracker_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/thread_tracker_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/thread_tracker_agent.py",
+        "sha256": "dcf4d630cab0eaa9a6919e052cb14429416a1607f4e581a397a58430c7f8ad98"
+      },
+      "stats": {
+        "lines": 267,
+        "size_kb": 9.0,
+        "added_at": null
       }
     },
     {

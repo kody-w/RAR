@@ -1,10 +1,10 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-10-24T04:03:19Z",
+  "generated": "2026-10-24T04:05:57Z",
   "categories": [
     {
       "name": "productivity",
-      "count": 45
+      "count": 46
     },
     {
       "name": "general",
@@ -62,7 +62,7 @@
     },
     {
       "name": "@kody-w",
-      "count": 70
+      "count": 71
     },
     {
       "name": "@rapp",
@@ -104,7 +104,7 @@
     },
     {
       "name": "community",
-      "count": 68
+      "count": 69
     },
     {
       "name": "official",
@@ -381,6 +381,10 @@
       "count": 4
     },
     {
+      "name": "routing",
+      "count": 4
+    },
+    {
       "name": "crm",
       "count": 4
     },
@@ -494,10 +498,6 @@
     },
     {
       "name": "documentation",
-      "count": 3
-    },
-    {
-      "name": "routing",
       "count": 3
     },
     {

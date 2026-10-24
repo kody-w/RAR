@@ -3,6 +3,11 @@
   "actor_id": 1735900,
   "actor_login": "kody-w",
   "agent": "@kody-w/thread_tracker_agent",
+  "applied_at": "2026-10-24T04:04:33.384422+00:00",
+  "approved_by": {
+    "github_id": 1735900,
+    "github_login": "kody-w"
+  },
   "base_lifecycle_receipt": "",
   "base_lifecycle_sha256": "",
   "base_lifecycle_version": "",
@@ -22,6 +27,7 @@
   "issue_updated_at": "2026-08-30T01:19:07Z",
   "publisher": "@kody-w",
   "reason": "",
+  "receipt": "rar_a4e49b5c8bf6c4fe6c2e9c8db846d4f5de9544098195d727c13aeadf2b502362",
   "repository_id": 1200565697,
   "request_id": "req_3ccbd384d69b8cabe2046621",
   "revision_id": "a4e49b5c8bf6c4fe6c2e9c8db846d4f5de9544098195d727c13aeadf2b502362",
@@ -29,5 +35,5 @@
   "slug": "thread_tracker_agent",
   "source_body_sha256": "1d3e2e3161f37501add9dc60fb2e016dde0a586e69141753a5c739689d60615c",
   "source_url": "",
-  "status": "pending_review"
+  "status": "applied"
 }
