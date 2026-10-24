@@ -3,6 +3,11 @@
   "actor_id": 1735900,
   "actor_login": "kody-w",
   "agent": "@kody-w/self_compact_agent",
+  "applied_at": "2026-10-24T03:59:45.976356+00:00",
+  "approved_by": {
+    "github_id": 1735900,
+    "github_login": "kody-w"
+  },
   "base_lifecycle_receipt": "",
   "base_lifecycle_sha256": "",
   "base_lifecycle_version": "",
@@ -22,6 +27,7 @@
   "issue_updated_at": "2026-09-24T02:02:25Z",
   "publisher": "@kody-w",
   "reason": "",
+  "receipt": "rar_eb5d42a0247efc315074252174b82f9c5b8723d5266f98b20a8088743e6123aa",
   "repository_id": 1200565697,
   "request_id": "req_36bb8cb097d0ed06147053d5",
   "revision_id": "eb5d42a0247efc315074252174b82f9c5b8723d5266f98b20a8088743e6123aa",
@@ -29,5 +35,5 @@
   "slug": "self_compact_agent",
   "source_body_sha256": "cd492fe8d917b1ad95383eaf6f2d54554bd896b695234c12586050b5b2329e5d",
   "source_url": "",
-  "status": "pending_review"
+  "status": "applied"
 }

@@ -1,6 +1,6 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-10-20T22:34:38Z",
+  "generated": "2026-10-24T04:00:34Z",
   "categories": [
     {
       "name": "productivity",
@@ -12,7 +12,7 @@
     },
     {
       "name": "core",
-      "count": 34
+      "count": 35
     },
     {
       "name": "devtools",
@@ -62,7 +62,7 @@
     },
     {
       "name": "@kody-w",
-      "count": 69
+      "count": 70
     },
     {
       "name": "@rapp",
@@ -104,7 +104,7 @@
     },
     {
       "name": "community",
-      "count": 67
+      "count": 68
     },
     {
       "name": "official",
@@ -249,6 +249,10 @@
       "count": 6
     },
     {
+      "name": "memory",
+      "count": 5
+    },
+    {
       "name": "core",
       "count": 5
     },
@@ -323,10 +327,6 @@
     {
       "name": "egg",
       "count": 5
-    },
-    {
-      "name": "memory",
-      "count": 4
     },
     {
       "name": "knowledge-base",
@@ -486,6 +486,10 @@
     },
     {
       "name": "education",
+      "count": 3
+    },
+    {
+      "name": "handoff",
       "count": 3
     },
     {
@@ -717,10 +721,6 @@
       "count": 2
     },
     {
-      "name": "handoff",
-      "count": 2
-    },
-    {
       "name": "leadership",
       "count": 2
     },
@@ -870,6 +870,10 @@
     },
     {
       "name": "integration",
+      "count": 2
+    },
+    {
+      "name": "context",
       "count": 2
     },
     {
@@ -1314,10 +1318,6 @@
     },
     {
       "name": "eu_regulation",
-      "count": 1
-    },
-    {
-      "name": "marketing_review",
       "count": 1
     }
   ]

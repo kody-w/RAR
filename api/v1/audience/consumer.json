@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "consumer",
   "description": "Agents appropriate for an individual audience. Enterprise-only agents are excluded.",
-  "generated": "2026-10-20T22:34:38Z",
-  "count": 193,
+  "generated": "2026-10-24T04:00:34Z",
+  "count": 194,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/consumer.json",
   "agents": [
     {
@@ -6410,6 +6410,47 @@
         "lines": 119,
         "size_kb": 5.6,
         "added_at": "2026-06-20T18:41:00-04:00"
+      }
+    },
+    {
+      "artifact_type": "agent",
+      "protocol_conformance": {
+        "profile": null,
+        "status": "not_assessed",
+        "evidence": []
+      },
+      "id": "kody-w__self_compact_agent",
+      "name": "@kody-w/self_compact_agent",
+      "display_name": "SelfCompact",
+      "description": "The brainstem compacts its own context: a gauge on every chat, hints as it fills, and at the cutoff every other tool waits until the model writes a note to itself that survives when old turns drop out.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "@kody-w",
+      "category": "core",
+      "tags": [
+        "context",
+        "memory",
+        "compaction",
+        "handoff",
+        "long-conversations",
+        "pi"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/self_compact_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/self_compact_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/self_compact_agent.py",
+        "sha256": "ad47db5e49459bdc85e90cf7a6a1fa7201061b358925ae5d7290b8c32a790c9e"
+      },
+      "stats": {
+        "lines": 294,
+        "size_kb": 13.2,
+        "added_at": null
       }
     },
     {

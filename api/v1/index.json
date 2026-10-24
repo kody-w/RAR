@@ -3,8 +3,8 @@
   "name": "RAR Pok\u00e9dex API",
   "description": "Static catalog API for bare RAPP agents (single-file Python, BasicAgent subclass, perform()). Mirrors the RAPP_Store API shape so the rapp-zoo can browse all federation stores with the same client code. Each entry has a sprite, a downloadable .py (and .card holocard if shipped), lineage back to the species root, and stats (lines, size, sha256).",
   "version": "1.0.0",
-  "generated_at": "2026-10-20T22:34:38Z",
-  "count": 220,
+  "generated_at": "2026-10-24T04:00:34Z",
+  "count": 221,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/index.json",
   "agents": [
     {
@@ -2345,6 +2345,19 @@
       "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__second_life_agent.json",
       "sprite": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__second_life_agent.svg",
       "py": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__second_life_agent.py",
+      "card": null
+    },
+    {
+      "id": "kody-w__self_compact_agent",
+      "name": "SelfCompact",
+      "rar_name": "@kody-w/self_compact_agent",
+      "publisher": "@kody-w",
+      "category": "core",
+      "version": "1.0.0",
+      "has_card": true,
+      "url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__self_compact_agent.json",
+      "sprite": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__self_compact_agent.svg",
+      "py": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__self_compact_agent.py",
       "card": null
     },
     {

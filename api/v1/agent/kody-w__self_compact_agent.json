@@ -1,0 +1,41 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__self_compact_agent",
+  "name": "SelfCompact",
+  "rar_name": "@kody-w/self_compact_agent",
+  "rappid": "rappid:@kody-w/self_compact_agent:fb76688993e03742aba55119e436f57f6070f434b0923c306a396b5bda3e3e78",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "core",
+  "tags": [
+    "context",
+    "memory",
+    "compaction",
+    "handoff",
+    "long-conversations",
+    "pi"
+  ],
+  "description": "The brainstem compacts its own context: a gauge on every chat, hints as it fills, and at the cutoff every other tool waits until the model writes a note to itself that survives when old turns drop out.",
+  "author": "@kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 294,
+  "size_kb": 13.2,
+  "sha256": "ad47db5e49459bdc85e90cf7a6a1fa7201061b358925ae5d7290b8c32a790c9e",
+  "has_card": true,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__self_compact_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/self_compact_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__self_compact_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__self_compact_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/self_compact_agent.py"
+}

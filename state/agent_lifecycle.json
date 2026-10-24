@@ -20118,8 +20118,19 @@
       "sha256": "61dd52033a67e19c2c88909a379cfd2a855a1c18f76065ecde2bb330a3681997",
       "latest_receipt": "rar_1bbfa0b36a331bdb2054b1f5c46be0dfbad97a5bd229af14972f862486365ddd",
       "updated_at": "2026-10-18T12:45:14.497616+00:00"
+    },
+    "@kody-w/self_compact_agent": {
+      "status": "active",
+      "version": "1.0.0",
+      "quality_tier": "community",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "agents/@kody-w/self_compact_agent.py",
+      "sha256": "ad47db5e49459bdc85e90cf7a6a1fa7201061b358925ae5d7290b8c32a790c9e",
+      "latest_receipt": "rar_eb5d42a0247efc315074252174b82f9c5b8723d5266f98b20a8088743e6123aa",
+      "updated_at": "2026-10-24T03:59:45.976356+00:00"
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-10-19T00:52:13.982480+00:00"
+  "updated_at": "2026-10-24T03:59:45.976356+00:00"
 }
