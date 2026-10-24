@@ -1,0 +1,61 @@
+{
+  "agent": "@kody-w/thread_tracker_agent",
+  "agent_file": "thread_tracker_agent.py",
+  "agent_sha256": "dcf4d630cab0eaa9a6919e052cb14429416a1607f4e581a397a58430c7f8ad98",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ThreadTrackerAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Routes remarks into durable local topic threads, lists open work, and parks or closes threads without deleting their history.",
+    "display_name": "Thread Tracker",
+    "name": "@kody-w/thread_tracker_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "threads",
+      "notes",
+      "routing",
+      "append-only",
+      "offline"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "ThreadTracker",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "enum": [
+          "place",
+          "open",
+          "list",
+          "topics",
+          "close",
+          "park",
+          "show"
+        ],
+        "type": "string"
+      },
+      "reason": {
+        "type": "string"
+      },
+      "text": {
+        "type": "string"
+      },
+      "thread": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}
