@@ -1,0 +1,899 @@
+{
+  "schema": "rar-downloads/1.0",
+  "repo": "kody-w/RAR",
+  "source": "github release asset download_count (server-side, anonymous)",
+  "note": "A floor, not a total: raw.githubusercontent.com fetches are not counted. Report as 'release downloads', never 'installs'.",
+  "agents": {
+    "@bill/neuron_agent": {
+      "downloads": 0,
+      "asset": "rar_bill_neuron_agent.py"
+    },
+    "@borg/borg_agent": {
+      "downloads": 0,
+      "asset": "rar_borg_borg_agent.py"
+    },
+    "@cat-agent-skills/accessibility_pass": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_accessibility_pass_agent.py"
+    },
+    "@cat-agent-skills/acroform_writer": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_acroform_writer_agent.py"
+    },
+    "@cat-agent-skills/action_items_todo": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_action_items_todo_agent.py"
+    },
+    "@cat-agent-skills/agent_evaluation_designer": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_agent_evaluation_designer_agent.py"
+    },
+    "@cat-agent-skills/agent_harness_explorer": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_agent_harness_explorer_agent.py"
+    },
+    "@cat-agent-skills/agent_performance_triage": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_agent_performance_triage_agent.py"
+    },
+    "@cat-agent-skills/agent_red_team": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_agent_red_team_agent.py"
+    },
+    "@cat-agent-skills/ai_demo_assistant": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_ai_demo_assistant_agent.py"
+    },
+    "@cat-agent-skills/ai_first_process_redesign": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_ai_first_process_redesign_agent.py"
+    },
+    "@cat-agent-skills/ai_usecase_assessment": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_ai_usecase_assessment_agent.py"
+    },
+    "@cat-agent-skills/anonymised_case_study_writer": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_anonymised_case_study_writer_agent.py"
+    },
+    "@cat-agent-skills/awaiting_reply": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_awaiting_reply_agent.py"
+    },
+    "@cat-agent-skills/b2b_outreach_suite": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_b2b_outreach_suite_agent.py"
+    },
+    "@cat-agent-skills/blog_content_auditor": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_blog_content_auditor_agent.py"
+    },
+    "@cat-agent-skills/blog_post_structure_pass": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_blog_post_structure_pass_agent.py"
+    },
+    "@cat-agent-skills/booth_loop_video": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_booth_loop_video_agent.py"
+    },
+    "@cat-agent-skills/brand_template_enforcer": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_brand_template_enforcer_agent.py"
+    },
+    "@cat-agent-skills/brand_voice_pass": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_brand_voice_pass_agent.py"
+    },
+    "@cat-agent-skills/breathing_room": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_breathing_room_agent.py"
+    },
+    "@cat-agent-skills/browser_uat_analyst": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_browser_uat_analyst_agent.py"
+    },
+    "@cat-agent-skills/business_os": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_business_os_agent.py"
+    },
+    "@cat-agent-skills/call_for_speakers_digest": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_call_for_speakers_digest_agent.py"
+    },
+    "@cat-agent-skills/campaign_deck_builder": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_campaign_deck_builder_agent.py"
+    },
+    "@cat-agent-skills/chart_builder": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_chart_builder_agent.py"
+    },
+    "@cat-agent-skills/classic_text_adventure": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_classic_text_adventure_agent.py"
+    },
+    "@cat-agent-skills/clipchamp_video": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_clipchamp_video_agent.py"
+    },
+    "@cat-agent-skills/clt_hr_assistant": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_clt_hr_assistant_agent.py"
+    },
+    "@cat-agent-skills/commenting_content": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_commenting_content_agent.py"
+    },
+    "@cat-agent-skills/competitive_battlecard_builder": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_competitive_battlecard_builder_agent.py"
+    },
+    "@cat-agent-skills/conditional_chat_reminder": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_conditional_chat_reminder_agent.py"
+    },
+    "@cat-agent-skills/conference_session_abstract_pack": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_conference_session_abstract_pack_agent.py"
+    },
+    "@cat-agent-skills/content_quality_auditor": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_content_quality_auditor_agent.py"
+    },
+    "@cat-agent-skills/copilot_agent_advisor": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_copilot_agent_advisor_agent.py"
+    },
+    "@cat-agent-skills/copilot_agents_news_scout": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_copilot_agents_news_scout_agent.py"
+    },
+    "@cat-agent-skills/copilot_studio_agent_test": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_copilot_studio_agent_test_agent.py"
+    },
+    "@cat-agent-skills/copilot_studio_harness_picker": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_copilot_studio_harness_picker_agent.py"
+    },
+    "@cat-agent-skills/copilot_studio_knowledge_readiness": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_copilot_studio_knowledge_readiness_agent.py"
+    },
+    "@cat-agent-skills/copilot_studio_test_planner": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_copilot_studio_test_planner_agent.py"
+    },
+    "@cat-agent-skills/copilot_studio_topic_blueprint": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_copilot_studio_topic_blueprint_agent.py"
+    },
+    "@cat-agent-skills/cowork_use_case_one_pager": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_cowork_use_case_one_pager_agent.py"
+    },
+    "@cat-agent-skills/doc_format_converter": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_doc_format_converter_agent.py"
+    },
+    "@cat-agent-skills/enterprise_agent_design_authority": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_enterprise_agent_design_authority_agent.py"
+    },
+    "@cat-agent-skills/eu_greenwashing_analysis": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_eu_greenwashing_analysis_agent.py"
+    },
+    "@cat-agent-skills/exam_prep_learning_plan_builder": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_exam_prep_learning_plan_builder_agent.py"
+    },
+    "@cat-agent-skills/explainer_video": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_explainer_video_agent.py"
+    },
+    "@cat-agent-skills/gantt_chart_generator": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_gantt_chart_generator_agent.py"
+    },
+    "@cat-agent-skills/generating_podcast_script": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_generating_podcast_script_agent.py"
+    },
+    "@cat-agent-skills/global_greenwashing_claim_auditor": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_global_greenwashing_claim_auditor_agent.py"
+    },
+    "@cat-agent-skills/grab_my_files": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_grab_my_files_agent.py"
+    },
+    "@cat-agent-skills/holiday_recap": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_holiday_recap_agent.py"
+    },
+    "@cat-agent-skills/idea_refiner": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_idea_refiner_agent.py"
+    },
+    "@cat-agent-skills/institutional_knowledge": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_institutional_knowledge_agent.py"
+    },
+    "@cat-agent-skills/iterative_file_editing": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_iterative_file_editing_agent.py"
+    },
+    "@cat-agent-skills/knowledge_corpus_curator": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_knowledge_corpus_curator_agent.py"
+    },
+    "@cat-agent-skills/knowledge_source_router": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_knowledge_source_router_agent.py"
+    },
+    "@cat-agent-skills/lab_column_mapper": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_lab_column_mapper_agent.py"
+    },
+    "@cat-agent-skills/linkedin_content_system": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_linkedin_content_system_agent.py"
+    },
+    "@cat-agent-skills/linkedin_content_writer": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_linkedin_content_writer_agent.py"
+    },
+    "@cat-agent-skills/lookup_dataverse_table": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_lookup_dataverse_table_agent.py"
+    },
+    "@cat-agent-skills/mct_excellence_iq": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_mct_excellence_iq_agent.py"
+    },
+    "@cat-agent-skills/meeting_analyzer": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_meeting_analyzer_agent.py"
+    },
+    "@cat-agent-skills/microsoft_ai_platform_advisor": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_microsoft_ai_platform_advisor_agent.py"
+    },
+    "@cat-agent-skills/monte_carlo_analysis": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_monte_carlo_analysis_agent.py"
+    },
+    "@cat-agent-skills/own_voice_builder": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_own_voice_builder_agent.py"
+    },
+    "@cat-agent-skills/pattern_radar": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_pattern_radar_agent.py"
+    },
+    "@cat-agent-skills/pattern_radar_automation": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_pattern_radar_automation_agent.py"
+    },
+    "@cat-agent-skills/pdf_table_data_conversion": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_pdf_table_data_conversion_agent.py"
+    },
+    "@cat-agent-skills/persona_reaction_panel": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_persona_reaction_panel_agent.py"
+    },
+    "@cat-agent-skills/phi_deidentifier": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_phi_deidentifier_agent.py"
+    },
+    "@cat-agent-skills/pov_line_generator": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_pov_line_generator_agent.py"
+    },
+    "@cat-agent-skills/power_automate_desktop_assessment": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_power_automate_desktop_assessment_agent.py"
+    },
+    "@cat-agent-skills/power_automate_documentation": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_power_automate_documentation_agent.py"
+    },
+    "@cat-agent-skills/power_bi_model_review": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_power_bi_model_review_agent.py"
+    },
+    "@cat-agent-skills/powerpoint_deck_designer": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_powerpoint_deck_designer_agent.py"
+    },
+    "@cat-agent-skills/presentation_talk_track_builder": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_presentation_talk_track_builder_agent.py"
+    },
+    "@cat-agent-skills/process_sop_architect": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_process_sop_architect_agent.py"
+    },
+    "@cat-agent-skills/redlining_content": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_redlining_content_agent.py"
+    },
+    "@cat-agent-skills/regulation_monitor": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_regulation_monitor_agent.py"
+    },
+    "@cat-agent-skills/rich_html_presentation": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_rich_html_presentation_agent.py"
+    },
+    "@cat-agent-skills/route_map_visualizer": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_route_map_visualizer_agent.py"
+    },
+    "@cat-agent-skills/scrollytelling_data": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_scrollytelling_data_agent.py"
+    },
+    "@cat-agent-skills/sharepoint_list_formatter": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_sharepoint_list_formatter_agent.py"
+    },
+    "@cat-agent-skills/sharepoint_list_insight_report_generator": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_sharepoint_list_insight_report_generator_agent.py"
+    },
+    "@cat-agent-skills/skill_authoring_coach": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_skill_authoring_coach_agent.py"
+    },
+    "@cat-agent-skills/spend_more_time_with_friends_and_family": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_spend_more_time_with_friends_and_family_agent.py"
+    },
+    "@cat-agent-skills/stoic_negotiator": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_stoic_negotiator_agent.py"
+    },
+    "@cat-agent-skills/style_analyzer": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_style_analyzer_agent.py"
+    },
+    "@cat-agent-skills/tool_tracer": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_tool_tracer_agent.py"
+    },
+    "@cat-agent-skills/travel_cost_estimator": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_travel_cost_estimator_agent.py"
+    },
+    "@cat-agent-skills/vacation_urgent_forwarder": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_vacation_urgent_forwarder_agent.py"
+    },
+    "@cat-agent-skills/vendor_contract_risk_review": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_vendor_contract_risk_review_agent.py"
+    },
+    "@cat-agent-skills/wcag_power_platform": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_wcag_power_platform_agent.py"
+    },
+    "@cat-agent-skills/what_to_use_when": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_what_to_use_when_agent.py"
+    },
+    "@cat-agent-skills/whiteboard_to_infographic": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_whiteboard_to_infographic_agent.py"
+    },
+    "@cat-agent-skills/wikipedia_human_style_writing": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_wikipedia_human_style_writing_agent.py"
+    },
+    "@cat-agent-skills/work_brief": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_work_brief_agent.py"
+    },
+    "@cat-agent-skills/work_iq_signalboard": {
+      "downloads": 0,
+      "asset": "rar_cat_agent_skills_work_iq_signalboard_agent.py"
+    },
+    "@discreetRappers/agent_generator_agent": {
+      "downloads": 0,
+      "asset": "rar_discreetrappers_agent_generator_agent.py"
+    },
+    "@discreetRappers/agent_transpiler_agent": {
+      "downloads": 0,
+      "asset": "rar_discreetrappers_agent_transpiler_agent.py"
+    },
+    "@discreetRappers/architecture_diagram_agent": {
+      "downloads": 0,
+      "asset": "rar_discreetrappers_architecture_diagram_agent.py"
+    },
+    "@discreetRappers/copilot_studio_transpiler_agent": {
+      "downloads": 0,
+      "asset": "rar_discreetrappers_copilot_studio_transpiler_agent.py"
+    },
+    "@discreetRappers/demo_script_generator_agent": {
+      "downloads": 0,
+      "asset": "rar_discreetrappers_demo_script_generator_agent.py"
+    },
+    "@discreetRappers/dynamics_crud_agent": {
+      "downloads": 0,
+      "asset": "rar_discreetrappers_dynamics_crud_agent.py"
+    },
+    "@discreetRappers/email_drafting_agent": {
+      "downloads": 0,
+      "asset": "rar_discreetrappers_email_drafting_agent.py"
+    },
+    "@discreetRappers/powerpoint_generator_agent": {
+      "downloads": 0,
+      "asset": "rar_discreetrappers_powerpoint_generator_agent.py"
+    },
+    "@discreetRappers/project_tracker_agent": {
+      "downloads": 0,
+      "asset": "rar_discreetrappers_project_tracker_agent.py"
+    },
+    "@discreetRappers/rapp_pipeline_agent": {
+      "downloads": 0,
+      "asset": "rar_discreetrappers_rapp_pipeline_agent.py"
+    },
+    "@discreetRappers/sales_assistant_agent": {
+      "downloads": 0,
+      "asset": "rar_discreetrappers_sales_assistant_agent.py"
+    },
+    "@discreetRappers/scripted_demo_agent": {
+      "downloads": 0,
+      "asset": "rar_discreetrappers_scripted_demo_agent.py"
+    },
+    "@discreetRappers/sharepoint_contract_analysis_agent": {
+      "downloads": 0,
+      "asset": "rar_discreetrappers_sharepoint_contract_analysis_agent.py"
+    },
+    "@howardh/cardsmith_agent": {
+      "downloads": 0,
+      "asset": "rar_howardh_cardsmith_agent.py"
+    },
+    "@howardh/chief_of_staff_agent": {
+      "downloads": 0,
+      "asset": "rar_howardh_chief_of_staff_agent.py"
+    },
+    "@howardh/markdown_to_slides_agent": {
+      "downloads": 0,
+      "asset": "rar_howardh_markdown_to_slides_agent.py"
+    },
+    "@howardh/prompt_to_video_agent": {
+      "downloads": 0,
+      "asset": "rar_howardh_prompt_to_video_agent.py"
+    },
+    "@howardh/recon_agent": {
+      "downloads": 0,
+      "asset": "rar_howardh_recon_agent.py"
+    },
+    "@howardh/training_quest_agent": {
+      "downloads": 0,
+      "asset": "rar_howardh_training_quest_agent.py"
+    },
+    "@howardh/tuftelove_agent": {
+      "downloads": 0,
+      "asset": "rar_howardh_tuftelove_agent.py"
+    },
+    "@howardh/vaultmind_agent": {
+      "downloads": 0,
+      "asset": "rar_howardh_vaultmind_agent.py"
+    },
+    "@kody-w/agent_team_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_agent_team_agent.py"
+    },
+    "@kody-w/agent_workbench": {
+      "downloads": 0,
+      "asset": "rar_kody_w_agent_workbench_agent.py"
+    },
+    "@kody-w/arena_compete_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_arena_compete_agent.py"
+    },
+    "@kody-w/art_generator_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_art_generator_agent.py"
+    },
+    "@kody-w/bakeoff_factory": {
+      "downloads": 0,
+      "asset": "rar_kody_w_bakeoff_factory_agent.py"
+    },
+    "@kody-w/bond_rhythm_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_bond_rhythm_agent.py"
+    },
+    "@kody-w/buzzsaw": {
+      "downloads": 0,
+      "asset": "rar_kody_w_buzzsaw_agent.py"
+    },
+    "@kody-w/chain_composer_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_chain_composer_agent.py"
+    },
+    "@kody-w/commons_life_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_commons_life_agent.py"
+    },
+    "@kody-w/commons_show_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_commons_show_agent.py"
+    },
+    "@kody-w/connected_solution_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_connected_solution_agent.py"
+    },
+    "@kody-w/context_memory_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_context_memory_agent.py"
+    },
+    "@kody-w/copilot_studio_deploy_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_copilot_studio_deploy_agent.py"
+    },
+    "@kody-w/copilot_studio_forge_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_copilot_studio_forge_agent.py"
+    },
+    "@kody-w/copilot_studio_parity_deploy": {
+      "downloads": 0,
+      "asset": "rar_kody_w_copilot_studio_parity_deploy_agent.py"
+    },
+    "@kody-w/copilot_studio_probe_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_copilot_studio_probe_agent.py"
+    },
+    "@kody-w/deal_desk_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_deal_desk_agent.py"
+    },
+    "@kody-w/double_jump_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_double_jump_agent.py"
+    },
+    "@kody-w/education_shorts_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_education_shorts_agent.py"
+    },
+    "@kody-w/estate_factory": {
+      "downloads": 0,
+      "asset": "rar_kody_w_estate_factory_agent.py"
+    },
+    "@kody-w/ez_sharpen_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_ez_sharpen_agent.py"
+    },
+    "@kody-w/factory": {
+      "downloads": 0,
+      "asset": "rar_kody_w_factory_agent.py"
+    },
+    "@kody-w/first_hour_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_first_hour_agent.py"
+    },
+    "@kody-w/flight_recorder": {
+      "downloads": 0,
+      "asset": "rar_kody_w_flight_recorder_agent.py"
+    },
+    "@kody-w/full_rapp_leviathan": {
+      "downloads": 0,
+      "asset": "rar_kody_w_full_rapp_leviathan_agent.py"
+    },
+    "@kody-w/git_warehouse_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_git_warehouse_agent.py"
+    },
+    "@kody-w/github_agent_library_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_github_agent_library_agent.py"
+    },
+    "@kody-w/hello_world_agent": {
+      "downloads": 8,
+      "asset": "rar_kody_w_hello_world_agent.py"
+    },
+    "@kody-w/hologram_dogg": {
+      "downloads": 0,
+      "asset": "rar_kody_w_hologram_dogg_agent.py"
+    },
+    "@kody-w/host_compat_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_host_compat_agent.py"
+    },
+    "@kody-w/install_rappter_distro_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_install_rappter_distro_agent.py"
+    },
+    "@kody-w/kody2day_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_kody2day_agent.py"
+    },
+    "@kody-w/kody2day_studio_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_kody2day_studio_agent.py"
+    },
+    "@kody-w/launch_to_public_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_launch_to_public_agent.py"
+    },
+    "@kody-w/manage_memory_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_manage_memory_agent.py"
+    },
+    "@kody-w/matrix_arena_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_matrix_arena_agent.py"
+    },
+    "@kody-w/microsoft_deck_studio_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_microsoft_deck_studio_agent.py"
+    },
+    "@kody-w/neuron_swarm": {
+      "downloads": 0,
+      "asset": "rar_kody_w_neuron_swarm_agent.py"
+    },
+    "@kody-w/parallel_dimensions_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_parallel_dimensions_agent.py"
+    },
+    "@kody-w/perpetual_loop_factory": {
+      "downloads": 0,
+      "asset": "rar_kody_w_perpetual_loop_factory_agent.py"
+    },
+    "@kody-w/plant_seed_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_plant_seed_agent.py"
+    },
+    "@kody-w/play_youtube_video_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_play_youtube_video_agent.py"
+    },
+    "@kody-w/power_apps_code_app_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_power_apps_code_app_agent.py"
+    },
+    "@kody-w/predictive_asset_maintenance_intelligence": {
+      "downloads": 0,
+      "asset": "rar_kody_w_predictive_asset_maintenance_intelligence_agent.py"
+    },
+    "@kody-w/project_tracker_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_project_tracker_agent.py"
+    },
+    "@kody-w/prompt_extractor": {
+      "downloads": 0,
+      "asset": "rar_kody_w_prompt_extractor_agent.py"
+    },
+    "@kody-w/prototype_lock_factory_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_prototype_lock_factory_agent.py"
+    },
+    "@kody-w/rapp_leviathan_factory": {
+      "downloads": 0,
+      "asset": "rar_kody_w_rapp_leviathan_factory_agent.py"
+    },
+    "@kody-w/rapp_projects": {
+      "downloads": 0,
+      "asset": "rar_kody_w_rapp_projects_agent.py"
+    },
+    "@kody-w/rapp_sdk_builder": {
+      "downloads": 0,
+      "asset": "rar_kody_w_rapp_sdk_builder_agent.py"
+    },
+    "@kody-w/rapp_sentinel_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_rapp_sentinel_agent.py"
+    },
+    "@kody-w/rapp_skill_bridge_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_rapp_skill_bridge_agent.py"
+    },
+    "@kody-w/rapp_x_notary_canary_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_rapp_x_notary_canary_agent.py"
+    },
+    "@kody-w/rappter_engine_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_rappter_engine_agent.py"
+    },
+    "@kody-w/rappterbook_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_rappterbook_agent.py"
+    },
+    "@kody-w/rappterpedia_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_rappterpedia_agent.py"
+    },
+    "@kody-w/rar_installer_troubleshooter_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_rar_installer_troubleshooter_agent.py"
+    },
+    "@kody-w/rar_remote_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_rar_remote_agent.py"
+    },
+    "@kody-w/recon_deck_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_recon_deck_agent.py"
+    },
+    "@kody-w/second_life_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_second_life_agent.py"
+    },
+    "@kody-w/self_compact_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_self_compact_agent.py"
+    },
+    "@kody-w/skill_toaster_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_skill_toaster_agent.py"
+    },
+    "@kody-w/thread_tracker_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_thread_tracker_agent.py"
+    },
+    "@kody-w/transcript2prototype": {
+      "downloads": 0,
+      "asset": "rar_kody_w_transcript2prototype_agent.py"
+    },
+    "@kody-w/twin_egg_hatcher": {
+      "downloads": 0,
+      "asset": "rar_kody_w_twin_egg_hatcher_agent.py"
+    },
+    "@kody-w/twin_me": {
+      "downloads": 0,
+      "asset": "rar_kody_w_twin_me_agent.py"
+    },
+    "@kody-w/vibe_coding_loop": {
+      "downloads": 0,
+      "asset": "rar_kody_w_vibe_coding_loop_agent.py"
+    },
+    "@kody-w/windows_vm_install_lab_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_windows_vm_install_lab_agent.py"
+    },
+    "@kody-w/workiq": {
+      "downloads": 0,
+      "asset": "rar_kody_w_workiq_agent.py"
+    },
+    "@kody-w/wp_publish_agent": {
+      "downloads": 0,
+      "asset": "rar_kody_w_wp_publish_agent.py"
+    },
+    "@rapp/basic_agent": {
+      "downloads": 0,
+      "asset": "rar_rapp_basic_agent.py"
+    },
+    "@rapp/commons_post": {
+      "downloads": 0,
+      "asset": "rar_rapp_commons_post_agent.py"
+    },
+    "@rapp/drift": {
+      "downloads": 0,
+      "asset": "rar_rapp_drift_agent.py"
+    },
+    "@rapp/drift_watcher": {
+      "downloads": 0,
+      "asset": "rar_rapp_drift_watcher_agent.py"
+    },
+    "@rapp/egg_hatcher": {
+      "downloads": 0,
+      "asset": "rar_rapp_egg_hatcher_agent.py"
+    },
+    "@rapp/estate_outbound": {
+      "downloads": 0,
+      "asset": "rar_rapp_estate_outbound_agent.py"
+    },
+    "@rapp/exec_brief_agent": {
+      "downloads": 0,
+      "asset": "rar_rapp_exec_brief_agent.py"
+    },
+    "@rapp/fleet_commander": {
+      "downloads": 0,
+      "asset": "rar_rapp_fleet_commander_agent.py"
+    },
+    "@rapp/forge_provenance_agent": {
+      "downloads": 0,
+      "asset": "rar_rapp_forge_provenance_agent.py"
+    },
+    "@rapp/hacker_news": {
+      "downloads": 0,
+      "asset": "rar_rapp_hacker_news_agent.py"
+    },
+    "@rapp/learn_new": {
+      "downloads": 0,
+      "asset": "rar_rapp_learn_new_agent.py"
+    },
+    "@rapp/moment_factory_agent": {
+      "downloads": 0,
+      "asset": "rar_rapp_moment_factory_agent.py"
+    },
+    "@rapp/ping_agent": {
+      "downloads": 0,
+      "asset": "rar_rapp_ping_agent.py"
+    },
+    "@rapp/pitch_deck_agent": {
+      "downloads": 0,
+      "asset": "rar_rapp_pitch_deck_agent.py"
+    },
+    "@rapp/rapp": {
+      "downloads": 0,
+      "asset": "rar_rapp_rapp_agent.py"
+    },
+    "@rapp/rapp_dogg_agent": {
+      "downloads": 0,
+      "asset": "rar_rapp_rapp_dogg_agent.py"
+    },
+    "@rapp/rapp_publish_agent": {
+      "downloads": 0,
+      "asset": "rar_rapp_rapp_publish_agent.py"
+    },
+    "@rapp/rapplication_agent": {
+      "downloads": 0,
+      "asset": "rar_rapp_rapplication_agent.py"
+    },
+    "@rapp/rar_steward": {
+      "downloads": 0,
+      "asset": "rar_rapp_rar_steward_agent.py"
+    },
+    "@rapp/store_navigator_agent": {
+      "downloads": 0,
+      "asset": "rar_rapp_store_navigator_agent.py"
+    },
+    "@rapp/swarm_factory_agent": {
+      "downloads": 0,
+      "asset": "rar_rapp_swarm_factory_agent.py"
+    },
+    "@rapp/twin_agent": {
+      "downloads": 0,
+      "asset": "rar_rapp_twin_agent.py"
+    },
+    "@rapp/vibe_builder_agent": {
+      "downloads": 0,
+      "asset": "rar_rapp_vibe_builder_agent.py"
+    },
+    "@rapter/hive_census_agent": {
+      "downloads": 0,
+      "asset": "rar_rapter_hive_census_agent.py"
+    },
+    "@rapter/hive_shape_agent": {
+      "downloads": 0,
+      "asset": "rar_rapter_hive_shape_agent.py"
+    },
+    "@rapter/rapp_dogg_agent": {
+      "downloads": 0,
+      "asset": "rar_rapter_rapp_dogg_agent.py"
+    },
+    "@rarbookworld/bookfactory": {
+      "downloads": 0,
+      "asset": "rar_rarbookworld_bookfactory_agent.py"
+    },
+    "@rarbookworld/momentfactory": {
+      "downloads": 0,
+      "asset": "rar_rarbookworld_momentfactory_agent.py"
+    },
+    "@wildhaven/bellows_agent": {
+      "downloads": 0,
+      "asset": "rar_wildhaven_bellows_agent.py"
+    },
+    "@wildhaven/ceo_agent": {
+      "downloads": 0,
+      "asset": "rar_wildhaven_ceo_agent.py"
+    },
+    "@wildhaven/penumbra_agent": {
+      "downloads": 0,
+      "asset": "rar_wildhaven_penumbra_agent.py"
+    }
+  },
+  "totals": {
+    "downloads": 8,
+    "attributed_downloads": 8,
+    "unattributed_downloads": 0,
+    "assets_published": 222,
+    "agents_with_downloads": 1
+  }
+}

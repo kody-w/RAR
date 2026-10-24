@@ -31,7 +31,7 @@
       "license_url": "",
       "license_verified": true,
       "license_note": "Public Microsoft repository with an MIT LICENSE file at the root; indexed as catalog metadata only, bodies stay upstream.",
-      "item_count": 86,
+      "item_count": 90,
       "source_downloads": 0
     }
   ],
@@ -470,6 +470,39 @@
       "upstream_sha256": "f263fce15e46a25788db493139e6928c41815e8d8187f53335e71e705365b57d"
     },
     {
+      "ref": "@aibast-library/campaign_delivery_optimizer",
+      "source_id": "aibast-agents-library",
+      "source_slug": "campaign-delivery-optimizer",
+      "name": "Campaign Delivery Optimizer Agent",
+      "description": "Help ad sales and ad operations teams keep advertiser campaigns on plan from a synthetic weekly delivery snapshot: each campaign's delivered reach against plan with the gap explained, the placements with extra reach available this week, and the drafted recommendation for the sales lead to approve. The agent never books inventory, changes a campaign or placement, or shares anything with an adverti\u2026",
+      "kind": "agent",
+      "tags": [
+        "media",
+        "advertising",
+        "ad-sales",
+        "ad-operations",
+        "campaign-delivery"
+      ],
+      "platforms": [
+        "rapp-brainstem"
+      ],
+      "author": "AIBAST",
+      "author_github": null,
+      "version": "1.0.0",
+      "created_at": null,
+      "has_bundle": false,
+      "url": "https://github.com/microsoft/aibast-agents-library/blob/main/agents/@aibast-agents-library/telecom_media_gaming_stacks/campaign_delivery_optimizer_stack/campaign_delivery_optimizer_agent.py",
+      "source_signal": {
+        "quality_tier": "verified",
+        "synthetic_data": true
+      },
+      "category": "telecom_media_gaming",
+      "stack": "campaign_delivery_optimizer",
+      "vertical": "telecom_media_gaming",
+      "upstream_path": "agents/@aibast-agents-library/telecom_media_gaming_stacks/campaign_delivery_optimizer_stack/campaign_delivery_optimizer_agent.py",
+      "upstream_sha256": "817dea94625d6a15dda95fc418d3041f058c3ae12de0d406af7fa50878956c67"
+    },
+    {
       "ref": "@aibast-library/care_gap_closure",
       "source_id": "aibast-agents-library",
       "source_slug": "care-gap-closure",
@@ -668,6 +701,39 @@
       "vertical": "b2b_sales",
       "upstream_path": "agents/@aibast-agents-library/b2b_sales_stacks/account_intelligence_stack/competitive_intelligence_agent.py",
       "upstream_sha256": "8848b9a389d6a017a30b98dbd62a2713e6086b41e6a25b7b2b91e77ff0420556"
+    },
+    {
+      "ref": "@aibast-library/content_launch_clearance",
+      "source_id": "aibast-agents-library",
+      "source_slug": "content-launch-clearance",
+      "name": "Content Launch Clearance Agent",
+      "description": "Help programming, distribution and rights teams confirm where, when and on which platform a title can launch from a synthetic rights snapshot: the launch clearance by territory and platform with the exact contract clause cited, the distribution window and any holdback that blocks an earlier date, and whether the request is ready for rights-team approval. The agent never schedules or publishes a t\u2026",
+      "kind": "agent",
+      "tags": [
+        "media",
+        "streaming",
+        "rights-and-clearances",
+        "content-distribution",
+        "launch-planning"
+      ],
+      "platforms": [
+        "rapp-brainstem"
+      ],
+      "author": "AIBAST",
+      "author_github": null,
+      "version": "1.0.0",
+      "created_at": null,
+      "has_bundle": false,
+      "url": "https://github.com/microsoft/aibast-agents-library/blob/main/agents/@aibast-agents-library/telecom_media_gaming_stacks/content_launch_clearance_stack/content_launch_clearance_agent.py",
+      "source_signal": {
+        "quality_tier": "verified",
+        "synthetic_data": true
+      },
+      "category": "telecom_media_gaming",
+      "stack": "content_launch_clearance",
+      "vertical": "telecom_media_gaming",
+      "upstream_path": "agents/@aibast-agents-library/telecom_media_gaming_stacks/content_launch_clearance_stack/content_launch_clearance_agent.py",
+      "upstream_sha256": "04793d0bb0e7c6e8f6244bacfd81ae972391e34db6dba5d060ae027da1f36f37"
     },
     {
       "ref": "@aibast-library/contract_risk_review",
@@ -1208,6 +1274,39 @@
       "upstream_sha256": "79bee42d7de48881912c677a0bb842299343c9cfa0af19ba63f8d7727ff06e13"
     },
     {
+      "ref": "@aibast-library/first_time_fix",
+      "source_id": "aibast-agents-library",
+      "source_slug": "first-time-fix",
+      "name": "First-Time Fix Agent",
+      "description": "Help contact center and field service agents resolve a customer's connection issue on the first call from a synthetic broadband snapshot: the service status with the guided connection fix, local network work that could be affecting the service, previous visit outcomes with technician notes, and the recommended technician with the job preparation when a visit is needed. The agent never books, chan\u2026",
+      "kind": "agent",
+      "tags": [
+        "telecommunications",
+        "broadband",
+        "contact-center",
+        "field-service",
+        "first-call-resolution"
+      ],
+      "platforms": [
+        "rapp-brainstem"
+      ],
+      "author": "AIBAST",
+      "author_github": null,
+      "version": "1.0.0",
+      "created_at": null,
+      "has_bundle": false,
+      "url": "https://github.com/microsoft/aibast-agents-library/blob/main/agents/@aibast-agents-library/telecom_media_gaming_stacks/first_time_fix_stack/first_time_fix_agent.py",
+      "source_signal": {
+        "quality_tier": "verified",
+        "synthetic_data": true
+      },
+      "category": "telecom_media_gaming",
+      "stack": "first_time_fix",
+      "vertical": "telecom_media_gaming",
+      "upstream_path": "agents/@aibast-agents-library/telecom_media_gaming_stacks/first_time_fix_stack/first_time_fix_agent.py",
+      "upstream_sha256": "35c333da8a89eb74aaaebedee0d92840329b02cb0b7e6d31cd29832f26ee86c4"
+    },
+    {
       "ref": "@aibast-library/fraud_detection_alert",
       "source_id": "aibast-agents-library",
       "source_slug": "fraud-detection-alert",
@@ -1476,6 +1575,39 @@
       "vertical": "software_digital_products",
       "upstream_path": "agents/@aibast-agents-library/software_dp_stacks/license_renewal_expansion_stack/license_renewal_expansion_agent.py",
       "upstream_sha256": "fd97d48a5ec515d3308e1d0358aa822a3559a12609832fd072992666c59c80d6"
+    },
+    {
+      "ref": "@aibast-library/live_event_launch_planner",
+      "source_id": "aibast-agents-library",
+      "source_slug": "live-event-launch-planner",
+      "name": "Live Event Launch Planner Agent",
+      "description": "Help live operations, community and marketing teams launch a seasonal in-game event from one plan built on a synthetic snapshot: the launch timeline with every milestone to launch day, the readiness checklist across teams with owners and status, the player announcement with its approval and publishing permission, and a summary of late, missing and blocked work. The agent never publishes an announ\u2026",
+      "kind": "agent",
+      "tags": [
+        "gaming",
+        "live-operations",
+        "community",
+        "event-launch",
+        "readiness"
+      ],
+      "platforms": [
+        "rapp-brainstem"
+      ],
+      "author": "AIBAST",
+      "author_github": null,
+      "version": "1.0.0",
+      "created_at": null,
+      "has_bundle": false,
+      "url": "https://github.com/microsoft/aibast-agents-library/blob/main/agents/@aibast-agents-library/telecom_media_gaming_stacks/live_event_launch_planner_stack/live_event_launch_planner_agent.py",
+      "source_signal": {
+        "quality_tier": "verified",
+        "synthetic_data": true
+      },
+      "category": "telecom_media_gaming",
+      "stack": "live_event_launch_planner",
+      "vertical": "telecom_media_gaming",
+      "upstream_path": "agents/@aibast-agents-library/telecom_media_gaming_stacks/live_event_launch_planner_stack/live_event_launch_planner_agent.py",
+      "upstream_sha256": "9503f99b9605e77a3b07af943712d434c67b085b0e48d858c2ff7b5424c2a50b"
     },
     {
       "ref": "@aibast-library/loan_origination_assistant",
@@ -6083,7 +6215,7 @@
   ],
   "totals": {
     "sources": 2,
-    "items": 195,
+    "items": 199,
     "source_downloads": 1258
   }
 }
