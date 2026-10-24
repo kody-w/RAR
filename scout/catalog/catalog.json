@@ -529,7 +529,7 @@
       ]
     },
     {
-      "bytes": 316344,
+      "bytes": 335246,
       "channel": "starter",
       "files": 7,
       "id": "starter",
@@ -549,7 +549,7 @@
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "3ab288bd5bfcd0e399ffce446d7ec70457479e199cfab05826c4083cb8e78bcd",
+          "sha256": "b1ef60a5a6ffd0aebd9af46e7c70bbcc69d60a0ab655df6a664eb6365783af31",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/starter/skills/rapp-skills/SKILL.md"
         },
         {
@@ -569,12 +569,12 @@
         },
         {
           "path": "rapp/agent.lock.json",
-          "sha256": "13385ded1012f973db021d9ff606bdf53d78f4592ccf66dab783b8994a1221fc",
+          "sha256": "43a00c598e1e8c1088f8e64bad87160f6010a3005dbae39f92f078cb20af2da4",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/starter/skills/rapp-skills/rapp/agent.lock.json"
         },
         {
           "path": "rapp_skill_agent.py",
-          "sha256": "1fa931266d8646ee3138d0c1bab1e742267a1951765b8ceeee0496a677bd6e4c",
+          "sha256": "061fca4300c75e3a5e50d9abbc6652990c2c91edeef7c6866301ae36473b6ea2",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/starter/skills/rapp-skills/rapp_skill_agent.py"
         },
         {
@@ -663,6 +663,7 @@
               "ensure",
               "chat",
               "install_sdk",
+              "install_agent",
               "bootstrap_callback",
               "prove",
               "protocol",
@@ -689,6 +690,10 @@
             ],
             "type": "string"
           },
+          "registry_url": {
+            "description": "For install_agent, an alternate registry.json URL or local path. Defaults to the public RAR registry.",
+            "type": "string"
+          },
           "session_id": {
             "description": "Prior Brainstem session ID. Omit on the first turn.",
             "type": "string"
@@ -713,11 +718,11 @@
       },
       "requires_env": [],
       "skill_name": "rapp-skills",
-      "skill_sha256": "3ab288bd5bfcd0e399ffce446d7ec70457479e199cfab05826c4083cb8e78bcd",
+      "skill_sha256": "b1ef60a5a6ffd0aebd9af46e7c70bbcc69d60a0ab655df6a664eb6365783af31",
       "source_commit": null,
       "source_kind": "foundation",
-      "source_sha256": "1fa931266d8646ee3138d0c1bab1e742267a1951765b8ceeee0496a677bd6e4c",
-      "version": "1.3.1"
+      "source_sha256": "061fca4300c75e3a5e50d9abbc6652990c2c91edeef7c6866301ae36473b6ea2",
+      "version": "1.3.2"
     },
     {
       "bundle": "rapplications-01",

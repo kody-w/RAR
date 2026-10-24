@@ -74,7 +74,7 @@ def load_rapp_skill_module():
 
 def test_rapp_skill_pins_the_current_conformant_sdk():
     module = load_rapp_skill_module()
-    assert module.__manifest__["version"] == "1.3.1"
+    assert module.__manifest__["version"] == "1.3.2"
     assert module.RAPP1_COMMIT == (
         "caf6ef276cafa92aa744499af90dc1a28559941a"
     )
@@ -835,3 +835,80 @@ def test_catalog_coverage_and_explicit_exclusions():
     )
     assert skipped
     assert all(item.get("reason") for item in CATALOG["skipped"])
+
+
+def test_install_agent_prefers_the_counted_release_asset_and_pins_the_sha(tmp_path, monkeypatch):
+    """A stranger's plugin can install one public RAR agent: release asset first (the only
+    download GitHub counts), raw main second, and nothing is written unless the bytes hash to
+    the registry's _sha256."""
+    module = load_rapp_skill_module()
+    agent = module.Agent() if hasattr(module, "Agent") else module.RappSkillAgent()
+    brainstem_dir = tmp_path / "brainstem"
+    agents_dir = brainstem_dir / "agents"
+    agents_dir.mkdir(parents=True)
+    source = b"class HelloWorldAgent:\n    pass\n"
+    digest = hashlib.sha256(source).hexdigest()
+    registry = {"agents": [{
+        "name": "@kody-w/hello_world_agent",
+        "version": "1.0.3",
+        "_sha256": digest,
+        "_install_filename": "rar_kody_w_hello_world_agent.py",
+        "_file": "agents/@kody-w/hello_world_agent.py",
+    }]}
+    registry_path = tmp_path / "registry.json"
+    registry_path.write_text(json.dumps(registry), encoding="utf-8")
+
+    monkeypatch.setattr(
+        agent,
+        "_health_payload",
+        lambda _kwargs: (
+            {"base_url": "http://localhost:7071", "timeout_seconds": 30, "secret": ""},
+            {"brainstem_dir": str(brainstem_dir), "agents": ["ContextMemory"]},
+        ),
+    )
+    monkeypatch.setattr(
+        module,
+        "_request_json",
+        lambda *_args, **_kwargs: {"brainstem_dir": str(brainstem_dir), "agents": ["ContextMemory", "HelloWorldAgent"]},
+    )
+    fetched = []
+
+    def fake_fetch(url, expected, _timeout=None):
+        fetched.append(url)
+        if url.startswith(module.RAR_RELEASE_DOWNLOAD_BASE) and fail_release:
+            raise module.BridgeRequestError("download-failed", "no release yet")
+        assert expected == digest
+        return source
+
+    monkeypatch.setattr(module, "_fetch_verified", fake_fetch)
+
+    # 1. the counted asset is used when it exists
+    fail_release = False
+    installed = json.loads(agent.perform(operation="install_agent", agent="@kody-w/hello_world_agent", registry_url=str(registry_path)))
+    assert installed["status"] == "ok", installed
+    assert installed["result"] == "installed"
+    assert installed["counted"] is True
+    assert installed["source"] == module.RAR_RELEASE_DOWNLOAD_BASE + "rar_kody_w_hello_world_agent.py"
+    assert installed["new_agents"] == ["HelloWorldAgent"]
+    assert (agents_dir / "rar_kody_w_hello_world_agent.py").read_bytes() == source
+
+    # 2. same bytes again: already installed, nothing fetched twice into a different file
+    again = json.loads(agent.perform(operation="install_agent", agent="hello_world_agent", registry_url=str(registry_path)))
+    assert again["status"] == "error" or again["result"] == "already-installed"
+
+    # 3. no release asset: raw main is the fallback, still sha-checked, and not counted
+    (agents_dir / "rar_kody_w_hello_world_agent.py").unlink()
+    fail_release = True
+    fallback = json.loads(agent.perform(operation="install_agent", agent="@kody-w/hello_world_agent", registry_url=str(registry_path)))
+    assert fallback["status"] == "ok", fallback
+    assert fallback["counted"] is False
+    assert fallback["source"] == module.RAR_RAW_BASE + "agents/@kody-w/hello_world_agent.py"
+
+    # 4. a local file that differs is never overwritten without force
+    (agents_dir / "rar_kody_w_hello_world_agent.py").write_text("mine\n", encoding="utf-8")
+    refused = json.loads(agent.perform(operation="install_agent", agent="@kody-w/hello_world_agent", registry_url=str(registry_path)))
+    assert refused["code"] == "existing-agent-differs"
+
+    # 5. an unknown name is a clean error, nothing written
+    missing = json.loads(agent.perform(operation="install_agent", agent="@nobody/nothing_agent", registry_url=str(registry_path)))
+    assert missing["code"] == "agent-not-in-registry"

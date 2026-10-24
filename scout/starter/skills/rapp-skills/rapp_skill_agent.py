@@ -111,7 +111,7 @@ except ImportError:
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/rapp_skill_agent",
-    "version": "1.3.1",
+    "version": "1.3.2",
     "display_name": "RAPP Skill",
     "description": (
         "Connects any SKILL-aware claw directly to a local or hosted RAPP "
@@ -193,6 +193,11 @@ RAR_SCOUT_CATALOG_URL = (
     "https://raw.githubusercontent.com/kody-w/RAR/main/"
     "scout/catalog/catalog.json"
 )
+RAR_REGISTRY_URL = "https://raw.githubusercontent.com/kody-w/RAR/main/registry.json"
+# Release assets are the only download GitHub counts for the registry; raw main is the
+# fallback when a release is missing or behind. Both are checked against the registry sha.
+RAR_RELEASE_DOWNLOAD_BASE = "https://github.com/kody-w/RAR/releases/latest/download/"
+RAR_RAW_BASE = "https://raw.githubusercontent.com/kody-w/RAR/main/"
 DEFAULT_BRAINSTEM_URL = "http://localhost:7071"
 DEFAULT_TIMEOUT_SECONDS = 30
 
@@ -636,6 +641,36 @@ def _load_marker(directory):
     return marker if marker.get("schema") == "rar-managed-skill/1.0" else None
 
 
+def _fetch_registry(url=None, timeout_seconds=None):
+    """The public RAR registry as a dict, from a URL or a local path."""
+    location = str(url or RAR_REGISTRY_URL)
+    if not location.startswith(("http://", "https://")):
+        return json.loads(Path(location).expanduser().read_text(encoding="utf-8"))
+    request = urllib.request.Request(location, headers={"User-Agent": "rapp-skill/1.0"})
+    try:
+        with urllib.request.urlopen(request, timeout=_timeout(timeout_seconds)) as response:
+            return json.loads(response.read().decode("utf-8"))
+    except urllib.error.URLError as error:
+        raise BridgeRequestError(
+            "registry-fetch-failed",
+            f"Could not fetch the RAR registry from {location}: {error.reason}",
+        ) from error
+
+
+def _registry_entry(registry, name):
+    """Find one agent by registry name; tolerate a missing or extra `_agent` suffix."""
+    wanted = str(name or "").strip()
+    candidates = {wanted}
+    if wanted.endswith("_agent"):
+        candidates.add(wanted[: -len("_agent")])
+    else:
+        candidates.add(wanted + "_agent")
+    for entry in registry.get("agents") or []:
+        if entry.get("name") in candidates:
+            return entry
+    return None
+
+
 def _installer_path(filename, timeout_seconds=None):
     metadata = RAPP_INSTALLERS[filename]
     bundled = Path(__file__).resolve().parent / "installer" / filename
@@ -874,6 +909,7 @@ class RappSkillAgent(BasicAgent):
                             "ensure",
                             "chat",
                             "install_sdk",
+                            "install_agent",
                             "bootstrap_callback",
                             "prove",
                             "protocol",
@@ -969,6 +1005,20 @@ class RappSkillAgent(BasicAgent):
                             "replace a differing callback agent."
                         ),
                     },
+                    "agent": {
+                        "type": "string",
+                        "description": (
+                            "For install_agent, the registry name, such as "
+                            "@kody-w/hello_world_agent."
+                        ),
+                    },
+                    "registry_url": {
+                        "type": "string",
+                        "description": (
+                            "For install_agent, an alternate registry.json URL or "
+                            "local path. Defaults to the public RAR registry."
+                        ),
+                    },
                     "install_sdk": {
                         "type": "boolean",
                         "description": (
@@ -1049,6 +1099,8 @@ class RappSkillAgent(BasicAgent):
                 return self._chat(kwargs)
             if operation == "install_sdk":
                 return self._install_sdk(kwargs)
+            if operation == "install_agent":
+                return self._install_agent(kwargs)
             if operation == "bootstrap_callback":
                 return self._bootstrap_callback(kwargs)
             if operation == "prove":
@@ -1462,6 +1514,139 @@ class RappSkillAgent(BasicAgent):
             "agent_visible": "RappSdkBuilder" in (refreshed.get("agents") or []),
             "hotload": "No restart required.",
             "source": RAPP_SDK_URL,
+        })
+
+    def _install_agent(self, kwargs):
+        """Install one public RAR agent into the loopback Brainstem, pinned to the registry's sha256.
+
+        The counted release asset is tried first, raw main second; either must hash to the
+        registry's `_sha256` or nothing is written. The kernel hot-loads `*_agent.py`, so no restart."""
+        name = str(kwargs.get("agent") or kwargs.get("name") or "").strip()
+        if not name:
+            return _json({
+                "status": "error",
+                "code": "missing-agent",
+                "message": "install_agent needs agent=<registry name>, such as @kody-w/hello_world_agent.",
+            })
+        connection, health = self._health_payload(kwargs)
+        if not _is_loopback(connection["base_url"]):
+            return _json({
+                "status": "error",
+                "code": "remote-install-unsupported",
+                "message": "install_agent writes only to a loopback Brainstem.",
+            })
+        brainstem_dir = health.get("brainstem_dir")
+        if not isinstance(brainstem_dir, str) or not brainstem_dir:
+            raise BridgeRequestError(
+                "missing-brainstem-dir",
+                "/health did not return brainstem_dir.",
+                payload=health,
+            )
+
+        registry = _fetch_registry(kwargs.get("registry_url"), kwargs.get("timeout_seconds"))
+        entry = _registry_entry(registry, name)
+        if entry is None:
+            return _json({
+                "status": "error",
+                "code": "agent-not-in-registry",
+                "message": f"{name} is not in the RAR registry.",
+            })
+        expected = str(entry.get("_sha256") or "")
+        filename = str(entry.get("_install_filename") or "")
+        repo_path = str(entry.get("_file") or "")
+        if not expected or not filename:
+            return _json({
+                "status": "error",
+                "code": "registry-entry-unpinned",
+                "message": f"{entry.get('name')} has no _sha256 or _install_filename in the registry; refusing to install unpinned.",
+            })
+
+        sources = [RAR_RELEASE_DOWNLOAD_BASE + filename]
+        if repo_path:
+            sources.append(RAR_RAW_BASE + repo_path)
+        agent_bytes = None
+        source = None
+        failures = []
+        for url in sources:
+            try:
+                agent_bytes = _fetch_verified(url, expected, kwargs.get("timeout_seconds"))
+                source = url
+                break
+            except BridgeRequestError as error:
+                failures.append({"url": url, "code": error.code, "message": str(error)})
+        if agent_bytes is None:
+            return _json({
+                "status": "error",
+                "code": "agent-fetch-failed",
+                "message": f"No source for {entry.get('name')} matched the registry sha256.",
+                "attempts": failures,
+            })
+
+        agents_dir = Path(brainstem_dir).expanduser().resolve() / "agents"
+        agents_dir.mkdir(parents=True, exist_ok=True)
+        destination = agents_dir / filename
+        backup = None
+        if destination.exists():
+            existing_sha = _sha256(destination.read_bytes().replace(b"\r\n", b"\n"))
+            if existing_sha == expected:
+                return _json({
+                    "status": "ok",
+                    "operation": "install_agent",
+                    "result": "already-installed",
+                    "agent": entry.get("name"),
+                    "version": entry.get("version"),
+                    "path": str(destination),
+                    "sha256": existing_sha,
+                })
+            if not bool(kwargs.get("force")):
+                return _json({
+                    "status": "error",
+                    "code": "existing-agent-differs",
+                    "message": (
+                        f"A different {filename} already exists. Re-run with force=true "
+                        "to back it up and install the registry version."
+                    ),
+                    "path": str(destination),
+                    "existing_sha256": existing_sha,
+                    "pinned_sha256": expected,
+                })
+            backup = destination.with_name(destination.name + f".bak-{int(time.time())}")
+            shutil.copy2(destination, backup)
+
+        fd, temporary_name = tempfile.mkstemp(prefix=".rapp-agent-", suffix=".tmp", dir=str(agents_dir))
+        try:
+            with os.fdopen(fd, "wb") as temporary:
+                temporary.write(agent_bytes)
+                temporary.flush()
+                os.fsync(temporary.fileno())
+            os.replace(temporary_name, destination)
+        finally:
+            if os.path.exists(temporary_name):
+                os.unlink(temporary_name)
+
+        agents_before = list(health.get("agents") or [])
+        refreshed = _request_json(
+            "GET",
+            connection["base_url"] + "/health",
+            timeout_seconds=connection["timeout_seconds"],
+            secret=connection["secret"],
+        )
+        agents_after = list(refreshed.get("agents") or [])
+        return _json({
+            "status": "ok",
+            "operation": "install_agent",
+            "result": "installed",
+            "agent": entry.get("name"),
+            "version": entry.get("version"),
+            "path": str(destination),
+            "sha256": expected,
+            "source": source,
+            "counted": bool(source and source.startswith(RAR_RELEASE_DOWNLOAD_BASE)),
+            "backup": str(backup) if backup else None,
+            "agents_before": len(agents_before),
+            "agents_after": len(agents_after),
+            "new_agents": sorted(set(agents_after) - set(agents_before)),
+            "hotload": "No restart required; discovery reruns on /health and /chat.",
         })
 
     def _bootstrap_callback(self, kwargs):

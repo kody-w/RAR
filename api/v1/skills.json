@@ -12,7 +12,7 @@
   },
   "inputs": {
     "canonical_manifests": "64b03442d38d2cc1cf3620a305f1aa8ce52967d78722c7338db346e2cf45d700",
-    "scout_catalog": "13bf47e617d01333515227f006b361a273794327835bec876efbb31392041924",
+    "scout_catalog": "9e3c4e372e644b184cba2cdc2412ec3b66317a93afc22bd00cb4972042ffd869",
     "scout_toaster": {
       "commit": "d54ba8484b5c5dae6406d2090c03115d12985446",
       "sha256": "d340043178aa4160f76a179b8b1086971e09207b212aff2ab2c0752b69173e17"
@@ -197,13 +197,13 @@
       ],
       "slug": "rapp-skills",
       "source": {
-        "artifact_sha256": "1fa931266d8646ee3138d0c1bab1e742267a1951765b8ceeee0496a677bd6e4c",
+        "artifact_sha256": "061fca4300c75e3a5e50d9abbc6652990c2c91edeef7c6866301ae36473b6ea2",
         "entrypoint": "scout/starter/skills/rapp-skills/SKILL.md",
         "entrypoint_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/starter/skills/rapp-skills/SKILL.md",
         "files": [
           {
             "path": "scout/starter/skills/rapp-skills/SKILL.md",
-            "sha256": "3ab288bd5bfcd0e399ffce446d7ec70457479e199cfab05826c4083cb8e78bcd",
+            "sha256": "b1ef60a5a6ffd0aebd9af46e7c70bbcc69d60a0ab655df6a664eb6365783af31",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/starter/skills/rapp-skills/SKILL.md"
           },
           {
@@ -223,12 +223,12 @@
           },
           {
             "path": "scout/starter/skills/rapp-skills/rapp/agent.lock.json",
-            "sha256": "13385ded1012f973db021d9ff606bdf53d78f4592ccf66dab783b8994a1221fc",
+            "sha256": "43a00c598e1e8c1088f8e64bad87160f6010a3005dbae39f92f078cb20af2da4",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/starter/skills/rapp-skills/rapp/agent.lock.json"
           },
           {
             "path": "scout/starter/skills/rapp-skills/rapp_skill_agent.py",
-            "sha256": "1fa931266d8646ee3138d0c1bab1e742267a1951765b8ceeee0496a677bd6e4c",
+            "sha256": "061fca4300c75e3a5e50d9abbc6652990c2c91edeef7c6866301ae36473b6ea2",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/starter/skills/rapp-skills/rapp_skill_agent.py"
           },
           {
@@ -252,7 +252,7 @@
         "scout",
         "starter"
       ],
-      "version": "1.3.1"
+      "version": "1.3.2"
     },
     {
       "artifact_type": "skill",
