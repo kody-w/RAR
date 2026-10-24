@@ -1,0 +1,70 @@
+{
+  "agent": "@kody-w/parallel_dimensions_agent",
+  "agent_file": "parallel_dimensions_agent.py",
+  "agent_sha256": "ad3d5af03678ded14558a1f449a5ba4002e15dbb1ee101c37349da16ba7b2c2b",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ParallelDimensionsAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Tracks independent what-if branches, detects conflicting assertions, and merges only compatible dimensions using an append-only local record.",
+    "display_name": "Parallel Dimensions",
+    "name": "@kody-w/parallel_dimensions_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "planning",
+      "what-if",
+      "branches",
+      "append-only",
+      "offline"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "ParallelDimensions",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "about": {
+        "type": "string"
+      },
+      "action": {
+        "enum": [
+          "branch",
+          "explore",
+          "compatible",
+          "merge",
+          "amend",
+          "show",
+          "list"
+        ],
+        "type": "string"
+      },
+      "assertions": {
+        "type": "object"
+      },
+      "dimension": {
+        "type": "string"
+      },
+      "other": {
+        "type": "string"
+      },
+      "reason": {
+        "type": "string"
+      },
+      "step": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

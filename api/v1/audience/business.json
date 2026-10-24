@@ -2,7 +2,7 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-10-24T04:12:45Z",
+  "generated": "2026-10-24T04:17:13Z",
   "count": 220,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
@@ -6541,7 +6541,7 @@
       "stats": {
         "lines": 258,
         "size_kb": 9.4,
-        "added_at": null
+        "added_at": "2026-10-24T04:16:07Z"
       }
     },
     {
