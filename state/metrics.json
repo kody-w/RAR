@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-10-25T09:54:24Z",
+ "generated_at": "2026-10-26T11:15:15Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,26 +10,26 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 12,
-  "size_kb": 116854,
+  "size_kb": 118923,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-10-25T08:52:26Z",
+  "pushed_at": "2026-10-26T09:33:36Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
  "totals": {
-  "downloads": 13508,
-  "clones": 13049,
+  "downloads": 13644,
+  "clones": 13185,
   "cdn_hits": 451,
   "release_downloads": 8,
   "agent_file_downloads": 15,
-  "clones_excluding_ci_estimate": 8699,
-  "ci_clone_estimate": 4350,
-  "page_views": 261,
-  "clone_uniques_14d": 349,
-  "view_uniques_14d": 10,
-  "clone_uniques_daily_sum": 2284,
-  "view_uniques_daily_sum": 116,
-  "days_tracked": 75,
+  "clones_excluding_ci_estimate": 8777,
+  "ci_clone_estimate": 4408,
+  "page_views": 263,
+  "clone_uniques_14d": 368,
+  "view_uniques_14d": 11,
+  "clone_uniques_daily_sum": 2333,
+  "view_uniques_daily_sum": 118,
+  "days_tracked": 76,
   "tracking_since": "2026-07-14",
   "agents": 223,
   "swarms": 2,
@@ -586,21 +586,28 @@
    "clone_uniques": 83,
    "views": 2,
    "cdn": 0
+  },
+  {
+   "date": "2026-10-25",
+   "clones": 136,
+   "clone_uniques": 49,
+   "views": 2,
+   "cdn": 0
   }
  ],
  "traffic": {
   "paths": [
    {
+    "path": "/kody-w/RAR",
+    "title": "Overview",
+    "count": 3,
+    "uniques": 3
+   },
+   {
     "path": "/kody-w/RAR/blob/main/sources.json",
     "title": "/blob/main/sources.json",
     "count": 3,
     "uniques": 1
-   },
-   {
-    "path": "/kody-w/RAR",
-    "title": "Overview",
-    "count": 2,
-    "uniques": 2
    },
    {
     "path": "/kody-w/RAR/blob/main/skill.md",
@@ -612,6 +619,12 @@
     "path": "/kody-w/RAR/blob/main/skills.html",
     "title": "/blob/main/skills.html",
     "count": 2,
+    "uniques": 1
+   },
+   {
+    "path": "/kody-w/RAR/blob/main/docs/FIELD-REQUIREMENTS.md",
+    "title": "/blob/main/docs/FIELD-REQUIREMENTS.md",
+    "count": 1,
     "uniques": 1
    },
    {
@@ -629,12 +642,6 @@
    {
     "path": "/kody-w/RAR/discussions",
     "title": "/discussions",
-    "count": 1,
-    "uniques": 1
-   },
-   {
-    "path": "/kody-w/RAR/discussions/1340",
-    "title": "/discussions/1340",
     "count": 1,
     "uniques": 1
    },
@@ -663,15 +670,15 @@
     "uniques": 1
    }
   ],
-  "clones_14d": 2469,
-  "views_14d": 18,
+  "clones_14d": 2105,
+  "views_14d": 19,
   "live": true,
-  "as_of": "2026-10-25T09:54:24Z"
+  "as_of": "2026-10-26T11:15:15Z"
  },
  "cdn": {
   "total_hits": 451,
   "bandwidth": 6360652,
-  "rank": 803121,
+  "rank": 807337,
   "agent_hits": 15,
   "files": [
    {
