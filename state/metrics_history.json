@@ -312,12 +312,16 @@
   "2026-10-25": {
    "count": 136,
    "uniques": 49
+  },
+  "2026-10-26": {
+   "count": 76,
+   "uniques": 22
   }
  },
  "last_known": {
-  "at": "2026-10-26T11:15:15Z",
-  "clone_uniques_14d": 368,
-  "clones_14d": 2105,
+  "at": "2026-10-27T10:41:08Z",
+  "clone_uniques_14d": 372,
+  "clones_14d": 2111,
   "paths": [
    {
     "count": 3,
@@ -326,21 +330,9 @@
     "uniques": 3
    },
    {
-    "count": 3,
-    "path": "/kody-w/RAR/blob/main/sources.json",
-    "title": "/blob/main/sources.json",
-    "uniques": 1
-   },
-   {
     "count": 2,
-    "path": "/kody-w/RAR/blob/main/skill.md",
-    "title": "/blob/main/skill.md",
-    "uniques": 1
-   },
-   {
-    "count": 2,
-    "path": "/kody-w/RAR/blob/main/skills.html",
-    "title": "/blob/main/skills.html",
+    "path": "/kody-w/RAR/blob/main/scout/starter/README.md",
+    "title": "/blob/main/scout/starter/README.md",
     "uniques": 1
    },
    {
@@ -351,8 +343,8 @@
    },
    {
     "count": 1,
-    "path": "/kody-w/RAR/blob/main/stats.html",
-    "title": "/blob/main/stats.html",
+    "path": "/kody-w/RAR/blob/main/scout/README.md",
+    "title": "/blob/main/scout/README.md",
     "uniques": 1
    },
    {
@@ -378,22 +370,34 @@
     "path": "/kody-w/RAR/discussions/451",
     "title": "/discussions/451",
     "uniques": 1
+   },
+   {
+    "count": 1,
+    "path": "/kody-w/RAR/tree/main/scout",
+    "title": "/tree/main/scout",
+    "uniques": 1
+   },
+   {
+    "count": 1,
+    "path": "/kody-w/RAR/tree/main/scout/starter",
+    "title": "/tree/main/scout/starter",
+    "uniques": 1
    }
   ],
   "referrers": [
    {
-    "count": 5,
+    "count": 3,
     "referrer": "github.com",
-    "uniques": 5
+    "uniques": 3
    },
    {
-    "count": 2,
-    "referrer": "Bing",
+    "count": 1,
+    "referrer": "aocr.org",
     "uniques": 1
    }
   ],
-  "view_uniques_14d": 11,
-  "views_14d": 19
+  "view_uniques_14d": 10,
+  "views_14d": 15
  },
  "snapshots": [
   {
@@ -1885,6 +1889,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 118,
    "views_all_time": 263
+  },
+  {
+   "at": "2026-10-27T10:41:08Z",
+   "cdn_all_time": 451,
+   "clone_uniques_all_time": 2355,
+   "clones_all_time": 13261,
+   "days_tracked": 77,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 120,
+   "views_all_time": 270
   }
  ],
  "views": {
@@ -2190,6 +2204,10 @@
   },
   "2026-10-25": {
    "count": 2,
+   "uniques": 2
+  },
+  "2026-10-26": {
+   "count": 7,
    "uniques": 2
   }
  }

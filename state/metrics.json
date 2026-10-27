@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-10-26T11:15:15Z",
+ "generated_at": "2026-10-27T10:41:08Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,26 +10,26 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 12,
-  "size_kb": 118923,
+  "size_kb": 120571,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-10-26T09:33:36Z",
+  "pushed_at": "2026-10-27T09:30:25Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
  "totals": {
-  "downloads": 13644,
-  "clones": 13185,
+  "downloads": 13722,
+  "clones": 13261,
   "cdn_hits": 451,
-  "release_downloads": 8,
+  "release_downloads": 10,
   "agent_file_downloads": 15,
-  "clones_excluding_ci_estimate": 8777,
-  "ci_clone_estimate": 4408,
-  "page_views": 263,
-  "clone_uniques_14d": 368,
-  "view_uniques_14d": 11,
-  "clone_uniques_daily_sum": 2333,
-  "view_uniques_daily_sum": 118,
-  "days_tracked": 76,
+  "clones_excluding_ci_estimate": 8795,
+  "ci_clone_estimate": 4466,
+  "page_views": 270,
+  "clone_uniques_14d": 372,
+  "view_uniques_14d": 10,
+  "clone_uniques_daily_sum": 2355,
+  "view_uniques_daily_sum": 120,
+  "days_tracked": 77,
   "tracking_since": "2026-07-14",
   "agents": 223,
   "swarms": 2,
@@ -593,6 +593,13 @@
    "clone_uniques": 49,
    "views": 2,
    "cdn": 0
+  },
+  {
+   "date": "2026-10-26",
+   "clones": 76,
+   "clone_uniques": 22,
+   "views": 7,
+   "cdn": 0
   }
  ],
  "traffic": {
@@ -604,20 +611,8 @@
     "uniques": 3
    },
    {
-    "path": "/kody-w/RAR/blob/main/sources.json",
-    "title": "/blob/main/sources.json",
-    "count": 3,
-    "uniques": 1
-   },
-   {
-    "path": "/kody-w/RAR/blob/main/skill.md",
-    "title": "/blob/main/skill.md",
-    "count": 2,
-    "uniques": 1
-   },
-   {
-    "path": "/kody-w/RAR/blob/main/skills.html",
-    "title": "/blob/main/skills.html",
+    "path": "/kody-w/RAR/blob/main/scout/starter/README.md",
+    "title": "/blob/main/scout/starter/README.md",
     "count": 2,
     "uniques": 1
    },
@@ -628,8 +623,8 @@
     "uniques": 1
    },
    {
-    "path": "/kody-w/RAR/blob/main/stats.html",
-    "title": "/blob/main/stats.html",
+    "path": "/kody-w/RAR/blob/main/scout/README.md",
+    "title": "/blob/main/scout/README.md",
     "count": 1,
     "uniques": 1
    },
@@ -656,29 +651,41 @@
     "title": "/discussions/451",
     "count": 1,
     "uniques": 1
+   },
+   {
+    "path": "/kody-w/RAR/tree/main/scout",
+    "title": "/tree/main/scout",
+    "count": 1,
+    "uniques": 1
+   },
+   {
+    "path": "/kody-w/RAR/tree/main/scout/starter",
+    "title": "/tree/main/scout/starter",
+    "count": 1,
+    "uniques": 1
    }
   ],
   "referrers": [
    {
     "referrer": "github.com",
-    "count": 5,
-    "uniques": 5
+    "count": 3,
+    "uniques": 3
    },
    {
-    "referrer": "Bing",
-    "count": 2,
+    "referrer": "aocr.org",
+    "count": 1,
     "uniques": 1
    }
   ],
-  "clones_14d": 2105,
-  "views_14d": 19,
+  "clones_14d": 2111,
+  "views_14d": 15,
   "live": true,
-  "as_of": "2026-10-26T11:15:15Z"
+  "as_of": "2026-10-27T10:41:08Z"
  },
  "cdn": {
   "total_hits": 451,
   "bandwidth": 6360652,
-  "rank": 807337,
+  "rank": 811529,
   "agent_hits": 15,
   "files": [
    {
@@ -924,14 +931,14 @@
   ]
  },
  "releases": {
-  "total_downloads": 8,
+  "total_downloads": 10,
   "count": 2,
   "releases": [
    {
     "tag": "v2.0.0",
     "name": "Autumn 2026 (v2.0.0)",
     "published_at": "2026-10-24T04:44:17Z",
-    "downloads": 8,
+    "downloads": 10,
     "assets": [
      {
       "name": "rar_bill_neuron_agent.py",
@@ -1595,7 +1602,7 @@
      },
      {
       "name": "rar_kody_w_copilot_studio_deploy_agent.py",
-      "downloads": 0,
+      "downloads": 1,
       "size": 453476
      },
      {
@@ -1605,7 +1612,7 @@
      },
      {
       "name": "rar_kody_w_copilot_studio_parity_deploy_agent.py",
-      "downloads": 0,
+      "downloads": 1,
       "size": 268833
      },
      {
