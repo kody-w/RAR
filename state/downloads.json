@@ -533,7 +533,7 @@
       "asset": "rar_kody_w_context_memory_agent.py"
     },
     "@kody-w/copilot_studio_deploy_agent": {
-      "downloads": 0,
+      "downloads": 1,
       "asset": "rar_kody_w_copilot_studio_deploy_agent.py"
     },
     "@kody-w/copilot_studio_forge_agent": {
@@ -541,7 +541,7 @@
       "asset": "rar_kody_w_copilot_studio_forge_agent.py"
     },
     "@kody-w/copilot_studio_parity_deploy": {
-      "downloads": 0,
+      "downloads": 1,
       "asset": "rar_kody_w_copilot_studio_parity_deploy_agent.py"
     },
     "@kody-w/copilot_studio_probe_agent": {
@@ -890,10 +890,10 @@
     }
   },
   "totals": {
-    "downloads": 8,
-    "attributed_downloads": 8,
+    "downloads": 10,
+    "attributed_downloads": 10,
     "unattributed_downloads": 0,
     "assets_published": 222,
-    "agents_with_downloads": 1
+    "agents_with_downloads": 3
   }
 }
