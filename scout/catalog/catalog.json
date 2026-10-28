@@ -18077,6 +18077,16 @@
       "reason": "Published singleton bytes no longer match the federation SHA-256; blocked until the upstream catalog is repaired."
     },
     {
+      "aggregate_id": "audit-readiness",
+      "identity": "@cat-agent-skills/audit_readiness",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
+      "aggregate_id": "consumer-market-insight-synthesis",
+      "identity": "@cat-agent-skills/consumer_market_insight_synthesis",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
       "aggregate_id": "copilot-studio-adaptive-card-builder",
       "identity": "@cat-agent-skills/copilot_studio_adaptive_card_builder",
       "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
@@ -18097,6 +18107,16 @@
       "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
     },
     {
+      "aggregate_id": "customer-service-order-support",
+      "identity": "@cat-agent-skills/customer_service_order_support",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
+      "aggregate_id": "engineering-change-bom",
+      "identity": "@cat-agent-skills/engineering_change_bom",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
       "aggregate_id": "inbox-triage",
       "identity": "@cat-agent-skills/inbox_triage",
       "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
@@ -18107,13 +18127,58 @@
       "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
     },
     {
+      "aggregate_id": "maintenance-triage",
+      "identity": "@cat-agent-skills/maintenance_triage",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
+      "aggregate_id": "order-intake-o2c-exception",
+      "identity": "@cat-agent-skills/order_intake_o2c_exception",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
+      "aggregate_id": "product-content-catalog-enrichment",
+      "identity": "@cat-agent-skills/product_content_catalog_enrichment",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
+      "aggregate_id": "production-planning",
+      "identity": "@cat-agent-skills/production_planning",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
       "aggregate_id": "qr-code-builder",
       "identity": "@cat-agent-skills/qr_code_builder",
       "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
     },
     {
+      "aggregate_id": "quality-incident-capa",
+      "identity": "@cat-agent-skills/quality_incident_capa",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
+      "aggregate_id": "quality-inspection",
+      "identity": "@cat-agent-skills/quality_inspection",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
+      "aggregate_id": "retail-execution-perfect-store",
+      "identity": "@cat-agent-skills/retail_execution_perfect_store",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
+      "aggregate_id": "returns-refund-case",
+      "identity": "@cat-agent-skills/returns_refund_case",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
       "aggregate_id": "root-cause-analysis",
       "identity": "@cat-agent-skills/root_cause_analysis",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
+      "aggregate_id": "safety-incident",
+      "identity": "@cat-agent-skills/safety_incident",
       "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
     },
     {
@@ -18127,13 +18192,48 @@
       "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
     },
     {
+      "aggregate_id": "store-associate-assist",
+      "identity": "@cat-agent-skills/store_associate_assist",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
+      "aggregate_id": "store-task-promotion-execution",
+      "identity": "@cat-agent-skills/store_task_promotion_execution",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
       "aggregate_id": "study-flashcards",
       "identity": "@cat-agent-skills/study_flashcards",
       "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
     },
     {
+      "aggregate_id": "supplier-disruption",
+      "identity": "@cat-agent-skills/supplier_disruption",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
+      "aggregate_id": "supplier-qualification",
+      "identity": "@cat-agent-skills/supplier_qualification",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
+      "aggregate_id": "supplier-vendor-performance",
+      "identity": "@cat-agent-skills/supplier_vendor_performance",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
       "aggregate_id": "template-based-document-generation",
       "identity": "@cat-agent-skills/template_based_document_generation",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
+      "aggregate_id": "trade-promotion-deduction-recovery",
+      "identity": "@cat-agent-skills/trade_promotion_deduction_recovery",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
+      "aggregate_id": "work-order-assist",
+      "identity": "@cat-agent-skills/work_order_assist",
       "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
     },
     {
