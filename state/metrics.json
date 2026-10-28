@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-10-27T10:41:08Z",
+ "generated_at": "2026-10-28T11:25:09Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,26 +10,26 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 12,
-  "size_kb": 120571,
+  "size_kb": 122232,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-10-27T09:30:25Z",
+  "pushed_at": "2026-10-28T07:48:20Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
  "totals": {
-  "downloads": 13722,
-  "clones": 13261,
+  "downloads": 13812,
+  "clones": 13351,
   "cdn_hits": 451,
   "release_downloads": 10,
   "agent_file_downloads": 15,
-  "clones_excluding_ci_estimate": 8795,
-  "ci_clone_estimate": 4466,
-  "page_views": 270,
-  "clone_uniques_14d": 372,
-  "view_uniques_14d": 10,
-  "clone_uniques_daily_sum": 2355,
-  "view_uniques_daily_sum": 120,
-  "days_tracked": 77,
+  "clones_excluding_ci_estimate": 8827,
+  "ci_clone_estimate": 4524,
+  "page_views": 274,
+  "clone_uniques_14d": 363,
+  "view_uniques_14d": 11,
+  "clone_uniques_daily_sum": 2371,
+  "view_uniques_daily_sum": 121,
+  "days_tracked": 78,
   "tracking_since": "2026-07-14",
   "agents": 223,
   "swarms": 2,
@@ -600,6 +600,13 @@
    "clone_uniques": 22,
    "views": 7,
    "cdn": 0
+  },
+  {
+   "date": "2026-10-27",
+   "clones": 90,
+   "clone_uniques": 16,
+   "views": 4,
+   "cdn": 0
   }
  ],
  "traffic": {
@@ -607,8 +614,8 @@
    {
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "count": 3,
-    "uniques": 3
+    "count": 4,
+    "uniques": 4
    },
    {
     "path": "/kody-w/RAR/blob/main/scout/starter/README.md",
@@ -653,14 +660,14 @@
     "uniques": 1
    },
    {
-    "path": "/kody-w/RAR/tree/main/scout",
-    "title": "/tree/main/scout",
+    "path": "/kody-w/RAR/tree/main",
+    "title": "/tree/main",
     "count": 1,
     "uniques": 1
    },
    {
-    "path": "/kody-w/RAR/tree/main/scout/starter",
-    "title": "/tree/main/scout/starter",
+    "path": "/kody-w/RAR/tree/main/agents",
+    "title": "/tree/main/agents",
     "count": 1,
     "uniques": 1
    }
@@ -677,15 +684,15 @@
     "uniques": 1
    }
   ],
-  "clones_14d": 2111,
-  "views_14d": 15,
+  "clones_14d": 2124,
+  "views_14d": 19,
   "live": true,
-  "as_of": "2026-10-27T10:41:08Z"
+  "as_of": "2026-10-28T11:25:09Z"
  },
  "cdn": {
   "total_hits": 451,
   "bandwidth": 6360652,
-  "rank": 811529,
+  "rank": 816231,
   "agent_hits": 15,
   "files": [
    {

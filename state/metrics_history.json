@@ -316,18 +316,22 @@
   "2026-10-26": {
    "count": 76,
    "uniques": 22
+  },
+  "2026-10-27": {
+   "count": 90,
+   "uniques": 16
   }
  },
  "last_known": {
-  "at": "2026-10-27T10:41:08Z",
-  "clone_uniques_14d": 372,
-  "clones_14d": 2111,
+  "at": "2026-10-28T11:25:09Z",
+  "clone_uniques_14d": 363,
+  "clones_14d": 2124,
   "paths": [
    {
-    "count": 3,
+    "count": 4,
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "uniques": 3
+    "uniques": 4
    },
    {
     "count": 2,
@@ -373,14 +377,14 @@
    },
    {
     "count": 1,
-    "path": "/kody-w/RAR/tree/main/scout",
-    "title": "/tree/main/scout",
+    "path": "/kody-w/RAR/tree/main",
+    "title": "/tree/main",
     "uniques": 1
    },
    {
     "count": 1,
-    "path": "/kody-w/RAR/tree/main/scout/starter",
-    "title": "/tree/main/scout/starter",
+    "path": "/kody-w/RAR/tree/main/agents",
+    "title": "/tree/main/agents",
     "uniques": 1
    }
   ],
@@ -396,8 +400,8 @@
     "uniques": 1
    }
   ],
-  "view_uniques_14d": 10,
-  "views_14d": 15
+  "view_uniques_14d": 11,
+  "views_14d": 19
  },
  "snapshots": [
   {
@@ -1899,6 +1903,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 120,
    "views_all_time": 270
+  },
+  {
+   "at": "2026-10-28T11:25:09Z",
+   "cdn_all_time": 451,
+   "clone_uniques_all_time": 2371,
+   "clones_all_time": 13351,
+   "days_tracked": 78,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 121,
+   "views_all_time": 274
   }
  ],
  "views": {
@@ -2209,6 +2223,10 @@
   "2026-10-26": {
    "count": 7,
    "uniques": 2
+  },
+  "2026-10-27": {
+   "count": 4,
+   "uniques": 1
   }
  }
 }
