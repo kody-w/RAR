@@ -18132,6 +18132,11 @@
       "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
     },
     {
+      "aggregate_id": "meeting-moments-library-builder-cowork",
+      "identity": "@cat-agent-skills/meeting_moments_library_builder_cowork",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
       "aggregate_id": "order-intake-o2c-exception",
       "identity": "@cat-agent-skills/order_intake_o2c_exception",
       "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
