@@ -1299,6 +1299,54 @@
       "articles_created": [],
       "threads_created": [],
       "reviews_created": []
+    },
+    "frame-1727-alpha.json": {
+      "frame": 1727,
+      "stream_id": "alpha",
+      "completed_at": "2026-10-29T14:51:51Z",
+      "articles_created": [],
+      "threads_created": [],
+      "reviews_created": []
+    },
+    "frame-1727-bravo.json": {
+      "frame": 1727,
+      "stream_id": "bravo",
+      "completed_at": "2026-10-29T14:51:49Z",
+      "articles_created": [],
+      "threads_created": [],
+      "reviews_created": []
+    },
+    "frame-1727-charlie.json": {
+      "frame": 1727,
+      "stream_id": "charlie",
+      "completed_at": "2026-10-29T14:51:52Z",
+      "articles_created": [],
+      "threads_created": [],
+      "reviews_created": []
+    },
+    "frame-1727-delta.json": {
+      "frame": 1727,
+      "stream_id": "delta",
+      "completed_at": "2026-10-29T14:51:49Z",
+      "articles_created": [],
+      "threads_created": [],
+      "reviews_created": []
+    },
+    "frame-1727-echo.json": {
+      "frame": 1727,
+      "stream_id": "echo",
+      "completed_at": "2026-10-29T14:51:52Z",
+      "articles_created": [],
+      "threads_created": [],
+      "reviews_created": []
+    },
+    "frame-1727-refill.json": {
+      "frame": 1727,
+      "stream_id": "refill",
+      "completed_at": "2026-10-29T14:52:25Z",
+      "articles_created": [],
+      "threads_created": [],
+      "reviews_created": []
     }
   },
   "sha256": {
@@ -1463,6 +1511,12 @@
     "frame-1726-charlie.json": "18b493870543e6c4f702196320099f9ab417cc997457c60ada669405485ecd29",
     "frame-1726-delta.json": "0ca9fa31dc3b49dffd48c3064eff14c7e50f96d0dccda46e91a5ef3efd04a7a2",
     "frame-1726-echo.json": "73e371d66bd21a6d3ae5fbbef78bf62daf6911f812cd209c62120b9cc412bfb6",
-    "frame-1726-refill.json": "bccb964b7fc2a71db1564fd67e8d7a6427b33fe87e4791fd4ea4b0b9f3ec8ea8"
+    "frame-1726-refill.json": "bccb964b7fc2a71db1564fd67e8d7a6427b33fe87e4791fd4ea4b0b9f3ec8ea8",
+    "frame-1727-alpha.json": "c84e686ed618adcba5a2b36ad943e09dfd30a93427c8c2f4f2cb44f66be6708d",
+    "frame-1727-bravo.json": "ba183fef66013dfaebf729254f1c0c85deffb78161478ac79ca89ceaa9cf71db",
+    "frame-1727-charlie.json": "479643035e9519c01bbafec7ddedcefd7a7c7515936e57a220ea27e56605915d",
+    "frame-1727-delta.json": "350b8cf6c95b03125404fa274c38f032c307b3063b49583c7ae0da71d21d68c4",
+    "frame-1727-echo.json": "c55a9df13dca00d4e76c7640017efccf7728ca964b44cd7b20b058e9b85b84f4",
+    "frame-1727-refill.json": "475c090a977c763ba8242346ff2a23b975461a538da1198a8a3143a7f1f0c299"
   }
 }
