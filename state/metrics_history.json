@@ -329,12 +329,16 @@
   "2026-10-29": {
    "count": 202,
    "uniques": 25
+  },
+  "2026-10-30": {
+   "count": 92,
+   "uniques": 26
   }
  },
  "last_known": {
-  "at": "2026-10-30T11:27:29Z",
-  "clone_uniques_14d": 356,
-  "clones_14d": 2219,
+  "at": "2026-10-31T10:58:27Z",
+  "clone_uniques_14d": 359,
+  "clones_14d": 2126,
   "paths": [
    {
     "count": 5,
@@ -404,13 +408,13 @@
     "uniques": 4
    },
    {
-    "count": 2,
+    "count": 3,
     "referrer": "aocr.org",
-    "uniques": 2
+    "uniques": 3
    }
   ],
-  "view_uniques_14d": 13,
-  "views_14d": 22
+  "view_uniques_14d": 14,
+  "views_14d": 23
  },
  "snapshots": [
   {
@@ -1942,6 +1946,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 124,
    "views_all_time": 277
+  },
+  {
+   "at": "2026-10-31T10:58:27Z",
+   "cdn_all_time": 455,
+   "clone_uniques_all_time": 2434,
+   "clones_all_time": 13706,
+   "days_tracked": 81,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 125,
+   "views_all_time": 278
   }
  ],
  "views": {
@@ -2264,6 +2278,10 @@
   "2026-10-29": {
    "count": 3,
    "uniques": 3
+  },
+  "2026-10-30": {
+   "count": 1,
+   "uniques": 1
   }
  }
 }
