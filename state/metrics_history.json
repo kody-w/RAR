@@ -333,12 +333,16 @@
   "2026-10-30": {
    "count": 92,
    "uniques": 26
+  },
+  "2026-10-31": {
+   "count": 78,
+   "uniques": 17
   }
  },
  "last_known": {
-  "at": "2026-10-31T10:58:27Z",
-  "clone_uniques_14d": 359,
-  "clones_14d": 2126,
+  "at": "2026-11-01T11:53:51Z",
+  "clone_uniques_14d": 353,
+  "clones_14d": 2085,
   "paths": [
    {
     "count": 5,
@@ -1956,6 +1960,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 125,
    "views_all_time": 278
+  },
+  {
+   "at": "2026-11-01T11:53:51Z",
+   "cdn_all_time": 455,
+   "clone_uniques_all_time": 2451,
+   "clones_all_time": 13784,
+   "days_tracked": 82,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 125,
+   "views_all_time": 278
   }
  ],
  "views": {
@@ -2282,6 +2296,10 @@
   "2026-10-30": {
    "count": 1,
    "uniques": 1
+  },
+  "2026-10-31": {
+   "count": 0,
+   "uniques": 0
   }
  }
 }

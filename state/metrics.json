@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-10-31T10:58:27Z",
+ "generated_at": "2026-11-01T11:53:51Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,26 +10,26 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 12,
-  "size_kb": 111157,
+  "size_kb": 112801,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-10-31T07:51:16Z",
+  "pushed_at": "2026-11-01T10:57:25Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
  "totals": {
-  "downloads": 14171,
-  "clones": 13706,
+  "downloads": 14249,
+  "clones": 13784,
   "cdn_hits": 455,
   "release_downloads": 10,
   "agent_file_downloads": 15,
-  "clones_excluding_ci_estimate": 9008,
-  "ci_clone_estimate": 4698,
+  "clones_excluding_ci_estimate": 9028,
+  "ci_clone_estimate": 4756,
   "page_views": 278,
-  "clone_uniques_14d": 359,
+  "clone_uniques_14d": 353,
   "view_uniques_14d": 14,
-  "clone_uniques_daily_sum": 2434,
+  "clone_uniques_daily_sum": 2451,
   "view_uniques_daily_sum": 125,
-  "days_tracked": 81,
+  "days_tracked": 82,
   "tracking_since": "2026-07-14",
   "agents": 223,
   "swarms": 2,
@@ -628,6 +628,13 @@
    "clone_uniques": 26,
    "views": 1,
    "cdn": 0
+  },
+  {
+   "date": "2026-10-31",
+   "clones": 78,
+   "clone_uniques": 17,
+   "views": 0,
+   "cdn": 0
   }
  ],
  "traffic": {
@@ -705,15 +712,15 @@
     "uniques": 3
    }
   ],
-  "clones_14d": 2126,
+  "clones_14d": 2085,
   "views_14d": 23,
   "live": true,
-  "as_of": "2026-10-31T10:58:27Z"
+  "as_of": "2026-11-01T11:53:51Z"
  },
  "cdn": {
   "total_hits": 455,
   "bandwidth": 6438176,
-  "rank": 828391,
+  "rank": 833710,
   "agent_hits": 15,
   "files": [
    {
