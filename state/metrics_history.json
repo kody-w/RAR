@@ -337,12 +337,16 @@
   "2026-10-31": {
    "count": 78,
    "uniques": 17
+  },
+  "2026-11-01": {
+   "count": 147,
+   "uniques": 35
   }
  },
  "last_known": {
-  "at": "2026-11-01T11:53:51Z",
-  "clone_uniques_14d": 353,
-  "clones_14d": 2085,
+  "at": "2026-11-02T13:38:27Z",
+  "clone_uniques_14d": 350,
+  "clones_14d": 2017,
   "paths": [
    {
     "count": 5,
@@ -370,18 +374,6 @@
    },
    {
     "count": 1,
-    "path": "/kody-w/RAR/compare/learn-new-template-source",
-    "title": "/compare/learn-new-template-source",
-    "uniques": 1
-   },
-   {
-    "count": 1,
-    "path": "/kody-w/RAR/discussions",
-    "title": "/discussions",
-    "uniques": 1
-   },
-   {
-    "count": 1,
     "path": "/kody-w/RAR/discussions/15",
     "title": "/discussions/15",
     "uniques": 1
@@ -403,6 +395,18 @@
     "path": "/kody-w/RAR/discussions/categories/announcements",
     "title": "/discussions/categories/announcements",
     "uniques": 1
+   },
+   {
+    "count": 1,
+    "path": "/kody-w/RAR/pull/100",
+    "title": "/pull/100",
+    "uniques": 1
+   },
+   {
+    "count": 1,
+    "path": "/kody-w/RAR/tree/main",
+    "title": "/tree/main",
+    "uniques": 1
    }
   ],
   "referrers": [
@@ -417,8 +421,8 @@
     "uniques": 3
    }
   ],
-  "view_uniques_14d": 14,
-  "views_14d": 23
+  "view_uniques_14d": 13,
+  "views_14d": 21
  },
  "snapshots": [
   {
@@ -1970,6 +1974,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 125,
    "views_all_time": 278
+  },
+  {
+   "at": "2026-11-02T13:38:27Z",
+   "cdn_all_time": 455,
+   "clone_uniques_all_time": 2486,
+   "clones_all_time": 13931,
+   "days_tracked": 83,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 125,
+   "views_all_time": 278
   }
  ],
  "views": {
@@ -2298,6 +2312,10 @@
    "uniques": 1
   },
   "2026-10-31": {
+   "count": 0,
+   "uniques": 0
+  },
+  "2026-11-01": {
    "count": 0,
    "uniques": 0
   }
