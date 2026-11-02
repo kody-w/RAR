@@ -15,8 +15,8 @@
       "license_url": "",
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
-      "item_count": 130,
-      "source_downloads": 1258
+      "item_count": 133,
+      "source_downloads": 1589
     },
     {
       "id": "aibast-agents-library",
@@ -3182,7 +3182,7 @@
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#agent-harness-explorer",
       "source_signal": {
-        "downloads": 142,
+        "downloads": 198,
         "rating": 5,
         "featured": true
       }
@@ -3214,6 +3214,33 @@
       "created_at": null,
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#agent-performance-triage",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/agent_rai_impact_assessment",
+      "source_id": "cat-agent-skills",
+      "source_slug": "agent-rai-impact-assessment",
+      "name": "Agent RAI Impact Assessment",
+      "description": "Draft a Responsible AI impact assessment for an AI agent, covering affected people, action authority, harm scenarios, controls, and residual risk.",
+      "kind": "skill",
+      "tags": [
+        "responsible-ai",
+        "agents",
+        "architecture",
+        "risk-assessment",
+        "governance"
+      ],
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "author": "Arindam Choudhury",
+      "author_github": "ari20089",
+      "version": "1.0.0",
+      "created_at": "2026-10-15T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#agent-rai-impact-assessment",
       "source_signal": {
         "downloads": 0
       }
@@ -3331,7 +3358,7 @@
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#ai-usecase-assessment",
       "source_signal": {
-        "downloads": 133,
+        "downloads": 157,
         "rating": 3
       }
     },
@@ -3566,7 +3593,7 @@
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#brand-template-enforcer",
       "source_signal": {
-        "downloads": 98,
+        "downloads": 113,
         "rating": 4
       }
     },
@@ -3767,7 +3794,7 @@
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#chart-builder",
       "source_signal": {
-        "downloads": 255,
+        "downloads": 321,
         "rating": 5,
         "featured": true
       }
@@ -4290,6 +4317,36 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/cowork_consumption_advisor",
+      "source_id": "cat-agent-skills",
+      "source_slug": "cowork-consumption-advisor",
+      "name": "Cowork & Work IQ Consumption Advisor",
+      "description": "Turn Microsoft 365 Cost Management exports into an interactive Cowork and Work IQ consumption report, with service breakdowns, spending-limit analysis, forecasts, and evidence-backed recommendations.",
+      "kind": "skill",
+      "tags": [
+        "cowork",
+        "work-iq",
+        "copilot-credits",
+        "consumption",
+        "cost-management",
+        "finops",
+        "dashboard",
+        "analysis"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Bojan Buhac",
+      "author_github": "bojanbuhac",
+      "version": "1.0.0",
+      "created_at": "2026-09-14T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#cowork-consumption-advisor",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/cowork_plugin_engineer",
       "source_id": "cat-agent-skills",
       "source_slug": "cowork-plugin-engineer",
@@ -4428,7 +4485,7 @@
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#doc-format-converter",
       "source_signal": {
-        "downloads": 177,
+        "downloads": 211,
         "rating": 5,
         "featured": true
       }
@@ -5013,7 +5070,7 @@
       "has_bundle": false,
       "url": "https://microsoft.github.io/cat-agent-skills/#linkedin-content-writer",
       "source_signal": {
-        "downloads": 60,
+        "downloads": 72,
         "rating": 2
       }
     },
@@ -5573,7 +5630,7 @@
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#powerpoint-deck-designer",
       "source_signal": {
-        "downloads": 101
+        "downloads": 142
       }
     },
     {
@@ -5794,7 +5851,7 @@
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#redlining-content",
       "source_signal": {
-        "downloads": 81,
+        "downloads": 109,
         "rating": 3,
         "featured": true
       }
@@ -5909,7 +5966,7 @@
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#rich-html-presentation",
       "source_signal": {
-        "downloads": 110,
+        "downloads": 142,
         "rating": 3
       }
     },
@@ -6000,6 +6057,37 @@
       "created_at": "2026-08-01T00:00:00.000Z",
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#safety-incident",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/sap_power_platform_integration_architect",
+      "source_id": "cat-agent-skills",
+      "source_slug": "sap-power-platform-integration-architect",
+      "name": "SAP\u2013Power Platform Integration Architect",
+      "description": "Your SAP + Microsoft architect: when to use SAP Joule, Microsoft 365 Copilot or Copilot Studio and how they work together; whether to extend in SAP (Fiori, SAP Build) or with Power Platform; and exactly how to connect SAP to Power Platform \u2014 connector, gateway, API layer, single sign-on \u2014 with a shareable HTML architecture report.",
+      "kind": "skill",
+      "tags": [
+        "sap",
+        "power-platform",
+        "copilot-studio",
+        "joule",
+        "integration",
+        "architecture",
+        "advisor",
+        "extensibility",
+        "single-sign-on"
+      ],
+      "platforms": [
+        "Copilot Studio"
+      ],
+      "author": "C\u00e9sar Calvo Cobo",
+      "author_github": "CesarCalvoCobo",
+      "version": "0.3.1",
+      "created_at": "2026-10-21T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#sap-power-platform-integration-architect",
       "source_signal": {
         "downloads": 0
       }
@@ -6166,7 +6254,7 @@
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#skill-authoring-coach",
       "source_signal": {
-        "downloads": 101
+        "downloads": 124
       }
     },
     {
@@ -6805,7 +6893,7 @@
   ],
   "totals": {
     "sources": 2,
-    "items": 220,
-    "source_downloads": 1258
+    "items": 223,
+    "source_downloads": 1589
   }
 }
