@@ -1,7 +1,7 @@
 {
   "schema": "rar-catalog/1.0",
   "description": "Every agent in RAR as a lean record. Fetch this one file to render a complete browsable catalog with no further requests, no backend, no authentication and no GitHub account.",
-  "generated": "2026-11-03T02:59:40Z",
+  "generated": "2026-11-03T15:41:11Z",
   "count": 223,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/catalog.json",
   "agents": [
@@ -7659,8 +7659,8 @@
       "id": "kody-w__twin_egg_hatcher",
       "name": "@kody-w/twin_egg_hatcher",
       "display_name": "HatchTwinEgg",
-      "description": "Hatches any RAPP twin from a cwd checkout, GitHub repo, or .egg zip into ~/.rapp/twins/ so the brainstem's Twin agent can boot it.",
-      "version": "1.0.2",
+      "description": "Generic single-file hatcher for any RAPP digital-organism twin. Loads identity from cwd auto-detect, --source REPO (raw GitHub), or --egg PATH (zip), then materializes ~/.rapp/twins/<hash>/. The global brainstem's built-in Twin agent boots/chats with it immediately.",
+      "version": "1.1.0",
       "publisher": "@kody-w",
       "author": "Kody Wildfeuer",
       "category": "core",
@@ -7683,11 +7683,11 @@
         "path": "agents/@kody-w/twin_egg_hatcher_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/twin_egg_hatcher_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/twin_egg_hatcher_agent.py",
-        "sha256": "0e307e62ab319665cfa3e6f534abaf47cc71d7bfbc2f1637e940ef2407c33c78"
+        "sha256": "2b59ec448480ebb09d910683e37b1e5925edcf7aa26b3695da6f2a6aa882ca9f"
       },
       "stats": {
-        "lines": 895,
-        "size_kb": 32.2,
+        "lines": 1167,
+        "size_kb": 43.3,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },
@@ -8308,8 +8308,8 @@
       "id": "rapp__learn_new",
       "name": "@rapp/learn_new",
       "display_name": "LearnNew",
-      "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback.",
-      "version": "3.3.0",
+      "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback; action='workflow' assembles a Claude multi-agent workflow template for ClaudeWorkflows.",
+      "version": "3.4.0",
       "publisher": "@rapp",
       "author": "RAPP",
       "category": "core",
@@ -8332,11 +8332,11 @@
         "path": "agents/@rapp/learn_new_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/learn_new_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/learn_new_agent.py",
-        "sha256": "c610a51c8958901dd8bf40f74de2ee4a6fd3f0d36bd52df6252da6c523ae8418"
+        "sha256": "6f4de801d377e00f083b42ce4ae9ee8776ff52430d82b2c6cbe8445ffaa063ea"
       },
       "stats": {
-        "lines": 2184,
-        "size_kb": 92.3,
+        "lines": 2361,
+        "size_kb": 104.3,
         "added_at": "2026-04-20T12:38:45-04:00"
       }
     },
