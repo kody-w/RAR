@@ -24,7 +24,7 @@ import time
 import urllib.request
 
 # Hook points this layer wraps. Two enabled layers touching the same point conflict; the pack's order wins.
-TOUCHES = {"flask.Flask.add_url_rule"}
+TOUCHES = {"flask.Flask.add_url_rule"}  # the transport point: the HTTP routes themselves
 
 # sha256 of every grail brainstem.py this layer was PROVEN against (a real /chat and /chat/stream recorded through it).
 PROVEN_GRAIL = {

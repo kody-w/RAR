@@ -2,7 +2,7 @@
   "schema": "rapp-rar-stack/1.2",
   "name": "grail-layers",
   "display_name": "Grail layers",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "purpose": "Updates for every Brainstem that install over the unchanged grail and can fail without breaking it. A supervisor applies each layer in memory at start, probes /chat, and falls back to plain grail on any failure. First layer: Responses-API models (gpt-6.1-sol, gpt-6-luna) work in the unchanged grail. Second layer: every chat turn is recorded in the owner's Brainstem Journal by default (journal_tap). Third layer: models running on this machine (Ollama) appear in the model list and answer chat, tools included (local_models).",
   "install": {
     "type": "grail_layers",
@@ -26,9 +26,9 @@
       {
         "id": "@kody-w/journal_tap",
         "kind": "layer",
-        "point": "chat",
+        "point": "transport",
         "file": "journal_tap.py",
-        "sha256": "4ff6d526400ca0c4ef5e5058d82e6b7d3d6d9ff35a44544212ed3a7ab7434f6d",
+        "sha256": "dd0e6f70c521721c23f73fae7bfef0cb0aea10661a6b7e87f41070ecc7ebaf1a",
         "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/journal_tap.py",
         "proven_grail": [
           "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
@@ -96,8 +96,8 @@
       "sha256": "311e2162e397f7df5fe9262684f737178acdc0306b0a3a5b9cbd4df6b420a50b"
     },
     "journal_tap.py": {
-      "size": 6143,
-      "sha256": "4ff6d526400ca0c4ef5e5058d82e6b7d3d6d9ff35a44544212ed3a7ab7434f6d"
+      "size": 6194,
+      "sha256": "dd0e6f70c521721c23f73fae7bfef0cb0aea10661a6b7e87f41070ecc7ebaf1a"
     },
     "local_models.py": {
       "size": 3625,
