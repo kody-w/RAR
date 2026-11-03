@@ -13,6 +13,13 @@ import json
 
 import requests
 
+# sha256 of every grail brainstem.py this layer was PROVEN against (a real /chat through it).
+# The supervisor skips this layer on any other grail. Add a sha only after re-proving.
+PROVEN_GRAIL = {
+    "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",  # 0.6.17 (installed)
+    "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4",  # 0.6.16 (public rapp-installer main)
+}
+
 RESPONSES_ONLY = set()
 _orig_get, _orig_post = requests.get, requests.post
 _orig_sget, _orig_spost = requests.Session.get, requests.Session.post

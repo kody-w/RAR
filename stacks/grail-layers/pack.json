@@ -2,7 +2,7 @@
   "schema": "rapp-rar-stack/1.1",
   "name": "grail-layers",
   "display_name": "Grail layers",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "purpose": "Updates for every Brainstem that install over the unchanged grail and can fail without breaking it. A supervisor applies each layer in memory at start, probes /chat, and falls back to plain grail on any failure. First layer: Responses-API models (gpt-6.1-sol, gpt-6-luna) work in the unchanged grail.",
   "install": {
     "type": "grail_layers",
@@ -14,7 +14,13 @@
     "default_enabled": [
       "responses_models"
     ],
-    "supervisor": "https://kody-w.github.io/grail-layers/grail_layers.py"
+    "supervisor": "https://kody-w.github.io/grail-layers/grail_layers.py",
+    "proven_grail": {
+      "responses_models.py": [
+        "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
+        "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
+      ]
+    }
   },
   "files": {
     "README.md": {
@@ -22,8 +28,8 @@
       "sha256": "fbca2953ebadfebfaee320b879738a9299068a60d898ddf8f1d97eaa600b7713"
     },
     "responses_models.py": {
-      "size": 5343,
-      "sha256": "17d3b5669d251578cc139266bbddd2543f06089ad44cf1fa9e57384f90b1b6f2"
+      "size": 5749,
+      "sha256": "cc6428c5bba7ad10c97b28c973a3af6ecad5e8342cd40ae7c54a0221def9fddf"
     }
   }
 }

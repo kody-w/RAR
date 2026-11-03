@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-03T17:15:42.937326+00:00",
+  "generated_at": "2026-11-03T17:28:28.216062+00:00",
   "stats": {
     "total_agents": 223,
     "total_swarms": 2,
@@ -13691,7 +13691,7 @@
     {
       "name": "grail-layers",
       "display_name": "Grail layers",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "schema": "rapp-rar-stack/1.1",
       "path": "stacks/grail-layers",
       "purpose": "Updates for every Brainstem that install over the unchanged grail and can fail without breaking it. A supervisor applies each layer in memory at start, probes /chat, and falls back to plain grail on any failure. First layer: Responses-API models (gpt-6.1-sol, gpt-6-luna) work in the unchanged grail.",
@@ -13701,7 +13701,7 @@
           "verified": true
         },
         "responses_models.py": {
-          "sha256": "17d3b5669d251578cc139266bbddd2543f06089ad44cf1fa9e57384f90b1b6f2",
+          "sha256": "cc6428c5bba7ad10c97b28c973a3af6ecad5e8342cd40ae7c54a0221def9fddf",
           "verified": true
         }
       },
