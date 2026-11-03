@@ -2,8 +2,8 @@
   "schema": "rapp-rar-stack/1.2",
   "name": "grail-layers",
   "display_name": "Grail layers",
-  "version": "1.2.1",
-  "purpose": "Updates for every Brainstem that install over the unchanged grail and can fail without breaking it. A supervisor applies each layer in memory at start, probes /chat, and falls back to plain grail on any failure. First layer: Responses-API models (gpt-6.1-sol, gpt-6-luna) work in the unchanged grail.",
+  "version": "1.2.2",
+  "purpose": "Updates for every Brainstem that install over the unchanged grail and can fail without breaking it. A supervisor applies each layer in memory at start, probes /chat, and falls back to plain grail on any failure. First layer: Responses-API models (gpt-6.1-sol, gpt-6-luna) work in the unchanged grail. Second layer: every chat turn is recorded in the owner's Brainstem Journal by default (journal_tap). Third layer: models running on this machine (Ollama) appear in the model list and answer chat, tools included (local_models).",
   "install": {
     "type": "grail_layers",
     "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/install.sh | bash",
@@ -24,6 +24,32 @@
         "what": "Models that only speak the Responses API (gpt-6.1-sol, gpt-6-luna) become usable in the unchanged grail."
       },
       {
+        "id": "@kody-w/journal_tap",
+        "kind": "layer",
+        "point": "chat",
+        "file": "journal_tap.py",
+        "sha256": "4ff6d526400ca0c4ef5e5058d82e6b7d3d6d9ff35a44544212ed3a7ab7434f6d",
+        "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/journal_tap.py",
+        "proven_grail": [
+          "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
+          "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
+        ],
+        "what": "Every chat turn (plain and streamed) is recorded in the Brainstem Journal on this device, by default; pause it from chat. No journal running: nothing happens."
+      },
+      {
+        "id": "@kody-w/local_models",
+        "kind": "layer",
+        "point": "provider",
+        "file": "local_models.py",
+        "sha256": "884148aa85d3c405bfe1d642d0c309d6100fa6e71a03a05c2d468324ab56c3f8",
+        "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/local_models.py",
+        "proven_grail": [
+          "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
+          "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
+        ],
+        "what": "Models running on this machine (Ollama, http://127.0.0.1:11434) join the model list as ollama/<name> and answer chat with tools, no Copilot needed for them. No Ollama: nothing changes."
+      },
+      {
         "id": "@kody-w/lispy_brainstem",
         "kind": "kernel",
         "point": "kernel",
@@ -38,7 +64,9 @@
       }
     ],
     "seed": [
-      "@kody-w/responses_models"
+      "@kody-w/responses_models",
+      "@kody-w/journal_tap",
+      "@kody-w/local_models"
     ],
     "parts_note": "rapp-rar-stack/1.2: `parts` is the current list (publisher-scoped ids, kind layer|kernel, one point each, sha256 + locator; the installer seeds the device's rapp/1 chain from it). `layers`, `default_enabled` and `proven_grail` are kept as an alias of `parts` for older installers; status: alias, retiring when a measured check shows zero readers. `seed` (1.2.1) names the parts the installer seeds; the rest are published for \"update my brainstem with \u2026\".",
     "layers": [
@@ -66,6 +94,14 @@
     "lispy_brainstem.py": {
       "size": 50358,
       "sha256": "311e2162e397f7df5fe9262684f737178acdc0306b0a3a5b9cbd4df6b420a50b"
+    },
+    "journal_tap.py": {
+      "size": 6143,
+      "sha256": "4ff6d526400ca0c4ef5e5058d82e6b7d3d6d9ff35a44544212ed3a7ab7434f6d"
+    },
+    "local_models.py": {
+      "size": 3625,
+      "sha256": "884148aa85d3c405bfe1d642d0c309d6100fa6e71a03a05c2d468324ab56c3f8"
     }
   }
 }
