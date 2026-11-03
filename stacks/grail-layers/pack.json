@@ -1,20 +1,36 @@
 {
-  "schema": "rapp-rar-stack/1.1",
+  "schema": "rapp-rar-stack/1.2",
   "name": "grail-layers",
   "display_name": "Grail layers",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "purpose": "Updates for every Brainstem that install over the unchanged grail and can fail without breaking it. A supervisor applies each layer in memory at start, probes /chat, and falls back to plain grail on any failure. First layer: Responses-API models (gpt-6.1-sol, gpt-6-luna) work in the unchanged grail.",
   "install": {
     "type": "grail_layers",
     "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/install.sh | bash",
     "uninstall": "curl -fsSL https://kody-w.github.io/grail-layers/uninstall.sh | bash",
+    "supervisor": "https://kody-w.github.io/grail-layers/grail_layers.py",
+    "parts": [
+      {
+        "id": "@kody-w/responses_models",
+        "kind": "layer",
+        "point": "provider",
+        "file": "responses_models.py",
+        "sha256": "77343ad7f8edfdf42ecddc2727ccb2919f15bd75f944ec7b260d439ed1f06e60",
+        "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/responses_models.py",
+        "proven_grail": [
+          "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
+          "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
+        ],
+        "what": "Models that only speak the Responses API (gpt-6.1-sol, gpt-6-luna) become usable in the unchanged grail."
+      }
+    ],
+    "parts_note": "rapp-rar-stack/1.2: `parts` is the current list (publisher-scoped ids, kind layer|kernel, one point each, sha256 + locator; the installer seeds the device's rapp/1 chain from it). `layers`, `default_enabled` and `proven_grail` are kept as an alias of `parts` for older installers; status: alias, retiring when a measured check shows zero readers.",
     "layers": [
       "responses_models.py"
     ],
     "default_enabled": [
       "responses_models"
     ],
-    "supervisor": "https://kody-w.github.io/grail-layers/grail_layers.py",
     "proven_grail": {
       "responses_models.py": [
         "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
@@ -24,8 +40,8 @@
   },
   "files": {
     "README.md": {
-      "size": 736,
-      "sha256": "fbca2953ebadfebfaee320b879738a9299068a60d898ddf8f1d97eaa600b7713"
+      "size": 1129,
+      "sha256": "26ca0308afa01b260db3d8f84590bd8ddd6603fa38bb1294a99a2ee478a8d936"
     },
     "responses_models.py": {
       "size": 5902,
