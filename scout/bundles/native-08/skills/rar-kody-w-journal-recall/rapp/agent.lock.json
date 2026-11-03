@@ -1,0 +1,65 @@
+{
+  "agent": "@kody-w/journal_recall_agent",
+  "agent_file": "journal_recall_agent.py",
+  "agent_sha256": "f97b91e25360b4feb4cd29957e5615339d25394198093d859eaa5e8e45977fac",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "JournalRecallAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "memory",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Finds earlier conversations in the owner's Brainstem Journal (what did I ask about X, what did we say last Tuesday) and pauses or resumes the journal's recording from chat.",
+    "display_name": "Journal Recall",
+    "name": "@kody-w/journal_recall_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "journal",
+      "memory",
+      "history",
+      "search",
+      "recall"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "JournalRecall",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "enum": [
+          "recall",
+          "pause_logging",
+          "resume_logging",
+          "status"
+        ],
+        "type": "string"
+      },
+      "n": {
+        "description": "for recall: how many matches (default 10)",
+        "type": "integer"
+      },
+      "query": {
+        "description": "for recall: the words to look for (topic, name, phrase)",
+        "type": "string"
+      },
+      "since": {
+        "description": "for recall: ISO date or datetime, e.g. 2026-11-01",
+        "type": "string"
+      },
+      "until": {
+        "description": "for recall: ISO date or datetime",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}
