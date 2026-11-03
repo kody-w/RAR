@@ -12,8 +12,8 @@
     },
     "summond.py": {
       "purpose": "The sidecar. Fetched and sha256-checked by summon_agent.py from RAR; never run unverified.",
-      "size": 9084,
-      "sha256": "0f9ee1d1b6a6a6fed022f65fefae899a1f638f0070c32872e0156305f716da00"
+      "size": 15108,
+      "sha256": "3906506baf63df7bea455404b35c9516655c5d9f94f4512278258009f600fac5"
     }
   },
   "capabilities": [

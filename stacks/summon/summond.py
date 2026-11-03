@@ -12,7 +12,8 @@ Listens ONLY on loopback and this Mac's Tailscale address (never 0.0.0.0), so on
 own tailnet devices can reach it. Pair a phone once: open /pair on this Mac and scan.
 """
 PAGES = "https://kody-w.github.io/RAR"
-import html, json, hashlib, shutil, subprocess, sys, threading, time, urllib.request, uuid
+import html, json, hashlib, os, shutil, subprocess, sys, threading, time, urllib.request, uuid
+from pathlib import Path
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 
 BRAIN = sys.argv[1] if len(sys.argv) > 1 else "http://127.0.0.1:7071"
@@ -42,7 +43,11 @@ def plan(kind, key):
     """What would be installed: list of (install_name, url, sha256), plus a card to show."""
     if kind == "seed":
         e = registry().get(key)
-        if not e:
+        if not e:  # a distro's seed: summon the whole stack
+            pk = next((p for p in get(f"{RAR}/registry.json").get("stack_packs", [])
+                       if str(p.get("_seed")) == key), None)
+            if pk:
+                return plan("stack", pk["name"])
             raise LookupError(f"no card with seed {key}")
         if e.get("_lifecycle") != "notarized":
             raise PermissionError(f"{e['name']} is not notarized; refusing to summon")
@@ -56,7 +61,8 @@ def plan(kind, key):
     if not pk.get("_verified"):  # RAR could not vouch for these bytes: refuse
         raise PermissionError(f"stack {key} is not verified in RAR; refusing to summon")
     files = [(n, f"{RAR}/{pk['path']}/{n}", m["sha256"]) for n, m in pk["files"].items() if n.endswith("_agent.py")]
-    return ({"name": pk["display_name"], "by": "stack", "what": pk["purpose"], "id": pk["path"]}, files)
+    return ({"name": pk["display_name"], "by": "stack", "what": pk["purpose"], "id": pk["path"],
+             "_pack": pk}, files)
 
 
 def tailnet():
@@ -100,8 +106,128 @@ def import_file(name, payload, sha):
         return e.code, json.loads(e.read() or b"{}")
 
 
+DISTROS = Path.home() / ".brainstem" / "distros"
+KERNEL_FILES = ["brainstem.py", "local_storage.py", "VERSION", "requirements.txt", "index.html"]
+_live = {}  # name -> {"port", "pid", "proxy"}
+
+
+def port_owners(port):
+    out = subprocess.run(["lsof", "-tnP", f"-iTCP:{port}", "-sTCP:LISTEN"], capture_output=True, text=True).stdout.split()
+    return {int(x) for x in out}
+
+
+def port_owner(port):
+    """Some PID listening on the port, or None (use port_owners to test a specific PID:
+    a distro's port is held by both its Brainstem and this sidecar's tailnet forwarder)."""
+    o = port_owners(port)
+    return min(o) if o else None
+
+
+def forward(listen_ip, port):
+    """Tailnet-only door to a distro Brainstem that itself listens only on loopback."""
+    import socket
+    srv = socket.socket(); srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    srv.bind((listen_ip, port)); srv.listen(32)
+
+    def pipe(a, b):
+        try:
+            while (d := a.recv(65536)):
+                b.sendall(d)
+        except OSError:
+            pass
+        finally:
+            for x in (a, b):
+                try: x.close()
+                except OSError: pass
+
+    def loop():
+        while True:
+            c, _ = srv.accept()
+            try:
+                u = socket.create_connection(("127.0.0.1", port))
+            except OSError:
+                c.close(); continue
+            threading.Thread(target=pipe, args=(c, u), daemon=True).start()
+            threading.Thread(target=pipe, args=(u, c), daemon=True).start()
+    threading.Thread(target=loop, daemon=True).start()
+
+
+def brain_python():
+    """The interpreter of the process serving the main Brainstem's port."""
+    port = BRAIN.rsplit(":", 1)[-1].strip("/")
+    for pid in port_owners(port):
+        exe = subprocess.run(["ps", "-o", "comm=", "-p", str(pid)], capture_output=True, text=True).stdout.strip()
+        if exe and os.path.isabs(exe) and os.access(exe, os.X_OK):
+            return exe
+    return None
+
+
+def summon_distro(card, pk):
+    """A distro gets its OWN fresh Brainstem: the same pinned kernel (hardlinked, sha-checked),
+    its own agents, soul and memory. The owner's main Brainstem is never touched."""
+    name = pk["name"]
+    if name in _live and _live[name]["pid"] in port_owners(_live[name]["port"]):
+        return {"card": card, "ok": True, "already": True, "chat_url": _live[name]["url"], "results": []}
+    pin = (pk.get("kernel") or {}).get("sha256", "")
+    health = get(f"{BRAIN}/health")
+    kd = Path(health.get("brainstem_dir") or "")
+    if not (kd / "brainstem.py").is_file():
+        raise RuntimeError("could not locate this Brainstem's kernel (is it signed in?)")
+    have = hashlib.sha256((kd / "brainstem.py").read_bytes()).hexdigest()
+    if have != pin:
+        raise PermissionError(f"this distro pins kernel {pin[:12]}, but this Brainstem runs {have[:12]}; refusing")
+    seat = DISTROS / name
+    (seat / "agents").mkdir(parents=True, exist_ok=True)
+    for f in KERNEL_FILES:  # same bytes, same fingerprint, never edited
+        if not (seat / f).exists():
+            os.link(kd / f, seat / f)
+    if not (seat / "agents" / "basic_agent.py").exists():
+        os.link(kd / "agents" / "basic_agent.py", seat / "agents" / "basic_agent.py")
+    (seat / "agents" / "__init__.py").touch()  # beat any same-named site-packages 'agents'
+    for f in (".copilot_token", ".copilot_session"):
+        if (kd / f).exists() and not (seat / f).exists():
+            shutil.copy2(kd / f, seat / f); os.chmod(seat / f, 0o600)
+    results = []
+    for fname, meta in pk["files"].items():
+        if not (fname.endswith("_agent.py") or fname == "soul.md"):
+            continue
+        body = get(f"{RAR}/{pk['path']}/{fname}", binary=True)
+        ok = hashlib.sha256(body).hexdigest() == meta["sha256"]
+        results.append({"file": fname, "ok": ok, **({} if ok else {"error": "sha mismatch"})})
+        if ok:
+            (seat / ("soul.md" if fname == "soul.md" else f"agents/{fname}")).write_bytes(body)
+    if not all(r["ok"] for r in results):
+        return {"card": card, "ok": False, "results": results}
+    ip, dns = tailnet()
+    port = next(p for p in range(7500, 7600) if port_owner(p) is None)
+    env = {**os.environ, "PORT": str(port), "PYTHONUNBUFFERED": "1",
+           "AGENTS_PATH": str(seat / "agents"), "SOUL_PATH": str(seat / "soul.md"),
+           "BRAINSTEM_ALLOWED_HOSTS": ",".join(h for h in (dns, ip) if h)}
+    py = brain_python() or sys.executable  # the main Brainstem's own Python has the kernel's packages
+    proc = subprocess.Popen([py, str(seat / "brainstem.py")], cwd=seat, env=env,
+                            stdout=open(seat / "brainstem.log", "w"), stderr=subprocess.STDOUT,
+                            start_new_session=True)
+    for _ in range(300):
+        if proc.poll() is not None:
+            raise RuntimeError(f"the distro's Brainstem exited; see {seat / 'brainstem.log'}")
+        if proc.pid in port_owners(port):
+            break
+        time.sleep(0.2)
+    else:
+        proc.kill(); raise RuntimeError("the distro's Brainstem did not come up in time")
+    if ip:
+        forward(ip, port)
+    url = f"http://{dns}:{port}/" if ip else f"http://127.0.0.1:{port}/"
+    _live[name] = {"port": port, "pid": proc.pid, "url": url}
+    (seat / "state.json").write_text(json.dumps({"port": port, "pid": proc.pid, "url": url, "kernel": have}))
+    return {"card": card, "ok": True, "results": results, "chat_url": url}
+
+
 def summon(kind, key):
     card, files = plan(kind, key)
+    pk = card.pop("_pack", None)
+    if pk and pk.get("kernel"):
+        return summon_distro(card, pk)
     results = []
     for name, url, sha in files:
         payload = get(url, binary=True)
@@ -124,6 +250,7 @@ button{{width:100%;padding:16px;margin-top:18px;font-size:18px;border:0;border-r
 <button onclick="go()">Summon</button><div id=out></div>
 <script>async function go(){{const o=document.getElementById('out');o.textContent='Summoning…';
 const r=await fetch(location.pathname,{{method:'POST'}});const j=await r.json();
+if(j.ok&&j.chat_url){{o.textContent='Summoned: '+j.card.name+' — opening its Brainstem…';location.href=j.chat_url;return}}
 o.textContent=j.ok?('Summoned: '+j.card.name+' — ready in your next chat'):('Not installed: '+JSON.stringify(j.results||j.error))}}</script>"""
 
 

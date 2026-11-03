@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-03T02:59:34.090365+00:00",
+  "generated_at": "2026-11-03T03:37:11.222215+00:00",
   "stats": {
     "total_agents": 223,
     "total_swarms": 2,
@@ -13728,6 +13728,40 @@
       "_incantation": "FORGE FUSE PANTHER GROOM CLANG ARISE STAMP"
     },
     {
+      "name": "rooms",
+      "display_name": "Rooms (test)",
+      "version": "0.1.0",
+      "schema": "rapp-rar-stack/1.1",
+      "path": "stacks/rooms",
+      "purpose": "Test distro: group chat of AI seats on one Brainstem, each with its own personality and private memory; turn budgets, pick-up-where-it-stopped and hand-back to the owner.",
+      "files": {
+        "rooms_agent.py": {
+          "sha256": "cddfc6c10aec505072bcc72fa34c964874ee4cb579f3f6446500dcd8f4f00ec0",
+          "verified": true
+        },
+        "seat_notes_agent.py": {
+          "sha256": "caf790f5a9f9a0004d453d467e373ea41d12e15122b0a120e4c56276fa164e10",
+          "verified": true
+        },
+        "soul.md": {
+          "sha256": "ba97a0b788f107ba5b9af71fb8467443c8ef284f18decf7ab66e66e82796af50",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "075b4db40462e30d74c0b6256a1b1511120e52785d9140db34dc96552c14eecc",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "kernel": {
+        "sha256": "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
+        "file": "brainstem.py",
+        "version": "0.6.16"
+      },
+      "_seed": 17920793872363962368,
+      "_incantation": "FORGE FUSE PANTHER BLOOM EFFACE DROIT BIND"
+    },
+    {
       "name": "summon",
       "display_name": "Summon (scan to install)",
       "version": "1.0.0",
@@ -13740,7 +13774,7 @@
           "verified": true
         },
         "summond.py": {
-          "sha256": "0f9ee1d1b6a6a6fed022f65fefae899a1f638f0070c32872e0156305f716da00",
+          "sha256": "3906506baf63df7bea455404b35c9516655c5d9f94f4512278258009f600fac5",
           "verified": true
         }
       },
