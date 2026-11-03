@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-03T03:56:45.004898+00:00",
+  "generated_at": "2026-11-03T04:09:45.395028+00:00",
   "stats": {
     "total_agents": 223,
     "total_swarms": 2,
@@ -13656,7 +13656,7 @@
           "verified": true
         },
         "twin_egg_hatcher_agent.py": {
-          "sha256": "9492c71d714fe8763cc46e9cc22ceeabe6cf3f0698738513eccab833aac359ee",
+          "sha256": "04a935dc7faf169bfc1c0a34fa06d1393b536080fdc52668f3c17c6d3ab11ce5",
           "verified": true
         }
       },

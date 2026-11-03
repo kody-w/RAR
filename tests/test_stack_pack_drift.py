@@ -27,3 +27,35 @@ def test_declared_copies_match_their_source():
             if meta.get("source") and src.is_file():
                 assert (stack / name).read_bytes() == src.read_bytes(), \
                     f"{stack.name}: {name} drifted from its declared source {src}"
+
+
+def _identity(path):
+    import ast
+    try:
+        tree = ast.parse(path.read_text())
+    except (SyntaxError, UnicodeDecodeError):
+        return None
+    for node in tree.body:
+        if isinstance(node, ast.Assign) and any(getattr(t, "id", "") == "__manifest__" for t in node.targets):
+            try:
+                m = ast.literal_eval(node.value)
+                return (m.get("name"), m.get("version"))
+            except ValueError:
+                return None
+    return None
+
+
+def test_one_name_and_version_means_one_set_of_bytes():
+    """Like npm/PyPI: a published version is immutable. A stack may carry a different
+    version of a catalog agent, but never different bytes under the same version."""
+    catalog = {}
+    for f in Path("agents").rglob("*_agent.py"):
+        ident = _identity(f)
+        if ident and ident[0]:
+            catalog[ident] = f
+    for stack in STACKS:
+        for f in stack.glob("*_agent.py"):
+            ident = _identity(f)
+            if ident in catalog:
+                assert f.read_bytes() == catalog[ident].read_bytes(), \
+                    f"{stack.name}: {f.name} reuses {ident[0]} {ident[1]} with different contents; bump its version"
