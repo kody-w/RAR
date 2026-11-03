@@ -10,7 +10,7 @@ Brainstem kernel changes.
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/summon_agent",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Summon",
     "description": "Starts a sidecar so scanning a RAR card's QR code on your phone installs that card into this Brainstem over Tailscale.",
     "author": "kody-w",
@@ -28,6 +28,7 @@ import signal
 import subprocess
 import sys
 import time
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -59,12 +60,15 @@ class SummonAgent(BasicAgent):
             "name": self.name,
             "description": ("Set up or check scan-to-summon: lets the owner scan a RAR card's QR code "
                             "with their phone to install it into this Brainstem. Use action 'start' to "
-                            "turn it on and get the pairing page, 'status' to check it, 'stop' to turn it off."),
+                            "turn it on and get the pairing page, 'status' to check it, 'stop' to turn it off. "
+                            "'distros' lists summoned distros; 'dismiss' (name) stops one and moves it, memory "
+                            "included, to the attic; 'restore' (name) brings the newest dismissed copy back."),
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "action": {"type": "string", "enum": ["start", "status", "stop"],
-                               "description": "start, status or stop the summon sidecar"},
+                    "action": {"type": "string", "enum": ["start", "status", "stop", "distros", "dismiss", "restore"],
+                               "description": "what to do"},
+                    "name": {"type": "string", "description": "distro name, for dismiss or restore"},
                 },
                 "required": ["action"],
             },
@@ -78,6 +82,28 @@ class SummonAgent(BasicAgent):
         pid = int(pidf.read_text()) if pidf.exists() else None
         running = pid is not None and _port_owner(port) == pid
 
+        if action in ("distros", "dismiss", "restore"):
+            if not running:
+                return "Summon is off, so there are no summoned distros to manage. Ask me to start it."
+            name = (kwargs.get("name") or "").strip().lower()
+            if action == "distros":
+                req = urllib.request.Request(f"http://127.0.0.1:{port}/distros")
+            else:
+                if not name:
+                    return f"Which distro should I {action}?"
+                req = urllib.request.Request(f"http://127.0.0.1:{port}/{action}/{urllib.parse.quote(name)}",
+                                             data=b"", method="POST")
+            out = json.loads(urllib.request.urlopen(req, timeout=180).read())
+            if action == "distros":
+                on = [f"{d['name']} ({'running' if d['running'] else 'stopped'})" for d in out["summoned"]]
+                return (f"Summoned: {', '.join(on) or 'none'}. "
+                        f"In the attic: {', '.join(out['dismissed']) or 'none'}.")
+            if not out.get("ok"):
+                return f"Couldn't {action} {name}: {out.get('error')}"
+            if action == "dismiss":
+                return f"{name} is stopped and moved to the attic with its memory. Say 'restore {name}' to bring it back."
+            return (f"{name} is back with its memory. On this Mac open {out.get('local_url')}; "
+                    "on your phone, scan its card again.")
         if action == "status":
             return (f"Summon is on. Pair your phone at http://127.0.0.1:{port}/pair" if running
                     else "Summon is off. Ask me to start it.")
@@ -107,6 +133,7 @@ class SummonAgent(BasicAgent):
 
         proc = subprocess.Popen(
             [sys.executable, str(script), f"http://127.0.0.1:{_brain_port()}", str(port), RAR_BASE],
+            env={**os.environ, "SUMMON_HOME": str(_home())},
             stdout=open(_home() / "summond.log", "w"), stderr=subprocess.STDOUT,
             start_new_session=True)
         for _ in range(50):

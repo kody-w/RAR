@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-03T04:09:45.395028+00:00",
+  "generated_at": "2026-11-03T04:38:13.778651+00:00",
   "stats": {
     "total_agents": 223,
     "total_swarms": 2,
@@ -13665,6 +13665,27 @@
       "_incantation": "PLUME DOMINION LUSTER DINT JADE OMEN BIND"
     },
     {
+      "name": "judge",
+      "display_name": "Regression Judge",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.1",
+      "path": "stacks/judge",
+      "purpose": "Catches regressions: record questions and answers once, then after any change replay them on the live Brainstem and a teacher grades each new answer against the original (same, better, worse, broken), with a side-by-side report.",
+      "files": {
+        "regression_judge_agent.py": {
+          "sha256": "bd66af0633b21b789e4c9281aff1a10113a7e06dd6ae885f92a7ac41987d96de",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "8358ea234c1069be0ff189220594a45c72beac90678338f46a047ed64137279a",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "_seed": 17889783379558146048,
+      "_incantation": "FORGE CHISEL PANTHER BULWARK WISE PACK BIND"
+    },
+    {
       "name": "microsoft-365-team",
       "display_name": "Microsoft 365 Team Starter",
       "version": "1.0.0",
@@ -13770,11 +13791,11 @@
       "purpose": "Scan a RAR card's QR code with your phone and it installs into your own Brainstem. One agent starts a small sidecar beside the unchanged kernel; it listens only on this Mac and its Tailscale address, and installs through the Brainstem's own /agents/import, which checks every fingerprint.",
       "files": {
         "summon_agent.py": {
-          "sha256": "577d7553a194b5b57496770d63d61cdadcbad51c91f7678b01472ea43019bb59",
+          "sha256": "a57e473a727ec5407e23f9692e7cc1e4423bd7650b5fdb15ec4670f07b126e64",
           "verified": true
         },
         "summond.py": {
-          "sha256": "3906506baf63df7bea455404b35c9516655c5d9f94f4512278258009f600fac5",
+          "sha256": "b45d7c0d5ee439660e2ac2f70a65bd26828e65f7e5de1a20e9fefebfba570836",
           "verified": true
         }
       },

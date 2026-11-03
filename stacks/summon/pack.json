@@ -7,13 +7,13 @@
   "files": {
     "summon_agent.py": {
       "purpose": "Drop into (or summon into) a Brainstem's agents/. Say 'start summon' to turn scan-to-summon on.",
-      "size": 5188,
-      "sha256": "577d7553a194b5b57496770d63d61cdadcbad51c91f7678b01472ea43019bb59"
+      "size": 7043,
+      "sha256": "a57e473a727ec5407e23f9692e7cc1e4423bd7650b5fdb15ec4670f07b126e64"
     },
     "summond.py": {
       "purpose": "The sidecar. Fetched and sha256-checked by summon_agent.py from RAR; never run unverified.",
-      "size": 15108,
-      "sha256": "3906506baf63df7bea455404b35c9516655c5d9f94f4512278258009f600fac5"
+      "size": 23447,
+      "sha256": "b45d7c0d5ee439660e2ac2f70a65bd26828e65f7e5de1a20e9fefebfba570836"
     }
   },
   "capabilities": [

@@ -40,7 +40,16 @@
 <script>
 (function () {
   "use strict";
-  var KEY = "rar.summon.sidecar";
+  var KEY = "rar.summon.sidecar", PKEY = "rar.summon.key";
+  // A pairing link is "pair=<sidecar-url>&k=<pairing key>"; the key proves this phone was paired at the Mac.
+  function savePair(s) {
+    var m = String(s).replace(/^.*#?pair=/, "").split("&k=");
+    var u = safeUrl(m[0]);
+    if (!u) { return null; }
+    localStorage.setItem(KEY, u);
+    if (m[1]) { localStorage.setItem(PKEY, m[1]); } else { localStorage.removeItem(PKEY); }
+    return u;
+  }
   var hash = decodeURIComponent((location.hash || "").replace(/^#/, ""));
   var card = document.getElementById("card");
   var action = document.getElementById("action");
@@ -50,8 +59,7 @@
   function safeUrl(u) { try { var x = new URL(u); return (x.protocol === "http:" || x.protocol === "https:") ? x.origin : null; } catch (e) { return null; } }
 
   if (hash.indexOf("pair=") === 0) {
-    var url = safeUrl(hash.slice(5));
-    if (url) { localStorage.setItem(KEY, url); }
+    var url = savePair(hash);
     card.innerHTML = url
       ? "<h1>Paired</h1><p>This phone now summons into <b>" + esc(url) + "</b>. Scan any RAR card to summon it.</p>"
       : "<h1>Pairing failed</h1><p class='warn'>That pairing link is not a valid address.</p>";
@@ -130,13 +138,13 @@
       action.innerHTML = "<button disabled>Summon</button>";
     } else if (side) {
       action.innerHTML = "<a class='btn' id='go'>Summon into my Brainstem</a>";
-      document.getElementById("go").href = side + "/" + path;
+      var pk = localStorage.getItem(PKEY);
+      document.getElementById("go").href = side + "/" + path + (pk ? "?k=" + encodeURIComponent(pk) : "");
     } else {
       action.innerHTML = "<button disabled>Summon</button><p class='by'>Pair this phone with your Brainstem first: open its pairing QR code, or paste its summon address:</p>" +
-        "<input id='pair' placeholder='http://your-mac:7390'><button id='save'>Pair</button>";
+        "<input id='pair' placeholder='paste the pairing link from your Mac'><button id='save'>Pair</button>";
       document.getElementById("save").onclick = function () {
-        var u = safeUrl(document.getElementById("pair").value.trim());
-        if (u) { localStorage.setItem(KEY, u); location.reload(); }
+        if (savePair(document.getElementById("pair").value.trim())) { location.reload(); }
       };
     }
   }).catch(function () {

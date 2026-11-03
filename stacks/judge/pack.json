@@ -1,0 +1,24 @@
+{
+  "schema": "rapp-rar-stack/1.1",
+  "name": "judge",
+  "display_name": "Regression Judge",
+  "version": "1.0.0",
+  "purpose": "Catches regressions: record questions and answers once, then after any change replay them on the live Brainstem and a teacher grades each new answer against the original (same, better, worse, broken), with a side-by-side report.",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "regression_judge_agent.py"
+    ],
+    "destination": "agents/"
+  },
+  "files": {
+    "regression_judge_agent.py": {
+      "size": 16368,
+      "sha256": "bd66af0633b21b789e4c9281aff1a10113a7e06dd6ae885f92a7ac41987d96de"
+    },
+    "README.md": {
+      "size": 796,
+      "sha256": "8358ea234c1069be0ff189220594a45c72beac90678338f46a047ed64137279a"
+    }
+  }
+}

@@ -12,7 +12,8 @@ Listens ONLY on loopback and this Mac's Tailscale address (never 0.0.0.0), so on
 own tailnet devices can reach it. Pair a phone once: open /pair on this Mac and scan.
 """
 PAGES = "https://kody-w.github.io/RAR"
-import html, json, hashlib, os, shutil, subprocess, sys, threading, time, urllib.request, uuid
+import hmac, html, json, hashlib, os, re, secrets, shutil, subprocess, sys, threading, time, urllib.request, uuid
+from urllib.parse import parse_qs, urlsplit
 from pathlib import Path
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 
@@ -77,11 +78,29 @@ def tailnet():
         return None, None
 
 
+HOME = Path(os.getenv("SUMMON_HOME") or Path(__file__).resolve().parent)
+NAME_OK = re.compile(r"^[a-z0-9][a-z0-9_-]{0,63}$")
+
+
+def pair_key():
+    """One secret per sidecar, given to a phone once through the pairing QR on this Mac.
+    Every request from the tailnet must carry it; delete pair.key to un-pair every phone."""
+    f = HOME / "pair.key"
+    if not f.exists():
+        f.write_text(secrets.token_urlsafe(24))
+        os.chmod(f, 0o600)
+    return f.read_text().strip()
+
+
+def key_matches(given):
+    return bool(given) and hmac.compare_digest(given.encode(), pair_key().encode())
+
+
 def pair_page():
     ip, name = tailnet()
     if not ip:
         return "<p>Tailscale is not running on this Mac, so phones can't reach it yet. Start Tailscale, then reload.</p>"
-    link = f"{PAGES}/s.html#pair=http://{name}:{PORT}"
+    link = f"{PAGES}/s.html#pair=http://{name}:{PORT}&k={pair_key()}"
     svg = ""
     if shutil.which("qrencode"):
         svg = subprocess.run(["qrencode", "-t", "SVG", "-m", "2", "-o", "-", link],
@@ -123,8 +142,36 @@ def port_owner(port):
     return min(o) if o else None
 
 
+def _gate(c):
+    """Read one request head from the tailnet. Let it through only with the pairing key:
+    ?k=<key> once (answered with a cookie and a redirect), then the cookie on every request."""
+    buf = b""
+    while b"\r\n\r\n" not in buf and len(buf) < 65536:
+        d = c.recv(65536)
+        if not d:
+            return None
+        buf += d
+    head = buf.split(b"\r\n\r\n", 1)[0].decode("latin-1")
+    parts = head.split("\r\n", 1)[0].split(" ")
+    target = urlsplit(parts[1] if len(parts) > 1 else "/")
+    cookie = re.search(r"(?:^|[;\s])summon_k=([A-Za-z0-9_-]+)", head)
+    if key_matches(parse_qs(target.query).get("k", [""])[0]):
+        rest = "&".join(f"{k}={v[0]}" for k, v in parse_qs(target.query).items() if k != "k")
+        loc = target.path + ("?" + rest if rest else "")
+        c.sendall((f"HTTP/1.1 302 Found\r\nLocation: {loc}\r\nSet-Cookie: summon_k={pair_key()}; Path=/; "
+                   "HttpOnly; SameSite=Strict; Max-Age=2592000\r\nContent-Length: 0\r\nConnection: close\r\n\r\n").encode())
+        return None
+    if cookie and key_matches(cookie.group(1)):
+        return buf
+    msg = b"This device is not paired. Open /pair on the Mac running your Brainstem and scan it."
+    c.sendall(b"HTTP/1.1 403 Forbidden\r\nContent-Type: text/plain\r\nConnection: close\r\nContent-Length: "
+              + str(len(msg)).encode() + b"\r\n\r\n" + msg)
+    return None
+
+
 def forward(listen_ip, port):
-    """Tailnet-only door to a distro Brainstem that itself listens only on loopback."""
+    """Tailnet-only, key-gated door to a distro Brainstem that itself listens only on loopback.
+    (The kernel trusts loopback callers, so without this gate the tailnet would inherit that trust.)"""
     import socket
     srv = socket.socket(); srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     srv.bind((listen_ip, port)); srv.listen(32)
@@ -140,16 +187,34 @@ def forward(listen_ip, port):
                 try: x.close()
                 except OSError: pass
 
+    def serve(c):
+        try:
+            c.settimeout(30)
+            first = _gate(c)
+            c.settimeout(None)
+        except OSError:
+            first = None
+        if first is None:
+            try: c.close()
+            except OSError: pass
+            return
+        try:
+            u = socket.create_connection(("127.0.0.1", port))
+        except OSError:
+            c.close(); return
+        u.sendall(first)
+        threading.Thread(target=pipe, args=(c, u), daemon=True).start()
+        pipe(u, c)
+
     def loop():
         while True:
-            c, _ = srv.accept()
             try:
-                u = socket.create_connection(("127.0.0.1", port))
-            except OSError:
-                c.close(); continue
-            threading.Thread(target=pipe, args=(c, u), daemon=True).start()
-            threading.Thread(target=pipe, args=(u, c), daemon=True).start()
+                c, _ = srv.accept()
+            except OSError:  # the door was closed (dismiss)
+                return
+            threading.Thread(target=serve, args=(c,), daemon=True).start()
     threading.Thread(target=loop, daemon=True).start()
+    return srv
 
 
 def brain_python():
@@ -167,7 +232,8 @@ def summon_distro(card, pk):
     its own agents, soul and memory. The owner's main Brainstem is never touched."""
     name = pk["name"]
     if name in _live and _live[name]["pid"] in port_owners(_live[name]["port"]):
-        return {"card": card, "ok": True, "already": True, "chat_url": _live[name]["url"], "results": []}
+        return {"card": card, "ok": True, "already": True, "results": [],
+                "chat_url": _live[name]["url"] + (f"?k={pair_key()}" if _live[name].get("srv") else "")}
     pin = (pk.get("kernel") or {}).get("sha256", "")
     health = get(f"{BRAIN}/health")
     kd = Path(health.get("brainstem_dir") or "")
@@ -198,11 +264,18 @@ def summon_distro(card, pk):
             (seat / ("soul.md" if fname == "soul.md" else f"agents/{fname}")).write_bytes(body)
     if not all(r["ok"] for r in results):
         return {"card": card, "ok": False, "results": results}
+    (seat / "pack.json").write_text(json.dumps(pk, indent=1))
+    return {"card": card, "results": results, **launch(seat, name, have)}
+
+
+def launch(seat, name, have):
+    """Start a distro's Brainstem from its folder and open its key-gated tailnet door."""
     ip, dns = tailnet()
     port = next(p for p in range(7500, 7600) if port_owner(p) is None)
     env = {**os.environ, "PORT": str(port), "PYTHONUNBUFFERED": "1",
            "AGENTS_PATH": str(seat / "agents"), "SOUL_PATH": str(seat / "soul.md"),
            "BRAINSTEM_ALLOWED_HOSTS": ",".join(h for h in (dns, ip) if h)}
+    env.pop("BRAINSTEM_LAN_MODE", None)  # the distro listens on loopback only; the gated door is its only way in
     py = brain_python() or sys.executable  # the main Brainstem's own Python has the kernel's packages
     proc = subprocess.Popen([py, str(seat / "brainstem.py")], cwd=seat, env=env,
                             stdout=open(seat / "brainstem.log", "w"), stderr=subprocess.STDOUT,
@@ -215,12 +288,91 @@ def summon_distro(card, pk):
         time.sleep(0.2)
     else:
         proc.kill(); raise RuntimeError("the distro's Brainstem did not come up in time")
-    if ip:
-        forward(ip, port)
+    srv = forward(ip, port) if ip else None
     url = f"http://{dns}:{port}/" if ip else f"http://127.0.0.1:{port}/"
-    _live[name] = {"port": port, "pid": proc.pid, "url": url}
+    _live[name] = {"port": port, "pid": proc.pid, "url": url, "srv": srv}
     (seat / "state.json").write_text(json.dumps({"port": port, "pid": proc.pid, "url": url, "kernel": have}))
-    return {"card": card, "ok": True, "results": results, "chat_url": url}
+    return {"ok": True, "chat_url": url + (f"?k={pair_key()}" if ip else ""),
+            "local_url": f"http://127.0.0.1:{port}/"}
+
+
+ATTIC = DISTROS.parent / "distros-attic"
+
+
+def _seat_pids(seat):
+    """Processes running a kernel from inside this distro's folder (its Brainstem and any helpers)."""
+    out = subprocess.run(["ps", "-axo", "pid=,command="], capture_output=True, text=True).stdout
+    mark = str(seat) + "/"
+    return [int(l.split(None, 1)[0]) for l in out.splitlines()
+            if mark in l and int(l.split(None, 1)[0]) != os.getpid()]
+
+
+def list_distros():
+    rows = []
+    for d in sorted(DISTROS.iterdir()) if DISTROS.is_dir() else []:
+        st = json.loads((d / "state.json").read_text()) if (d / "state.json").exists() else {}
+        on = bool(st) and st.get("pid") in port_owners(st.get("port", 0))
+        rows.append({"name": d.name, "running": on, "url": st.get("url") if on else None})
+    attic = sorted(p.name for p in ATTIC.iterdir()) if ATTIC.is_dir() else []
+    return {"ok": True, "summoned": rows, "dismissed": attic}
+
+
+def dismiss(name):
+    """Stop a distro and move its folder (memory included) to the attic. Never deletes; restore undoes it."""
+    seat = DISTROS / name
+    if not NAME_OK.match(name) or not seat.is_dir():
+        return {"ok": False, "error": f"no summoned distro called {name}"}
+    live = _live.pop(name, None)
+    if live and live.get("srv"):
+        live["srv"].close()
+    pids = _seat_pids(seat)
+    for pid in pids:
+        try: os.kill(pid, 15)
+        except ProcessLookupError: pass
+    for _ in range(100):
+        if not _seat_pids(seat):
+            break
+        time.sleep(0.1)
+    for pid in _seat_pids(seat):  # still running after 10s: force it (only processes inside this folder)
+        try: os.kill(pid, 9)
+        except ProcessLookupError: pass
+    time.sleep(0.5)
+    if _seat_pids(seat):
+        return {"ok": False, "error": "some of its processes would not stop, so nothing was moved"}
+    ATTIC.mkdir(parents=True, exist_ok=True)
+    dest = ATTIC / f"{name}-{time.strftime('%Y%m%d-%H%M%S')}"
+    shutil.move(str(seat), dest)
+    return {"ok": True, "stopped": pids, "moved_to": str(dest)}
+
+
+def restore(name):
+    """Bring back the newest dismissed copy of a distro, memory and all, and start it."""
+    if not NAME_OK.match(name):
+        return {"ok": False, "error": "bad name"}
+    if (DISTROS / name).exists():
+        return {"ok": False, "error": f"{name} is already summoned"}
+    copies = sorted(ATTIC.glob(f"{name}-*")) if ATTIC.is_dir() else []
+    if not copies:
+        return {"ok": False, "error": f"no dismissed copy of {name}"}
+    seat = DISTROS / name
+    shutil.move(str(copies[-1]), seat)
+    kd = Path(get(f"{BRAIN}/health").get("brainstem_dir") or "")
+    have = hashlib.sha256((seat / "brainstem.py").read_bytes()).hexdigest()
+    pin = (json.loads((seat / "pack.json").read_text()).get("kernel") or {}).get("sha256") \
+        if (seat / "pack.json").exists() else have
+    if have != pin or have != hashlib.sha256((kd / "brainstem.py").read_bytes()).hexdigest():
+        return {"ok": False, "error": "its kernel no longer matches this Brainstem's; summon it fresh instead"}
+    return {"name": name, **launch(seat, name, have)}
+
+
+def adopt():
+    """On restart, re-open the doors of distros that are still running."""
+    ip, _ = tailnet()
+    for d in DISTROS.iterdir() if DISTROS.is_dir() else []:
+        st = json.loads((d / "state.json").read_text()) if (d / "state.json").exists() else {}
+        if st and st.get("pid") in port_owners(st["port"]):
+            srv = forward(ip, st["port"]) if ip else None
+            _live[d.name] = {**st, "srv": srv}
 
 
 def summon(kind, key):
@@ -249,7 +401,7 @@ button{{width:100%;padding:16px;margin-top:18px;font-size:18px;border:0;border-r
 <div class=by>Installs into your Brainstem at {brain}</div></div>
 <button onclick="go()">Summon</button><div id=out></div>
 <script>async function go(){{const o=document.getElementById('out');o.textContent='Summoning…';
-const r=await fetch(location.pathname,{{method:'POST'}});const j=await r.json();
+const r=await fetch(location.pathname+location.search,{{method:'POST'}});const j=await r.json();
 if(j.ok&&j.chat_url){{o.textContent='Summoned: '+j.card.name+' — opening its Brainstem…';location.href=j.chat_url;return}}
 o.textContent=j.ok?('Summoned: '+j.card.name+' — ready in your next chat'):('Not installed: '+JSON.stringify(j.results||j.error))}}</script>"""
 
@@ -265,7 +417,7 @@ class Server(ThreadingHTTPServer):
 
 class H(BaseHTTPRequestHandler):
     def route(self):
-        p = self.path.strip("/").split("/")
+        p = urlsplit(self.path).path.strip("/").split("/")
         if len(p) == 2 and p[0] == "s":
             return "seed", p[1]
         if len(p) == 3 and p[:2] == ["s", "stack"]:
@@ -276,8 +428,25 @@ class H(BaseHTTPRequestHandler):
         self.send_response(code); self.send_header("Content-Type", ctype); self.end_headers()
         self.wfile.write(body.encode() if isinstance(body, str) else body)
 
+    def local(self):
+        return self.client_address[0] == "127.0.0.1"
+
+    def paired(self):
+        if self.local():
+            return True
+        return key_matches(parse_qs(urlsplit(self.path).query).get("k", [""])[0])
+
+    def not_paired(self):
+        return self.reply(403, "text/html; charset=utf-8",
+                          "<meta name=viewport content='width=device-width'><body style='font-family:-apple-system,sans-serif;max-width:420px;margin:24px auto'>"
+                          "<h2>Pair this phone first</h2><p>Open <b>/pair</b> on the Mac running your Brainstem and scan its code, then scan the card again.</p>")
+
     def do_GET(self):
-        if self.path.rstrip("/") == "/pair":
+        if urlsplit(self.path).path == "/distros":
+            if not self.local():
+                return self.reply(403, "application/json", '{"error":"only on this Mac"}')
+            return self.reply(200, "application/json", json.dumps(list_distros()))
+        if urlsplit(self.path).path.rstrip("/") == "/pair":
             if self.client_address[0] != "127.0.0.1":  # pairing is shown only on this Mac
                 return self.reply(403, "text/plain", "open /pair on the Mac running your Brainstem")
             return self.reply(200, "text/html; charset=utf-8",
@@ -285,6 +454,8 @@ class H(BaseHTTPRequestHandler):
         r = self.route()
         if not r:
             return self.reply(404, "text/plain", "scan a card: /s/<seed> or /s/stack/<name>")
+        if not self.paired():
+            return self.not_paired()
         try:
             card, files = plan(*r)
         except Exception as e:
@@ -293,6 +464,17 @@ class H(BaseHTTPRequestHandler):
         self.reply(200, "text/html; charset=utf-8", PAGE.format(brain=html.escape(BRAIN), **esc))
 
     def do_POST(self):
+        p = urlsplit(self.path).path.strip("/").split("/")
+        if len(p) == 2 and p[0] in ("dismiss", "restore"):
+            if not self.local():
+                return self.reply(403, "application/json", '{"error":"only on this Mac"}')
+            try:
+                out = (dismiss if p[0] == "dismiss" else restore)(p[1])
+            except Exception as e:
+                out = {"ok": False, "error": str(e)}
+            return self.reply(200, "application/json", json.dumps(out))
+        if not self.paired():
+            return self.reply(403, "application/json", '{"ok":false,"error":"this phone is not paired"}')
         r = self.route()
         if not r:
             return self.reply(404, "application/json", '{"error":"bad path"}')
@@ -307,6 +489,7 @@ class H(BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
+    pair_key(); adopt()
     ip, name = tailnet()
     binds = ["127.0.0.1"] + ([ip] if ip else [])
     for addr in binds[1:]:
