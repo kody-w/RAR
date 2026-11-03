@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-03T03:39:29.902074+00:00",
+  "generated_at": "2026-11-03T03:56:45.004898+00:00",
   "stats": {
     "total_agents": 223,
     "total_swarms": 2,
@@ -13652,15 +13652,15 @@
       "purpose": "Drop-in pack that turns one brainstem into a fleet controller for a network of Mac-mini brainstems. Two files: fleet_agent.py (the SSH-driven fleet adapter \u2014 discover, authorize, exec, read, write, tail, chat any twin on any peer, mesh-exec, mesh-chat, plus brainstem-aware actions like provision_bra",
       "files": {
         "fleet_agent.py": {
-          "sha256": "9b4c43f787d3bfb56d87e4f4304b96249c589b872c95b86dcce0651de43b53cc",
-          "verified": false
+          "sha256": "abf5f9d78da5fa58e804f8770fb4eb8462fcf67bdd5e1ec49c107e898e07a9fa",
+          "verified": true
         },
         "twin_egg_hatcher_agent.py": {
-          "sha256": "7456fc537e8b525ae9108bec87deca67e29e21f730a7ce40f3a94a705d3600aa",
-          "verified": false
+          "sha256": "9492c71d714fe8763cc46e9cc22ceeabe6cf3f0698738513eccab833aac359ee",
+          "verified": true
         }
       },
-      "_verified": false,
+      "_verified": true,
       "_seed": 17440304482002819656,
       "_incantation": "PLUME DOMINION LUSTER DINT JADE OMEN BIND"
     },
@@ -13715,15 +13715,15 @@
       "purpose": "Two agents that turn a vanilla brainstem into a full organism host: Twin (summon/hatch/boot/stop/list/inspect \u2014 full digital-twin lifecycle) + EggHatcher (universal .egg cartridge router that introspects manifest.schema/type and dispatches to organism / rapplication / session / neighborhood / estate",
       "files": {
         "twin_agent.py": {
-          "sha256": "8bdf553457025f46ad8e6c3a5c9141823f8541731a868795d30e55700da58450",
-          "verified": false
+          "sha256": "878729c7a59ce520c487d02e6986845a79babce12a6e10ecbbe5e9eec1b71dda",
+          "verified": true
         },
         "egg_hatcher_agent.py": {
-          "sha256": "e4d415868cbc120b0c2f4ad70863883f88faaca763906e60bae5b46e1e1b50b5",
-          "verified": false
+          "sha256": "bba2848c59de6883ad0f3d190ff0fe4e9f44f595016c95f4453d2764d3f4e78f",
+          "verified": true
         }
       },
-      "_verified": false,
+      "_verified": true,
       "_seed": 14843056862517018624,
       "_incantation": "FORGE FUSE PANTHER GROOM CLANG ARISE STAMP"
     },
