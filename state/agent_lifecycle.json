@@ -19030,6 +19030,17 @@
       "updated_at": "2026-08-11T18:38:53.432269+00:00",
       "version": "1.0.3"
     },
+    "@kody-w/first_hour_agent": {
+      "canonical_path": "agents/@kody-w/first_hour_agent.py",
+      "latest_receipt": "rar_1bbfa0b36a331bdb2054b1f5c46be0dfbad97a5bd229af14972f862486365ddd",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "community",
+      "sha256": "61dd52033a67e19c2c88909a379cfd2a855a1c18f76065ecde2bb330a3681997",
+      "status": "active",
+      "updated_at": "2026-10-18T12:45:14.497616+00:00",
+      "version": "1.0.0"
+    },
     "@kody-w/flight_recorder": {
       "canonical_path": "agents/@kody-w/flight_recorder_agent.py",
       "latest_receipt": "rar_6935f0ff5d40e09b8eb57fa86a8e0eb7037391e8944b0655b556405fb17bd4ff",
@@ -19194,6 +19205,17 @@
       "status": "active",
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.1"
+    },
+    "@kody-w/parallel_dimensions_agent": {
+      "canonical_path": "agents/@kody-w/parallel_dimensions_agent.py",
+      "latest_receipt": "rar_0a5f9aed49e9702012fd2c582e410a8381612d44c4361285224e33d7192bc220",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "community",
+      "sha256": "ad3d5af03678ded14558a1f449a5ba4002e15dbb1ee101c37349da16ba7b2c2b",
+      "status": "active",
+      "updated_at": "2026-10-24T04:11:15.334413+00:00",
+      "version": "1.0.0"
     },
     "@kody-w/perpetual_loop_factory": {
       "canonical_path": "agents/@kody-w/perpetual_loop_factory_agent.py",
@@ -19426,6 +19448,17 @@
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.1"
     },
+    "@kody-w/self_compact_agent": {
+      "canonical_path": "agents/@kody-w/self_compact_agent.py",
+      "latest_receipt": "rar_eb5d42a0247efc315074252174b82f9c5b8723d5266f98b20a8088743e6123aa",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "community",
+      "sha256": "ad47db5e49459bdc85e90cf7a6a1fa7201061b358925ae5d7290b8c32a790c9e",
+      "status": "active",
+      "updated_at": "2026-10-24T03:59:45.976356+00:00",
+      "version": "1.0.0"
+    },
     "@kody-w/skill_toaster_agent": {
       "canonical_path": "agents/@kody-w/skill_toaster_agent.py",
       "latest_receipt": "rar_b7e4f5536a90cffa60f50bd70b7a76d12c201bec567372e09033292b55095620",
@@ -19436,6 +19469,17 @@
       "status": "active",
       "updated_at": "2026-09-08T20:27:06.555078+00:00",
       "version": "2.0.0"
+    },
+    "@kody-w/thread_tracker_agent": {
+      "canonical_path": "agents/@kody-w/thread_tracker_agent.py",
+      "latest_receipt": "rar_a4e49b5c8bf6c4fe6c2e9c8db846d4f5de9544098195d727c13aeadf2b502362",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "community",
+      "sha256": "dcf4d630cab0eaa9a6919e052cb14429416a1607f4e581a397a58430c7f8ad98",
+      "status": "active",
+      "updated_at": "2026-10-24T04:04:33.384422+00:00",
+      "version": "1.0.0"
     },
     "@kody-w/transcript2prototype": {
       "canonical_path": "agents/@kody-w/transcript2prototype_agent.py",
@@ -19450,14 +19494,14 @@
     },
     "@kody-w/twin_egg_hatcher": {
       "canonical_path": "agents/@kody-w/twin_egg_hatcher_agent.py",
-      "latest_receipt": "rar_609cd9c2a8e5a778cf94e01ffccda6fd1cc5a70a2008f0c2a664b60993eaac00",
+      "latest_receipt": "rar_c126d44415abbcc2778c5490bed045c34aa7394b831c74ce1a8f400656a4d596",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "quality_tier": "community",
-      "sha256": "0e307e62ab319665cfa3e6f534abaf47cc71d7bfbc2f1637e940ef2407c33c78",
+      "sha256": "2b59ec448480ebb09d910683e37b1e5925edcf7aa26b3695da6f2a6aa882ca9f",
       "status": "active",
-      "updated_at": "2026-07-22T01:05:34.168967+00:00",
-      "version": "1.0.2"
+      "updated_at": "2026-11-03T15:36:37.017338+00:00",
+      "version": "1.1.0"
     },
     "@kody-w/twin_me": {
       "canonical_path": "agents/@kody-w/twin_me_agent.py",
@@ -19636,15 +19680,15 @@
       "version": "1.0.0"
     },
     "@rapp/learn_new": {
-      "status": "active",
-      "version": "3.3.0",
-      "quality_tier": "official",
+      "canonical_path": "agents/@rapp/learn_new_agent.py",
+      "latest_receipt": "rar_a087c80d52cc482671ab9375814890e869c418934ad70f94b19b01fefd2d8e94",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
-      "canonical_path": "agents/@rapp/learn_new_agent.py",
-      "sha256": "c610a51c8958901dd8bf40f74de2ee4a6fd3f0d36bd52df6252da6c523ae8418",
-      "latest_receipt": "rar_6bc31d2d092132904074868b24fb06a0a87c67951d56995b058187e48faef269",
-      "updated_at": "2026-10-19T00:52:13.982480+00:00"
+      "quality_tier": "official",
+      "sha256": "6f4de801d377e00f083b42ce4ae9ee8776ff52430d82b2c6cbe8445ffaa063ea",
+      "status": "active",
+      "updated_at": "2026-11-03T15:31:06.693904+00:00",
+      "version": "3.4.0"
     },
     "@rapp/moment_factory_agent": {
       "canonical_path": "agents/@rapp/moment_factory_agent.py",
@@ -20107,52 +20151,8 @@
       "status": "active",
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.2"
-    },
-    "@kody-w/first_hour_agent": {
-      "status": "active",
-      "version": "1.0.0",
-      "quality_tier": "community",
-      "owner_github_id": 1735900,
-      "owner_github_login": "kody-w",
-      "canonical_path": "agents/@kody-w/first_hour_agent.py",
-      "sha256": "61dd52033a67e19c2c88909a379cfd2a855a1c18f76065ecde2bb330a3681997",
-      "latest_receipt": "rar_1bbfa0b36a331bdb2054b1f5c46be0dfbad97a5bd229af14972f862486365ddd",
-      "updated_at": "2026-10-18T12:45:14.497616+00:00"
-    },
-    "@kody-w/self_compact_agent": {
-      "status": "active",
-      "version": "1.0.0",
-      "quality_tier": "community",
-      "owner_github_id": 1735900,
-      "owner_github_login": "kody-w",
-      "canonical_path": "agents/@kody-w/self_compact_agent.py",
-      "sha256": "ad47db5e49459bdc85e90cf7a6a1fa7201061b358925ae5d7290b8c32a790c9e",
-      "latest_receipt": "rar_eb5d42a0247efc315074252174b82f9c5b8723d5266f98b20a8088743e6123aa",
-      "updated_at": "2026-10-24T03:59:45.976356+00:00"
-    },
-    "@kody-w/thread_tracker_agent": {
-      "status": "active",
-      "version": "1.0.0",
-      "quality_tier": "community",
-      "owner_github_id": 1735900,
-      "owner_github_login": "kody-w",
-      "canonical_path": "agents/@kody-w/thread_tracker_agent.py",
-      "sha256": "dcf4d630cab0eaa9a6919e052cb14429416a1607f4e581a397a58430c7f8ad98",
-      "latest_receipt": "rar_a4e49b5c8bf6c4fe6c2e9c8db846d4f5de9544098195d727c13aeadf2b502362",
-      "updated_at": "2026-10-24T04:04:33.384422+00:00"
-    },
-    "@kody-w/parallel_dimensions_agent": {
-      "status": "active",
-      "version": "1.0.0",
-      "quality_tier": "community",
-      "owner_github_id": 1735900,
-      "owner_github_login": "kody-w",
-      "canonical_path": "agents/@kody-w/parallel_dimensions_agent.py",
-      "sha256": "ad3d5af03678ded14558a1f449a5ba4002e15dbb1ee101c37349da16ba7b2c2b",
-      "latest_receipt": "rar_0a5f9aed49e9702012fd2c582e410a8381612d44c4361285224e33d7192bc220",
-      "updated_at": "2026-10-24T04:11:15.334413+00:00"
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-10-24T04:11:15.334413+00:00"
+  "updated_at": "2026-11-03T15:36:37.017338+00:00"
 }

@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-03T04:39:22.856220+00:00",
+  "generated_at": "2026-11-03T15:37:38.058078+00:00",
   "stats": {
     "total_agents": 223,
     "total_swarms": 2,
@@ -11380,9 +11380,12 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/twin_egg_hatcher",
-      "version": "1.0.2",
+      "version": "1.1.0",
+      "distinct_from": {
+        "@rapp/egg_hatcher": "egg_hatcher routes any .egg to a handler by its manifest type; this hatcher materializes a twin workspace from a checkout, repo or egg at every scale"
+      },
       "display_name": "HatchTwinEgg",
-      "description": "Hatches any RAPP twin from a cwd checkout, GitHub repo, or .egg zip into ~/.rapp/twins/ so the brainstem's Twin agent can boot it.",
+      "description": "Generic single-file hatcher for any RAPP digital-organism twin. Loads identity from cwd auto-detect, --source REPO (raw GitHub), or --egg PATH (zip), then materializes ~/.rapp/twins/<hash>/. The global brainstem's built-in Twin agent boots/chats with it immediately.",
       "author": "Kody Wildfeuer",
       "tags": [
         "twin",
@@ -11401,9 +11404,9 @@
       ],
       "_file": "agents/@kody-w/twin_egg_hatcher_agent.py",
       "_install_filename": "rar_kody_w_twin_egg_hatcher_agent.py",
-      "_sha256": "0e307e62ab319665cfa3e6f534abaf47cc71d7bfbc2f1637e940ef2407c33c78",
+      "_sha256": "2b59ec448480ebb09d910683e37b1e5925edcf7aa26b3695da6f2a6aa882ca9f",
       "_lifecycle": "notarized",
-      "_receipt": "rar_609cd9c2a8e5a778cf94e01ffccda6fd1cc5a70a2008f0c2a664b60993eaac00",
+      "_receipt": "rar_c126d44415abbcc2778c5490bed045c34aa7394b831c74ce1a8f400656a4d596",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -11420,12 +11423,12 @@
         ]
       },
       "_seed": 8075652905997056003,
-      "_size_kb": 32.2,
-      "_lines": 895,
+      "_size_kb": 43.3,
+      "_lines": 1167,
       "_has_card": true,
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
-      "_latest_commit_sha": "026f18b4093e3ec07c2f359dd9618438e020a0be",
+      "_latest_commit_sha": "730fcbd0dcf3194071a7c1dbf7337878175dd584",
       "_card_sha256": "bf63c0e3cb32e5d24ac4209832fce67b70f9618d0221582723b9f66afee04265"
     },
     {
@@ -12205,9 +12208,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@rapp/learn_new",
-      "version": "3.3.0",
+      "version": "3.4.0",
       "display_name": "LearnNew",
-      "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback.",
+      "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback; action='workflow' assembles a Claude multi-agent workflow template for ClaudeWorkflows.",
       "author": "RAPP",
       "tags": [
         "meta",
@@ -12232,35 +12235,31 @@
       },
       "_file": "agents/@rapp/learn_new_agent.py",
       "_install_filename": "rar_rapp_learn_new_agent.py",
-      "_sha256": "c610a51c8958901dd8bf40f74de2ee4a6fd3f0d36bd52df6252da6c523ae8418",
+      "_sha256": "6f4de801d377e00f083b42ce4ae9ee8776ff52430d82b2c6cbe8445ffaa063ea",
       "_lifecycle": "notarized",
-      "_receipt": "rar_6bc31d2d092132904074868b24fb06a0a87c67951d56995b058187e48faef269",
+      "_receipt": "rar_a087c80d52cc482671ab9375814890e869c418934ad70f94b19b01fefd2d8e94",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
       },
       "_provenance": {
-        "issue": 1493,
+        "issue": null,
         "submitted_by": "kody-w",
         "accepted_by": "kody-w",
         "checks": [
           "manifest",
-          "namespace",
           "content_sha256",
-          "base_precondition",
-          "security_scan",
           "registry_build",
-          "card_forge",
           "full_test_suite"
         ]
       },
       "_seed": 2538772095262668015,
-      "_size_kb": 92.3,
-      "_lines": 2184,
+      "_size_kb": 104.3,
+      "_lines": 2361,
       "_has_card": true,
       "_added_at": "2026-04-20T12:38:45-04:00",
       "_first_commit_sha": "1e4054692e4a9b1edc6ff96245ef02af9bb4f9b3",
-      "_latest_commit_sha": "100291a4fa04c3446c132a053d8af64bde3cc6d6",
+      "_latest_commit_sha": "730fcbd0dcf3194071a7c1dbf7337878175dd584",
       "_card_sha256": "088b81f4015adaacfa6c7eacd5e53a71222a4626b7648d1a4d80d39771737124",
       "_seed_aliases": [
         2538772095262403840
@@ -13644,6 +13643,27 @@
   },
   "stack_packs": [
     {
+      "name": "claude-workflows",
+      "display_name": "Claude Workflows",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.1",
+      "path": "stacks/claude-workflows",
+      "purpose": "Run Claude Managed Agents with dynamic multi-agent workflows from Brainstem chat: start a job from a template with a hard spending cap, watch its phases, collect its output files. Pairs with @rapp/learn_new action='workflow'.",
+      "files": {
+        "claude_workflow_agent.py": {
+          "sha256": "9bfa76855567a7f740cbbf36aa01ef5972542c02801d4e5e6c5758292ddd893e",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "072706ae7e455c8e6e736ff7c4c3454bbf461ec08a81ae8cfe72731e8f50e1e6",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "_seed": 7100592804908244992,
+      "_incantation": "FORGE CHISEL PANTHER BEREFT MARCH CREED TEMPER"
+    },
+    {
       "name": "fleet-management",
       "display_name": "Fleet Management",
       "version": "1.0.0",
@@ -13656,7 +13676,7 @@
           "verified": true
         },
         "twin_egg_hatcher_agent.py": {
-          "sha256": "04a935dc7faf169bfc1c0a34fa06d1393b536080fdc52668f3c17c6d3ab11ce5",
+          "sha256": "2b59ec448480ebb09d910683e37b1e5925edcf7aa26b3695da6f2a6aa882ca9f",
           "verified": true
         }
       },

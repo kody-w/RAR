@@ -74,6 +74,7 @@ __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/twin_egg_hatcher",
     "version": "1.1.0",
+    "distinct_from": {"@rapp/egg_hatcher": "egg_hatcher routes any .egg to a handler by its manifest type; this hatcher materializes a twin workspace from a checkout, repo or egg at every scale"},
     "display_name": "HatchTwinEgg",
     "description": (
         "Generic single-file hatcher for any RAPP digital-organism twin. "

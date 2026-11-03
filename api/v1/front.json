@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-11-02T16:57:49Z",
+  "generated": "2026-11-03T15:35:40Z",
   "counts": {
     "native": 223,
     "aggregated": 126,
@@ -3213,7 +3213,7 @@
       "rank": 52,
       "ref": "@rapp/learn_new",
       "title": "LearnNew",
-      "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback.",
+      "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback; action='workflow' assembles a Claude multi-agent workflow template for ClaudeWorkflows.",
       "origin": "native",
       "category": "core",
       "tags": [
@@ -3255,7 +3255,7 @@
           "channels": {},
           "tier": "official",
           "age_days": 186,
-          "lines": 2184,
+          "lines": 2361,
           "has_card": true
         },
         "source": null
@@ -3264,7 +3264,7 @@
         "no community feedback yet - scored at the population median",
         "official tier",
         "added 186 days ago",
-        "2184 lines",
+        "2361 lines",
         "has a rendered card"
       ]
     },
@@ -7666,7 +7666,7 @@
       "rank": 124,
       "ref": "@kody-w/twin_egg_hatcher",
       "title": "HatchTwinEgg",
-      "description": "Hatches any RAPP twin from a cwd checkout, GitHub repo, or .egg zip into ~/.rapp/twins/ so the brainstem's Twin agent can boot it.",
+      "description": "Generic single-file hatcher for any RAPP digital-organism twin. Loads identity from cwd auto-detect, --source REPO (raw GitHub), or --egg PATH (zip), then materializes ~/.rapp/twins/<hash>/. The global brainstem's built-in Twin agent boots/chats with it immediately.",
       "origin": "native",
       "category": "core",
       "tags": [
@@ -7708,7 +7708,7 @@
           "channels": {},
           "tier": "community",
           "age_days": 152,
-          "lines": 895,
+          "lines": 1166,
           "has_card": true
         },
         "source": null
@@ -7717,7 +7717,7 @@
         "no community feedback yet - scored at the population median",
         "community tier",
         "added 152 days ago",
-        "895 lines",
+        "1166 lines",
         "has a rendered card"
       ]
     },

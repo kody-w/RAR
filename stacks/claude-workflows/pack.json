@@ -1,0 +1,24 @@
+{
+  "schema": "rapp-rar-stack/1.1",
+  "name": "claude-workflows",
+  "display_name": "Claude Workflows",
+  "version": "1.0.0",
+  "purpose": "Run Claude Managed Agents with dynamic multi-agent workflows from Brainstem chat: start a job from a template with a hard spending cap, watch its phases, collect its output files. Pairs with @rapp/learn_new action='workflow'.",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "claude_workflow_agent.py"
+    ],
+    "destination": "agents/"
+  },
+  "files": {
+    "claude_workflow_agent.py": {
+      "size": 18737,
+      "sha256": "9bfa76855567a7f740cbbf36aa01ef5972542c02801d4e5e6c5758292ddd893e"
+    },
+    "README.md": {
+      "size": 779,
+      "sha256": "072706ae7e455c8e6e736ff7c4c3454bbf461ec08a81ae8cfe72731e8f50e1e6"
+    }
+  }
+}

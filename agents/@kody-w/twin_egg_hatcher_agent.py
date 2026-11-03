@@ -73,10 +73,14 @@ from __future__ import annotations
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/twin_egg_hatcher",
-    "version": "1.0.2",
+    "version": "1.1.0",
+    "distinct_from": {"@rapp/egg_hatcher": "egg_hatcher routes any .egg to a handler by its manifest type; this hatcher materializes a twin workspace from a checkout, repo or egg at every scale"},
     "display_name": "HatchTwinEgg",
     "description": (
-        "Hatches any RAPP twin from a cwd checkout, GitHub repo, or .egg zip into ~/.rapp/twins/ so the brainstem's Twin agent can boot it."
+        "Generic single-file hatcher for any RAPP digital-organism twin. "
+        "Loads identity from cwd auto-detect, --source REPO (raw GitHub), "
+        "or --egg PATH (zip), then materializes ~/.rapp/twins/<hash>/. The "
+        "global brainstem's built-in Twin agent boots/chats with it immediately."
     ),
     "author": "Kody Wildfeuer",
     "tags": ["twin", "egg", "hatcher", "organism", "federation", "single-file", "rapp"],
@@ -108,8 +112,12 @@ from typing import Any, Dict, List, Optional, Tuple
 # Constants
 # ---------------------------------------------------------------------------
 
-HATCHER_VERSION = "1.0.0"
+HATCHER_VERSION = "1.1.0"  # 1.1.0: multi-scale eggs (neighborhood / swarm / industry / estate)
 HATCH_RECEIPT_NAME = "HATCH_RECEIPT.json"
+EGG_SCHEMA = "rapp-egg/2.0"
+
+# Scales the hatcher knows about, from smallest to largest unit of organism.
+SCALES = ("agent", "twin", "brainstem", "neighborhood", "swarm", "factory", "industry", "estate")
 
 DEFAULT_BRAINSTEM_HOME = Path(os.environ.get("BRAINSTEM_HOME", str(Path.home() / ".brainstem")))
 BRAINSTEM_SRC_SUBPATH = Path("src") / "rapp_brainstem"
@@ -118,6 +126,22 @@ BACKUPS_DIR = TWIN_EGG_HOME / "backups"          # mode=global only
 RAPP_HOME = Path(os.environ.get("RAPP_HOME", str(Path.home() / ".rapp")))
 TWINS_DIR = RAPP_HOME / "twins"
 TRASH_DIR = TWINS_DIR / ".trash"
+# Per-scale workspace roots (created lazily).
+NEIGHBORHOODS_DIR = RAPP_HOME / "neighborhoods"
+SWARMS_DIR        = RAPP_HOME / "swarms"
+FACTORIES_DIR     = RAPP_HOME / "factories"
+INDUSTRIES_DIR    = RAPP_HOME / "industries"
+ESTATES_DIR       = RAPP_HOME / "estates"
+LEVIATHANS_DIR    = RAPP_HOME / "leviathans"
+SCALE_ROOTS = {
+    "twin":         TWINS_DIR,
+    "brainstem":    TWINS_DIR,  # same root — a brainstem-shaped egg is a single twin
+    "neighborhood": NEIGHBORHOODS_DIR,
+    "swarm":        SWARMS_DIR,
+    "factory":      FACTORIES_DIR,
+    "industry":     INDUSTRIES_DIR,
+    "estate":       ESTATES_DIR,
+}
 
 GITHUB_RAW = "https://raw.githubusercontent.com"
 GITHUB_API = "https://api.github.com"
@@ -476,6 +500,247 @@ def load_identity(*, egg: Optional[str], source: Optional[str], cwd: Optional[Pa
 
 
 # ---------------------------------------------------------------------------
+# Multi-scale egg dispatch — hatch any unit of the organism (rapp-egg/2.0).
+# ---------------------------------------------------------------------------
+#
+# A rapp-egg/2.0 manifest declares its `scale` (agent / twin / brainstem /
+# neighborhood / swarm / factory / industry / estate).  The dispatcher reads
+# the manifest, then routes to the right unpacker.  Older single-twin eggs
+# (no manifest, files under `repo/`) keep working via the legacy path.
+# ---------------------------------------------------------------------------
+
+
+def _read_egg_manifest(egg_path: Path) -> Optional[Dict[str, Any]]:
+    """Return the manifest.json dict if the egg has one, else None (legacy)."""
+    with zipfile.ZipFile(egg_path) as z:
+        names = set(z.namelist())
+        for cand in ("manifest.json", "egg.json", "repo/manifest.json"):
+            if cand in names:
+                try:
+                    return json.loads(z.read(cand).decode("utf-8"))
+                except json.JSONDecodeError:
+                    return None
+    return None
+
+
+def hatch_egg(egg: str) -> Dict[str, Any]:
+    """Entry point for any .egg.  Reads the manifest, dispatches by scale.
+
+    Falls back to the legacy single-twin unpacker (load_from_egg → hatch_twin)
+    for older eggs without a manifest.
+    """
+    egg_path = Path(egg).expanduser().resolve()
+    if not egg_path.exists():
+        return {"ok": False, "error": f"egg not found: {egg_path}"}
+
+    m = _read_egg_manifest(egg_path)
+    scale = (m or {}).get("scale") or "twin"
+    if scale not in SCALES:
+        return {"ok": False, "error": f"unknown scale '{scale}'.  Known: {SCALES}"}
+
+    if scale in ("twin", "brainstem"):
+        return hatch_twin(egg=str(egg_path))
+    if scale == "agent":
+        return _hatch_agent_egg(egg_path, m or {})
+    if scale == "neighborhood":
+        return _hatch_neighborhood_egg(egg_path, m or {})
+    if scale in ("swarm", "factory", "industry", "estate"):
+        return _hatch_container_egg(egg_path, m or {}, scale)
+    return {"ok": False, "error": f"scale '{scale}' recognized but not yet implemented"}
+
+
+def _hatch_agent_egg(egg_path: Path, manifest: Dict[str, Any]) -> Dict[str, Any]:
+    """Single-agent egg — drops a `_agent.py` into the brainstem's agents/ folder
+    so the next /chat picks it up via load_agents().  The egg should contain
+    one or more `*_agent.py` files at the top level (or under `agents/`)."""
+    bs_agents = brainstem_src() / "agents"
+    if not bs_agents.is_dir():
+        return {"ok": False, "scale": "agent", "error": f"brainstem agents dir not found: {bs_agents}"}
+    written: List[str] = []
+    with zipfile.ZipFile(egg_path) as z:
+        for name in z.namelist():
+            base = os.path.basename(name)
+            if base.endswith("_agent.py"):
+                bs_agents.joinpath(base).write_bytes(z.read(name))
+                written.append(base)
+    return {
+        "ok": True,
+        "scale": "agent",
+        "manifest": manifest,
+        "installed_into": str(bs_agents),
+        "files_written": written,
+        "note": "Next /chat will load the new agent(s) — no restart needed.",
+    }
+
+
+def _hatch_neighborhood_egg(egg_path: Path, manifest: Dict[str, Any]) -> Dict[str, Any]:
+    """Neighborhood egg — unpacks `twins/<hash>/...` into ~/.rapp/twins/<hash>/
+    for every member.  Also drops a neighborhood roster under
+    ~/.rapp/neighborhoods/<neighborhood_hash>/.  The global brainstem's Twin
+    agent picks up every workspace immediately."""
+    _ensure_dirs()
+    NEIGHBORHOODS_DIR.mkdir(parents=True, exist_ok=True)
+
+    members = manifest.get("members") or []
+    if not isinstance(members, list):
+        return {"ok": False, "scale": "neighborhood", "error": "manifest.members must be a list"}
+
+    n_hash = manifest.get("hash") or _hash_from_rappid(manifest.get("rappid", "")) or "neighborhood"
+    n_dir = NEIGHBORHOODS_DIR / n_hash
+    n_dir.mkdir(parents=True, exist_ok=True)
+
+    extracted_per_twin: Dict[str, int] = {}
+    members_summary: List[Dict[str, Any]] = []
+
+    with zipfile.ZipFile(egg_path) as z:
+        all_names = z.namelist()
+        for member in members:
+            mhash = member.get("hash")
+            if not mhash:
+                continue
+            ws = TWINS_DIR / mhash
+            ws.mkdir(parents=True, exist_ok=True)
+            (ws / "agents").mkdir(exist_ok=True)
+            (ws / ".brainstem_data").mkdir(exist_ok=True)
+            prefix = f"twins/{mhash}/"
+            count = 0
+            for n in all_names:
+                if not n.startswith(prefix):
+                    continue
+                rel = n[len(prefix):]
+                if not rel or rel.endswith("/"):
+                    continue
+                if rel.endswith("/.keep"):
+                    # Re-create empty dir, skip placeholder file
+                    (ws / rel[:-len("/.keep")]).mkdir(parents=True, exist_ok=True)
+                    continue
+                target = ws / rel
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(z.read(n))
+                count += 1
+            extracted_per_twin[mhash] = count
+            members_summary.append({
+                "name": member.get("name"),
+                "hash": mhash,
+                "rappid": member.get("rappid"),
+                "workspace": str(ws),
+                "files_extracted": count,
+            })
+
+    # Write the neighborhood roster + hatch receipt.
+    (n_dir / "members.json").write_text(
+        json.dumps({"members": members_summary}, indent=2),
+        encoding="utf-8",
+    )
+    (n_dir / "rappid.json").write_text(
+        json.dumps({
+            "schema":  "rapp/1",
+            "rappid":  manifest.get("rappid"),
+            "hash":    n_hash,
+            "kind":    "neighborhood",
+            "name":    manifest.get("name"),
+            "parent_rappid": manifest.get("parent_rappid"),
+            "born_at": manifest.get("born_at"),
+            "creator": manifest.get("creator"),
+            "description": manifest.get("description"),
+        }, indent=2),
+        encoding="utf-8",
+    )
+    (n_dir / HATCH_RECEIPT_NAME).write_text(
+        json.dumps({
+            "hatcher_version": HATCHER_VERSION,
+            "scale": "neighborhood",
+            "source": f"egg:{egg_path}",
+            "rappid": manifest.get("rappid"),
+            "hatched_at": datetime.now(timezone.utc).isoformat(),
+            "members": members_summary,
+        }, indent=2),
+        encoding="utf-8",
+    )
+
+    boot = manifest.get("boot_hint", {}).get("ports", {})
+    boot_cmds = []
+    for m in members_summary:
+        port = boot.get(m["name"], "")
+        if port:
+            boot_cmds.append(
+                f"SOUL_PATH={m['workspace']}/soul.md AGENTS_PATH={m['workspace']}/agents "
+                f"PORT={port} bash ~/.brainstem/src/rapp_brainstem/start.sh &"
+            )
+
+    return {
+        "ok": True,
+        "scale": "neighborhood",
+        "rappid": manifest.get("rappid"),
+        "neighborhood_workspace": str(n_dir),
+        "members_extracted": members_summary,
+        "files_per_twin": extracted_per_twin,
+        "boot_commands": boot_cmds,
+        "next": [
+            "Each member is now under ~/.rapp/twins/<hash>/ — the global brainstem's Twin agent sees them all.",
+            "Boot each twin on the suggested port (see boot_commands) to bring the federation alive.",
+            "From the global brainstem: Twin(action='list') will enumerate every member.",
+        ],
+    }
+
+
+def _hatch_container_egg(egg_path: Path, manifest: Dict[str, Any], scale: str) -> Dict[str, Any]:
+    """Best-effort unpacker for swarm/factory/industry/estate eggs.
+
+    The convention: the egg contains nested `children/<scale>/<hash>/...` paths
+    where each child is itself a brainstem-scale or neighborhood-scale workspace.
+    We extract every child under the appropriate ~/.rapp/<scale>s/<hash>/ root,
+    write a roster, and print a recursive next-hatch hint.
+
+    Estates / industries / swarms / factories that don't yet have an
+    established workspace shape will land here as a snapshot the user can
+    explore.  This is intentionally unopinionated — pick a shape later, add
+    a scale-specific handler.
+    """
+    _ensure_dirs()
+    root = SCALE_ROOTS[scale]
+    root.mkdir(parents=True, exist_ok=True)
+    chash = manifest.get("hash") or _hash_from_rappid(manifest.get("rappid", "")) or scale
+    wdir = root / chash
+    wdir.mkdir(parents=True, exist_ok=True)
+
+    written: List[str] = []
+    with zipfile.ZipFile(egg_path) as z:
+        for name in z.namelist():
+            if name.endswith("/"):
+                continue
+            target = wdir / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(z.read(name))
+            written.append(name)
+
+    (wdir / HATCH_RECEIPT_NAME).write_text(
+        json.dumps({
+            "hatcher_version": HATCHER_VERSION,
+            "scale": scale,
+            "source": f"egg:{egg_path}",
+            "rappid": manifest.get("rappid"),
+            "hatched_at": datetime.now(timezone.utc).isoformat(),
+            "files": len(written),
+        }, indent=2),
+        encoding="utf-8",
+    )
+
+    return {
+        "ok": True,
+        "scale": scale,
+        "rappid": manifest.get("rappid"),
+        "workspace": str(wdir),
+        "files_written": len(written),
+        "note": (
+            f"Container egg of scale '{scale}' unpacked to {wdir}.  "
+            f"Nested children (if any) need to be hatched recursively — point "
+            f"the hatcher at each child's egg or workspace."
+        ),
+    }
+
+
+# ---------------------------------------------------------------------------
 # Hatch / rollback / list / status
 # ---------------------------------------------------------------------------
 
@@ -810,6 +1075,10 @@ class HatchTwinEggAgent(BasicAgent):
             if action == "hatch":
                 if mode == "global":
                     result = hatch_global(egg=kwargs.get("egg"), source=kwargs.get("source"))
+                elif kwargs.get("egg"):
+                    # Egg path always routes through the scale-aware dispatcher —
+                    # it'll DTRT for agent / twin / brainstem / neighborhood / etc.
+                    result = hatch_egg(kwargs["egg"])
                 else:
                     result = hatch_twin(
                         egg=kwargs.get("egg"),
@@ -873,6 +1142,9 @@ def _cli(argv: List[str]) -> int:
     if cmd == "hatch":
         if ns.mode == "global":
             _print(hatch_global(egg=ns.egg, source=ns.source))
+        elif ns.egg:
+            # Scale-aware: dispatch based on the egg's manifest.json.
+            _print(hatch_egg(ns.egg))
         else:
             _print(hatch_twin(egg=ns.egg, source=ns.source, name=ns.name, description=ns.description))
     elif cmd == "rollback":
