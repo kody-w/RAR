@@ -10,4 +10,9 @@ Updates that install OVER the unchanged grail (the Brainstem kernel) and can fai
 |---|---|
 | `responses_models` | Models that only speak the Responses API (for example gpt-6.1-sol and gpt-6-luna) become usable in the unchanged grail. |
 
+Since pack 1.2 every entry is a **part**: `{id "@publisher/name", kind layer|kernel, point, file, sha256, locator}`.
+The installer seeds the device's own rapp/1 chain from the `parts` list (one tile, gated as already proven), and from
+then on the owner changes the shape through chat ("update my brainstem with …", "undo"). The older `layers` list is
+kept as an alias for older installers.
+
 The pattern and the layer contract: https://github.com/kody-w/grail-layers
