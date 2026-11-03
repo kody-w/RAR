@@ -218,7 +218,7 @@
       ]
     },
     {
-      "bytes": 1152666,
+      "bytes": 1152662,
       "channel": "native",
       "files": 32,
       "id": "native-14",
@@ -16536,7 +16536,7 @@
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "abf2b85bd049f95cffcd497e2f57ddec157ff780e9d0b7bd3735a59e8007c85c",
+          "sha256": "063307c4899eef2f13c71b73fea067cba98144ca1080eb43a93fa3932490f81b",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-learn-new/SKILL.md"
         },
         {
@@ -16565,8 +16565,8 @@
       },
       "requires_env": [],
       "skill_name": "rar-rapp-learn-new",
-      "skill_sha256": "abf2b85bd049f95cffcd497e2f57ddec157ff780e9d0b7bd3735a59e8007c85c",
-      "source_commit": "37b2f58ea887a90b996f47e63f3bba1918d4fa8a",
+      "skill_sha256": "063307c4899eef2f13c71b73fea067cba98144ca1080eb43a93fa3932490f81b",
+      "source_commit": "513c341d154ec859f7124d096c56ae650a6420e1",
       "source_kind": "rar-agent",
       "source_sha256": "0d3df4dbd6ee8f7d9786cc7cbd2c35616fb61bd0813cd85150b6c339fe6618e2",
       "version": "3.4.1"

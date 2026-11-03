@@ -2,7 +2,7 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-11-03T15:45:10Z",
+  "generated": "2026-11-03T16:49:46Z",
   "count": 220,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
@@ -8191,8 +8191,8 @@
       "id": "rapp__learn_new",
       "name": "@rapp/learn_new",
       "display_name": "LearnNew",
-      "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback; action='workflow' assembles a Claude multi-agent workflow template for ClaudeWorkflows.",
-      "version": "3.4.0",
+      "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback.",
+      "version": "3.4.1",
       "publisher": "@rapp",
       "author": "RAPP",
       "category": "core",
@@ -8215,11 +8215,11 @@
         "path": "agents/@rapp/learn_new_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/learn_new_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/learn_new_agent.py",
-        "sha256": "6f4de801d377e00f083b42ce4ae9ee8776ff52430d82b2c6cbe8445ffaa063ea"
+        "sha256": "0d3df4dbd6ee8f7d9786cc7cbd2c35616fb61bd0813cd85150b6c339fe6618e2"
       },
       "stats": {
-        "lines": 2361,
-        "size_kb": 104.3,
+        "lines": 2188,
+        "size_kb": 92.5,
         "added_at": "2026-04-20T12:38:45-04:00"
       }
     },

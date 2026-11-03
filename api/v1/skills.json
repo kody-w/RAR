@@ -12,7 +12,7 @@
   },
   "inputs": {
     "canonical_manifests": "64b03442d38d2cc1cf3620a305f1aa8ce52967d78722c7338db346e2cf45d700",
-    "scout_catalog": "a8fc80066e320442df36bd00adde157546c35eb32fc4ae8b373b0867a3697476",
+    "scout_catalog": "8e9274978349d3402314a02059e8bcb182dc9e0dc9405d97d302d5d2d418ec38",
     "scout_toaster": {
       "commit": "d54ba8484b5c5dae6406d2090c03115d12985446",
       "sha256": "d340043178aa4160f76a179b8b1086971e09207b212aff2ab2c0752b69173e17"
@@ -23293,7 +23293,7 @@
         "files": [
           {
             "path": "scout/bundles/native-14/skills/rar-rapp-learn-new/SKILL.md",
-            "sha256": "abf2b85bd049f95cffcd497e2f57ddec157ff780e9d0b7bd3735a59e8007c85c",
+            "sha256": "063307c4899eef2f13c71b73fea067cba98144ca1080eb43a93fa3932490f81b",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-learn-new/SKILL.md"
           },
           {
@@ -23313,7 +23313,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "37b2f58ea887a90b996f47e63f3bba1918d4fa8a",
+        "input_revision": "513c341d154ec859f7124d096c56ae650a6420e1",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
