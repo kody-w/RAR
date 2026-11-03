@@ -124,3 +124,12 @@ def test_distros_page_draws_qr_locally_with_integrity_and_exact_seeds():
     assert "qrserver" not in page and "chart.googleapis" not in page, "never send links to a QR service"
     assert "parseExact" in page and "r.json()" not in page, "64-bit seeds read as text"
     assert "_verified === true" in page, "unverified stacks get no QR"
+
+
+def test_chant_share_sheet_speaks_then_summons_verified_only():
+    page = (ROOT / "chants.html").read_text()
+    assert "speechSynthesis" in page and "SpeechSynthesisUtterance" in page, "says the chant out loud"
+    assert 's.html#chant=' in page, "hands off to the summon page with the chant seeded"
+    assert "_verified === true" in page, "only verified distros are listed"
+    assert "setTimeout(finish" in page, "never hangs if the phone skips the speech end event"
+    assert "parseExact" in page and "r.json()" not in page

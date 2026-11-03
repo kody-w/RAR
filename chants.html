@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Summon chants — RAR</title>
+<!-- Share sheet: open on the phone, tap a chant. The phone says the 7 words out loud
+     (best English voice the phone offers; iOS does not expose Siri's own voices to web
+     pages), then opens s.html#chant=... which summons into the phone's paired Brainstem.
+     iOS requires one tap before a page may speak. Only verified distros are listed. -->
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+         background: #0d1117; color: #e6edf3; margin: 0; padding: 24px 16px 48px; }
+  main { max-width: 440px; margin: 0 auto; }
+  h1 { font-size: 26px; margin: 0 0 4px; } .sub { color: #8b949e; margin: 0 0 20px; }
+  .c { background: #161b22; border: 1px solid #30363d; border-radius: 16px; padding: 18px; margin-bottom: 14px; }
+  .c h2 { font-size: 19px; margin: 0 0 6px; }
+  .words { font-size: 15px; letter-spacing: .03em; color: #c9d1d9; margin: 0 0 12px; line-height: 1.6; }
+  .words span { display: inline-block; padding: 1px 6px; border-radius: 6px; transition: background .15s; }
+  .words span.on { background: #2f81f7; color: #fff; }
+  button { width: 100%; padding: 15px; font-size: 17px; border: 0; border-radius: 12px;
+           background: #2f81f7; color: #fff; cursor: pointer; }
+  button[disabled] { background: #30363d; color: #8b949e; }
+  .by { color: #8b949e; font-size: 13px; }
+  a { color: #58a6ff; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Summon chants</h1>
+  <p class="sub">Tap one. Your phone says the chant, then summons it into your paired Brainstem.</p>
+  <div id="list">Loading…</div>
+  <p class="by">Voice: <span id="voice">checking…</span>. Not paired yet? Open
+    <a href="s.html">s.html</a> once from your Brainstem's pairing code.</p>
+</main>
+<script>
+(function () {
+  "use strict";
+  var synth = window.speechSynthesis;
+  function esc(s) { var d = document.createElement("div"); d.textContent = String(s == null ? "" : s); return d.innerHTML; }
+  function parseExact(t) { return JSON.parse(t.replace(/("_seed"\s*:\s*)(\d+)/g, '$1"$2"')); }
+
+  // Best available English voice: Siri-quality "Enhanced"/"Premium" first, then Samantha.
+  function pickVoice() {
+    var vs = synth ? synth.getVoices().filter(function (v) { return /^en(-|_|$)/i.test(v.lang); }) : [];
+    function score(v) {
+      var n = v.name.toLowerCase();
+      return (/premium/.test(n) ? 40 : 0) + (/enhanced/.test(n) ? 30 : 0) + (/siri/.test(n) ? 25 : 0) +
+             (/samantha/.test(n) ? 20 : 0) + (/en-us/i.test(v.lang) ? 5 : 0) + (v.localService ? 2 : 0);
+    }
+    vs.sort(function (a, b) { return score(b) - score(a); });
+    return vs[0] || null;
+  }
+  function showVoice() { var v = pickVoice(); document.getElementById("voice").textContent = v ? v.name : (synth ? "default" : "not supported (it will summon silently)"); }
+  if (synth) { showVoice(); synth.onvoiceschanged = showVoice; } else { showVoice(); }
+
+  function sayThenSummon(words, wordEls, btn) {
+    var go = function () { location.href = "s.html#chant=" + words.join("-"); };
+    if (!synth) { go(); return; }
+    btn.disabled = true; btn.textContent = "Speaking…";
+    synth.cancel();
+    var u = new SpeechSynthesisUtterance(words.join(". ") + ".");  // a beat between words, like a chant
+    var v = pickVoice(); if (v) { u.voice = v; u.lang = v.lang; }
+    u.rate = 0.82; u.pitch = 1.0;
+    var i = 0, done = false;
+    var light = function (n) { wordEls.forEach(function (el, k) { el.classList.toggle("on", k === n); }); };
+    u.onboundary = function (e) { if (e.name === "word" || e.charIndex !== undefined) { light(i); i = Math.min(i + 1, words.length - 1); } };
+    var finish = function () { if (done) return; done = true; light(-1); btn.textContent = "Summoning…"; setTimeout(go, 350); };
+    u.onend = finish; u.onerror = finish;
+    setTimeout(finish, 9000);  // never hang if the phone skips the end event
+    synth.speak(u);
+  }
+
+  fetch("registry.json", { cache: "no-cache" }).then(function (r) { return r.text(); }).then(parseExact).then(function (reg) {
+    var packs = (reg.stack_packs || []).filter(function (p) { return p._verified === true && p._incantation; });
+    var list = document.getElementById("list");
+    if (!packs.length) { list.textContent = "No distros to summon yet."; return; }
+    list.innerHTML = "";
+    packs.forEach(function (p) {
+      var words = p._incantation.split(/\s+/);
+      var c = document.createElement("div"); c.className = "c";
+      c.innerHTML = "<h2>" + esc(p.display_name) + "</h2><p class='words'>" +
+        words.map(function (w) { return "<span>" + esc(w) + "</span>"; }).join(" ") + "</p><button>Say it &amp; summon</button>";
+      var btn = c.querySelector("button"), spans = Array.prototype.slice.call(c.querySelectorAll(".words span"));
+      btn.onclick = function () { sayThenSummon(words, spans, btn); };
+      list.appendChild(c);
+    });
+  }).catch(function () { document.getElementById("list").textContent = "Couldn't load the registry."; });
+})();
+</script>
+</body>
+</html>
