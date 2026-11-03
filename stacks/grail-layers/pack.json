@@ -2,7 +2,7 @@
   "schema": "rapp-rar-stack/1.2",
   "name": "grail-layers",
   "display_name": "Grail layers",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "purpose": "Updates for every Brainstem that install over the unchanged grail and can fail without breaking it. A supervisor applies each layer in memory at start, probes /chat, and falls back to plain grail on any failure. First layer: Responses-API models (gpt-6.1-sol, gpt-6-luna) work in the unchanged grail.",
   "install": {
     "type": "grail_layers",
@@ -22,9 +22,25 @@
           "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
         ],
         "what": "Models that only speak the Responses API (gpt-6.1-sol, gpt-6-luna) become usable in the unchanged grail."
+      },
+      {
+        "id": "@kody-w/lispy_brainstem",
+        "kind": "kernel",
+        "point": "kernel",
+        "file": "lispy_brainstem.py",
+        "sha256": "311e2162e397f7df5fe9262684f737178acdc0306b0a3a5b9cbd4df6b420a50b",
+        "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/lispy_brainstem.py",
+        "what": "A whole Brainstem whose kernel is LisPy (lispy-core@1) in ONE file: lisp.py 0.26.0, its stdlib, brainstem.lispy and the thin host, sha-pinned and unpacked into a hash-keyed folder. Passes the same 25-scenario grail oracle. Replaces brainstem.py for the shape it is in; your agents, soul and data follow.",
+        "proven_grail": [
+          "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
+          "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
+        ]
       }
     ],
-    "parts_note": "rapp-rar-stack/1.2: `parts` is the current list (publisher-scoped ids, kind layer|kernel, one point each, sha256 + locator; the installer seeds the device's rapp/1 chain from it). `layers`, `default_enabled` and `proven_grail` are kept as an alias of `parts` for older installers; status: alias, retiring when a measured check shows zero readers.",
+    "seed": [
+      "@kody-w/responses_models"
+    ],
+    "parts_note": "rapp-rar-stack/1.2: `parts` is the current list (publisher-scoped ids, kind layer|kernel, one point each, sha256 + locator; the installer seeds the device's rapp/1 chain from it). `layers`, `default_enabled` and `proven_grail` are kept as an alias of `parts` for older installers; status: alias, retiring when a measured check shows zero readers. `seed` (1.2.1) names the parts the installer seeds; the rest are published for \"update my brainstem with \u2026\".",
     "layers": [
       "responses_models.py"
     ],
@@ -40,12 +56,16 @@
   },
   "files": {
     "README.md": {
-      "size": 1129,
-      "sha256": "26ca0308afa01b260db3d8f84590bd8ddd6603fa38bb1294a99a2ee478a8d936"
+      "size": 1352,
+      "sha256": "50aa36856975dd94898afda5a89dbba2f359a78cda64c94ab510bf57e51e11c8"
     },
     "responses_models.py": {
       "size": 5902,
       "sha256": "77343ad7f8edfdf42ecddc2727ccb2919f15bd75f944ec7b260d439ed1f06e60"
+    },
+    "lispy_brainstem.py": {
+      "size": 50358,
+      "sha256": "311e2162e397f7df5fe9262684f737178acdc0306b0a3a5b9cbd4df6b420a50b"
     }
   }
 }
