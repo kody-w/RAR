@@ -1,13 +1,13 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-03T17:36:21.283913+00:00",
+  "generated_at": "2026-11-03T22:22:59.194354+00:00",
   "stats": {
-    "total_agents": 223,
+    "total_agents": 224,
     "total_swarms": 2,
     "total_stubs": 2,
     "publishers": 10,
-    "categories": 13,
+    "categories": 14,
     "publisher_list": [
       "@bill",
       "@borg",
@@ -29,6 +29,7 @@
       "energy",
       "general",
       "integrations",
+      "memory",
       "meta",
       "pipeline",
       "platform",
@@ -9699,6 +9700,54 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@kody-w/journal_recall_agent",
+      "version": "1.0.0",
+      "display_name": "Journal Recall",
+      "description": "Finds earlier conversations in the owner's Brainstem Journal (what did I ask about X, what did we say last Tuesday) and pauses or resumes the journal's recording from chat.",
+      "author": "kody-w",
+      "tags": [
+        "journal",
+        "memory",
+        "history",
+        "search",
+        "recall"
+      ],
+      "category": "memory",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@kody-w/journal_recall_agent.py",
+      "_install_filename": "rar_kody_w_journal_recall_agent.py",
+      "_sha256": "f97b91e25360b4feb4cd29957e5615339d25394198093d859eaa5e8e45977fac",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_fd8e99d8a34c587e6c6b830a6162a7164fadcd282d07494fc2dd813b46be61c6",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": null,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "content_sha256",
+          "registry_build",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 15245874458268417127,
+      "_size_kb": 5.0,
+      "_lines": 107,
+      "_has_card": false,
+      "_added_at": "2026-11-03T17:22:23-05:00",
+      "_first_commit_sha": "f44604624c1a322cd3e861eb1308ce9e6375212d",
+      "_latest_commit_sha": "f44604624c1a322cd3e861eb1308ce9e6375212d"
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@kody-w/kody2day_agent",
       "version": "1.0.0",
       "display_name": "Kody2day",
@@ -13691,17 +13740,29 @@
     {
       "name": "grail-layers",
       "display_name": "Grail layers",
-      "version": "1.1.1",
-      "schema": "rapp-rar-stack/1.1",
+      "version": "1.2.2",
+      "schema": "rapp-rar-stack/1.2",
       "path": "stacks/grail-layers",
       "purpose": "Updates for every Brainstem that install over the unchanged grail and can fail without breaking it. A supervisor applies each layer in memory at start, probes /chat, and falls back to plain grail on any failure. First layer: Responses-API models (gpt-6.1-sol, gpt-6-luna) work in the unchanged grail.",
       "files": {
         "README.md": {
-          "sha256": "fbca2953ebadfebfaee320b879738a9299068a60d898ddf8f1d97eaa600b7713",
+          "sha256": "50aa36856975dd94898afda5a89dbba2f359a78cda64c94ab510bf57e51e11c8",
           "verified": true
         },
         "responses_models.py": {
           "sha256": "77343ad7f8edfdf42ecddc2727ccb2919f15bd75f944ec7b260d439ed1f06e60",
+          "verified": true
+        },
+        "lispy_brainstem.py": {
+          "sha256": "311e2162e397f7df5fe9262684f737178acdc0306b0a3a5b9cbd4df6b420a50b",
+          "verified": true
+        },
+        "journal_tap.py": {
+          "sha256": "4ff6d526400ca0c4ef5e5058d82e6b7d3d6d9ff35a44544212ed3a7ab7434f6d",
+          "verified": true
+        },
+        "local_models.py": {
+          "sha256": "884148aa85d3c405bfe1d642d0c309d6100fa6e71a03a05c2d468324ab56c3f8",
           "verified": true
         }
       },

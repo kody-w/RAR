@@ -19129,6 +19129,17 @@
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.2"
     },
+    "@kody-w/journal_recall_agent": {
+      "canonical_path": "agents/@kody-w/journal_recall_agent.py",
+      "latest_receipt": "rar_fd8e99d8a34c587e6c6b830a6162a7164fadcd282d07494fc2dd813b46be61c6",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "community",
+      "sha256": "f97b91e25360b4feb4cd29957e5615339d25394198093d859eaa5e8e45977fac",
+      "status": "active",
+      "updated_at": "2026-11-03T22:20:15.845357+00:00",
+      "version": "1.0.0"
+    },
     "@kody-w/kody2day_agent": {
       "canonical_path": "agents/@kody-w/kody2day_agent.py",
       "latest_receipt": "rar_2e4c5e6f6599495513ba0602a420956d37060f73fb3d635a22f7a85eca92b0cc",
@@ -20154,5 +20165,5 @@
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-11-03T15:45:30.451374+00:00"
+  "updated_at": "2026-11-03T22:20:15.845357+00:00"
 }
