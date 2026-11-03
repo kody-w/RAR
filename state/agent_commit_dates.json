@@ -7088,6 +7088,10 @@
    "added": "2026-06-26T23:08:53-04:00",
    "updated": "2026-07-21T19:28:49-04:00"
   },
+  "agents/@kody-w/parallel_dimensions_agent.py": {
+   "added": "2026-10-24T04:16:07Z",
+   "updated": "2026-10-24T04:16:07Z"
+  },
   "agents/@kody-w/perpetual_loop_factory_agent.py": {
    "added": "2026-05-05T08:57:33-04:00",
    "updated": "2026-07-21T19:28:49-04:00"
@@ -7172,9 +7176,17 @@
    "added": "2026-06-20T18:41:00-04:00",
    "updated": "2026-07-21T19:28:49-04:00"
   },
+  "agents/@kody-w/self_compact_agent.py": {
+   "added": "2026-10-24T04:02:39Z",
+   "updated": "2026-10-24T04:02:39Z"
+  },
   "agents/@kody-w/skill_toaster_agent.py": {
    "added": "2026-08-01T21:33:29-04:00",
    "updated": "2026-09-08T16:38:03-04:00"
+  },
+  "agents/@kody-w/thread_tracker_agent.py": {
+   "added": "2026-10-24T04:09:13Z",
+   "updated": "2026-10-24T04:09:13Z"
   },
   "agents/@kody-w/transcript2prototype_agent.py": {
    "added": "2026-06-17T17:06:07-04:00",
