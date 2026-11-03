@@ -184,7 +184,7 @@
       ]
     },
     {
-      "bytes": 1611120,
+      "bytes": 1638221,
       "channel": "native",
       "files": 32,
       "id": "native-12",
@@ -218,7 +218,7 @@
       ]
     },
     {
-      "bytes": 1151869,
+      "bytes": 1183685,
       "channel": "native",
       "files": 32,
       "id": "native-14",
@@ -15440,12 +15440,12 @@
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "4c9e9d1caa6849f5ec6c5d05875cc589d4a0cc2b2af200348bcc159f796d05af",
+          "sha256": "1688a8de7d58b64f8b31cd4ca72277bf967ca9934914a67b17290e22afa63038",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-kody-w-twin-egg-hatcher/SKILL.md"
         },
         {
           "path": "rapp/agent.lock.json",
-          "sha256": "dbeb25805f8f92204924835e0433a865886c222fa618711df80537d83556b738",
+          "sha256": "05f9c31e98998dff344c78f39f7067ed7b6088a7833b3b1a54dba1a11304229b",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-kody-w-twin-egg-hatcher/rapp/agent.lock.json"
         },
         {
@@ -15455,7 +15455,7 @@
         },
         {
           "path": "twin_egg_hatcher_agent.py",
-          "sha256": "0e307e62ab319665cfa3e6f534abaf47cc71d7bfbc2f1637e940ef2407c33c78",
+          "sha256": "2b59ec448480ebb09d910683e37b1e5925edcf7aa26b3695da6f2a6aa882ca9f",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-kody-w-twin-egg-hatcher/twin_egg_hatcher_agent.py"
         }
       ],
@@ -15508,11 +15508,11 @@
       },
       "requires_env": [],
       "skill_name": "rar-kody-w-twin-egg-hatcher",
-      "skill_sha256": "4c9e9d1caa6849f5ec6c5d05875cc589d4a0cc2b2af200348bcc159f796d05af",
-      "source_commit": "026f18b4093e3ec07c2f359dd9618438e020a0be",
+      "skill_sha256": "1688a8de7d58b64f8b31cd4ca72277bf967ca9934914a67b17290e22afa63038",
+      "source_commit": "959f7f2524e8a2565c026d7e7e8f6a7fac3e95e2",
       "source_kind": "rar-agent",
-      "source_sha256": "0e307e62ab319665cfa3e6f534abaf47cc71d7bfbc2f1637e940ef2407c33c78",
-      "version": "1.0.2"
+      "source_sha256": "2b59ec448480ebb09d910683e37b1e5925edcf7aa26b3695da6f2a6aa882ca9f",
+      "version": "1.1.0"
     },
     {
       "bundle": "native-12",
@@ -16528,7 +16528,7 @@
     {
       "bundle": "native-14",
       "channel": "native",
-      "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback.",
+      "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback; action='workflow' assembles a Claude multi-agent workflow template for ClaudeWorkflows.",
       "example_args": {
         "action": "create",
         "description": "An agent that researches an enterprise account before a sales call"
@@ -16536,17 +16536,17 @@
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "78661c3d02ef0e757a9d005aab318003c5870f917056357930408ab702d36fee",
+          "sha256": "c4f4cf9fbd2e7ab6b2e5307f491ef76a49576ced6b1b18d9ccca0272aed96ec7",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-learn-new/SKILL.md"
         },
         {
           "path": "learn_new_agent.py",
-          "sha256": "c610a51c8958901dd8bf40f74de2ee4a6fd3f0d36bd52df6252da6c523ae8418",
+          "sha256": "6f4de801d377e00f083b42ce4ae9ee8776ff52430d82b2c6cbe8445ffaa063ea",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-learn-new/learn_new_agent.py"
         },
         {
           "path": "rapp/agent.lock.json",
-          "sha256": "66ef11fcc86ef9a3ee368e237361d71559c8fc74f185dc31638a98f775321f84",
+          "sha256": "703790308507df079ff7cb474baf323fe6a7824f7890b994b6bb0ab97ac3ea6f",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-learn-new/rapp/agent.lock.json"
         },
         {
@@ -16565,11 +16565,11 @@
       },
       "requires_env": [],
       "skill_name": "rar-rapp-learn-new",
-      "skill_sha256": "78661c3d02ef0e757a9d005aab318003c5870f917056357930408ab702d36fee",
-      "source_commit": "100291a4fa04c3446c132a053d8af64bde3cc6d6",
+      "skill_sha256": "c4f4cf9fbd2e7ab6b2e5307f491ef76a49576ced6b1b18d9ccca0272aed96ec7",
+      "source_commit": "959f7f2524e8a2565c026d7e7e8f6a7fac3e95e2",
       "source_kind": "rar-agent",
-      "source_sha256": "c610a51c8958901dd8bf40f74de2ee4a6fd3f0d36bd52df6252da6c523ae8418",
-      "version": "3.3.0"
+      "source_sha256": "6f4de801d377e00f083b42ce4ae9ee8776ff52430d82b2c6cbe8445ffaa063ea",
+      "version": "3.4.0"
     },
     {
       "bundle": "native-14",

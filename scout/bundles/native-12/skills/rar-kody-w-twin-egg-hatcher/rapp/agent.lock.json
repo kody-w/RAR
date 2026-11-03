@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/twin_egg_hatcher",
   "agent_file": "twin_egg_hatcher_agent.py",
-  "agent_sha256": "0e307e62ab319665cfa3e6f534abaf47cc71d7bfbc2f1637e940ef2407c33c78",
+  "agent_sha256": "2b59ec448480ebb09d910683e37b1e5925edcf7aa26b3695da6f2a6aa882ca9f",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "HatchTwinEggAgent",
   "host_dependencies": [],
@@ -11,8 +11,11 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Hatches any RAPP twin from a cwd checkout, GitHub repo, or .egg zip into ~/.rapp/twins/ so the brainstem's Twin agent can boot it.",
+    "description": "Generic single-file hatcher for any RAPP digital-organism twin. Loads identity from cwd auto-detect, --source REPO (raw GitHub), or --egg PATH (zip), then materializes ~/.rapp/twins/<hash>/. The global brainstem's built-in Twin agent boots/chats with it immediately.",
     "display_name": "HatchTwinEgg",
+    "distinct_from": {
+      "@rapp/egg_hatcher": "egg_hatcher routes any .egg to a handler by its manifest type; this hatcher materializes a twin workspace from a checkout, repo or egg at every scale"
+    },
     "name": "@kody-w/twin_egg_hatcher",
     "quality_tier": "community",
     "requires_env": [],
@@ -26,7 +29,7 @@
       "single-file",
       "rapp"
     ],
-    "version": "1.0.2"
+    "version": "1.1.0"
   },
   "runtime_name": "HatchTwinEgg",
   "schema": "rapp-agent-lock/1.0",
@@ -74,5 +77,5 @@
     "required": [],
     "type": "object"
   },
-  "version": "1.0.2"
+  "version": "1.1.0"
 }

@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/learn_new",
   "agent_file": "learn_new_agent.py",
-  "agent_sha256": "c610a51c8958901dd8bf40f74de2ee4a6fd3f0d36bd52df6252da6c523ae8418",
+  "agent_sha256": "6f4de801d377e00f083b42ce4ae9ee8776ff52430d82b2c6cbe8445ffaa063ea",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "LearnNewAgent",
   "host_dependencies": [],
@@ -11,7 +11,7 @@
     "dependencies": [
       "@rapp/basic_agent"
     ],
-    "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback.",
+    "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback; action='workflow' assembles a Claude multi-agent workflow template for ClaudeWorkflows.",
     "display_name": "LearnNew",
     "example_call": {
       "args": {
@@ -32,7 +32,7 @@
       "templates",
       "aibast"
     ],
-    "version": "3.3.0"
+    "version": "3.4.0"
   },
   "runtime_name": "LearnNew",
   "schema": "rapp-agent-lock/1.0",
@@ -41,5 +41,5 @@
     "required": [],
     "type": "object"
   },
-  "version": "3.3.0"
+  "version": "3.4.0"
 }
