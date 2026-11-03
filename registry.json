@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-03T15:45:07.423042+00:00",
+  "generated_at": "2026-11-03T16:49:15.113545+00:00",
   "stats": {
     "total_agents": 223,
     "total_swarms": 2,
@@ -12208,9 +12208,9 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@rapp/learn_new",
-      "version": "3.4.0",
+      "version": "3.4.1",
       "display_name": "LearnNew",
-      "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback; action='workflow' assembles a Claude multi-agent workflow template for ClaudeWorkflows.",
+      "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback.",
       "author": "RAPP",
       "tags": [
         "meta",
@@ -12235,9 +12235,9 @@
       },
       "_file": "agents/@rapp/learn_new_agent.py",
       "_install_filename": "rar_rapp_learn_new_agent.py",
-      "_sha256": "6f4de801d377e00f083b42ce4ae9ee8776ff52430d82b2c6cbe8445ffaa063ea",
+      "_sha256": "0d3df4dbd6ee8f7d9786cc7cbd2c35616fb61bd0813cd85150b6c339fe6618e2",
       "_lifecycle": "notarized",
-      "_receipt": "rar_a087c80d52cc482671ab9375814890e869c418934ad70f94b19b01fefd2d8e94",
+      "_receipt": "rar_5355e08f720538fecb5f00db1db5b14e82b3502d6b91e253cc477ca877d3692f",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
@@ -12254,8 +12254,8 @@
         ]
       },
       "_seed": 2538772095262668015,
-      "_size_kb": 104.3,
-      "_lines": 2361,
+      "_size_kb": 92.5,
+      "_lines": 2188,
       "_has_card": true,
       "_added_at": "2026-04-20T12:38:45-04:00",
       "_first_commit_sha": "1e4054692e4a9b1edc6ff96245ef02af9bb4f9b3",
@@ -13648,20 +13648,24 @@
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.1",
       "path": "stacks/claude-workflows",
-      "purpose": "Run Claude Managed Agents with dynamic multi-agent workflows from Brainstem chat: start a job from a template with a hard spending cap, watch its phases, collect its output files. Pairs with @rapp/learn_new action='workflow'.",
+      "purpose": "Run Claude Managed Agents with dynamic multi-agent workflows from Brainstem chat: start a job from a template with a hard spending cap, watch its phases, collect its output files. WorkflowBuilder assembles new workflow templates from parts in chat; other AI ecosystems plug in as drop-in targets.",
       "files": {
         "claude_workflow_agent.py": {
           "sha256": "9bfa76855567a7f740cbbf36aa01ef5972542c02801d4e5e6c5758292ddd893e",
           "verified": true
         },
+        "workflow_builder_agent.py": {
+          "sha256": "8fa62507e2a6470150650e2403fddd457f83221664b754ebcd4fe128fd9ef07f",
+          "verified": true
+        },
         "README.md": {
-          "sha256": "072706ae7e455c8e6e736ff7c4c3454bbf461ec08a81ae8cfe72731e8f50e1e6",
+          "sha256": "ee647b3748ea7a246d547d1f4e3b5a3d21dc574ab1091ce7869cbff9b2fc5403",
           "verified": true
         }
       },
       "_verified": true,
-      "_seed": 7100592804908244992,
-      "_incantation": "FORGE CHISEL PANTHER BEREFT MARCH CREED TEMPER"
+      "_seed": 7100592804908253184,
+      "_incantation": "FORGE FUSE PANTHER BEREFT MARCH CREED TEMPER"
     },
     {
       "name": "fleet-management",

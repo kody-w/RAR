@@ -19681,14 +19681,14 @@
     },
     "@rapp/learn_new": {
       "canonical_path": "agents/@rapp/learn_new_agent.py",
-      "latest_receipt": "rar_a087c80d52cc482671ab9375814890e869c418934ad70f94b19b01fefd2d8e94",
+      "latest_receipt": "rar_5355e08f720538fecb5f00db1db5b14e82b3502d6b91e253cc477ca877d3692f",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "quality_tier": "official",
-      "sha256": "6f4de801d377e00f083b42ce4ae9ee8776ff52430d82b2c6cbe8445ffaa063ea",
+      "sha256": "0d3df4dbd6ee8f7d9786cc7cbd2c35616fb61bd0813cd85150b6c339fe6618e2",
       "status": "active",
-      "updated_at": "2026-11-03T15:31:06.693904+00:00",
-      "version": "3.4.0"
+      "updated_at": "2026-11-03T15:45:30.451374+00:00",
+      "version": "3.4.1"
     },
     "@rapp/moment_factory_agent": {
       "canonical_path": "agents/@rapp/moment_factory_agent.py",
@@ -20154,5 +20154,5 @@
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-11-03T15:36:37.017338+00:00"
+  "updated_at": "2026-11-03T15:45:30.451374+00:00"
 }

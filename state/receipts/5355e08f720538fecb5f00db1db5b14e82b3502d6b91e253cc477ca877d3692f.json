@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-03"
+ },
+ "action": "agent.update",
+ "agent": "@rapp/learn_new",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "0d3df4dbd6ee8f7d9786cc7cbd2c35616fb61bd0813cd85150b6c339fe6618e2"
+ },
+ "canonical_path": "agents/@rapp/learn_new_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-03T15:45:30.451374+00:00",
+ "id": "rar_5355e08f720538fecb5f00db1db5b14e82b3502d6b91e253cc477ca877d3692f",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "6f4de801d377e00f083b42ce4ae9ee8776ff52430d82b2c6cbe8445ffaa063ea",
+  "receipt": "rar_a087c80d52cc482671ab9375814890e869c418934ad70f94b19b01fefd2d8e94",
+  "version": "3.4.0"
+ },
+ "quality_tier": "official",
+ "request_id": "req_5355e08f720538fecb5f00db",
+ "revision_id": "5355e08f720538fecb5f00db1db5b14e82b3502d6b91e253cc477ca877d3692f",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "learn_new 3.4.1: back to 3.3.0 behaviour; workflow action moved to @kody-w/workflow_builder"
+ },
+ "version": "3.4.1"
+}
