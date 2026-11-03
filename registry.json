@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-03T02:34:18.220489+00:00",
+  "generated_at": "2026-11-03T02:56:40.572998+00:00",
   "stats": {
     "total_agents": 223,
     "total_swarms": 2,
@@ -13661,7 +13661,8 @@
         }
       },
       "_verified": false,
-      "_seed": 17440304482002819656
+      "_seed": 17440304482002819656,
+      "_incantation": "PLUME DOMINION LUSTER DINT JADE OMEN BIND"
     },
     {
       "name": "microsoft-365-team",
@@ -13681,7 +13682,8 @@
         }
       },
       "_verified": true,
-      "_seed": 18165375178786217984
+      "_seed": 18165375178786217984,
+      "_incantation": "FORGE CHISEL PANTHER JOIST DEN SQUIRE BIND"
     },
     {
       "name": "neighborhood-starter",
@@ -13701,7 +13703,8 @@
         }
       },
       "_verified": true,
-      "_seed": 6633108683007991808
+      "_seed": 6633108683007991808,
+      "_incantation": "FORGE CHISEL PANTHER KEEP ION CONSUL SMELT"
     },
     {
       "name": "organism-lifecycle",
@@ -13721,7 +13724,8 @@
         }
       },
       "_verified": false,
-      "_seed": 14843056862517018624
+      "_seed": 14843056862517018624,
+      "_incantation": "FORGE FUSE PANTHER GROOM CLANG ARISE STAMP"
     },
     {
       "name": "summon",
@@ -13741,7 +13745,8 @@
         }
       },
       "_verified": true,
-      "_seed": 2288792079516053954
+      "_seed": 2288792079516053954,
+      "_incantation": "KNOLL SECT RAY ABYSS RAVAGE SAFFRON ANVIL"
     }
   ],
   "releases": [

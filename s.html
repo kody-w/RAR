@@ -58,9 +58,42 @@
     return;
   }
 
+  // Chants: 7 words = a 64-bit seed (rapp_sdk.seed_to_words). The word list is the
+  // protocol, so read it from rapp_sdk.py itself rather than keeping a second copy.
+  function chantToSeed(chant) {
+    return fetch("rapp_sdk.py", { cache: "force-cache" }).then(function (r) { return r.text(); }).then(function (src) {
+      var m = src.match(/MNEMONIC_WORDS = """([\s\S]*?)"""/);
+      if (!m) throw new Error("word list missing");
+      var list = m[1].trim().split(/\s+/), idx = {};
+      list.forEach(function (w, i) { idx[w] = i; });
+      var words = chant.toUpperCase().replace(/[-,.]/g, " ").trim().split(/\s+/);
+      if (words.length !== 7) throw new Error("A chant is exactly 7 words.");
+      var seed = BigInt(0);
+      for (var i = 0; i < 7; i++) {
+        if (!(words[i] in idx)) throw new Error("\"" + words[i] + "\" is not a chant word.");
+        seed |= BigInt(idx[words[i]]) << BigInt(10 * i);
+      }
+      return seed.toString();
+    });
+  }
+  function chantBox(msg) {
+    card.innerHTML = "<h1>Say the chant</h1><p>" + esc(msg || "Type or dictate the card's 7 words.") + "</p>" +
+      "<input id='chant' autocomplete='off' autocapitalize='characters' placeholder='WORD WORD WORD WORD WORD WORD WORD'>" +
+      "<button id='speak'>Summon by chant</button>";
+    document.getElementById("speak").onclick = function () {
+      location.hash = "chant=" + document.getElementById("chant").value.trim().replace(/\s+/g, "-");
+      location.reload();
+    };
+  }
+  if (hash.indexOf("chant=") === 0) {
+    chantToSeed(hash.slice(6)).then(function (seed) { location.replace("#" + seed); location.reload(); })
+      .catch(function (e) { chantBox(e.message); });
+    return;
+  }
+
   var isStack = hash.indexOf("stack=") === 0;
   var key = isStack ? hash.slice(6) : hash;
-  if (!key) { card.innerHTML = "<h1>Nothing to summon</h1><p>Scan a card's QR code to open it here.</p>"; return; }
+  if (!key) { chantBox(); return; }
 
   // Seeds are 64-bit: JSON.parse would round them (18289705222458979460 -> ...80000),
   // so quote every seed as text before parsing and compare seeds only as strings.
@@ -86,7 +119,8 @@
     }
     if (!item) { card.innerHTML = "<h1>Card not found</h1><p class='warn'>No card in RAR matches this code.</p>"; return; }
 
-    card.innerHTML = "<h1>" + esc(title) + "</h1><div class='by'>by " + esc(by) + "</div><p>" + esc(what) + "</p>" +
+    var chant = item._incantation ? "<p class='by'>Chant: <b>" + esc(item._incantation) + "</b></p>" : "";
+    card.innerHTML = "<h1>" + esc(title) + "</h1><div class='by'>by " + esc(by) + "</div><p>" + esc(what) + "</p>" + chant +
       (ok ? "" : "<p class='warn'>Not verified in RAR yet, so it can't be summoned.</p>");
     details.innerHTML = "<p>" + esc(isStack ? item.path : item.name) + " · version " + esc(item.version) + "</p>" +
       "<p>Summon sends only this card's code to your own Brainstem. Your Brainstem downloads it from RAR and checks its fingerprint before installing.</p>";

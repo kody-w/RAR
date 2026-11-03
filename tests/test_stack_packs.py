@@ -102,3 +102,25 @@ def test_summon_page_never_parses_seeds_as_numbers():
     page = (ROOT / "s.html").read_text()
     assert "r.json()" not in page
     assert "parseExact" in page and '"_seed"' in page
+
+
+def test_stack_chant_round_trips_to_its_seed(tmp_path):
+    from rapp_sdk import words_to_seed
+    _pack(tmp_path, "chanted", {"a_agent.py": b"x\n"})
+    [p] = build_registry.build_stack_packs(set(), tmp_path)
+    assert len(p["_incantation"].split()) == 7
+    assert words_to_seed(p["_incantation"]) == p["_seed"]
+
+
+def test_summon_page_decodes_chants_from_the_one_word_list():
+    page = (ROOT / "s.html").read_text()
+    assert 'fetch("rapp_sdk.py"' in page and "MNEMONIC_WORDS" in page, "no second copy of the word list"
+    assert "BigInt" in page, "64-bit seeds must be decoded exactly"
+
+
+def test_distros_page_draws_qr_locally_with_integrity_and_exact_seeds():
+    page = (ROOT / "distros.html").read_text()
+    assert 'integrity="sha384-' in page, "the QR library must be pinned with Subresource Integrity"
+    assert "qrserver" not in page and "chart.googleapis" not in page, "never send links to a QR service"
+    assert "parseExact" in page and "r.json()" not in page, "64-bit seeds read as text"
+    assert "_verified === true" in page, "unverified stacks get no QR"

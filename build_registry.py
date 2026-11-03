@@ -581,7 +581,9 @@ def build_stack_packs(taken_seeds: set, root: Path = Path("stacks")) -> list[dic
         seed = compute_seed(f"@stacks/{name}", "pipeline", "community",
                             list(pack.get("capabilities") or [])[:31], agent_files)
         if seed not in taken_seeds:
+            from rapp_sdk import seed_to_words
             entry["_seed"] = seed
+            entry["_incantation"] = seed_to_words(seed)  # the stack's 7-word summon chant
             taken_seeds.add(seed)
         packs.append(entry)
     return packs
