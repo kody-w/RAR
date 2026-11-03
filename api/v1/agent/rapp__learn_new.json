@@ -3,8 +3,8 @@
   "id": "rapp__learn_new",
   "name": "LearnNew",
   "rar_name": "@rapp/learn_new",
-  "rappid": "rappid:@rapp/learn_new:342da6c949dd9380c74cc8b5cd29e467f0e2e7ce8c031a292b10ae696ec8decf",
-  "_migrated_from": "rappid:@rapp/learn_new:ff058f9019a8f9acb77fd76d1bc2fa9475c2f34b1087733b081761e1a704f177",
+  "rappid": "rappid:@rapp/learn_new:8df55e355eb7fa32b515e98019dd03a680a84bc79a22ef55f0d4eecb958661d8",
+  "_migrated_from": "rappid:@rapp/learn_new:342da6c949dd9380c74cc8b5cd29e467f0e2e7ce8c031a292b10ae696ec8decf",
   "_migrated_from_all": [
     "rappid:v2:agent:@rapp/learn_new:0edcecec861b4dce7ad6c06ef77a320d",
     "rappid:@rapp/learn_new:4b849a9bd8534e3b76132d60b6f2a1ba2c5ca6361641166cb5be288f3e2d231f",
@@ -12,10 +12,11 @@
     "rappid:@rapp/learn_new:80d14ebdc3a2d11e9b062d8923a931bf2b0d95c7faebf90b34f87125d65079de",
     "rappid:@rapp/learn_new:bfc87ddcf11ad1630b4a957e5d9e0effb1ce7cc805aa839e459d0fe2891b7885",
     "rappid:@rapp/learn_new:7e14bd18ea44be508c650c34cbda9422ba552af0527e0442fd3b76078e68f264",
-    "rappid:@rapp/learn_new:ff058f9019a8f9acb77fd76d1bc2fa9475c2f34b1087733b081761e1a704f177"
+    "rappid:@rapp/learn_new:ff058f9019a8f9acb77fd76d1bc2fa9475c2f34b1087733b081761e1a704f177",
+    "rappid:@rapp/learn_new:342da6c949dd9380c74cc8b5cd29e467f0e2e7ce8c031a292b10ae696ec8decf"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "publisher": "@rapp",
   "category": "core",
   "tags": [
@@ -27,16 +28,16 @@
     "templates",
     "aibast"
   ],
-  "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback.",
+  "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback; action='workflow' assembles a Claude multi-agent workflow template for ClaudeWorkflows.",
   "author": "RAPP",
   "quality_tier": "official",
   "requires_env": [],
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 2184,
-  "size_kb": 92.3,
-  "sha256": "c610a51c8958901dd8bf40f74de2ee4a6fd3f0d36bd52df6252da6c523ae8418",
+  "lines": 2361,
+  "size_kb": 104.3,
+  "sha256": "6f4de801d377e00f083b42ce4ae9ee8776ff52430d82b2c6cbe8445ffaa063ea",
   "has_card": true,
   "added_at": "2026-04-20T12:38:45-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
