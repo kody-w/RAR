@@ -191,3 +191,9 @@ Contract tests validate: manifest presence/fields, `@publisher/slug` naming, `Ba
 ## Python Version
 
 Python 3.11+ required (Azure Functions v4 dependency).
+
+## Stack packs and scan-to-summon
+
+`stacks/<name>/pack.json` packs are projected into `registry.json` under `stack_packs` by `build_stack_packs()` in `build_registry.py`. The projection is additive and read-only: each listed file's sha256 is re-checked against the bytes on disk, and `_verified` is true only when all match. A stale pack never fails the build; it is published as unverified and summon clients must refuse it. Fix a stale pack by updating its `pack.json` hashes deliberately, never by loosening the check. A pack may carry an optional `kernel` object (a distro pinning the unchanged Brainstem kernel by sha256); it passes through untouched, and packs without it keep working. Each pack gets a `_seed` from the same permanent forge as agent seeds (keyed on `@stacks/<name>`); a seed that would collide with an agent seed is withheld, never reused.
+
+`s.html` is the scan-to-summon landing page. A card's QR code encodes `s.html#<seed>` (or `s.html#stack=<name>`). The page only shows the card; Summon hands the seed to the owner's own paired Brainstem summon sidecar (`s.html#pair=<url>` pairs a phone once), which re-fetches from RAR, checks every sha256, and imports through the kernel's own `/agents/import`, which checks again. Only notarized agents and verified stacks can be summoned. Tests: `tests/test_stack_packs.py`.

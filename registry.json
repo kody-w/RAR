@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-10-24T04:44:15.047600+00:00",
+  "generated_at": "2026-11-03T02:02:24.774660+00:00",
   "stats": {
     "total_agents": 223,
     "total_swarms": 2,
@@ -13642,6 +13642,88 @@
     ],
     "note": "withheld agents remain at their published paths; they are omitted from every lookup"
   },
+  "stack_packs": [
+    {
+      "name": "fleet-management",
+      "display_name": "Fleet Management",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.0",
+      "path": "stacks/fleet-management",
+      "purpose": "Drop-in pack that turns one brainstem into a fleet controller for a network of Mac-mini brainstems. Two files: fleet_agent.py (the SSH-driven fleet adapter \u2014 discover, authorize, exec, read, write, tail, chat any twin on any peer, mesh-exec, mesh-chat, plus brainstem-aware actions like provision_bra",
+      "files": {
+        "fleet_agent.py": {
+          "sha256": "9b4c43f787d3bfb56d87e4f4304b96249c589b872c95b86dcce0651de43b53cc",
+          "verified": false
+        },
+        "twin_egg_hatcher_agent.py": {
+          "sha256": "7456fc537e8b525ae9108bec87deca67e29e21f730a7ce40f3a94a705d3600aa",
+          "verified": false
+        }
+      },
+      "_verified": false,
+      "_seed": 17440304482002819656
+    },
+    {
+      "name": "microsoft-365-team",
+      "display_name": "Microsoft 365 Team Starter",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.0",
+      "path": "stacks/microsoft-365-team",
+      "purpose": "Drop-in pack for Microsoft Solution Engineers. Two files: factory_agent.py (plants new MS-themed neighborhoods under your GitHub handle in 4 modes: local/private/public/egg) + microsoft-365-team.egg (the canonical content \u2014 11 agents including WorkIQ for M365 access, MS-stack-shaped Twin with field ",
+      "files": {
+        "factory_agent.py": {
+          "sha256": "79010b3038bca259d6e584da4e494eee71ae5b9f9140a1d8c470e6b0c36c6980",
+          "verified": true
+        },
+        "microsoft-365-team.egg": {
+          "sha256": "bd5dc14d7892800bce72ae1f8b3ff303ffd5e693f9d4da1632e9867a26d6531d",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "_seed": 18165375178786217984
+    },
+    {
+      "name": "neighborhood-starter",
+      "display_name": "Neighborhood Starter Stack",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.0",
+      "path": "stacks/neighborhood-starter",
+      "purpose": "The canonical starter pack for planting a new RAPP neighborhood. Two files: factory_agent.py (drops into your local brainstem; the meta-agent that plants neighborhoods) + neighborhood-starter.egg (the template content, parameterized for the user's choices). Supports four modes: local-only on-device,",
+      "files": {
+        "factory_agent.py": {
+          "sha256": "79010b3038bca259d6e584da4e494eee71ae5b9f9140a1d8c470e6b0c36c6980",
+          "verified": true
+        },
+        "neighborhood-starter.egg": {
+          "sha256": "749b1caeb56e5c94b3428fc65a66dda46512694267cdaec1d311290307233851",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "_seed": 6633108683007991808
+    },
+    {
+      "name": "organism-lifecycle",
+      "display_name": "Organism Lifecycle",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.0",
+      "path": "stacks/organism-lifecycle",
+      "purpose": "Two agents that turn a vanilla brainstem into a full organism host: Twin (summon/hatch/boot/stop/list/inspect \u2014 full digital-twin lifecycle) + EggHatcher (universal .egg cartridge router that introspects manifest.schema/type and dispatches to organism / rapplication / session / neighborhood / estate",
+      "files": {
+        "twin_agent.py": {
+          "sha256": "8bdf553457025f46ad8e6c3a5c9141823f8541731a868795d30e55700da58450",
+          "verified": false
+        },
+        "egg_hatcher_agent.py": {
+          "sha256": "e4d415868cbc120b0c2f4ad70863883f88faaca763906e60bae5b46e1e1b50b5",
+          "verified": false
+        }
+      },
+      "_verified": false,
+      "_seed": 14843056862517018624
+    }
+  ],
   "releases": [
     {
       "release_name": "Autumn 2026",

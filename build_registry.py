@@ -541,6 +541,52 @@ def compute_seed(name: str, category: str, tier: str, tags: list, deps: list) ->
     return _forge(name, category, tier, tags, deps)
 
 
+def build_stack_packs(taken_seeds: set, root: Path = Path("stacks")) -> list[dict]:
+    """Project stacks/<name>/pack.json into registry entries with a summon seed.
+
+    Read-only over the pack files. Each file's sha256 is re-checked against the
+    bytes on disk; `_verified` is true only when every listed file exists and
+    matches. The optional `kernel` field (a distro's pinned kernel) is passed
+    through untouched. Seeds come from the same permanent forge as agent seeds,
+    keyed on "@stacks/<name>"; a seed that would collide with an agent seed is
+    withheld rather than reused.
+    """
+    import hashlib
+    packs = []
+    for pack_path in sorted(root.glob("*/pack.json")):
+        try:
+            pack = json.loads(pack_path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        name = pack.get("name") or pack_path.parent.name
+        files = {}
+        for fname, meta in (pack.get("files") or {}).items():
+            fpath = pack_path.parent / fname
+            want = (meta or {}).get("sha256", "")
+            ok = fpath.is_file() and hashlib.sha256(fpath.read_bytes()).hexdigest() == want
+            files[fname] = {"sha256": want, "verified": ok}
+        agent_files = sorted(f for f in files if f.endswith("_agent.py"))
+        entry = {
+            "name": name,
+            "display_name": pack.get("display_name", name),
+            "version": pack.get("version", "0.0.0"),
+            "schema": pack.get("schema", "rapp-rar-stack/1.0"),
+            "path": pack_path.parent.as_posix(),
+            "purpose": (pack.get("purpose") or "")[:300],
+            "files": files,
+            "_verified": bool(files) and all(f["verified"] for f in files.values()),
+        }
+        if isinstance(pack.get("kernel"), dict):
+            entry["kernel"] = pack["kernel"]
+        seed = compute_seed(f"@stacks/{name}", "pipeline", "community",
+                            list(pack.get("capabilities") or [])[:31], agent_files)
+        if seed not in taken_seeds:
+            entry["_seed"] = seed
+            taken_seeds.add(seed)
+        packs.append(entry)
+    return packs
+
+
 def preserved_seed_aliases(previous: dict, current_seed: int) -> list[int]:
     aliases = []
     previous_aliases = previous.get("_seed_aliases", [])
@@ -1347,6 +1393,17 @@ def build_registry():
 
     if stacks:
         registry["stacks"] = stacks
+
+    # ─── Stack packs (stacks/<name>/pack.json) ────────────────────────
+    # Additive projection so a stack can be summoned by seed (scan a QR → the
+    # owner's Brainstem installs it). Never fails the build: a file whose bytes
+    # no longer match its pack.json sha256 is reported as unverified, and
+    # summon clients must refuse unverified packs.
+    stack_packs = build_stack_packs(
+        {a["_seed"] for a in agents if "_seed" in a}
+        | {s for a in agents for s in a.get("_seed_aliases", [])})
+    if stack_packs:
+        registry["stack_packs"] = stack_packs
 
     # ─── Release ledger ───────────────────────────────────────────────
     # The release workflow used to append its record straight into

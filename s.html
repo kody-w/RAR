@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Summon — RAR</title>
+<!-- Scan-to-summon landing page. A QR code on a card encodes
+       https://kody-w.github.io/RAR/s.html#<seed>        (an agent card)
+       https://kody-w.github.io/RAR/s.html#stack=<name>  (a stack)
+     This page only SHOWS the card. It never installs anything itself and never
+     carries code: "Summon" hands the seed to the owner's own paired Brainstem
+     summon sidecar, which re-fetches from RAR and checks every sha256, and the
+     Brainstem kernel checks it again on import. Pairing (once per phone):
+       s.html#pair=<sidecar-url>   e.g. http://my-mac.tailnet.ts.net:7390 -->
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+         background: #0d1117; color: #e6edf3; margin: 0; padding: 24px 16px; }
+  main { max-width: 440px; margin: 0 auto; }
+  .card { background: #161b22; border: 1px solid #30363d; border-radius: 16px; padding: 22px; }
+  h1 { font-size: 24px; margin: 0 0 4px; }
+  .by { color: #8b949e; font-size: 14px; }
+  p { line-height: 1.5; }
+  .warn { color: #f0883e; }
+  button, .btn { display: block; width: 100%; box-sizing: border-box; text-align: center; padding: 16px;
+         margin-top: 18px; font-size: 18px; border: 0; border-radius: 12px; background: #2f81f7;
+         color: #fff; text-decoration: none; cursor: pointer; }
+  button[disabled] { background: #30363d; color: #8b949e; cursor: default; }
+  details { margin-top: 18px; color: #8b949e; font-size: 14px; }
+  input { width: 100%; box-sizing: border-box; padding: 10px; margin-top: 8px; border-radius: 8px;
+          border: 1px solid #30363d; background: #0d1117; color: #e6edf3; }
+  a { color: #58a6ff; }
+</style>
+</head>
+<body>
+<main>
+  <div class="card" id="card"><p>Loading the card…</p></div>
+  <div id="action"></div>
+  <details id="more"><summary>Details</summary><div id="details"></div></details>
+</main>
+<script>
+(function () {
+  "use strict";
+  var KEY = "rar.summon.sidecar";
+  var hash = decodeURIComponent((location.hash || "").replace(/^#/, ""));
+  var card = document.getElementById("card");
+  var action = document.getElementById("action");
+  var details = document.getElementById("details");
+
+  function esc(s) { var d = document.createElement("div"); d.textContent = String(s == null ? "" : s); return d.innerHTML; }
+  function safeUrl(u) { try { var x = new URL(u); return (x.protocol === "http:" || x.protocol === "https:") ? x.origin : null; } catch (e) { return null; } }
+
+  if (hash.indexOf("pair=") === 0) {
+    var url = safeUrl(hash.slice(5));
+    if (url) { localStorage.setItem(KEY, url); }
+    card.innerHTML = url
+      ? "<h1>Paired</h1><p>This phone now summons into <b>" + esc(url) + "</b>. Scan any RAR card to summon it.</p>"
+      : "<h1>Pairing failed</h1><p class='warn'>That pairing link is not a valid address.</p>";
+    return;
+  }
+
+  var isStack = hash.indexOf("stack=") === 0;
+  var key = isStack ? hash.slice(6) : hash;
+  if (!key) { card.innerHTML = "<h1>Nothing to summon</h1><p>Scan a card's QR code to open it here.</p>"; return; }
+
+  // Seeds are 64-bit: JSON.parse would round them (18289705222458979460 -> ...80000),
+  // so quote every seed as text before parsing and compare seeds only as strings.
+  function parseExact(text) {
+    text = text.replace(/("_seed"\s*:\s*)(\d+)/g, '$1"$2"');
+    text = text.replace(/("_seed_aliases"\s*:\s*\[)([^\]]*)\]/g, function (m, head, body) {
+      return head + body.replace(/(\d+)/g, '"$1"') + "]";
+    });
+    return JSON.parse(text);
+  }
+  fetch("registry.json", { cache: "no-cache" }).then(function (r) { return r.text(); }).then(parseExact).then(function (reg) {
+    var item = null, ok = true, title, by, what, path;
+    if (isStack) {
+      (reg.stack_packs || []).forEach(function (p) { if (p.name === key) item = p; });
+      if (item) { title = item.display_name; by = "Stack"; what = item.purpose; ok = item._verified === true; path = "s/stack/" + encodeURIComponent(item.name); }
+    } else {
+      (reg.agents || []).forEach(function (a) {
+        if (String(a._seed) === key || (a._seed_aliases || []).map(String).indexOf(key) >= 0) item = a;
+      });
+      if (!item) (reg.stack_packs || []).forEach(function (p) { if (String(p._seed) === key) { item = p; isStack = true; } });
+      if (item && isStack) { title = item.display_name; by = "Stack"; what = item.purpose; ok = item._verified === true; path = "s/stack/" + encodeURIComponent(item.name); }
+      else if (item) { title = item.display_name; by = item.author; what = item.description; ok = item._lifecycle === "notarized"; path = "s/" + encodeURIComponent(String(item._seed)); }
+    }
+    if (!item) { card.innerHTML = "<h1>Card not found</h1><p class='warn'>No card in RAR matches this code.</p>"; return; }
+
+    card.innerHTML = "<h1>" + esc(title) + "</h1><div class='by'>by " + esc(by) + "</div><p>" + esc(what) + "</p>" +
+      (ok ? "" : "<p class='warn'>Not verified in RAR yet, so it can't be summoned.</p>");
+    details.innerHTML = "<p>" + esc(isStack ? item.path : item.name) + " · version " + esc(item.version) + "</p>" +
+      "<p>Summon sends only this card's code to your own Brainstem. Your Brainstem downloads it from RAR and checks its fingerprint before installing.</p>";
+
+    var side = localStorage.getItem(KEY);
+    if (!ok) {
+      action.innerHTML = "<button disabled>Summon</button>";
+    } else if (side) {
+      action.innerHTML = "<a class='btn' id='go'>Summon into my Brainstem</a>";
+      document.getElementById("go").href = side + "/" + path;
+    } else {
+      action.innerHTML = "<button disabled>Summon</button><p class='by'>Pair this phone with your Brainstem first: open its pairing QR code, or paste its summon address:</p>" +
+        "<input id='pair' placeholder='http://your-mac:7390'><button id='save'>Pair</button>";
+      document.getElementById("save").onclick = function () {
+        var u = safeUrl(document.getElementById("pair").value.trim());
+        if (u) { localStorage.setItem(KEY, u); location.reload(); }
+      };
+    }
+  }).catch(function () {
+    card.innerHTML = "<h1>Couldn't reach RAR</h1><p class='warn'>Check your connection and scan again.</p>";
+  });
+})();
+</script>
+</body>
+</html>
