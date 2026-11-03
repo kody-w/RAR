@@ -12,7 +12,7 @@
   },
   "inputs": {
     "canonical_manifests": "64b03442d38d2cc1cf3620a305f1aa8ce52967d78722c7338db346e2cf45d700",
-    "scout_catalog": "4b27c16495c241e3e32ed4926312f65b03d5921f329804ee94b0ea9ab2336bd8",
+    "scout_catalog": "a8fc80066e320442df36bd00adde157546c35eb32fc4ae8b373b0867a3697476",
     "scout_toaster": {
       "commit": "d54ba8484b5c5dae6406d2090c03115d12985446",
       "sha256": "d340043178aa4160f76a179b8b1086971e09207b212aff2ab2c0752b69173e17"
@@ -23225,7 +23225,7 @@
       "catalog_origin": "generated-projection",
       "category": "projection",
       "compatibility": {},
-      "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback; action='workflow' assembles a Claude multi-agent workflow template for ClaudeWorkflows.",
+      "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback.",
       "display_name": "rar-rapp-learn-new",
       "install": {
         "bundle": "native-14",
@@ -23287,23 +23287,23 @@
       ],
       "slug": "rar-rapp-learn-new",
       "source": {
-        "artifact_sha256": "6f4de801d377e00f083b42ce4ae9ee8776ff52430d82b2c6cbe8445ffaa063ea",
+        "artifact_sha256": "0d3df4dbd6ee8f7d9786cc7cbd2c35616fb61bd0813cd85150b6c339fe6618e2",
         "entrypoint": "scout/bundles/native-14/skills/rar-rapp-learn-new/SKILL.md",
         "entrypoint_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-learn-new/SKILL.md",
         "files": [
           {
             "path": "scout/bundles/native-14/skills/rar-rapp-learn-new/SKILL.md",
-            "sha256": "c4f4cf9fbd2e7ab6b2e5307f491ef76a49576ced6b1b18d9ccca0272aed96ec7",
+            "sha256": "abf2b85bd049f95cffcd497e2f57ddec157ff780e9d0b7bd3735a59e8007c85c",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-learn-new/SKILL.md"
           },
           {
             "path": "scout/bundles/native-14/skills/rar-rapp-learn-new/learn_new_agent.py",
-            "sha256": "6f4de801d377e00f083b42ce4ae9ee8776ff52430d82b2c6cbe8445ffaa063ea",
+            "sha256": "0d3df4dbd6ee8f7d9786cc7cbd2c35616fb61bd0813cd85150b6c339fe6618e2",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-learn-new/learn_new_agent.py"
           },
           {
             "path": "scout/bundles/native-14/skills/rar-rapp-learn-new/rapp/agent.lock.json",
-            "sha256": "703790308507df079ff7cb474baf323fe6a7824f7890b994b6bb0ab97ac3ea6f",
+            "sha256": "4c9f3b8b898515928edae24cd9a02a9e5952fa0b1bfc4109eed54d1106471a03",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-learn-new/rapp/agent.lock.json"
           },
           {
@@ -23313,7 +23313,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "959f7f2524e8a2565c026d7e7e8f6a7fac3e95e2",
+        "input_revision": "37b2f58ea887a90b996f47e63f3bba1918d4fa8a",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -23327,7 +23327,7 @@
         "projection",
         "scout"
       ],
-      "version": "3.4.0"
+      "version": "3.4.1"
     },
     {
       "artifact_type": "skill",

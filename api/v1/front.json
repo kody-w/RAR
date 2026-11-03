@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-11-03T15:39:04Z",
+  "generated": "2026-11-03T15:46:48Z",
   "counts": {
     "native": 223,
     "aggregated": 126,
@@ -3213,7 +3213,7 @@
       "rank": 52,
       "ref": "@rapp/learn_new",
       "title": "LearnNew",
-      "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback; action='workflow' assembles a Claude multi-agent workflow template for ClaudeWorkflows.",
+      "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback.",
       "origin": "native",
       "category": "core",
       "tags": [
@@ -3255,7 +3255,7 @@
           "channels": {},
           "tier": "official",
           "age_days": 186,
-          "lines": 2361,
+          "lines": 2188,
           "has_card": true
         },
         "source": null
@@ -3264,7 +3264,7 @@
         "no community feedback yet - scored at the population median",
         "official tier",
         "added 186 days ago",
-        "2361 lines",
+        "2188 lines",
         "has a rendered card"
       ]
     },
