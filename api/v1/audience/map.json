@@ -1,7 +1,7 @@
 {
   "schema": "rar-audience-map/1.0",
   "description": "Compact audience verdict per agent, for clients that already have the registry and only need to filter it. b=business, c=consumer, x=both. Absent means both.",
-  "generated": "2026-11-03T17:35:46Z",
+  "generated": "2026-11-04T13:58:28Z",
   "legend": {
     "b": "business",
     "c": "consumer",
@@ -10,9 +10,9 @@
   "counts": {
     "business_only": 27,
     "consumer_only": 3,
-    "both": 193,
-    "in_business_mode": 220,
-    "in_consumer_mode": 196
+    "both": 195,
+    "in_business_mode": 222,
+    "in_consumer_mode": 198
   },
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/map.json",
   "map": {
@@ -161,6 +161,7 @@
     "@kody-w/factory": "x",
     "@kody-w/first_hour_agent": "x",
     "@kody-w/flight_recorder": "x",
+    "@kody-w/fragments_agent": "x",
     "@kody-w/full_rapp_leviathan": "x",
     "@kody-w/git_warehouse_agent": "x",
     "@kody-w/github_agent_library_agent": "x",
@@ -168,6 +169,7 @@
     "@kody-w/hologram_dogg": "x",
     "@kody-w/host_compat_agent": "x",
     "@kody-w/install_rappter_distro_agent": "x",
+    "@kody-w/journal_recall_agent": "x",
     "@kody-w/kody2day_agent": "x",
     "@kody-w/kody2day_studio_agent": "x",
     "@kody-w/launch_to_public_agent": "x",
@@ -821,6 +823,10 @@
       "b": 1.5,
       "c": 0.0
     },
+    "@kody-w/fragments_agent": {
+      "b": 0.0,
+      "c": 0.0
+    },
     "@kody-w/full_rapp_leviathan": {
       "b": 1.5,
       "c": 0.0
@@ -846,6 +852,10 @@
       "c": 0.0
     },
     "@kody-w/install_rappter_distro_agent": {
+      "b": 0.0,
+      "c": 0.0
+    },
+    "@kody-w/journal_recall_agent": {
       "b": 0.0,
       "c": 0.0
     },
