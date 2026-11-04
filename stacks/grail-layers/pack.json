@@ -2,7 +2,7 @@
   "schema": "rapp-rar-stack/1.2",
   "name": "grail-layers",
   "display_name": "Grail layers",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "purpose": "The one distro for everything new, on the unchanged grail. Layers applied in memory (the supervisor probes /chat and falls back to plain grail on any failure): providers (Responses-API models like gpt-6.1-sol, plus this machine's Ollama models) and journal_tap (every chat turn recorded in your Brainstem Journal). Agents: Journal Recall (find earlier conversations, pause recording) and Fragments (paste once, address by hash, pin into every chat). Use it from the llm CLI with github.com/kody-w/llm-brainstem.",
   "install": {
     "type": "grail_layers",
@@ -14,14 +14,14 @@
         "id": "@kody-w/providers",
         "kind": "layer",
         "point": "provider",
-        "file": "providers.py",
-        "sha256": "eec63ad97a31e4a8f3465633cc6d6050c14147554822ff943665a9ea09fc7218",
-        "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/providers.py",
+        "file": "providers_1_1.py",
+        "sha256": "0b011eed4870598e2ba070547d55e41afaf17d73c63fd761fc3a459bdc98671d",
+        "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/providers_1_1.py",
         "proven_grail": [
           "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
           "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
         ],
-        "what": "The one provider part: Responses-API-only models (gpt-6.1-sol, gpt-6-luna) and this machine's Ollama models (ollama/<name>, tools included) in the unchanged grail. responses_models and local_models are aliases of this part (status: alias; still served, not seeded)."
+        "what": "The one provider part: Responses-API-only models (gpt-6.1-sol, gpt-6-luna) and this machine's Ollama models (ollama/<name>, tools included) in the unchanged grail. responses_models and local_models are aliases of this part (status: alias; still served, not seeded). Since 1.1: topics the owner marks private (Private Mode pack) are answered by a local model or refused, never sent out."
       },
       {
         "id": "@kody-w/responses_models",
@@ -84,13 +84,13 @@
     ],
     "parts_note": "rapp-rar-stack/1.2: `parts` is the current list (publisher-scoped ids, kind layer|kernel, one point each, sha256 + locator; the installer seeds the device's rapp/1 chain from it). `layers`, `default_enabled` and `proven_grail` are kept as an alias of `parts` for older installers; status: alias, retiring when a measured check shows zero readers. `seed` (1.2.1) names the parts the installer seeds; the rest are published for \"update my brainstem with …\".",
     "layers": [
-      "providers.py"
+      "providers_1_1.py"
     ],
     "default_enabled": [
       "providers"
     ],
     "proven_grail": {
-      "providers.py": [
+      "providers_1_1.py": [
         "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
         "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
       ]
@@ -130,6 +130,10 @@
       "size": 6893,
       "sha256": "88e1749ee4ace1f506b6ee9c2c4fa2ce38e33107315f2b35f5919a489956be13",
       "source": "agents/@kody-w/fragments_agent.py"
+    },
+    "providers_1_1.py": {
+      "size": 10506,
+      "sha256": "0b011eed4870598e2ba070547d55e41afaf17d73c63fd761fc3a459bdc98671d"
     }
   },
   "kernel": {

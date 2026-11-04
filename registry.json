@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-04T12:43:35.258810+00:00",
+  "generated_at": "2026-11-04T13:19:25.891889+00:00",
   "stats": {
     "total_agents": 225,
     "total_swarms": 2,
@@ -13788,7 +13788,7 @@
     {
       "name": "grail-layers",
       "display_name": "Grail layers",
-      "version": "1.3.0",
+      "version": "1.4.0",
       "schema": "rapp-rar-stack/1.2",
       "path": "stacks/grail-layers",
       "purpose": "The one distro for everything new, on the unchanged grail. Layers applied in memory (the supervisor probes /chat and falls back to plain grail on any failure): providers (Responses-API models like gpt-6.1-sol, plus this machine's Ollama models) and journal_tap (every chat turn recorded in your Brain",
@@ -13824,6 +13824,10 @@
         "fragments_agent.py": {
           "sha256": "88e1749ee4ace1f506b6ee9c2c4fa2ce38e33107315f2b35f5919a489956be13",
           "verified": true
+        },
+        "providers_1_1.py": {
+          "sha256": "0b011eed4870598e2ba070547d55e41afaf17d73c63fd761fc3a459bdc98671d",
+          "verified": true
         }
       },
       "_verified": true,
@@ -13834,6 +13838,23 @@
       },
       "_seed": 11298904168309211136,
       "_incantation": "FORGE FUSE PANTHER SILL STEPPE PROPHECY BRAND"
+    },
+    {
+      "name": "inheritance",
+      "display_name": "Inheritance",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "path": "stacks/inheritance",
+      "purpose": "Say who gets your Brainstem if something happens to you. After a silence window it hands over, signed with keys you hold; only public keys are recorded.",
+      "files": {
+        "README.md": {
+          "sha256": "40c7a3742b00a314762741d17b72ae7c0476a9b0068f2184eeeadf2f259dd75a",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "_seed": 18205994896412639232,
+      "_incantation": "FORGE FORGE PANTHER KINGDOM VAULT TEMPLAR BIND"
     },
     {
       "name": "judge",
@@ -13859,12 +13880,12 @@
     {
       "name": "microsoft-365-team",
       "display_name": "Microsoft 365 Team Starter",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "schema": "rapp-rar-stack/1.0",
       "path": "stacks/microsoft-365-team",
       "purpose": "Drop-in pack for Microsoft Solution Engineers. Two files: factory_agent.py (plants new MS-themed neighborhoods under your GitHub handle in 4 modes: local/private/public/egg) + microsoft-365-team.egg (the canonical content \u2014 11 agents including WorkIQ for M365 access, MS-stack-shaped Twin with field ",
       "files": {
-        "factory_agent.py": {
+        "neighborhood_factory_agent.py": {
           "sha256": "79010b3038bca259d6e584da4e494eee71ae5b9f9140a1d8c470e6b0c36c6980",
           "verified": true
         },
@@ -13880,12 +13901,12 @@
     {
       "name": "neighborhood-starter",
       "display_name": "Neighborhood Starter Stack",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "schema": "rapp-rar-stack/1.0",
       "path": "stacks/neighborhood-starter",
       "purpose": "The canonical starter pack for planting a new RAPP neighborhood. Two files: factory_agent.py (drops into your local brainstem; the meta-agent that plants neighborhoods) + neighborhood-starter.egg (the template content, parameterized for the user's choices). Supports four modes: local-only on-device,",
       "files": {
-        "factory_agent.py": {
+        "neighborhood_factory_agent.py": {
           "sha256": "79010b3038bca259d6e584da4e494eee71ae5b9f9140a1d8c470e6b0c36c6980",
           "verified": true
         },
@@ -13897,6 +13918,27 @@
       "_verified": true,
       "_seed": 6633108683007991808,
       "_incantation": "FORGE CHISEL PANTHER KEEP ION CONSUL SMELT"
+    },
+    {
+      "name": "night-watch",
+      "display_name": "Night Watch",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "path": "stacks/night-watch",
+      "purpose": "Your Brainstem looks after the computer it lives on: disk space, its own services, last night's drills. It tells you once, in one sentence, only when something needs you, and fixes what is safe to fix.",
+      "files": {
+        "night_watch_agent.py": {
+          "sha256": "f1e89eaf1645ebf08afe79f0d14bf85371e8cf539f72589a36897469e51d1eb7",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "708ef4e975628ca342d564d8373b605d7ffcb0c1e05edd7ed6391131fc4e5fe5",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "_seed": 14313598458479517696,
+      "_incantation": "FORGE CHISEL PANTHER TURRET SEAR POISE STAMP"
     },
     {
       "name": "organism-lifecycle",
@@ -13918,6 +13960,27 @@
       "_verified": true,
       "_seed": 14843056862517018624,
       "_incantation": "FORGE FUSE PANTHER GROOM CLANG ARISE STAMP"
+    },
+    {
+      "name": "private-mode",
+      "display_name": "Private Mode",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "path": "stacks/private-mode",
+      "purpose": "Name the topics that must never leave this computer (health, money, a person). Chats about them are answered by a local model, whatever model is picked; with no local model running they are refused, never sent out.",
+      "files": {
+        "private_mode_agent.py": {
+          "sha256": "c82f44d8bed994646097a1f31e9ab613c806902482afce5c41604d73decafdd4",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "8145185df465e5e39028a8c8a318b9af03387ffbb2406cd107949cfc5875a916",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "_seed": 3615053568043655168,
+      "_incantation": "FORGE CHISEL PANTHER SINGE MOTE SHADE RUNE"
     },
     {
       "name": "rooms",
@@ -13952,6 +14015,57 @@
       },
       "_seed": 17920793872363962368,
       "_incantation": "FORGE FUSE PANTHER BLOOM EFFACE DROIT BIND"
+    },
+    {
+      "name": "starter-business",
+      "display_name": "Business starter",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "path": "stacks/starter-business",
+      "purpose": "For a small business: the grail with every model, Night Watch, Private Mode for client matters, a Microsoft 365 agent team, Claude workflows and a regression judge for your agents.",
+      "files": {
+        "README.md": {
+          "sha256": "c797c7e8a4a9e44f673dcca6ca7b6c9acfc6e9bcf9558666519753fff74a7fc9",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "_seed": 6642089966430060544,
+      "_incantation": "FORGE FORGE PANTHER MUSK LION MONARCH SMELT"
+    },
+    {
+      "name": "starter-hobby",
+      "display_name": "Hobby starter",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "path": "stacks/starter-hobby",
+      "purpose": "For tinkering: the grail with every model, Night Watch, AI group chat rooms, a neighborhood to plant, and digital twins you can hatch.",
+      "files": {
+        "README.md": {
+          "sha256": "04179f42816c7c8744d9fe85145f1dfddc589c6d0eac50fd3e5af08e22a89cb3",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "_seed": 1164997647363211264,
+      "_incantation": "FORGE FORGE PANTHER DAGGER INFERNO MOLD ANVIL"
+    },
+    {
+      "name": "starter-personal",
+      "display_name": "Personal starter",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "path": "stacks/starter-personal",
+      "purpose": "For your own life: everything new on the grail, a Brainstem that looks after its computer, private topics that stay home, and who inherits it.",
+      "files": {
+        "README.md": {
+          "sha256": "7b460c835568d0796032bbb51e8458263bff0bea32550a3eb2da89b03e06afb5",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "_seed": 13471067076349132800,
+      "_incantation": "FORGE FORGE PANTHER SHAMAN CRIMSON ARRAY CAST"
     },
     {
       "name": "summon",

@@ -1,0 +1,24 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "starter-hobby",
+  "display_name": "Hobby starter",
+  "version": "1.0.0",
+  "purpose": "For tinkering: the grail with every model, Night Watch, AI group chat rooms, a neighborhood to plant, and digital twins you can hatch.",
+  "install": {
+    "type": "packs",
+    "includes": [
+      "grail-layers",
+      "night-watch",
+      "rooms",
+      "neighborhood-starter",
+      "organism-lifecycle"
+    ],
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- starter-hobby"
+  },
+  "files": {
+    "README.md": {
+      "size": 449,
+      "sha256": "04179f42816c7c8744d9fe85145f1dfddc589c6d0eac50fd3e5af08e22a89cb3"
+    }
+  }
+}

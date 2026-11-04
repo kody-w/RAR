@@ -2,11 +2,11 @@
   "schema": "rapp-rar-stack/1.0",
   "name": "neighborhood-starter",
   "display_name": "Neighborhood Starter Stack",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "created_at": "2026-05-10T22:00:00Z",
   "purpose": "The canonical starter pack for planting a new RAPP neighborhood. Two files: factory_agent.py (drops into your local brainstem; the meta-agent that plants neighborhoods) + neighborhood-starter.egg (the template content, parameterized for the user's choices). Supports four modes: local-only on-device, GitHub-private, GitHub-public, or fresh portable .egg.",
   "files": {
-    "factory_agent.py": {
+    "neighborhood_factory_agent.py": {
       "purpose": "Drop into local brainstem agents/. Run NeighborhoodFactory to plant.",
       "size": 16396,
       "sha256": "79010b3038bca259d6e584da4e494eee71ae5b9f9140a1d8c470e6b0c36c6980"
@@ -21,5 +21,8 @@
   "see_also": [
     "https://github.com/kody-w/RAPP/blob/main/pages/docs/rapplication-sdk.md",
     "https://github.com/kody-w/RAPP/blob/main/CONSTITUTION.md"
-  ]
+  ],
+  "renamed": {
+    "factory_agent.py": "alias of neighborhood_factory_agent.py (same bytes; the old URL stays served; agent files are named *_factory_agent.py)"
+  }
 }

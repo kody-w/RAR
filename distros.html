@@ -54,6 +54,16 @@
   .btn { background: #0d6efd; color: #fff; border: 0; border-radius: 6px; padding: 9px 16px; font-size: 19px; cursor: pointer; text-decoration: none; display: inline-block; }
   .btn:hover { background: #0b5ed7; }
   .btn.ghost { background: #fff; color: #0d6efd; border: 1px solid #0d6efd; }
+  .pick { display: inline-flex; align-items: center; gap: 7px; font-size: 16px; margin-top: 12px; cursor: pointer; user-select: none; }
+  .pick input { width: 18px; height: 18px; accent-color: #0d6efd; }
+  .tile.chosen { border-color: #0d6efd; box-shadow: 0 0 0 3px rgba(13,110,253,.25); }
+  .incl { font-size: 13px; color: #6c757d; margin-top: 6px; }
+  .cart { position: fixed; left: 0; right: 0; bottom: 0; background: #212529; color: #fff; padding: 12px 16px; display: none;
+          align-items: center; gap: 12px; justify-content: center; flex-wrap: wrap; z-index: 50; box-shadow: 0 -6px 20px rgba(0,0,0,.2); }
+  .cart.on { display: flex; }
+  .cart code { background: #000; color: #9ef0b0; padding: 8px 10px; border-radius: 6px; font-size: 13px; max-width: 70vw; overflow-x: auto; white-space: nowrap; }
+  .cart .btn { font-size: 15px; padding: 7px 14px; }
+  body { padding-bottom: 90px; }
   .pager { display: flex; justify-content: center; margin-top: 32px; }
   .pager button { border: 1px solid #dee2e6; background: #fff; color: #0d6efd; min-width: 40px; height: 40px; font-size: 17px; cursor: pointer; margin-left: -1px; }
   .pager button:first-child { border-radius: 6px 0 0 6px; } .pager button:last-child { border-radius: 0 6px 6px 0; }
@@ -144,10 +154,13 @@
   <header>
     <h1>Distros</h1>
     <p class="sub">Every distro is a sealed pack: your own Brainstem for one job, on the unchanged grail. Rip one open to
-      see every card inside. The last card is the summon card, with its QR code and chant (or say the chant at <a href="s.html">s.html</a>).</p>
+      see every card inside. The last card is the summon card, with its QR code and chant (or say the chant at <a href="s.html">s.html</a>).
+      <b>Pick several</b> and they all install into your one Brainstem, all or nothing. Starter packs pick a set for you.</p>
   </header>
   <div class="grid" id="list">Loading…</div>
   <nav class="pager" id="pager" aria-label="Pages"></nav>
+  <div class="cart" id="cart" role="region" aria-label="Selected packs"><span id="cartn"></span><code id="cartcmd"></code>
+    <button type="button" class="btn" id="cartcopy">Copy</button><button type="button" class="btn ghost" id="cartclear">Clear</button></div>
 </main>
 <div class="detail" id="detail" role="dialog" aria-modal="true" aria-label="Distro details"></div>
 <div class="veil" id="veil" role="dialog" aria-modal="true" aria-label="Pack reveal"></div>
@@ -180,6 +193,12 @@
     "microsoft-365-team": '<circle cx="50" cy="48" r="20" fill="#5b5fc7"/><path d="M14 122 a36 36 0 0 1 72 0Z" fill="#5b5fc7"/><circle cx="104" cy="56" r="16" fill="#7f85f5"/><path d="M78 122 a28 30 0 0 1 56 0Z" fill="#7f85f5"/>',
     "neighborhood-starter": '<path d="M10 76 L44 46 L78 76 V128 H10Z" fill="#198754"/><rect x="34" y="96" width="20" height="32" fill="#fff"/><path d="M72 66 L108 34 L142 66 V128 H72Z" fill="#20c997"/><rect x="98" y="92" width="20" height="36" fill="#fff"/><rect x="0" y="128" width="150" height="6" fill="#495057"/>',
     "organism-lifecycle": '<path d="M75 128 C 20 110, 14 52, 75 18 C 136 52, 130 110, 75 128Z" fill="#198754"/><path d="M75 128 V 40" stroke="#fff" stroke-width="5"/><path d="M75 70 L52 54 M75 92 L100 74" stroke="#fff" stroke-width="4"/>',
+    "night-watch": '<circle cx="75" cy="75" r="60" fill="#1d2b53"/><path d="M92 40 a38 38 0 1 0 22 62 a30 30 0 1 1 -22 -62Z" fill="#ffd33d"/><circle cx="40" cy="48" r="3" fill="#fff"/><circle cx="56" cy="104" r="2.5" fill="#fff"/>',
+    "private-mode": '<rect x="34" y="66" width="82" height="64" rx="10" fill="#495057"/><path d="M50 66 V48 a25 25 0 0 1 50 0 V66" fill="none" stroke="#495057" stroke-width="12"/><circle cx="75" cy="94" r="9" fill="#ffc107"/><rect x="71" y="98" width="8" height="18" fill="#ffc107"/>',
+    "inheritance": '<path d="M75 20 L120 40 V78 C120 108 98 126 75 134 C52 126 30 108 30 78 V40Z" fill="#6f42c1"/><circle cx="62" cy="72" r="10" fill="#fff"/><circle cx="90" cy="72" r="10" fill="#fff"/><path d="M48 104 a14 12 0 0 1 28 0Z M76 104 a14 12 0 0 1 28 0Z" fill="#fff"/>',
+    "starter-personal": '<rect x="20" y="30" width="110" height="96" rx="12" fill="#0d6efd"/><path d="M75 52 a14 14 0 1 1 0 .1Z" fill="#fff"/><path d="M47 112 a28 26 0 0 1 56 0Z" fill="#fff"/>',
+    "starter-business": '<rect x="20" y="48" width="110" height="78" rx="10" fill="#198754"/><path d="M58 48 V36 a6 6 0 0 1 6 -6 H86 a6 6 0 0 1 6 6 V48" fill="none" stroke="#198754" stroke-width="9"/><rect x="20" y="78" width="110" height="8" fill="#0f5132"/>',
+    "starter-hobby": '<circle cx="75" cy="75" r="56" fill="#fd7e14"/><path d="M75 35 L86 64 H117 L92 82 L101 112 L75 94 L49 112 L58 82 L33 64 H64Z" fill="#fff"/>',
     "summon": '<rect x="18" y="18" width="46" height="46" rx="4" fill="none" stroke="#212529" stroke-width="8"/><rect x="31" y="31" width="20" height="20" fill="#212529"/><rect x="86" y="18" width="46" height="46" rx="4" fill="none" stroke="#212529" stroke-width="8"/><rect x="99" y="31" width="20" height="20" fill="#212529"/><rect x="18" y="86" width="46" height="46" rx="4" fill="none" stroke="#212529" stroke-width="8"/><rect x="31" y="99" width="20" height="20" fill="#212529"/><path d="M110 82 l7 18 18 7 -18 7 -7 18 -7 -18 -18 -7 18 -7Z" fill="#ffc107"/>'
   };
   var MONITOR = '<rect x="16" y="16" width="118" height="84" rx="10" fill="none" stroke="#000" stroke-width="9"/><path d="M16 82 H134" stroke="#000" stroke-width="9"/><circle cx="75" cy="91" r="5" fill="#000"/><path d="M62 100 L56 128 M88 100 L94 128 M44 130 H106" stroke="#000" stroke-width="9" stroke-linecap="round"/>';
@@ -304,7 +323,14 @@
       "<div class='count'>" + n + " card" + (n === 1 ? "" : "s") + " \u00b7 1 summon card</div></div><div class='tags'><span class='pill blue'>RAR</span>" +
       "<span class='pill green'>" + (p.kernel ? "distro" : "agent pack") + "</span>" +
       (ok ? "" : "<span class='pill gray'>unverified</span>") + "</div></div>" +
+      "<label class='pick'><input type='checkbox'" + (chosen[p.name] ? " checked" : "") + "> Add to my Brainstem</label>" +
+      "<div class='incl'></div>" +
       "<div class='foot'><button type='button' class='btn'>Rip it open</button></div>";
+    if (chosen[p.name]) el.classList.add("chosen");
+    el.querySelector(".pick input").onchange = function (e) {
+      if (e.target.checked) chosen[p.name] = true; else delete chosen[p.name];
+      el.classList.toggle("chosen", e.target.checked); cart();
+    };
     var pj = null;
     // The pack's own pack.json: total size, and whether grail layers ride with it.
     fetch(p.path + "/pack.json", { cache: "no-cache" }).then(function (r) { return r.ok ? r.text().then(parseExact) : null; })
@@ -313,6 +339,8 @@
         var total = 0;
         Object.keys((j && j.files) || {}).forEach(function (f) { total += (j.files[f] && j.files[f].size) || 0; });
         el.querySelector(".sz").innerHTML = I_SIZE + "Size: " + (total ? size(total) : "—");
+        var inc = (j && j.install && j.install.includes) || [];
+        if (inc.length) el.querySelector(".incl").textContent = "Includes: " + inc.join(", ");
         if (j && j.install && j.install.parts && j.install.parts.length) {
           el.querySelector(".tags").insertAdjacentHTML("beforeend", "<span class='pill gold'>layered</span>");
         }
@@ -325,7 +353,19 @@
     return el;
   }
 
-  var packs = [], page = 1;
+  var packs = [], page = 1, chosen = {};
+  var ADD = "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- ";
+  function cart() {
+    var names = Object.keys(chosen), bar = document.getElementById("cart");
+    bar.classList.toggle("on", names.length > 0);
+    document.getElementById("cartn").textContent = names.length + " pack" + (names.length === 1 ? "" : "s") + " for your Brainstem:";
+    document.getElementById("cartcmd").textContent = ADD + names.join(" ");
+  }
+  document.getElementById("cartcopy").onclick = function () {
+    var t = document.getElementById("cartcmd").textContent, b = this;
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 1500); });
+  };
+  document.getElementById("cartclear").onclick = function () { chosen = {}; cart(); render(); };
   function render() {
     var list = document.getElementById("list"), pager = document.getElementById("pager");
     var pages = Math.max(1, Math.ceil(packs.length / PER_PAGE));
@@ -343,7 +383,8 @@
 
   fetch("registry.json", { cache: "no-cache" }).then(function (r) { return r.text(); }).then(parseExact).then(function (reg) {
     packs = (reg.stack_packs || []).slice().sort(function (a, b) {
-      return (b._verified === true) - (a._verified === true) || String(a.display_name).localeCompare(b.display_name);
+      var sa = /^starter-/.test(a.name), sb = /^starter-/.test(b.name);
+      return (b._verified === true) - (a._verified === true) || sb - sa || String(a.display_name).localeCompare(b.display_name);
     });
     if (!packs.length) { document.getElementById("list").textContent = "No distros yet."; return; }
     render();

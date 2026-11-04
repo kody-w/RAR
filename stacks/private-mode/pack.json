@@ -1,0 +1,28 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "private-mode",
+  "display_name": "Private Mode",
+  "version": "1.0.0",
+  "purpose": "Name the topics that must never leave this computer (health, money, a person). Chats about them are answered by a local model, whatever model is picked; with no local model running they are refused, never sent out.",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "private_mode_agent.py"
+    ],
+    "destination": "agents/",
+    "includes": [
+      "grail-layers"
+    ],
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- private-mode"
+  },
+  "files": {
+    "private_mode_agent.py": {
+      "size": 4094,
+      "sha256": "c82f44d8bed994646097a1f31e9ab613c806902482afce5c41604d73decafdd4"
+    },
+    "README.md": {
+      "size": 580,
+      "sha256": "8145185df465e5e39028a8c8a318b9af03387ffbb2406cd107949cfc5875a916"
+    }
+  }
+}

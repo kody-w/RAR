@@ -1,0 +1,25 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "night-watch",
+  "display_name": "Night Watch",
+  "version": "1.0.0",
+  "purpose": "Your Brainstem looks after the computer it lives on: disk space, its own services, last night's drills. It tells you once, in one sentence, only when something needs you, and fixes what is safe to fix.",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "night_watch_agent.py"
+    ],
+    "destination": "agents/",
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- night-watch"
+  },
+  "files": {
+    "night_watch_agent.py": {
+      "size": 5646,
+      "sha256": "f1e89eaf1645ebf08afe79f0d14bf85371e8cf539f72589a36897469e51d1eb7"
+    },
+    "README.md": {
+      "size": 381,
+      "sha256": "708ef4e975628ca342d564d8373b605d7ffcb0c1e05edd7ed6391131fc4e5fe5"
+    }
+  }
+}

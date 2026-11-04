@@ -1,0 +1,20 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "inheritance",
+  "display_name": "Inheritance",
+  "version": "1.0.0",
+  "purpose": "Say who gets your Brainstem if something happens to you. After a silence window it hands over, signed with keys you hold; only public keys are recorded.",
+  "install": {
+    "type": "packs",
+    "includes": [
+      "grail-layers"
+    ],
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- inheritance"
+  },
+  "files": {
+    "README.md": {
+      "size": 417,
+      "sha256": "40c7a3742b00a314762741d17b72ae7c0476a9b0068f2184eeeadf2f259dd75a"
+    }
+  }
+}
