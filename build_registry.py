@@ -579,7 +579,7 @@ def build_stack_packs(taken_seeds: set, root: Path = Path("stacks")) -> list[dic
         if isinstance(pack.get("kernel"), dict):
             entry["kernel"] = pack["kernel"]
         # The shelf a person browses: starters fill the cart, apps came from the RAPP Store, packs are the rest.
-        entry["shelf"] = ("starter" if name.startswith("starter-") else
+        entry["shelf"] = ("starter" if name.startswith("starter-") or pack.get("shelf") == "starter" else
                           "app" if pack.get("kind_label") == "rapplication" else "pack")
         seed = compute_seed(f"@stacks/{name}", "pipeline", "community",
                             list(pack.get("capabilities") or [])[:31], agent_files)

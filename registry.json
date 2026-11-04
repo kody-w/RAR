@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-04T15:58:21.416868+00:00",
+  "generated_at": "2026-11-04T16:49:43.413671+00:00",
   "stats": {
     "total_agents": 226,
     "total_swarms": 2,
@@ -14451,6 +14451,24 @@
       "shelf": "app",
       "_seed": 2308479191810580480,
       "_incantation": "FORGE CHISEL PANTHER LARCH COSMIC BLADE BLADE"
+    },
+    {
+      "name": "wildhaven-hearth",
+      "display_name": "Wildhaven Hearth",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "path": "stacks/wildhaven-hearth",
+      "purpose": "Your own AI at home on your computer that looks after itself: it never drops the conversation, every pack installs and uninstalls cleanly, and the Brainstem engine stays exactly as published. By Wildhaven Homes.",
+      "files": {
+        "README.md": {
+          "sha256": "05979c80bab7212f5b1c7164fa2a9585b80ed0cbb2aec18e699eef642375218d",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "starter",
+      "_seed": 3055186258679562240,
+      "_incantation": "FORGE FORGE PANTHER GOLDEN FONT TRAIN BLADE"
     },
     {
       "name": "work-receipts",

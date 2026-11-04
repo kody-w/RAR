@@ -1,0 +1,23 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "wildhaven-hearth",
+  "display_name": "Wildhaven Hearth",
+  "version": "1.0.0",
+  "purpose": "Your own AI at home on your computer that looks after itself: it never drops the conversation, every pack installs and uninstalls cleanly, and the Brainstem engine stays exactly as published. By Wildhaven Homes.",
+  "shelf": "starter",
+  "publisher": "@wildhaven",
+  "install": {
+    "type": "packs",
+    "includes": [
+      "grail-layers",
+      "starter-personal"
+    ],
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- wildhaven-hearth"
+  },
+  "files": {
+    "README.md": {
+      "size": 881,
+      "sha256": "05979c80bab7212f5b1c7164fa2a9585b80ed0cbb2aec18e699eef642375218d"
+    }
+  }
+}
