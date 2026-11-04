@@ -1,9 +1,13 @@
 {
-  "count": 1,
+  "count": 2,
   "paths": {
     "skills/@kody-w/rapp-workspace-refresh/manifest.json": {
       "first_seen": "2026-09-13T16:28:55Z",
       "name": "@kody-w/rapp-workspace-refresh"
+    },
+    "skills/@kody-w/rar-easy-mode/manifest.json": {
+      "first_seen": "2026-11-04T16:48:06Z",
+      "name": "@kody-w/rar-easy-mode"
     }
   },
   "schema": "rar-published-skill-paths/1.0"

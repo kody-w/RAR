@@ -2,8 +2,8 @@
   "artifact_type": "skill-catalog",
   "counts": {
     "generated_projections": 244,
-    "reviewed_submissions": 1,
-    "total": 245
+    "reviewed_submissions": 2,
+    "total": 246
   },
   "description": "Static catalog of reviewed portable skills and generated Scout projections. Skill artifact kind is independent from protocol conformance; catalog admission never implies runtime or authenticated RAPP/1 compliance.",
   "hashing": {
@@ -11,13 +11,13 @@
     "manifest": "sha256-canonical-json-v1"
   },
   "inputs": {
-    "canonical_manifests": "64b03442d38d2cc1cf3620a305f1aa8ce52967d78722c7338db346e2cf45d700",
+    "canonical_manifests": "8f55b83407988dc104b5ec4f0e01a4ab1e1452a0770ff3ff7249810030b0c1ae",
     "scout_catalog": "073595c1d2538fac6bbabe220b3cdf379b709dc851682a4daaaf628f3b7351b7",
     "scout_toaster": {
       "commit": "d54ba8484b5c5dae6406d2090c03115d12985446",
       "sha256": "d340043178aa4160f76a179b8b1086971e09207b212aff2ab2c0752b69173e17"
     },
-    "skill_lifecycle": "a19b8ff8be92d1fdc628b77f338e0255262affd002aa2ccc75c2cf872c0319fe"
+    "skill_lifecycle": "5f31434b47a4a142c93ca00b00ca0ead7d6cc1eb333c706fbca8e57fd64b9022"
   },
   "schema": "rar-skills-catalog/1.0",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/skills.json",
@@ -128,6 +128,108 @@
         "local-first"
       ],
       "version": "0.1.0"
+    },
+    {
+      "artifact_type": "skill",
+      "author": "kody-w",
+      "catalog_origin": "reviewed-submission",
+      "category": "devtools",
+      "compatibility": {
+        "rapp_protocol": "optional"
+      },
+      "description": "Install RAR packs, starters and store agents into your own Brainstem and test them from one plain sentence, in GitHub Copilot Chat Agent mode or any AI that can run commands.",
+      "display_name": "RAR Easy Mode",
+      "install": {
+        "destination": "skills/rar-easy-mode",
+        "entrypoint": "SKILL.md",
+        "strategy": "copy-files",
+        "verify": "sha256-before-use"
+      },
+      "license": "",
+      "manifest": {
+        "hash_algorithm": "sha256-canonical-json-v1",
+        "path": "skills/@kody-w/rar-easy-mode/manifest.json",
+        "sha256": "edc6d9f022ec1a34506a93bab1127fad7febe804e034e880b957f37384c4bb57",
+        "url": "https://raw.githubusercontent.com/kody-w/RAR/main/skills/@kody-w/rar-easy-mode/manifest.json"
+      },
+      "name": "@kody-w/rar-easy-mode",
+      "namespace": "@kody-w",
+      "protocol_conformance": {
+        "evidence": [],
+        "profile": null,
+        "status": "not_assessed"
+      },
+      "relationships": [],
+      "review": {
+        "accepted_at": "2026-11-04T16:48:06.338965+00:00",
+        "receipt": "rar_skill_4203d8efba019a0d0b59e76013070875ef6f0afd35a2cf93ab92304caf1465c3",
+        "revision_id": "4203d8efba019a0d0b59e76013070875ef6f0afd35a2cf93ab92304caf1465c3",
+        "status": "notarized"
+      },
+      "search_terms": [
+        "kody",
+        "rar",
+        "easy",
+        "mode",
+        "install",
+        "packs",
+        "starters",
+        "store",
+        "agents",
+        "your",
+        "own",
+        "brainstem",
+        "test",
+        "them",
+        "one",
+        "plain",
+        "sentence",
+        "in",
+        "github",
+        "copilot",
+        "chat",
+        "agent",
+        "or",
+        "any",
+        "ai",
+        "can",
+        "run",
+        "commands",
+        "rapp",
+        "local",
+        "first",
+        "devtools"
+      ],
+      "slug": "rar-easy-mode",
+      "source": {
+        "entrypoint": "skills/rar-easy-mode/SKILL.md",
+        "entrypoint_url": "https://raw.githubusercontent.com/kody-w/grail-layers/5ac9288f467488039df732a756f5863e890b3b13/skills/rar-easy-mode/SKILL.md",
+        "files": [
+          {
+            "media_type": "text/markdown",
+            "path": "skills/rar-easy-mode/SKILL.md",
+            "sha256": "2f7f6ed660199aecd419fa16884a0c7c854550104c5027c24950a797bca5f477",
+            "url": "https://raw.githubusercontent.com/kody-w/grail-layers/5ac9288f467488039df732a756f5863e890b3b13/skills/rar-easy-mode/SKILL.md"
+          },
+          {
+            "media_type": "text/x-python",
+            "path": "skills/rar-easy-mode/rar_easy_mode_agent.py",
+            "sha256": "e4e91e95dbada6941dc231d4a030326244cdb61b7f0dc048a293a5115930ec57",
+            "url": "https://raw.githubusercontent.com/kody-w/grail-layers/5ac9288f467488039df732a756f5863e890b3b13/skills/rar-easy-mode/rar_easy_mode_agent.py"
+          }
+        ],
+        "hash_algorithm": "sha256",
+        "repository": "kody-w/grail-layers",
+        "revision": "5ac9288f467488039df732a756f5863e890b3b13"
+      },
+      "tags": [
+        "install",
+        "easy-mode",
+        "copilot",
+        "rapp-1",
+        "local-first"
+      ],
+      "version": "1.0.0"
     },
     {
       "artifact_type": "skill",

@@ -2,6 +2,11 @@
   "action": "skill.create",
   "actor_id": 1735900,
   "actor_login": "kody-w",
+  "applied_at": "2026-11-04T16:48:06.338965+00:00",
+  "approved_by": {
+    "github_id": 1735900,
+    "github_login": "kody-w"
+  },
   "base_lifecycle_receipt": "",
   "base_lifecycle_sha256": "",
   "base_lifecycle_version": "",
@@ -18,6 +23,7 @@
   "issue_updated_at": "2026-11-04T15:16:51Z",
   "manifest_sha256": "edc6d9f022ec1a34506a93bab1127fad7febe804e034e880b957f37384c4bb57",
   "publisher": "@kody-w",
+  "receipt": "rar_skill_4203d8efba019a0d0b59e76013070875ef6f0afd35a2cf93ab92304caf1465c3",
   "repository_id": 1200565697,
   "request_id": "req_2e9fa82b49ed8ec34239e192",
   "resource_kind": "skill",
@@ -29,5 +35,5 @@
   "source_files_sha256": "6813dec3ce4e63978003bbefdfe64dd71e15e57a5f4c9d0c256212f64892e3a9",
   "source_repository": "kody-w/grail-layers",
   "source_revision": "5ac9288f467488039df732a756f5863e890b3b13",
-  "status": "pending_review"
+  "status": "applied"
 }
