@@ -2454,14 +2454,37 @@
   .quiz-result .score-big { font-size: 3rem; font-weight: 900; color: var(--accent); }
   .quiz-result p { color: var(--text-dim); margin-top: 8px; }
 </style>
+<link rel="stylesheet" href="nav.css">
+<script src="nav.js" defer></script>
 </head>
 <body>
+<nav id="rar-nav" aria-label="Primary">
+<a class="rar-brand" href="index.html"><span class="rar-brand-mark">R</span>RAPP Agent Repository</a>
+<span class="rar-primary"><noscript><span class="rar-nav-fallback">
+  <a href="index.html">Browse</a><a href="distros.html">Distros</a><a href="skills.html">Skills</a><a href="install.html">Install</a><a href="front.html">Front page</a><a href="store.html">Advanced</a><a href="llms.txt">For AIs</a>
+</span></noscript></span>
+<details class="rar-more"><summary>More</summary><div class="rar-more-content">
+  <a href="metrics.html">Metrics</a>
+  <a href="rappterpedia/">Wiki</a>
+  <button class="nav-btn" onclick="startTour()">Tour</button>
+  <button class="nav-btn" onclick="switchTab('leaderboard')">Leaderboard</button>
+  <button class="nav-btn" onclick="switchTab('cards')">Cards</button>
+  <button class="nav-btn" onclick="switchTab('packs')">Packs</button>
+  <button class="nav-btn" onclick="switchTab('stream')">Stream</button>
+  <button class="nav-btn" onclick="switchTab('swarms')">Swarms</button>
+  <button class="nav-btn" onclick="switchTab('ecosystem')">Ecosystem</button>
+  <button class="nav-btn" onclick="switchTab('market')">Market</button>
+  <button class="nav-btn" onclick="switchTab('workbench')">Workbench</button>
+  <button class="nav-btn" onclick="switchTab('submit')">Submit</button>
+</div></details>
+</nav>
 
-<header>
+<header class="rar-page-header">
   <div class="logo" onclick="switchTab('browse')">
     <div class="logo-mark">R</div><span id="logo-text">RAPP Agent Repository</span>
   </div>
-  <nav id="main-nav">
+  </header>
+  <nav id="main-nav" aria-label="Store tabs">
     <button class="nav-btn active" data-tab="browse" onclick="switchTab('browse')">Browse</button>
     <button class="nav-btn" data-tab="leaderboard" onclick="switchTab('leaderboard')">Leaderboard</button>
     <button class="nav-btn" data-tab="cards" onclick="switchTab('cards')">Cards</button>
@@ -2476,6 +2499,7 @@
     <button class="nav-btn" data-tab="submit" onclick="switchTab('submit')">Submit</button>
     <a class="nav-btn" href="rappterpedia/" style="text-decoration:none">Wiki</a>
   </nav>
+<div hidden>
   <div class="header-actions" id="header-actions">
     <a href="index.html" style="background:var(--surface2);border:1px solid var(--border);color:var(--text-dim);padding:5px 12px;border-radius:6px;cursor:pointer;font-size:.78rem;margin-right:4px;text-decoration:none;display:inline-block" title="Switch to simple browse view">Simple</a>
     <a href="metrics.html" style="background:var(--surface2);border:1px solid var(--border);color:var(--text-dim);padding:5px 12px;border-radius:6px;cursor:pointer;font-size:.78rem;margin-right:4px;text-decoration:none;display:inline-block" title="Public registry metrics">Metrics</a>
@@ -2489,7 +2513,7 @@
       Sign in
     </button>
   </div>
-</header>
+</div>
 
 <div class="hero" id="hero">
   <h1 id="hero-title">RAPP <span class="gradient">Agent</span> Repository</h1>

@@ -99,6 +99,16 @@ by LF and no other normalization. Successful checks produce a receipt committed 
 
 RAPP is npm for AI agents — but local-first, single-file, and offline-capable. No `node_modules`. No build step. No server.
 
+The nine main UI pages (`index`, `distros`, `skills`, `install`, `front`, `store`,
+`discover`, `metrics`, and `submit`) share `nav.js` and `nav.css`. Add primary
+destinations in `nav.js` and keep each page's plain `<noscript>` links in sync.
+The shared bar contains the brand, seven primary links, a native `More` dropdown
+for legacy links and controls, and the existing cart where available. Legacy
+header rows stay hidden with their script-referenced IDs intact; live controls
+move into `More` and the store tab bar stays as the secondary row. No fetch or
+build step is needed, including when opening a page from `file://`. The dropdown
+and plain fallback links also work without JavaScript.
+
 - **Every agent is one `.py` file** — the file IS the package, the manifest, and the documentation
 - **Every card has a seed** — a 64-bit number that reconstructs the full card offline, anywhere
 - **Every seed has an incantation** — 7 words that summon the card: `TWIST MOLD BEQUEST VALOR LEFT ORBIT RUNE`

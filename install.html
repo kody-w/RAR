@@ -208,8 +208,21 @@
   }
   .links a { margin: 0 12px; }
 </style>
+<link rel="stylesheet" href="nav.css">
+<script src="nav.js" defer></script>
 </head>
-<body>
+<body class="rar-install">
+<nav id="rar-nav" aria-label="Primary">
+<a class="rar-brand" href="index.html"><span class="rar-brand-mark">R</span>RAPP Agent Repository</a>
+<span class="rar-primary"><noscript><span class="rar-nav-fallback">
+  <a href="index.html">Browse</a><a href="distros.html">Distros</a><a href="skills.html">Skills</a><a href="install.html">Install</a><a href="front.html">Front page</a><a href="store.html">Advanced</a><a href="llms.txt">For AIs</a>
+</span></noscript></span>
+<details class="rar-more"><summary>More</summary><div class="rar-more-content">
+  <a href="https://github.com/kody-w/RAR">RAPP Repo</a>
+  <a href="https://github.com/kody-w/CommunityRAPP">CommunityRAPP</a>
+  <a href="https://ollama.com">Ollama</a>
+</div></details>
+</nav>
 
 <div class="hero">
   <div class="logo">R</div>

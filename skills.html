@@ -104,9 +104,21 @@ code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
   .toolbar { grid-template-columns: 1fr; }
 }
 </style>
+<link rel="stylesheet" href="nav.css">
+<script src="nav.js" defer></script>
 </head>
 <body>
-<header>
+<nav id="rar-nav" aria-label="Primary">
+<a class="rar-brand" href="index.html"><span class="rar-brand-mark">R</span>RAPP Agent Repository</a>
+<span class="rar-primary"><noscript><span class="rar-nav-fallback">
+  <a href="index.html">Browse</a><a href="distros.html">Distros</a><a href="skills.html">Skills</a><a href="install.html">Install</a><a href="front.html">Front page</a><a href="store.html">Advanced</a><a href="llms.txt">For AIs</a>
+</span></noscript></span>
+<details class="rar-more"><summary>More</summary><div class="rar-more-content">
+  <a href="api/v1/skills.json">JSON Catalog</a>
+  <a href="skill.md#8a-rar-skills-store-distinct-artifact-type">Submission Contract</a>
+</div></details>
+</nav>
+<header class="rar-page-header">
   <a class="brand" href="index.html"><span class="mark">R</span><span>RAR Skills</span></a>
   <nav>
     <a href="index.html">Agents</a>

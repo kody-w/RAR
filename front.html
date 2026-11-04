@@ -114,7 +114,7 @@ header {
   display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
   padding: 12px 14px; margin-bottom: 6px;
   background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-  position: sticky; top: 61px; z-index: 40;
+  position: sticky; top: var(--rar-nav-height, 61px); z-index: 40;
 }
 .seg { display: flex; gap: 3px; background: var(--bg); padding: 3px; border-radius: 9px; }
 .seg button {
@@ -269,10 +269,22 @@ footer .src { font-family: var(--mono); font-size: .72rem; word-break: break-all
   .showing { margin-left: 0; }
 }
 </style>
+<link rel="stylesheet" href="nav.css">
+<script src="nav.js" defer></script>
 </head>
 <body>
+<nav id="rar-nav" aria-label="Primary">
+<a class="rar-brand" href="index.html"><span class="rar-brand-mark">R</span>RAPP Agent Repository</a>
+<span class="rar-primary"><noscript><span class="rar-nav-fallback">
+  <a href="index.html">Browse</a><a href="distros.html">Distros</a><a href="skills.html">Skills</a><a href="install.html">Install</a><a href="front.html">Front page</a><a href="store.html">Advanced</a><a href="llms.txt">For AIs</a>
+</span></noscript></span>
+<details class="rar-more"><summary>More</summary><div class="rar-more-content">
+  <a href="discover.html">For Work</a>
+  <a href="metrics.html">Metrics</a>
+</div></details>
+</nav>
 
-<header>
+<header class="rar-page-header">
   <div class="logo">
     <div class="logo-mark">R</div>
     <span>Front Page</span>

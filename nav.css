@@ -1,0 +1,132 @@
+#rar-nav {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  margin: 0;
+  padding: 12px 24px;
+  border: 0;
+  border-bottom: 1px solid #30363d;
+  border-radius: 0;
+  background: #161b22;
+  overflow: visible;
+  color: #e6edf3;
+  font: 600 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+#rar-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+#rar-nav .rar-primary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+#rar-nav .rar-nav-fallback { display: contents; }
+#rar-nav a,
+#rar-nav summary {
+  display: inline-block;
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: #e6edf3;
+  background: transparent;
+  text-decoration: none;
+  white-space: nowrap;
+}
+#rar-nav a:hover,
+#rar-nav summary:hover,
+#rar-nav a[aria-current="page"] {
+  border-color: #484f58;
+  background: #21262d;
+  color: #fff;
+}
+#rar-nav a:focus-visible,
+#rar-nav summary:focus-visible,
+#rar-nav > #cart-toggle:focus-visible {
+  outline: 2px solid #58a6ff;
+  outline-offset: 2px;
+}
+#rar-nav > #cart-toggle {
+  flex: none;
+  background: #21262d;
+  border-color: #484f58;
+  color: #e6edf3;
+}
+body > header.rar-page-header {
+  display: none;
+}
+#rar-nav > .rar-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: auto;
+  padding-left: 0;
+  font-size: 15px;
+}
+.rar-brand-mark {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #58a6ff, #bc8cff);
+  color: #fff;
+  font-weight: 800;
+}
+#rar-nav .rar-more { position: relative; }
+#rar-nav summary { cursor: pointer; }
+#rar-nav .rar-more-content {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 260px;
+  max-height: 65vh;
+  overflow: auto;
+  padding: 8px;
+  border: 1px solid #484f58;
+  border-radius: 8px;
+  background: #161b22;
+  box-shadow: 0 8px 24px #0006;
+}
+#rar-nav .rar-more-content > a,
+#rar-nav .rar-more-content > button { display: block; width: 100%; text-align: left; }
+#rar-nav .header-actions { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
+#rar-nav .header-actions > a,
+#rar-nav .header-actions > button[onclick="startTour()"] { display: none !important; }
+body > #main-nav {
+  margin: 0;
+  padding: 8px 24px;
+  border-radius: 0;
+  flex-wrap: wrap;
+}
+body.rar-distros { padding-top: 0; }
+.rar-distros > #rar-nav {
+  margin: 0 -16px 28px;
+  width: calc(100% + 32px);
+}
+body.rar-install { padding-top: 0; }
+.rar-install > #rar-nav {
+  flex: none;
+  align-self: stretch;
+  margin: 0 -24px 48px;
+  width: calc(100% + 48px);
+}
+@media (max-width: 640px) {
+  #rar-nav {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    padding: 10px 12px;
+    gap: 4px;
+  }
+  #rar-nav a,
+  #rar-nav summary { padding: 6px 8px; }
+  #rar-nav > .rar-brand { margin: 0; font-size: 14px; white-space: normal; }
+  #rar-nav .rar-primary { grid-column: 1 / -1; grid-row: 2; }
+  #rar-nav .rar-more { position: static; grid-column: 2; grid-row: 1; }
+  #rar-nav > #cart-toggle { grid-column: 3; grid-row: 1; }
+  #rar-nav .rar-more-content { right: 12px; }
+}
