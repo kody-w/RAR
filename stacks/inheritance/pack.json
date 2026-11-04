@@ -3,6 +3,12 @@
   "name": "inheritance",
   "display_name": "Inheritance",
   "version": "1.0.0",
+  "status": "retired",
+  "retired": {
+    "since": "2026-11-04",
+    "reason": "No succession code in the pack; it only includes grail-layers.",
+    "replacement": null
+  },
   "purpose": "Say who gets your Brainstem if something happens to you. After a silence window it hands over, signed with keys you hold; only public keys are recorded.",
   "install": {
     "type": "packs",

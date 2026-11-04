@@ -3,6 +3,12 @@
   "name": "wildhaven-hearth",
   "display_name": "Wildhaven Hearth",
   "version": "1.0.0",
+  "status": "retired",
+  "retired": {
+    "since": "2026-11-04",
+    "reason": "Redundant wrapper over starter-personal.",
+    "replacement": "starter-personal"
+  },
   "purpose": "Your own AI at home on your computer that looks after itself: it never drops the conversation, every pack installs and uninstalls cleanly, and the Brainstem engine stays exactly as published. By Wildhaven Homes.",
   "shelf": "starter",
   "publisher": "@wildhaven",

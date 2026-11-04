@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-04T21:16:31.286268+00:00",
+  "generated_at": "2026-11-04T21:38:36.252074+00:00",
   "stats": {
     "total_agents": 226,
     "total_swarms": 2,
@@ -13669,7 +13669,7 @@
       "display_name": "Inheritance",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.2",
-      "status": "current",
+      "status": "retired",
       "path": "stacks/inheritance",
       "purpose": "Say who gets your Brainstem if something happens to you. After a silence window it hands over, signed with keys you hold; only public keys are recorded.",
       "files": {
@@ -13679,6 +13679,11 @@
         }
       },
       "_verified": true,
+      "retired": {
+        "since": "2026-11-04",
+        "reason": "No succession code in the pack; it only includes grail-layers.",
+        "replacement": null
+      },
       "shelf": "pack",
       "_seed": 18205994896412639232,
       "_incantation": "FORGE FORGE PANTHER KINGDOM VAULT TEMPLAR BIND"
@@ -14317,14 +14322,14 @@
     {
       "name": "starter-personal",
       "display_name": "Personal starter",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "schema": "rapp-rar-stack/1.2",
       "status": "current",
       "path": "stacks/starter-personal",
-      "purpose": "For your own life: everything new on the grail, a Brainstem that looks after its computer, private topics that stay home, and who inherits it.",
+      "purpose": "For your own life: everything new on the grail, a Brainstem that looks after its computer, private topics that stay home, money watch, paperwork and moving day.",
       "files": {
         "README.md": {
-          "sha256": "7b460c835568d0796032bbb51e8458263bff0bea32550a3eb2da89b03e06afb5",
+          "sha256": "496de831f0dfdf3356d23606b475aed4356b7de82677ef69f9508606307cb419",
           "verified": true
         }
       },
@@ -14481,7 +14486,7 @@
       "display_name": "Wildhaven Hearth",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.2",
-      "status": "current",
+      "status": "retired",
       "path": "stacks/wildhaven-hearth",
       "purpose": "Your own AI at home on your computer that looks after itself: it never drops the conversation, every pack installs and uninstalls cleanly, and the Brainstem engine stays exactly as published. By Wildhaven Homes.",
       "files": {
@@ -14491,6 +14496,11 @@
         }
       },
       "_verified": true,
+      "retired": {
+        "since": "2026-11-04",
+        "reason": "Redundant wrapper over starter-personal.",
+        "replacement": "starter-personal"
+      },
       "shelf": "starter",
       "_seed": 3055186258679562240,
       "_incantation": "FORGE FORGE PANTHER GOLDEN FONT TRAIN BLADE"

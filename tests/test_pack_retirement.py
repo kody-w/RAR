@@ -101,14 +101,31 @@ def test_retired_starter_cannot_include_itself(tmp_path):
         build_registry.build_stack_packs(set(), tmp_path)
 
 
-def test_published_catalog_retains_all_packs_and_retirement_metadata():
+@pytest.mark.parametrize("name,replacement", [
+    ("vibe-coding-loop", "@kody-w/vibe_coding_loop"),
+    ("inheritance", None),
+    ("wildhaven-hearth", "starter-personal"),
+])
+def test_published_catalog_retains_all_packs_and_retirement_metadata(name, replacement):
     registry = json.loads((ROOT / "registry.json").read_text())
     catalog = json.loads((ROOT / "api/v1/catalog.json").read_text())
     assert catalog["stack_packs"] == registry["stack_packs"]
-    retired = next(p for p in catalog["stack_packs"] if p["name"] == "vibe-coding-loop")
+    retired = next(p for p in catalog["stack_packs"] if p["name"] == name)
     assert retired["status"] == "retired"
-    assert retired["retired"]["replacement"] == "@kody-w/vibe_coding_loop"
+    assert retired["retired"]["replacement"] == replacement
     assert retired["_verified"] is True
+
+
+def test_personal_starter_no_longer_promises_or_includes_succession():
+    pack = json.loads((ROOT / "stacks/starter-personal/pack.json").read_text())
+    assert pack["version"] == "1.2.1"
+    assert "inheritance" not in pack["install"]["includes"]
+    assert "inherits" not in pack["purpose"]
+    packs = {
+        p.parent.name: json.loads(p.read_text())
+        for p in (ROOT / "stacks").glob("*/pack.json")
+    }
+    build_registry.validate_stack_pack_status(packs)
 
 
 def _node(script):
