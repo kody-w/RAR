@@ -15,54 +15,73 @@
         "kind": "layer",
         "point": "provider",
         "file": "providers_1_1.py",
-        "sha256": "0b011eed4870598e2ba070547d55e41afaf17d73c63fd761fc3a459bdc98671d",
+        "sha256": "9bdf1f1924d0baa740c3ad335abe33660887634f79349c2973bd38319411fcdc",
         "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/providers_1_1.py",
         "proven_grail": [
           "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
           "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
         ],
-        "what": "The one provider part: Responses-API-only models (gpt-6.1-sol, gpt-6-luna) and this machine's Ollama models (ollama/<name>, tools included) in the unchanged grail. responses_models and local_models are aliases of this part (status: alias; still served, not seeded). Since 1.1: topics the owner marks private (Private Mode pack) are answered by a local model or refused, never sent out."
+        "what": "Layer: providers \u2014 every model the unchanged grail can reach, in one provider part.",
+        "touches": [
+          "requests.get",
+          "requests.post"
+        ],
+        "wraps": []
       },
       {
         "id": "@kody-w/responses_models",
         "kind": "layer",
         "point": "provider",
         "file": "responses_models.py",
-        "sha256": "77343ad7f8edfdf42ecddc2727ccb2919f15bd75f944ec7b260d439ed1f06e60",
+        "sha256": "edb0eee0313372a3aa51c8c513694f43885d305455872b90b7c589d921db0a8d",
         "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/responses_models.py",
         "proven_grail": [
           "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
           "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
         ],
-        "what": "Models that only speak the Responses API (gpt-6.1-sol, gpt-6-luna) become usable in the unchanged grail.",
-        "status": "alias of @kody-w/providers"
+        "what": "Layer: responses_models \u2014 lets the unchanged grail use models that only speak the Responses API",
+        "status": "alias of @kody-w/providers",
+        "touches": [
+          "requests.get",
+          "requests.post"
+        ],
+        "wraps": []
       },
       {
         "id": "@kody-w/journal_tap",
         "kind": "layer",
         "point": "transport",
         "file": "journal_tap.py",
-        "sha256": "dd0e6f70c521721c23f73fae7bfef0cb0aea10661a6b7e87f41070ecc7ebaf1a",
+        "sha256": "1fb33db6b6dbab0bea2abe6733f941942a2eb3a5ef1a3cf3c82799f3f96863cc",
         "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/journal_tap.py",
         "proven_grail": [
           "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
           "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
         ],
-        "what": "Every chat turn (plain and streamed) is recorded in the Brainstem Journal on this device, by default; pause it from chat. No journal running: nothing happens."
+        "what": "Layer: journal_tap \u2014 every completed chat turn is recorded in the owner's journal, by default.",
+        "touches": [
+          "flask.Flask.add_url_rule"
+        ],
+        "wraps": []
       },
       {
         "id": "@kody-w/local_models",
         "kind": "layer",
         "point": "provider",
         "file": "local_models.py",
-        "sha256": "884148aa85d3c405bfe1d642d0c309d6100fa6e71a03a05c2d468324ab56c3f8",
+        "sha256": "ea95cdc10ce7b274ae8bb579bcb52b5a7e7164d70dc2d9dcfa7bc135ca1aef13",
         "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/local_models.py",
         "proven_grail": [
           "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
           "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
         ],
-        "what": "Models running on this machine (Ollama, http://127.0.0.1:11434) join the model list as ollama/<name> and answer chat with tools, no Copilot needed for them. No Ollama: nothing changes.",
-        "status": "alias of @kody-w/providers"
+        "what": "Layer: local_models \u2014 the unchanged grail can talk to models running on this machine (Ollama).",
+        "status": "alias of @kody-w/providers",
+        "touches": [],
+        "wraps": [
+          "requests.get",
+          "requests.post"
+        ]
       },
       {
         "id": "@kody-w/lispy_brainstem",
@@ -82,13 +101,19 @@
         "kind": "layer",
         "point": "agents",
         "file": "senses_and_pages.py",
-        "sha256": "1eddf52129df01baec2ce09962bc7025ffe478533dc67a0635a787814c251bb5",
+        "sha256": "c7af54d392156cb65bd3d6a2886f7fbf526e2edad0b09729c377ebcccefb016b",
         "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/senses_and_pages.py",
         "proven_grail": [
           "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
           "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
         ],
-        "what": "Senses and pages over the unchanged grail. A sense adds one extra field to every plain chat reply (a headline, a short version); a page adds a read-only view at /api/<name>/ (GET only; every change goes through /chat, rapp/1 section 8). Senses and pages hot-load like agents/: add, change or remove the file and the next request sees it, no restart. Before this, only rappter-distro's own kernel loaded them; that loader is now an alias of this part. Organ is an alias of page."
+        "what": "Layer: senses_and_pages \u2014 senses and pages run over the unchanged grail.",
+        "touches": [
+          "flask.Flask.__init__"
+        ],
+        "wraps": [
+          "requests.post"
+        ]
       }
     ],
     "seed": [
@@ -112,51 +137,55 @@
   },
   "files": {
     "README.md": {
-      "size": 2328,
-      "sha256": "b0072af4c395d55fab3e4896e833f939c9a1bf0a3b6caf9544ae4fe1baf4eb26"
+      "size": 1772,
+      "sha256": "64a9522fd9d04fec09cd8a29c7f08342b62c782ce3da17bb68fca7edd80a8f24"
     },
     "responses_models.py": {
-      "size": 5902,
-      "sha256": "77343ad7f8edfdf42ecddc2727ccb2919f15bd75f944ec7b260d439ed1f06e60"
+      "size": 6943,
+      "sha256": "edb0eee0313372a3aa51c8c513694f43885d305455872b90b7c589d921db0a8d"
     },
     "lispy_brainstem.py": {
       "size": 50358,
       "sha256": "311e2162e397f7df5fe9262684f737178acdc0306b0a3a5b9cbd4df6b420a50b"
     },
     "journal_tap.py": {
-      "size": 6194,
-      "sha256": "dd0e6f70c521721c23f73fae7bfef0cb0aea10661a6b7e87f41070ecc7ebaf1a"
+      "size": 7219,
+      "sha256": "1fb33db6b6dbab0bea2abe6733f941942a2eb3a5ef1a3cf3c82799f3f96863cc"
     },
     "local_models.py": {
-      "size": 3625,
-      "sha256": "884148aa85d3c405bfe1d642d0c309d6100fa6e71a03a05c2d468324ab56c3f8"
+      "size": 4653,
+      "sha256": "ea95cdc10ce7b274ae8bb579bcb52b5a7e7164d70dc2d9dcfa7bc135ca1aef13"
     },
     "providers.py": {
-      "size": 7877,
-      "sha256": "eec63ad97a31e4a8f3465633cc6d6050c14147554822ff943665a9ea09fc7218"
+      "size": 8885,
+      "sha256": "90bb46c6b82383378e83ba8669327d02dfc1df9aab5dcca764b4d7850c657bea"
     },
     "journal_recall_agent.py": {
-      "size": 5148,
+      "size": 6341,
       "sha256": "f6358978b97b93606c74b987803dfc099f42e3ff143825040616102d5f8201bf",
       "source": "agents/@kody-w/journal_recall_agent.py"
     },
     "fragments_agent.py": {
-      "size": 6893,
+      "size": 8071,
       "sha256": "4d13906d0277d672c4b54489527e7fc8042c54ae6a32c2024fec407b0ee6d381",
       "source": "agents/@kody-w/fragments_agent.py"
     },
     "providers_1_1.py": {
-      "size": 10506,
-      "sha256": "0b011eed4870598e2ba070547d55e41afaf17d73c63fd761fc3a459bdc98671d"
+      "size": 11518,
+      "sha256": "9bdf1f1924d0baa740c3ad335abe33660887634f79349c2973bd38319411fcdc"
     },
     "senses_and_pages.py": {
-      "size": 6613,
-      "sha256": "1eddf52129df01baec2ce09962bc7025ffe478533dc67a0635a787814c251bb5"
+      "size": 7784,
+      "sha256": "c7af54d392156cb65bd3d6a2886f7fbf526e2edad0b09729c377ebcccefb016b"
     }
   },
   "kernel": {
     "sha256": "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
     "file": "brainstem.py",
-    "version": "0.6.17"
+    "version": "0.6.17",
+    "proven": [
+      "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
+      "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
+    ]
   }
 }

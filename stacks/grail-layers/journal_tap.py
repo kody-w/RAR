@@ -1,3 +1,14 @@
+# ── RAPP layer ticket ── @kody-w/journal_tap
+# What: Layer: journal_tap — every completed chat turn is recorded in the owner's journal, by default.
+# Add in chat: update my Brainstem with @kody-w/journal_tap
+# Or add the pack (its seeded parts): curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- grail-layers
+# Check: GET http://localhost:7071/api/ticket (when the ticket-page pack is installed);
+#   confirm this file's label is in the supervisor log: [grail-layers] grail <sha>; applied: [...]; skipped: ...
+#   Label: journal_tap. Health alone is not proof; test /chat and /chat/stream.
+# Remove the pack (keeps shared/user files): curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- --remove grail-layers
+#   For a part added individually in chat, ask to remove its id or undo that shape change.
+# Rules: https://kody-w.github.io/RAR/LAYERS.md ; rapp/1 protocols/rapp-layer/1: https://github.com/kody-w/rapp-1/tree/main/protocols/rapp-layer/1
+# ── End RAPP layer ticket
 """Layer: journal_tap — every completed chat turn is recorded in the owner's journal, by default.
 
 Simon Willison's `llm` lesson: the log people keep a tool for is the one that is on by default and searchable

@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-04T20:24:30.386765+00:00",
+  "generated_at": "2026-11-04T20:37:05.578673+00:00",
   "stats": {
     "total_agents": 226,
     "total_swarms": 2,
@@ -13603,11 +13603,11 @@
       "purpose": "The one distro for everything new, on the unchanged grail. Layers applied in memory (the supervisor probes /chat and falls back to plain grail on any failure): providers (Responses-API models like gpt-6.1-sol, plus this machine's Ollama models) and journal_tap (every chat turn recorded in your Brain",
       "files": {
         "README.md": {
-          "sha256": "b0072af4c395d55fab3e4896e833f939c9a1bf0a3b6caf9544ae4fe1baf4eb26",
+          "sha256": "64a9522fd9d04fec09cd8a29c7f08342b62c782ce3da17bb68fca7edd80a8f24",
           "verified": true
         },
         "responses_models.py": {
-          "sha256": "77343ad7f8edfdf42ecddc2727ccb2919f15bd75f944ec7b260d439ed1f06e60",
+          "sha256": "edb0eee0313372a3aa51c8c513694f43885d305455872b90b7c589d921db0a8d",
           "verified": true
         },
         "lispy_brainstem.py": {
@@ -13615,15 +13615,15 @@
           "verified": true
         },
         "journal_tap.py": {
-          "sha256": "dd0e6f70c521721c23f73fae7bfef0cb0aea10661a6b7e87f41070ecc7ebaf1a",
+          "sha256": "1fb33db6b6dbab0bea2abe6733f941942a2eb3a5ef1a3cf3c82799f3f96863cc",
           "verified": true
         },
         "local_models.py": {
-          "sha256": "884148aa85d3c405bfe1d642d0c309d6100fa6e71a03a05c2d468324ab56c3f8",
+          "sha256": "ea95cdc10ce7b274ae8bb579bcb52b5a7e7164d70dc2d9dcfa7bc135ca1aef13",
           "verified": true
         },
         "providers.py": {
-          "sha256": "eec63ad97a31e4a8f3465633cc6d6050c14147554822ff943665a9ea09fc7218",
+          "sha256": "90bb46c6b82383378e83ba8669327d02dfc1df9aab5dcca764b4d7850c657bea",
           "verified": true
         },
         "journal_recall_agent.py": {
@@ -13635,11 +13635,11 @@
           "verified": true
         },
         "providers_1_1.py": {
-          "sha256": "0b011eed4870598e2ba070547d55e41afaf17d73c63fd761fc3a459bdc98671d",
+          "sha256": "9bdf1f1924d0baa740c3ad335abe33660887634f79349c2973bd38319411fcdc",
           "verified": true
         },
         "senses_and_pages.py": {
-          "sha256": "1eddf52129df01baec2ce09962bc7025ffe478533dc67a0635a787814c251bb5",
+          "sha256": "c7af54d392156cb65bd3d6a2886f7fbf526e2edad0b09729c377ebcccefb016b",
           "verified": true
         }
       },
@@ -13647,7 +13647,11 @@
       "kernel": {
         "sha256": "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
         "file": "brainstem.py",
-        "version": "0.6.17"
+        "version": "0.6.17",
+        "proven": [
+          "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
+          "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
+        ]
       },
       "shelf": "pack",
       "_seed": 11298904168309211136,

@@ -6,6 +6,7 @@
 - Catalog (JSON): https://kody-w.github.io/RAR/registry.json
 - Agent tickets: rewrite https://kody-w.github.io/RAR/#agent/@pub/name to https://kody-w.github.io/RAR/a/@pub/name/agent.md and fetch it for the agent and the three load steps (no JavaScript required).
 - Packs and starters (one cart): https://kody-w.github.io/RAR/distros.html
+- Write a layer (contract, file-generated parts/proven engines, add/check/remove): https://kody-w.github.io/RAR/LAYERS.md
 - Agent template: https://kody-w.github.io/RAR/template_agent.py
 - Install anything: curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- <pack or @publisher/agent> ...
 - Protocol: https://kody-w.github.io/rapp-1/llms.txt

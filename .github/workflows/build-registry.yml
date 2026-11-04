@@ -25,6 +25,11 @@ on:
       - 'build_registry.py'
       - 'tools/stamp_ticket.py'
       - 'tools/build_agent_pages.py'
+      - 'tools/sync_layers.py'
+      - 'a/**'
+      - 'stacks/**'
+      - 'LAYERS.md'
+      - 'tests/test_layer_sync.py'
       - 'scripts/build_pokedex_api.py'
       - 'scripts/apply_maintainer_migrations.py'
       - 'scripts/mint_maintainer_receipts.py'
@@ -36,6 +41,13 @@ on:
       - '.github/workflows/build-registry.yml'
   pull_request:
     paths:
+      - 'tools/sync_layers.py'
+      - 'tools/stamp_ticket.py'
+      - 'stacks/**'
+      - 'LAYERS.md'
+      - 'a/**'
+      - 'tests/test_layer_sync.py'
+      - '.github/workflows/build-registry.yml'
       - 'agents/**/*.py'
       - 'agents/**/*.py.card'
       - 'skills/**'
@@ -110,6 +122,9 @@ jobs:
 
       - name: Security scan agents
         run: python security_scan.py
+
+      - name: Verify generated layer facts and tickets
+        run: python tools/sync_layers.py --check
 
       - name: Build registry
         run: python build_registry.py

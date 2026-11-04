@@ -32,6 +32,9 @@ publish to it. This page is the summary; where it and a linked spec disagree, th
 | pack | `stacks/<name>/pack.json` (`rapp-rar-stack/1.2`) | the cart | a list of the parts above, sha-pinned, with optional `includes` (other packs). A starter or distro is a pack |
 | egg | rapp/1 §9 ZIP (`organism`, `rapplication`, ...) | anywhere | a pack plus your data: a whole Brainstem you can move or hatch |
 
+**Write or install a layer:** [LAYERS.md](https://kody-w.github.io/RAR/LAYERS.md) contains the
+author/AI contract, generated part facts, engine proof, gate, fallback and zero-gap handover rules.
+
 ## 3. Installing (what the person runs, or you run for them)
 ```bash
 curl -fsSL https://kody-w.github.io/grail-layers/install.sh | bash        # the grail, then layers over it

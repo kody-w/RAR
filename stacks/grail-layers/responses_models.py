@@ -1,3 +1,14 @@
+# ── RAPP layer ticket ── @kody-w/responses_models
+# What: Layer: responses_models — lets the unchanged grail use models that only speak the Responses API
+# Add in chat: update my Brainstem with @kody-w/responses_models
+# Or add the pack (its seeded parts): curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- grail-layers
+# Check: GET http://localhost:7071/api/ticket (when the ticket-page pack is installed);
+#   confirm this file's label is in the supervisor log: [grail-layers] grail <sha>; applied: [...]; skipped: ...
+#   Label: responses_models. Health alone is not proof; test /chat and /chat/stream.
+# Remove the pack (keeps shared/user files): curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- --remove grail-layers
+#   For a part added individually in chat, ask to remove its id or undo that shape change.
+# Rules: https://kody-w.github.io/RAR/LAYERS.md ; rapp/1 protocols/rapp-layer/1: https://github.com/kody-w/rapp-1/tree/main/protocols/rapp-layer/1
+# ── End RAPP layer ticket
 """Layer: responses_models — lets the unchanged grail use models that only speak the Responses API
 (for example gpt-6-astra and gpt-6.1-sol on GitHub Copilot).
 

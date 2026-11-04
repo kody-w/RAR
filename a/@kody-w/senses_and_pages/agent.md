@@ -1,0 +1,47 @@
+# @kody-w/senses_and_pages - RAPP layer ticket
+
+## What it changes
+
+Layer: senses_and_pages — senses and pages run over the unchanged grail.
+
+Senses (RAPP Sense Store format: name, delimiter, response_key, system_prompt) add one extra field to every plain
+/chat reply, such as a headline or a spoken version. Pages (rappter-distro organ format: name, handle(method, path,
+body)) add routes at /api/<name>/... . Before this layer only rappter-distro's own kernel loaded either; now any
+Brainstem does, and that loader is retired as an alias of this one.
+
+Where things go (one standard): ~/.brainstem/senses/*_sense.py and ~/.brainstem/pages/*_page.py
+(~/.brainstem/organs/*_organ.py is read too: "organ" is an alias of "page"). Env BRAINSTEM_SENSES_DIR and
+BRAINSTEM_PAGES_DIR override for a lab.
+
+Safety: a sense or page that fails to load is skipped and logged; a page that throws answers 500 for its own route
+only; the sense prompt is added only to plain /chat (never /chat/stream, so the chat page shows no markers), and a
+reply without the marker is returned exactly as the kernel gave it.
+
+Pack: grail-layers
+Kind: layer
+Point: agents
+Status: current
+TOUCHES (exclusive): flask.Flask.__init__
+WRAPS (composable): requests.post
+Proven engines: 35618683ebc3 (v0.6.17), bd55a7f0bcf5 (v0.6.16)
+
+## Add, check, remove
+
+Add in chat: update my Brainstem with @kody-w/senses_and_pages
+Or add the pack (its seeded parts): curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- grail-layers
+Check: GET http://localhost:7071/api/ticket (when the ticket-page pack is installed);
+  confirm this file's label is in the supervisor log: [grail-layers] grail <sha>; applied: [...]; skipped: ...
+  Label: senses_and_pages. Health alone is not proof; test /chat and /chat/stream.
+Remove the pack (keeps shared/user files): curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- --remove grail-layers
+  For a part added individually in chat, ask to remove its id or undo that shape change.
+Rules: https://kody-w.github.io/RAR/LAYERS.md ; rapp/1 protocols/rapp-layer/1: https://github.com/kody-w/rapp-1/tree/main/protocols/rapp-layer/1
+
+A pack command installs only its seeded parts; it does not select an unseeded alias. Use the publisher-scoped chat id for an individual part. Only load code you trust.
+
+Raw file: https://kody-w.github.io/RAR/stacks/grail-layers/senses_and_pages.py
+Page: https://kody-w.github.io/RAR/a/@kody-w/senses_and_pages/
+Plain text for AIs: https://kody-w.github.io/RAR/a/@kody-w/senses_and_pages/agent.md
+
+Full PROVEN_GRAIL sha256 values:
+- 35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a
+- bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4

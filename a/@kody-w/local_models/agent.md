@@ -1,0 +1,47 @@
+# @kody-w/local_models - RAPP layer ticket
+
+## What it changes
+
+Layer: local_models — the unchanged grail can talk to models running on this machine (Ollama).
+
+The kernel only knows one provider: the GitHub Copilot endpoint it gets from its token exchange. Ollama serves
+the same wire (OpenAI chat-completions, tool calls included) at http://127.0.0.1:11434/v1, so no adapter is
+needed: this layer adds Ollama's models to the kernel's model list under the prefix `ollama/` and, when the
+chosen model carries that prefix, sends the chat-completions call to Ollama instead of Copilot, with no
+Authorization header. Everything else (Copilot models, the token exchange, streaming) passes straight through.
+
+Composition: this layer WRAPS requests.get/post (it calls through to whatever an earlier layer, for example
+responses_models, left there), so both can be live in one shape; the pack's order decides who is outermost.
+
+Env: OLLAMA_URL (default http://127.0.0.1:11434). No Ollama running: the model list is unchanged and nothing
+else happens. Probe before publishing (2026-11-03): Ollama 'llama3.2:latest' answered a chat-completions
+request with a tool call in the kernel's exact shape, 1 of 1.
+
+Pack: grail-layers
+Kind: layer
+Point: provider
+Status: alias of @kody-w/providers
+TOUCHES (exclusive): None
+WRAPS (composable): requests.get, requests.post
+Proven engines: 35618683ebc3 (v0.6.17), bd55a7f0bcf5 (v0.6.16)
+
+## Add, check, remove
+
+Add in chat: update my Brainstem with @kody-w/local_models
+Or add the pack (its seeded parts): curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- grail-layers
+Check: GET http://localhost:7071/api/ticket (when the ticket-page pack is installed);
+  confirm this file's label is in the supervisor log: [grail-layers] grail <sha>; applied: [...]; skipped: ...
+  Label: local_models. Health alone is not proof; test /chat and /chat/stream.
+Remove the pack (keeps shared/user files): curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- --remove grail-layers
+  For a part added individually in chat, ask to remove its id or undo that shape change.
+Rules: https://kody-w.github.io/RAR/LAYERS.md ; rapp/1 protocols/rapp-layer/1: https://github.com/kody-w/rapp-1/tree/main/protocols/rapp-layer/1
+
+A pack command installs only its seeded parts; it does not select an unseeded alias. Use the publisher-scoped chat id for an individual part. Only load code you trust.
+
+Raw file: https://kody-w.github.io/RAR/stacks/grail-layers/local_models.py
+Page: https://kody-w.github.io/RAR/a/@kody-w/local_models/
+Plain text for AIs: https://kody-w.github.io/RAR/a/@kody-w/local_models/agent.md
+
+Full PROVEN_GRAIL sha256 values:
+- 35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a
+- bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4
