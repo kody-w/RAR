@@ -12,7 +12,7 @@
   },
   "inputs": {
     "canonical_manifests": "b3db907d4b20894ca52b84988590e7b577d561477cf6b48167b04f15c5e08e63",
-    "scout_catalog": "330c09c173785a3bdf40bacdfb899796c33a52a0b4afd44e2ce1158d1f9d3462",
+    "scout_catalog": "60f6c66e11cf6224e46da53487a53e6a1baf567f6c4bb627fb1eea848242ecba",
     "scout_toaster": {
       "commit": "d54ba8484b5c5dae6406d2090c03115d12985446",
       "sha256": "d340043178aa4160f76a179b8b1086971e09207b212aff2ab2c0752b69173e17"
@@ -2514,7 +2514,7 @@
         "files": [
           {
             "path": "scout/bundles/native-01/skills/rar-bill-neuron/SKILL.md",
-            "sha256": "301edd735f55ba37dd53a2c7e1372c46f1ddcbe2f85980c2378a178d39febc0a",
+            "sha256": "7b9b9a5714a8f4399d82dad153bc31317e7a607be82982583499d0cd92eddaae",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-01/skills/rar-bill-neuron/SKILL.md"
           },
           {
@@ -2534,7 +2534,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -2624,7 +2624,7 @@
         "files": [
           {
             "path": "scout/bundles/native-01/skills/rar-borg-borg/SKILL.md",
-            "sha256": "51de39e5fd5bddfc34d6214f002d981643afb3ebcdede7b852db3134a676960a",
+            "sha256": "c46c20dbe12165e00a144c85788c4481b5bad541386fbb0c6f4ea755f78fda7e",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-01/skills/rar-borg-borg/SKILL.md"
           },
           {
@@ -2644,7 +2644,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -2734,7 +2734,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-01/skills/rar-cat-agent-skills-accessibility-pass/SKILL.md",
-            "sha256": "d203a31c9763b7e3ea99822fd8d00c8c0d8ddba4569fbb39f83e8c9b3fb84f3b",
+            "sha256": "194590818be564c511a348e2043703f6bf36d5042da6ac9beec1593828a758de",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-01/skills/rar-cat-agent-skills-accessibility-pass/SKILL.md"
           },
           {
@@ -2754,7 +2754,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -2833,7 +2833,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-01/skills/rar-cat-agent-skills-acroform-writer/SKILL.md",
-            "sha256": "e34a1fd268048500c528aae1db8687c9edfbebcf66cb004c23fe1ad85421f244",
+            "sha256": "edcac1c21468288fd441a1568b9b8b43f87f10df8f0c2efc896ffa9056791ccd",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-01/skills/rar-cat-agent-skills-acroform-writer/SKILL.md"
           },
           {
@@ -2853,7 +2853,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -2943,7 +2943,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-01/skills/rar-cat-agent-skills-action-items-todo/SKILL.md",
-            "sha256": "2fdd9cd979282dc83e03ad24468bbbc87d38057f9ce9cc462dc1acfb713680ba",
+            "sha256": "95f3ed4dee207aec4fb70716a5d0ea3f6ca98cfbe0c210918a2cb38cbb352f04",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-01/skills/rar-cat-agent-skills-action-items-todo/SKILL.md"
           },
           {
@@ -2963,7 +2963,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -3052,7 +3052,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-01/skills/rar-cat-agent-skills-agent-evaluation-designer/SKILL.md",
-            "sha256": "1743ea0cdda345ce5ef3bcd7549f36f60f9ac66deec74640f560815aaee3c409",
+            "sha256": "b06bba63f1dc34fbaf5535df7ef345ae60ef2cc81bc0010a634764d3f9212dcc",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-01/skills/rar-cat-agent-skills-agent-evaluation-designer/SKILL.md"
           },
           {
@@ -3072,7 +3072,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -3153,7 +3153,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-01/skills/rar-cat-agent-skills-agent-harness-explorer/SKILL.md",
-            "sha256": "30ba01b290649b3cd330509c8b3825e78338493af826d7a0021c2a6e0f0173b3",
+            "sha256": "36285a6930596af18ba0248d09b878853347568e5dc0520c785a3b0d205b4c3d",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-01/skills/rar-cat-agent-skills-agent-harness-explorer/SKILL.md"
           },
           {
@@ -3173,7 +3173,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -3246,7 +3246,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-01/skills/rar-cat-agent-skills-agent-performance-triage/SKILL.md",
-            "sha256": "815c2accde9d6c50dcad5657238dbd2245010f9b28d548be9e3923e330c5c807",
+            "sha256": "50d5f4a5d8f0054fc8ae9f49b194161e796acf5060b4cc3fefa7d0485ae80dea",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-01/skills/rar-cat-agent-skills-agent-performance-triage/SKILL.md"
           },
           {
@@ -3266,7 +3266,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -3346,7 +3346,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-01/skills/rar-cat-agent-skills-agent-red-team/SKILL.md",
-            "sha256": "1eba723403344c629eed520a714713ac72887b08441950a9885f34f93f7ce326",
+            "sha256": "9af93ad171c8e3f3c662ace6d48b9ba5c748afd1b6f2a85e5c980f2c0c4e8396",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-01/skills/rar-cat-agent-skills-agent-red-team/SKILL.md"
           },
           {
@@ -3366,7 +3366,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -3456,7 +3456,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-01/skills/rar-cat-agent-skills-ai-demo-assistant/SKILL.md",
-            "sha256": "d494016dc461e960d4f6303757eaf71cc52e5af825a7bdbb8fa878701fdf4ab9",
+            "sha256": "85fd20302c2638e15d9a2e03802ec77136ef9443e48b5415508ab28e4f5c17b0",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-01/skills/rar-cat-agent-skills-ai-demo-assistant/SKILL.md"
           },
           {
@@ -3476,7 +3476,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -3547,7 +3547,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-02/skills/rar-cat-agent-skills-ai-first-process-redesign/SKILL.md",
-            "sha256": "fa58e5ea54a12ab17369eb93ec96974765785af373ede1e6ee18ada809b95955",
+            "sha256": "201ae3eb4fe836cdd4a049421943da2d1c3c328a73d56591332edf32987aafc7",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-02/skills/rar-cat-agent-skills-ai-first-process-redesign/SKILL.md"
           },
           {
@@ -3567,7 +3567,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -3657,7 +3657,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-02/skills/rar-cat-agent-skills-ai-usecase-assessment/SKILL.md",
-            "sha256": "169662dce3b110cb91696cac364d2661087131b6f7ba0453500759bb908413d5",
+            "sha256": "9aa13b11c4008c88fcc90548d8042770038fc530b0357195f0e255115ab7e6aa",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-02/skills/rar-cat-agent-skills-ai-usecase-assessment/SKILL.md"
           },
           {
@@ -3677,7 +3677,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -3754,7 +3754,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-02/skills/rar-cat-agent-skills-anonymised-case-study-writer/SKILL.md",
-            "sha256": "43425d7c579f72e8e605e42dc8c9506f307daa31cc340af852625dee90ce7530",
+            "sha256": "c68295bf5493041da687f44fc9c98485c6e37ff7b99a2bf0b0b7f2477a60ee2b",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-02/skills/rar-cat-agent-skills-anonymised-case-study-writer/SKILL.md"
           },
           {
@@ -3774,7 +3774,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -3864,7 +3864,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-02/skills/rar-cat-agent-skills-awaiting-reply/SKILL.md",
-            "sha256": "5d6b1a14bf125058e99ce8e2374240c5e6cfe4647c6b19bad05d729128c4b4d5",
+            "sha256": "b02f229a4a681653e6959147561f00b723449880b71bd3d04b077fcfca1a0b96",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-02/skills/rar-cat-agent-skills-awaiting-reply/SKILL.md"
           },
           {
@@ -3884,7 +3884,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -3974,7 +3974,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-02/skills/rar-cat-agent-skills-b2b-outreach-suite/SKILL.md",
-            "sha256": "beb46c4705a54a4f258a4617a1635795551cb693c4f65bb9007bb09aa287759b",
+            "sha256": "097a33b98378d4b0abf5a13ad9a556b61f0c9ecfd11baa680c49ce2514079e09",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-02/skills/rar-cat-agent-skills-b2b-outreach-suite/SKILL.md"
           },
           {
@@ -3994,7 +3994,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -4071,7 +4071,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-02/skills/rar-cat-agent-skills-blog-content-auditor/SKILL.md",
-            "sha256": "3c8cb133438c823fe94c9395ad11a67fa993dba6b614eff17ec5ec2527b3f9ff",
+            "sha256": "8e388a3ea594e2688d04f7b5db39f36fb63f92643b7d7ab2f6eaf98683b97b26",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-02/skills/rar-cat-agent-skills-blog-content-auditor/SKILL.md"
           },
           {
@@ -4091,7 +4091,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -4169,7 +4169,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-02/skills/rar-cat-agent-skills-blog-post-structure-pass/SKILL.md",
-            "sha256": "d857043854998ee74f5731c73624381750e9e0882621200adfc850c2570a99b2",
+            "sha256": "d71fa0153395ffc5da86db6e87d6e02f34f4c4bf36b66ab3d9be63f91f19a22d",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-02/skills/rar-cat-agent-skills-blog-post-structure-pass/SKILL.md"
           },
           {
@@ -4189,7 +4189,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -4276,7 +4276,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-02/skills/rar-cat-agent-skills-booth-loop-video/SKILL.md",
-            "sha256": "7d23e859cf27fed44e9501ff44ae712caae35acd62d08a915270185a45804bf8",
+            "sha256": "2464042f17a8940fd3b063ca27937abdf5029f6b148f11d2f27ced4217ac4240",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-02/skills/rar-cat-agent-skills-booth-loop-video/SKILL.md"
           },
           {
@@ -4296,7 +4296,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -4375,7 +4375,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-03/skills/rar-cat-agent-skills-brand-template-enforcer/SKILL.md",
-            "sha256": "f39f131314461ab9114d5dbe0772db90320ac1e07dc5a1d6f00bc3c0d583a1c0",
+            "sha256": "b233baff77e51f36b95cfdc22666192d89b3d843f7e8018e62ff0f90cc5aad7c",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-03/skills/rar-cat-agent-skills-brand-template-enforcer/SKILL.md"
           },
           {
@@ -4395,7 +4395,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -4473,7 +4473,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-03/skills/rar-cat-agent-skills-brand-voice-pass/SKILL.md",
-            "sha256": "afed0db57c2a13734651129221d298841934d1a72c3a730fd61e582fdf12d3dd",
+            "sha256": "64ae9c253de469cab518fc2b2621f669a179319ccc620c669282a06cfa30d318",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-03/skills/rar-cat-agent-skills-brand-voice-pass/SKILL.md"
           },
           {
@@ -4493,7 +4493,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -4583,7 +4583,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-03/skills/rar-cat-agent-skills-breathing-room/SKILL.md",
-            "sha256": "a7cee9256d784f547dc9a85f9f707eed6b507cd89c555dfc02be2f33385ed5cf",
+            "sha256": "6a10e6fb27dc5f4bc2475b3bb2326e6402c8234eb68f9992f68438a1b5a90e04",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-03/skills/rar-cat-agent-skills-breathing-room/SKILL.md"
           },
           {
@@ -4603,7 +4603,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -4693,7 +4693,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-03/skills/rar-cat-agent-skills-browser-uat-analyst/SKILL.md",
-            "sha256": "3c036b21c73b1bb0acb1dcb54767d709f33a300bdc645c2541e3b8e3a5ea16a0",
+            "sha256": "0dc8e4519067c99e2beefb7ca2e2391b8b1c224dea5e02c625eb98853e6ac5d4",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-03/skills/rar-cat-agent-skills-browser-uat-analyst/SKILL.md"
           },
           {
@@ -4713,7 +4713,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -4803,7 +4803,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-03/skills/rar-cat-agent-skills-business-os/SKILL.md",
-            "sha256": "0311a43a3ed1f48a7c12747be23dac14b5abe5e9752b62a0fb375f7d2ec2a829",
+            "sha256": "723549f277670aefe3ad209624a3669d0b934599e5e75643d441c525f4925504",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-03/skills/rar-cat-agent-skills-business-os/SKILL.md"
           },
           {
@@ -4823,7 +4823,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -4913,7 +4913,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-03/skills/rar-cat-agent-skills-call-for-speakers-digest/SKILL.md",
-            "sha256": "95684b56dc829cacb520aa73279eb78d771c7fea915456d5f70fb68b3e30b850",
+            "sha256": "7d8a99261b2249d4a809f32caa89b585818f9ba95b81caed708053ce59b353cf",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-03/skills/rar-cat-agent-skills-call-for-speakers-digest/SKILL.md"
           },
           {
@@ -4933,7 +4933,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -5011,7 +5011,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-03/skills/rar-cat-agent-skills-campaign-deck-builder/SKILL.md",
-            "sha256": "e2e37c40a86c96470bb4281ceff5564aa66d1e0bf3d1a8164082cff9c75b6de3",
+            "sha256": "b92dd452501501b25d83d79b4bde8a2efa627a9db8251848d4348cc2b9a34851",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-03/skills/rar-cat-agent-skills-campaign-deck-builder/SKILL.md"
           },
           {
@@ -5031,7 +5031,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -5112,7 +5112,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-03/skills/rar-cat-agent-skills-chart-builder/SKILL.md",
-            "sha256": "e0c0ba9637d6baabb089d8b028d9b83d619c98305c029a8de9c54d64ba744e6e",
+            "sha256": "4e831c11b4505bcb9fd29b646d477bb34c01e2fc10fea99181502cadcc2fd5ac",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-03/skills/rar-cat-agent-skills-chart-builder/SKILL.md"
           },
           {
@@ -5132,7 +5132,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -5209,7 +5209,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-04/skills/rar-cat-agent-skills-classic-text-adventure/SKILL.md",
-            "sha256": "b333fed26bd030460690fc2422adf3e3e364875b52169743b11e3abbbfeb7d2d",
+            "sha256": "dbd93217e333869cc775b9e3057aec3f59b5489c0857bd6aec010c845e49f7e0",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-04/skills/rar-cat-agent-skills-classic-text-adventure/SKILL.md"
           },
           {
@@ -5229,7 +5229,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -5319,7 +5319,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-04/skills/rar-cat-agent-skills-clipchamp-video/SKILL.md",
-            "sha256": "1cec99df36d9bb5947b4cbc76c775ed27b6fd2788acb69136695b3e038c4a076",
+            "sha256": "c79f081a92b5dc604be4f9a50bc7e849bae112ab9b1807baa64ef703202fb689",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-04/skills/rar-cat-agent-skills-clipchamp-video/SKILL.md"
           },
           {
@@ -5339,7 +5339,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -5429,7 +5429,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-04/skills/rar-cat-agent-skills-clt-hr-assistant/SKILL.md",
-            "sha256": "0d95fb3a07a687b4dd8aea99963568a6b2d31a52177399b95610a275a127f646",
+            "sha256": "71a58ca332ca8e65257b9f1d91247dfc11b0cf81b9a8aff4e4e1916272709ef6",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-04/skills/rar-cat-agent-skills-clt-hr-assistant/SKILL.md"
           },
           {
@@ -5449,7 +5449,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -5519,7 +5519,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-04/skills/rar-cat-agent-skills-commenting-content/SKILL.md",
-            "sha256": "d9e46915898762cf6a3b180dea0f4f5d7b5a8552894a8bd38c25cfe28939bc9a",
+            "sha256": "d6ccedbbe1e289a9cb09be00363c9480572ca8ba6419364ee244be48682c9cfe",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-04/skills/rar-cat-agent-skills-commenting-content/SKILL.md"
           },
           {
@@ -5539,7 +5539,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -5629,7 +5629,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-04/skills/rar-cat-agent-skills-competitive-battlecard-builder/SKILL.md",
-            "sha256": "198bc6fec4d15d231c9339fdfd49da41659262e3033202166883c24effe15daf",
+            "sha256": "0fff15ff12c44a61c47dfb07c85b8334068b109505a0f39a160ffdfd26dc92f5",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-04/skills/rar-cat-agent-skills-competitive-battlecard-builder/SKILL.md"
           },
           {
@@ -5649,7 +5649,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -5728,7 +5728,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-04/skills/rar-cat-agent-skills-conditional-chat-reminder/SKILL.md",
-            "sha256": "66766613e9d9fbfca64d113a2c7ecc1efe23a2470442e0f3a7405110628645ea",
+            "sha256": "d9f0b383a2c02d0ea2766dc3e28032985469f4a1bf8f3715fd0694b88ad2d09e",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-04/skills/rar-cat-agent-skills-conditional-chat-reminder/SKILL.md"
           },
           {
@@ -5748,7 +5748,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -5827,7 +5827,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-04/skills/rar-cat-agent-skills-conference-session-abstract-pack/SKILL.md",
-            "sha256": "f5113703e90cdd65ca036dd1c8df54bad114ac4e901dc03731c5d2fa25211f87",
+            "sha256": "c7566a1ed2ed09bd1f9decdbd6258b569ec02b5a657d48733efcf653756c59bf",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-04/skills/rar-cat-agent-skills-conference-session-abstract-pack/SKILL.md"
           },
           {
@@ -5847,7 +5847,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -5925,7 +5925,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-04/skills/rar-cat-agent-skills-content-quality-auditor/SKILL.md",
-            "sha256": "1fc0297a3f94d165d7ff8253b3f88a616a1755e59f0e24edf851ec1ccfcd279e",
+            "sha256": "31b44b61fce0afa51b68ac3873b6db38e160c01129e045b6ba193767b8ba260f",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-04/skills/rar-cat-agent-skills-content-quality-auditor/SKILL.md"
           },
           {
@@ -5945,7 +5945,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -6035,7 +6035,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-05/skills/rar-cat-agent-skills-copilot-agent-advisor/SKILL.md",
-            "sha256": "ec36ea4b5fbe25dbe8c38debdc37db0a005f32739159d62c5d1f5c869c920d2e",
+            "sha256": "769e3afd78a623763b9ee54ef33702387825f185814eca1d1ddcd9ac11f1850e",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-05/skills/rar-cat-agent-skills-copilot-agent-advisor/SKILL.md"
           },
           {
@@ -6055,7 +6055,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -6138,7 +6138,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-05/skills/rar-cat-agent-skills-copilot-agents-news-scout/SKILL.md",
-            "sha256": "a3db8d7fd375238bacb6a7a0d811000561f56708ec3c6e936aeebf5c9eff013e",
+            "sha256": "b5e5e6c5cc5eeb59c877dfc826683458e4e71aedb3f04743bd33eedb744f3a28",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-05/skills/rar-cat-agent-skills-copilot-agents-news-scout/SKILL.md"
           },
           {
@@ -6158,7 +6158,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -6236,7 +6236,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-05/skills/rar-cat-agent-skills-copilot-studio-agent-test/SKILL.md",
-            "sha256": "b98cd1b1bf5a93ad0280b388d817ac9ae9425303f77aa4c9388dc5792bdcf7b9",
+            "sha256": "525d210bcf304854494ff83e0b910dbb4c99bae40e7c197b2790e4265970879c",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-05/skills/rar-cat-agent-skills-copilot-studio-agent-test/SKILL.md"
           },
           {
@@ -6256,7 +6256,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -6342,7 +6342,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-05/skills/rar-cat-agent-skills-copilot-studio-harness-picker/SKILL.md",
-            "sha256": "918f5e39056beabd8f30023594917de46f383ee8c42e350859f0587a612ef143",
+            "sha256": "f65bbc54b7f2794c6319189678bac5918fe62f71a78e39a6bbf163a9f97e976c",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-05/skills/rar-cat-agent-skills-copilot-studio-harness-picker/SKILL.md"
           },
           {
@@ -6362,7 +6362,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -6452,7 +6452,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-05/skills/rar-cat-agent-skills-copilot-studio-knowledge-readiness/SKILL.md",
-            "sha256": "03945e482a8d8fd6d0af4a34689098744d08eced029d75d39c90447941047e87",
+            "sha256": "a7deb4d3a717b82b2995319804647d8208b0d4835c704767e9adbf959a9fdc39",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-05/skills/rar-cat-agent-skills-copilot-studio-knowledge-readiness/SKILL.md"
           },
           {
@@ -6472,7 +6472,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -6562,7 +6562,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-05/skills/rar-cat-agent-skills-copilot-studio-test-planner/SKILL.md",
-            "sha256": "f09e1831f9ef4834e9a2af6de89d3457b9fe1cbe442adefffaf6c7188a225963",
+            "sha256": "3dd5b68feb867e6f3c94ae042531f2f5e3bd0a429b7a9338e3caf183fdf83000",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-05/skills/rar-cat-agent-skills-copilot-studio-test-planner/SKILL.md"
           },
           {
@@ -6582,7 +6582,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -6672,7 +6672,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-05/skills/rar-cat-agent-skills-copilot-studio-topic-blueprint/SKILL.md",
-            "sha256": "bf6872e7e772bab179720609435fbf626144cd0f9546b1af815e02f58ee59c11",
+            "sha256": "6b493a75094d4ae1a65c7ca47a1126eb17492bae8edc8ec5efc137e8ca322682",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-05/skills/rar-cat-agent-skills-copilot-studio-topic-blueprint/SKILL.md"
           },
           {
@@ -6692,7 +6692,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -6772,7 +6772,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-05/skills/rar-cat-agent-skills-cowork-use-case-one-pager/SKILL.md",
-            "sha256": "13a2486f7e81964df77bd0e4032e186d755010dc35e9a5cb30c0f080396f7c69",
+            "sha256": "349f95cba05b0edca5e5ba2aa901aba05b9cda9b9508d0ca44536eadaa8cb477",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-05/skills/rar-cat-agent-skills-cowork-use-case-one-pager/SKILL.md"
           },
           {
@@ -6792,7 +6792,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -6877,7 +6877,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-06/skills/rar-cat-agent-skills-doc-format-converter/SKILL.md",
-            "sha256": "3b65f1505acfb3bc76310a27f6ada66c25c5175907198868cb94b615f6e80704",
+            "sha256": "1e22e3a773d5440917c585ebc9caa4b2dbd0ed10f0de5392dfac04bb54d26f5b",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-06/skills/rar-cat-agent-skills-doc-format-converter/SKILL.md"
           },
           {
@@ -6897,7 +6897,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -6978,7 +6978,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-06/skills/rar-cat-agent-skills-enterprise-agent-design-authority/SKILL.md",
-            "sha256": "e6b549aee2c746882f4764aa413203fa6521cbaa605918e5fda0a7d68e44d836",
+            "sha256": "826e3f02d342dd5a48317496657a4c355e2f59ce07ff0364765aba46faefd591",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-06/skills/rar-cat-agent-skills-enterprise-agent-design-authority/SKILL.md"
           },
           {
@@ -6998,7 +6998,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -7088,7 +7088,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-06/skills/rar-cat-agent-skills-eu-greenwashing-analysis/SKILL.md",
-            "sha256": "efcd568ff26aa372f18bcbc10ba36e8cb84e88c9093b0a5386451b2d1048a27e",
+            "sha256": "c18c4788bb52e6646525484b4be20d74fd5508617084ab5ee31724d951ab98b3",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-06/skills/rar-cat-agent-skills-eu-greenwashing-analysis/SKILL.md"
           },
           {
@@ -7108,7 +7108,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -7198,7 +7198,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-06/skills/rar-cat-agent-skills-exam-prep-learning-plan-builder/SKILL.md",
-            "sha256": "4160869d3c1430b9c279795a43bf42d828e164f77fd9df022d9a03b293a947fc",
+            "sha256": "53f73f662b3f57ebdce184e0f5c7e81b9716c8cbc72d5703aef2f54159f58595",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-06/skills/rar-cat-agent-skills-exam-prep-learning-plan-builder/SKILL.md"
           },
           {
@@ -7218,7 +7218,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -7294,7 +7294,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-06/skills/rar-cat-agent-skills-explainer-video/SKILL.md",
-            "sha256": "952505adf523965c3213dccc55a30df8ceddf7a694ea41c31c9427f0b17d4a50",
+            "sha256": "a9fd3df92a614aa7194b1d5a788599fc9bee4c15f8c6816093015dc5ecc2c49e",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-06/skills/rar-cat-agent-skills-explainer-video/SKILL.md"
           },
           {
@@ -7314,7 +7314,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -7396,7 +7396,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-06/skills/rar-cat-agent-skills-gantt-chart-generator/SKILL.md",
-            "sha256": "176221c870af84c1f13dfbde2a65e1fa98aa6d0b0021eb141f7cb8f447d02a68",
+            "sha256": "6fb4e714f3dbd3d341a18a7ba5acb730c209bcc2a517530da76e1f20671acdb3",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-06/skills/rar-cat-agent-skills-gantt-chart-generator/SKILL.md"
           },
           {
@@ -7416,7 +7416,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -7506,7 +7506,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-06/skills/rar-cat-agent-skills-generating-podcast-script/SKILL.md",
-            "sha256": "1a493950c368a4d7ce35eb4ef12ba7b0e01cba4a90adc462bc3e738bbc04073e",
+            "sha256": "2bf93e6f77f4af43268a2019edc195ed26096b2c0be78324fe1edd279c8d4f52",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-06/skills/rar-cat-agent-skills-generating-podcast-script/SKILL.md"
           },
           {
@@ -7526,7 +7526,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -7611,7 +7611,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-06/skills/rar-cat-agent-skills-global-greenwashing-claim-auditor/SKILL.md",
-            "sha256": "78c0b4c982d6fcafd63566e4f46d4df9f3721eb9197ba233fe7a92de9281fdad",
+            "sha256": "ec8cc635763159142b63d29495ce27af3b09e025b65aa9e565cc661d0c6469d2",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-06/skills/rar-cat-agent-skills-global-greenwashing-claim-auditor/SKILL.md"
           },
           {
@@ -7631,7 +7631,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -7718,7 +7718,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-07/skills/rar-cat-agent-skills-grab-my-files/SKILL.md",
-            "sha256": "c90a6089da69b6f3877f21b12bd7cd5244b38b6b6b487d72c176c4f217dc8451",
+            "sha256": "ca983566f3a484344f9147ebe253297fbe5b39450c6e495b6aaf5a79fb4be0c6",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-07/skills/rar-cat-agent-skills-grab-my-files/SKILL.md"
           },
           {
@@ -7738,7 +7738,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -7826,7 +7826,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-07/skills/rar-cat-agent-skills-holiday-recap/SKILL.md",
-            "sha256": "0c2e20c4cf91c66f2b02365fb352b58e3b68c5b3b1ec1593a40f90553c509cb1",
+            "sha256": "1a685bc4879eba71ef9d524042921ec5ba533b2e4ad25c7d335b200f09ee39eb",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-07/skills/rar-cat-agent-skills-holiday-recap/SKILL.md"
           },
           {
@@ -7846,7 +7846,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -7936,7 +7936,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-07/skills/rar-cat-agent-skills-idea-refiner/SKILL.md",
-            "sha256": "183540aa90cf5e09be8455f63883b946ca47114a72985f2552e45148f6fe01b5",
+            "sha256": "d6eefb32c913194806afced023204a5cdf67279bbec3ecf6ead1ac3ec67e0ae7",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-07/skills/rar-cat-agent-skills-idea-refiner/SKILL.md"
           },
           {
@@ -7956,7 +7956,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -8042,7 +8042,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-07/skills/rar-cat-agent-skills-institutional-knowledge/SKILL.md",
-            "sha256": "62f604d99821a7fd87a334a6134c890347a704f6ea4edee6b6b8e65ab71e2485",
+            "sha256": "3ec0fe1c7381711a44327b5b75b21fbb5af15e203b9a0e2f142072c792607470",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-07/skills/rar-cat-agent-skills-institutional-knowledge/SKILL.md"
           },
           {
@@ -8062,7 +8062,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -8152,7 +8152,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-07/skills/rar-cat-agent-skills-iterative-file-editing/SKILL.md",
-            "sha256": "1d2af415ab853a38efdef522354d0680119e181bd24e651795fa479c229e5acb",
+            "sha256": "f7844a3764a3ccd6110f0d4ec7fd08c683f90b0e23b17d1b2fe40c5fc738e9b0",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-07/skills/rar-cat-agent-skills-iterative-file-editing/SKILL.md"
           },
           {
@@ -8172,7 +8172,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -8256,7 +8256,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-07/skills/rar-cat-agent-skills-knowledge-corpus-curator/SKILL.md",
-            "sha256": "df5744d348cd2d6e7c7ec51a10110a9f5ff34eb851c4f7aca6b4e2285a43ff0c",
+            "sha256": "d4645a5ed98eb3f99c73202d23f196d7ea78cc505b057a4eb5d691bd520dcd2b",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-07/skills/rar-cat-agent-skills-knowledge-corpus-curator/SKILL.md"
           },
           {
@@ -8276,7 +8276,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -8358,7 +8358,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-07/skills/rar-cat-agent-skills-knowledge-source-router/SKILL.md",
-            "sha256": "604c7f205da13ccd81f0edf57e45ca04b5ab2f58c5978eeba2dc57350e8e6264",
+            "sha256": "9b5c49fad2149af17d1a04667f611048bead75400d1812d224da460b4752bf85",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-07/skills/rar-cat-agent-skills-knowledge-source-router/SKILL.md"
           },
           {
@@ -8378,7 +8378,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -8468,7 +8468,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-07/skills/rar-cat-agent-skills-lab-column-mapper/SKILL.md",
-            "sha256": "f3c0d5865273feb3b75fee2b3314348422007f59ed0b09f8801b0eb1b60cc0e4",
+            "sha256": "5210b72bbb001b1d03bce2458ce080b5ab70badacdaaee328d8687b3cd70f19e",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-07/skills/rar-cat-agent-skills-lab-column-mapper/SKILL.md"
           },
           {
@@ -8488,7 +8488,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -8568,7 +8568,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-08/skills/rar-cat-agent-skills-linkedin-content-system/SKILL.md",
-            "sha256": "01ada798e03a1abedfc08fb0f8e1f8338d0361457300526b55ea09b52c078ea3",
+            "sha256": "e5207457f568b27f3fb7ac6e3fb7cfa4c998cb552a4b5f640d350303b14c5e3d",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-08/skills/rar-cat-agent-skills-linkedin-content-system/SKILL.md"
           },
           {
@@ -8588,7 +8588,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -8665,7 +8665,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-08/skills/rar-cat-agent-skills-linkedin-content-writer/SKILL.md",
-            "sha256": "5179f1c143e62dc09dcf5203e5566a3f8bad751703952cbe6081bd37daa9aefb",
+            "sha256": "a0b802f4d7889573802f71b57174725211ab7023b5ad51248b8c8c3fd59c8dc8",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-08/skills/rar-cat-agent-skills-linkedin-content-writer/SKILL.md"
           },
           {
@@ -8685,7 +8685,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -8766,7 +8766,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-08/skills/rar-cat-agent-skills-lookup-dataverse-table/SKILL.md",
-            "sha256": "ea31e8695549486ed4de87c86b676fd1f161311393259a1e829c5d9d405274f6",
+            "sha256": "2b77572a9d4daac70408570fbf35526b73d3a9bb48c94038bc43a3f3e1e0b917",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-08/skills/rar-cat-agent-skills-lookup-dataverse-table/SKILL.md"
           },
           {
@@ -8786,7 +8786,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -8876,7 +8876,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-08/skills/rar-cat-agent-skills-mct-excellence-iq/SKILL.md",
-            "sha256": "8a808662367866202d694864622af8bfce55119a94c24f726ea32752a2045aa0",
+            "sha256": "123455fe16c445218825bc448438c5d86415017db0895353713062120a7c3946",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-08/skills/rar-cat-agent-skills-mct-excellence-iq/SKILL.md"
           },
           {
@@ -8896,7 +8896,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -8986,7 +8986,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-08/skills/rar-cat-agent-skills-meeting-analyzer/SKILL.md",
-            "sha256": "92b1a1761b86c7219abf8bf2b2476f1fd0bb16ba41768c8f9f2cb3ed181a19a8",
+            "sha256": "264fea41a9110ed73a7fcb4dacbd6aa877b1e7ba1492cdd2d6950d80c072c42e",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-08/skills/rar-cat-agent-skills-meeting-analyzer/SKILL.md"
           },
           {
@@ -9006,7 +9006,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -9096,7 +9096,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-08/skills/rar-cat-agent-skills-microsoft-ai-platform-advisor/SKILL.md",
-            "sha256": "048d0ea13c3f95d1052528eea485d041d9b09115530ed373665b914607231c92",
+            "sha256": "a925c1b5d517c033757e5d2b8ced542ca91dce5492bb43b092ce274800485a2e",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-08/skills/rar-cat-agent-skills-microsoft-ai-platform-advisor/SKILL.md"
           },
           {
@@ -9116,7 +9116,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -9203,7 +9203,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-08/skills/rar-cat-agent-skills-monte-carlo-analysis/SKILL.md",
-            "sha256": "efd6b393608dcd046cd9ad45d58e81350f5b83f5257164139f47de52acfcb08e",
+            "sha256": "a5df2f7a9211be28423f9226efe6650843b97a6ebb9c0f77f759dc54b250d749",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-08/skills/rar-cat-agent-skills-monte-carlo-analysis/SKILL.md"
           },
           {
@@ -9223,7 +9223,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -9313,7 +9313,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-08/skills/rar-cat-agent-skills-own-voice-builder/SKILL.md",
-            "sha256": "d6d5342c4d44a27ff20e23536334955f3b2fafaba0f18af46dc0303f6648c553",
+            "sha256": "dbae4717f0f6c0d92828b75df81ae03091a3e2ed7810b57ffeb8156ba6036f6d",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-08/skills/rar-cat-agent-skills-own-voice-builder/SKILL.md"
           },
           {
@@ -9333,7 +9333,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -9423,7 +9423,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-09/skills/rar-cat-agent-skills-pattern-radar/SKILL.md",
-            "sha256": "30ec6dc89b1c7d0f78d338ebcc9a99effcff0bd6d4e4f25bb91e65e4082ded2c",
+            "sha256": "890747babecabf1c17bebd1279d609b9594b9ef34f2eb722cc75d502b3c7fa2f",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-09/skills/rar-cat-agent-skills-pattern-radar/SKILL.md"
           },
           {
@@ -9443,7 +9443,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -9533,7 +9533,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-09/skills/rar-cat-agent-skills-pattern-radar-automation/SKILL.md",
-            "sha256": "79487cb257ee54be21affd70998a87706d4cd686fbf19b40340d9e026454067a",
+            "sha256": "30276e9b77fa903e92b82ebea8f3f1402abe222d050129215330b989e12943b6",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-09/skills/rar-cat-agent-skills-pattern-radar-automation/SKILL.md"
           },
           {
@@ -9553,7 +9553,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -9635,7 +9635,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-09/skills/rar-cat-agent-skills-pdf-table-data-conversion/SKILL.md",
-            "sha256": "826adf76fafb490b0ee0d52a08db1971cd74ab8914d2c5b9de203597cebce2f3",
+            "sha256": "bbfd4769abe8c300c0863fc6a80127b0a6672f0a1bbe7a5dd1ae8f7b7efb6aac",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-09/skills/rar-cat-agent-skills-pdf-table-data-conversion/SKILL.md"
           },
           {
@@ -9655,7 +9655,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -9745,7 +9745,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-09/skills/rar-cat-agent-skills-persona-reaction-panel/SKILL.md",
-            "sha256": "5f2d0576a714c7da7505dbfb7546b001ebf0aee08c91e1d3921046abab6c88c7",
+            "sha256": "2b57fdb4c47fcc695c0c3def1e2baeac1675b11e6ce11512ecc2289e630cb371",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-09/skills/rar-cat-agent-skills-persona-reaction-panel/SKILL.md"
           },
           {
@@ -9765,7 +9765,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -9853,7 +9853,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-09/skills/rar-cat-agent-skills-phi-deidentifier/SKILL.md",
-            "sha256": "8b73cc22a5b0da69aef26eba63e47256ac6325e68ecfb3f7a34d708172bcd0c7",
+            "sha256": "a3cc6c0f92cd3637778b0e3c6d4e3721c7b0cd2cbcda451e65d8ae629f08d51e",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-09/skills/rar-cat-agent-skills-phi-deidentifier/SKILL.md"
           },
           {
@@ -9873,7 +9873,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -9953,7 +9953,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-09/skills/rar-cat-agent-skills-pov-line-generator/SKILL.md",
-            "sha256": "342b17897d3d8ca083d3a3b8aeb0ca259a41973a78d23debdf1201ee53dbdf75",
+            "sha256": "21907e1131866f448cac85a0bb0e077d30789381668f7b480c942ae53274f84c",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-09/skills/rar-cat-agent-skills-pov-line-generator/SKILL.md"
           },
           {
@@ -9973,7 +9973,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -10050,7 +10050,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-09/skills/rar-cat-agent-skills-power-automate-desktop-assessment/SKILL.md",
-            "sha256": "183fe463c8cccd5143b5d143c4cb4139b3c277b502cc437350556c647f49db78",
+            "sha256": "b0fc29a50ad5239ce37b96e117fc081103a2d253a410f1d84205be5692768020",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-09/skills/rar-cat-agent-skills-power-automate-desktop-assessment/SKILL.md"
           },
           {
@@ -10070,7 +10070,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -10160,7 +10160,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-09/skills/rar-cat-agent-skills-power-automate-documentation/SKILL.md",
-            "sha256": "ee920db21d119ac26ac03ba58acc48cc81eb785e9ce9d4e95002d1ff28813d53",
+            "sha256": "93a257727cf843091b1e763396730fa992971166667c41754d47a2c985cce13a",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-09/skills/rar-cat-agent-skills-power-automate-documentation/SKILL.md"
           },
           {
@@ -10180,7 +10180,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -10267,7 +10267,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-10/skills/rar-cat-agent-skills-power-bi-model-review/SKILL.md",
-            "sha256": "6d137658078ade8b63cab82e8f3e1f758b539904c74ebca6941e4810ca222c44",
+            "sha256": "4a1708dc09d8ad0baff4840c7d3d8a82889d6e49e864beef3c0a3cbab13ebab1",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-10/skills/rar-cat-agent-skills-power-bi-model-review/SKILL.md"
           },
           {
@@ -10287,7 +10287,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -10377,7 +10377,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-10/skills/rar-cat-agent-skills-powerpoint-deck-designer/SKILL.md",
-            "sha256": "db70ce7ce5bd1aa5c4141961541eba8d7859fc90f5fc44f57c113ecd6c6c29ec",
+            "sha256": "5228b603720447f8aadcb296de2400a2200543ceb2562bf59e194172fa885385",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-10/skills/rar-cat-agent-skills-powerpoint-deck-designer/SKILL.md"
           },
           {
@@ -10397,7 +10397,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -10487,7 +10487,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-10/skills/rar-cat-agent-skills-presentation-talk-track-builder/SKILL.md",
-            "sha256": "172e71ed8f5b6171ecfc76075a03100bedd97abcad298a05f0a91422e07f6541",
+            "sha256": "cf59e5d871b36f8424416e5321cc273f6e3b36feeec81c8a8b6eac2316d10127",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-10/skills/rar-cat-agent-skills-presentation-talk-track-builder/SKILL.md"
           },
           {
@@ -10507,7 +10507,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -10587,7 +10587,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-10/skills/rar-cat-agent-skills-process-sop-architect/SKILL.md",
-            "sha256": "0b51363e08ad41808fcc3f74649edf7537565c066ebb8de96eeb0de152766d56",
+            "sha256": "0db8f9e21c5c3edf5ae9d2f783d8ff39ecbaea1f3832e7424364b0b55626fb8e",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-10/skills/rar-cat-agent-skills-process-sop-architect/SKILL.md"
           },
           {
@@ -10607,7 +10607,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -10679,7 +10679,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-10/skills/rar-cat-agent-skills-redlining-content/SKILL.md",
-            "sha256": "43448ca28a91e6369f2e83997b1e7b788b3cdc531795abfabab6310bdaefcbdc",
+            "sha256": "5f3b5c8e77543b1048c277506cfb2ea617eb1becab11fc54a05a8a93c22a97b0",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-10/skills/rar-cat-agent-skills-redlining-content/SKILL.md"
           },
           {
@@ -10699,7 +10699,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -10789,7 +10789,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-10/skills/rar-cat-agent-skills-regulation-monitor/SKILL.md",
-            "sha256": "232b6c2f056d2f07ab09b17ad56716ada363cf2325a8541c106a34ad1943a986",
+            "sha256": "7a14446a5f357dc681100d5efd6932c2ee7ad133ea38fa07125410c5adb95650",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-10/skills/rar-cat-agent-skills-regulation-monitor/SKILL.md"
           },
           {
@@ -10809,7 +10809,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -10890,7 +10890,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-10/skills/rar-cat-agent-skills-rich-html-presentation/SKILL.md",
-            "sha256": "aee20c0a57ec2ae978e5aca8ab54306e74abf8e86be542bf44d51defcdcb9527",
+            "sha256": "1f2ef880b7bce502b40e03654cb2d5f8a8e61514532a700a3e74d2bb96d640d6",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-10/skills/rar-cat-agent-skills-rich-html-presentation/SKILL.md"
           },
           {
@@ -10910,7 +10910,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -11000,7 +11000,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-10/skills/rar-cat-agent-skills-route-map-visualizer/SKILL.md",
-            "sha256": "df672d88066ddcac5d0a70618dc5e45e0f11e4780031efa29cad9e2c9a7867da",
+            "sha256": "7aa6c2b91a1bb82f8c8a25a2410a7424d6793ca9ff3493edadef05b16006bf38",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-10/skills/rar-cat-agent-skills-route-map-visualizer/SKILL.md"
           },
           {
@@ -11020,7 +11020,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -11090,7 +11090,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-11/skills/rar-cat-agent-skills-scrollytelling-data/SKILL.md",
-            "sha256": "6750395ca100916c703e0497436254cb9959005d52f9399fd2cfd173eafc1fee",
+            "sha256": "71b048eb0c42afcba5830443afa5cdefe68d1b970f81d0e3b5001f232d7e678c",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-11/skills/rar-cat-agent-skills-scrollytelling-data/SKILL.md"
           },
           {
@@ -11110,7 +11110,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -11196,7 +11196,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-11/skills/rar-cat-agent-skills-sharepoint-list-formatter/SKILL.md",
-            "sha256": "76e5efbb3d4919429b98947cad76699640f0bafce34e6e1e15eb0fdde879a607",
+            "sha256": "90dec694b9bd02895bb50ea2a374c565c42753b5258735889e8475bc254f980b",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-11/skills/rar-cat-agent-skills-sharepoint-list-formatter/SKILL.md"
           },
           {
@@ -11216,7 +11216,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -11306,7 +11306,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-11/skills/rar-cat-agent-skills-sharepoint-list-insight-report-generator/SKILL.md",
-            "sha256": "188a04f41530c89f484ff649e0fd4c3453e8f985f9ed58074f4b48866290b06a",
+            "sha256": "baeef20a47146e879d6d46780a824ddb8d45b49603e2ff245ef92e8e956e06df",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-11/skills/rar-cat-agent-skills-sharepoint-list-insight-report-generator/SKILL.md"
           },
           {
@@ -11326,7 +11326,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -11402,7 +11402,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-11/skills/rar-cat-agent-skills-skill-authoring-coach/SKILL.md",
-            "sha256": "7bb4a8e739e9f4d4d41fb677111107212d3305076524df2ac74f9366967ad9a5",
+            "sha256": "bc31ed265cf24e4b8dbfef6b11c84630234c01d3f24cc016297e2cd75f20702a",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-11/skills/rar-cat-agent-skills-skill-authoring-coach/SKILL.md"
           },
           {
@@ -11422,7 +11422,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -11512,7 +11512,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-11/skills/rar-cat-agent-skills-spend-more-time-with-friends-and-family/SKILL.md",
-            "sha256": "10ff79da5f37744da13e9d82cd63e233f43fa487e216a60445217051862bd920",
+            "sha256": "feaeb18c05cca6acc822d5937a361938c29ca75f25feca2ea9a9c61a5a291a81",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-11/skills/rar-cat-agent-skills-spend-more-time-with-friends-and-family/SKILL.md"
           },
           {
@@ -11532,7 +11532,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -11622,7 +11622,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-11/skills/rar-cat-agent-skills-stoic-negotiator/SKILL.md",
-            "sha256": "aef872614f9b1e65d11796dba7fa5e9c7d81d646066dbf515673b018b198abd0",
+            "sha256": "97359b1049310a0a0a3f6f3bc4e69b816674505a0f076bc0c6211390975bedb5",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-11/skills/rar-cat-agent-skills-stoic-negotiator/SKILL.md"
           },
           {
@@ -11642,7 +11642,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -11732,7 +11732,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-11/skills/rar-cat-agent-skills-style-analyzer/SKILL.md",
-            "sha256": "337b3091f7744dbc77580a32e45c39321cd3c094d5c9f24be5a453733ef625b9",
+            "sha256": "a2fa5416d961cf4f25ff4834bd83b2472b5701ccdcdd152b09dab60b1e95d559",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-11/skills/rar-cat-agent-skills-style-analyzer/SKILL.md"
           },
           {
@@ -11752,7 +11752,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -11827,7 +11827,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-11/skills/rar-cat-agent-skills-tool-tracer/SKILL.md",
-            "sha256": "74f0005c609f694ad8cb5c9901b83c0c7120631e0acaab3bde35c416dc1c94e5",
+            "sha256": "9678dc2f25c125deae3e1167a48c820cf18a5ebe516c5e39be4ba8293a77d96b",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-11/skills/rar-cat-agent-skills-tool-tracer/SKILL.md"
           },
           {
@@ -11847,7 +11847,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -11937,7 +11937,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-12/skills/rar-cat-agent-skills-travel-cost-estimator/SKILL.md",
-            "sha256": "4e5c86e509151b4e60b2bdb65744f737f970bcd347cdc0b16df967100692f547",
+            "sha256": "f4c0fb10b297d3b5df3684fc617bccea5ed5ea18cadee625c1ba0afe12895a84",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-12/skills/rar-cat-agent-skills-travel-cost-estimator/SKILL.md"
           },
           {
@@ -11957,7 +11957,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -12040,7 +12040,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-12/skills/rar-cat-agent-skills-vacation-urgent-forwarder/SKILL.md",
-            "sha256": "70c08b94d57b931533ecaf2c32caa606cbfe7f84d45a8cc5003f9f95f6ff7622",
+            "sha256": "d5166afdacdcea88db027a14a5e04a4a503e7608f57f0c20ff99b44524876350",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-12/skills/rar-cat-agent-skills-vacation-urgent-forwarder/SKILL.md"
           },
           {
@@ -12060,7 +12060,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -12150,7 +12150,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-12/skills/rar-cat-agent-skills-vendor-contract-risk-review/SKILL.md",
-            "sha256": "a095c0e4d3866d1c912185cb11f2c84c28b16b5a8bb8c6a9c8fb7e486ce45c54",
+            "sha256": "11e7b83024bca4880d56f969cc62e4fdc45ac49f96fe3e398ba9708ff0f35da1",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-12/skills/rar-cat-agent-skills-vendor-contract-risk-review/SKILL.md"
           },
           {
@@ -12170,7 +12170,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -12254,7 +12254,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-12/skills/rar-cat-agent-skills-wcag-power-platform/SKILL.md",
-            "sha256": "2284dfe1482ce51fc51c7575fc93e3d6d8fab32db7455de4e184145d6da8ea07",
+            "sha256": "a5d0d597a3bf8016ebeb2d0075902c333c3137288e9ea6c20f7ceb2808838cba",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-12/skills/rar-cat-agent-skills-wcag-power-platform/SKILL.md"
           },
           {
@@ -12274,7 +12274,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -12360,7 +12360,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-12/skills/rar-cat-agent-skills-what-to-use-when/SKILL.md",
-            "sha256": "b88bb6ae1d2e56de49df04887a4999de195723a506d6342f848aaf464083d50e",
+            "sha256": "a1e0440e88fe31971f4cacbf629dec6b1f4d636d7354ce7e289afc82d2e5cb87",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-12/skills/rar-cat-agent-skills-what-to-use-when/SKILL.md"
           },
           {
@@ -12380,7 +12380,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -12464,7 +12464,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-12/skills/rar-cat-agent-skills-whiteboard-to-infographic/SKILL.md",
-            "sha256": "ddb400fe6195714bca9be7c95baa1b84007ea9c2b533d7bcbee2d327caee8cd3",
+            "sha256": "fd1606ca4bf209a8f1badc76e0c1a2b2a015abc1b4901a9794a41228c7879a7e",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-12/skills/rar-cat-agent-skills-whiteboard-to-infographic/SKILL.md"
           },
           {
@@ -12484,7 +12484,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -12566,7 +12566,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-12/skills/rar-cat-agent-skills-wikipedia-human-style-writing/SKILL.md",
-            "sha256": "76ce5ddf21af078e952b864065c504ecc6174c1d169b8f8707e3be94017112ad",
+            "sha256": "c292f41e0dd560ffd1310e2f108099137b44e79f67cce4db5dcad1e928d144c4",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-12/skills/rar-cat-agent-skills-wikipedia-human-style-writing/SKILL.md"
           },
           {
@@ -12586,7 +12586,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -12666,7 +12666,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-12/skills/rar-cat-agent-skills-work-brief/SKILL.md",
-            "sha256": "9fad2e43336789c2d89c39b210e32c12dfb8a7ff48d4012ab13009fc57be54a6",
+            "sha256": "857de15ef5a0b90268d29fc12d726bed24ccafe9293ee0a9014aa1ab41e346fb",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-12/skills/rar-cat-agent-skills-work-brief/SKILL.md"
           },
           {
@@ -12686,7 +12686,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -12765,7 +12765,7 @@
         "files": [
           {
             "path": "scout/bundles/powercat-13/skills/rar-cat-agent-skills-work-iq-signalboard/SKILL.md",
-            "sha256": "850878687fd9bee4ff8b1d188c7c20d9636e3548f87b8c40bf53c317e50430aa",
+            "sha256": "5e150713267bc896d8e4c75863b0dc73c49d34e8f3cc6617b66819b87a852c63",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/powercat-13/skills/rar-cat-agent-skills-work-iq-signalboard/SKILL.md"
           },
           {
@@ -12785,7 +12785,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -12858,7 +12858,7 @@
         "files": [
           {
             "path": "scout/bundles/native-01/skills/rar-discreetrappers-agent-generator/SKILL.md",
-            "sha256": "f0b939e1a7bfa1dcb30ebe9c183bde834b0306879de6d27f007dfa90def3d13e",
+            "sha256": "e785ef374b6ba87d7feb408f33217909d4b2c73072b37eca19e11a2124ce69c5",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-01/skills/rar-discreetrappers-agent-generator/SKILL.md"
           },
           {
@@ -12878,7 +12878,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -12953,7 +12953,7 @@
         "files": [
           {
             "path": "scout/bundles/native-01/skills/rar-discreetrappers-agent-transpiler/SKILL.md",
-            "sha256": "b7e0760816af3256b0de1ec6f14356da88c5e52c139cb366cc91389952a97f42",
+            "sha256": "fed380f0fd2fcd6c7f8d884571eab3bad7c00a77d612c965f11f4e5e153d98ce",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-01/skills/rar-discreetrappers-agent-transpiler/SKILL.md"
           },
           {
@@ -12973,7 +12973,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -13063,7 +13063,7 @@
         "files": [
           {
             "path": "scout/bundles/native-01/skills/rar-discreetrappers-architecture-diagram/SKILL.md",
-            "sha256": "dda1b616b499b055c5b19171da9341a65a1f8ee26e6d7c17f592e7cf42797de6",
+            "sha256": "79f89cddbf41980f1bd81b2b8c90e9e82561b743e1f41c7045af88ea2bcf91b1",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-01/skills/rar-discreetrappers-architecture-diagram/SKILL.md"
           },
           {
@@ -13083,7 +13083,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -13159,7 +13159,7 @@
         "files": [
           {
             "path": "scout/bundles/native-01/skills/rar-discreetrappers-copilot-studio-transpiler/SKILL.md",
-            "sha256": "b43a17a3035f447e7fb361b5d52092ad4b8363a3271cf0a4b6f775f6fb89f8bf",
+            "sha256": "e59119cc81116d424977a575fa7857e995e1e1d953e229bc07d347fd93cfd596",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-01/skills/rar-discreetrappers-copilot-studio-transpiler/SKILL.md"
           },
           {
@@ -13179,7 +13179,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -13267,7 +13267,7 @@
         "files": [
           {
             "path": "scout/bundles/native-01/skills/rar-discreetrappers-demo-script-generator/SKILL.md",
-            "sha256": "b5e259b417ec1198604a9d3c63579c247e49a20ac7366d9b42be8926e904f16a",
+            "sha256": "60553ef904a8d5dd93d3333d7a33480a7fdce39b9ce5293098c96c53aa68e763",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-01/skills/rar-discreetrappers-demo-script-generator/SKILL.md"
           },
           {
@@ -13287,7 +13287,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -13376,7 +13376,7 @@
         "files": [
           {
             "path": "scout/bundles/native-01/skills/rar-discreetrappers-dynamics-crud/SKILL.md",
-            "sha256": "07b040e99d617049fee2d7b818fb9cb66387361d0501fb0b5b12d2958d5f7281",
+            "sha256": "248a02d515934daae10a3cdadb3f0cacdda9bc9531f15160d1baa9d0339ffb2e",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-01/skills/rar-discreetrappers-dynamics-crud/SKILL.md"
           },
           {
@@ -13396,7 +13396,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -13474,7 +13474,7 @@
         "files": [
           {
             "path": "scout/bundles/native-02/skills/rar-discreetrappers-email-drafting/SKILL.md",
-            "sha256": "3a5d9159e8f523a9fdca4c0dc66fbb1a7dca7fa0a97784cc8a771a4de2bd26c7",
+            "sha256": "78ececbbdb8c0f3b019136ba1d4663b56260d68cc6d7825593b6932f42707b85",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-02/skills/rar-discreetrappers-email-drafting/SKILL.md"
           },
           {
@@ -13494,7 +13494,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -13584,7 +13584,7 @@
         "files": [
           {
             "path": "scout/bundles/native-02/skills/rar-discreetrappers-powerpoint-generator/SKILL.md",
-            "sha256": "b23639484f67360f346da02d4f91b056940f464a5d762ef6f33a037584b4dd67",
+            "sha256": "18b2376f90b0484323d9e4d334ca642f394b1fd50265e6659622abcf3c6b2c95",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-02/skills/rar-discreetrappers-powerpoint-generator/SKILL.md"
           },
           {
@@ -13604,7 +13604,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -13694,7 +13694,7 @@
         "files": [
           {
             "path": "scout/bundles/native-02/skills/rar-discreetrappers-project-tracker/SKILL.md",
-            "sha256": "01d4a305734b3ff41f656f1887a500b2aa14e9330594ce89f7a7ca0262ac862d",
+            "sha256": "b4854f2ac4667c5b919a2df93191b812e5dea44bab266a1fa5196cb487bdc30d",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-02/skills/rar-discreetrappers-project-tracker/SKILL.md"
           },
           {
@@ -13714,7 +13714,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -13804,7 +13804,7 @@
         "files": [
           {
             "path": "scout/bundles/native-02/skills/rar-discreetrappers-rapp-pipeline/SKILL.md",
-            "sha256": "bfd90c6b6710c14f7d5ce2b94e9b404963060e1be6dd2561cbfd490b589e8ca0",
+            "sha256": "4fefe7441b406e322d54aa1d125004069f2068f9bb319218c07197f7f168663a",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-02/skills/rar-discreetrappers-rapp-pipeline/SKILL.md"
           },
           {
@@ -13824,7 +13824,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -13906,7 +13906,7 @@
         "files": [
           {
             "path": "scout/bundles/native-02/skills/rar-discreetrappers-sales-assistant/SKILL.md",
-            "sha256": "a7693176894a64a8d58fcd669c8f7399510dd49977164be056be50b8b6819eb0",
+            "sha256": "8debd50d6621ed78af11057c3e9d38da65ded05a5ad55b8099cea347a3e4d212",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-02/skills/rar-discreetrappers-sales-assistant/SKILL.md"
           },
           {
@@ -13926,7 +13926,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -14016,7 +14016,7 @@
         "files": [
           {
             "path": "scout/bundles/native-02/skills/rar-discreetrappers-scripted-demo/SKILL.md",
-            "sha256": "62f1cea863df330922fb84ab52e3ceb995dc6c706acfa10e0f41c45b78cce5fa",
+            "sha256": "7135bf322a53455d56028b3181272ed9f8d6decabf06ed63285045ddcd286459",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-02/skills/rar-discreetrappers-scripted-demo/SKILL.md"
           },
           {
@@ -14036,7 +14036,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -14126,7 +14126,7 @@
         "files": [
           {
             "path": "scout/bundles/native-02/skills/rar-discreetrappers-sharepoint-contract-analysis/SKILL.md",
-            "sha256": "c4fa10ff6cd8b0ac6248210c2274f1c8f4647b5f93aa539613c8413d53909edb",
+            "sha256": "fcfd6ad145c2e5cde2de6cbf94cbba41c9d3c226f2de7cd2f18ec14532115631",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-02/skills/rar-discreetrappers-sharepoint-contract-analysis/SKILL.md"
           },
           {
@@ -14146,7 +14146,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -14228,7 +14228,7 @@
         "files": [
           {
             "path": "scout/bundles/native-02/skills/rar-howardh-cardsmith/SKILL.md",
-            "sha256": "5a42c92d35a798cbdde74b1a0a7681ce2c9e4babf57319a5d3513af2191cb8d2",
+            "sha256": "9623f975cbc6a0a7cf299d45c354504594bd2e5bfc77790583ecb667c73b0970",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-02/skills/rar-howardh-cardsmith/SKILL.md"
           },
           {
@@ -14248,7 +14248,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -14338,7 +14338,7 @@
         "files": [
           {
             "path": "scout/bundles/native-03/skills/rar-howardh-chief-of-staff/SKILL.md",
-            "sha256": "544bdfd85fc201badfa55d944961dd3024159a72d4ab506f8542058dc69193bf",
+            "sha256": "6e5af3a01863debab93a5999f7dff92b54c8ac109b608fbc5faa06bbce7d768e",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-03/skills/rar-howardh-chief-of-staff/SKILL.md"
           },
           {
@@ -14358,7 +14358,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -14433,7 +14433,7 @@
         "files": [
           {
             "path": "scout/bundles/native-03/skills/rar-howardh-markdown-to-slides/SKILL.md",
-            "sha256": "7283c8cd2db3c882c8001a39c16d69a2588615db4ff9eedb1778f805816b257c",
+            "sha256": "e6fa8757735ca6f3a868ceb206088560cb8ee064829b604bc9919228e1746690",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-03/skills/rar-howardh-markdown-to-slides/SKILL.md"
           },
           {
@@ -14453,7 +14453,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -14532,7 +14532,7 @@
         "files": [
           {
             "path": "scout/bundles/native-03/skills/rar-howardh-prompt-to-video/SKILL.md",
-            "sha256": "a2b082077cfb28bccd57d0734852ffeaba922bea6d8b4218c4794741fa2ee291",
+            "sha256": "ea0a460fd2183aafc1e5b4f3323cb888815312815096c933cbd39deee224d7a4",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-03/skills/rar-howardh-prompt-to-video/SKILL.md"
           },
           {
@@ -14552,7 +14552,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -14642,7 +14642,7 @@
         "files": [
           {
             "path": "scout/bundles/native-03/skills/rar-howardh-recon/SKILL.md",
-            "sha256": "b646f874440132f7d34c60c9790e87809b214ab0e2490f94fde281e73a190817",
+            "sha256": "0abf633c39bb3405e4c0e2c45f4f47db6583a1895a89520e6d6c7a34aa289c51",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-03/skills/rar-howardh-recon/SKILL.md"
           },
           {
@@ -14662,7 +14662,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -14752,7 +14752,7 @@
         "files": [
           {
             "path": "scout/bundles/native-03/skills/rar-howardh-training-quest/SKILL.md",
-            "sha256": "e6dc0edc5d907f17abf6c659f37b30fefb978fd3400810e023821f7f526e92d3",
+            "sha256": "b72075535440ed38344d1ce0736b5509534fea3149b3e655f956deeb9ac741b0",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-03/skills/rar-howardh-training-quest/SKILL.md"
           },
           {
@@ -14772,7 +14772,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -14862,7 +14862,7 @@
         "files": [
           {
             "path": "scout/bundles/native-03/skills/rar-howardh-tuftelove/SKILL.md",
-            "sha256": "935a60c5f80ca3c62314a633d20336263609ae6895fcfa8d97c42774068d0ea2",
+            "sha256": "9caae6946db187fde955185fa3d2c89bd00d4bed266e565a8ee39ba1bddcd3d1",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-03/skills/rar-howardh-tuftelove/SKILL.md"
           },
           {
@@ -14882,7 +14882,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -14972,7 +14972,7 @@
         "files": [
           {
             "path": "scout/bundles/native-03/skills/rar-howardh-vaultmind/SKILL.md",
-            "sha256": "92c90dc3d1fbd52d86880b9673c4f127ee731bef37d6d16ebb896817c3d35a88",
+            "sha256": "4bf02f9e05595e0bd231c2369ebe5c201bdd48d8f8d87820ec7162eeca981b43",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-03/skills/rar-howardh-vaultmind/SKILL.md"
           },
           {
@@ -14992,7 +14992,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -15082,7 +15082,7 @@
         "files": [
           {
             "path": "scout/bundles/native-03/skills/rar-kody-w-agent-team/SKILL.md",
-            "sha256": "ff1c818ceabf13a2dbf731cb1f99b59674d4db385ba76009be40b0c569f466b1",
+            "sha256": "03ec27d047916d586ec955db3fd423d86f275688aef01d45fb875c0865d8ea5d",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-03/skills/rar-kody-w-agent-team/SKILL.md"
           },
           {
@@ -15102,7 +15102,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -15177,7 +15177,7 @@
         "files": [
           {
             "path": "scout/bundles/native-04/skills/rar-kody-w-agent-workbench/SKILL.md",
-            "sha256": "203e20b60f44c683d09ca1d66ae601018dab7a7c971f2235ee12cb29a0aa80ad",
+            "sha256": "4a7d5780226ecb8c9b4d93d67d74ef8e68d67134d2be022722990619d85a951c",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-04/skills/rar-kody-w-agent-workbench/SKILL.md"
           },
           {
@@ -15197,7 +15197,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -15287,7 +15287,7 @@
         "files": [
           {
             "path": "scout/bundles/native-04/skills/rar-kody-w-arena-compete/SKILL.md",
-            "sha256": "d31bc825d85772d670b97f1e1b861a99e016ef73e6e2fe5c13b83db3e912a7bf",
+            "sha256": "dff723f8e5f476fa1cca9d719588c188a0ef6c9bc96caa31d1c40ba127800102",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-04/skills/rar-kody-w-arena-compete/SKILL.md"
           },
           {
@@ -15307,7 +15307,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -15388,7 +15388,7 @@
         "files": [
           {
             "path": "scout/bundles/native-04/skills/rar-kody-w-art-generator/SKILL.md",
-            "sha256": "659cdbde4fede70fa16cbce82e27ec9fe9320bf205e4d38cff87009a4e2a9a77",
+            "sha256": "f06eb09f6d8fabfe5474ee50ec12fa658adcc30dbb088e4b9e28b69ef917c85f",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-04/skills/rar-kody-w-art-generator/SKILL.md"
           },
           {
@@ -15408,7 +15408,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -15498,7 +15498,7 @@
         "files": [
           {
             "path": "scout/bundles/native-04/skills/rar-kody-w-bakeoff-factory/SKILL.md",
-            "sha256": "34645668223afac678f21ddf31db8a35c59ef6621b55c29da71d16a2aee1e975",
+            "sha256": "47f49b0440a8438cf059f46aa707e1a8b4eb74d565a4c4c86e56dc65b95e3746",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-04/skills/rar-kody-w-bakeoff-factory/SKILL.md"
           },
           {
@@ -15518,7 +15518,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -15608,7 +15608,7 @@
         "files": [
           {
             "path": "scout/bundles/native-04/skills/rar-kody-w-bond-rhythm/SKILL.md",
-            "sha256": "5575dd9b1d3b224d0f8b2d67a99c84cbf0e5222d4aca72dc3b7c0ee79cdce8f5",
+            "sha256": "1155623cfe5d09746b80301865e00f6b0247c966c55abf17a01d0be2e0177512",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-04/skills/rar-kody-w-bond-rhythm/SKILL.md"
           },
           {
@@ -15628,7 +15628,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -15714,7 +15714,7 @@
         "files": [
           {
             "path": "scout/bundles/native-04/skills/rar-kody-w-buzzsaw/SKILL.md",
-            "sha256": "f0aa179cb79ae7005745d9b2bb9901f49ad7562024e022a2c1da94d5af4c7b75",
+            "sha256": "cf4b1e8573b098b95920f10c8eed04f6b2b4940bbb8ee778a8e3cd1a66d029f0",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-04/skills/rar-kody-w-buzzsaw/SKILL.md"
           },
           {
@@ -15734,7 +15734,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -15815,7 +15815,7 @@
         "files": [
           {
             "path": "scout/bundles/native-04/skills/rar-kody-w-chain-composer/SKILL.md",
-            "sha256": "8ec5fc37b9a24e79c10895419b4d75a78145786b408f3f66e23407eae0bcb80d",
+            "sha256": "22cb4758b8efcfe9e3a9ddc815441a07fccfb5f67f1ba33aa914ebae63aee39f",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-04/skills/rar-kody-w-chain-composer/SKILL.md"
           },
           {
@@ -15835,7 +15835,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -15925,7 +15925,7 @@
         "files": [
           {
             "path": "scout/bundles/native-04/skills/rar-kody-w-commons-life/SKILL.md",
-            "sha256": "cb6a62c026ce8f4bbcc69ef92c4ce04279cfcc847a8febe14af8f8f729636d55",
+            "sha256": "e1e2f697944dca3db7332b7065ca499612e80170d77014ecf9dc3e184aeaee23",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-04/skills/rar-kody-w-commons-life/SKILL.md"
           },
           {
@@ -15945,7 +15945,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -16035,7 +16035,7 @@
         "files": [
           {
             "path": "scout/bundles/native-05/skills/rar-kody-w-commons-show/SKILL.md",
-            "sha256": "1f4bb08b0d8fa6538f7ec8faca317abaab723e93064473fb8aabde0e5170e8e7",
+            "sha256": "f008d78b3c915a205663df9079817835e8f265f20e1804ed3f84730206c3bce6",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-05/skills/rar-kody-w-commons-show/SKILL.md"
           },
           {
@@ -16055,7 +16055,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -16145,7 +16145,7 @@
         "files": [
           {
             "path": "scout/bundles/native-05/skills/rar-kody-w-connected-solution/SKILL.md",
-            "sha256": "f358a604a2e91c71f42817d435b3cf35d60749889c313b1940ede9f4bd6105cf",
+            "sha256": "61ce09accc5ad8ca7c5b26fcc236538733f53b895f60bc91ae6748d55a7e1982",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-05/skills/rar-kody-w-connected-solution/SKILL.md"
           },
           {
@@ -16165,7 +16165,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -16239,7 +16239,7 @@
         "files": [
           {
             "path": "scout/bundles/native-05/skills/rar-kody-w-context-memory/SKILL.md",
-            "sha256": "08ebf45cd5cc547ac3bb4c11b9353c6a7748789f64aa28d8fc2a131bb6f24cb8",
+            "sha256": "d4167f063d1bd44001fd123ddf5d43bdd75a8a28b9d5cf6859aad8b76fe96951",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-05/skills/rar-kody-w-context-memory/SKILL.md"
           },
           {
@@ -16259,7 +16259,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -16349,7 +16349,7 @@
         "files": [
           {
             "path": "scout/bundles/native-05/skills/rar-kody-w-copilot-studio-deploy/SKILL.md",
-            "sha256": "4a46b128ab5249c0f2802c97e7cb663eeffc12a03822de15eb0a64ab8bcf0577",
+            "sha256": "38d7dc592dd5e2e94793e4a19faa77526591b70b3075978b9d8fff3962194c41",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-05/skills/rar-kody-w-copilot-studio-deploy/SKILL.md"
           },
           {
@@ -16369,7 +16369,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -16448,7 +16448,7 @@
         "files": [
           {
             "path": "scout/bundles/native-06/skills/rar-kody-w-copilot-studio-forge/SKILL.md",
-            "sha256": "7799442c00390f3c085d217a5902fb2264858165a2ecb7348c4f03d07d81cc10",
+            "sha256": "2915275081a46f1db2f7266459686d9bf1eed4abffbd4a48206dd5a9b33cae17",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-06/skills/rar-kody-w-copilot-studio-forge/SKILL.md"
           },
           {
@@ -16468,7 +16468,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -16558,7 +16558,7 @@
         "files": [
           {
             "path": "scout/bundles/native-06/skills/rar-kody-w-copilot-studio-parity-deploy/SKILL.md",
-            "sha256": "631bf067bcffc613c596aa0125a8419d0ceb7dbfacbf9f5c2448e7f688acb8b0",
+            "sha256": "4ca141a8b41e404b003d6556b67076f8dcf9d7470bcdc000c7ace358e20cd6cc",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-06/skills/rar-kody-w-copilot-studio-parity-deploy/SKILL.md"
           },
           {
@@ -16578,7 +16578,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -16668,7 +16668,7 @@
         "files": [
           {
             "path": "scout/bundles/native-06/skills/rar-kody-w-copilot-studio-probe/SKILL.md",
-            "sha256": "69cb19c5b7a2eb18fc0049cb6127bea45fd46ae5a3df254c3c246a38f85be59b",
+            "sha256": "1227fd85c180ae24331a825e2eddca6f1d283640e59348d25cd43c550d7b854b",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-06/skills/rar-kody-w-copilot-studio-probe/SKILL.md"
           },
           {
@@ -16688,7 +16688,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -16766,7 +16766,7 @@
         "files": [
           {
             "path": "scout/bundles/native-06/skills/rar-kody-w-deal-desk/SKILL.md",
-            "sha256": "912db8eff4dc9cb76086ffedf522c67d6fa5f00753139cf6c902c32eb5c583bc",
+            "sha256": "017def986fb1e7a790279c0e53f7c82b732b0387518635e8aadcecaa7b06d3ec",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-06/skills/rar-kody-w-deal-desk/SKILL.md"
           },
           {
@@ -16786,7 +16786,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -16876,7 +16876,7 @@
         "files": [
           {
             "path": "scout/bundles/native-06/skills/rar-kody-w-double-jump/SKILL.md",
-            "sha256": "75cf81f459b0bf74a7128e79b6d169e5758372539e299692de9b1b5d5b8b0070",
+            "sha256": "98add75a7328f4d9153272ee4a53bd7287197a11703bdb34907485597560ba23",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-06/skills/rar-kody-w-double-jump/SKILL.md"
           },
           {
@@ -16896,7 +16896,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -16980,7 +16980,7 @@
         "files": [
           {
             "path": "scout/bundles/native-06/skills/rar-kody-w-education-shorts/SKILL.md",
-            "sha256": "6566ba9c43b89284d9e6caaf53d4857d5f05bd0043f32b00fbea020c4ac20aa1",
+            "sha256": "4928a5c6dd7955c87d5ff5bf5dc797da94a771075286232ac94a49c6803a1b03",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-06/skills/rar-kody-w-education-shorts/SKILL.md"
           },
           {
@@ -17000,7 +17000,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -17090,7 +17090,7 @@
         "files": [
           {
             "path": "scout/bundles/native-06/skills/rar-kody-w-estate-factory/SKILL.md",
-            "sha256": "890c7284e50c24aca021fc704f10df2813b8adf6041b0f3bc11c8899b410d138",
+            "sha256": "2044a7ecc5328123302369a4f3e01676af74b06bd7478c957a65adaaaa805b45",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-06/skills/rar-kody-w-estate-factory/SKILL.md"
           },
           {
@@ -17110,7 +17110,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -17200,7 +17200,7 @@
         "files": [
           {
             "path": "scout/bundles/native-06/skills/rar-kody-w-ez-sharpen/SKILL.md",
-            "sha256": "fc1e6655e5902d5fa0c1c7b45259a8b416d488fc1f92c5415f3f68f97e1df856",
+            "sha256": "f95b2b0839a6d5e8603e510c75fa03bd9768382b622257842c845157480a8e1e",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-06/skills/rar-kody-w-ez-sharpen/SKILL.md"
           },
           {
@@ -17220,7 +17220,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -17301,7 +17301,7 @@
         "files": [
           {
             "path": "scout/bundles/native-07/skills/rar-kody-w-factory/SKILL.md",
-            "sha256": "cf85656d4c657a93726eba0aecbc09b32f8cf990987e3cc4ab6aee50660b377c",
+            "sha256": "378906bd115f339cad4338d37e11e4b25535bf88135c895d4b035950923a01c8",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-07/skills/rar-kody-w-factory/SKILL.md"
           },
           {
@@ -17321,7 +17321,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -17411,7 +17411,7 @@
         "files": [
           {
             "path": "scout/bundles/native-07/skills/rar-kody-w-first-hour/SKILL.md",
-            "sha256": "583791a8e1d6dea2365a70cfe76c379b1b2c042db68f09ea5fce45571dabaec7",
+            "sha256": "d7e4a6201f27805f217f9f934bc103a287a4ed6517758bbcbacb5ea13cf17af2",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-07/skills/rar-kody-w-first-hour/SKILL.md"
           },
           {
@@ -17431,7 +17431,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -17513,7 +17513,7 @@
         "files": [
           {
             "path": "scout/bundles/native-07/skills/rar-kody-w-flight-recorder/SKILL.md",
-            "sha256": "6804e31c0eb082a42d3b6e72f2823e569d16a27ca8dd05ecdc37ed38a719d578",
+            "sha256": "0ad05700b4481fea80d99f5e362641ebc9930fe2ba22799a4fcb372cc29e4639",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-07/skills/rar-kody-w-flight-recorder/SKILL.md"
           },
           {
@@ -17533,7 +17533,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -17623,7 +17623,7 @@
         "files": [
           {
             "path": "scout/bundles/native-07/skills/rar-kody-w-fragments/SKILL.md",
-            "sha256": "a908115046f377593cdd914818faea5ad75d0f9db6c0f5a9f12feb7a8c69e7d5",
+            "sha256": "96d232f076e6236e00143f24f24f810d6eb06311eddd97d6b094179d1f973544",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-07/skills/rar-kody-w-fragments/SKILL.md"
           },
           {
@@ -17643,7 +17643,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -17722,7 +17722,7 @@
         "files": [
           {
             "path": "scout/bundles/native-07/skills/rar-kody-w-full-rapp-leviathan/SKILL.md",
-            "sha256": "35b52ae15dedec326dadc95c679a0efdce3c3c6c371e4e8b9066f02bc7e15d8e",
+            "sha256": "5d541ad3b032c531c8895110fd3ce13d00eb5ecf684c057176aecf6a4106ddf7",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-07/skills/rar-kody-w-full-rapp-leviathan/SKILL.md"
           },
           {
@@ -17742,7 +17742,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -17832,7 +17832,7 @@
         "files": [
           {
             "path": "scout/bundles/native-07/skills/rar-kody-w-git-warehouse/SKILL.md",
-            "sha256": "e324959b092dbd9226f04ecacfc1c8f139f12ded51b3799127d68bce6ede07b8",
+            "sha256": "1805a9882def5cdb1c8e8b87f3f385097fc9c30750691bd688c64f57bfd4f4d1",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-07/skills/rar-kody-w-git-warehouse/SKILL.md"
           },
           {
@@ -17852,7 +17852,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -17942,7 +17942,7 @@
         "files": [
           {
             "path": "scout/bundles/native-07/skills/rar-kody-w-github-agent-library/SKILL.md",
-            "sha256": "7b66a0d6211abe18ae8e7d24907b7798a094a299e8373d0999c09d4a6c4c89b1",
+            "sha256": "002ec312cbb05b0a60ea600d01f8a86a3b70cff1215b1eec2e156d4b21cbee04",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-07/skills/rar-kody-w-github-agent-library/SKILL.md"
           },
           {
@@ -17962,7 +17962,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -18029,7 +18029,7 @@
         "files": [
           {
             "path": "scout/bundles/native-07/skills/rar-kody-w-hello-world/SKILL.md",
-            "sha256": "ac75ca4d27a4a44d7d7fc4d311219b1c971134dc1a0cebde96fe57f75a19b8f6",
+            "sha256": "e7faaba52e6a1e8a675aa736db70ff64afad98ebd8752889542d0bdc1808a2ee",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-07/skills/rar-kody-w-hello-world/SKILL.md"
           },
           {
@@ -18049,7 +18049,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -18133,7 +18133,7 @@
         "files": [
           {
             "path": "scout/bundles/native-08/skills/rar-kody-w-hologram-dogg/SKILL.md",
-            "sha256": "6bacfb7d27f290e32f369e477248bbe86ab95f847e1edbf1b9f9fb035a40389f",
+            "sha256": "f54f46ae7c7ec727d75efa3fa760b67dcf722f040b5b1a6a5356a90ae4b1dfee",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-08/skills/rar-kody-w-hologram-dogg/SKILL.md"
           },
           {
@@ -18153,7 +18153,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -18243,7 +18243,7 @@
         "files": [
           {
             "path": "scout/bundles/native-08/skills/rar-kody-w-host-compat/SKILL.md",
-            "sha256": "03acd52710870692648ecbe4bd91eadc74ec7c332a57b9c6206ee502f228c210",
+            "sha256": "77de59f54c801bb668bb3a4b91d2812ff70c7ab9f1211c3d7b8424da6b107437",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-08/skills/rar-kody-w-host-compat/SKILL.md"
           },
           {
@@ -18263,7 +18263,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -18343,7 +18343,7 @@
         "files": [
           {
             "path": "scout/bundles/native-08/skills/rar-kody-w-install-rappter-distro/SKILL.md",
-            "sha256": "8af31f2d6bd141cde962d555ddc3c9a84a1e18f2b87ed223311438b3b62541e6",
+            "sha256": "76e1521914355f71cb10c76c27799226863df0d1931062b456d8bfa311aeae54",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-08/skills/rar-kody-w-install-rappter-distro/SKILL.md"
           },
           {
@@ -18363,7 +18363,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -18453,7 +18453,7 @@
         "files": [
           {
             "path": "scout/bundles/native-08/skills/rar-kody-w-journal-recall/SKILL.md",
-            "sha256": "1f5a839eaa4861b6e46612fbcd85e71c863b5edcac0f0d14ae53b6c6cc50ff66",
+            "sha256": "2dbd0cfc2db6f27916794c55481f0d72e660fdd05e748c23c051bf2681054b99",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-08/skills/rar-kody-w-journal-recall/SKILL.md"
           },
           {
@@ -18473,7 +18473,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -18562,7 +18562,7 @@
         "files": [
           {
             "path": "scout/bundles/native-08/skills/rar-kody-w-kody2day/SKILL.md",
-            "sha256": "ed3989b0844ad1657a7529a1a9efc2fbb640937577d24efa4ef2bc56ae5d9ec5",
+            "sha256": "afa534895cca80bebe3e019bf463166762ed17ad88592674ac43a59dca281f2c",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-08/skills/rar-kody-w-kody2day/SKILL.md"
           },
           {
@@ -18582,7 +18582,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -18671,7 +18671,7 @@
         "files": [
           {
             "path": "scout/bundles/native-08/skills/rar-kody-w-kody2day-studio/SKILL.md",
-            "sha256": "0ffef3a3b74f0248a1032f4d0e5f98ddb541cbff305eca4b651d909fe6fd0304",
+            "sha256": "db8daa296b889f4c3522fa6c59749149177eed836712ff8199030d0f3a080e55",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-08/skills/rar-kody-w-kody2day-studio/SKILL.md"
           },
           {
@@ -18691,7 +18691,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -18781,7 +18781,7 @@
         "files": [
           {
             "path": "scout/bundles/native-08/skills/rar-kody-w-launch-to-public/SKILL.md",
-            "sha256": "e8ca01f49f50c042e93ff0bd8e20ca1122c9df55caded08aa82c4c8eb9882ba1",
+            "sha256": "7dfe0480f0b66fc4c6ab0a71121b1014bdeb431f186029148fe8caf21bca3e0f",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-08/skills/rar-kody-w-launch-to-public/SKILL.md"
           },
           {
@@ -18801,7 +18801,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -18879,7 +18879,7 @@
         "files": [
           {
             "path": "scout/bundles/native-08/skills/rar-kody-w-manage-memory/SKILL.md",
-            "sha256": "630bad485d3a2daab6b953a8f60aa23bd0e0379278be551f1856eb9042e43dfb",
+            "sha256": "8e98a08b0e1a4b59838581820ea56ccbbf29206088d3df089b99f6074c9b1ad5",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-08/skills/rar-kody-w-manage-memory/SKILL.md"
           },
           {
@@ -18899,7 +18899,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -18989,7 +18989,7 @@
         "files": [
           {
             "path": "scout/bundles/native-09/skills/rar-kody-w-matrix-arena/SKILL.md",
-            "sha256": "05650f0d591d0e4200e045760416b5ecb34fcd7880e9a47e0bdda9ab9b4b0004",
+            "sha256": "0e6439634f4cece2ec003b4fbbe9ef4e1362ae90855c5274ed00c5db088321da",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-09/skills/rar-kody-w-matrix-arena/SKILL.md"
           },
           {
@@ -19009,7 +19009,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -19099,7 +19099,7 @@
         "files": [
           {
             "path": "scout/bundles/native-09/skills/rar-kody-w-microsoft-deck-studio/SKILL.md",
-            "sha256": "0d481fa3d70f47320e564dbbc64fab67309ef92af970cec3698a5b4f6f1ec5b4",
+            "sha256": "ff8a1f4a19574c456be30ffb6c6624f47c85c691ddfb86d539af7af04c9d84c7",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-09/skills/rar-kody-w-microsoft-deck-studio/SKILL.md"
           },
           {
@@ -19119,7 +19119,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -19209,7 +19209,7 @@
         "files": [
           {
             "path": "scout/bundles/native-09/skills/rar-kody-w-neuron-swarm/SKILL.md",
-            "sha256": "b5c792fb641d6a422f53483bbf6e481566179e6aa78919293cbe24e20068e9cc",
+            "sha256": "fc97dd708cbd3d864e1ab090fb382eb437ca4d345064f2ebaf8351137854625a",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-09/skills/rar-kody-w-neuron-swarm/SKILL.md"
           },
           {
@@ -19229,7 +19229,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -19309,7 +19309,7 @@
         "files": [
           {
             "path": "scout/bundles/native-09/skills/rar-kody-w-parallel-dimensions/SKILL.md",
-            "sha256": "4c8dff8478d1fbf1be9c5b4d6000e5fd8ca8fcd0ebea3a32f75b25a9f65acf70",
+            "sha256": "145f18e101bbdab818adcdf8d1f711da50e4fc05c9f6a264a3278b56e413c539",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-09/skills/rar-kody-w-parallel-dimensions/SKILL.md"
           },
           {
@@ -19329,7 +19329,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -19411,7 +19411,7 @@
         "files": [
           {
             "path": "scout/bundles/native-09/skills/rar-kody-w-perpetual-loop-factory/SKILL.md",
-            "sha256": "a5975f46bc775d8602ede00c49814972448f438c8bc58147879842f44a85ab3a",
+            "sha256": "6cf945e9594c91886a2ec571f8a626fa88907c76e0afeeba2085022acad66cfb",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-09/skills/rar-kody-w-perpetual-loop-factory/SKILL.md"
           },
           {
@@ -19431,7 +19431,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -19521,7 +19521,7 @@
         "files": [
           {
             "path": "scout/bundles/native-09/skills/rar-kody-w-plant-seed/SKILL.md",
-            "sha256": "e8051259358de05b208bcf657b523232cea102f14b7738e0bed54fc240fa94b2",
+            "sha256": "2bf3467b2f0d3f52bff5f5019b740d874dee9c117ad66e6459d64a9b6388dc85",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-09/skills/rar-kody-w-plant-seed/SKILL.md"
           },
           {
@@ -19541,7 +19541,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -19631,7 +19631,7 @@
         "files": [
           {
             "path": "scout/bundles/native-09/skills/rar-kody-w-play-youtube-video/SKILL.md",
-            "sha256": "c087e96bdeae4991fb35c0249fe7b0e74d7b52e3ce1b4d4af3c3b23c86b50957",
+            "sha256": "29b5a529cd3769632b5f36f922167db7f4a883c00bfbffc848a2a93a8f75430d",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-09/skills/rar-kody-w-play-youtube-video/SKILL.md"
           },
           {
@@ -19651,7 +19651,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -19741,7 +19741,7 @@
         "files": [
           {
             "path": "scout/bundles/native-09/skills/rar-kody-w-power-apps-code-app/SKILL.md",
-            "sha256": "eda97bfef5a93a88cd0ec88d429b8da58d5d213b1fbeb7e26821eb2f5273af7d",
+            "sha256": "76c707c746fdade2e114104959ae8792752ca5494e1be69ed4f9ffc17cc8365c",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-09/skills/rar-kody-w-power-apps-code-app/SKILL.md"
           },
           {
@@ -19761,7 +19761,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -19851,7 +19851,7 @@
         "files": [
           {
             "path": "scout/bundles/native-10/skills/rar-kody-w-predictive-asset-maintenance-intelligence/SKILL.md",
-            "sha256": "258e0bd3cda7b1ebf80787a0e99fbef817049ab89e776fcd8fe3e83549a9702e",
+            "sha256": "91f325f91a5d3d7293e63e1d20b32fc11eeb1eb20c4e13da8c4c22e3b1ab840d",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-10/skills/rar-kody-w-predictive-asset-maintenance-intelligence/SKILL.md"
           },
           {
@@ -19871,7 +19871,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -19961,7 +19961,7 @@
         "files": [
           {
             "path": "scout/bundles/native-10/skills/rar-kody-w-project-tracker/SKILL.md",
-            "sha256": "bff6661b56a5ae4f8ca235b4ee816200b3f005c57381eba9efd94d6b53e6b245",
+            "sha256": "3393849e10e7993482f9bd7eaf5f6aa60141ce4611ce7617eaade20cbbff2312",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-10/skills/rar-kody-w-project-tracker/SKILL.md"
           },
           {
@@ -19981,7 +19981,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -20071,7 +20071,7 @@
         "files": [
           {
             "path": "scout/bundles/native-10/skills/rar-kody-w-prompt-extractor/SKILL.md",
-            "sha256": "e257ef87bbfcd25f0e7528a08c0b917c917fde25cee2be0f5f62bee601ae805b",
+            "sha256": "4b9c0fb1c6956f54bd32a1e13eb73bf89b921083d2ffb5feb9464e8477831f90",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-10/skills/rar-kody-w-prompt-extractor/SKILL.md"
           },
           {
@@ -20091,7 +20091,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -20178,7 +20178,7 @@
         "files": [
           {
             "path": "scout/bundles/native-10/skills/rar-kody-w-prototype-lock-factory/SKILL.md",
-            "sha256": "092ed73a0b83954ad82fd3b1867aaca0f085be5a6985c1e8b4bc00fd3bf4d8c6",
+            "sha256": "1b79cd98f3cc566570e546127b3659056a8f19caa7c11af87550239efcf2b86c",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-10/skills/rar-kody-w-prototype-lock-factory/SKILL.md"
           },
           {
@@ -20198,7 +20198,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -20270,7 +20270,7 @@
         "files": [
           {
             "path": "scout/bundles/native-10/skills/rar-kody-w-rapp-leviathan-factory/SKILL.md",
-            "sha256": "a88016471656d025e2e97e1ea096e07196a15574c82164ae83be2ba160c73f1f",
+            "sha256": "396072b31c3c9aaaae67c5e2f5bf8baa174f8994da713d99dd9d55ea50988659",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-10/skills/rar-kody-w-rapp-leviathan-factory/SKILL.md"
           },
           {
@@ -20290,7 +20290,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -20367,7 +20367,7 @@
         "files": [
           {
             "path": "scout/bundles/native-10/skills/rar-kody-w-rapp-projects/SKILL.md",
-            "sha256": "c57c8335458afd3b86c2a5ea4a426759be272a850cce31d7de0655c034e2a321",
+            "sha256": "0ba87682c8f27063a5f3adfb3dc77fd53a172bb18c58a99fc7e487462b25a1bd",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-10/skills/rar-kody-w-rapp-projects/SKILL.md"
           },
           {
@@ -20387,7 +20387,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -20474,7 +20474,7 @@
         "files": [
           {
             "path": "scout/bundles/native-10/skills/rar-kody-w-rapp-sdk-builder/SKILL.md",
-            "sha256": "20959e5795b16f5fd6207666bd86d04daffbde4793b98176e307a6a3858ab0ee",
+            "sha256": "ac8c69c90278de75da4748f054eede03b20f9123da71ae3b7a9c6983c858fb15",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-10/skills/rar-kody-w-rapp-sdk-builder/SKILL.md"
           },
           {
@@ -20494,7 +20494,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -20584,7 +20584,7 @@
         "files": [
           {
             "path": "scout/bundles/native-10/skills/rar-kody-w-rapp-sentinel/SKILL.md",
-            "sha256": "255eb4c146ae637a91336136b396eab38f6634392514262728e10f5c3bd71356",
+            "sha256": "1577a1fcaec78f5fa6dc823e4d5af93b47443ef57548895c15083a0b42cf64ac",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-10/skills/rar-kody-w-rapp-sentinel/SKILL.md"
           },
           {
@@ -20604,7 +20604,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -20694,7 +20694,7 @@
         "files": [
           {
             "path": "scout/bundles/native-11/skills/rar-kody-w-rapp-skill-bridge/SKILL.md",
-            "sha256": "40454f4c1cfb084a095364aa53d0bb91029d6568268000ebb82b09d68f15b82d",
+            "sha256": "8db317e93067baa023813b9cb6bb66f35d0b3520be99072c3de5e26ea1eac429",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-11/skills/rar-kody-w-rapp-skill-bridge/SKILL.md"
           },
           {
@@ -20714,7 +20714,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -20784,7 +20784,7 @@
         "files": [
           {
             "path": "scout/bundles/native-11/skills/rar-kody-w-rapp-x-notary-canary/SKILL.md",
-            "sha256": "c8f0db271d1ecc8e45b133c0255451b1cfe14e58e7015e66e1121c8aa332fb28",
+            "sha256": "281b658dd67df67ebcdf79c6c9be6222eb0e92ec7cc1ef2aeab15a77d93d2fa5",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-11/skills/rar-kody-w-rapp-x-notary-canary/SKILL.md"
           },
           {
@@ -20804,7 +20804,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -20885,7 +20885,7 @@
         "files": [
           {
             "path": "scout/bundles/native-11/skills/rar-kody-w-rappter-engine/SKILL.md",
-            "sha256": "57c871a65e551b6779b8a0feb6c1036f76a95046e503b52c15e77257ad002ff3",
+            "sha256": "77f15ef68bade5c7c013da477e69c2c343a6f657d44de4987a8dd25170713d4e",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-11/skills/rar-kody-w-rappter-engine/SKILL.md"
           },
           {
@@ -20905,7 +20905,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -20980,7 +20980,7 @@
         "files": [
           {
             "path": "scout/bundles/native-11/skills/rar-kody-w-rappterbook/SKILL.md",
-            "sha256": "f93bb148f50ad6f4e4997d569b33b3f81672dfe4345fb0432df9ea644aebd7db",
+            "sha256": "6023386745d0d4cfb7ba125e97d3cdfe440c3930e2fd224fe45db44a29a740a3",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-11/skills/rar-kody-w-rappterbook/SKILL.md"
           },
           {
@@ -21000,7 +21000,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -21075,7 +21075,7 @@
         "files": [
           {
             "path": "scout/bundles/native-11/skills/rar-kody-w-rappterpedia/SKILL.md",
-            "sha256": "e2cf507969eab0268083cede41ddc2ff9bb391ecb9322837c2a88edac6bd1410",
+            "sha256": "dc2d088d170b680192620e92c4cb972174924c4f51f205d84a1a0281eb65b890",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-11/skills/rar-kody-w-rappterpedia/SKILL.md"
           },
           {
@@ -21095,7 +21095,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -21185,7 +21185,7 @@
         "files": [
           {
             "path": "scout/bundles/native-11/skills/rar-kody-w-rar-installer-troubleshooter/SKILL.md",
-            "sha256": "f1e8445303d071b8a401166696906cd5cc2c7c9eb434e6a6fec2e0399f836db4",
+            "sha256": "34ccc3e019c9ba12009c85163f610170a56347802643531c9cef3e39aa6fcfb6",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-11/skills/rar-kody-w-rar-installer-troubleshooter/SKILL.md"
           },
           {
@@ -21205,7 +21205,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -21295,7 +21295,7 @@
         "files": [
           {
             "path": "scout/bundles/native-11/skills/rar-kody-w-rar-remote/SKILL.md",
-            "sha256": "e8ec6697d6a0fb2e762e86fa202fa1d48bf8ecc4008807b8683e6d638ebf7226",
+            "sha256": "33ffca1dd57af55dc3c0928340930b271fa3fa6d89a1d8ce521edb5b3acd5eda",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-11/skills/rar-kody-w-rar-remote/SKILL.md"
           },
           {
@@ -21315,7 +21315,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -21393,7 +21393,7 @@
         "files": [
           {
             "path": "scout/bundles/native-11/skills/rar-kody-w-recon-deck/SKILL.md",
-            "sha256": "a27f5534277ad65e18c255aceb802db1753ad363d660bae02b80546ccdd503c9",
+            "sha256": "467d0b1bb85de28df78d1129ec5ec54d409c8b8b74b10b78c455b433d164d146",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-11/skills/rar-kody-w-recon-deck/SKILL.md"
           },
           {
@@ -21413,7 +21413,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -21503,7 +21503,7 @@
         "files": [
           {
             "path": "scout/bundles/native-12/skills/rar-kody-w-second-life/SKILL.md",
-            "sha256": "a939e07863d69eb9a82aad96eb38c394e217bbc51775a2ee538a1b6f2866353a",
+            "sha256": "09df63ca1d1419fafb73a6f71e39b11a30b3381fa673e7c5fd309a44c41e8ea7",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-kody-w-second-life/SKILL.md"
           },
           {
@@ -21523,7 +21523,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -21613,7 +21613,7 @@
         "files": [
           {
             "path": "scout/bundles/native-12/skills/rar-kody-w-self-compact/SKILL.md",
-            "sha256": "1b3bf8f42c71810925f1290cb96a413fa943da406e8179efe7cdf883e7ab2fed",
+            "sha256": "cd8ee477ea5d7fc7833917ce08ee2b52780610668bb49453875a3121a092aa2c",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-kody-w-self-compact/SKILL.md"
           },
           {
@@ -21633,7 +21633,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -21723,7 +21723,7 @@
         "files": [
           {
             "path": "scout/bundles/native-12/skills/rar-kody-w-skill-toaster/SKILL.md",
-            "sha256": "88aecc3608b7a32f55a204e62e611ddc88fdaf7eca3274dfaf89c8a6f9e6eb41",
+            "sha256": "39102840b30070747ceff5be9897478c1eee5748907a90edc06258d9463ecd02",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-kody-w-skill-toaster/SKILL.md"
           },
           {
@@ -21743,7 +21743,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -21833,7 +21833,7 @@
         "files": [
           {
             "path": "scout/bundles/native-12/skills/rar-kody-w-source-capture/SKILL.md",
-            "sha256": "4cf188636533b663d35ef3bfe1b482d48eb475223253bd9b8e4b41b1b7bc260b",
+            "sha256": "a334e01ca0e588f1ee000a50631557273af3d9cc57e6505ed3a2b725f524e361",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-kody-w-source-capture/SKILL.md"
           },
           {
@@ -21853,7 +21853,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -21933,7 +21933,7 @@
         "files": [
           {
             "path": "scout/bundles/native-12/skills/rar-kody-w-thread-tracker/SKILL.md",
-            "sha256": "724d681fdbab0ba15619f4514f173ddb1e32e74b5d458d8de1a014041fb4a42a",
+            "sha256": "6b0b0cbff2acdaad663f1558c3aeb686a337c2cf8446bf4d9caaedf0cf97c269",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-kody-w-thread-tracker/SKILL.md"
           },
           {
@@ -21953,7 +21953,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -22032,7 +22032,7 @@
         "files": [
           {
             "path": "scout/bundles/native-12/skills/rar-kody-w-transcript2prototype/SKILL.md",
-            "sha256": "8d1aa5d8e14c4d1e7d8a40874a25e2b5099106fc94f1b0e3aa9de13d088a09e6",
+            "sha256": "3bf028264fcc6bb0a22e5c7eff6350cf99231ee5e6ab1b0115544e3888026b56",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-kody-w-transcript2prototype/SKILL.md"
           },
           {
@@ -22052,7 +22052,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -22142,7 +22142,7 @@
         "files": [
           {
             "path": "scout/bundles/native-12/skills/rar-kody-w-twin-egg-hatcher/SKILL.md",
-            "sha256": "87d0cc3a4eae9329170b2b4a84aa1f809646aff37cbbf57044e904db22489d36",
+            "sha256": "2d79ffaf749e0505bed34a271b3054f034d89075fad54e226652743cf0e34daa",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-kody-w-twin-egg-hatcher/SKILL.md"
           },
           {
@@ -22162,7 +22162,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -22252,7 +22252,7 @@
         "files": [
           {
             "path": "scout/bundles/native-12/skills/rar-kody-w-twin-me/SKILL.md",
-            "sha256": "bd43f97834a688be31a2f8ebadf4f8318db3e19685fe5c9a4323941bcf0450f4",
+            "sha256": "527857586ca86d0ff5b537afa4d9c378ee4d43ac4455ca6394a093c1701dfaec",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-12/skills/rar-kody-w-twin-me/SKILL.md"
           },
           {
@@ -22272,7 +22272,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -22357,7 +22357,7 @@
         "files": [
           {
             "path": "scout/bundles/native-13/skills/rar-kody-w-vibe-coding-loop/SKILL.md",
-            "sha256": "6a2d4bc89fa068f237f9aaadf6d6677a04ec504f9f7b568e126a89a8198ec07d",
+            "sha256": "84382226b555f1beb396c067fe2331b3f7d477d4e3132ba2d688d8f7e2ffcffe",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-kody-w-vibe-coding-loop/SKILL.md"
           },
           {
@@ -22377,7 +22377,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -22457,7 +22457,7 @@
         "files": [
           {
             "path": "scout/bundles/native-13/skills/rar-kody-w-windows-vm-install-lab/SKILL.md",
-            "sha256": "ee3781d7c8cce3274f4ebe0af048c46530feb32186d6230eb0753664207a4bea",
+            "sha256": "fa8f77910c314bfe1b91766493ac0966b1614f6fe571e670a3c90d44994fe9d3",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-kody-w-windows-vm-install-lab/SKILL.md"
           },
           {
@@ -22477,7 +22477,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -22567,7 +22567,7 @@
         "files": [
           {
             "path": "scout/bundles/native-13/skills/rar-kody-w-workiq/SKILL.md",
-            "sha256": "e91beef37a5f97830cb385ddf5cd02d8225539c1e74d13d2df3b32b65477bb56",
+            "sha256": "f912b1cea5329b8ad1a29100a34681f38d291a06d3dd9beed559a46367ed0ae5",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-kody-w-workiq/SKILL.md"
           },
           {
@@ -22587,7 +22587,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -22677,7 +22677,7 @@
         "files": [
           {
             "path": "scout/bundles/native-13/skills/rar-kody-w-wp-publish/SKILL.md",
-            "sha256": "c2ac57e23043cd8d5071268908693ff40b5ce93886d87e5d6369e986eeb6991d",
+            "sha256": "a285c9a28e5dd7f56c1ee1592173cbee7da619762e53590014ecb7fb45cf3adb",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-kody-w-wp-publish/SKILL.md"
           },
           {
@@ -22697,7 +22697,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -22771,7 +22771,7 @@
         "files": [
           {
             "path": "scout/bundles/native-13/skills/rar-rapp-commons-post/SKILL.md",
-            "sha256": "a564faf53d7412dce179ea17d4fc6258cb0a081c7d4b948e3c25ead8a3c92e3c",
+            "sha256": "f567fb4826e0d95a8c5951101779e984514d54099e9889c7f9868fd48300a4ee",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-commons-post/SKILL.md"
           },
           {
@@ -22791,7 +22791,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -22869,7 +22869,7 @@
         "files": [
           {
             "path": "scout/bundles/native-13/skills/rar-rapp-drift/SKILL.md",
-            "sha256": "fd5c9fbb59ff64fb3494bc12e66631c017321ccb5e17cd47a450ddc9798c67ca",
+            "sha256": "0a10e42081cd81a1b88015a1bfc3dd60ce80b6e7b70603fddf9cf29bae15b278",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-drift/SKILL.md"
           },
           {
@@ -22889,7 +22889,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -22975,7 +22975,7 @@
         "files": [
           {
             "path": "scout/bundles/native-13/skills/rar-rapp-drift-watcher/SKILL.md",
-            "sha256": "95a6956af20c4de8374aff35d0940a5b4995d712ba8664276caf995946bbe9af",
+            "sha256": "ac1f831c64e6924c616cec4e21f0190b11b288d5f1d3ba061724faf3abedf659",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-drift-watcher/SKILL.md"
           },
           {
@@ -22995,7 +22995,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -23085,7 +23085,7 @@
         "files": [
           {
             "path": "scout/bundles/native-13/skills/rar-rapp-egg-hatcher/SKILL.md",
-            "sha256": "2d51d61d24a6ed03b06dd0ee5d2a707c4f62f25c641791dd516c425b4c467029",
+            "sha256": "9e38a493f12d37f8a2c4f41ece5273d11e047004817c6321e08b35feddf21c5a",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-egg-hatcher/SKILL.md"
           },
           {
@@ -23105,7 +23105,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -23191,7 +23191,7 @@
         "files": [
           {
             "path": "scout/bundles/native-14/skills/rar-rapp-estate-outbound/SKILL.md",
-            "sha256": "e070d411e85b70b3ebfc81e8aa5047d635775cfd3458417fb062058bbee6c94e",
+            "sha256": "4561a5d5cd579ff303e6605b5f58092cc470af8a4b1f3b9886cd867d07625cd2",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-estate-outbound/SKILL.md"
           },
           {
@@ -23211,7 +23211,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -23301,7 +23301,7 @@
         "files": [
           {
             "path": "scout/bundles/native-14/skills/rar-rapp-exec-brief/SKILL.md",
-            "sha256": "582135e542c5c511c7be9f734c1f7c94421f619e27a3100603646146225358d6",
+            "sha256": "aa581a0ca179abb6ed0273c0f3eaa02a354420d45a644b39badbbd1a2c28158d",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-exec-brief/SKILL.md"
           },
           {
@@ -23321,7 +23321,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -23401,7 +23401,7 @@
         "files": [
           {
             "path": "scout/bundles/native-14/skills/rar-rapp-fleet-commander/SKILL.md",
-            "sha256": "2c0b20165f30dc49e63d48b969fb21c50b47a496368182711e4e13dec18dffc6",
+            "sha256": "80cbc33e0373845f84ad3a2cb2a4fcd8929875bf05cc6bb3a161c0781e3e91ce",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-fleet-commander/SKILL.md"
           },
           {
@@ -23421,7 +23421,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -23511,7 +23511,7 @@
         "files": [
           {
             "path": "scout/bundles/native-14/skills/rar-rapp-forge-provenance/SKILL.md",
-            "sha256": "71564d9a2392bf457b740d372bd1af24d438c284cbfa8a27953bf0a16ba59a3f",
+            "sha256": "4e4d3fa8d781c948ab4efc6dc12c03184c4742f3216297e429f5562bb5d2160a",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-forge-provenance/SKILL.md"
           },
           {
@@ -23531,7 +23531,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -23615,7 +23615,7 @@
         "files": [
           {
             "path": "scout/bundles/native-14/skills/rar-rapp-hacker-news/SKILL.md",
-            "sha256": "8274881e94068abc7d50ff0eadd98b852724a80cd0e936dc600dbaf61e8f145c",
+            "sha256": "e727cf964288e0189a73f459e409b6a9fb127b89c8d7048167e958f5e59715a3",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-hacker-news/SKILL.md"
           },
           {
@@ -23635,7 +23635,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -23725,7 +23725,7 @@
         "files": [
           {
             "path": "scout/bundles/native-14/skills/rar-rapp-learn-new/SKILL.md",
-            "sha256": "f409c4d44936a4dbf73a592344036d6f6a545d6020c4bf9a3f8d661249605d35",
+            "sha256": "10ab27c0a32bae2ca35869df739fb7c07ea660b5950fc58ca27afdf7567f8a2b",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-learn-new/SKILL.md"
           },
           {
@@ -23745,7 +23745,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -23835,7 +23835,7 @@
         "files": [
           {
             "path": "scout/bundles/native-14/skills/rar-rapp-moment-factory/SKILL.md",
-            "sha256": "21691268dbfcef2ce587cced809ed052534a56281e5c8a3e74689a4866a9c6e6",
+            "sha256": "6336fce419d3061ef2f263c38acdb9a65bbfa8a0bf6bdbe40f8d71d0e633e88f",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-moment-factory/SKILL.md"
           },
           {
@@ -23855,7 +23855,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -23924,7 +23924,7 @@
         "files": [
           {
             "path": "scout/bundles/native-14/skills/rar-rapp-ping/SKILL.md",
-            "sha256": "1b7932c8678c356f8395229baed3c3bfba7a41db6b0238ddf64d28e58abdc00e",
+            "sha256": "6ef69f4209b6968fa11bf1958ef79fd4730719902e6e02c6ffa3adb07faf0796",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-14/skills/rar-rapp-ping/SKILL.md"
           },
           {
@@ -23944,7 +23944,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -24034,7 +24034,7 @@
         "files": [
           {
             "path": "scout/bundles/native-15/skills/rar-rapp-pitch-deck/SKILL.md",
-            "sha256": "c1f1d518f09976045b6a83b609a24d10ca8f7d8c25d7ff8c88ceb0e17e77b58b",
+            "sha256": "5ef50fd98c5b2637e40a310f66008137eafe311941638d4aac9b64b0f17f3a7d",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-pitch-deck/SKILL.md"
           },
           {
@@ -24054,7 +24054,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -24144,7 +24144,7 @@
         "files": [
           {
             "path": "scout/bundles/native-15/skills/rar-rapp-rapp/SKILL.md",
-            "sha256": "950df0a0f0ae16d34e931028a6b3a61698a021a26b4e06756c19b7738408c29a",
+            "sha256": "ef4da8aec5223844049f46498939730e7ecb374a8d2cde9764c2368db6e95703",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-rapp/SKILL.md"
           },
           {
@@ -24164,7 +24164,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -24254,7 +24254,7 @@
         "files": [
           {
             "path": "scout/bundles/native-15/skills/rar-rapp-rapp-dogg/SKILL.md",
-            "sha256": "b33814c8a8bc98f53af10db7d1d2d8be326a48545ddebaeaaa074dfe05042471",
+            "sha256": "0ec1ce80ad70afbb52baeb54d35316fbbcdcbd616899f367d3ac45cab5baa526",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-rapp-dogg/SKILL.md"
           },
           {
@@ -24274,7 +24274,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -24364,7 +24364,7 @@
         "files": [
           {
             "path": "scout/bundles/native-15/skills/rar-rapp-rapp-publish/SKILL.md",
-            "sha256": "a76b4c3014028b622172629d4f7ceb4c6fb5759f0e5e72895346bfd575da3950",
+            "sha256": "474ccfeecb89c35e57333c9aeb128bc39aea5954573e14a779622012b09baff0",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-rapp-publish/SKILL.md"
           },
           {
@@ -24384,7 +24384,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -24474,7 +24474,7 @@
         "files": [
           {
             "path": "scout/bundles/native-15/skills/rar-rapp-rapplication/SKILL.md",
-            "sha256": "4339f1e14ba5c3a6ff12d0a698169b5223b1d965a3d291df6d83f1b1165551b6",
+            "sha256": "a4114e2d5fe8971bd8dc04c815c6c85702b9f905494b83279d96cfa08e178ee2",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-rapplication/SKILL.md"
           },
           {
@@ -24494,7 +24494,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -24578,7 +24578,7 @@
         "files": [
           {
             "path": "scout/bundles/native-15/skills/rar-rapp-rar-steward/SKILL.md",
-            "sha256": "704cec7577fa685a76f92e5c1196db9e82f7f759fa6cdf2b0b2431d2af08c94c",
+            "sha256": "3756a6eda7508b0e1a462543e06da7be0159f302026764aa2cc3a92acda56b79",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-rar-steward/SKILL.md"
           },
           {
@@ -24598,7 +24598,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -24688,7 +24688,7 @@
         "files": [
           {
             "path": "scout/bundles/native-15/skills/rar-rapp-store-navigator/SKILL.md",
-            "sha256": "01c0f03f3d8dfeddafa71f278ed193bccd031af5a31f474ac89d53c8d4e15691",
+            "sha256": "1ea66ee27a4f19992ec605c7cf592a8b05ed0359bd773c5e54411353930a8bb0",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-store-navigator/SKILL.md"
           },
           {
@@ -24708,7 +24708,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -24798,7 +24798,7 @@
         "files": [
           {
             "path": "scout/bundles/native-15/skills/rar-rapp-swarm-factory/SKILL.md",
-            "sha256": "c655207fe8a4002d1e781bfceac715c46f1518267d277ed16e25ea958fab7e0a",
+            "sha256": "480905b0ad9f98cac95caf1b81052791f9f2d475b92cee7238c468bc8e291da3",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-swarm-factory/SKILL.md"
           },
           {
@@ -24818,7 +24818,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -24898,7 +24898,7 @@
         "files": [
           {
             "path": "scout/bundles/native-16/skills/rar-rapp-twin/SKILL.md",
-            "sha256": "8bc10f6ae34981f930dda6a7c37eff091c8c5cf4318f6c23a841b9aa904c5bf0",
+            "sha256": "fe7ebdc4973d1fe724dde0724720c7d7d0a18e50c096d4786f61a255ae97c7b4",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-16/skills/rar-rapp-twin/SKILL.md"
           },
           {
@@ -24918,7 +24918,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -25008,7 +25008,7 @@
         "files": [
           {
             "path": "scout/bundles/native-16/skills/rar-rapp-vibe-builder/SKILL.md",
-            "sha256": "e91bcf760d9964ab49740a7604ddf66df176a160224232cf35f8ace1054adbc1",
+            "sha256": "2cbf57588a08eb5ef5f2e9473562138266d30bbf9350cbb5b5a73fec3f4df213",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-16/skills/rar-rapp-vibe-builder/SKILL.md"
           },
           {
@@ -25028,7 +25028,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -25118,7 +25118,7 @@
         "files": [
           {
             "path": "scout/bundles/native-16/skills/rar-rapter-hive-census/SKILL.md",
-            "sha256": "dc054fbc78726a377c0fa890de4e1ae6dc5fe61d2c7e806ddd4a70157dd446a9",
+            "sha256": "db1ad1eb645cef160b0003a6b909986457ec51dc3adea8d243ba26bf63b33da6",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-16/skills/rar-rapter-hive-census/SKILL.md"
           },
           {
@@ -25138,7 +25138,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -25228,7 +25228,7 @@
         "files": [
           {
             "path": "scout/bundles/native-16/skills/rar-rapter-hive-shape/SKILL.md",
-            "sha256": "d38ec6828bbac91648d6748d89995be058c3f89a59b840ce56a0d1d54275c7cc",
+            "sha256": "1baad5bfa28f7ab6c0ebe9a38fb53540d2e64971d82e553fce55974b74e740af",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-16/skills/rar-rapter-hive-shape/SKILL.md"
           },
           {
@@ -25248,7 +25248,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -25338,7 +25338,7 @@
         "files": [
           {
             "path": "scout/bundles/native-16/skills/rar-rapter-rapp-dogg/SKILL.md",
-            "sha256": "106e95d061f7fb7d0de4558975c97234f9bd3462939d30ed396309c14cfe263f",
+            "sha256": "bb520cdd9630a84dccf9c780b6e1e27f80bc183a7bde9de765853af2ecb8daec",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-16/skills/rar-rapter-rapp-dogg/SKILL.md"
           },
           {
@@ -25358,7 +25358,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -25447,7 +25447,7 @@
         "files": [
           {
             "path": "scout/bundles/native-16/skills/rar-rarbookworld-bookfactory/SKILL.md",
-            "sha256": "d36ea3c38e3680570ed3b66825e1ca766de683446f1bd30cab947221e16180f7",
+            "sha256": "4a92fde5eda4a2aa706ef85b14abfaefc1ee33b296da268122329b07ec8a72b0",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-16/skills/rar-rarbookworld-bookfactory/SKILL.md"
           },
           {
@@ -25467,7 +25467,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -25557,7 +25557,7 @@
         "files": [
           {
             "path": "scout/bundles/native-16/skills/rar-rarbookworld-momentfactory/SKILL.md",
-            "sha256": "aabe64fd448823c2d4fd999032ce053a4a9f1baa6cefdf92168054335e31ac50",
+            "sha256": "f7beafc6710479ea17d6ac5a0805b6c240e778cf9a51212efc1b293277e377c4",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-16/skills/rar-rarbookworld-momentfactory/SKILL.md"
           },
           {
@@ -25577,7 +25577,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -25659,7 +25659,7 @@
         "files": [
           {
             "path": "scout/bundles/native-16/skills/rar-wildhaven-bellows/SKILL.md",
-            "sha256": "0b9f03a63c6a785e69709a0b3622f03b8eeca2ddf706bcd1174dda41920ee139",
+            "sha256": "bc41620f78e964f11c571bb6cf491c8861c3f8518f79b37c1b82644d5ebd100a",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-16/skills/rar-wildhaven-bellows/SKILL.md"
           },
           {
@@ -25679,7 +25679,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -25756,7 +25756,7 @@
         "files": [
           {
             "path": "scout/bundles/native-17/skills/rar-wildhaven-ceo/SKILL.md",
-            "sha256": "c4026dca6d1568c64917b051474f6af730291e1e8e33367448fef935a3035c37",
+            "sha256": "63140b658f93d4dc66f12e5310ebc3ae04c8cbfc6b247bbbc286e61afde6b5f5",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-17/skills/rar-wildhaven-ceo/SKILL.md"
           },
           {
@@ -25776,7 +25776,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -25861,7 +25861,7 @@
         "files": [
           {
             "path": "scout/bundles/native-17/skills/rar-wildhaven-penumbra/SKILL.md",
-            "sha256": "cb906d7244012c52fb46cb5c2a46d3099ad56cf24ab808875f1de77c9612aca8",
+            "sha256": "1485a829a078d20f7ec5ded4498be98ab5ef756d8fb3edaa1c7bebb7061a2a40",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-17/skills/rar-wildhaven-penumbra/SKILL.md"
           },
           {
@@ -25881,7 +25881,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "working-tree",
+        "input_revision": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
