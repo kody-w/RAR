@@ -1,8 +1,8 @@
 {
-  "schema": "rapp-rar-stack/1.0",
+  "schema": "rapp-rar-stack/1.2",
   "name": "summon",
   "display_name": "Summon (scan to install)",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "purpose": "Scan a RAR card's QR code with your phone and it installs into your own Brainstem. One agent starts a small sidecar beside the unchanged kernel; it listens only on this Mac and its Tailscale address, and installs through the Brainstem's own /agents/import, which checks every fingerprint.",
   "files": {
     "summon_agent.py": {
@@ -12,8 +12,8 @@
     },
     "summond.py": {
       "purpose": "The sidecar. Fetched and sha256-checked by summon_agent.py from RAR; never run unverified.",
-      "size": 23447,
-      "sha256": "b45d7c0d5ee439660e2ac2f70a65bd26828e65f7e5de1a20e9fefebfba570836"
+      "size": 26230,
+      "sha256": "6a138073c2b5dddb8cf742b84f5049437be814e3cb45222c211310b4ddf82d07"
     }
   },
   "capabilities": [

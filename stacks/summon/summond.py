@@ -265,7 +265,47 @@ def summon_distro(card, pk):
     if not all(r["ok"] for r in results):
         return {"card": card, "ok": False, "results": results}
     (seat / "pack.json").write_text(json.dumps(pk, indent=1))
+    results += seed_layers(seat, pk)
+    if not all(r["ok"] for r in results):
+        return {"card": card, "ok": False, "results": results}
     return {"card": card, "results": results, **launch(seat, name, have)}
+
+
+SUPERVISOR = Path.home() / ".brainstem" / "layers" / "grail_layers.py"
+PART_KEYS = ("id", "kind", "point", "file", "sha256", "locator")
+
+
+def seed_layers(seat, pk):
+    """A distro that lists grail layers (pack >= 1.2: install.parts + seed) gets them seeded into its OWN chain
+    under <seat>/layers, every part's bytes checked against the pack's sha256. The same supervisor that runs the
+    main Brainstem applies them in memory over the unchanged kernel and falls back to plain grail on any failure.
+    No parts, or no supervisor installed: the seat boots plain grail exactly as before."""
+    inst = pk.get("install") or {}
+    parts = inst.get("parts") or []
+    seed = inst.get("seed")
+    if seed is not None:
+        parts = [x for x in parts if x.get("id") in seed]
+    if not parts:
+        return []
+    home = seat / "layers"
+    (home / "parts").mkdir(parents=True, exist_ok=True)
+    results, seeded = [], []
+    for part in parts:
+        try:
+            part = {k: part[k] for k in PART_KEYS}
+            body = get(part["locator"], binary=True)
+            ok = hashlib.sha256(body).hexdigest() == part["sha256"]
+        except Exception as e:  # a missing key or an unreachable locator is a refusal, never a half-install
+            results.append({"file": str(part.get("id")), "ok": False, "error": str(e)[:120]}); continue
+        results.append({"file": part["id"], "ok": ok, **({} if ok else {"error": "sha mismatch"})})
+        if ok:
+            pub, nm = part["id"][1:].split("/", 1)
+            target = home / "parts" / pub / nm / part["file"]
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(body)
+            seeded.append(part)
+    (home / "parts.json").write_text(json.dumps(seeded, indent=1) + "\n")
+    return results
 
 
 def launch(seat, name, have):
@@ -277,26 +317,41 @@ def launch(seat, name, have):
            "BRAINSTEM_ALLOWED_HOSTS": ",".join(h for h in (dns, ip) if h)}
     env.pop("BRAINSTEM_LAN_MODE", None)  # the distro listens on loopback only; the gated door is its only way in
     py = brain_python() or sys.executable  # the main Brainstem's own Python has the kernel's packages
-    proc = subprocess.Popen([py, str(seat / "brainstem.py")], cwd=seat, env=env,
+    layered = (seat / "layers" / "parts.json").is_file() and SUPERVISOR.is_file()
+    if layered:  # grail + the pack's layers, applied in memory; the supervisor falls back to plain grail itself
+        env["GRAIL_LAYERS_HOME"] = str(seat / "layers")
+        cmd = [py, str(SUPERVISOR), "--kernel", str(seat / "brainstem.py"), "--port", str(port),
+               "--lab-port", str(port + 10000), "--python", py]
+    else:
+        cmd = [py, str(seat / "brainstem.py")]
+    proc = subprocess.Popen(cmd, cwd=seat, env=env,
                             stdout=open(seat / "brainstem.log", "w"), stderr=subprocess.STDOUT,
                             start_new_session=True)
-    for _ in range(300):
+    owner = None
+    for _ in range(600):  # a layered boot proves itself in the lab first: up to 2 minutes
         if proc.poll() is not None:
             raise RuntimeError(f"the distro's Brainstem exited; see {seat / 'brainstem.log'}")
-        if proc.pid in port_owners(port):
+        owner = next((p for p in port_owners(port) if p == proc.pid or _parent(p) == proc.pid), None)
+        if owner:
             break
         time.sleep(0.2)
     else:
         proc.kill(); raise RuntimeError("the distro's Brainstem did not come up in time")
     srv = forward(ip, port) if ip else None
     url = f"http://{dns}:{port}/" if ip else f"http://127.0.0.1:{port}/"
-    _live[name] = {"port": port, "pid": proc.pid, "url": url, "srv": srv}
-    (seat / "state.json").write_text(json.dumps({"port": port, "pid": proc.pid, "url": url, "kernel": have}))
+    _live[name] = {"port": port, "pid": owner, "url": url, "srv": srv}
+    (seat / "state.json").write_text(json.dumps({"port": port, "pid": owner, "url": url, "kernel": have,
+                                                 "layered": layered}))
     return {"ok": True, "chat_url": url + (f"?k={pair_key()}" if ip else ""),
             "local_url": f"http://127.0.0.1:{port}/"}
 
 
 ATTIC = DISTROS.parent / "distros-attic"
+
+
+def _parent(pid):
+    out = subprocess.run(["ps", "-o", "ppid=", "-p", str(pid)], capture_output=True, text=True).stdout.strip()
+    return int(out) if out.isdigit() else None
 
 
 def _seat_pids(seat):

@@ -1,15 +1,40 @@
 {
-  "schema": "rapp-rar-stack/1.1",
+  "schema": "rapp-rar-stack/1.2",
   "name": "judge",
   "display_name": "Regression Judge",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "purpose": "Catches regressions: record questions and answers once, then after any change replay them on the live Brainstem and a teacher grades each new answer against the original (same, better, worse, broken), with a side-by-side report.",
   "install": {
     "type": "agent_pack",
     "agents": [
       "regression_judge_agent.py"
     ],
-    "destination": "agents/"
+    "destination": "agents/",
+    "parts": [
+      {
+        "id": "@kody-w/providers",
+        "kind": "layer",
+        "point": "provider",
+        "file": "providers.py",
+        "sha256": "eec63ad97a31e4a8f3465633cc6d6050c14147554822ff943665a9ea09fc7218",
+        "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/providers.py",
+        "what": "The one provider part: Responses-API-only models (gpt-6.1-sol, gpt-6-luna) and this machine's Ollama models (ollama/<name>, tools included) in the unchanged grail. responses_models and local_models are aliases of this part (status: alias; still served, not seeded)."
+      },
+      {
+        "id": "@kody-w/journal_tap",
+        "kind": "layer",
+        "point": "transport",
+        "file": "journal_tap.py",
+        "sha256": "dd0e6f70c521721c23f73fae7bfef0cb0aea10661a6b7e87f41070ecc7ebaf1a",
+        "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/journal_tap.py",
+        "what": "Every chat turn (plain and streamed) is recorded in the Brainstem Journal on this device, by default; pause it from chat. No journal running: nothing happens."
+      }
+    ],
+    "seed": [
+      "@kody-w/journal_tap",
+      "@kody-w/providers"
+    ],
+    "parts_note": "rapp-rar-stack/1.2: this distro runs on the unchanged grail with these grail layers seeded over it (same bytes and sha256 as stacks/grail-layers; the supervisor applies them in memory, probes /chat, and falls back to plain grail). The distro's own agents install beside them."
   },
   "files": {
     "regression_judge_agent.py": {
@@ -20,5 +45,10 @@
       "size": 796,
       "sha256": "8358ea234c1069be0ff189220594a45c72beac90678338f46a047ed64137279a"
     }
+  },
+  "kernel": {
+    "sha256": "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
+    "file": "brainstem.py",
+    "version": "0.6.17"
   }
 }
