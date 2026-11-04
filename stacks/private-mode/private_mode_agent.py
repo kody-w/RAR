@@ -12,7 +12,7 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/private_mode_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Private Mode",
     "description": "Name topics (health, money, a person) that must never leave this computer; chats about them are answered by a local model or not at all.",
     "author": "kody-w",
@@ -26,6 +26,16 @@ __manifest__ = {
 FILE = os.path.join(os.environ.get("GRAIL_LAYERS_HOME") or os.path.expanduser("~/.brainstem/layers"), "private-topics.json")
 
 
+FILLER = {"my", "our", "the", "a", "an", "about", "questions", "question", "stuff", "things", "topics", "topic",
+          "anything", "related", "to", "chats", "chat", "info", "information"}
+
+
+def _clean(topic):
+    """'my money questions' -> 'money': the topic is the word that will actually appear in a chat."""
+    words = [w for w in (topic or "").lower().replace(",", " ").split() if w not in FILLER]
+    return " ".join(words).strip()
+
+
 class PrivateModeAgent(BasicAgent):
     def __init__(self):
         self.name = "PrivateMode"
@@ -36,7 +46,7 @@ class PrivateModeAgent(BasicAgent):
                             "question would stay on this computer."),
             "parameters": {"type": "object", "properties": {
                 "action": {"type": "string", "enum": ["add_topic", "remove_topic", "list", "check"]},
-                "topic": {"type": "string", "description": "a word or short phrase, e.g. 'health' or 'my divorce'"},
+                "topic": {"type": "string", "description": "ONE plain word that will appear in such chats, e.g. 'health', 'money', 'divorce'"},
                 "text": {"type": "string", "description": "for check: the question to test"}},
                 "required": ["action"]},
         }
@@ -68,15 +78,18 @@ class PrivateModeAgent(BasicAgent):
     def perform(self, action="list", topic=None, text=None, **_):
         d = self._load()
         topics = d.setdefault("topics", [])
+        fixed = [_clean(t) or t for t in topics]  # heal lists written before 1.0.1
+        if fixed != topics:
+            d["topics"] = topics = list(dict.fromkeys(fixed)); self._save(d)
         if action == "add_topic":
-            t = (topic or "").strip().lower()
+            t = _clean(topic)
             if not t:
                 return "Which topic should stay private?"
             if t not in topics:
                 topics.append(t); self._save(d)
             return f"'{t}' is private now: chats about it stay on this computer. Private topics: {', '.join(topics)}."
         if action == "remove_topic":
-            t = (topic or "").strip().lower()
+            t = _clean(topic)
             if t not in topics:
                 return f"'{t}' was not on the private list."
             topics.remove(t); self._save(d)

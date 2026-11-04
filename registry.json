@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-04T13:19:25.891889+00:00",
+  "generated_at": "2026-11-04T13:26:04.871078+00:00",
   "stats": {
     "total_agents": 225,
     "total_swarms": 2,
@@ -13964,13 +13964,13 @@
     {
       "name": "private-mode",
       "display_name": "Private Mode",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "schema": "rapp-rar-stack/1.2",
       "path": "stacks/private-mode",
       "purpose": "Name the topics that must never leave this computer (health, money, a person). Chats about them are answered by a local model, whatever model is picked; with no local model running they are refused, never sent out.",
       "files": {
         "private_mode_agent.py": {
-          "sha256": "c82f44d8bed994646097a1f31e9ab613c806902482afce5c41604d73decafdd4",
+          "sha256": "527884bf54125df5a7b33a8846d2f4dbc1d9ad8f961d83e5cb4ac330b36a7a87",
           "verified": true
         },
         "README.md": {

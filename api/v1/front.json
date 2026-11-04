@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-11-04T13:18:09Z",
+  "generated": "2026-11-04T13:26:09Z",
   "counts": {
     "native": 225,
     "aggregated": 126,
@@ -12597,7 +12597,7 @@
         "hash",
         "pin"
       ],
-      "audience": "both",
+      "audience": null,
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Ffragments_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/fragments_agent.py",
       "source": null,
@@ -13975,7 +13975,7 @@
         "search",
         "recall"
       ],
-      "audience": "both",
+      "audience": null,
       "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fjournal_recall_agent",
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/journal_recall_agent.py",
       "source": null,
