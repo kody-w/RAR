@@ -10,10 +10,12 @@ Kody's ruling (2026-11-03): one occupant per shape point, so the two provider be
   2. local_models: models running on this machine (Ollama, OLLAMA_URL default http://127.0.0.1:11434) join the
      model list as ollama/<name> and answer chat with tools, no Copilot needed for them.
 `@kody-w/responses_models` and `@kody-w/local_models` are ALIASES of this part: their files stay published and
-unchanged, new shapes use this one. Any error inside the layer -> the grail's original call.
+unchanged, new shapes use this one. Privacy-policy and local-dispatch errors refuse; they never fall back to cloud.
   3. private mode (1.1): topics the owner marked private (<layers home>/private-topics.json, managed in chat by the
      PrivateMode agent) never leave this machine. A chat whose user messages mention one is answered by a local
      Ollama model whatever model is picked; with no local model running it is refused, never sent to the cloud.
+     Matching is case-insensitive substring matching, not semantic classification. An absent policy leaves ordinary
+     routing unchanged; an unreadable, corrupt or invalid policy refuses chat until repaired.
 
 Pack: grail-layers
 Kind: layer

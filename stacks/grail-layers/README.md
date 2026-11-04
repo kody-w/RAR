@@ -20,3 +20,9 @@ then on the owner changes the shape through chat ("update my brainstem with …"
 kept as an alias for older installers.
 
 The pattern and the layer contract: https://github.com/kody-w/grail-layers
+
+The current provider refuses chat if `private-topics.json` exists but cannot be read or validated; a missing
+policy leaves ordinary routing unchanged. Private topics use case-insensitive substring matching, not semantic
+classification. Matching chats use local Ollama or refuse, and local dispatch errors never retry the cloud.
+This protection requires `providers_1_1` to be active: verify its applied label in the supervisor log and a
+private-topic refusal with Ollama stopped. A supervisor fallback to plain grail does not enforce this policy.

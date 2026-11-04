@@ -2,8 +2,8 @@
   "schema": "rapp-rar-stack/1.2",
   "name": "private-mode",
   "display_name": "Private Mode",
-  "version": "1.0.2",
-  "purpose": "Name the topics that must never leave this computer (health, money, a person). Chats about them are answered by a local model, whatever model is picked; with no local model running they are refused, never sent out.",
+  "version": "1.0.3",
+  "purpose": "Edit private topic substrings. Requires the active providers layer to route matching chats locally or refuse; unreadable or invalid policies refuse chat. The editor cannot verify host enforcement.",
   "install": {
     "type": "agent_pack",
     "agents": [
@@ -17,12 +17,12 @@
   },
   "files": {
     "private_mode_agent.py": {
-      "size": 4845,
-      "sha256": "3a4b1a0c040c1d4b97bf931233110e32ea60e916ecce66b492af2ca031b8ad2f"
+      "size": 6065,
+      "sha256": "66ad79114bf1f3426826bba084c5257df3cbcf10df0460069e46212fbd5ce0c7"
     },
     "README.md": {
-      "size": 580,
-      "sha256": "8145185df465e5e39028a8c8a318b9af03387ffbb2406cd107949cfc5875a916"
+      "size": 1037,
+      "sha256": "f007abb11d86547f6a9e80fc869c3c3bff8bfd4bc0b5760ce5423f55f84c7a93"
     }
   }
 }

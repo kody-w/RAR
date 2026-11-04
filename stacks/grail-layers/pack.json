@@ -2,7 +2,7 @@
   "schema": "rapp-rar-stack/1.2",
   "name": "grail-layers",
   "display_name": "Grail layers",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "purpose": "The one distro for everything new, on the unchanged grail. Layers applied in memory (the supervisor probes /chat and falls back to plain grail on any failure): providers (Responses-API models like gpt-6.1-sol, plus this machine's Ollama models) and journal_tap (every chat turn recorded in your Brainstem Journal). Agents: Journal Recall (find earlier conversations, pause recording) and Fragments (paste once, address by hash, pin into every chat). Use it from the llm CLI with github.com/kody-w/llm-brainstem.",
   "install": {
     "type": "grail_layers",
@@ -15,7 +15,7 @@
         "kind": "layer",
         "point": "provider",
         "file": "providers_1_1.py",
-        "sha256": "9bdf1f1924d0baa740c3ad335abe33660887634f79349c2973bd38319411fcdc",
+        "sha256": "2c1bd4d3453a2ae1259e81b51f86daeee9e4a04f68bf37d5e5a4cb5f637936b9",
         "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/providers_1_1.py",
         "proven_grail": [
           "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
@@ -137,8 +137,8 @@
   },
   "files": {
     "README.md": {
-      "size": 1772,
-      "sha256": "64a9522fd9d04fec09cd8a29c7f08342b62c782ce3da17bb68fca7edd80a8f24"
+      "size": 2319,
+      "sha256": "a62b222a7e3a372ebe9632ce3b1073f9fd156dcd122f76fc1f0382a969f89c3c"
     },
     "responses_models.py": {
       "size": 6943,
@@ -171,8 +171,8 @@
       "source": "agents/@kody-w/fragments_agent.py"
     },
     "providers_1_1.py": {
-      "size": 11518,
-      "sha256": "9bdf1f1924d0baa740c3ad335abe33660887634f79349c2973bd38319411fcdc"
+      "size": 12371,
+      "sha256": "2c1bd4d3453a2ae1259e81b51f86daeee9e4a04f68bf37d5e5a4cb5f637936b9"
     },
     "senses_and_pages.py": {
       "size": 7784,

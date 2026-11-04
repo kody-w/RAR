@@ -17,10 +17,12 @@ Kody's ruling (2026-11-03): one occupant per shape point, so the two provider be
   2. local_models: models running on this machine (Ollama, OLLAMA_URL default http://127.0.0.1:11434) join the
      model list as ollama/<name> and answer chat with tools, no Copilot needed for them.
 `@kody-w/responses_models` and `@kody-w/local_models` are ALIASES of this part: their files stay published and
-unchanged, new shapes use this one. Any error inside the layer -> the grail's original call.
+unchanged, new shapes use this one. Privacy-policy and local-dispatch errors refuse; they never fall back to cloud.
   3. private mode (1.1): topics the owner marked private (<layers home>/private-topics.json, managed in chat by the
      PrivateMode agent) never leave this machine. A chat whose user messages mention one is answered by a local
      Ollama model whatever model is picked; with no local model running it is refused, never sent to the cloud.
+     Matching is case-insensitive substring matching, not semantic classification. An absent policy leaves ordinary
+     routing unchanged; an unreadable, corrupt or invalid policy refuses chat until repaired.
 """
 import json
 import os
@@ -188,8 +190,8 @@ def _post_local(url, *a, **kw):
             headers = {k: v for k, v in (kw.get("headers") or {}).items() if k.lower() != "authorization"}
             kw2 = dict(kw, json=body, headers=headers)
             return _prev_post(OLLAMA + "/v1/chat/completions", *a, **kw2)
-    except Exception:
-        pass
+    except Exception as error:
+        return _fake(503, {"error": {"message": f"Local model dispatch failed; no cloud fallback: {error}"}})
     return _prev_post(url, *a, **kw)
 
 
@@ -204,9 +206,14 @@ def _private_topics():
     try:
         with open(PRIVATE_FILE) as f:
             d = json.load(f)
-        return [t.lower() for t in d.get("topics", []) if isinstance(t, str) and t.strip()], d.get("model")
-    except Exception:
+    except FileNotFoundError:
         return [], None
+    if not isinstance(d, dict) or not isinstance(d.get("topics"), list) or not all(
+            isinstance(t, str) and t.strip() for t in d["topics"]):
+        raise ValueError("expected an object with a topics list of non-empty strings")
+    if d.get("model") is not None and (not isinstance(d["model"], str) or not d["model"].strip()):
+        raise ValueError("model must be a non-empty string or null")
+    return [t.strip().lower() for t in d["topics"]], d.get("model")
 
 
 def _private_hit(body):
@@ -227,14 +234,14 @@ def _private_hit(body):
 
 def _post_private(url, *a, **kw):
     body = kw.get("json")
-    if not (str(url).rstrip("/").endswith("/chat/completions") and isinstance(body, dict)) \
-            or str(body.get("model", "")).startswith(PREFIX):
+    if not (str(url).rstrip("/").endswith("/chat/completions") and isinstance(body, dict)):
         return _post_local(url, *a, **kw)
     try:
         topic, model = _private_hit(body)
-    except Exception:
-        topic, model = None, None
-    if not topic:
+    except (OSError, ValueError, TypeError) as error:
+        return _fake(503, {"error": {"message":
+            f"Privacy policy error: {error}. Chat refused; repair private-topics.json before retrying."}})
+    if not topic or str(body.get("model", "")).startswith(PREFIX):
         return _post_local(url, *a, **kw)
     # Private: answer here or nowhere. No fallback to the cloud on any error from this point.
     local = [m["id"] for m in _ollama_models()]

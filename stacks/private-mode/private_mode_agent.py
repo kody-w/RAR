@@ -2,7 +2,9 @@
 
 "keep my health questions private" -> add_topic(health). From then on any chat that mentions it is answered by a
 local model (Ollama) whatever model is picked; with no local model running it is refused, never sent out. The
-routing itself lives in the providers layer (one provider part per shape); this agent only keeps the list.
+routing itself requires the active providers layer (one provider part per shape); this agent only keeps the list
+and cannot verify the host's active layers. Coverage is case-insensitive substring matching, not semantic detection.
+Unreadable or invalid policies are errors, never silently replaced with an empty list.
 """
 import json
 import os
@@ -12,9 +14,9 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/private_mode_agent",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "display_name": "Private Mode",
-    "description": "Name topics (health, money, a person) that must never leave this computer; chats about them are answered by a local model or not at all.",
+    "description": "Edit private topic substrings; requires the active providers layer to route matching chats locally or refuse. Cannot verify host enforcement.",
     "author": "kody-w",
     "tags": ["privacy", "local", "ollama", "topics"],
     "category": "privacy",
@@ -56,10 +58,14 @@ class PrivateModeAgent(BasicAgent):
         try:
             with open(FILE) as f:
                 d = json.load(f)
-            d = d if isinstance(d, dict) else {"topics": []}
-        except Exception:
+        except FileNotFoundError:
             return {"topics": []}
-        topics = d.get("topics") or []
+        if not isinstance(d, dict) or not isinstance(d.get("topics"), list) or not all(
+                isinstance(t, str) and t.strip() for t in d["topics"]):
+            raise ValueError("expected an object with a topics list of non-empty strings")
+        if d.get("model") is not None and (not isinstance(d["model"], str) or not d["model"].strip()):
+            raise ValueError("model must be a non-empty string or null")
+        topics = d["topics"]
         fixed = list(dict.fromkeys(_clean(t) or t for t in topics if isinstance(t, str)))
         if fixed != topics:  # heal lists written before 1.0.1, every turn (system_context loads it each chat)
             d["topics"] = fixed
@@ -74,7 +80,10 @@ class PrivateModeAgent(BasicAgent):
         os.replace(tmp, FILE)
 
     def system_context(self):
-        t = self._load().get("topics") or []
+        try:
+            t = self._load().get("topics") or []
+        except (OSError, ValueError) as error:
+            return f"<private_mode>Privacy policy error: {error}. Refuse chat until repaired.</private_mode>"
         if not t:
             return None
         return ("<private_mode>Topics the owner keeps on this computer only: " + ", ".join(t) +
@@ -82,6 +91,12 @@ class PrivateModeAgent(BasicAgent):
                 "</private_mode>")
 
     def perform(self, action="list", topic=None, text=None, **_):
+        try:
+            return self._perform(action, topic, text)
+        except (OSError, ValueError) as error:
+            return f"Privacy policy error: {error}. Policy not updated; repair private-topics.json before retrying."
+
+    def _perform(self, action, topic, text):
         d = self._load()
         topics = d.setdefault("topics", [])
         if action == "add_topic":
@@ -90,7 +105,8 @@ class PrivateModeAgent(BasicAgent):
                 return "Which topic should stay private?"
             if t not in topics:
                 topics.append(t); self._save(d)
-            return f"'{t}' is private now: chats about it stay on this computer. Private topics: {', '.join(topics)}."
+            return (f"Saved private topic '{t}'. Requires the active providers layer for local-only routing; "
+                    f"this editor cannot verify enforcement. Private topics: {', '.join(topics)}.")
         if action == "remove_topic":
             t = _clean(topic)
             if t not in topics:
@@ -99,6 +115,7 @@ class PrivateModeAgent(BasicAgent):
             return f"'{t}' is no longer private. Private topics: {', '.join(topics) or 'none'}."
         if action == "check":
             hit = next((t for t in topics if t in (text or "").lower()), None)
-            return (f"That mentions '{hit}', so it stays on this computer." if hit
-                    else "That mentions no private topic, so it goes to the model you picked.")
+            result = (f"That matches private substring '{hit}'." if hit
+                      else "That matches no private substring; semantic privacy is not checked.")
+            return result + " Requires the active providers layer; this editor cannot verify enforcement."
         return "Private topics: " + (", ".join(topics) if topics else "none yet. Say 'keep my health questions private'.")
