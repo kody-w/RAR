@@ -21,6 +21,14 @@ publish to it. This page is the summary; where it and a linked spec disagree, th
    never change (a fix is a new version). Identities are rappids (rapp/1 §6), never derived from names.
 5. **Nothing is deleted.** Old names get a status (current, alias of X, retiring on a date, tombstone) and every URL
    that ever worked keeps working.
+   Packs may declare `"status": "retired"` and
+   `"retired": {"since": "YYYY-MM-DD", "reason": "non-empty explanation", "replacement": "@publisher/agent or pack name"}`.
+   `replacement` may be `null`; omitting `status` means `current`. Retirement changes discovery metadata only:
+   keep the version, file bytes, hashes, seeds, ticket pages and raw URLs unchanged so exact pins still resolve.
+   `registry.json` and `api/v1/catalog.json` retain retired packs and their metadata under `stack_packs`.
+   Distros and the advanced store's installable Packs list hide them unless **Show retired (N)** is enabled;
+   collectible booster packs are separate. A starter (name `starter-*` or shelf `starter`) must not include
+   a retired pack, directly or transitively. `build_registry.py` validates this and the retirement fields in CI.
 
 ## 2. The parts you can ship (all in RAR, the one store: https://kody-w.github.io/RAR/)
 | Part | File | Goes to | What it does |

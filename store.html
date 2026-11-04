@@ -2972,7 +2972,12 @@
       <p style="color:var(--text-dim);font-size:.88rem;max-width:540px;margin:8px auto 0">Open packs to mint unique, graded agent cards. Every card has a serial number, visual variations, and a condition score that changes over time.</p>
     </div>
 
-    <h3 style="font-size:.9rem;font-weight:700;margin-bottom:12px;color:var(--text-dim)">Available Packs</h3>
+    <h3 style="font-size:.9rem;font-weight:700;margin-bottom:12px;color:var(--text-dim)">Installable Packs</h3>
+    <label id="store-retired-toggle" hidden style="font-size:.78rem;color:var(--text-dim)">
+      <input id="store-show-retired" type="checkbox" onchange="renderInstallablePacks()"> Show retired (<span id="store-retired-count">0</span>)
+    </label>
+    <div id="installable-packs" style="display:flex;flex-wrap:wrap;gap:12px;margin:12px 0 24px"></div>
+    <h3 style="font-size:.9rem;font-weight:700;margin-bottom:12px;color:var(--text-dim)">Available Booster Packs</h3>
     <div class="pack-shelf" id="pack-shelf"></div>
 
     <div style="margin-top:32px">
@@ -3732,6 +3737,8 @@ async function init() {
     syncStackDecks(reg);
     // Build vertical packs — each vertical = a pack bundling its decks
     buildVerticalPacks(reg);
+    installablePacks = reg.stack_packs || [];
+    renderInstallablePacks();
   }
   if (v) votes = v;
   if (r) reviews = r;
@@ -8610,6 +8617,20 @@ const VERTICAL_PACK_COLORS = {
   slg_government:        { bg1: '#0a1a2a', bg2: '#0a2a3a', border: '#0284c7', accent: '#7dd3fc' },
   software_dp:           { bg1: '#0a2a1a', bg2: '#0a3a2a', border: '#22c55e', accent: '#86efac' },
 };
+
+let installablePacks = [];
+function renderInstallablePacks() {
+  const el = document.getElementById('installable-packs');
+  const retiredCount = installablePacks.filter(p => p.status === 'retired').length;
+  document.getElementById('store-retired-toggle').hidden = !retiredCount;
+  document.getElementById('store-retired-count').textContent = retiredCount;
+  const showRetired = document.getElementById('store-show-retired').checked;
+  el.innerHTML = installablePacks.filter(p => showRetired || p.status !== 'retired').map(p => {
+    const retired = p.status === 'retired';
+    const note = retired ? `Retired ${p.retired.since}: ${p.retired.reason}${p.retired.replacement ? ` Use ${p.retired.replacement} instead.` : ''}` : p.purpose;
+    return `<a href="s.html#stack=${encodeURIComponent(p.name)}" title="${esc(note).replace(/"/g, '&quot;')}">${esc(p.display_name)}${retired ? ' (retired)' : ''}</a>`;
+  }).join('');
+}
 
 function buildVerticalPacks(reg) {
   if (!reg || !reg.stacks) return;

@@ -57,7 +57,7 @@
   .pick { display: inline-flex; align-items: center; gap: 7px; font-size: 16px; margin-top: 12px; cursor: pointer; user-select: none; }
   .pick input { width: 18px; height: 18px; accent-color: #0d6efd; }
   .tile.chosen { border-color: #0d6efd; box-shadow: 0 0 0 3px rgba(13,110,253,.25); }
-  .incl { font-size: 13px; color: #6c757d; margin-top: 6px; }
+  .incl, .retirement { font-size: 13px; color: #6c757d; margin-top: 6px; }
   .shelves { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
   .shelves button { font-size: 15px; padding: 8px 14px; border-radius: 999px; border: 1px solid #ced4da; background: #fff; color: #212529; cursor: pointer; }
   .shelves button.on { background: #212529; color: #fff; border-color: #212529; }
@@ -352,7 +352,10 @@
       "<div class='brand'>RAR</div><div class='art'>" + logo(p.name) + "</div><div class='seal'>Sealed pack</div>" +
       "<div class='count'>" + n + " card" + (n === 1 ? "" : "s") + " \u00b7 1 summon card</div></div><div class='tags'><span class='pill blue'>RAR</span>" +
       "<span class='pill green'>" + (/^starter-/.test(p.name) ? "starter" : p.shelf === "app" ? "app" : p.kernel ? "distro" : "pack") + "</span>" +
+      (p.status === "retired" ? "<span class='pill gray'>retired</span>" : "") +
       (ok ? "" : "<span class='pill gray'>unverified</span>") + "</div></div>" +
+      (p.status === "retired" ? "<p class='retirement'>Retired " + esc(p.retired.since) + ": " + esc(p.retired.reason) +
+        (p.retired.replacement ? " Use " + esc(p.retired.replacement) + " instead." : "") + "</p>" : "") +
       "<label class='pick'><input type='checkbox'" + (chosen[p.name] ? " checked" : "") + "> Add to cart</label>" +
       "<div class='incl'></div>" +
       "<div class='foot'><button type='button' class='btn'>Rip it open</button></div>";
@@ -500,24 +503,35 @@
     };
   }
   document.getElementById("cartclear").onclick = function () { chosen = {}; cart(); render(); };
-  var shelf = "all";
+  var shelf = "all", showRetired = false;
+  function visiblePacks() {
+    return packs.filter(function (p) { return showRetired || p.status !== "retired"; });
+  }
   var SHELVES = [["all", "Everything"], ["starter", "Starters"], ["pack", "Packs that look after you"], ["app", "Apps"]];
   function shelfBar() {
     var bar = document.getElementById("shelves");
     if (!bar) { bar = document.createElement("div"); bar.id = "shelves"; bar.className = "shelves";
       document.getElementById("list").parentNode.insertBefore(bar, document.getElementById("list")); }
     bar.innerHTML = SHELVES.map(function (x) {
-      var n = x[0] === "all" ? packs.length : packs.filter(function (p) { return (p.shelf || "pack") === x[0]; }).length;
+      var n = x[0] === "all" ? visiblePacks().length : visiblePacks().filter(function (p) { return (p.shelf || "pack") === x[0]; }).length;
       return "<button type='button' data-s='" + x[0] + "'" + (shelf === x[0] ? " class='on' aria-pressed='true'" : " aria-pressed='false'") + ">" + x[1] + " (" + n + ")</button>";
     }).join("");
     Array.prototype.forEach.call(bar.querySelectorAll("button"), function (b) {
       b.onclick = function () { shelf = b.getAttribute("data-s"); page = 1; render(); };
     });
+    var retiredCount = packs.filter(function (p) { return p.status === "retired"; }).length;
+    if (retiredCount) {
+      var toggle = document.createElement("label");
+      toggle.className = "pick";
+      toggle.innerHTML = "<input id='show-retired' type='checkbox'" + (showRetired ? " checked" : "") + "> Show retired (" + retiredCount + ")";
+      toggle.querySelector("input").onchange = function (e) { showRetired = e.target.checked; page = 1; render(); };
+      bar.appendChild(toggle);
+    }
   }
   function render() {
     var list = document.getElementById("list"), pager = document.getElementById("pager");
     shelfBar();
-    var shown = packs.filter(function (p) { return shelf === "all" || (p.shelf || "pack") === shelf; });
+    var shown = visiblePacks().filter(function (p) { return shelf === "all" || (p.shelf || "pack") === shelf; });
     var pages = Math.max(1, Math.ceil(shown.length / PER_PAGE));
     page = Math.min(Math.max(1, page), pages);
     list.innerHTML = "";

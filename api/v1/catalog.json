@@ -1,7 +1,7 @@
 {
   "schema": "rar-catalog/1.0",
-  "description": "Every agent in RAR as a lean record. Fetch this one file to render a complete browsable catalog with no further requests, no backend, no authentication and no GitHub account.",
-  "generated": "2026-11-04T20:48:31Z",
+  "description": "Every agent in RAR as a lean record. Fetch this one file to render a complete browsable catalog with no further requests, no backend, no authentication and no GitHub account. stack_packs lists every installable pack, including retired packs with status and retirement metadata.",
+  "generated": "2026-11-04T21:13:38Z",
   "count": 226,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/catalog.json",
   "agents": [
@@ -9295,6 +9295,1068 @@
         "size_kb": 11.7,
         "added_at": "2026-05-16T12:50:07-04:00"
       }
+    }
+  ],
+  "stack_packs": [
+    {
+      "name": "agent-team",
+      "display_name": "AgentTeam",
+      "version": "0.1.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/agent-team",
+      "purpose": "The persona-routing brain of Bill Whalen's Agent Team Starter Kit, ported to a single rapplication. Given a project goal, returns the outcome frame, persona route, paste-ready GitHub issue body, and the needs-you questions the team would surface.",
+      "files": {
+        "agent_team_agent.py": {
+          "sha256": "c950b295557f7d25471aeff87b5caac9b51cf49633d9f71108c6e80d24db947f",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "ebf00177f15ce0d9fb22f5c14eaf5a9be93d15f2674d69f7fb3461d67677fd20",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "app",
+      "_seed": 3321709878707232768,
+      "_incantation": "FORGE CHISEL PANTHER BEREFT SHRIEK COMMAND BLADE"
+    },
+    {
+      "name": "bookfactory",
+      "display_name": "BookFactory",
+      "version": "0.3.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/bookfactory",
+      "purpose": "Five-persona content pipeline (Writer → Editor → CEO → Publisher → Reviewer). One call, one chapter back.",
+      "files": {
+        "bookfactory_agent.py": {
+          "sha256": "7419619b65eacd27dbfa418f391ba755b9d30fffbf084be211cfa011286b73d9",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "c832be7c8aa4b75e12f463a702208bc8c6e6a037c19221c56f17f9151b97eef7",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "app",
+      "_seed": 15167808110090788864,
+      "_incantation": "FORGE CHISEL PANTHER COBALT SCYTHE HYMN ETCH"
+    },
+    {
+      "name": "claude-workflows",
+      "display_name": "Claude Workflows",
+      "version": "1.2.0",
+      "schema": "rapp-rar-stack/1.1",
+      "status": "current",
+      "path": "stacks/claude-workflows",
+      "purpose": "Run Claude Managed Agents with dynamic multi-agent workflows from Brainstem chat: start a job from a template with a hard spending cap, watch its phases, collect its output files. WorkflowBuilder assembles new workflow templates from parts in chat; other AI ecosystems plug in as drop-in targets.",
+      "files": {
+        "claude_workflow_agent.py": {
+          "sha256": "9bfa76855567a7f740cbbf36aa01ef5972542c02801d4e5e6c5758292ddd893e",
+          "verified": true
+        },
+        "workflow_builder_agent.py": {
+          "sha256": "8fa62507e2a6470150650e2403fddd457f83221664b754ebcd4fe128fd9ef07f",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "ee647b3748ea7a246d547d1f4e3b5a3d21dc574ab1091ce7869cbff9b2fc5403",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 7100592804908253184,
+      "_incantation": "FORGE FUSE PANTHER BEREFT MARCH CREED TEMPER"
+    },
+    {
+      "name": "coe-starter-kit",
+      "display_name": "CoE Starter Kit",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/coe-starter-kit",
+      "purpose": "Bill Whalen's Agent Team (BWAT) starter kit as one rapplication. Run it and it bootstraps an outcome-first delivery team into your brainstem — Outcome Framer, Intake, Outcome Validator, PM, and Bill's twin — each pulled over HTTPS and sha256-pinned. Self-contained, stdlib-only.",
+      "files": {
+        "coe_starter_kit_agent.py": {
+          "sha256": "50a04db67238b2bedd3817fa3ab4225032fb050531671b5dde126881efac4fbe",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "c5543a295b6d0675f71f3b1ea82322f17d17b03fd861252c3b69ceaf8b27d122",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "app",
+      "_seed": 11402832094720696320,
+      "_incantation": "FORGE CHISEL PANTHER STALLION HERALD HEIRLOOM BRAND"
+    },
+    {
+      "name": "csv-surgeon",
+      "display_name": "CSV Surgeon",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/csv-surgeon",
+      "purpose": "Profile a CSV — per-column types, null rate, cardinality, min/max — or find ragged rows, duplicate and whitespace-padded headers, duplicate records, or slice rows. Stdlib only, no network.",
+      "files": {
+        "csv_surgeon_agent.py": {
+          "sha256": "4d500fd77ebdc677d2860167748f06d1280bfd10de365f759e3b0e9a682b4076",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "b9478104df1249f766474d34d6ef4baec674bfe709e13c8b4bafe787421e9891",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "app",
+      "_seed": 17329503791988350976,
+      "_incantation": "FORGE CHISEL PANTHER SANCTIFY THROW STOKE BIND"
+    },
+    {
+      "name": "fleet-management",
+      "display_name": "Fleet Management",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.0",
+      "status": "current",
+      "path": "stacks/fleet-management",
+      "purpose": "Drop-in pack that turns one brainstem into a fleet controller for a network of Mac-mini brainstems. Two files: fleet_agent.py (the SSH-driven fleet adapter — discover, authorize, exec, read, write, tail, chat any twin on any peer, mesh-exec, mesh-chat, plus brainstem-aware actions like provision_bra",
+      "files": {
+        "fleet_agent.py": {
+          "sha256": "abf5f9d78da5fa58e804f8770fb4eb8462fcf67bdd5e1ec49c107e898e07a9fa",
+          "verified": true
+        },
+        "twin_egg_hatcher_agent.py": {
+          "sha256": "300dd7302be574e2460c2ccd873c930fb9a6f07057078afbe3da114c84b23ef2",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 17440304482002819656,
+      "_incantation": "PLUME DOMINION LUSTER DINT JADE OMEN BIND"
+    },
+    {
+      "name": "grail-layers",
+      "display_name": "Grail layers",
+      "version": "1.5.2",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/grail-layers",
+      "purpose": "The one distro for everything new, on the unchanged grail. Layers applied in memory (the supervisor probes /chat and falls back to plain grail on any failure): providers (Responses-API models like gpt-6.1-sol, plus this machine's Ollama models) and journal_tap (every chat turn recorded in your Brain",
+      "files": {
+        "README.md": {
+          "sha256": "64a9522fd9d04fec09cd8a29c7f08342b62c782ce3da17bb68fca7edd80a8f24",
+          "verified": true
+        },
+        "responses_models.py": {
+          "sha256": "edb0eee0313372a3aa51c8c513694f43885d305455872b90b7c589d921db0a8d",
+          "verified": true
+        },
+        "lispy_brainstem.py": {
+          "sha256": "311e2162e397f7df5fe9262684f737178acdc0306b0a3a5b9cbd4df6b420a50b",
+          "verified": true
+        },
+        "journal_tap.py": {
+          "sha256": "1fb33db6b6dbab0bea2abe6733f941942a2eb3a5ef1a3cf3c82799f3f96863cc",
+          "verified": true
+        },
+        "local_models.py": {
+          "sha256": "ea95cdc10ce7b274ae8bb579bcb52b5a7e7164d70dc2d9dcfa7bc135ca1aef13",
+          "verified": true
+        },
+        "providers.py": {
+          "sha256": "90bb46c6b82383378e83ba8669327d02dfc1df9aab5dcca764b4d7850c657bea",
+          "verified": true
+        },
+        "journal_recall_agent.py": {
+          "sha256": "f6358978b97b93606c74b987803dfc099f42e3ff143825040616102d5f8201bf",
+          "verified": true
+        },
+        "fragments_agent.py": {
+          "sha256": "4d13906d0277d672c4b54489527e7fc8042c54ae6a32c2024fec407b0ee6d381",
+          "verified": true
+        },
+        "providers_1_1.py": {
+          "sha256": "9bdf1f1924d0baa740c3ad335abe33660887634f79349c2973bd38319411fcdc",
+          "verified": true
+        },
+        "senses_and_pages.py": {
+          "sha256": "c7af54d392156cb65bd3d6a2886f7fbf526e2edad0b09729c377ebcccefb016b",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "kernel": {
+        "sha256": "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4",
+        "file": "brainstem.py",
+        "version": "0.6.16",
+        "proven": [
+          "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
+          "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
+        ]
+      },
+      "shelf": "pack",
+      "_seed": 11298904168309211136,
+      "_incantation": "FORGE FUSE PANTHER SILL STEPPE PROPHECY BRAND"
+    },
+    {
+      "name": "inheritance",
+      "display_name": "Inheritance",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/inheritance",
+      "purpose": "Say who gets your Brainstem if something happens to you. After a silence window it hands over, signed with keys you hold; only public keys are recorded.",
+      "files": {
+        "README.md": {
+          "sha256": "40c7a3742b00a314762741d17b72ae7c0476a9b0068f2184eeeadf2f259dd75a",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 18205994896412639232,
+      "_incantation": "FORGE FORGE PANTHER KINGDOM VAULT TEMPLAR BIND"
+    },
+    {
+      "name": "json-doctor",
+      "display_name": "JSON Doctor",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/json-doctor",
+      "purpose": "Inspect, validate, diff or query JSON and JSONL without opening it. Infers shape with per-field coverage, points at the exact line and column of a syntax error, and compares two files structurally.",
+      "files": {
+        "json_doctor_agent.py": {
+          "sha256": "e532be574326b108ede0dbbd7d3c012cf275c9f2aee51793864c45546938f20e",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "03d088148d474a65448335cb4bea46102701155b97dd65d05b9210b116282f71",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "app",
+      "_seed": 13901077956484145152,
+      "_incantation": "FORGE CHISEL PANTHER ENVOY SOAK BURST STAMP"
+    },
+    {
+      "name": "judge",
+      "display_name": "Regression Judge",
+      "version": "1.2.0",
+      "schema": "rapp-rar-stack/1.1",
+      "status": "current",
+      "path": "stacks/judge",
+      "purpose": "Catches regressions: record questions and answers once, then after any change replay them on the live Brainstem and a teacher grades each new answer against the original (same, better, worse, broken), with a side-by-side report.",
+      "files": {
+        "regression_judge_agent.py": {
+          "sha256": "bd66af0633b21b789e4c9281aff1a10113a7e06dd6ae885f92a7ac41987d96de",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "8358ea234c1069be0ff189220594a45c72beac90678338f46a047ed64137279a",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 17889783379558146048,
+      "_incantation": "FORGE CHISEL PANTHER BULWARK WISE PACK BIND"
+    },
+    {
+      "name": "log-detective",
+      "display_name": "Log Detective",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/log-detective",
+      "purpose": "Summarise a log file, cluster near-identical errors into signatures by shape rather than text, build a timeline so a spike has a timestamp, or grep with context. Reads plain text and JSON-lines. Never uploads anything.",
+      "files": {
+        "log_detective_agent.py": {
+          "sha256": "5d3b06228dddc510fb3a84a30b1e3517387d52388cdf66e6879e4be9e5c7a81f",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "d5bdd371b364a36ce76cecbf26cc7962e1d7836d1313579aba8d102abf8dd370",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "app",
+      "_seed": 10267934643709812736,
+      "_incantation": "FORGE CHISEL PANTHER DIRGE PALADIN MATRIX CHISEL"
+    },
+    {
+      "name": "markdown-medic",
+      "display_name": "Markdown Medic",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/markdown-medic",
+      "purpose": "Check a markdown file or docs folder for broken relative links and images, skipped heading levels and duplicate anchors, or generate a table of contents. Never makes network calls.",
+      "files": {
+        "markdown_medic_agent.py": {
+          "sha256": "68c349d82161b59278bb31dbbafad199f23d1cabba2487c9d0d79f0dfc68882f",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "8c4aa98fda4e0b32dfd8db04c30bf9415c338d5c1f5d47be321f2567c0c26275",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "app",
+      "_seed": 18300474856845615104,
+      "_incantation": "FORGE CHISEL PANTHER HALBERD GORGE AWAKEN BIND"
+    },
+    {
+      "name": "microsoft-365-team",
+      "display_name": "Microsoft 365 Team Starter",
+      "version": "1.1.0",
+      "schema": "rapp-rar-stack/1.0",
+      "status": "current",
+      "path": "stacks/microsoft-365-team",
+      "purpose": "Drop-in pack for Microsoft Solution Engineers. Two files: factory_agent.py (plants new MS-themed neighborhoods under your GitHub handle in 4 modes: local/private/public/egg) + microsoft-365-team.egg (the canonical content — 11 agents including WorkIQ for M365 access, MS-stack-shaped Twin with field ",
+      "files": {
+        "neighborhood_factory_agent.py": {
+          "sha256": "79010b3038bca259d6e584da4e494eee71ae5b9f9140a1d8c470e6b0c36c6980",
+          "verified": true
+        },
+        "microsoft-365-team.egg": {
+          "sha256": "bd5dc14d7892800bce72ae1f8b3ff303ffd5e693f9d4da1632e9867a26d6531d",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 18165375178786217984,
+      "_incantation": "FORGE CHISEL PANTHER JOIST DEN SQUIRE BIND"
+    },
+    {
+      "name": "money-watch",
+      "display_name": "Money Watch",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/money-watch",
+      "purpose": "Read your bank and card exports on this computer only: it catches price rises, duplicate charges and renewals coming up, and tells you once. Nothing is ever sent anywhere.",
+      "files": {
+        "money_watch_agent.py": {
+          "sha256": "b0d722471a508a83448911da7cccdfc5cdb85fbe204ebcdeda2f8de5e07b2657",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "26fbd998d5b2022881e6cc8ba5d6a5482c138b6e189e2efc1e00a6ea1dea82a4",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 14569915131677908992,
+      "_incantation": "FORGE CHISEL PANTHER STANCE ARRAY SOAK STAMP"
+    },
+    {
+      "name": "moving-day",
+      "display_name": "Moving Day",
+      "version": "1.2.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/moving-day",
+      "purpose": "Your new computer becomes your old one, and another Mac can cover for this one. Pack once or keep a nightly standby copy in iCloud Drive; unpack or take over on the other Mac in one sentence. Agents, soul, memory, model, private topics and packs come along as a verified rapp/1 egg; sign-in and secre",
+      "files": {
+        "moving_day_agent.py": {
+          "sha256": "41c60f298b0fad8b73a935463ab78786606e6b068ec63fed97c550d148b15a3b",
+          "verified": true
+        },
+        "moving_page.py": {
+          "sha256": "1dfdac38b1e79337fbacf1cfec5a46d8acd843d44522f27caeaec2cb8706a4fe",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "8fb55107d1706b5b4f08668f28d404c789a742163c17e19d36ced95dd1b7adea",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 1870861920299393024,
+      "_incantation": "FORGE CHISEL PANTHER SHARD SLED BLISS ANVIL"
+    },
+    {
+      "name": "neighborhood-starter",
+      "display_name": "Neighborhood Starter Stack",
+      "version": "1.1.0",
+      "schema": "rapp-rar-stack/1.0",
+      "status": "current",
+      "path": "stacks/neighborhood-starter",
+      "purpose": "The canonical starter pack for planting a new RAPP neighborhood. Two files: factory_agent.py (drops into your local brainstem; the meta-agent that plants neighborhoods) + neighborhood-starter.egg (the template content, parameterized for the user's choices). Supports four modes: local-only on-device,",
+      "files": {
+        "neighborhood_factory_agent.py": {
+          "sha256": "79010b3038bca259d6e584da4e494eee71ae5b9f9140a1d8c470e6b0c36c6980",
+          "verified": true
+        },
+        "neighborhood-starter.egg": {
+          "sha256": "749b1caeb56e5c94b3428fc65a66dda46512694267cdaec1d311290307233851",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 6633108683007991808,
+      "_incantation": "FORGE CHISEL PANTHER KEEP ION CONSUL SMELT"
+    },
+    {
+      "name": "night-watch",
+      "display_name": "Night Watch",
+      "version": "1.1.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/night-watch",
+      "purpose": "Your Brainstem looks after its own computer (disk, its services, nightly drills) and your premium-model use against a monthly limit you set (Spend Guard; a warning, nothing is blocked). It tells you once, in one sentence, only when something needs you.",
+      "files": {
+        "night_watch_agent.py": {
+          "sha256": "3125dd6817072fc74e0373dc034cdbf37096de53b0a57215b6475a4fbf79645a",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "708ef4e975628ca342d564d8373b605d7ffcb0c1e05edd7ed6391131fc4e5fe5",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 14313598458479517696,
+      "_incantation": "FORGE CHISEL PANTHER TURRET SEAR POISE STAMP"
+    },
+    {
+      "name": "novell",
+      "display_name": "Novell",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/novell",
+      "purpose": "Adversarial pre-review. Twelve skeptic lenses roast your artifact and hand back the specific evidence that kills each objection. Run it as a pipeline gate so a draft fails in CI before a human ever reads it.",
+      "files": {
+        "novell_agent.py": {
+          "sha256": "3c49a6cb033ecdc343190e57d36476840b11af4eb7500eb5638df5f9d5fccf91",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "82f22bf71e4def9a5c5929f20ee6afc0aaf50c7b2eb54f45866884a774f2ddd8",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "app",
+      "_seed": 1651304922999693312,
+      "_incantation": "FORGE CHISEL PANTHER BLOOM REMAIN FEINT ANVIL"
+    },
+    {
+      "name": "organism-lifecycle",
+      "display_name": "Organism Lifecycle",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.0",
+      "status": "current",
+      "path": "stacks/organism-lifecycle",
+      "purpose": "Two agents that turn a vanilla brainstem into a full organism host: Twin (summon/hatch/boot/stop/list/inspect — full digital-twin lifecycle) + EggHatcher (universal .egg cartridge router that introspects manifest.schema/type and dispatches to organism / rapplication / session / neighborhood / estate",
+      "files": {
+        "twin_agent.py": {
+          "sha256": "ca59d24cc598580225532ed9cbe5932dcc37957f77325d2dfccbe78a92826460",
+          "verified": true
+        },
+        "egg_hatcher_agent.py": {
+          "sha256": "7391fce3a02e8ee274332fbd71c5850495998d2e656732837b1ef104b99aef8e",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 14843056862517018624,
+      "_incantation": "FORGE FUSE PANTHER GROOM CLANG ARISE STAMP"
+    },
+    {
+      "name": "paperwork-desk",
+      "display_name": "Paperwork Desk",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/paperwork-desk",
+      "purpose": "Drop in a lease, a policy or a warranty; it files the paper on this computer, finds every deadline (renewal, claim by, expiry) and tells you once before each one. Ask it anything about your papers later.",
+      "files": {
+        "paperwork_desk_agent.py": {
+          "sha256": "71cff5fad899ac769dd166ea550ea608af320a2d0c036c91704239a3296a4630",
+          "verified": true
+        },
+        "paperwork_page.py": {
+          "sha256": "f6ea3518969e0c9911fb4c013342a6c998143ea60b86e6aa9155e79f0c1bada5",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "8ca6558ef2fc2c1e567f9d0df488c17539af621d4f7d67baddb5e6434de1228c",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 1139286654574403584,
+      "_incantation": "FORGE CHISEL PANTHER STRIKE HEIRLOOM ORCHID FORGE"
+    },
+    {
+      "name": "pii-scout",
+      "display_name": "PII Scout",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/pii-scout",
+      "purpose": "Scan a folder for what must not be published — secrets, credential files, captured sessions, emails, home paths and any names you supply. Reports file and count, never the value.",
+      "files": {
+        "pii_scout_agent.py": {
+          "sha256": "fcdbbcc12a04f5f7aebc69d619895c2edf7872354ac03821c0665b7818683513",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "ecf3abb57c57af6debdcf72c34af05da81785118e2e03b0d861b88add11d94fb",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "app",
+      "_seed": 8835783867647401984,
+      "_incantation": "FORGE CHISEL PANTHER FRIDGE PREFECT LOST WELD"
+    },
+    {
+      "name": "private-mode",
+      "display_name": "Private Mode",
+      "version": "1.0.2",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/private-mode",
+      "purpose": "Name the topics that must never leave this computer (health, money, a person). Chats about them are answered by a local model, whatever model is picked; with no local model running they are refused, never sent out.",
+      "files": {
+        "private_mode_agent.py": {
+          "sha256": "3a4b1a0c040c1d4b97bf931233110e32ea60e916ecce66b492af2ca031b8ad2f",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "8145185df465e5e39028a8c8a318b9af03387ffbb2406cd107949cfc5875a916",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 3615053568043655168,
+      "_incantation": "FORGE CHISEL PANTHER SINGE MOTE SHADE RUNE"
+    },
+    {
+      "name": "project-tracker",
+      "display_name": "Project Tracker",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/project-tracker",
+      "purpose": "A local-first tracker for a portfolio of AI-agent projects and their MVP statements. The web UI is a 1:1 clone of the aibast-agents-library project-tracker tool; the bundled ProjectTracker agent manages the same portfolio headlessly over /chat. Both speak the tool's native projectTrackerData JSON, s",
+      "files": {
+        "project_tracker_agent.py": {
+          "sha256": "0a9452444854c420edbf73b617d392c1a63510890a663455f69d56a4e4ea0fc6",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "baa619cab351b04da83866e1bf17539eddad02e3cc99ed968732a5d41b8ce16e",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "app",
+      "_seed": 12954676483971883008,
+      "_incantation": "FORGE CHISEL PANTHER DISMISS VENOM WHIRL CAST"
+    },
+    {
+      "name": "rapp-commons",
+      "display_name": "RAPP Commons",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/rapp-commons",
+      "purpose": "A contribution app for the RAPP Commons — the stack-agnostic social network for agents. Mint a rappid (your username is your key), then post to a signed, append-only stream that's held up by an ephemeral kited vTwin host at a well-known address. No sign-up, no server, no account: the key is the acco",
+      "files": {
+        "commons_agent.py": {
+          "sha256": "039a2cb71500ed29a0d765c0bed1fdf18f97a4147f18b81e488ca759ab99f063",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "9f783b837181b9002de8aed0400048ff722441122ec002ad11ce9ed389d65ba0",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "app",
+      "_seed": 744629879340802048,
+      "_incantation": "FORGE CHISEL PANTHER BROADSWORD PANTHER CHAIN FORGE"
+    },
+    {
+      "name": "rapp-crispy",
+      "display_name": "RAPP Crispy",
+      "version": "1.5.1",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/rapp-crispy",
+      "purpose": "Native macOS 14+ meeting app with graphical record/stop/cancel, app-owned microphone permissions, explicitly named Apple AVFoundation voice processing, bundled local Whisper transcription, meeting history and audio/transcript views. Optional screen/window capture is video only. Notes stay disabled u",
+      "files": {
+        "rapp_crispy_agent.py": {
+          "sha256": "d3133031a2e4ffc3be0ed282c2df7b73ca49e46e07b259dc704539904aaefe74",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "1b1c12e835a842ae311b279e3ccf72aa94b8d499c57d06aff291c1373dfba988",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "app",
+      "_seed": 11341501868699295744,
+      "_incantation": "FORGE CHISEL PANTHER ERADICATE BARK CONJURE BRAND"
+    },
+    {
+      "name": "rapp-god-forum",
+      "display_name": "rapp-god Forum",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/rapp-god-forum",
+      "purpose": "The agentic forum for the full RAPP stack — a threaded discussion forum where people and agents talk through the whole thing end to end (brainstem, kited layer, RACon, commons, registry, agents, governance). Mirrors the RAPP Commons pattern (rapp-commons-protocol/2.0, forum profile): your rappid is ",
+      "files": {
+        "forum_agent.py": {
+          "sha256": "b5a98826f4698b0082dc1c5164af0ed4441f64be9bd2571b505f859ce8a08f04",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "9432c05451ad296fc0c69583d16656ae8b8b845cc490b2698d0cc5d2d7f60d72",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "app",
+      "_seed": 15136910703773884416,
+      "_incantation": "FORGE CHISEL PANTHER GORGE BELLOW SAGE ETCH"
+    },
+    {
+      "name": "rapp-rewind",
+      "display_name": "RAPP Rewind",
+      "version": "1.2.1",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/rapp-rewind",
+      "purpose": "Native macOS searchable screen memory with explicit Start/Pause/Stop, app-owned ScreenCaptureKit, on-device Vision OCR, and local SQLite FTS5. Capture, OCR, indexing, and search stay on this Mac; optional RAPP host integration is separate.",
+      "files": {
+        "rapp_rewind_agent.py": {
+          "sha256": "65e86577bd45dc30713a5b1ebb103ec411d0d2b0fa32721bec66425ee92ba947",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "bffee8cb6fd775efcd711175b49b71e72814ae1f4e204e222a4f67c7fef3f3b9",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "app",
+      "_seed": 13136106163231793152,
+      "_incantation": "FORGE CHISEL PANTHER BARROW FORT HEX CAST"
+    },
+    {
+      "name": "rapp-shot",
+      "display_name": "RAPP Shot",
+      "version": "1.3.1",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/rapp-shot",
+      "purpose": "Native macOS screenshot capture, editable annotations and crop, local Vision OCR, and opaque credential redaction with review before copying or exporting. Detection is per line and can miss secrets; inspect the final preview. Optional Python adapters integrate an already-installed app or legacy CLI.",
+      "files": {
+        "rapp_shot_agent.py": {
+          "sha256": "bc817f0fdf172cb4e16bbba507e8381838f444033cc0b277d0f55c679d72f61d",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "66e06ce6d226ec39dc26dd1f7c1291c642f7960107edfcbf88e01a9d470a3c5f",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "app",
+      "_seed": 4966212221660045312,
+      "_incantation": "FORGE CHISEL PANTHER PROWESS PROCLAIM ELDER SHARD"
+    },
+    {
+      "name": "rapp-voice",
+      "display_name": "RAPP Voice",
+      "version": "1.1.1",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/rapp-voice",
+      "purpose": "Native macOS dictation with local whisper.cpp recognition, a weighted dictionary, app-aware cleanup, and safe insertion or manual-copy fallback. Optional cloud polish is off until explicitly consented.",
+      "files": {
+        "rapp_voice_agent.py": {
+          "sha256": "39028adae65b34b524fc615ca4bb7a135d4bf5720c7a5bccb51328891f52b398",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "5140dbde2acc6e16099e8a96550f6f5ba23db4f80cf9ca68a388dafdd1a5c9f3",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "app",
+      "_seed": 6391394812716654592,
+      "_incantation": "FORGE CHISEL PANTHER WOVEN RHYME DROIT SMELT"
+    },
+    {
+      "name": "rooms",
+      "display_name": "Rooms (test)",
+      "version": "0.3.0",
+      "schema": "rapp-rar-stack/1.1",
+      "status": "current",
+      "path": "stacks/rooms",
+      "purpose": "Test distro: group chat of AI seats on one Brainstem, each with its own personality and private memory; turn budgets, pick-up-where-it-stopped and hand-back to the owner.",
+      "files": {
+        "rooms_agent.py": {
+          "sha256": "cddfc6c10aec505072bcc72fa34c964874ee4cb579f3f6446500dcd8f4f00ec0",
+          "verified": true
+        },
+        "seat_notes_agent.py": {
+          "sha256": "caf790f5a9f9a0004d453d467e373ea41d12e15122b0a120e4c56276fa164e10",
+          "verified": true
+        },
+        "soul.md": {
+          "sha256": "ba97a0b788f107ba5b9af71fb8467443c8ef284f18decf7ab66e66e82796af50",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "075b4db40462e30d74c0b6256a1b1511120e52785d9140db34dc96552c14eecc",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "kernel": {
+        "sha256": "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4",
+        "file": "brainstem.py",
+        "version": "0.6.16"
+      },
+      "shelf": "pack",
+      "_seed": 17920793872363962368,
+      "_incantation": "FORGE FUSE PANTHER BLOOM EFFACE DROIT BIND"
+    },
+    {
+      "name": "senses",
+      "display_name": "Senses",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/senses",
+      "purpose": "Extra ways to say every reply (headline, tl;dr, explain simply, emoji, haiku, spark). Each one adds its own field beside the answer; keep only the ones you want.",
+      "files": {
+        "eli5_sense.py": {
+          "sha256": "576307675f2a91d984133c8fc5300200b6d43ef6cb90fef9fa5507da8339ee2c",
+          "verified": true
+        },
+        "emoji_sense.py": {
+          "sha256": "e6a66c784c98084ed30ea708b2019d5150fac2b84c20030c195b2f22f0855e03",
+          "verified": true
+        },
+        "haiku_sense.py": {
+          "sha256": "af0b3fcd34ae019d91f64aeacaba7e38d79d4297d38bc0f09972384cc3686129",
+          "verified": true
+        },
+        "headline_sense.py": {
+          "sha256": "70f8cf64b5b74f9779c8a0f795cebb906401a09d6b85c81eb2768809c8d8e3b9",
+          "verified": true
+        },
+        "tldr_sense.py": {
+          "sha256": "79ff5e04fdd9e3518b359c66eaf141538c88848527207ff70ab5628e8c0bfc5e",
+          "verified": true
+        },
+        "spark_sense.py": {
+          "sha256": "af421a84f0e55ac872ad0c21f5b1b6fb554c48485d4cc4eccb523b4545060f58",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "2f689a024f46986c2247ffb51b940b84ef4c4beb68624dc6797eed6373a7f629",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 2225479605945368576,
+      "_incantation": "FORGE FORGE PANTHER ENIGMA BLISS BROADSWORD ANVIL"
+    },
+    {
+      "name": "spine-dag",
+      "display_name": "SpineDAG",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/spine-dag",
+      "purpose": "Universal Directed-Acyclic-Graph analyser. Point it at any folder, code project, Excel workbook, JSON/YAML config, or block of prose; it builds the dependency graph, finds hubs, leaves, orphans, cycles, and the critical path, scores Spine Health 0-100, and returns Markdown with a Mermaid diagram, AS",
+      "files": {
+        "spine_dag_agent.py": {
+          "sha256": "3f71c8e61bc69f8553bbdaecaf6dd5bdf78b7df29702fbd26ef0c53fc1246776",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "72a8a4357e504f693f69add35bcef9dfd0adadb4f56d3166f7d3ecc365fdbb6b",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "app",
+      "_seed": 8980610023134601216,
+      "_incantation": "FORGE CHISEL PANTHER RAPID ION CENTURION WELD"
+    },
+    {
+      "name": "starter-business",
+      "display_name": "Business starter",
+      "version": "1.1.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/starter-business",
+      "purpose": "For a small business: the grail with every model, Night Watch, Private Mode for client matters, a Microsoft 365 agent team, Claude workflows and a regression judge for your agents.",
+      "files": {
+        "README.md": {
+          "sha256": "c797c7e8a4a9e44f673dcca6ca7b6c9acfc6e9bcf9558666519753fff74a7fc9",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "starter",
+      "_seed": 6642089966430060544,
+      "_incantation": "FORGE FORGE PANTHER MUSK LION MONARCH SMELT"
+    },
+    {
+      "name": "starter-hobby",
+      "display_name": "Hobby starter",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/starter-hobby",
+      "purpose": "For tinkering: the grail with every model, Night Watch, AI group chat rooms, a neighborhood to plant, and digital twins you can hatch.",
+      "files": {
+        "README.md": {
+          "sha256": "04179f42816c7c8744d9fe85145f1dfddc589c6d0eac50fd3e5af08e22a89cb3",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "starter",
+      "_seed": 1164997647363211264,
+      "_incantation": "FORGE FORGE PANTHER DAGGER INFERNO MOLD ANVIL"
+    },
+    {
+      "name": "starter-personal",
+      "display_name": "Personal starter",
+      "version": "1.2.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/starter-personal",
+      "purpose": "For your own life: everything new on the grail, a Brainstem that looks after its computer, private topics that stay home, and who inherits it.",
+      "files": {
+        "README.md": {
+          "sha256": "7b460c835568d0796032bbb51e8458263bff0bea32550a3eb2da89b03e06afb5",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "starter",
+      "_seed": 13471067076349132800,
+      "_incantation": "FORGE FORGE PANTHER SHAMAN CRIMSON ARRAY CAST"
+    },
+    {
+      "name": "summon",
+      "display_name": "Summon (scan to install)",
+      "version": "1.1.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/summon",
+      "purpose": "Scan a RAR card's QR code with your phone and it installs into your own Brainstem. One agent starts a small sidecar beside the unchanged kernel; it listens only on this Mac and its Tailscale address, and installs through the Brainstem's own /agents/import, which checks every fingerprint.",
+      "files": {
+        "summon_agent.py": {
+          "sha256": "a57e473a727ec5407e23f9692e7cc1e4423bd7650b5fdb15ec4670f07b126e64",
+          "verified": true
+        },
+        "summond.py": {
+          "sha256": "6a138073c2b5dddb8cf742b84f5049437be814e3cb45222c211310b4ddf82d07",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 2288792079516053954,
+      "_incantation": "KNOLL SECT RAY ABYSS RAVAGE SAFFRON ANVIL"
+    },
+    {
+      "name": "thoughtbox",
+      "display_name": "Thoughtbox",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/thoughtbox",
+      "purpose": "Local-first reflection journal — append, list, search, tag, export, import. Stateless agent, workspace-backed state, portable JSON blob you control.",
+      "files": {
+        "thoughtbox_agent.py": {
+          "sha256": "d93b56abcc578d8299df787816142c3d0553a018d45e611ad54ac453bf11933b",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "e4af762a28680274d29673569eed4e70af0f060f33bf06be817a60d31a3c146f",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "app",
+      "_seed": 5906658335469346816,
+      "_incantation": "FORGE CHISEL PANTHER CASCADE RIFT CHARM SMELT"
+    },
+    {
+      "name": "ticket-page",
+      "display_name": "Ticket Page",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/ticket-page",
+      "purpose": "Every Brainstem explains itself to visiting AIs at GET /api/ticket: what it is, how to chat, which agents are loaded, how to add one.",
+      "files": {
+        "ticket_page.py": {
+          "sha256": "216d6c1f74109c430b3375413fa2c42e1225028ed91fac0533ce447e3d0c84b6",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "bb9bf07e1ddff1b19e5a8e748948e29e0ed55923da1840edff264746d4daf5cd",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 9669355720365047808,
+      "_incantation": "FORGE FORGE PANTHER PORTENT BASALT AIM CHISEL"
+    },
+    {
+      "name": "toaster",
+      "display_name": "Toaster",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/toaster",
+      "purpose": "Carry a capability between agent.py, SKILL.md, openclaw and openrappter without losing fidelity. Toast a raw skill so it gains a typed contract and becomes measurable, then soak it to prove it does not drift across conversion routes.",
+      "files": {
+        "toaster_agent.py": {
+          "sha256": "d4d540104c288152b2761b7890aaf263e58af286acaf702d09422b6f3f198e16",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "c344265fa5d14981aee7220207bd614729b4c6f8b1174cc38f1bb5ff2ed97e06",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "app",
+      "_seed": 192799570479030272,
+      "_incantation": "FORGE CHISEL PANTHER DAGGER ORBIT WARP FORGE"
+    },
+    {
+      "name": "vibe-coding-loop",
+      "display_name": "Vibe Coding Loop",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "retired",
+      "path": "stacks/vibe-coding-loop",
+      "purpose": "Ship batches of 10 single-file HTML demos to a Jekyll site via parallel sub-agents. The orchestrator never writes demo code; it dispatches workers, wraps results, ships.",
+      "files": {
+        "vibe_coding_loop_agent.py": {
+          "sha256": "fcbba7d2b73f340e1bdcf27a263e9f7a50b9d5ae117af80496cfcda287847b1d",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "7acc956721a469f7890355a9547422571157ef3338fa6ad15c57c7fb2cdf4321",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "retired": {
+        "since": "2026-11-04",
+        "reason": "Template generator that neither orchestrates nor ships; 97% duplicate of the @kody-w/vibe_coding_loop agent.",
+        "replacement": "@kody-w/vibe_coding_loop"
+      },
+      "shelf": "app",
+      "_seed": 16756029940331192320,
+      "_incantation": "FORGE CHISEL PANTHER COVE PULSAR THEFT CARVE"
+    },
+    {
+      "name": "wildhaven-ceo",
+      "display_name": "WildhavenCEO",
+      "version": "0.1.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/wildhaven-ceo",
+      "purpose": "A CEO workspace agent. Drop a vault of strategy / legal / budget / pitch / playbook documents in, then ask questions and get answers in a confident operator's voice. Wraps the pattern from kody-w/wildhaven-ceo: 'talk to the workspace' as the whole interface — no reading files, no learning the org, t",
+      "files": {
+        "wildhaven_ceo_agent.py": {
+          "sha256": "63ba8bea6a3fa294de04fcc385a257e24c6a14e768ed6e9546fe32a22a594d22",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "8c00ead954b518c888ce6e2dc7d63d05b591ae5c9fd7c477ceff7b6ae3630c93",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "app",
+      "_seed": 2308479191810580480,
+      "_incantation": "FORGE CHISEL PANTHER LARCH COSMIC BLADE BLADE"
+    },
+    {
+      "name": "wildhaven-hearth",
+      "display_name": "Wildhaven Hearth",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/wildhaven-hearth",
+      "purpose": "Your own AI at home on your computer that looks after itself: it never drops the conversation, every pack installs and uninstalls cleanly, and the Brainstem engine stays exactly as published. By Wildhaven Homes.",
+      "files": {
+        "README.md": {
+          "sha256": "05979c80bab7212f5b1c7164fa2a9585b80ed0cbb2aec18e699eef642375218d",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "starter",
+      "_seed": 3055186258679562240,
+      "_incantation": "FORGE FORGE PANTHER GOLDEN FONT TRAIN BLADE"
+    },
+    {
+      "name": "work-receipts",
+      "display_name": "Work Receipts",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/work-receipts",
+      "purpose": "A plain record of what your AI did and when, from the journal on this computer: a report for any range of days, a CSV export with its fingerprint, and search.",
+      "files": {
+        "work_receipts_agent.py": {
+          "sha256": "77efa5881b83c67133acac2cdf0d81d116b1be72c47f2c0e89e5b379ae192f73",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "1ed2f017335ba86b002d3875d5ad6270fefe978eca8da5244679820e81917d71",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 12441458485151932416,
+      "_incantation": "FORGE CHISEL PANTHER GROOM RAPID TEMPLAR MOLD"
     }
   ]
 }

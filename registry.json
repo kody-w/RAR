@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-04T20:48:26.437912+00:00",
+  "generated_at": "2026-11-04T21:16:31.286268+00:00",
   "stats": {
     "total_agents": 226,
     "total_swarms": 2,
@@ -13463,6 +13463,7 @@
       "display_name": "AgentTeam",
       "version": "0.1.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/agent-team",
       "purpose": "The persona-routing brain of Bill Whalen's Agent Team Starter Kit, ported to a single rapplication. Given a project goal, returns the outcome frame, persona route, paste-ready GitHub issue body, and the needs-you questions the team would surface.",
       "files": {
@@ -13485,6 +13486,7 @@
       "display_name": "BookFactory",
       "version": "0.3.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/bookfactory",
       "purpose": "Five-persona content pipeline (Writer \u2192 Editor \u2192 CEO \u2192 Publisher \u2192 Reviewer). One call, one chapter back.",
       "files": {
@@ -13507,6 +13509,7 @@
       "display_name": "Claude Workflows",
       "version": "1.2.0",
       "schema": "rapp-rar-stack/1.1",
+      "status": "current",
       "path": "stacks/claude-workflows",
       "purpose": "Run Claude Managed Agents with dynamic multi-agent workflows from Brainstem chat: start a job from a template with a hard spending cap, watch its phases, collect its output files. WorkflowBuilder assembles new workflow templates from parts in chat; other AI ecosystems plug in as drop-in targets.",
       "files": {
@@ -13533,6 +13536,7 @@
       "display_name": "CoE Starter Kit",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/coe-starter-kit",
       "purpose": "Bill Whalen's Agent Team (BWAT) starter kit as one rapplication. Run it and it bootstraps an outcome-first delivery team into your brainstem \u2014 Outcome Framer, Intake, Outcome Validator, PM, and Bill's twin \u2014 each pulled over HTTPS and sha256-pinned. Self-contained, stdlib-only.",
       "files": {
@@ -13555,6 +13559,7 @@
       "display_name": "CSV Surgeon",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/csv-surgeon",
       "purpose": "Profile a CSV \u2014 per-column types, null rate, cardinality, min/max \u2014 or find ragged rows, duplicate and whitespace-padded headers, duplicate records, or slice rows. Stdlib only, no network.",
       "files": {
@@ -13577,6 +13582,7 @@
       "display_name": "Fleet Management",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.0",
+      "status": "current",
       "path": "stacks/fleet-management",
       "purpose": "Drop-in pack that turns one brainstem into a fleet controller for a network of Mac-mini brainstems. Two files: fleet_agent.py (the SSH-driven fleet adapter \u2014 discover, authorize, exec, read, write, tail, chat any twin on any peer, mesh-exec, mesh-chat, plus brainstem-aware actions like provision_bra",
       "files": {
@@ -13599,6 +13605,7 @@
       "display_name": "Grail layers",
       "version": "1.5.2",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/grail-layers",
       "purpose": "The one distro for everything new, on the unchanged grail. Layers applied in memory (the supervisor probes /chat and falls back to plain grail on any failure): providers (Responses-API models like gpt-6.1-sol, plus this machine's Ollama models) and journal_tap (every chat turn recorded in your Brain",
       "files": {
@@ -13662,6 +13669,7 @@
       "display_name": "Inheritance",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/inheritance",
       "purpose": "Say who gets your Brainstem if something happens to you. After a silence window it hands over, signed with keys you hold; only public keys are recorded.",
       "files": {
@@ -13680,6 +13688,7 @@
       "display_name": "JSON Doctor",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/json-doctor",
       "purpose": "Inspect, validate, diff or query JSON and JSONL without opening it. Infers shape with per-field coverage, points at the exact line and column of a syntax error, and compares two files structurally.",
       "files": {
@@ -13702,6 +13711,7 @@
       "display_name": "Regression Judge",
       "version": "1.2.0",
       "schema": "rapp-rar-stack/1.1",
+      "status": "current",
       "path": "stacks/judge",
       "purpose": "Catches regressions: record questions and answers once, then after any change replay them on the live Brainstem and a teacher grades each new answer against the original (same, better, worse, broken), with a side-by-side report.",
       "files": {
@@ -13724,6 +13734,7 @@
       "display_name": "Log Detective",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/log-detective",
       "purpose": "Summarise a log file, cluster near-identical errors into signatures by shape rather than text, build a timeline so a spike has a timestamp, or grep with context. Reads plain text and JSON-lines. Never uploads anything.",
       "files": {
@@ -13746,6 +13757,7 @@
       "display_name": "Markdown Medic",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/markdown-medic",
       "purpose": "Check a markdown file or docs folder for broken relative links and images, skipped heading levels and duplicate anchors, or generate a table of contents. Never makes network calls.",
       "files": {
@@ -13768,6 +13780,7 @@
       "display_name": "Microsoft 365 Team Starter",
       "version": "1.1.0",
       "schema": "rapp-rar-stack/1.0",
+      "status": "current",
       "path": "stacks/microsoft-365-team",
       "purpose": "Drop-in pack for Microsoft Solution Engineers. Two files: factory_agent.py (plants new MS-themed neighborhoods under your GitHub handle in 4 modes: local/private/public/egg) + microsoft-365-team.egg (the canonical content \u2014 11 agents including WorkIQ for M365 access, MS-stack-shaped Twin with field ",
       "files": {
@@ -13790,6 +13803,7 @@
       "display_name": "Money Watch",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/money-watch",
       "purpose": "Read your bank and card exports on this computer only: it catches price rises, duplicate charges and renewals coming up, and tells you once. Nothing is ever sent anywhere.",
       "files": {
@@ -13812,6 +13826,7 @@
       "display_name": "Moving Day",
       "version": "1.2.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/moving-day",
       "purpose": "Your new computer becomes your old one, and another Mac can cover for this one. Pack once or keep a nightly standby copy in iCloud Drive; unpack or take over on the other Mac in one sentence. Agents, soul, memory, model, private topics and packs come along as a verified rapp/1 egg; sign-in and secre",
       "files": {
@@ -13838,6 +13853,7 @@
       "display_name": "Neighborhood Starter Stack",
       "version": "1.1.0",
       "schema": "rapp-rar-stack/1.0",
+      "status": "current",
       "path": "stacks/neighborhood-starter",
       "purpose": "The canonical starter pack for planting a new RAPP neighborhood. Two files: factory_agent.py (drops into your local brainstem; the meta-agent that plants neighborhoods) + neighborhood-starter.egg (the template content, parameterized for the user's choices). Supports four modes: local-only on-device,",
       "files": {
@@ -13860,6 +13876,7 @@
       "display_name": "Night Watch",
       "version": "1.1.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/night-watch",
       "purpose": "Your Brainstem looks after its own computer (disk, its services, nightly drills) and your premium-model use against a monthly limit you set (Spend Guard; a warning, nothing is blocked). It tells you once, in one sentence, only when something needs you.",
       "files": {
@@ -13882,6 +13899,7 @@
       "display_name": "Novell",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/novell",
       "purpose": "Adversarial pre-review. Twelve skeptic lenses roast your artifact and hand back the specific evidence that kills each objection. Run it as a pipeline gate so a draft fails in CI before a human ever reads it.",
       "files": {
@@ -13904,6 +13922,7 @@
       "display_name": "Organism Lifecycle",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.0",
+      "status": "current",
       "path": "stacks/organism-lifecycle",
       "purpose": "Two agents that turn a vanilla brainstem into a full organism host: Twin (summon/hatch/boot/stop/list/inspect \u2014 full digital-twin lifecycle) + EggHatcher (universal .egg cartridge router that introspects manifest.schema/type and dispatches to organism / rapplication / session / neighborhood / estate",
       "files": {
@@ -13926,6 +13945,7 @@
       "display_name": "Paperwork Desk",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/paperwork-desk",
       "purpose": "Drop in a lease, a policy or a warranty; it files the paper on this computer, finds every deadline (renewal, claim by, expiry) and tells you once before each one. Ask it anything about your papers later.",
       "files": {
@@ -13952,6 +13972,7 @@
       "display_name": "PII Scout",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/pii-scout",
       "purpose": "Scan a folder for what must not be published \u2014 secrets, credential files, captured sessions, emails, home paths and any names you supply. Reports file and count, never the value.",
       "files": {
@@ -13974,6 +13995,7 @@
       "display_name": "Private Mode",
       "version": "1.0.2",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/private-mode",
       "purpose": "Name the topics that must never leave this computer (health, money, a person). Chats about them are answered by a local model, whatever model is picked; with no local model running they are refused, never sent out.",
       "files": {
@@ -13996,6 +14018,7 @@
       "display_name": "Project Tracker",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/project-tracker",
       "purpose": "A local-first tracker for a portfolio of AI-agent projects and their MVP statements. The web UI is a 1:1 clone of the aibast-agents-library project-tracker tool; the bundled ProjectTracker agent manages the same portfolio headlessly over /chat. Both speak the tool's native projectTrackerData JSON, s",
       "files": {
@@ -14018,6 +14041,7 @@
       "display_name": "RAPP Commons",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/rapp-commons",
       "purpose": "A contribution app for the RAPP Commons \u2014 the stack-agnostic social network for agents. Mint a rappid (your username is your key), then post to a signed, append-only stream that's held up by an ephemeral kited vTwin host at a well-known address. No sign-up, no server, no account: the key is the acco",
       "files": {
@@ -14040,6 +14064,7 @@
       "display_name": "RAPP Crispy",
       "version": "1.5.1",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/rapp-crispy",
       "purpose": "Native macOS 14+ meeting app with graphical record/stop/cancel, app-owned microphone permissions, explicitly named Apple AVFoundation voice processing, bundled local Whisper transcription, meeting history and audio/transcript views. Optional screen/window capture is video only. Notes stay disabled u",
       "files": {
@@ -14062,6 +14087,7 @@
       "display_name": "rapp-god Forum",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/rapp-god-forum",
       "purpose": "The agentic forum for the full RAPP stack \u2014 a threaded discussion forum where people and agents talk through the whole thing end to end (brainstem, kited layer, RACon, commons, registry, agents, governance). Mirrors the RAPP Commons pattern (rapp-commons-protocol/2.0, forum profile): your rappid is ",
       "files": {
@@ -14084,6 +14110,7 @@
       "display_name": "RAPP Rewind",
       "version": "1.2.1",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/rapp-rewind",
       "purpose": "Native macOS searchable screen memory with explicit Start/Pause/Stop, app-owned ScreenCaptureKit, on-device Vision OCR, and local SQLite FTS5. Capture, OCR, indexing, and search stay on this Mac; optional RAPP host integration is separate.",
       "files": {
@@ -14106,6 +14133,7 @@
       "display_name": "RAPP Shot",
       "version": "1.3.1",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/rapp-shot",
       "purpose": "Native macOS screenshot capture, editable annotations and crop, local Vision OCR, and opaque credential redaction with review before copying or exporting. Detection is per line and can miss secrets; inspect the final preview. Optional Python adapters integrate an already-installed app or legacy CLI.",
       "files": {
@@ -14128,6 +14156,7 @@
       "display_name": "RAPP Voice",
       "version": "1.1.1",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/rapp-voice",
       "purpose": "Native macOS dictation with local whisper.cpp recognition, a weighted dictionary, app-aware cleanup, and safe insertion or manual-copy fallback. Optional cloud polish is off until explicitly consented.",
       "files": {
@@ -14150,6 +14179,7 @@
       "display_name": "Rooms (test)",
       "version": "0.3.0",
       "schema": "rapp-rar-stack/1.1",
+      "status": "current",
       "path": "stacks/rooms",
       "purpose": "Test distro: group chat of AI seats on one Brainstem, each with its own personality and private memory; turn budgets, pick-up-where-it-stopped and hand-back to the owner.",
       "files": {
@@ -14185,6 +14215,7 @@
       "display_name": "Senses",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/senses",
       "purpose": "Extra ways to say every reply (headline, tl;dr, explain simply, emoji, haiku, spark). Each one adds its own field beside the answer; keep only the ones you want.",
       "files": {
@@ -14227,6 +14258,7 @@
       "display_name": "SpineDAG",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/spine-dag",
       "purpose": "Universal Directed-Acyclic-Graph analyser. Point it at any folder, code project, Excel workbook, JSON/YAML config, or block of prose; it builds the dependency graph, finds hubs, leaves, orphans, cycles, and the critical path, scores Spine Health 0-100, and returns Markdown with a Mermaid diagram, AS",
       "files": {
@@ -14249,6 +14281,7 @@
       "display_name": "Business starter",
       "version": "1.1.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/starter-business",
       "purpose": "For a small business: the grail with every model, Night Watch, Private Mode for client matters, a Microsoft 365 agent team, Claude workflows and a regression judge for your agents.",
       "files": {
@@ -14267,6 +14300,7 @@
       "display_name": "Hobby starter",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/starter-hobby",
       "purpose": "For tinkering: the grail with every model, Night Watch, AI group chat rooms, a neighborhood to plant, and digital twins you can hatch.",
       "files": {
@@ -14285,6 +14319,7 @@
       "display_name": "Personal starter",
       "version": "1.2.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/starter-personal",
       "purpose": "For your own life: everything new on the grail, a Brainstem that looks after its computer, private topics that stay home, and who inherits it.",
       "files": {
@@ -14303,6 +14338,7 @@
       "display_name": "Summon (scan to install)",
       "version": "1.1.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/summon",
       "purpose": "Scan a RAR card's QR code with your phone and it installs into your own Brainstem. One agent starts a small sidecar beside the unchanged kernel; it listens only on this Mac and its Tailscale address, and installs through the Brainstem's own /agents/import, which checks every fingerprint.",
       "files": {
@@ -14325,6 +14361,7 @@
       "display_name": "Thoughtbox",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/thoughtbox",
       "purpose": "Local-first reflection journal \u2014 append, list, search, tag, export, import. Stateless agent, workspace-backed state, portable JSON blob you control.",
       "files": {
@@ -14347,6 +14384,7 @@
       "display_name": "Ticket Page",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/ticket-page",
       "purpose": "Every Brainstem explains itself to visiting AIs at GET /api/ticket: what it is, how to chat, which agents are loaded, how to add one.",
       "files": {
@@ -14369,6 +14407,7 @@
       "display_name": "Toaster",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/toaster",
       "purpose": "Carry a capability between agent.py, SKILL.md, openclaw and openrappter without losing fidelity. Toast a raw skill so it gains a typed contract and becomes measurable, then soak it to prove it does not drift across conversion routes.",
       "files": {
@@ -14391,6 +14430,7 @@
       "display_name": "Vibe Coding Loop",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "retired",
       "path": "stacks/vibe-coding-loop",
       "purpose": "Ship batches of 10 single-file HTML demos to a Jekyll site via parallel sub-agents. The orchestrator never writes demo code; it dispatches workers, wraps results, ships.",
       "files": {
@@ -14404,6 +14444,11 @@
         }
       },
       "_verified": true,
+      "retired": {
+        "since": "2026-11-04",
+        "reason": "Template generator that neither orchestrates nor ships; 97% duplicate of the @kody-w/vibe_coding_loop agent.",
+        "replacement": "@kody-w/vibe_coding_loop"
+      },
       "shelf": "app",
       "_seed": 16756029940331192320,
       "_incantation": "FORGE CHISEL PANTHER COVE PULSAR THEFT CARVE"
@@ -14413,6 +14458,7 @@
       "display_name": "WildhavenCEO",
       "version": "0.1.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/wildhaven-ceo",
       "purpose": "A CEO workspace agent. Drop a vault of strategy / legal / budget / pitch / playbook documents in, then ask questions and get answers in a confident operator's voice. Wraps the pattern from kody-w/wildhaven-ceo: 'talk to the workspace' as the whole interface \u2014 no reading files, no learning the org, t",
       "files": {
@@ -14435,6 +14481,7 @@
       "display_name": "Wildhaven Hearth",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/wildhaven-hearth",
       "purpose": "Your own AI at home on your computer that looks after itself: it never drops the conversation, every pack installs and uninstalls cleanly, and the Brainstem engine stays exactly as published. By Wildhaven Homes.",
       "files": {
@@ -14453,6 +14500,7 @@
       "display_name": "Work Receipts",
       "version": "1.0.0",
       "schema": "rapp-rar-stack/1.2",
+      "status": "current",
       "path": "stacks/work-receipts",
       "purpose": "A plain record of what your AI did and when, from the journal on this computer: a report for any range of days, a CSV export with its fingerprint, and search.",
       "files": {

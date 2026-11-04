@@ -543,23 +543,77 @@ def compute_seed(name: str, category: str, tier: str, tags: list, deps: list) ->
     return _forge(name, category, tier, tags, deps)
 
 
+def validate_stack_pack_status(packs: dict[str, dict]) -> None:
+    """Validate retirement metadata and keep retired packs out of starter includes."""
+    for name, pack in packs.items():
+        status = pack.get("status", "current")
+        if status not in ("current", "retired"):
+            raise ValueError(f"{name}: unsupported pack status {status!r}")
+        if status != "retired":
+            if "retired" in pack:
+                raise ValueError(f"{name}: retired metadata requires status 'retired'")
+            continue
+        retired = pack.get("retired")
+        if not isinstance(retired, dict):
+            raise ValueError(f"{name}: retired pack requires retired metadata")
+        since = retired.get("since")
+        if not isinstance(since, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", since):
+            raise ValueError(f"{name}: retired.since must be a YYYY-MM-DD date")
+        try:
+            datetime.strptime(since, "%Y-%m-%d")
+        except ValueError as exc:
+            raise ValueError(f"{name}: retired.since must be a valid date") from exc
+        if not isinstance(retired.get("reason"), str) or not retired["reason"].strip():
+            raise ValueError(f"{name}: retired.reason must be non-empty text")
+        replacement = retired.get("replacement")
+        if "replacement" not in retired or not (
+            replacement is None or isinstance(replacement, str) and replacement.strip()
+        ):
+            raise ValueError(f"{name}: retired.replacement must be a name or null")
+
+    def walk(name: str, trail: list[str], seen: set[str]) -> None:
+        if name not in packs:
+            return
+        pack = packs[name]
+        if len(trail) > 1 and pack.get("status") == "retired":
+            raise ValueError(f"{trail[0]}: install.includes reaches retired pack: {' -> '.join(trail)}")
+        if name in seen:
+            return
+        seen.add(name)
+        includes = (pack.get("install") or {}).get("includes", [])
+        if not isinstance(includes, list) or not all(isinstance(n, str) for n in includes):
+            raise ValueError(f"{name}: install.includes must be a list of pack names")
+        for child in includes:
+            walk(child, trail + [child], seen)
+
+    for name, pack in packs.items():
+        if name.startswith("starter-") or pack.get("shelf") == "starter":
+            walk(name, [name], set())
+
+
 def build_stack_packs(taken_seeds: set, root: Path = Path("stacks")) -> list[dict]:
     """Project stacks/<name>/pack.json into registry entries with a summon seed.
 
     Read-only over the pack files. Each file's sha256 is re-checked against the
     bytes on disk; `_verified` is true only when every listed file exists and
-    matches. The optional `kernel` field (a distro's pinned kernel) is passed
-    through untouched. Seeds come from the same permanent forge as agent seeds,
+    matches. Retirement metadata and the optional `kernel` field pass through
+    untouched. Invalid lifecycle metadata or retired starter includes fail the
+    build; retirement never changes verification or seeds.
+    Seeds come from the same permanent forge as agent seeds,
     keyed on "@stacks/<name>"; a seed that would collide with an agent seed is
     withheld rather than reused.
     """
     import hashlib
-    packs = []
+    sources = {}
     for pack_path in sorted(root.glob("*/pack.json")):
         try:
             pack = json.loads(pack_path.read_text(encoding="utf-8"))
         except (OSError, ValueError):
             continue
+        sources[pack_path] = pack
+    validate_stack_pack_status({p.get("name") or path.parent.name: p for path, p in sources.items()})
+    packs = []
+    for pack_path, pack in sources.items():
         name = pack.get("name") or pack_path.parent.name
         files = {}
         for fname, meta in (pack.get("files") or {}).items():
@@ -573,11 +627,14 @@ def build_stack_packs(taken_seeds: set, root: Path = Path("stacks")) -> list[dic
             "display_name": pack.get("display_name", name),
             "version": pack.get("version", "0.0.0"),
             "schema": pack.get("schema", "rapp-rar-stack/1.0"),
+            "status": pack.get("status", "current"),
             "path": pack_path.parent.as_posix(),
             "purpose": (pack.get("purpose") or "")[:300],
             "files": files,
             "_verified": bool(files) and all(f["verified"] for f in files.values()),
         }
+        if "retired" in pack:
+            entry["retired"] = pack["retired"]
         if isinstance(pack.get("kernel"), dict):
             entry["kernel"] = pack["kernel"]
         # The shelf a person browses: starters fill the cart, apps came from the RAPP Store, packs are the rest.
@@ -1413,12 +1470,16 @@ def build_registry():
 
     # ─── Stack packs (stacks/<name>/pack.json) ────────────────────────
     # Additive projection so a stack can be summoned by seed (scan a QR → the
-    # owner's Brainstem installs it). Never fails the build: a file whose bytes
+    # owner's Brainstem installs it). A file whose bytes
     # no longer match its pack.json sha256 is reported as unverified, and
     # summon clients must refuse unverified packs.
-    stack_packs = build_stack_packs(
-        {a["_seed"] for a in agents if "_seed" in a}
-        | {s for a in agents for s in a.get("_seed_aliases", [])})
+    try:
+        stack_packs = build_stack_packs(
+            {a["_seed"] for a in agents if "_seed" in a}
+            | {s for a in agents for s in a.get("_seed_aliases", [])})
+    except ValueError as exc:
+        print(f"ERROR Stack pack validation: {exc}", file=sys.stderr)
+        return 1
     if stack_packs:
         registry["stack_packs"] = stack_packs
 

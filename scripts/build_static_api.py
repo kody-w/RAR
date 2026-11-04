@@ -25,7 +25,7 @@ Written surface (all new paths):
     manifest.json                  rapp-static-api/1.0 descriptor
     api/v1/status.json             counts + content hashes
     api/v1/badge.json              shields.io endpoint
-    api/v1/catalog.json            every agent, lean records
+    api/v1/catalog.json            every agent, lean records, plus stack packs (including retired)
     api/v1/taxonomy.json           categories, publishers, tags
     api/v1/match.json              use-case → ranked agents + term index
     api/v1/marketplaces.json       ratified rapp@x plugin identities
@@ -579,12 +579,14 @@ def main() -> int:
         "description": (
             "Every agent in RAR as a lean record. Fetch this one file to render a "
             "complete browsable catalog with no further requests, no backend, no "
-            "authentication and no GitHub account."
+            "authentication and no GitHub account. stack_packs lists every installable "
+            "pack, including retired packs with status and retirement metadata."
         ),
         "generated": now(),
         "count": len(records),
         "self_url": f"{RAW_BASE}/api/v1/catalog.json",
         "agents": records,
+        "stack_packs": registry.get("stack_packs", []),
     }
 
     # ── audience slices

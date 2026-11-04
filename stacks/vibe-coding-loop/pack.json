@@ -3,6 +3,12 @@
   "name": "vibe-coding-loop",
   "display_name": "Vibe Coding Loop",
   "version": "1.0.0",
+  "status": "retired",
+  "retired": {
+    "since": "2026-11-04",
+    "reason": "Template generator that neither orchestrates nor ships; 97% duplicate of the @kody-w/vibe_coding_loop agent.",
+    "replacement": "@kody-w/vibe_coding_loop"
+  },
   "purpose": "Ship batches of 10 single-file HTML demos to a Jekyll site via parallel sub-agents. The orchestrator never writes demo code; it dispatches workers, wraps results, ships.",
   "kind_label": "rapplication",
   "install": {

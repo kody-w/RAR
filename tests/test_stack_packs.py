@@ -1,7 +1,7 @@
 """Stack packs: stacks/<name>/pack.json projected into registry.json with a summon seed.
 
 Contract:
-  * additive and read-only: never fails the build, never edits a pack;
+  * additive and read-only: hash drift never fails the build, never edits a pack;
   * `_verified` is true only when every listed file exists and matches its sha256;
   * an optional `kernel` pin (a distro's pinned kernel) passes through untouched;
   * seeds come from the permanent forge and never collide with an agent seed;
