@@ -1,0 +1,66 @@
+{
+  "agent": "@kody-w/fragments_agent",
+  "agent_file": "fragments_agent.py",
+  "agent_sha256": "88e1749ee4ace1f506b6ee9c2c4fa2ce38e33107315f2b35f5919a489956be13",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "FragmentsAgent",
+  "host_dependencies": [
+    "utils.azure_file_storage"
+  ],
+  "manifest": {
+    "author": "kody-w",
+    "category": "memory",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Paste a document once and address it by a short hash forever: store, get, pin into every chat, unpin, forget, list. Fragment text stays untrusted data on the device.",
+    "display_name": "Fragments",
+    "name": "@kody-w/fragments_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "fragments",
+      "memory",
+      "context",
+      "hash",
+      "pin"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "Fragments",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "description": "What to do.",
+        "enum": [
+          "add",
+          "get",
+          "pin",
+          "unpin",
+          "forget",
+          "list"
+        ],
+        "type": "string"
+      },
+      "hash": {
+        "description": "For get/pin/unpin/forget: the fragment hash (prefix is fine).",
+        "type": "string"
+      },
+      "label": {
+        "description": "For add: a short human label (optional).",
+        "type": "string"
+      },
+      "text": {
+        "description": "For add: the fragment text, verbatim.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}
