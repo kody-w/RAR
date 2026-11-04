@@ -25,6 +25,7 @@ WRAPS = {"requests.post"}           # sense prompts ride on the system message; 
 
 PROVEN_GRAIL = {
     "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",  # 0.6.17 (installed)
+    "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4",  # 0.6.16 (published; proven 2026-11-04: 5/5 chat with sense, stream, 3/3 pages)
 }
 
 BASE = os.path.expanduser("~/.brainstem")

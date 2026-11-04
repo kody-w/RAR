@@ -82,10 +82,11 @@
         "kind": "layer",
         "point": "agents",
         "file": "senses_and_pages.py",
-        "sha256": "08970b0033d417486f0307eaae07d05c19bbf96cf32083d9a1f0ef3ab007185e",
+        "sha256": "1eddf52129df01baec2ce09962bc7025ffe478533dc67a0635a787814c251bb5",
         "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/senses_and_pages.py",
         "proven_grail": [
-          "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a"
+          "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
+          "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
         ],
         "what": "Senses and pages over the unchanged grail. A sense adds one extra field to every plain chat reply (a headline, a short version); a page adds a read-only view at /api/<name>/ (GET only; every change goes through /chat, rapp/1 section 8). Senses and pages hot-load like agents/: add, change or remove the file and the next request sees it, no restart. Before this, only rappter-distro's own kernel loaded them; that loader is now an alias of this part. Organ is an alias of page."
       }
@@ -150,7 +151,7 @@
     },
     "senses_and_pages.py": {
       "size": 6613,
-      "sha256": "08970b0033d417486f0307eaae07d05c19bbf96cf32083d9a1f0ef3ab007185e"
+      "sha256": "1eddf52129df01baec2ce09962bc7025ffe478533dc67a0635a787814c251bb5"
     }
   },
   "kernel": {
