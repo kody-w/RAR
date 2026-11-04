@@ -531,9 +531,9 @@ def capture(action, run_id="", source="", scope="", items=None, source_id="", te
 class SourceCaptureAgent(BasicAgent):
     def __init__(self, archive_home=HOME):
         self.archive_home = archive_home
-        name = "SourceCapture"
-        super().__init__(name=name, metadata={
-            "name": name,
+        self.name = "SourceCapture"
+        self.metadata = {
+            "name": "SourceCapture",
             "display_name": __manifest__["display_name"],
             "description": "Capture and recall data from any user-authorized chat/file source. "
                            "VS Code must use its own browser/file tools to collect the data; this "
@@ -566,7 +566,8 @@ class SourceCaptureAgent(BasicAgent):
                 "path": {"type": "string", "description": "User-authorized local file to import; no commands are executed."},
                 "format": {"type": "string", "enum": ["llm-json", "json", "jsonl", "text", "markdown"]},
             }, "required": ["action"]},
-        })
+        }
+        super().__init__(name=self.name, metadata=self.metadata)
 
     def perform(self, action="", **kwargs):
         try:

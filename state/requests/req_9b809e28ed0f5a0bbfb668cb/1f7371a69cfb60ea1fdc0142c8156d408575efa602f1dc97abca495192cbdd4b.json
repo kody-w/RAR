@@ -29,5 +29,7 @@
   "slug": "source_capture_agent",
   "source_body_sha256": "55c3187e5af34613d7a0f1777486e35aaed9b4894a01125d065fd85343f78430",
   "source_url": "",
-  "status": "pending_review"
+  "status": "superseded",
+  "superseded_by": "02d118347b8a4b50515de40593edfddb70a4ac60948b4d561be705f6ea1a36b1",
+  "superseded_at": "2026-11-04T14:03:15.374023+00:00"
 }
