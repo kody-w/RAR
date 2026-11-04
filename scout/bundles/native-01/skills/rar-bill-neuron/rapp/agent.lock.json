@@ -1,7 +1,7 @@
 {
   "agent": "@bill/neuron_agent",
   "agent_file": "neuron_agent.py",
-  "agent_sha256": "093ac6ab4dcd123fdf55998ddc8f1dc904be9bb4b27d7eb82e118099e353fcc1",
+  "agent_sha256": "e0af759764d7c236755c42e600539fc64a7f17ddc3fac358077f6b23bd8bcb30",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "NeuronAgent",
   "host_dependencies": [],

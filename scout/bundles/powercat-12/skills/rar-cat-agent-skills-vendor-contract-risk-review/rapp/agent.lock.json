@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/vendor_contract_risk_review",
   "agent_file": "vendor_contract_risk_review_agent.py",
-  "agent_sha256": "a1eaff0f2d79f7143b9cd5cd11d58b9144cd6537ce0f81ec7f204ad55c256818",
+  "agent_sha256": "5da2d82c01864eb2ad6792ec0fe9535f2dffe88c3229432f661aef0e99efad33",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "VendorContractRiskReview",
   "host_dependencies": [],

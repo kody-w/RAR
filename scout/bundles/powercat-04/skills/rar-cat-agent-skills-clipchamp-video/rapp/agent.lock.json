@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/clipchamp_video",
   "agent_file": "clipchamp_video_agent.py",
-  "agent_sha256": "99c1a93abfecee1f36363f05c06d8b7f08c9a63e141aeb6e4f2014b6c50b4a4c",
+  "agent_sha256": "d2cfd098c26b1ed16c4eb39226dc8486860550d40cd1b8f1c0c6672dc6793515",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ClipchampVideo",
   "host_dependencies": [],

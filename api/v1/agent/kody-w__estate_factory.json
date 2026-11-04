@@ -3,10 +3,11 @@
   "id": "kody-w__estate_factory",
   "name": "EstateFactory",
   "rar_name": "@kody-w/estate_factory",
-  "rappid": "rappid:@kody-w/estate_factory:1be00bb79c2a5268eddae3dae6488b674fb97d9b8a89b957a6f8d9bc10addb96",
-  "_migrated_from": "rappid:@kody-w/estate_factory:d7716b741133e7b6c08a54a7de5efd51a4d01bf9a334a031ce1e54ae2757ed32",
+  "rappid": "rappid:@kody-w/estate_factory:6efbfb3f8160bc3e4be01f3cca63cb64f0f0c3022a43de2b16b7d31ee8997051",
+  "_migrated_from": "rappid:@kody-w/estate_factory:1be00bb79c2a5268eddae3dae6488b674fb97d9b8a89b957a6f8d9bc10addb96",
   "_migrated_from_all": [
-    "rappid:@kody-w/estate_factory:d7716b741133e7b6c08a54a7de5efd51a4d01bf9a334a031ce1e54ae2757ed32"
+    "rappid:@kody-w/estate_factory:d7716b741133e7b6c08a54a7de5efd51a4d01bf9a334a031ce1e54ae2757ed32",
+    "rappid:@kody-w/estate_factory:1be00bb79c2a5268eddae3dae6488b674fb97d9b8a89b957a6f8d9bc10addb96"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "0.1.2",
@@ -27,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 934,
-  "size_kb": 37.3,
-  "sha256": "7558023b529e952b58084d09cf0c93c1a8cdea34684302e62e6dba5b0ccbc238",
+  "lines": 944,
+  "size_kb": 38.5,
+  "sha256": "46b070177e96da94f21bacbd45bfb0fa19f01d9aa79af7727bf1ff8aadd8e7b3",
   "has_card": true,
   "added_at": "2026-05-16T16:30:24-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__classic_text_adventure",
   "name": "Classic Text Adventure",
   "rar_name": "@cat-agent-skills/classic_text_adventure",
-  "rappid": "rappid:@cat-agent-skills/classic_text_adventure:11f3fd875e9443e1738d8861aa80f2aa828aa10572a71cef8c9f237e81ef4c8a",
-  "_migrated_from": "rappid:@cat-agent-skills/classic_text_adventure:456bfbe09351a9d85e145446c355ed06882e917ca42abab106380333c86c8361",
+  "rappid": "rappid:@cat-agent-skills/classic_text_adventure:6fa8f7a599d7192362b8b7b3ca7b0bf5666f0aca8ac4632e8e4a36d269c0ac96",
+  "_migrated_from": "rappid:@cat-agent-skills/classic_text_adventure:11f3fd875e9443e1738d8861aa80f2aa828aa10572a71cef8c9f237e81ef4c8a",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/classic_text_adventure:456bfbe09351a9d85e145446c355ed06882e917ca42abab106380333c86c8361"
+    "rappid:@cat-agent-skills/classic_text_adventure:456bfbe09351a9d85e145446c355ed06882e917ca42abab106380333c86c8361",
+    "rappid:@cat-agent-skills/classic_text_adventure:11f3fd875e9443e1738d8861aa80f2aa828aa10572a71cef8c9f237e81ef4c8a"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "2.1.2",
@@ -24,9 +25,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 11.7,
-  "sha256": "09395f5d6e086ccbeb20463fd8726db778b02f174064e42616b0ab3b4d7e5fac",
+  "lines": 272,
+  "size_kb": 12.9,
+  "sha256": "4c4a86cbf7aeee5e0f57eff39d2e15f30542f45222da4cb6bad6b6993f190995",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

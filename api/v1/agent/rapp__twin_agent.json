@@ -3,10 +3,11 @@
   "id": "rapp__twin_agent",
   "name": "Twin",
   "rar_name": "@rapp/twin_agent",
-  "rappid": "rappid:@rapp/twin_agent:4e160ec1df10edd558c164ec32c7e739b481e03c713d9005d5c50d2427c643db",
-  "_migrated_from": "rappid:@rapp/twin_agent:4eee14ca6f8127a21f2573f9056338e611bae0c8d75aeebd431331ea9da43037",
+  "rappid": "rappid:@rapp/twin_agent:bc533d80605445cb3471917297aa257d1848aeb97af221d0c163dfa3b1c6bccb",
+  "_migrated_from": "rappid:@rapp/twin_agent:4e160ec1df10edd558c164ec32c7e739b481e03c713d9005d5c50d2427c643db",
   "_migrated_from_all": [
-    "rappid:@rapp/twin_agent:4eee14ca6f8127a21f2573f9056338e611bae0c8d75aeebd431331ea9da43037"
+    "rappid:@rapp/twin_agent:4eee14ca6f8127a21f2573f9056338e611bae0c8d75aeebd431331ea9da43037",
+    "rappid:@rapp/twin_agent:4e160ec1df10edd558c164ec32c7e739b481e03c713d9005d5c50d2427c643db"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.1.3",
@@ -29,9 +30,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 1773,
-  "size_kb": 71.9,
-  "sha256": "878729c7a59ce520c487d02e6986845a79babce12a6e10ecbbe5e9eec1b71dda",
+  "lines": 1783,
+  "size_kb": 73.0,
+  "sha256": "ca59d24cc598580225532ed9cbe5932dcc37957f77325d2dfccbe78a92826460",
   "has_card": true,
   "added_at": "2026-05-11T10:53:36-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

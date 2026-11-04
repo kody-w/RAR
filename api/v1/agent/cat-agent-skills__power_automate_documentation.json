@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__power_automate_documentation",
   "name": "Power Automate Documentation",
   "rar_name": "@cat-agent-skills/power_automate_documentation",
-  "rappid": "rappid:@cat-agent-skills/power_automate_documentation:97bdfa37a8780db100f46de4ca6e43dab55f32ce49232e7214363a761fefe439",
-  "_migrated_from": "rappid:@cat-agent-skills/power_automate_documentation:5a703496504b0c68544b1a4b69a7c58d311dc07deaf08f25f27f4528971bbb89",
+  "rappid": "rappid:@cat-agent-skills/power_automate_documentation:2dd5ed4386be12d7a6819355e78925824a40bcfe09c67014bf00d43cc03c09e2",
+  "_migrated_from": "rappid:@cat-agent-skills/power_automate_documentation:97bdfa37a8780db100f46de4ca6e43dab55f32ce49232e7214363a761fefe439",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/power_automate_documentation:5a703496504b0c68544b1a4b69a7c58d311dc07deaf08f25f27f4528971bbb89"
+    "rappid:@cat-agent-skills/power_automate_documentation:5a703496504b0c68544b1a4b69a7c58d311dc07deaf08f25f27f4528971bbb89",
+    "rappid:@cat-agent-skills/power_automate_documentation:97bdfa37a8780db100f46de4ca6e43dab55f32ce49232e7214363a761fefe439"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -25,9 +26,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.9,
-  "sha256": "2f6813624393f9855a67039690460b474cd338bc60bad710bc594790761b4ab0",
+  "lines": 272,
+  "size_kb": 14.1,
+  "sha256": "3344a86f74a0583dbd4ef3455746795bec78b962fa22169be50ad5f5e6094454",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

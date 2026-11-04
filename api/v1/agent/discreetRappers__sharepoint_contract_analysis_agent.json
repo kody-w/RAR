@@ -3,11 +3,12 @@
   "id": "discreetRappers__sharepoint_contract_analysis_agent",
   "name": "ContractAnalysis",
   "rar_name": "@discreetRappers/sharepoint_contract_analysis_agent",
-  "rappid": "rappid:@discreetRappers/sharepoint_contract_analysis_agent:53dd16eab1991e4cecf0ca63cdb2753ece530b3ce97aa538c035b9d8240377c0",
-  "_migrated_from": "rappid:@discreetRappers/sharepoint_contract_analysis_agent:1a8b06af02c5ed90f0461483fd59316c8311bdb4f78cb99fa07416c142766ffd",
+  "rappid": "rappid:@discreetRappers/sharepoint_contract_analysis_agent:eca02112a78ad9236737edf9f72c38d0bbe575cf0d5a24c294b2324f9a40217b",
+  "_migrated_from": "rappid:@discreetRappers/sharepoint_contract_analysis_agent:53dd16eab1991e4cecf0ca63cdb2753ece530b3ce97aa538c035b9d8240377c0",
   "_migrated_from_all": [
     "rappid:v2:agent:@discreetRappers/sharepoint_contract_analysis_agent:bbe89adb2e1271c1d44004afeffac1f0",
-    "rappid:@discreetRappers/sharepoint_contract_analysis_agent:1a8b06af02c5ed90f0461483fd59316c8311bdb4f78cb99fa07416c142766ffd"
+    "rappid:@discreetRappers/sharepoint_contract_analysis_agent:1a8b06af02c5ed90f0461483fd59316c8311bdb4f78cb99fa07416c142766ffd",
+    "rappid:@discreetRappers/sharepoint_contract_analysis_agent:53dd16eab1991e4cecf0ca63cdb2753ece530b3ce97aa538c035b9d8240377c0"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.2",
@@ -33,9 +34,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 2470,
-  "size_kb": 119.9,
-  "sha256": "befdce082ff846fa57e936fc130bd1e423451de8da911a50674b9a4c9c261d32",
+  "lines": 2480,
+  "size_kb": 121.1,
+  "sha256": "6bfac36ced9e10e89b7a35b6e3a7464d3cc66e4f8832feedbbde899852aa3893",
   "has_card": true,
   "added_at": "2026-04-06T16:39:03-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

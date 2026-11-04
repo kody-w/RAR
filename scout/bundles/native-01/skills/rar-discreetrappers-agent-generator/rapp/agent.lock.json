@@ -1,7 +1,7 @@
 {
   "agent": "@discreetRappers/agent_generator_agent",
   "agent_file": "agent_generator_agent.py",
-  "agent_sha256": "11b58f135dce6bd67bf595c7d5a31576e695a768bf6dba4d46709427e209e61c",
+  "agent_sha256": "396da3af57b237a0b36dcca2adb1520220be5b65813dd89d09ae59d3d26a9aa2",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AgentGeneratorAgent",
   "host_dependencies": [],

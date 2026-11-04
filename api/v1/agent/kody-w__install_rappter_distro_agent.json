@@ -3,10 +3,11 @@
   "id": "kody-w__install_rappter_distro_agent",
   "name": "Install Rappter Distro",
   "rar_name": "@kody-w/install_rappter_distro_agent",
-  "rappid": "rappid:@kody-w/install_rappter_distro_agent:0c0cd7dd5b04e37f33c9aa1a786987bf416c726ab9f3862f0408029141ead8e8",
-  "_migrated_from": "rappid:@kody-w/install_rappter_distro_agent:efc1fa81b7573e43c21f6b1a16a0ccefc2bcc0c35d85b9397cdb5992fc84773b",
+  "rappid": "rappid:@kody-w/install_rappter_distro_agent:1fb167f8ddd2e7d822a2c7023636fc915daed30fd66b164bc7061e50e8fcf049",
+  "_migrated_from": "rappid:@kody-w/install_rappter_distro_agent:0c0cd7dd5b04e37f33c9aa1a786987bf416c726ab9f3862f0408029141ead8e8",
   "_migrated_from_all": [
-    "rappid:@kody-w/install_rappter_distro_agent:efc1fa81b7573e43c21f6b1a16a0ccefc2bcc0c35d85b9397cdb5992fc84773b"
+    "rappid:@kody-w/install_rappter_distro_agent:efc1fa81b7573e43c21f6b1a16a0ccefc2bcc0c35d85b9397cdb5992fc84773b",
+    "rappid:@kody-w/install_rappter_distro_agent:0c0cd7dd5b04e37f33c9aa1a786987bf416c726ab9f3862f0408029141ead8e8"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.2",
@@ -26,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 940,
-  "size_kb": 36.4,
-  "sha256": "15ee1708f83dc55022bdf74d625b6b443d59f73371cd2f4c68100651c8f001d2",
+  "lines": 950,
+  "size_kb": 37.6,
+  "sha256": "91f2128926d613cc537ff4b3e5327a35b0268d0eabd548a828d5009af956b803",
   "has_card": true,
   "added_at": "2026-05-24T21:45:25-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

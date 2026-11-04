@@ -3,11 +3,12 @@
   "id": "rapp__swarm_factory_agent",
   "name": "SwarmFactory",
   "rar_name": "@rapp/swarm_factory_agent",
-  "rappid": "rappid:@rapp/swarm_factory_agent:ab82df0fdd98b16b8fb384f6e529587bde2b6573eda3c23c01f86a86c9c87f01",
-  "_migrated_from": "rappid:@rapp/swarm_factory_agent:62ced5449be9a30f08aefc7d7be841ef9a40e7d9d8bf9a5a6d9e775c72918df3",
+  "rappid": "rappid:@rapp/swarm_factory_agent:e86479c3d86d7a1b3601e28fb9b8bd9a92124e591b1e37a88bb108f090713c3d",
+  "_migrated_from": "rappid:@rapp/swarm_factory_agent:ab82df0fdd98b16b8fb384f6e529587bde2b6573eda3c23c01f86a86c9c87f01",
   "_migrated_from_all": [
     "rappid:v2:agent:@rapp/swarm_factory_agent:b0cde195f8b3ca50caac01f1651d904b",
-    "rappid:@rapp/swarm_factory_agent:62ced5449be9a30f08aefc7d7be841ef9a40e7d9d8bf9a5a6d9e775c72918df3"
+    "rappid:@rapp/swarm_factory_agent:62ced5449be9a30f08aefc7d7be841ef9a40e7d9d8bf9a5a6d9e775c72918df3",
+    "rappid:@rapp/swarm_factory_agent:ab82df0fdd98b16b8fb384f6e529587bde2b6573eda3c23c01f86a86c9c87f01"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "0.3.1",
@@ -27,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 752,
-  "size_kb": 40.4,
-  "sha256": "cfe3a0cffffb9d6395bf3d9377239e24500d3f7ab23c00b059da62f16a529ae0",
+  "lines": 762,
+  "size_kb": 41.6,
+  "sha256": "54ef914e46c15b4127235a1e17dd3a1d0257fbae0f9cede71a33173d52da4d93",
   "has_card": true,
   "added_at": "2026-04-20T12:38:45-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

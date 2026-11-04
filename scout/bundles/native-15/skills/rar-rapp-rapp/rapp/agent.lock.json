@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/rapp",
   "agent_file": "rapp_agent.py",
-  "agent_sha256": "137f52017fe47f6263fe54b15baa5cdd65d86f664debbe4e26cbbd835f4abedb",
+  "agent_sha256": "827cc07976687631087dd00ceb7d5d78082eb2f025467215cadac68e81d10a71",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappAgent",
   "host_dependencies": [],

@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/idea_refiner",
   "agent_file": "idea_refiner_agent.py",
-  "agent_sha256": "e738ccce46e81b957aee2b02fb6e92e0c6f7a007f8d264a0539158190464d5d4",
+  "agent_sha256": "48843aa159ca7a02aebbc259496476dc6c4e7aeb87efc227372c9fd55711cd84",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "IdeaRefiner",
   "host_dependencies": [],

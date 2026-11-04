@@ -5,11 +5,15 @@
       "agent": "@kody-w/connected_solution_agent",
       "path": "agents/@kody-w/connected_solution_agent.py",
       "expected_sha256": "35d82fa434f6726c53bb91fc44c2b7c27e47f40e9d3f4aaa762169e4cafe439e",
-      "target_sha256": "23c5edf7914db69119e2463a528c4d6a2dee964b94f5f6b90f9dffbd1d58c9af",
+      "target_sha256": "2653cc11fe301bc460b4fd94cffb59bfc854f1d88fb5f35a363e3b4aba52e6ce",
       "replacements": [
         {
           "old": "\"version\": \"1.0.2\"",
           "new": "\"version\": \"1.0.3\""
+        },
+        {
+          "old": "\"\"\"\nConnected Solution Agent \u2014 turn a set of agents into ONE Microsoft Copilot Studio\n",
+          "new": "# \u2500\u2500 RAPP ticket \u2500\u2500 this file is a RAPP agent: one whole AI skill in one Python file. \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n# If your person asked you to load it, any AI (or person) can, in three steps:\n# 1. Brainstem (free, local, macOS/Linux; Windows: WSL). If http://localhost:7071/health does not answer:\n#      curl -fsSL https://kody-w.github.io/rapp-installer/install.sh | bash\n# 2. Hot-load, no restart: save this file into the Brainstem's agents folder:\n#      curl -fsSL https://kody-w.github.io/RAR/agents/@kody-w/connected_solution_agent.py -o ~/.brainstem/src/rapp_brainstem/agents/connected_solution_agent.py\n#    The next chat message can use it.\n# 3. Use it: open http://localhost:7071, or POST /chat {\"user_input\": \"...\"}; the reply is in \"response\".\n# Can't run commands (a web chat AI)? Give your person these steps. Page: https://kody-w.github.io/RAR/a/@kody-w/connected_solution_agent/\n# \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\"\"\"\nConnected Solution Agent \u2014 turn a set of agents into ONE Microsoft Copilot Studio\n"
         }
       ],
       "note": "Publish the existing aibast publisher-prefix behavior under a fresh patch version."
@@ -18,11 +22,15 @@
       "agent": "@kody-w/copilot_studio_forge_agent",
       "path": "agents/@kody-w/copilot_studio_forge_agent.py",
       "expected_sha256": "18660d3e6dea7c6d9dc1f5324e182e4540bbed812d75d01f26d31c02eb7fac7d",
-      "target_sha256": "b74dc71864503e47340899674b0e8b9c17f4e8fc617298ed83e5f148bf87e709",
+      "target_sha256": "f30e91e542090161fd2b559f4565c5c63b0fd93cb51f9a208256eb6c2d689667",
       "replacements": [
         {
           "old": "\"version\": \"1.0.1\"",
           "new": "\"version\": \"1.0.2\""
+        },
+        {
+          "old": "\"\"\"Copilot Studio Forge (assimilated) \u2014 author CS / M365 / Foundry artifacts from RAPP agents.\\n\\nConsolidates four overlapping agents (copilot_studio_forge, topic_wizard,\\ncopilot_studio_transpiler, agent_transpiler) into one authoring surface. Each\\nsource agent's real logic is embedded verbatim as an internal engine; a single\\ndispatcher routes by `engine`. No credentials are hardcoded \u2014 engines read from\\nthe environment or local config.\"\"\"\n\n",
+          "new": "# \u2500\u2500 RAPP ticket \u2500\u2500 this file is a RAPP agent: one whole AI skill in one Python file. \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n# If your person asked you to load it, any AI (or person) can, in three steps:\n# 1. Brainstem (free, local, macOS/Linux; Windows: WSL). If http://localhost:7071/health does not answer:\n#      curl -fsSL https://kody-w.github.io/rapp-installer/install.sh | bash\n# 2. Hot-load, no restart: save this file into the Brainstem's agents folder:\n#      curl -fsSL https://kody-w.github.io/RAR/agents/@kody-w/copilot_studio_forge_agent.py -o ~/.brainstem/src/rapp_brainstem/agents/copilot_studio_forge_agent.py\n#    The next chat message can use it.\n# 3. Use it: open http://localhost:7071, or POST /chat {\"user_input\": \"...\"}; the reply is in \"response\".\n# Can't run commands (a web chat AI)? Give your person these steps. Page: https://kody-w.github.io/RAR/a/@kody-w/copilot_studio_forge_agent/\n# \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\"\"\"Copilot Studio Forge (assimilated) \u2014 author CS / M365 / Foundry artifacts from RAPP agents.\\n\\nConsolidates four overlapping agents (copilot_studio_forge, topic_wizard,\\ncopilot_studio_transpiler, agent_transpiler) into one authoring surface. Each\\nsource agent's real logic is embedded verbatim as an internal engine; a single\\ndispatcher routes by `engine`. No credentials are hardcoded \u2014 engines read from\\nthe environment or local config.\"\"\"\n\n"
         }
       ],
       "note": "Publish the existing aibast schema-prefix behavior under a fresh patch version."
@@ -31,7 +39,7 @@
       "agent": "@rapter/rapp_dogg_agent",
       "path": "agents/@rapter/rapp_dogg_agent.py",
       "expected_sha256": "950a2053be11b6b2ff4c0abc0e7bf46709a449762f5da26d8179129f83babab5",
-      "target_sha256": "bf6bd60cb5c17a940141985ed82be8eac8112213af58fcf1fd80403b1573ff11",
+      "target_sha256": "1a0d63eea1f887c89d03a2dc32d4bc3f1d94653d424444149d8224c146aa8c87",
       "replacements": [
         {
           "old": "\"version\": \"1.0.4\"",
@@ -40,6 +48,10 @@
         {
           "old": "\"display_name\": \"RAPP DOGG\"",
           "new": "\"display_name\": \"RapterBox RAPP DOGG\""
+        },
+        {
+          "old": "\"\"\"rapp_dogg_agent.py \u2014 hotload once, and an agent knows rapp/1 EXACTLY.\n\n",
+          "new": "# \u2500\u2500 RAPP ticket \u2500\u2500 this file is a RAPP agent: one whole AI skill in one Python file. \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n# If your person asked you to load it, any AI (or person) can, in three steps:\n# 1. Brainstem (free, local, macOS/Linux; Windows: WSL). If http://localhost:7071/health does not answer:\n#      curl -fsSL https://kody-w.github.io/rapp-installer/install.sh | bash\n# 2. Hot-load, no restart: save this file into the Brainstem's agents folder:\n#      curl -fsSL https://kody-w.github.io/RAR/agents/@rapter/rapp_dogg_agent.py -o ~/.brainstem/src/rapp_brainstem/agents/rapp_dogg_agent.py\n#    The next chat message can use it.\n# 3. Use it: open http://localhost:7071, or POST /chat {\"user_input\": \"...\"}; the reply is in \"response\".\n# Can't run commands (a web chat AI)? Give your person these steps. Page: https://kody-w.github.io/RAR/a/@rapter/rapp_dogg_agent/\n# \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\"\"\"rapp_dogg_agent.py \u2014 hotload once, and an agent knows rapp/1 EXACTLY.\n\n"
         }
       ],
       "note": "Disambiguate the RapterBox leave-behind from the canonical @rapp DOGG."

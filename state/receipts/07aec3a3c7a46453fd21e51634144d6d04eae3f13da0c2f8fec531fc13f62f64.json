@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@cat-agent-skills/competitive_battlecard_builder",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "89f511488361213aaf07ded3e0492e5111c9ad61267bbdcaf45e2363e34deff7"
+ },
+ "canonical_path": "agents/@cat-agent-skills/competitive_battlecard_builder_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_07aec3a3c7a46453fd21e51634144d6d04eae3f13da0c2f8fec531fc13f62f64",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "c2ecfa863e2631bbee32804ad0b3e1d10b4af20af55d7938b5d97c88c56e92f8",
+  "receipt": "rar_1f48c8398d4b308df79ae63e9390c15ae9bffe5d5cc7deb14332be07d7f956e3",
+  "version": "3.0.2"
+ },
+ "quality_tier": "frontier",
+ "request_id": "req_07aec3a3c7a46453fd21e516",
+ "revision_id": "07aec3a3c7a46453fd21e51634144d6d04eae3f13da0c2f8fec531fc13f62f64",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "3.0.2"
+}

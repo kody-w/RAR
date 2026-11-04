@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/windows_vm_install_lab_agent",
   "agent_file": "windows_vm_install_lab_agent.py",
-  "agent_sha256": "cb3249f0118aa4edf62f99daa353c1fa9ad50c79684832158351cdf81b9ca1bb",
+  "agent_sha256": "fc726fa63a72e17477e2358af45d9ee652adf5496439df752362372f3b58f9af",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WindowsVmLabAgent",
   "host_dependencies": [],

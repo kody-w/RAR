@@ -1,7 +1,7 @@
 {
   "agent": "@discreetRappers/sharepoint_contract_analysis_agent",
   "agent_file": "sharepoint_contract_analysis_agent.py",
-  "agent_sha256": "befdce082ff846fa57e936fc130bd1e423451de8da911a50674b9a4c9c261d32",
+  "agent_sha256": "6bfac36ced9e10e89b7a35b6e3a7464d3cc66e4f8832feedbbde899852aa3893",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ContractAnalysisAgent",
   "host_dependencies": [

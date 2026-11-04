@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__work_brief",
   "name": "Work Brief",
   "rar_name": "@cat-agent-skills/work_brief",
-  "rappid": "rappid:@cat-agent-skills/work_brief:3ab6c294814943cd30c58ada306be8e2dba352cf4a6a424010a30060a1168cfa",
-  "_migrated_from": "rappid:@cat-agent-skills/work_brief:2eaab823b71059d3d237c73e8f2c176919bccf5673c662adfa01f7078a9a187a",
+  "rappid": "rappid:@cat-agent-skills/work_brief:f79f8f10b68bdf4522d17a858ee5d9400ec17aabc335443f7b7f3d20685fc50d",
+  "_migrated_from": "rappid:@cat-agent-skills/work_brief:3ab6c294814943cd30c58ada306be8e2dba352cf4a6a424010a30060a1168cfa",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/work_brief:2eaab823b71059d3d237c73e8f2c176919bccf5673c662adfa01f7078a9a187a"
+    "rappid:@cat-agent-skills/work_brief:2eaab823b71059d3d237c73e8f2c176919bccf5673c662adfa01f7078a9a187a",
+    "rappid:@cat-agent-skills/work_brief:3ab6c294814943cd30c58ada306be8e2dba352cf4a6a424010a30060a1168cfa"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "2.4.2",
@@ -28,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.1,
-  "sha256": "fc84cf7ea8d9f0a140a10a5f7199b9267aafff543fe973e715b2f8f476591f0a",
+  "lines": 272,
+  "size_kb": 13.3,
+  "sha256": "3b957309d4ac4c7c604387d0814fd917c04feedd0f453bd24b110ea15152f1d2",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

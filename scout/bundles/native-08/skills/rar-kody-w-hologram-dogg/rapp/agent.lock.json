@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/hologram_dogg",
   "agent_file": "hologram_dogg_agent.py",
-  "agent_sha256": "d775ce5751134da02ee2d825ef0a74d79192691d3f5f8a3621c13c8bddfd8bf2",
+  "agent_sha256": "d4ad3769e2ef14bdef527072bdda1f2d126905bfbe52f30e74ba72ca953c11ee",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "HologramDOGGAgent",
   "host_dependencies": [],

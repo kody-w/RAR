@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@rapp/drift_watcher",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "0d87442bbc4330abef6f282af1e095f43c930580b20f1b3ac9ec010fad4187cd"
+ },
+ "canonical_path": "agents/@rapp/drift_watcher_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_71085137ca22db72a18192d56953fe612ca3834a61025a065110c225637ae480",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "6f2aedf636bbbde6a3b692c2d920c6af283291885886eba3f523179766529dee",
+  "receipt": "rar_3d480c333971f2a68531a8136499906d8f23979d9c5c0fdc912e342aadbace2d",
+  "version": "1.0.1"
+ },
+ "quality_tier": "official",
+ "request_id": "req_71085137ca22db72a18192d5",
+ "revision_id": "71085137ca22db72a18192d56953fe612ca3834a61025a065110c225637ae480",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "1.0.1"
+}

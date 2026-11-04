@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@rarbookworld/momentfactory",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "7c0330f8e2a55cce2e58e26cce883b2218f146536d13e23bd5af47e5986bebaf"
+ },
+ "canonical_path": "agents/@rarbookworld/momentfactory_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_7670a55628e498db532836ba29a95d62011a9b6751072256d86ad761bb771d41",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "08cddf370c9a202ceb0e52ecb41dd6882d3e314d46eeb796e9e1387d9b86ecb7",
+  "receipt": "rar_45be39be7efc6f8a864d9c2675a38553daf42c2c4bcf5f3cea0ebcabb2256941",
+  "version": "0.1.2"
+ },
+ "quality_tier": "community",
+ "request_id": "req_7670a55628e498db532836ba",
+ "revision_id": "7670a55628e498db532836ba29a95d62011a9b6751072256d86ad761bb771d41",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "0.1.2"
+}

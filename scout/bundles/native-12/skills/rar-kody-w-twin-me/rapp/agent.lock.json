@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/twin_me",
   "agent_file": "twin_me_agent.py",
-  "agent_sha256": "d3e0e553b21db6ba2323ebf1119a019bf44b898438fae6432284671359593896",
+  "agent_sha256": "821f3c97589ab2bd5ab346d36a2458621f39d568f205b9391893308099efabed",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TwinMeAgent",
   "host_dependencies": [],

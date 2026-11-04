@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/what_to_use_when",
   "agent_file": "what_to_use_when_agent.py",
-  "agent_sha256": "e80b02d38ecd766df8a02832be60359de48e852c670e6be8764e72cf25538337",
+  "agent_sha256": "de37690c140876aa9124ffc85a7712d4c93d0a5423e25cc6814416fcaba0e993",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WhatToUseWhen",
   "host_dependencies": [],

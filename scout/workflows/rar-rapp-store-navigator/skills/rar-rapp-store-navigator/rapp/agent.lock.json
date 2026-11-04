@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/store_navigator_agent",
   "agent_file": "store_navigator_agent.py",
-  "agent_sha256": "d66b3003e0a562b0af69dfa070eae0a4ca6dc97cb53438b9e636c2ffa55214ef",
+  "agent_sha256": "909f0778d6d9066e668adffc72f75be4d55de9552ab781df337afe6fd54e0d03",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "StoreNavigatorAgent",
   "host_dependencies": [],

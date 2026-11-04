@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@kody-w/rapp_x_notary_canary_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "c006e2637b31eb84db60a7832d730b37cd004d497b7d7ae589f2464706f03918"
+ },
+ "canonical_path": "agents/@kody-w/rapp_x_notary_canary_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_edf8a7f519568591b098c406bc1a17ca96fd058661c6350e66bd1ac105c59e21",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "5d34d87380925aa0f60c14e0066c8aa5e59ecd884bf19034619ebea58ad27149",
+  "receipt": "rar_9ae0b3801a2f3eb5c2537212a024e721a63685b0db1c5f9f55cd130a5284519d",
+  "version": "1.2.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_edf8a7f519568591b098c406",
+ "revision_id": "edf8a7f519568591b098c406bc1a17ca96fd058661c6350e66bd1ac105c59e21",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "1.2.0"
+}

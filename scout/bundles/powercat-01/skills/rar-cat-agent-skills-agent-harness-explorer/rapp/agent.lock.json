@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/agent_harness_explorer",
   "agent_file": "agent_harness_explorer_agent.py",
-  "agent_sha256": "ae4ce30f551513975fd4b56323c880f35f9894e07285212f88b81f65ce2f8eae",
+  "agent_sha256": "4e86bceb09a0a54ccd4332a264a2601cd15a61f27f86be2cbf1a859693f83cd5",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AgentHarnessExplorer",
   "host_dependencies": [],

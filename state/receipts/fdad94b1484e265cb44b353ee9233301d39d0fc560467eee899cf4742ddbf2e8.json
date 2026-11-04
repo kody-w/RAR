@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@cat-agent-skills/exam_prep_learning_plan_builder",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "bd985899fe983b4f68a0f915ee19628c54d774f79167fafef7a7e2866cbe7fdb"
+ },
+ "canonical_path": "agents/@cat-agent-skills/exam_prep_learning_plan_builder_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_fdad94b1484e265cb44b353ee9233301d39d0fc560467eee899cf4742ddbf2e8",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "03a5fb8c787b71080cb833cb37f80dd8b7a981731a2b71086670ad239f59a2cc",
+  "receipt": "rar_b358bcb09906b8065d0a42177f88c9ac003037fdbe296990c2f9ddf4b43c96e9",
+  "version": "4.0.3"
+ },
+ "quality_tier": "frontier",
+ "request_id": "req_fdad94b1484e265cb44b353e",
+ "revision_id": "fdad94b1484e265cb44b353ee9233301d39d0fc560467eee899cf4742ddbf2e8",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "4.0.3"
+}

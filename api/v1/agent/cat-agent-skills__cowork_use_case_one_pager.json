@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__cowork_use_case_one_pager",
   "name": "Cowork Use Case One-Pager",
   "rar_name": "@cat-agent-skills/cowork_use_case_one_pager",
-  "rappid": "rappid:@cat-agent-skills/cowork_use_case_one_pager:4b41d75df81d43734e29f9b9d49b2866300127925c73e1ab2a4c5d0025031a39",
-  "_migrated_from": "rappid:@cat-agent-skills/cowork_use_case_one_pager:64fd1a2953512a32e65f6b179f528a8eddb58e58da11ca89cbefba2e14eddb74",
+  "rappid": "rappid:@cat-agent-skills/cowork_use_case_one_pager:227520c7b01c9dc3a7ef88a88288c655ce3466898e3fbb727e7b8d96ef9ab72a",
+  "_migrated_from": "rappid:@cat-agent-skills/cowork_use_case_one_pager:4b41d75df81d43734e29f9b9d49b2866300127925c73e1ab2a4c5d0025031a39",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/cowork_use_case_one_pager:64fd1a2953512a32e65f6b179f528a8eddb58e58da11ca89cbefba2e14eddb74"
+    "rappid:@cat-agent-skills/cowork_use_case_one_pager:64fd1a2953512a32e65f6b179f528a8eddb58e58da11ca89cbefba2e14eddb74",
+    "rappid:@cat-agent-skills/cowork_use_case_one_pager:4b41d75df81d43734e29f9b9d49b2866300127925c73e1ab2a4c5d0025031a39"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.3",
@@ -27,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.3,
-  "sha256": "36fd44a76d80525c9ac4de4a7428e0bc4be342ca07dc8c6c8f1ade0df11a895f",
+  "lines": 272,
+  "size_kb": 13.5,
+  "sha256": "ea74002cbb93d2e5d5d336f091b9f4b6d89012e4669548ce3057b6443d09d75f",
   "has_card": true,
   "added_at": "2026-08-17T18:03:09-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

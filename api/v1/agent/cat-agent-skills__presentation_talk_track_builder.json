@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__presentation_talk_track_builder",
   "name": "Presentation Talk Track Builder",
   "rar_name": "@cat-agent-skills/presentation_talk_track_builder",
-  "rappid": "rappid:@cat-agent-skills/presentation_talk_track_builder:56d8778241f47898ed2260eb137b7eac15e6f5774f45535fa2e5cb40fed2f43a",
-  "_migrated_from": "rappid:@cat-agent-skills/presentation_talk_track_builder:9b16184a930c951660075cd151fed63f75455dc3cb281b4f3b84e9be85d57e30",
+  "rappid": "rappid:@cat-agent-skills/presentation_talk_track_builder:d89685cab0add8d9cdd3140dbd3c675cfae2c3a5f13ab46357d3939cc89bb2f6",
+  "_migrated_from": "rappid:@cat-agent-skills/presentation_talk_track_builder:56d8778241f47898ed2260eb137b7eac15e6f5774f45535fa2e5cb40fed2f43a",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/presentation_talk_track_builder:9b16184a930c951660075cd151fed63f75455dc3cb281b4f3b84e9be85d57e30"
+    "rappid:@cat-agent-skills/presentation_talk_track_builder:9b16184a930c951660075cd151fed63f75455dc3cb281b4f3b84e9be85d57e30",
+    "rappid:@cat-agent-skills/presentation_talk_track_builder:56d8778241f47898ed2260eb137b7eac15e6f5774f45535fa2e5cb40fed2f43a"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -26,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.7,
-  "sha256": "461da3b8ecd91d4ae5cc1ae9bc856fda9995910e9ab1048863a1b4435f9c04a0",
+  "lines": 272,
+  "size_kb": 13.9,
+  "sha256": "f164a6beb6d907f4b605378966693ea50532a14d39c7bb7d8b1c5a66e65a2794",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

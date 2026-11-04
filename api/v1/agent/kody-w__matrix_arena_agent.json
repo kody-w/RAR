@@ -3,10 +3,11 @@
   "id": "kody-w__matrix_arena_agent",
   "name": "Matrix Arena",
   "rar_name": "@kody-w/matrix_arena_agent",
-  "rappid": "rappid:@kody-w/matrix_arena_agent:77db583c426dc5520696460b010e87c1b078a85a3d80ddeef7a3196d340840e6",
-  "_migrated_from": "rappid:@kody-w/matrix_arena_agent:67aa5f939f1effa5c4b30e5031433533ffa026b92a6e506ef86a84f41f726629",
+  "rappid": "rappid:@kody-w/matrix_arena_agent:d3479ff26928332227d06261d4cce5b53c4112d70519b97a4fe635a206a06b10",
+  "_migrated_from": "rappid:@kody-w/matrix_arena_agent:77db583c426dc5520696460b010e87c1b078a85a3d80ddeef7a3196d340840e6",
   "_migrated_from_all": [
-    "rappid:@kody-w/matrix_arena_agent:67aa5f939f1effa5c4b30e5031433533ffa026b92a6e506ef86a84f41f726629"
+    "rappid:@kody-w/matrix_arena_agent:67aa5f939f1effa5c4b30e5031433533ffa026b92a6e506ef86a84f41f726629",
+    "rappid:@kody-w/matrix_arena_agent:77db583c426dc5520696460b010e87c1b078a85a3d80ddeef7a3196d340840e6"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -26,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 275,
-  "size_kb": 14.0,
-  "sha256": "313121fc5f72c6664069d2b016bf5f3a4566bad3f7bbebe29b411b26cf02425a",
+  "lines": 285,
+  "size_kb": 15.2,
+  "sha256": "1d1c4fe075943ca79f7873608a2a683448a0bd8d3c97e89b640b4d8690cee7f1",
   "has_card": true,
   "added_at": "2026-06-20T19:39:59-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

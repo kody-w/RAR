@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/content_quality_auditor",
   "agent_file": "content_quality_auditor_agent.py",
-  "agent_sha256": "d8b1870486fa4ca8f04150a70925851ae31980f7535850af3297aa10318d464f",
+  "agent_sha256": "cd8db2c4cd8e2a03a2e6ad4aa7879a1a9cf9f78cbaf3eb95e9ef25f0efdda293",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ContentQualityAuditor",
   "host_dependencies": [],

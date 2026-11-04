@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/power_automate_documentation",
   "agent_file": "power_automate_documentation_agent.py",
-  "agent_sha256": "2f6813624393f9855a67039690460b474cd338bc60bad710bc594790761b4ab0",
+  "agent_sha256": "3344a86f74a0583dbd4ef3455746795bec78b962fa22169be50ad5f5e6094454",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PowerAutomateDocumentation",
   "host_dependencies": [],

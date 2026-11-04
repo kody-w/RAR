@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/ai_first_process_redesign",
   "agent_file": "ai_first_process_redesign_agent.py",
-  "agent_sha256": "fed0d3782855d0c5ce6e0aaa4c9ffb05a91f85f2a156b281c18d7fd7cf3afaa0",
+  "agent_sha256": "e3d9ccd12cc26c79c1e294a7e0af59f2d7eb628d2366098ee45835223936c01b",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AiFirstProcessRedesign",
   "host_dependencies": [],

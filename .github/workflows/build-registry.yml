@@ -23,6 +23,9 @@ on:
       - 'state/releases.json'
       - 'state/maintainer_migrations.json'
       - 'build_registry.py'
+      - 'tools/stamp_ticket.py'
+      - 'tools/build_agent_pages.py'
+      - 'scripts/build_pokedex_api.py'
       - 'scripts/apply_maintainer_migrations.py'
       - 'scripts/mint_maintainer_receipts.py'
       - 'scripts/check_near_duplicates.py'
@@ -157,7 +160,7 @@ jobs:
                   agents/@rapp/learn_new_agent.py \
                   agents/@rapter/rapp_dogg_agent.py \
                   state/agent_lifecycle.json state/receipts \
-                  registry.json state/published_paths.json \
+                  registry.json a state/published_paths.json \
                   state/published_skill_paths.json \
                   state/agent_commit_dates.json \
                   manifest.json api/v1/catalog.json api/v1/taxonomy.json \

@@ -171,6 +171,10 @@ def main() -> int:
     parser.add_argument("--base", required=True)
     parser.add_argument("--repo-root", default=str(DEFAULT_REPO_ROOT))
     parser.add_argument("--pull-request", action="store_true")
+    parser.add_argument(
+        "--worktree", action="store_true",
+        help="include uncommitted tracked changes instead of stopping at HEAD",
+    )
     args = parser.parse_args()
     repo_root = Path(args.repo_root).resolve()
     lifecycle_file = repo_root / "state" / "agent_lifecycle.json"
@@ -190,7 +194,8 @@ def main() -> int:
             skill_lifecycle_file.read_text(encoding="utf-8")
         )
 
-    all_changes = _git(repo_root, "diff", "--name-status", base, "HEAD")
+    tip = [] if args.worktree else ["HEAD"]
+    all_changes = _git(repo_root, "diff", "--name-status", base, *tip)
     if args.pull_request:
         protected = []
         for line in all_changes.splitlines():
@@ -227,7 +232,7 @@ def main() -> int:
         "diff",
         "--name-status",
         base,
-        "HEAD",
+        *tip,
         "--",
         "agents/",
     )
@@ -246,7 +251,8 @@ def main() -> int:
         if not (
             path.endswith(".py")
             or path.endswith(".py.card")
-        ) or path.endswith(".py.stub"):
+            or path.endswith(".py.stub")
+        ):
             continue
         current_path = repo_root / path
         current = current_path.read_bytes() if current_path.exists() else None
@@ -266,7 +272,7 @@ def main() -> int:
         "diff",
         "--name-status",
         base,
-        "HEAD",
+        *tip,
         "--",
         "skills/",
     )

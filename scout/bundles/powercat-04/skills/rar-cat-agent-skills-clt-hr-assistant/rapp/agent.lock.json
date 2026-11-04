@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/clt_hr_assistant",
   "agent_file": "clt_hr_assistant_agent.py",
-  "agent_sha256": "f5b73a62818607a07ab31b5e8dc4218a277a3e7c1d97f5847706efa80d1bd0aa",
+  "agent_sha256": "f009d97229e7ac098108d20b4188d705620dfaebc5f359b00ec2bd747bbe2eea",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CltHrAssistant",
   "host_dependencies": [],

@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@cat-agent-skills/brand_voice_pass",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "8fe0e9ae3edc03da2cc0329fd08af34c4871530aa826d606972e1d38bf2c5127"
+ },
+ "canonical_path": "agents/@cat-agent-skills/brand_voice_pass_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_e7570478a082b8bfe5b4537454601ff7c5be203a0cb27933667c6a401b70a460",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "6637408a4175858b78cf4da9cb7fac9012e301e6577cc18e2064dca8629caa63",
+  "receipt": "rar_cca6b0497696f65774e9bdedf1a7ed26d6ae861a80dcef82cd2ca69f4ae15e31",
+  "version": "2.1.2"
+ },
+ "quality_tier": "frontier",
+ "request_id": "req_e7570478a082b8bfe5b45374",
+ "revision_id": "e7570478a082b8bfe5b4537454601ff7c5be203a0cb27933667c6a401b70a460",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "2.1.2"
+}

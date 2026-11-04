@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__meeting_analyzer",
   "name": "Meeting Analyzer",
   "rar_name": "@cat-agent-skills/meeting_analyzer",
-  "rappid": "rappid:@cat-agent-skills/meeting_analyzer:18b92ba3630608e5b5b84e0e3a122f09e4714278bff75c6699cfb96ad0596735",
-  "_migrated_from": "rappid:@cat-agent-skills/meeting_analyzer:66a0db6db94d4ff6177df480ddc4d2b7b238624d51631c321b3015f53ba710e0",
+  "rappid": "rappid:@cat-agent-skills/meeting_analyzer:76b462c1f3f1a53b6ab0cfee5dd98224853149cf837cc2149eae9ad714ff5898",
+  "_migrated_from": "rappid:@cat-agent-skills/meeting_analyzer:18b92ba3630608e5b5b84e0e3a122f09e4714278bff75c6699cfb96ad0596735",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/meeting_analyzer:66a0db6db94d4ff6177df480ddc4d2b7b238624d51631c321b3015f53ba710e0"
+    "rappid:@cat-agent-skills/meeting_analyzer:66a0db6db94d4ff6177df480ddc4d2b7b238624d51631c321b3015f53ba710e0",
+    "rappid:@cat-agent-skills/meeting_analyzer:18b92ba3630608e5b5b84e0e3a122f09e4714278bff75c6699cfb96ad0596735"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "2.1.2",
@@ -28,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.7,
-  "sha256": "cff073328a4f633a926aca3452f228aa971695a532761e72af7a40d99c3f14cd",
+  "lines": 272,
+  "size_kb": 13.9,
+  "sha256": "9b13ab416edb7d4f7013b1e210c393170b136d2b21efd1b02702ef7abccfc95d",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/journal_recall_agent",
   "agent_file": "journal_recall_agent.py",
-  "agent_sha256": "f97b91e25360b4feb4cd29957e5615339d25394198093d859eaa5e8e45977fac",
+  "agent_sha256": "f6358978b97b93606c74b987803dfc099f42e3ff143825040616102d5f8201bf",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "JournalRecallAgent",
   "host_dependencies": [],

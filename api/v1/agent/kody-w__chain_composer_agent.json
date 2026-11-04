@@ -3,10 +3,11 @@
   "id": "kody-w__chain_composer_agent",
   "name": "Chain Composer",
   "rar_name": "@kody-w/chain_composer_agent",
-  "rappid": "rappid:@kody-w/chain_composer_agent:340f18f1660e9594bac57da15c5db9904ea841f8cbebf9fa1311fdbb44dda14c",
-  "_migrated_from": "rappid:@kody-w/chain_composer_agent:18215a9c13d2e3d4a5a42871eef3b122b60abdd07382e75b3d42a9ce4f7452ea",
+  "rappid": "rappid:@kody-w/chain_composer_agent:ce405d7ee8599bb59179474e44d5f0823789f5ed819a49b3f1ce119144aecf84",
+  "_migrated_from": "rappid:@kody-w/chain_composer_agent:340f18f1660e9594bac57da15c5db9904ea841f8cbebf9fa1311fdbb44dda14c",
   "_migrated_from_all": [
-    "rappid:@kody-w/chain_composer_agent:18215a9c13d2e3d4a5a42871eef3b122b60abdd07382e75b3d42a9ce4f7452ea"
+    "rappid:@kody-w/chain_composer_agent:18215a9c13d2e3d4a5a42871eef3b122b60abdd07382e75b3d42a9ce4f7452ea",
+    "rappid:@kody-w/chain_composer_agent:340f18f1660e9594bac57da15c5db9904ea841f8cbebf9fa1311fdbb44dda14c"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -27,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 409,
-  "size_kb": 16.9,
-  "sha256": "5c3eec3b482e9a812b963cfb7570175ec73fe1cec384269a9c9a0a9866347d18",
+  "lines": 419,
+  "size_kb": 18.1,
+  "sha256": "2a6fe3cccb8c2ae3cb649def409dcbf714fea0e7760bbf0e3a95c989557f84a4",
   "has_card": true,
   "added_at": "2026-05-09T15:25:18-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

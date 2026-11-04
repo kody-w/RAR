@@ -3,10 +3,12 @@
   "id": "kody-w__art_generator_agent",
   "name": "Art Generator",
   "rar_name": "@kody-w/art_generator_agent",
-  "rappid": "rappid:@kody-w/art_generator_agent:c656dd557c80599c0a0d808dacf9a3a5a46f6b0de739762a51df43263c399742",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
+  "rappid": "rappid:@kody-w/art_generator_agent:72131a8adab340504d6b98b434e20b89da952df971f19123ecaa4272db8054a0",
+  "_migrated_from": "rappid:@kody-w/art_generator_agent:c656dd557c80599c0a0d808dacf9a3a5a46f6b0de739762a51df43263c399742",
+  "_migrated_from_all": [
+    "rappid:@kody-w/art_generator_agent:c656dd557c80599c0a0d808dacf9a3a5a46f6b0de739762a51df43263c399742"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.0",
   "publisher": "@kody-w",
   "category": "creative",
@@ -25,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 371,
-  "size_kb": 11.2,
-  "sha256": "abf32aa1c916a7c4b1606e434d3468e2f75c4bd725eafc304f022aeaae489712",
+  "lines": 381,
+  "size_kb": 12.4,
+  "sha256": "bc54973a21c902f273d1340391840ab8b1025232dadcd17175d0c1a2a77fd34c",
   "has_card": true,
   "added_at": "2026-08-18T03:01:53Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

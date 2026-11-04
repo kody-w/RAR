@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__persona_reaction_panel",
   "name": "Persona Reaction Panel",
   "rar_name": "@cat-agent-skills/persona_reaction_panel",
-  "rappid": "rappid:@cat-agent-skills/persona_reaction_panel:7d76757b554239d137f8a05e75da1820fe8ea59f5cb4bf1da388b21cbd9cbb3e",
-  "_migrated_from": "rappid:@cat-agent-skills/persona_reaction_panel:ebdda6310bb07d43b3dc2882bcc408416c91e7cf3f5b4a5d036e6875f0a63b76",
+  "rappid": "rappid:@cat-agent-skills/persona_reaction_panel:d0730ee5fe0386973141682b01a69f70e5aec7bf7df0fd6b084d619930bbbcd1",
+  "_migrated_from": "rappid:@cat-agent-skills/persona_reaction_panel:7d76757b554239d137f8a05e75da1820fe8ea59f5cb4bf1da388b21cbd9cbb3e",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/persona_reaction_panel:ebdda6310bb07d43b3dc2882bcc408416c91e7cf3f5b4a5d036e6875f0a63b76"
+    "rappid:@cat-agent-skills/persona_reaction_panel:ebdda6310bb07d43b3dc2882bcc408416c91e7cf3f5b4a5d036e6875f0a63b76",
+    "rappid:@cat-agent-skills/persona_reaction_panel:7d76757b554239d137f8a05e75da1820fe8ea59f5cb4bf1da388b21cbd9cbb3e"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -26,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.7,
-  "sha256": "adb83b8e6e07fe792cd7d5f581885ca1a6ada5be3413e82fe4a4620520596f53",
+  "lines": 272,
+  "size_kb": 13.9,
+  "sha256": "df0ee4b0cb412b509cf0dd8f9eb98c6373665213472e3b933a078379eab7b0f7",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

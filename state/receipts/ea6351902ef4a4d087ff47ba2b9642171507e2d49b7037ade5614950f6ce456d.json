@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@kody-w/connected_solution_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "2653cc11fe301bc460b4fd94cffb59bfc854f1d88fb5f35a363e3b4aba52e6ce"
+ },
+ "canonical_path": "agents/@kody-w/connected_solution_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_ea6351902ef4a4d087ff47ba2b9642171507e2d49b7037ade5614950f6ce456d",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "23c5edf7914db69119e2463a528c4d6a2dee964b94f5f6b90f9dffbd1d58c9af",
+  "receipt": "rar_f2c87c00e610fc9dbe1cf73c69e057fa60576d6b87a8fb5ef65cf0a5a7860d59",
+  "version": "1.0.3"
+ },
+ "quality_tier": "official",
+ "request_id": "req_ea6351902ef4a4d087ff47ba",
+ "revision_id": "ea6351902ef4a4d087ff47ba2b9642171507e2d49b7037ade5614950f6ce456d",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "1.0.3"
+}

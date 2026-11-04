@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__acroform_writer",
   "name": "AcroForm Writer",
   "rar_name": "@cat-agent-skills/acroform_writer",
-  "rappid": "rappid:@cat-agent-skills/acroform_writer:8e78a99667724ba08c2700b115684b75548971b6a5b76b9019467d7f661948fe",
-  "_migrated_from": "rappid:@cat-agent-skills/acroform_writer:e5524562f85b474bb7d8b3ace6413afd94486269ffa8ad033497c5ab623b6a96",
+  "rappid": "rappid:@cat-agent-skills/acroform_writer:08688ca24d10ce4aa7ba01d7c803798b06b29bcf888eafd979e88272760d0296",
+  "_migrated_from": "rappid:@cat-agent-skills/acroform_writer:8e78a99667724ba08c2700b115684b75548971b6a5b76b9019467d7f661948fe",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/acroform_writer:e5524562f85b474bb7d8b3ace6413afd94486269ffa8ad033497c5ab623b6a96"
+    "rappid:@cat-agent-skills/acroform_writer:e5524562f85b474bb7d8b3ace6413afd94486269ffa8ad033497c5ab623b6a96",
+    "rappid:@cat-agent-skills/acroform_writer:8e78a99667724ba08c2700b115684b75548971b6a5b76b9019467d7f661948fe"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -26,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.2,
-  "sha256": "443631d1d4364661b643c3d85cf3a0fadab6021e31c0796662765d71940be22a",
+  "lines": 272,
+  "size_kb": 13.4,
+  "sha256": "d9cb428f86f969b809e2bb18378be5096f7e87a590f6bd2d8321d18e6087091d",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

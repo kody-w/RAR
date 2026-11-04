@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/copilot_agent_advisor",
   "agent_file": "copilot_agent_advisor_agent.py",
-  "agent_sha256": "9de2c8ca78c8387755c34f06b7c478530cb3e84df8efe19abf60e1ad42e8932d",
+  "agent_sha256": "cf82b12d57ab776f1e9e989e305df5f5cb1acbf749e45dc601841f6e62d83b2d",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotAgentAdvisor",
   "host_dependencies": [],

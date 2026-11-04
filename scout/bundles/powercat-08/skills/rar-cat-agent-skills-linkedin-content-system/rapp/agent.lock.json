@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/linkedin_content_system",
   "agent_file": "linkedin_content_system_agent.py",
-  "agent_sha256": "8f2cf6fa8bde17f9ba6a01d54864ee5b1c02c560ece7c7488862e58cb7a441e7",
+  "agent_sha256": "354dcb11218d125b0d047e466c38e3923af74d37dfc7bcd9a47de2e742b84fab",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "LinkedinContentSystem",
   "host_dependencies": [],

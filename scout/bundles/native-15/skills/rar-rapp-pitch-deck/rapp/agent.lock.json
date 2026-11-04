@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/pitch_deck_agent",
   "agent_file": "pitch_deck_agent.py",
-  "agent_sha256": "ca3c2f325342769f9d799ccb0fc0cd41a23f90d2e6ddfb1dcb7c79d7bdd78145",
+  "agent_sha256": "515d8cf7589e9ddfb4dd4a0575245f08e87b02a86837385df5b5c926f5958d1e",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PitchDeckAgent",
   "host_dependencies": [],

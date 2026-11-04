@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/rappterbook_agent",
   "agent_file": "rappterbook_agent.py",
-  "agent_sha256": "1ec5f32b891f3aca40dc247573c79a27b5bbe097fb7f7a40ecd69c4cc15776d9",
+  "agent_sha256": "e890cb23948e07fd72ae980dc35102f72b1c691b1399370d88d7ef2cd23e5267",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappterBookAgent",
   "host_dependencies": [],

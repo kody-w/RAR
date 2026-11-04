@@ -3,10 +3,12 @@
   "id": "cat-agent-skills__breathing_room",
   "name": "Breathing Room",
   "rar_name": "@cat-agent-skills/breathing_room",
-  "rappid": "rappid:@cat-agent-skills/breathing_room:892a6228a7b645e547312484e8304301af1990a4dfb151bed907e3a44a1c95d5",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
+  "rappid": "rappid:@cat-agent-skills/breathing_room:68adfda45935344b324bd5e892980252b6b897a3f4ae5581ad24c57b743cd315",
+  "_migrated_from": "rappid:@cat-agent-skills/breathing_room:892a6228a7b645e547312484e8304301af1990a4dfb151bed907e3a44a1c95d5",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/breathing_room:892a6228a7b645e547312484e8304301af1990a4dfb151bed907e3a44a1c95d5"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.1.3",
   "publisher": "@cat-agent-skills",
   "category": "general",
@@ -26,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.2,
-  "sha256": "fe3c40feeeb2605e05593311b3be9795246c664abc303adc3c2602715001418b",
+  "lines": 272,
+  "size_kb": 13.4,
+  "sha256": "c1c264754985128b9c1ffd20b0e9b22a6766c10b6b2e72a0714764af07e00b0a",
   "has_card": true,
   "added_at": "2026-09-08T16:38:03-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

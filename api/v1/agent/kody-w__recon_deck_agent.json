@@ -3,10 +3,11 @@
   "id": "kody-w__recon_deck_agent",
   "name": "ReconDeck",
   "rar_name": "@kody-w/recon_deck_agent",
-  "rappid": "rappid:@kody-w/recon_deck_agent:cfd6e458aa71350e01e9d509bd9850f184c43bd89973342b8f0ffa977e0d1dd0",
-  "_migrated_from": "rappid:@kody-w/recon_deck_agent:c30ff701b509a63c0d408e9b68ed336b691abcffa9d9c7506d30e7f4ae7cdff4",
+  "rappid": "rappid:@kody-w/recon_deck_agent:65c667425baea0f5ce390a05c016a360bfb5d2fec15b5eebd310a0becd64c4ff",
+  "_migrated_from": "rappid:@kody-w/recon_deck_agent:cfd6e458aa71350e01e9d509bd9850f184c43bd89973342b8f0ffa977e0d1dd0",
   "_migrated_from_all": [
-    "rappid:@kody-w/recon_deck_agent:c30ff701b509a63c0d408e9b68ed336b691abcffa9d9c7506d30e7f4ae7cdff4"
+    "rappid:@kody-w/recon_deck_agent:c30ff701b509a63c0d408e9b68ed336b691abcffa9d9c7506d30e7f4ae7cdff4",
+    "rappid:@kody-w/recon_deck_agent:cfd6e458aa71350e01e9d509bd9850f184c43bd89973342b8f0ffa977e0d1dd0"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -31,9 +32,9 @@
     "@howardh/borg_agent",
     "@kody-w/rappterbook_agent"
   ],
-  "lines": 175,
-  "size_kb": 6.9,
-  "sha256": "678ff374c053126043a75147034abf4a27d05e626c83862ef7ff0371a5781ce1",
+  "lines": 185,
+  "size_kb": 8.1,
+  "sha256": "050da8810c28845a2d60cc336b33e3518805d57f02031a754901d92c55622d4c",
   "has_card": true,
   "added_at": "2026-05-24T21:45:25-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

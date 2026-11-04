@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__monte_carlo_analysis",
   "name": "Monte Carlo Analysis",
   "rar_name": "@cat-agent-skills/monte_carlo_analysis",
-  "rappid": "rappid:@cat-agent-skills/monte_carlo_analysis:682856fcdfe90fd0423b17413c034303cc422dbaabfcb2231058eeb6ec8afac1",
-  "_migrated_from": "rappid:@cat-agent-skills/monte_carlo_analysis:f415c33ba15a9ddd18734e4e09c4ba16be8893de895ca2a11cd19f31909f663d",
+  "rappid": "rappid:@cat-agent-skills/monte_carlo_analysis:1da8e88a3be63dcde9d78cb5d9bd5f89ddb16bcdc9c7511520e8e05f9323e84a",
+  "_migrated_from": "rappid:@cat-agent-skills/monte_carlo_analysis:682856fcdfe90fd0423b17413c034303cc422dbaabfcb2231058eeb6ec8afac1",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/monte_carlo_analysis:f415c33ba15a9ddd18734e4e09c4ba16be8893de895ca2a11cd19f31909f663d"
+    "rappid:@cat-agent-skills/monte_carlo_analysis:f415c33ba15a9ddd18734e4e09c4ba16be8893de895ca2a11cd19f31909f663d",
+    "rappid:@cat-agent-skills/monte_carlo_analysis:682856fcdfe90fd0423b17413c034303cc422dbaabfcb2231058eeb6ec8afac1"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -29,9 +30,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.4,
-  "sha256": "d859c727b6e268c23f6f7f423d0bc639d26deaef4653339360369ae84fae43e9",
+  "lines": 272,
+  "size_kb": 13.6,
+  "sha256": "f49b373bef4d20968b986d891cefaaffae7ff569a1388820214f144147ed06d5",
   "has_card": true,
   "added_at": "2026-08-11T09:43:05Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

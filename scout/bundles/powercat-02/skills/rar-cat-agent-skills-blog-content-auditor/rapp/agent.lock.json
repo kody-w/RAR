@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/blog_content_auditor",
   "agent_file": "blog_content_auditor_agent.py",
-  "agent_sha256": "d164db261994db6d69cdd075d45da8ad058dc87bea407088e9fe06935dbd58d7",
+  "agent_sha256": "902a9938856104a577bedd98478f6436adf0d6c55935978ff18563beec80d169",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BlogContentAuditor",
   "host_dependencies": [],

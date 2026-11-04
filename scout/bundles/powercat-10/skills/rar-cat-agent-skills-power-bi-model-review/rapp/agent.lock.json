@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/power_bi_model_review",
   "agent_file": "power_bi_model_review_agent.py",
-  "agent_sha256": "e64985886d803c3a693e66c6c88de9e55e8272a0255c7f5e47df71428d507619",
+  "agent_sha256": "d2a0cd620bbd24235f28f89f5f7fcdb1ebf7791ea5aaba31cf09e001caf52e86",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PowerBiModelReview",
   "host_dependencies": [],

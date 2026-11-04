@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/awaiting_reply",
   "agent_file": "awaiting_reply_agent.py",
-  "agent_sha256": "d02f3e9ab8faeaabb60ad68970f996c478687c29f591f9a0bce8459a68a6968e",
+  "agent_sha256": "b7aa264d0020c3aa19ae1edc112ef65f8ddcd16dcc3ec5d78bd9775e3b957719",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AwaitingReply",
   "host_dependencies": [],

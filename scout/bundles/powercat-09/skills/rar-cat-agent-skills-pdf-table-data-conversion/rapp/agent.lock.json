@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/pdf_table_data_conversion",
   "agent_file": "pdf_table_data_conversion_agent.py",
-  "agent_sha256": "8bcc954b577b135098beb82f05358cd014cd4bc96fd361763859a2762af5c0a3",
+  "agent_sha256": "c2f7ffba47f5e99eb59ff6fe2453844e159de3085d334c9748b900508c361d04",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PdfTableDataConversion",
   "host_dependencies": [],

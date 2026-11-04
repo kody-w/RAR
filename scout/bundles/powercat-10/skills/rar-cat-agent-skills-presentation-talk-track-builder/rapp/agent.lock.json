@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/presentation_talk_track_builder",
   "agent_file": "presentation_talk_track_builder_agent.py",
-  "agent_sha256": "461da3b8ecd91d4ae5cc1ae9bc856fda9995910e9ab1048863a1b4435f9c04a0",
+  "agent_sha256": "f164a6beb6d907f4b605378966693ea50532a14d39c7bb7d8b1c5a66e65a2794",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PresentationTalkTrackBuilder",
   "host_dependencies": [],

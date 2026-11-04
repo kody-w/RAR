@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/context_memory_agent",
   "agent_file": "context_memory_agent.py",
-  "agent_sha256": "611d0957274b1f584acd9f763bb789b616eca4c1e4297665064bfeef9ed37e7a",
+  "agent_sha256": "66c3a78c7dd9d6705e49ea4e6505103ddf5666e30ec4054874056bd05424d081",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ContextMemoryAgent",
   "host_dependencies": [

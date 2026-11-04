@@ -1,7 +1,7 @@
 {
   "agent": "@howardh/markdown_to_slides_agent",
   "agent_file": "markdown_to_slides_agent.py",
-  "agent_sha256": "ab0a2046a0a241148fdae0bfb68ce8f4f16317e96cfe9beabb0f285aaded07b7",
+  "agent_sha256": "b895958c9b7f074a4a51ca5456c3aa3b3e54061291f6ea4fe19d5eb4ae1c95cb",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MarkdownToSlidesAgent",
   "host_dependencies": [],

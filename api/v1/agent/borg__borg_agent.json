@@ -3,10 +3,11 @@
   "id": "borg__borg_agent",
   "name": "Borg",
   "rar_name": "@borg/borg_agent",
-  "rappid": "rappid:@borg/borg_agent:f55d76d5dd793e76ce2a279f52655886a052ba9df170ce884d7d07b7967fc12d",
-  "_migrated_from": "rappid:v2:agent:@borg/borg_agent:2674f191c96037d9bf5a535a7111c2ec",
+  "rappid": "rappid:@borg/borg_agent:4473926c697e4fa0253c2d2e6c374404a315ab69bfd084e4470b4d144b3e69f4",
+  "_migrated_from": "rappid:@borg/borg_agent:f55d76d5dd793e76ce2a279f52655886a052ba9df170ce884d7d07b7967fc12d",
   "_migrated_from_all": [
-    "rappid:v2:agent:@borg/borg_agent:2674f191c96037d9bf5a535a7111c2ec"
+    "rappid:v2:agent:@borg/borg_agent:2674f191c96037d9bf5a535a7111c2ec",
+    "rappid:@borg/borg_agent:f55d76d5dd793e76ce2a279f52655886a052ba9df170ce884d7d07b7967fc12d"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.1.0",
@@ -26,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 990,
-  "size_kb": 39.7,
-  "sha256": "7710557fc30ce2098c1b4d136004bc7e979ed8441b91dba95c38de830905166f",
+  "lines": 1000,
+  "size_kb": 40.9,
+  "sha256": "f381aedc272544bba4bac2329153244c037376b964bb2978fd9092306caae8c8",
   "has_card": true,
   "added_at": "2026-04-04T11:22:10-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

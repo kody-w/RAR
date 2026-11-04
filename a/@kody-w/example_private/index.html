@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ExamplePrivate - RAPP agent ticket</title>
+<meta name="description" content="Demonstrates the RAR private-agent stub layer — metadata only, with source resolved from a private GitHub repo at install time.">
+<link rel="canonical" href="https://kody-w.github.io/RAR/a/@kody-w/example_private/">
+</head>
+<body>
+<main>
+<h1>ExamplePrivate</h1>
+<p>Demonstrates the RAR private-agent stub layer — metadata only, with source resolved from a private GitHub repo at install time.</p>
+<h2>Load this agent in three steps</h2>
+<pre style="white-space:pre-wrap"># ExamplePrivate (@kody-w/example_private)
+
+Demonstrates the RAR private-agent stub layer — metadata only, with source resolved from a private GitHub repo at install time.
+
+GATED LISTING: this public file is metadata, NOT executable agent code.
+Do not copy the .py.stub into the agents folder. Your person needs read access to kody-w/example-private-rar and their own GitHub credentials.
+
+1. Brainstem: if http://localhost:7071/health does not answer, run:
+   curl -fsSL https://kody-w.github.io/rapp-installer/install.sh | bash
+2. In your paired Brainstem chat, ask:
+   rar install @kody-w/example_private
+   It resolves the private source using your own gh auth access. No restart is needed.
+3. Open http://localhost:7071, or POST /chat {&quot;user_input&quot;: &quot;...&quot;}; the reply is in &quot;response&quot;.
+
+Can&#x27;t run commands (a web chat AI)? Give your person these steps.
+
+Only load code you trust. If that filename already exists, keep a backup and inspect it before replacing it. Configure any required environment variables and dependencies before use.
+Dependencies: @rapp/basic_agent
+
+Raw file: https://kody-w.github.io/RAR/agents/@kody-w/private/example_private_agent.py.stub
+Browse in RAR: https://kody-w.github.io/RAR/#agent/@kody-w/example_private
+Page: https://kody-w.github.io/RAR/a/@kody-w/example_private/
+Plain text for AIs: https://kody-w.github.io/RAR/a/@kody-w/example_private/agent.md
+</pre>
+<p><a href="https://kody-w.github.io/RAR/agents/@kody-w/private/example_private_agent.py.stub">Raw file</a> | <a href="https://kody-w.github.io/RAR/#agent/@kody-w/example_private">Browse in RAR</a> | <a href="agent.md">Plain text for AIs</a></p>
+</main>
+</body>
+</html>

@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@cat-agent-skills/pdf_table_data_conversion",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "c2f7ffba47f5e99eb59ff6fe2453844e159de3085d334c9748b900508c361d04"
+ },
+ "canonical_path": "agents/@cat-agent-skills/pdf_table_data_conversion_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_31723772a6c916192f640ed1f92af4253b36e28e1b49ae52bd18457d5e700a99",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "8bcc954b577b135098beb82f05358cd014cd4bc96fd361763859a2762af5c0a3",
+  "receipt": "rar_0081bf2e8d7b81cf9e15dadb1d9a397f403fe2d8dd62dde5904c72034e460f8a",
+  "version": "3.0.2"
+ },
+ "quality_tier": "frontier",
+ "request_id": "req_31723772a6c916192f640ed1",
+ "revision_id": "31723772a6c916192f640ed1f92af4253b36e28e1b49ae52bd18457d5e700a99",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "3.0.2"
+}

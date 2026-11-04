@@ -1,7 +1,7 @@
 {
   "agent": "@howardh/chief_of_staff_agent",
   "agent_file": "chief_of_staff_agent.py",
-  "agent_sha256": "5d904f34d63faa2271e66a6d1c6f033c269136c840a1bd4d4dcc57875bbf8354",
+  "agent_sha256": "fedbb91cc50aca1912b9b29727b385cf6a4e06507e808d67ccb690a8eb4df9bc",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ChiefOfStaffAgent",
   "host_dependencies": [],

@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@kody-w/workiq",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "7f6de288bc1e6756834a22d68cf832b987c9d5a28ef3338e658a6948a5b18fab"
+ },
+ "canonical_path": "agents/@kody-w/workiq_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_96f2b6a0931658922ad6db73023eaaa435fa8094ddc9108535aed39d93c286e8",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "e5cb90e2a731de05214243cc96ad52946ee5c4ef6c96cb724349469172bd8dc4",
+  "receipt": "rar_e073ff010b46f020a83c8061e4b077b149e687d5715bfdea3b1afca128cb619f",
+  "version": "1.1.2"
+ },
+ "quality_tier": "official",
+ "request_id": "req_96f2b6a0931658922ad6db73",
+ "revision_id": "96f2b6a0931658922ad6db73023eaaa435fa8094ddc9108535aed39d93c286e8",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "1.1.2"
+}

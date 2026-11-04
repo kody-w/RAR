@@ -3,10 +3,12 @@
   "id": "rapter__rapp_dogg_agent",
   "name": "RapterBox RAPP DOGG",
   "rar_name": "@rapter/rapp_dogg_agent",
-  "rappid": "rappid:@rapter/rapp_dogg_agent:095a41033e871257d56998a88eb31aea9d9bbbc229abb68a2bf8ded6b8c23c4f",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
+  "rappid": "rappid:@rapter/rapp_dogg_agent:84823457005222d0d7cced57282944302c09e024e65784febebc86db0816f9f9",
+  "_migrated_from": "rappid:@rapter/rapp_dogg_agent:095a41033e871257d56998a88eb31aea9d9bbbc229abb68a2bf8ded6b8c23c4f",
+  "_migrated_from_all": [
+    "rappid:@rapter/rapp_dogg_agent:095a41033e871257d56998a88eb31aea9d9bbbc229abb68a2bf8ded6b8c23c4f"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.5",
   "publisher": "@rapter",
   "category": "core",
@@ -29,9 +31,9 @@
   "dependencies": [
     "@rapter/basic_agent"
   ],
-  "lines": 797,
-  "size_kb": 40.6,
-  "sha256": "bf6bd60cb5c17a940141985ed82be8eac8112213af58fcf1fd80403b1573ff11",
+  "lines": 807,
+  "size_kb": 41.8,
+  "sha256": "1a0d63eea1f887c89d03a2dc32d4bc3f1d94653d424444149d8224c146aa8c87",
   "has_card": true,
   "added_at": "2026-08-26T17:18:46-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

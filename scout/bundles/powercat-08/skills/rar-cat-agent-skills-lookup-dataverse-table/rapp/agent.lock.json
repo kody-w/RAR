@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/lookup_dataverse_table",
   "agent_file": "lookup_dataverse_table_agent.py",
-  "agent_sha256": "7b24a8b526f90b9df0e2d3d9c0e0402b8757bba8c615da546a617fff0815b959",
+  "agent_sha256": "8b0277b43675440ff607ba85c746d410d864d62ddc5682363f111737c00be4c4",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "LookupDataverseTable",
   "host_dependencies": [],

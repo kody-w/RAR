@@ -1,3 +1,13 @@
+# ── RAPP ticket ── this file is a RAPP agent: one whole AI skill in one Python file. ─────────────
+# If your person asked you to load it, any AI (or person) can, in three steps:
+# 1. Brainstem (free, local, macOS/Linux; Windows: WSL). If http://localhost:7071/health does not answer:
+#      curl -fsSL https://kody-w.github.io/rapp-installer/install.sh | bash
+# 2. Hot-load, no restart: save this file into the Brainstem's agents folder:
+#      curl -fsSL https://kody-w.github.io/RAR/agents/@bill/neuron_agent.py -o ~/.brainstem/src/rapp_brainstem/agents/neuron_agent.py
+#    The next chat message can use it.
+# 3. Use it: open http://localhost:7071, or POST /chat {"user_input": "..."}; the reply is in "response".
+# Can't run commands (a web chat AI)? Give your person these steps. Page: https://kody-w.github.io/RAR/a/@bill/neuron_agent/
+# ───────────────────────────────────────────────────────────────────────────────────────────────
 """Neuron — portable memory packs (RAPPNeurons) as a single-file agent.
 
 Drop this one .py file into agents/@bill/ and the brainstem gets a compact

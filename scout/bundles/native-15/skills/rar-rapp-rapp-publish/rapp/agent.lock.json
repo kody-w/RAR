@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/rapp_publish_agent",
   "agent_file": "rapp_publish_agent.py",
-  "agent_sha256": "fc199e9cd0c478971f5c67d818d6405d32e0035974da2187e29292bf36adc6ed",
+  "agent_sha256": "838117db87ab4909829de672e666504941b99c348d8bd5a9e3eb5a5542c69688",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappPublishAgent",
   "host_dependencies": [],

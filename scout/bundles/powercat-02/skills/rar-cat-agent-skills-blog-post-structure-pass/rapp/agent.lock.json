@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/blog_post_structure_pass",
   "agent_file": "blog_post_structure_pass_agent.py",
-  "agent_sha256": "7aa974d9e64cd44bf8b7d1c0b45c56396849d26beefbdb9d853de01547392519",
+  "agent_sha256": "43bbdec88cbd22f1df3c807a5ec76ded944fe911c957b5b1f5eb84cc660be546",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BlogPostStructurePass",
   "host_dependencies": [],

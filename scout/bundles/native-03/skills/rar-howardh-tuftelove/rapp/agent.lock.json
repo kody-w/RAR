@@ -1,7 +1,7 @@
 {
   "agent": "@howardh/tuftelove_agent",
   "agent_file": "tuftelove_agent.py",
-  "agent_sha256": "f5bba7ff967f166255b5220496ae7e86cb5f636730cb01a43abbf32113ebd46d",
+  "agent_sha256": "fe047c604edf53eac949ec02837dac4c6b32cba0db69d3d99119dbc3e50caf14",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TufteLoveAgent",
   "host_dependencies": [],

@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/rapplication_agent",
   "agent_file": "rapplication_agent.py",
-  "agent_sha256": "a40d2ce08abde9774ebb4d34f02577a31e15a2ef66d2064953ab08a3f39baa0b",
+  "agent_sha256": "c7bbf9955cd91626d099d580ab612f4081b0b81bd0b3b35033445872461de01c",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RapplicationAgent",
   "host_dependencies": [],

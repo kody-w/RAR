@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/manage_memory_agent",
   "agent_file": "manage_memory_agent.py",
-  "agent_sha256": "a3866eaef31b35e1a7b9bb17755d42950e3b62ab4c04b051f3f0e27808acb435",
+  "agent_sha256": "a37beaa2ab5282d9a36fbb1a10b1144649ef1a254baa437caaee0a3f87c30d1a",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ManageMemoryAgent",
   "host_dependencies": [

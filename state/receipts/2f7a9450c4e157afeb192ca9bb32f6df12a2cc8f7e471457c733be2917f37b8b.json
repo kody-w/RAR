@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@cat-agent-skills/spend_more_time_with_friends_and_family",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "4743e9c8b7ee1fa73e987d108f61e04136cdc16eea4ee7d16d01fd4db0d6984d"
+ },
+ "canonical_path": "agents/@cat-agent-skills/spend_more_time_with_friends_and_family_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_2f7a9450c4e157afeb192ca9bb32f6df12a2cc8f7e471457c733be2917f37b8b",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "ae5c4e43c1e54091d9c0fba127f9b7f077a61289feb638570df2aaab146c313c",
+  "receipt": "rar_c527ef4cfd6eab994dacadb108aa7eff4db21825e15993031f98217cde061d07",
+  "version": "3.0.2"
+ },
+ "quality_tier": "frontier",
+ "request_id": "req_2f7a9450c4e157afeb192ca9",
+ "revision_id": "2f7a9450c4e157afeb192ca9bb32f6df12a2cc8f7e471457c733be2917f37b8b",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "3.0.2"
+}

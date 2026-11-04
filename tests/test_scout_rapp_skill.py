@@ -16,6 +16,7 @@ import sys
 import zipfile
 
 import pytest
+from tools.stamp_ticket import strip_ticket
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -214,7 +215,37 @@ def test_every_primary_skill_is_reversible_and_exactly_pinned():
             assert sha256(target.read_bytes()) == file["sha256"]
 
 
-def test_drifted_current_files_use_notarized_historical_bytes():
+def assert_source_provenance(record, registry):
+    if re.fullmatch(r"[a-f0-9]{40}", record["source_commit"]):
+        return
+    assert record["source_commit"] == "working-tree"
+    source = (ROOT / registry["_file"]).read_bytes()
+    original = strip_ticket(source, registry)
+    assert original != source, "only exact ticket migrations may lack a git source commit"
+    lifecycle = json.loads((ROOT / "state" / "agent_lifecycle.json").read_text())
+    receipt_id = lifecycle["agents"][record["identity"]]["latest_receipt"]
+    receipt = json.loads(
+        (ROOT / "state" / "receipts" / f"{receipt_id.removeprefix('rar_')}.json").read_text()
+    )
+    assert receipt["artifact"]["digest"] == record["source_sha256"] == sha256(lf(source))
+    assert receipt["previous"]["digest"] == sha256(lf(original))
+    committed = subprocess.check_output(
+        ["git", "show", f"{registry['_latest_commit_sha']}:{registry['_file']}"],
+        cwd=ROOT,
+    )
+    if committed != original:
+        history = subprocess.check_output(
+            ["git", "log", "--format=%H", "--", registry["_file"]], cwd=ROOT, text=True,
+        ).splitlines()
+        assert any(
+            subprocess.check_output(
+                ["git", "show", f"{commit}:{registry['_file']}"], cwd=ROOT,
+            ) == original
+            for commit in history
+        )
+
+
+def test_drifted_current_files_use_notarized_historical_bytes_or_exact_tickets():
     registry_by_name = {entry["name"]: entry for entry in REGISTRY}
     catalog_by_name = {entry["identity"]: entry for entry in CATALOG["skills"]}
     recovered = [
@@ -226,10 +257,11 @@ def test_drifted_current_files_use_notarized_historical_bytes():
         record = catalog_by_name[identity]
         registry = registry_by_name[identity]
         assert record["source_sha256"] == registry["_sha256"]
-        assert re.fullmatch(r"[a-f0-9]{40}", record["source_commit"])
+        assert_source_provenance(record, registry)
 
 
-def test_every_committed_registry_skill_has_a_git_source_commit():
+def test_every_registry_skill_has_a_git_source_commit_or_notarized_exact_ticket():
+    registry_by_name = {entry["name"]: entry for entry in REGISTRY}
     records = [
         entry
         for entry in CATALOG["skills"]
@@ -237,8 +269,7 @@ def test_every_committed_registry_skill_has_a_git_source_commit():
     ]
     assert records
     for record in records:
-        assert record["source_commit"] != "working-tree"
-        assert re.fullmatch(r"[a-f0-9]{40}", record["source_commit"])
+        assert_source_provenance(record, registry_by_name[record["identity"]])
 
 
 def test_powercat_channel_projects_or_explicitly_defers_every_skill():

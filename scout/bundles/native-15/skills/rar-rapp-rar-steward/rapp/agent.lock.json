@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/rar_steward",
   "agent_file": "rar_steward_agent.py",
-  "agent_sha256": "e8cb15fe4f51fefb7c9f05fe3722dc7eccd67ab22beca8398591479d8fcc9e3e",
+  "agent_sha256": "e02083e45e0704bddd5a681e08490a92c9ef06c44277d09000aba99f65cacd57",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RarStewardAgent",
   "host_dependencies": [],

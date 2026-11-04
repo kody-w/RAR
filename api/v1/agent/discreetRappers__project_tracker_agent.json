@@ -3,11 +3,12 @@
   "id": "discreetRappers__project_tracker_agent",
   "name": "ProjectTracker",
   "rar_name": "@discreetRappers/project_tracker_agent",
-  "rappid": "rappid:@discreetRappers/project_tracker_agent:82267706404c016883bf5577e967f88c62570e65ae91894b45aea6f7f49313e1",
-  "_migrated_from": "rappid:@discreetRappers/project_tracker_agent:6ea1f9dae8625ab312cbd71f82ff4dae90ae4136e94afdd4c0ca02653a7d9dfa",
+  "rappid": "rappid:@discreetRappers/project_tracker_agent:755c9cfb049aadf401a4a4262ddeb52a836a993a94abd1c58cf6480043e518ea",
+  "_migrated_from": "rappid:@discreetRappers/project_tracker_agent:82267706404c016883bf5577e967f88c62570e65ae91894b45aea6f7f49313e1",
   "_migrated_from_all": [
     "rappid:v2:agent:@discreetRappers/project_tracker_agent:701fe6481c8d3b00c27426e912b659a1",
-    "rappid:@discreetRappers/project_tracker_agent:6ea1f9dae8625ab312cbd71f82ff4dae90ae4136e94afdd4c0ca02653a7d9dfa"
+    "rappid:@discreetRappers/project_tracker_agent:6ea1f9dae8625ab312cbd71f82ff4dae90ae4136e94afdd4c0ca02653a7d9dfa",
+    "rappid:@discreetRappers/project_tracker_agent:82267706404c016883bf5577e967f88c62570e65ae91894b45aea6f7f49313e1"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -25,9 +26,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 894,
-  "size_kb": 39.2,
-  "sha256": "b9df9cb9d4f0743092aae62cabc5a156bd6b7f73fd773fce14584278f1c56fa4",
+  "lines": 904,
+  "size_kb": 40.3,
+  "sha256": "6ce05fe89b9c16b52949a4e36991f5d9536cb7981aa891d93b4fc53419bd4849",
   "has_card": true,
   "added_at": "2026-04-06T16:39:03-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

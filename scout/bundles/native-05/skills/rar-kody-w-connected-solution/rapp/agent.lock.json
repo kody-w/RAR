@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/connected_solution_agent",
   "agent_file": "connected_solution_agent.py",
-  "agent_sha256": "23c5edf7914db69119e2463a528c4d6a2dee964b94f5f6b90f9dffbd1d58c9af",
+  "agent_sha256": "2653cc11fe301bc460b4fd94cffb59bfc854f1d88fb5f35a363e3b4aba52e6ce",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConnectedSolutionAgent",
   "host_dependencies": [],

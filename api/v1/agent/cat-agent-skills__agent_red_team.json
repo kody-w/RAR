@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__agent_red_team",
   "name": "Agent Red Team",
   "rar_name": "@cat-agent-skills/agent_red_team",
-  "rappid": "rappid:@cat-agent-skills/agent_red_team:850d4e3cdf94ef8bc724766b96f4c7eb0fe6eed67e09ee1a99eb1ea12ca38b99",
-  "_migrated_from": "rappid:@cat-agent-skills/agent_red_team:a48e9c8913758693093c63db61570c9ea791bf034138a5c598d97c47a406bdfa",
+  "rappid": "rappid:@cat-agent-skills/agent_red_team:c2083bab99efe95545ac402eda495594dc971ae82583f2776015491fc1d3d5ec",
+  "_migrated_from": "rappid:@cat-agent-skills/agent_red_team:850d4e3cdf94ef8bc724766b96f4c7eb0fe6eed67e09ee1a99eb1ea12ca38b99",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/agent_red_team:a48e9c8913758693093c63db61570c9ea791bf034138a5c598d97c47a406bdfa"
+    "rappid:@cat-agent-skills/agent_red_team:a48e9c8913758693093c63db61570c9ea791bf034138a5c598d97c47a406bdfa",
+    "rappid:@cat-agent-skills/agent_red_team:850d4e3cdf94ef8bc724766b96f4c7eb0fe6eed67e09ee1a99eb1ea12ca38b99"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -29,9 +30,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.5,
-  "sha256": "bd33be4ed1eedbdc195de49a108e26511b59e4ef9ee32e8839cd476334c39dac",
+  "lines": 272,
+  "size_kb": 13.7,
+  "sha256": "5f01b98ad41cd2a57a431bb9af01f063d2fd645d67d6548a58d36a10b3686317",
   "has_card": true,
   "added_at": "2026-08-28T04:52:39Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

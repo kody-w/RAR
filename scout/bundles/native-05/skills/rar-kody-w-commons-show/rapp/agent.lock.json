@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/commons_show_agent",
   "agent_file": "commons_show_agent.py",
-  "agent_sha256": "c7b97c5fbe3611f175f3812831450a5e559a4fcee17cb46fdad27b30d26a49ee",
+  "agent_sha256": "9287c090fce8d7a702aaddcb1223ea739ee2ac8988048239b7f78d16e8d94a0f",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CommonsShowAgent",
   "host_dependencies": [],

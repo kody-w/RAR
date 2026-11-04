@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/iterative_file_editing",
   "agent_file": "iterative_file_editing_agent.py",
-  "agent_sha256": "a4d257098864c459b987e5f2d613b74b9ce2dfca94886c34306fbb4869d073db",
+  "agent_sha256": "2250fc38fc33af9fc658a7a03db2db27ddcde3a4f9263e061f0a01561369a12e",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "IterativeFileEditing",
   "host_dependencies": [],

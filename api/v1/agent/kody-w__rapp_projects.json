@@ -3,10 +3,11 @@
   "id": "kody-w__rapp_projects",
   "name": "RappProjects",
   "rar_name": "@kody-w/rapp_projects",
-  "rappid": "rappid:@kody-w/rapp_projects:bda15d2ae308f3ff842c87fe3fe3fe459101717d52aa497480fc7697a737bc6e",
-  "_migrated_from": "rappid:@kody-w/rapp_projects:62e72af086647516c3e4685f7e46843d11c24bfb4c07978137f84ecc6b5fb1a6",
+  "rappid": "rappid:@kody-w/rapp_projects:580a3fb1301321a803b2431d155e9a380e2f87e03c81a637b87d7ea5041b9c05",
+  "_migrated_from": "rappid:@kody-w/rapp_projects:bda15d2ae308f3ff842c87fe3fe3fe459101717d52aa497480fc7697a737bc6e",
   "_migrated_from_all": [
-    "rappid:@kody-w/rapp_projects:62e72af086647516c3e4685f7e46843d11c24bfb4c07978137f84ecc6b5fb1a6"
+    "rappid:@kody-w/rapp_projects:62e72af086647516c3e4685f7e46843d11c24bfb4c07978137f84ecc6b5fb1a6",
+    "rappid:@kody-w/rapp_projects:bda15d2ae308f3ff842c87fe3fe3fe459101717d52aa497480fc7697a737bc6e"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.3",
@@ -26,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 4341,
-  "size_kb": 148.5,
-  "sha256": "e994af96f664097a291b4a1446ba8b8e36e911d7ccacd5aa58d984f64fb3afca",
+  "lines": 4351,
+  "size_kb": 149.7,
+  "sha256": "f4102700cea9eefca33d876a04ba7b077e4111bf045492af678d2854058d97f1",
   "has_card": true,
   "added_at": "2026-08-31T11:52:12-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

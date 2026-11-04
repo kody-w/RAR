@@ -3,10 +3,11 @@
   "id": "kody-w__context_memory_agent",
   "name": "ContextMemory",
   "rar_name": "@kody-w/context_memory_agent",
-  "rappid": "rappid:@kody-w/context_memory_agent:90c4190766f6ebd727222183d10107a3b3f168742e1f54f59cce99bca0504518",
-  "_migrated_from": "rappid:@kody-w/context_memory_agent:f04e20396413320cebe4e67f70ad92e84e4a8efca97f3259d0700ab1ea38f58a",
+  "rappid": "rappid:@kody-w/context_memory_agent:011d0a15e558887b083e3367e7cddc2f5f650ea4e565482c40ac02ac5a08ecdf",
+  "_migrated_from": "rappid:@kody-w/context_memory_agent:90c4190766f6ebd727222183d10107a3b3f168742e1f54f59cce99bca0504518",
   "_migrated_from_all": [
-    "rappid:@kody-w/context_memory_agent:f04e20396413320cebe4e67f70ad92e84e4a8efca97f3259d0700ab1ea38f58a"
+    "rappid:@kody-w/context_memory_agent:f04e20396413320cebe4e67f70ad92e84e4a8efca97f3259d0700ab1ea38f58a",
+    "rappid:@kody-w/context_memory_agent:90c4190766f6ebd727222183d10107a3b3f168742e1f54f59cce99bca0504518"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -25,9 +26,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 183,
-  "size_kb": 8.4,
-  "sha256": "611d0957274b1f584acd9f763bb789b616eca4c1e4297665064bfeef9ed37e7a",
+  "lines": 193,
+  "size_kb": 9.6,
+  "sha256": "66c3a78c7dd9d6705e49ea4e6505103ddf5666e30ec4054874056bd05424d081",
   "has_card": true,
   "added_at": "2026-05-24T21:45:25-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

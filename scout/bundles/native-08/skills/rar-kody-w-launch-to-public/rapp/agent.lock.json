@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/launch_to_public_agent",
   "agent_file": "launch_to_public_agent.py",
-  "agent_sha256": "857168ad0d4421f9099e93a63c4805ad22e229c31526b4d1cab37f9548fdff0e",
+  "agent_sha256": "15f570244d281c16313f2711c180910bd839fce61609a37545358e63b7c1ea24",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "LaunchToPublicAgent",
   "host_dependencies": [],

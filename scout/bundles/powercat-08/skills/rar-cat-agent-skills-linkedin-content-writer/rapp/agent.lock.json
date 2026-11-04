@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/linkedin_content_writer",
   "agent_file": "linkedin_content_writer_agent.py",
-  "agent_sha256": "0cd18fa07894aca3d64e11c86ed0a6d8eff173f27962ee6a8897dd2afff2c6b2",
+  "agent_sha256": "a6d7fa21211ae1f4b734b11aded5d0278fb3c47fd78e3c763bf630ebaacf691f",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "LinkedinContentWriter",
   "host_dependencies": [],

@@ -83,7 +83,7 @@ def main() -> int:
 
     paths = sorted(REPO_ROOT.glob("agents/**/*.py")) + sorted(
         REPO_ROOT.glob("agents/**/*.py.card")
-    )
+    ) + sorted(REPO_ROOT.glob("agents/**/*.py.stub"))
     for path in paths:
         rel = str(path.relative_to(REPO_ROOT))
         content = path.read_bytes()
@@ -100,7 +100,10 @@ def main() -> int:
         if existing and existing.get("sha256") == digest:
             continue
         version = str(manifest.get("version", "0.0.0"))
-        tier = str(manifest.get("quality_tier", "community"))
+        tier = (
+            "private" if path.name.endswith(".py.stub")
+            else str(manifest.get("quality_tier", "community"))
+        )
         action = "agent.update" if existing else "agent.create"
         basis = json.dumps(
             {

@@ -1,7 +1,7 @@
 {
   "agent": "@discreetRappers/architecture_diagram_agent",
   "agent_file": "architecture_diagram_agent.py",
-  "agent_sha256": "97485b27444625b332f52f9df07e46ed70d6a24dd250eba01bb78660056c36ba",
+  "agent_sha256": "d5cac1baac38b585dead94b556dd7c6a5feb8772944bca8b6d88be70985161be",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ArchitectureDiagramAgent",
   "host_dependencies": [],

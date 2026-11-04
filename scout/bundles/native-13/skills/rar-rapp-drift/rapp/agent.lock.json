@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/drift",
   "agent_file": "drift_agent.py",
-  "agent_sha256": "00ffb4b96beb3024e1b412caf5d2191a84846e73091132eefa30ffe6c2c5e31c",
+  "agent_sha256": "b40ed2f9d3cd95038078b0ae7514b31a8da5e36a5b3b56c170d625606f97176b",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DriftAgent",
   "host_dependencies": [],

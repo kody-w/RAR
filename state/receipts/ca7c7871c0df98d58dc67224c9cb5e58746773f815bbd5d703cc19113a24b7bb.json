@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@cat-agent-skills/monte_carlo_analysis",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "f49b373bef4d20968b986d891cefaaffae7ff569a1388820214f144147ed06d5"
+ },
+ "canonical_path": "agents/@cat-agent-skills/monte_carlo_analysis_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_ca7c7871c0df98d58dc67224c9cb5e58746773f815bbd5d703cc19113a24b7bb",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "d859c727b6e268c23f6f7f423d0bc639d26deaef4653339360369ae84fae43e9",
+  "receipt": "rar_17d97d65b2b78edf3419119dab03d1474c18cc96fc6a38087eda4c856d358859",
+  "version": "3.0.2"
+ },
+ "quality_tier": "frontier",
+ "request_id": "req_ca7c7871c0df98d58dc67224",
+ "revision_id": "ca7c7871c0df98d58dc67224c9cb5e58746773f815bbd5d703cc19113a24b7bb",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "3.0.2"
+}

@@ -3,12 +3,13 @@
   "id": "wildhaven__ceo_agent",
   "name": "CEO Agent",
   "rar_name": "@wildhaven/ceo_agent",
-  "rappid": "rappid:@wildhaven/ceo_agent:ae88335bba7ae1ae6b56620d85f76172ed2d253b64eeecc91e5acc71fe6c8ed4",
-  "_migrated_from": "rappid:@wildhaven/ceo_agent:e336b84423b5264a00ada4a82df2a84ce6fe0ecc09999125c71e79b76ba0f02b",
+  "rappid": "rappid:@wildhaven/ceo_agent:bd7205ad965bc98ea0357d532b017f4f75cc23a30f8cd04a8317fadc7c36a01d",
+  "_migrated_from": "rappid:@wildhaven/ceo_agent:ae88335bba7ae1ae6b56620d85f76172ed2d253b64eeecc91e5acc71fe6c8ed4",
   "_migrated_from_all": [
     "rappid:v2:agent:@wildhaven/ceo_agent:252842017521a19e87f2febdaabc624b",
     "rappid:@wildhaven/ceo_agent:21b1a025d8cdb48a797d3e5dfc72872eb915202c37f7de48762ad8f59985e6ca",
-    "rappid:@wildhaven/ceo_agent:e336b84423b5264a00ada4a82df2a84ce6fe0ecc09999125c71e79b76ba0f02b"
+    "rappid:@wildhaven/ceo_agent:e336b84423b5264a00ada4a82df2a84ce6fe0ecc09999125c71e79b76ba0f02b",
+    "rappid:@wildhaven/ceo_agent:ae88335bba7ae1ae6b56620d85f76172ed2d253b64eeecc91e5acc71fe6c8ed4"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.3",
@@ -30,9 +31,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 322,
-  "size_kb": 13.2,
-  "sha256": "c1e49265becbe104dceacd371dcbc6cce39aa53f3a36075fd47f06d9cf476896",
+  "lines": 332,
+  "size_kb": 14.4,
+  "sha256": "9bc2697ed4ed6eab9ca6036297a39968c5a7ab9e7aeaaf43630c705b0a3c733a",
   "has_card": true,
   "added_at": "2026-04-05T16:48:32-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

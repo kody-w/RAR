@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/wcag_power_platform",
   "agent_file": "wcag_power_platform_agent.py",
-  "agent_sha256": "37075dfcfef21add8a31629f5621e192de0f1738315b147f734d0f645cf5dff7",
+  "agent_sha256": "fcd22c913fc835ae83ff41a7ab8e9bd01ea977e290a401462651c622c0ae156c",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WcagPowerPlatform",
   "host_dependencies": [],

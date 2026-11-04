@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__stoic_negotiator",
   "name": "Stoic Negotiator",
   "rar_name": "@cat-agent-skills/stoic_negotiator",
-  "rappid": "rappid:@cat-agent-skills/stoic_negotiator:3dd6a61f539a8c4ed294510d0c5299de17f6479f362ad453bcdfd7d0037b6cbf",
-  "_migrated_from": "rappid:@cat-agent-skills/stoic_negotiator:5cb90f51923da0c6c70248a39409f054cee8df6837ca2273feee062e866c3f62",
+  "rappid": "rappid:@cat-agent-skills/stoic_negotiator:fa11742ca9f3b99d9b8c4fea2ae69b2eb54472686c59f5cc8ed88b8077d69618",
+  "_migrated_from": "rappid:@cat-agent-skills/stoic_negotiator:3dd6a61f539a8c4ed294510d0c5299de17f6479f362ad453bcdfd7d0037b6cbf",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/stoic_negotiator:5cb90f51923da0c6c70248a39409f054cee8df6837ca2273feee062e866c3f62"
+    "rappid:@cat-agent-skills/stoic_negotiator:5cb90f51923da0c6c70248a39409f054cee8df6837ca2273feee062e866c3f62",
+    "rappid:@cat-agent-skills/stoic_negotiator:3dd6a61f539a8c4ed294510d0c5299de17f6479f362ad453bcdfd7d0037b6cbf"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -29,9 +30,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.7,
-  "sha256": "c39474c15d45f3a477eb894f916d8f5fb8374755f6327fada1a1d2243ac4dfd1",
+  "lines": 272,
+  "size_kb": 13.9,
+  "sha256": "c74fb9856ed7018e68218cddcd1930ac99ccd995855c5106c6feb4cab241d398",
   "has_card": true,
   "added_at": "2026-08-11T09:43:05Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

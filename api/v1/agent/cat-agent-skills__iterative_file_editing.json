@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__iterative_file_editing",
   "name": "Iterative File Editing",
   "rar_name": "@cat-agent-skills/iterative_file_editing",
-  "rappid": "rappid:@cat-agent-skills/iterative_file_editing:f54f7311ad3c809b6530bc8a303bf8c91e43b3a784e39bc1ef47609672f5ae9d",
-  "_migrated_from": "rappid:@cat-agent-skills/iterative_file_editing:2a738cda5dad6a124cef4f1f5719a2a5393ac3fbd4eb5d3e52447a7397752561",
+  "rappid": "rappid:@cat-agent-skills/iterative_file_editing:8bbfa57ff1ad5d829f34322b4035f5082d73ac28e26d8402f8480413bf9a6f3a",
+  "_migrated_from": "rappid:@cat-agent-skills/iterative_file_editing:f54f7311ad3c809b6530bc8a303bf8c91e43b3a784e39bc1ef47609672f5ae9d",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/iterative_file_editing:2a738cda5dad6a124cef4f1f5719a2a5393ac3fbd4eb5d3e52447a7397752561"
+    "rappid:@cat-agent-skills/iterative_file_editing:2a738cda5dad6a124cef4f1f5719a2a5393ac3fbd4eb5d3e52447a7397752561",
+    "rappid:@cat-agent-skills/iterative_file_editing:f54f7311ad3c809b6530bc8a303bf8c91e43b3a784e39bc1ef47609672f5ae9d"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -26,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.7,
-  "sha256": "a4d257098864c459b987e5f2d613b74b9ce2dfca94886c34306fbb4869d073db",
+  "lines": 272,
+  "size_kb": 13.9,
+  "sha256": "2250fc38fc33af9fc658a7a03db2db27ddcde3a4f9263e061f0a01561369a12e",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

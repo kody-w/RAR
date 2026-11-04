@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/brand_template_enforcer",
   "agent_file": "brand_template_enforcer_agent.py",
-  "agent_sha256": "c4732fde24a93d74c774a8b69f5ad43d891add5ea8d12223073f6488db1555e6",
+  "agent_sha256": "9b55307c395f49f3800d1bafe751f64efa1519e40b9e69b3a57e9bebbc02c541",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BrandTemplateEnforcer",
   "host_dependencies": [],

@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__global_greenwashing_claim_auditor",
   "name": "Global Greenwashing Claim Auditor",
   "rar_name": "@cat-agent-skills/global_greenwashing_claim_auditor",
-  "rappid": "rappid:@cat-agent-skills/global_greenwashing_claim_auditor:81076f67b0d2e2c96c2eb5c5e622635edbe384b07712f64cd2a2c0db0b83a2a4",
-  "_migrated_from": "rappid:@cat-agent-skills/global_greenwashing_claim_auditor:d55989763e629eaa824e480fa643c297b3055a374f1bc9cd451cd72a4280b8ce",
+  "rappid": "rappid:@cat-agent-skills/global_greenwashing_claim_auditor:b31b7376195544e722244dd84ff549eb8be14891a3fa17666ab1d16b180d1216",
+  "_migrated_from": "rappid:@cat-agent-skills/global_greenwashing_claim_auditor:81076f67b0d2e2c96c2eb5c5e622635edbe384b07712f64cd2a2c0db0b83a2a4",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/global_greenwashing_claim_auditor:d55989763e629eaa824e480fa643c297b3055a374f1bc9cd451cd72a4280b8ce"
+    "rappid:@cat-agent-skills/global_greenwashing_claim_auditor:d55989763e629eaa824e480fa643c297b3055a374f1bc9cd451cd72a4280b8ce",
+    "rappid:@cat-agent-skills/global_greenwashing_claim_auditor:81076f67b0d2e2c96c2eb5c5e622635edbe384b07712f64cd2a2c0db0b83a2a4"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -29,9 +30,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.7,
-  "sha256": "37db76bce7c6b135cba2ed0f19ec2c7c15eae8f60f3cb4868d2325f5cff883e5",
+  "lines": 272,
+  "size_kb": 13.9,
+  "sha256": "7e0ac1c1c0852d3418f1bf9f90892ca2f4598397294b05a12aa62e7d541ed7b3",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

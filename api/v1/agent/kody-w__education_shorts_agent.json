@@ -3,10 +3,12 @@
   "id": "kody-w__education_shorts_agent",
   "name": "Education Shorts",
   "rar_name": "@kody-w/education_shorts_agent",
-  "rappid": "rappid:@kody-w/education_shorts_agent:4fdb4f6ecd9f5f4fe20b220267d75c3046d0f622aa38326931daf4e633dbf5f6",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
+  "rappid": "rappid:@kody-w/education_shorts_agent:c7cb03c6d4b61cf174397267d22f0bca7db0892a3d252e871af22d9aade5d2bc",
+  "_migrated_from": "rappid:@kody-w/education_shorts_agent:4fdb4f6ecd9f5f4fe20b220267d75c3046d0f622aa38326931daf4e633dbf5f6",
+  "_migrated_from_all": [
+    "rappid:@kody-w/education_shorts_agent:4fdb4f6ecd9f5f4fe20b220267d75c3046d0f622aa38326931daf4e633dbf5f6"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.0",
   "publisher": "@kody-w",
   "category": "creative",
@@ -25,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 259,
-  "size_kb": 14.9,
-  "sha256": "e8dae3c739c30dd6ea7a3c690a4aa6aaa25cbbfd26ab906d274ec9b520f28715",
+  "lines": 269,
+  "size_kb": 16.1,
+  "sha256": "36711e8da4ce32d9b11fc02c18e925f955ca0588dcc65a5ea08099d1f4233f1f",
   "has_card": true,
   "added_at": "2026-08-18T18:19:54-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

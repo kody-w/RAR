@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__gantt_chart_generator",
   "name": "Gantt Chart Builder",
   "rar_name": "@cat-agent-skills/gantt_chart_generator",
-  "rappid": "rappid:@cat-agent-skills/gantt_chart_generator:d6c8d65811488ec956482cf6beff041c69215ddcfd03482e0849dea702ded47d",
-  "_migrated_from": "rappid:@cat-agent-skills/gantt_chart_generator:a4ffec497f632fdfa097a11fa6a3aa65255a333ce28ba54c8aa544d7f883d7ca",
+  "rappid": "rappid:@cat-agent-skills/gantt_chart_generator:807c8a44307c8e14bb8bd02136d8cb4ea580c182a37016e86ec131b9005d32e0",
+  "_migrated_from": "rappid:@cat-agent-skills/gantt_chart_generator:d6c8d65811488ec956482cf6beff041c69215ddcfd03482e0849dea702ded47d",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/gantt_chart_generator:a4ffec497f632fdfa097a11fa6a3aa65255a333ce28ba54c8aa544d7f883d7ca"
+    "rappid:@cat-agent-skills/gantt_chart_generator:a4ffec497f632fdfa097a11fa6a3aa65255a333ce28ba54c8aa544d7f883d7ca",
+    "rappid:@cat-agent-skills/gantt_chart_generator:d6c8d65811488ec956482cf6beff041c69215ddcfd03482e0849dea702ded47d"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -27,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.5,
-  "sha256": "e65f1661b81bf0103d70144a51f6b3ac3d022e795400f9e8c93ea1780eed398c",
+  "lines": 272,
+  "size_kb": 13.7,
+  "sha256": "061ce3cfa4ea2f9aa26ffd7d11a22e3555748d5b254ca6ce2d6eb091b2c48a3a",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

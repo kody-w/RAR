@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/install_rappter_distro_agent",
   "agent_file": "install_rappter_distro_agent.py",
-  "agent_sha256": "15ee1708f83dc55022bdf74d625b6b443d59f73371cd2f4c68100651c8f001d2",
+  "agent_sha256": "91f2128926d613cc537ff4b3e5327a35b0268d0eabd548a828d5009af956b803",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "InstallDistroAgent",
   "host_dependencies": [],

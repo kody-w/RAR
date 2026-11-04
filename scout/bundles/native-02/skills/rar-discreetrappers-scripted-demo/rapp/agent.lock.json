@@ -1,7 +1,7 @@
 {
   "agent": "@discreetRappers/scripted_demo_agent",
   "agent_file": "scripted_demo_agent.py",
-  "agent_sha256": "feb243a6c7bbd7bf0cb329b0a8c60a6f6d88949e1893f89ccaa1cf2da31a80bc",
+  "agent_sha256": "04e240a1092a8e71d446ab7662792b69cbe54e48d78fa46ec76b4ff19cb78df4",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScriptedDemoAgent",
   "host_dependencies": [

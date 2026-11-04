@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@rapp/egg_hatcher",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "7391fce3a02e8ee274332fbd71c5850495998d2e656732837b1ef104b99aef8e"
+ },
+ "canonical_path": "agents/@rapp/egg_hatcher_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_96dd37e36b9d6ab392f779ea1ed2d3bc345ec99997d76ba06e30b0e4941a4045",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "bba2848c59de6883ad0f3d190ff0fe4e9f44f595016c95f4453d2764d3f4e78f",
+  "receipt": "rar_6058c8e0a7787ec4ef78134d370b4e3ad8f3bc54f979f1cb733bbd434537e979",
+  "version": "1.1.1"
+ },
+ "quality_tier": "official",
+ "request_id": "req_96dd37e36b9d6ab392f779ea",
+ "revision_id": "96dd37e36b9d6ab392f779ea1ed2d3bc345ec99997d76ba06e30b0e4941a4045",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "1.1.1"
+}

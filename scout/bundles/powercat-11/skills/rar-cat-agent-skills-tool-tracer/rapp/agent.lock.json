@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/tool_tracer",
   "agent_file": "tool_tracer_agent.py",
-  "agent_sha256": "94d1c0edc220629574391ccfba7db23a74bcced8cd5a12e608f317dbfae87151",
+  "agent_sha256": "795258346e89a87dcd4972fa952b9f58ed8e728ee53155c36f30dc0ff307ef89",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ToolTracer",
   "host_dependencies": [],

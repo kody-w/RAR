@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@cat-agent-skills/eu_greenwashing_analysis",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "6200a163f12cc7b5b12ef9742949a0bfe927e668231f5965e68fcd1f77cb7238"
+ },
+ "canonical_path": "agents/@cat-agent-skills/eu_greenwashing_analysis_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_280fb76f8c0a2873445abbe3b140aaf90ced0019046acc9b08128c24420740a8",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "a134c53dbb6e99e2879716f7e8341eef10280ddd10792464cf9fae79edeb6b59",
+  "receipt": "rar_e276ed07de94c322164703c8b7a08090bfd8885a047a398f87ade58fceac2abc",
+  "version": "3.0.2"
+ },
+ "quality_tier": "frontier",
+ "request_id": "req_280fb76f8c0a2873445abbe3",
+ "revision_id": "280fb76f8c0a2873445abbe3b140aaf90ced0019046acc9b08128c24420740a8",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "3.0.2"
+}

@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@discreetRappers/powerpoint_generator_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "e1c71838845673ea756b0fea8afa04d3c9014964423cdaf354547df96af9a7e6"
+ },
+ "canonical_path": "agents/@discreetRappers/powerpoint_generator_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_7ef1a188d14d92185f480f647084161e6197cebe770071801ca961701358e58c",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "5a9fc79dfbf2038ba411e2789dc988713389b2219ff5ce721b02d684d88a23f5",
+  "receipt": "rar_e1ac9b28f381a55aa0696b04130c8c9715579b3dbffb36ffda4a1092d8949772",
+  "version": "1.0.2"
+ },
+ "quality_tier": "community",
+ "request_id": "req_7ef1a188d14d92185f480f64",
+ "revision_id": "7ef1a188d14d92185f480f647084161e6197cebe770071801ca961701358e58c",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "1.0.2"
+}

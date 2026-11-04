@@ -3,10 +3,11 @@
   "id": "kody-w__bakeoff_factory",
   "name": "BakeoffFactory",
   "rar_name": "@kody-w/bakeoff_factory",
-  "rappid": "rappid:@kody-w/bakeoff_factory:3283d03504d00d0d2099b59a0f880cdd4b3113604d6f25b63f75820ff7278f8e",
-  "_migrated_from": "rappid:@kody-w/bakeoff_factory:ccfd843d36da222837a1a9be8c9dff174016f92534a2ad371b1e02dc006088c8",
+  "rappid": "rappid:@kody-w/bakeoff_factory:d35bf71a7c254788d6ff05bbac760a6f76822ca19afeaa4707d9fc70ada5bd04",
+  "_migrated_from": "rappid:@kody-w/bakeoff_factory:3283d03504d00d0d2099b59a0f880cdd4b3113604d6f25b63f75820ff7278f8e",
   "_migrated_from_all": [
-    "rappid:@kody-w/bakeoff_factory:ccfd843d36da222837a1a9be8c9dff174016f92534a2ad371b1e02dc006088c8"
+    "rappid:@kody-w/bakeoff_factory:ccfd843d36da222837a1a9be8c9dff174016f92534a2ad371b1e02dc006088c8",
+    "rappid:@kody-w/bakeoff_factory:3283d03504d00d0d2099b59a0f880cdd4b3113604d6f25b63f75820ff7278f8e"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "0.1.1",
@@ -28,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 860,
-  "size_kb": 36.2,
-  "sha256": "461620d239ee7c63430f5a5cd4412429d72a049977d5ff2beb04d0ba5e38b786",
+  "lines": 870,
+  "size_kb": 37.4,
+  "sha256": "61263e01de638d1c43e7ef6af8352ba219cf101d7b109118c36aaca34b2f502b",
   "has_card": true,
   "added_at": "2026-05-16T16:03:13-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

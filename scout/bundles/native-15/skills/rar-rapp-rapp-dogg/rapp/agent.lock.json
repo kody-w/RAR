@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/rapp_dogg_agent",
   "agent_file": "rapp_dogg_agent.py",
-  "agent_sha256": "14bbe3f9f1b3cf98cc5f95eff631bb362db580f331822efc24577682788f7bb4",
+  "agent_sha256": "6a2309f2838a8e890f721d0291a19254986fc9b5ebe11e5d859b48a6d2167853",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappDoggAgent",
   "host_dependencies": [],

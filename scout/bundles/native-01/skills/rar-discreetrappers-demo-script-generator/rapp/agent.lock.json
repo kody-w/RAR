@@ -1,7 +1,7 @@
 {
   "agent": "@discreetRappers/demo_script_generator_agent",
   "agent_file": "demo_script_generator_agent.py",
-  "agent_sha256": "8c3f230c67c330e7334e103653e34b810fbbcf2fe2acd120f7806f5f0cf26149",
+  "agent_sha256": "1c4123d0d87b13fbc12e728e4b6f0e48d73ab4484ba277c667fecf11f1202f5d",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DemoScriptGeneratorAgent",
   "host_dependencies": [

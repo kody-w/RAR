@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/twin_agent",
   "agent_file": "twin_agent.py",
-  "agent_sha256": "878729c7a59ce520c487d02e6986845a79babce12a6e10ecbbe5e9eec1b71dda",
+  "agent_sha256": "ca59d24cc598580225532ed9cbe5932dcc37957f77325d2dfccbe78a92826460",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TwinAgent",
   "host_dependencies": [],

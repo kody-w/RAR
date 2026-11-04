@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/meeting_analyzer",
   "agent_file": "meeting_analyzer_agent.py",
-  "agent_sha256": "cff073328a4f633a926aca3452f228aa971695a532761e72af7a40d99c3f14cd",
+  "agent_sha256": "9b13ab416edb7d4f7013b1e210c393170b136d2b21efd1b02702ef7abccfc95d",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MeetingAnalyzer",
   "host_dependencies": [],

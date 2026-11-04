@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/hello_world_agent",
   "agent_file": "hello_world_agent.py",
-  "agent_sha256": "d2695f70a412909546a49586487a471e6bca9c2d215d0367d440a80473b75bd1",
+  "agent_sha256": "dacc1cacd80777c63efa1e7ea140fca761df3a6f0df5d0bf116748ea30823009",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "HelloWorldAgent",
   "host_dependencies": [],

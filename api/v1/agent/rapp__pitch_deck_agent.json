@@ -3,11 +3,12 @@
   "id": "rapp__pitch_deck_agent",
   "name": "PitchDeck",
   "rar_name": "@rapp/pitch_deck_agent",
-  "rappid": "rappid:@rapp/pitch_deck_agent:ac978ad102e2b9609ecc8d98930bec01888b5a5a4be1ddf4e1da6ab0ab559248",
-  "_migrated_from": "rappid:@rapp/pitch_deck_agent:bd041b2e1d13d31c61a12c2cf12ecd279fbfeaacc201a4dd778b194756776671",
+  "rappid": "rappid:@rapp/pitch_deck_agent:a1f5193efdc2f5785ff746ad75b1406c5b3bac554d04985a4ae0a21374b2a4f4",
+  "_migrated_from": "rappid:@rapp/pitch_deck_agent:ac978ad102e2b9609ecc8d98930bec01888b5a5a4be1ddf4e1da6ab0ab559248",
   "_migrated_from_all": [
     "rappid:v2:agent:@rapp/pitch_deck_agent:7882b22bae29b0092079a7568dcfc13a",
-    "rappid:@rapp/pitch_deck_agent:bd041b2e1d13d31c61a12c2cf12ecd279fbfeaacc201a4dd778b194756776671"
+    "rappid:@rapp/pitch_deck_agent:bd041b2e1d13d31c61a12c2cf12ecd279fbfeaacc201a4dd778b194756776671",
+    "rappid:@rapp/pitch_deck_agent:ac978ad102e2b9609ecc8d98930bec01888b5a5a4be1ddf4e1da6ab0ab559248"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.2",
@@ -28,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 1087,
-  "size_kb": 56.0,
-  "sha256": "ca3c2f325342769f9d799ccb0fc0cd41a23f90d2e6ddfb1dcb7c79d7bdd78145",
+  "lines": 1097,
+  "size_kb": 57.1,
+  "sha256": "515d8cf7589e9ddfb4dd4a0575245f08e87b02a86837385df5b5c926f5958d1e",
   "has_card": true,
   "added_at": "2026-04-27T21:24:10Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

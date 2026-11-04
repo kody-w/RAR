@@ -3,10 +3,11 @@
   "id": "kody-w__github_agent_library_agent",
   "name": "GitHubAgentLibrary",
   "rar_name": "@kody-w/github_agent_library_agent",
-  "rappid": "rappid:@kody-w/github_agent_library_agent:96c935d91205e2e26c7f40bcb83591d28040165f446688dab5961c95a04dca07",
-  "_migrated_from": "rappid:@kody-w/github_agent_library_agent:46709a6728aa07ed83c79503ba969dd12d42d616f3baaf64158a6d6aa9a4c5f7",
+  "rappid": "rappid:@kody-w/github_agent_library_agent:480fd6a52fbc1a21acc4894a9ff9926eb5286a590cf6c95730cc9fe9ec349b9d",
+  "_migrated_from": "rappid:@kody-w/github_agent_library_agent:96c935d91205e2e26c7f40bcb83591d28040165f446688dab5961c95a04dca07",
   "_migrated_from_all": [
-    "rappid:@kody-w/github_agent_library_agent:46709a6728aa07ed83c79503ba969dd12d42d616f3baaf64158a6d6aa9a4c5f7"
+    "rappid:@kody-w/github_agent_library_agent:46709a6728aa07ed83c79503ba969dd12d42d616f3baaf64158a6d6aa9a4c5f7",
+    "rappid:@kody-w/github_agent_library_agent:96c935d91205e2e26c7f40bcb83591d28040165f446688dab5961c95a04dca07"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -25,9 +26,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 957,
-  "size_kb": 43.7,
-  "sha256": "7d25b2d553356cfcb2f74921552b984d8e348ab56f20984fcda831eb65336923",
+  "lines": 967,
+  "size_kb": 44.9,
+  "sha256": "b9bd6d0f87082877c37cca17be3a1d5ba873dcf736ce9805538eb8affcfadbab",
   "has_card": true,
   "added_at": "2026-05-24T21:45:25-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

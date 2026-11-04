@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/copilot_agents_news_scout",
   "agent_file": "copilot_agents_news_scout_agent.py",
-  "agent_sha256": "9d45dca1f4eeae058b0f07c698721c49a4bc3bb408dbbc74401899aef8225a40",
+  "agent_sha256": "0121f58ca0194995eceb2c1c014371e45312be27668c438506c656cc63bd9d96",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotAgentsNewsScout",
   "host_dependencies": [],

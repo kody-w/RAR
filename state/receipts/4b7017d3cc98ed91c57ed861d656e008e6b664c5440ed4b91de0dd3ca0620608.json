@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@discreetRappers/sharepoint_contract_analysis_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "6bfac36ced9e10e89b7a35b6e3a7464d3cc66e4f8832feedbbde899852aa3893"
+ },
+ "canonical_path": "agents/@discreetRappers/sharepoint_contract_analysis_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_4b7017d3cc98ed91c57ed861d656e008e6b664c5440ed4b91de0dd3ca0620608",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "befdce082ff846fa57e936fc130bd1e423451de8da911a50674b9a4c9c261d32",
+  "receipt": "rar_09d160336c64883acc5717f59ee2c48b79f99849c0fc49af04bec84ec9edc606",
+  "version": "1.0.2"
+ },
+ "quality_tier": "community",
+ "request_id": "req_4b7017d3cc98ed91c57ed861",
+ "revision_id": "4b7017d3cc98ed91c57ed861d656e008e6b664c5440ed4b91de0dd3ca0620608",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "1.0.2"
+}

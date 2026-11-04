@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__skill_authoring_coach",
   "name": "Skill Authoring Coach",
   "rar_name": "@cat-agent-skills/skill_authoring_coach",
-  "rappid": "rappid:@cat-agent-skills/skill_authoring_coach:58344e6baa51e9085c47c63feca4142b741d67c9ed9e9b10bb707e9ff79569a8",
-  "_migrated_from": "rappid:@cat-agent-skills/skill_authoring_coach:9b3bcb9beee1e2e015e3a030b0c3f7d2369a28873d3278de475eb31e4142f48a",
+  "rappid": "rappid:@cat-agent-skills/skill_authoring_coach:467b381d673071f259305a6f755132a9d810ba650447b95104b4477d2afbb444",
+  "_migrated_from": "rappid:@cat-agent-skills/skill_authoring_coach:58344e6baa51e9085c47c63feca4142b741d67c9ed9e9b10bb707e9ff79569a8",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/skill_authoring_coach:9b3bcb9beee1e2e015e3a030b0c3f7d2369a28873d3278de475eb31e4142f48a"
+    "rappid:@cat-agent-skills/skill_authoring_coach:9b3bcb9beee1e2e015e3a030b0c3f7d2369a28873d3278de475eb31e4142f48a",
+    "rappid:@cat-agent-skills/skill_authoring_coach:58344e6baa51e9085c47c63feca4142b741d67c9ed9e9b10bb707e9ff79569a8"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "2.1.2",
@@ -26,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.3,
-  "sha256": "b367fbfdfd349e0947f87666afc5f82890b1500c3e600fda8d63b669fe7695f8",
+  "lines": 272,
+  "size_kb": 13.5,
+  "sha256": "d87d562cb6ff69f03c5fbe70ec218c4a216e2f3a22cb4aa2055fdc360addc454",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

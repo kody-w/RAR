@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@kody-w/predictive_asset_maintenance_intelligence",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "0d74c48db5b63727319d7514b0743c1db08214d20c27560ebcd4902b205eeeed"
+ },
+ "canonical_path": "agents/@kody-w/predictive_asset_maintenance_intelligence_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_3b93257cf2ca38f890171ba13eaff6ecabdf4aca9b359175ac086077409be75a",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "d792270520fb82ad23815a9b9d6e940da5428ee5baa5fcddc362846adaff90e0",
+  "receipt": "rar_f0f983f777b54a75a6a57f6013d1680bf299740f0e9e3c2048ce7de8622d4773",
+  "version": "1.0.1"
+ },
+ "quality_tier": "community",
+ "request_id": "req_3b93257cf2ca38f890171ba1",
+ "revision_id": "3b93257cf2ca38f890171ba13eaff6ecabdf4aca9b359175ac086077409be75a",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "1.0.1"
+}

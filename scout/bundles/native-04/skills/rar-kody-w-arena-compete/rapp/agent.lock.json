@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/arena_compete_agent",
   "agent_file": "arena_compete_agent.py",
-  "agent_sha256": "cb5fdc2203b8127d5f174fbe9773c1f8f24e01dcdfb7162fb0a17ad40a2239db",
+  "agent_sha256": "3e5333752068fae52cdd93dafa259c357d697dc8af1ec7707f2d2f25eb556b10",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ArenaCompeteAgent",
   "host_dependencies": [],

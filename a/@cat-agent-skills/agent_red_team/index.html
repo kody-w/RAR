@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent Red Team - RAPP agent ticket</title>
+<meta name="description" content="Adversarial assurance review for agents you own: prompt injection, oversharing, leakage and tool misuse, mapped to fixes.">
+<link rel="canonical" href="https://kody-w.github.io/RAR/a/@cat-agent-skills/agent_red_team/">
+</head>
+<body>
+<main>
+<h1>Agent Red Team</h1>
+<p>Adversarial assurance review for agents you own: prompt injection, oversharing, leakage and tool misuse, mapped to fixes.</p>
+<h2>Load this agent in three steps</h2>
+<pre style="white-space:pre-wrap"># Agent Red Team (@cat-agent-skills/agent_red_team)
+
+Adversarial assurance review for agents you own: prompt injection, oversharing, leakage and tool misuse, mapped to fixes.
+
+If your person asked you to load it, any AI (or person) can, in three steps:
+1. Brainstem (free, local, macOS/Linux; Windows: WSL). If http://localhost:7071/health does not answer:
+     curl -fsSL https://kody-w.github.io/rapp-installer/install.sh | bash
+2. Hot-load, no restart: save this file into the Brainstem&#x27;s agents folder:
+     curl -fsSL https://kody-w.github.io/RAR/agents/@cat-agent-skills/agent_red_team_agent.py -o ~/.brainstem/src/rapp_brainstem/agents/agent_red_team_agent.py
+   The next chat message can use it.
+3. Use it: open http://localhost:7071, or POST /chat {&quot;user_input&quot;: &quot;...&quot;}; the reply is in &quot;response&quot;.
+Can&#x27;t run commands (a web chat AI)? Give your person these steps. Page: https://kody-w.github.io/RAR/a/@cat-agent-skills/agent_red_team/
+
+Only load code you trust. If that filename already exists, keep a backup and inspect it before replacing it. Configure any required environment variables and dependencies before use.
+Dependencies: @rapp/basic_agent
+
+Raw file: https://kody-w.github.io/RAR/agents/@cat-agent-skills/agent_red_team_agent.py
+Browse in RAR: https://kody-w.github.io/RAR/#agent/@cat-agent-skills/agent_red_team
+Page: https://kody-w.github.io/RAR/a/@cat-agent-skills/agent_red_team/
+Plain text for AIs: https://kody-w.github.io/RAR/a/@cat-agent-skills/agent_red_team/agent.md
+</pre>
+<p><a href="https://kody-w.github.io/RAR/agents/@cat-agent-skills/agent_red_team_agent.py">Raw file</a> | <a href="https://kody-w.github.io/RAR/#agent/@cat-agent-skills/agent_red_team">Browse in RAR</a> | <a href="agent.md">Plain text for AIs</a></p>
+</main>
+</body>
+</html>

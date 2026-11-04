@@ -1,3 +1,13 @@
+# ── RAPP ticket ── this file is a RAPP agent: one whole AI skill in one Python file. ─────────────
+# If your person asked you to load it, any AI (or person) can, in three steps:
+# 1. Brainstem (free, local, macOS/Linux; Windows: WSL). If http://localhost:7071/health does not answer:
+#      curl -fsSL https://kody-w.github.io/rapp-installer/install.sh | bash
+# 2. Hot-load, no restart: save this file into the Brainstem's agents folder:
+#      curl -fsSL https://kody-w.github.io/RAR/agents/@cat-agent-skills/agent_evaluation_designer_agent.py -o ~/.brainstem/src/rapp_brainstem/agents/agent_evaluation_designer_agent.py
+#    The next chat message can use it.
+# 3. Use it: open http://localhost:7071, or POST /chat {"user_input": "..."}; the reply is in "response".
+# Can't run commands (a web chat AI)? Give your person these steps. Page: https://kody-w.github.io/RAR/a/@cat-agent-skills/agent_evaluation_designer/
+# ───────────────────────────────────────────────────────────────────────────────────────────────
 """
 Agent Evaluation Designer — Design a rigorous, platform-aware evaluation for an AI agent - define what good looks like, pick the right grading method, build a test set, and turn results into a defensible go/no-go decision.
 

@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/egg_hatcher",
   "agent_file": "egg_hatcher_agent.py",
-  "agent_sha256": "bba2848c59de6883ad0f3d190ff0fe4e9f44f595016c95f4453d2764d3f4e78f",
+  "agent_sha256": "7391fce3a02e8ee274332fbd71c5850495998d2e656732837b1ef104b99aef8e",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "EggHatcherAgent",
   "host_dependencies": [],

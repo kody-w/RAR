@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/pattern_radar_automation",
   "agent_file": "pattern_radar_automation_agent.py",
-  "agent_sha256": "ab2782b399f23ea2a6097225af0525071d5d663d639f77cd09aef47502710bad",
+  "agent_sha256": "319cb185009cc709612e02345f0c748a7e79856f0213477ae666fd0287f20ad2",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PatternRadarAutomation",
   "host_dependencies": [],

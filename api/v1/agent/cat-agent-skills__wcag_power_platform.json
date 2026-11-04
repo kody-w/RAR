@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__wcag_power_platform",
   "name": "WCAG 2.1 for Web Apps & Power Platform",
   "rar_name": "@cat-agent-skills/wcag_power_platform",
-  "rappid": "rappid:@cat-agent-skills/wcag_power_platform:bb021c072a34b5bb96e457258756b984e84f42f94845529fc87ee358981ffa41",
-  "_migrated_from": "rappid:@cat-agent-skills/wcag_power_platform:8cb8b84197b1d44e3ba05a0ec6fa948b0e8da8eabae5a114e4c38a0dd70af9c5",
+  "rappid": "rappid:@cat-agent-skills/wcag_power_platform:2ceb1156559aee5d2abdb5874e4b4ced4ee49bf3c16594c04af995c668e3bc76",
+  "_migrated_from": "rappid:@cat-agent-skills/wcag_power_platform:bb021c072a34b5bb96e457258756b984e84f42f94845529fc87ee358981ffa41",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/wcag_power_platform:8cb8b84197b1d44e3ba05a0ec6fa948b0e8da8eabae5a114e4c38a0dd70af9c5"
+    "rappid:@cat-agent-skills/wcag_power_platform:8cb8b84197b1d44e3ba05a0ec6fa948b0e8da8eabae5a114e4c38a0dd70af9c5",
+    "rappid:@cat-agent-skills/wcag_power_platform:bb021c072a34b5bb96e457258756b984e84f42f94845529fc87ee358981ffa41"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -29,9 +30,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.6,
-  "sha256": "37075dfcfef21add8a31629f5621e192de0f1738315b147f734d0f645cf5dff7",
+  "lines": 272,
+  "size_kb": 13.8,
+  "sha256": "fcd22c913fc835ae83ff41a7ab8e9bd01ea977e290a401462651c622c0ae156c",
   "has_card": true,
   "added_at": "2026-08-17T18:03:09-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

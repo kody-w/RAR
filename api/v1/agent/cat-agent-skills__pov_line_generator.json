@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__pov_line_generator",
   "name": "POV Line Generator",
   "rar_name": "@cat-agent-skills/pov_line_generator",
-  "rappid": "rappid:@cat-agent-skills/pov_line_generator:f6e90482cc6a3e29e07a5f8a30e301da35424e87c1718d7a5a777ad52b7b1d31",
-  "_migrated_from": "rappid:@cat-agent-skills/pov_line_generator:103c5fd610f7e0733a9a1f5216ce621cd29b64ed1706f812b1489ffc31356d65",
+  "rappid": "rappid:@cat-agent-skills/pov_line_generator:01b93b0f076f9aa0e329a20d4948c33722ab700f1e96bee1c8a679e1dd1797ad",
+  "_migrated_from": "rappid:@cat-agent-skills/pov_line_generator:f6e90482cc6a3e29e07a5f8a30e301da35424e87c1718d7a5a777ad52b7b1d31",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/pov_line_generator:103c5fd610f7e0733a9a1f5216ce621cd29b64ed1706f812b1489ffc31356d65"
+    "rappid:@cat-agent-skills/pov_line_generator:103c5fd610f7e0733a9a1f5216ce621cd29b64ed1706f812b1489ffc31356d65",
+    "rappid:@cat-agent-skills/pov_line_generator:f6e90482cc6a3e29e07a5f8a30e301da35424e87c1718d7a5a777ad52b7b1d31"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "2.1.2",
@@ -26,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.2,
-  "sha256": "cbe57f8ea3671d17ab8daec288c8f57ce7641a9c070570cc3fb0e36ade9117d8",
+  "lines": 272,
+  "size_kb": 13.4,
+  "sha256": "a44620f4c73e4333235c8caf48c5f63607e423bd181878e3a813b3c995c1e3d0",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

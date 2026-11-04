@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/pov_line_generator",
   "agent_file": "pov_line_generator_agent.py",
-  "agent_sha256": "cbe57f8ea3671d17ab8daec288c8f57ce7641a9c070570cc3fb0e36ade9117d8",
+  "agent_sha256": "a44620f4c73e4333235c8caf48c5f63607e423bd181878e3a813b3c995c1e3d0",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PovLineGenerator",
   "host_dependencies": [],

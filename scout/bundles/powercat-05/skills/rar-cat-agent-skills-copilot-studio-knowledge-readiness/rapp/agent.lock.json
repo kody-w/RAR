@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/copilot_studio_knowledge_readiness",
   "agent_file": "copilot_studio_knowledge_readiness_agent.py",
-  "agent_sha256": "ff5febf605e0ed1a3f38a7e99ef1f90a3eef5861fcdd7ffe650fa70cda95c97d",
+  "agent_sha256": "9e86d57d4ff70581b2367925a2653531ce3b14d3dde20848b17b720b60511a93",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotStudioKnowledgeReadiness",
   "host_dependencies": [],

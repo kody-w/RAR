@@ -1,7 +1,7 @@
 {
   "agent": "@discreetRappers/sales_assistant_agent",
   "agent_file": "sales_assistant_agent.py",
-  "agent_sha256": "3b1ed8a43356939dfeb5d7a5bff8d47de45655c7179c82509d20d5acd78ba695",
+  "agent_sha256": "806446e21316d4362938d86ea3be72fe0281167ec2d0e0d0167c04ff1a61e9a9",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "SalesAssistantAgent",
   "host_dependencies": [

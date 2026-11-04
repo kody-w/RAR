@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/copilot_studio_harness_picker",
   "agent_file": "copilot_studio_harness_picker_agent.py",
-  "agent_sha256": "8075c230d2a97c1096252928ca33d87849b787515ea071d1b27fbea0cd27af6d",
+  "agent_sha256": "1260a59deabc3fa4f801f715786f4e643a4ef09184950388aae09939855f7091",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotStudioHarnessPicker",
   "host_dependencies": [],

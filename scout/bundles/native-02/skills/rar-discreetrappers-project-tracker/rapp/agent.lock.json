@@ -1,7 +1,7 @@
 {
   "agent": "@discreetRappers/project_tracker_agent",
   "agent_file": "project_tracker_agent.py",
-  "agent_sha256": "b9df9cb9d4f0743092aae62cabc5a156bd6b7f73fd773fce14584278f1c56fa4",
+  "agent_sha256": "6ce05fe89b9c16b52949a4e36991f5d9536cb7981aa891d93b4fc53419bd4849",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ProjectTrackerAgent",
   "host_dependencies": [

@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/copilot_studio_test_planner",
   "agent_file": "copilot_studio_test_planner_agent.py",
-  "agent_sha256": "b844fedd3d1befa33932d43c296c9fc3ede7185c6a805ccd59b5dd0ce70a20c6",
+  "agent_sha256": "1ff5ecc58626978dfa6177c233f43cb7f545aec0fd3025735830c380f44b8564",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotStudioTestPlanner",
   "host_dependencies": [],

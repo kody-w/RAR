@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__copilot_studio_harness_picker",
   "name": "Copilot Studio Harness Picker",
   "rar_name": "@cat-agent-skills/copilot_studio_harness_picker",
-  "rappid": "rappid:@cat-agent-skills/copilot_studio_harness_picker:9795b9df7395a5544db52a462ea4ccb79c19ebaf1e8b1cd204dd99596656f040",
-  "_migrated_from": "rappid:@cat-agent-skills/copilot_studio_harness_picker:715d82c37eb65ad2e9a56267b3b2d11b8718f5797275d144cf7987a7d403cbb8",
+  "rappid": "rappid:@cat-agent-skills/copilot_studio_harness_picker:f34dcbf69a84b677d07c61071210ddfd5ed69565e3d8e266867283467b61cd7b",
+  "_migrated_from": "rappid:@cat-agent-skills/copilot_studio_harness_picker:9795b9df7395a5544db52a462ea4ccb79c19ebaf1e8b1cd204dd99596656f040",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/copilot_studio_harness_picker:715d82c37eb65ad2e9a56267b3b2d11b8718f5797275d144cf7987a7d403cbb8"
+    "rappid:@cat-agent-skills/copilot_studio_harness_picker:715d82c37eb65ad2e9a56267b3b2d11b8718f5797275d144cf7987a7d403cbb8",
+    "rappid:@cat-agent-skills/copilot_studio_harness_picker:9795b9df7395a5544db52a462ea4ccb79c19ebaf1e8b1cd204dd99596656f040"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.1.2",
@@ -27,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.5,
-  "sha256": "8075c230d2a97c1096252928ca33d87849b787515ea071d1b27fbea0cd27af6d",
+  "lines": 272,
+  "size_kb": 13.7,
+  "sha256": "1260a59deabc3fa4f801f715786f4e643a4ef09184950388aae09939855f7091",
   "has_card": true,
   "added_at": "2026-08-11T09:43:05Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

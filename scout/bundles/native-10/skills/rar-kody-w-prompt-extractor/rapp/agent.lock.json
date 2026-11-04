@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/prompt_extractor",
   "agent_file": "prompt_extractor_agent.py",
-  "agent_sha256": "9b03c1b6d286d219e1f19966eea18eb2ef9c980213455963226b264c038440ba",
+  "agent_sha256": "ece05fd7f282eb9dc85f002df0fd03cd09ba82cfcb8c2acb1a54eaf83279747d",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PromptExtractorAgent",
   "host_dependencies": [],

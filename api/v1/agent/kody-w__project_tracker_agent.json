@@ -3,10 +3,12 @@
   "id": "kody-w__project_tracker_agent",
   "name": "Project Tracker",
   "rar_name": "@kody-w/project_tracker_agent",
-  "rappid": "rappid:@kody-w/project_tracker_agent:e155592fabdace10b237b756a9df28383f8289d57a7b3906fe9afb7626ae7ac1",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
+  "rappid": "rappid:@kody-w/project_tracker_agent:4f16fd442305d4514660825c2e30b1749225963fa205e9f91842bed64fc56f77",
+  "_migrated_from": "rappid:@kody-w/project_tracker_agent:e155592fabdace10b237b756a9df28383f8289d57a7b3906fe9afb7626ae7ac1",
+  "_migrated_from_all": [
+    "rappid:@kody-w/project_tracker_agent:e155592fabdace10b237b756a9df28383f8289d57a7b3906fe9afb7626ae7ac1"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.0",
   "publisher": "@kody-w",
   "category": "productivity",
@@ -26,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 535,
-  "size_kb": 26.9,
-  "sha256": "b6270faf10379411b7a0065a91b571299bbb3f9a8c6072d041f24580c70d7e7c",
+  "lines": 545,
+  "size_kb": 28.1,
+  "sha256": "0a9452444854c420edbf73b617d392c1a63510890a663455f69d56a4e4ea0fc6",
   "has_card": true,
   "added_at": "2026-07-24T16:53:40Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

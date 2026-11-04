@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/kody2day_studio_agent",
   "agent_file": "kody2day_studio_agent.py",
-  "agent_sha256": "520f26e2500bd6ec02288d510735b6ed1c3997ca824735865695c47ae17645d9",
+  "agent_sha256": "d20355f26593583aedbfb7d091a6d6a36b9e1798294baec17cfdc05cfa90b1bb",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "Kody2dayStudio",
   "host_dependencies": [],

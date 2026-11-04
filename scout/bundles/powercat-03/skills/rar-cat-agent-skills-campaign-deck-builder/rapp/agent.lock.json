@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/campaign_deck_builder",
   "agent_file": "campaign_deck_builder_agent.py",
-  "agent_sha256": "e7d5cb5432ba712afe2da34ab2bec2654a82864cd513b584af374c5a67f49e33",
+  "agent_sha256": "c83e942f9e64a210e436258385a286a7ad7808a844d8e3b0bfcba90cdae4917a",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CampaignDeckBuilder",
   "host_dependencies": [],

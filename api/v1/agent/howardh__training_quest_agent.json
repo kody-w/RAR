@@ -3,10 +3,11 @@
   "id": "howardh__training_quest_agent",
   "name": "TrainingQuest",
   "rar_name": "@howardh/training_quest_agent",
-  "rappid": "rappid:@howardh/training_quest_agent:765e8016aa6b73249de65caf82e55f478d4f75d67aac1d85f059180980f02426",
-  "_migrated_from": "rappid:@howardh/training_quest_agent:9db2f3969e8728374bbc0e56f6be66154b2e1c062d646e5d88cc32a74dce4407",
+  "rappid": "rappid:@howardh/training_quest_agent:52437cbc97025841a8fda56a9fab4e9c49928d7ff19058a863b0cf6c8fd8d2db",
+  "_migrated_from": "rappid:@howardh/training_quest_agent:765e8016aa6b73249de65caf82e55f478d4f75d67aac1d85f059180980f02426",
   "_migrated_from_all": [
-    "rappid:@howardh/training_quest_agent:9db2f3969e8728374bbc0e56f6be66154b2e1c062d646e5d88cc32a74dce4407"
+    "rappid:@howardh/training_quest_agent:9db2f3969e8728374bbc0e56f6be66154b2e1c062d646e5d88cc32a74dce4407",
+    "rappid:@howardh/training_quest_agent:765e8016aa6b73249de65caf82e55f478d4f75d67aac1d85f059180980f02426"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -27,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 689,
-  "size_kb": 45.6,
-  "sha256": "fc213fa839cf3f39312ba03c31e47e55af61dd636bbcd671d35ee48383c78ab5",
+  "lines": 699,
+  "size_kb": 46.7,
+  "sha256": "a583ada09fa44f0d3d88962fea0826ae5877a09dd8639c908e6325c04cc0c36c",
   "has_card": true,
   "added_at": "2026-05-24T21:45:25-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

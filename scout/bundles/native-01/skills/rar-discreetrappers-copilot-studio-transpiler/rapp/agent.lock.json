@@ -1,7 +1,7 @@
 {
   "agent": "@discreetRappers/copilot_studio_transpiler_agent",
   "agent_file": "copilot_studio_transpiler_agent.py",
-  "agent_sha256": "acccbacba2be5acb4aa7583abb1c85aee291c5205f4d7915d6eeafc579c86934",
+  "agent_sha256": "ee87bb1000f7f33a408097d912f3cd41946d0feb5ce40e7abe37f1938c8acefb",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotStudioTranspilerAgent",
   "host_dependencies": [

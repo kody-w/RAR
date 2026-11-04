@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@kody-w/twin_me",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "821f3c97589ab2bd5ab346d36a2458621f39d568f205b9391893308099efabed"
+ },
+ "canonical_path": "agents/@kody-w/twin_me_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_2b434bab4996584d2c7f367133411e0ca2c51746e683683621dfe78d4540e081",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "d3e0e553b21db6ba2323ebf1119a019bf44b898438fae6432284671359593896",
+  "receipt": "rar_ee6ae56548899e541ebdcdca5d9ace76a4accb79874aff91682e29a72cc15b05",
+  "version": "1.0.3"
+ },
+ "quality_tier": "community",
+ "request_id": "req_2b434bab4996584d2c7f3671",
+ "revision_id": "2b434bab4996584d2c7f367133411e0ca2c51746e683683621dfe78d4540e081",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "1.0.3"
+}

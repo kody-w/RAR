@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/ping_agent",
   "agent_file": "ping_agent.py",
-  "agent_sha256": "4761dcecf8af3893153407860dc6786ac8cd7d3654966bb57923143db885f0af",
+  "agent_sha256": "bcd367fbb3174f0128309a6f98df1b461f012dfdea619e4dae9b301c8b607bf9",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PingAgent",
   "host_dependencies": [],

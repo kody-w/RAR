@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__browser_uat_analyst",
   "name": "Browser UAT Analyst",
   "rar_name": "@cat-agent-skills/browser_uat_analyst",
-  "rappid": "rappid:@cat-agent-skills/browser_uat_analyst:52843b6a0e51585a19e1b565e889128c87d27f5fccd57605ae36e7c5944a84b1",
-  "_migrated_from": "rappid:@cat-agent-skills/browser_uat_analyst:233dd3ad574e7c10072622d77677ae9be44ae38b884440a084e9743cdee83c50",
+  "rappid": "rappid:@cat-agent-skills/browser_uat_analyst:b0b07b2ff3e779f5750e2945e767c90e43488389693cc5a05308d95ca5d7d9db",
+  "_migrated_from": "rappid:@cat-agent-skills/browser_uat_analyst:52843b6a0e51585a19e1b565e889128c87d27f5fccd57605ae36e7c5944a84b1",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/browser_uat_analyst:233dd3ad574e7c10072622d77677ae9be44ae38b884440a084e9743cdee83c50"
+    "rappid:@cat-agent-skills/browser_uat_analyst:233dd3ad574e7c10072622d77677ae9be44ae38b884440a084e9743cdee83c50",
+    "rappid:@cat-agent-skills/browser_uat_analyst:52843b6a0e51585a19e1b565e889128c87d27f5fccd57605ae36e7c5944a84b1"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -28,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.8,
-  "sha256": "04643dc07fd9ae22b95b57a4dc006100bfe3cbe9f2336dad00061f7953b55223",
+  "lines": 272,
+  "size_kb": 14.0,
+  "sha256": "1c9fbb8d48aaf02473498265789011da312ac8431035b97dbb21a8d021a8f256",
   "has_card": true,
   "added_at": "2026-08-11T09:43:05Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

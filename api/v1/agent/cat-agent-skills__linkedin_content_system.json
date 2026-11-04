@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__linkedin_content_system",
   "name": "LinkedIn Content System",
   "rar_name": "@cat-agent-skills/linkedin_content_system",
-  "rappid": "rappid:@cat-agent-skills/linkedin_content_system:d212b4bfe23bd2b987007dc0bd092f7b6dfd5dce577ed08b279146564cbc7f5f",
-  "_migrated_from": "rappid:@cat-agent-skills/linkedin_content_system:cd4c0f46a20b3670ad7c386188faf49754eadb5c65dd7d4a9c9c5aac8164c147",
+  "rappid": "rappid:@cat-agent-skills/linkedin_content_system:6d4c580189025e8bfb1f6a642a51d6da6b2c9bddc3099a2e2c2dbe818d918601",
+  "_migrated_from": "rappid:@cat-agent-skills/linkedin_content_system:d212b4bfe23bd2b987007dc0bd092f7b6dfd5dce577ed08b279146564cbc7f5f",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/linkedin_content_system:cd4c0f46a20b3670ad7c386188faf49754eadb5c65dd7d4a9c9c5aac8164c147"
+    "rappid:@cat-agent-skills/linkedin_content_system:cd4c0f46a20b3670ad7c386188faf49754eadb5c65dd7d4a9c9c5aac8164c147",
+    "rappid:@cat-agent-skills/linkedin_content_system:d212b4bfe23bd2b987007dc0bd092f7b6dfd5dce577ed08b279146564cbc7f5f"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "2.1.2",
@@ -26,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.2,
-  "sha256": "8f2cf6fa8bde17f9ba6a01d54864ee5b1c02c560ece7c7488862e58cb7a441e7",
+  "lines": 272,
+  "size_kb": 13.5,
+  "sha256": "354dcb11218d125b0d047e466c38e3923af74d37dfc7bcd9a47de2e742b84fab",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

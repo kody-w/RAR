@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/exam_prep_learning_plan_builder",
   "agent_file": "exam_prep_learning_plan_builder_agent.py",
-  "agent_sha256": "03a5fb8c787b71080cb833cb37f80dd8b7a981731a2b71086670ad239f59a2cc",
+  "agent_sha256": "bd985899fe983b4f68a0f915ee19628c54d774f79167fafef7a7e2866cbe7fdb",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ExamPrepLearningPlanBuilder",
   "host_dependencies": [],

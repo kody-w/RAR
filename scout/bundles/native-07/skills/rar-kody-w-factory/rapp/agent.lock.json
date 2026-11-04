@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/factory",
   "agent_file": "factory_agent.py",
-  "agent_sha256": "e81878cc359660ac98047c607bea3245cda5967f4725091ded356597309c2b77",
+  "agent_sha256": "72dc8b72531aa6133effb8dc23175b85889d63f7aa2bece4970ddca60792ddbf",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappCopilotStudioFactoryAgent",
   "host_dependencies": [],

@@ -3,10 +3,11 @@
   "id": "kody-w__bond_rhythm_agent",
   "name": "Bond Pulse",
   "rar_name": "@kody-w/bond_rhythm_agent",
-  "rappid": "rappid:@kody-w/bond_rhythm_agent:93a4e7b97de1b97272354bf2363c22193fb131edd7eaba46f4e43688b7b9fbb2",
-  "_migrated_from": "rappid:@kody-w/bond_rhythm_agent:ad68b0e9d73b7fa7104fd84b0befc020ea33159b08770d9ca2f97e2eeafb911e",
+  "rappid": "rappid:@kody-w/bond_rhythm_agent:4c51de40bb176f0f07369839a31339e269260c65bd5527642d8d6906b765cae1",
+  "_migrated_from": "rappid:@kody-w/bond_rhythm_agent:93a4e7b97de1b97272354bf2363c22193fb131edd7eaba46f4e43688b7b9fbb2",
   "_migrated_from_all": [
-    "rappid:@kody-w/bond_rhythm_agent:ad68b0e9d73b7fa7104fd84b0befc020ea33159b08770d9ca2f97e2eeafb911e"
+    "rappid:@kody-w/bond_rhythm_agent:ad68b0e9d73b7fa7104fd84b0befc020ea33159b08770d9ca2f97e2eeafb911e",
+    "rappid:@kody-w/bond_rhythm_agent:93a4e7b97de1b97272354bf2363c22193fb131edd7eaba46f4e43688b7b9fbb2"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -27,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 368,
-  "size_kb": 15.1,
-  "sha256": "88bb285bbf26b68fee053d24bf70c08ae1ec42e4c3a03b9afe7de2c404a5a219",
+  "lines": 378,
+  "size_kb": 16.3,
+  "sha256": "7bfa5d0afca6919cedff2409abf22fdd8a715525de81426e68025429ef7cb585",
   "has_card": true,
   "added_at": "2026-05-09T15:25:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

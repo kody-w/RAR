@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/copilot_studio_parity_deploy",
   "agent_file": "copilot_studio_parity_deploy_agent.py",
-  "agent_sha256": "e651d4f65d4cee2243e7c2bbfe35854d8c57aebda7db3a2fbc64a4338591ef14",
+  "agent_sha256": "503f23d3431603a245dd5b43bbe140a986fc626764cbd57e03f481d279794484",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotStudioDeployAgent",
   "host_dependencies": [

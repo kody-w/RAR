@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/rich_html_presentation",
   "agent_file": "rich_html_presentation_agent.py",
-  "agent_sha256": "f8f6f22899b994c7047f09873a6508f5e4a0aad70f5551620130f1793d8bfdb4",
+  "agent_sha256": "840d0228ff9167063d5c04517549c9a9b64c22fa85f9e8a8da393481809fb956",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RichHtmlPresentation",
   "host_dependencies": [],

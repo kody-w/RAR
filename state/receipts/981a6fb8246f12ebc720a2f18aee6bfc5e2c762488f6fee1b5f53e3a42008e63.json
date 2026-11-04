@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@cat-agent-skills/clipchamp_video",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "d2cfd098c26b1ed16c4eb39226dc8486860550d40cd1b8f1c0c6672dc6793515"
+ },
+ "canonical_path": "agents/@cat-agent-skills/clipchamp_video_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_981a6fb8246f12ebc720a2f18aee6bfc5e2c762488f6fee1b5f53e3a42008e63",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "99c1a93abfecee1f36363f05c06d8b7f08c9a63e141aeb6e4f2014b6c50b4a4c",
+  "receipt": "rar_5ba0f15755919bb0dd1e11cac4aea2d903eb7d8f9124993e01bcdd398a931c96",
+  "version": "3.0.2"
+ },
+ "quality_tier": "frontier",
+ "request_id": "req_981a6fb8246f12ebc720a2f1",
+ "revision_id": "981a6fb8246f12ebc720a2f18aee6bfc5e2c762488f6fee1b5f53e3a42008e63",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "3.0.2"
+}

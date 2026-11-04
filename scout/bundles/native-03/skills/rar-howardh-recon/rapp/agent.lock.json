@@ -1,7 +1,7 @@
 {
   "agent": "@howardh/recon_agent",
   "agent_file": "recon_agent.py",
-  "agent_sha256": "7c13e82c07ce373aba2729caccfeab00ae44e5c80ef46c8de34e4798361f6f06",
+  "agent_sha256": "3d26f7412310635f9b35e26a324ecfdb1af86ea26b0069e753d95a76d4c9d089",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReconAgent",
   "host_dependencies": [],

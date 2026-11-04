@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__copilot_studio_agent_test",
   "name": "Copilot Studio Agent Test",
   "rar_name": "@cat-agent-skills/copilot_studio_agent_test",
-  "rappid": "rappid:@cat-agent-skills/copilot_studio_agent_test:f624d8fa7229650604fc0ed99335fc95f442ef0ebca47908e905399fc0be3a0c",
-  "_migrated_from": "rappid:@cat-agent-skills/copilot_studio_agent_test:88eb8309906b9763f2387037f866117ddcb3a136ae2abd47b5d77d60f66498bd",
+  "rappid": "rappid:@cat-agent-skills/copilot_studio_agent_test:aa0e230b230b1c449dd304f2b5e7406a81191dc4d25b1c9ce25ff403608806ad",
+  "_migrated_from": "rappid:@cat-agent-skills/copilot_studio_agent_test:f624d8fa7229650604fc0ed99335fc95f442ef0ebca47908e905399fc0be3a0c",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/copilot_studio_agent_test:88eb8309906b9763f2387037f866117ddcb3a136ae2abd47b5d77d60f66498bd"
+    "rappid:@cat-agent-skills/copilot_studio_agent_test:88eb8309906b9763f2387037f866117ddcb3a136ae2abd47b5d77d60f66498bd",
+    "rappid:@cat-agent-skills/copilot_studio_agent_test:f624d8fa7229650604fc0ed99335fc95f442ef0ebca47908e905399fc0be3a0c"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -27,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.5,
-  "sha256": "571bdedba33c20a1913db0d63202aba452b953bb1a6bfe1bb09559c9fb986c64",
+  "lines": 272,
+  "size_kb": 13.7,
+  "sha256": "1075b0924639851f5066ff8f70c560ddf98829c6bbff4bf5fbfbc8bdb0cffd91",
   "has_card": true,
   "added_at": "2026-08-11T09:43:05Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

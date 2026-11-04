@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/sharepoint_list_formatter",
   "agent_file": "sharepoint_list_formatter_agent.py",
-  "agent_sha256": "9d5aac2ba3712657aade17d943de5d4935e122c800e3919e3c9202506154441b",
+  "agent_sha256": "8d46667639bcef5592415180941620139a0b843fe27c8f605456fb68a5316ced",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "SharepointListFormatter",
   "host_dependencies": [],

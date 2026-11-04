@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__awaiting_reply",
   "name": "Awaiting Reply",
   "rar_name": "@cat-agent-skills/awaiting_reply",
-  "rappid": "rappid:@cat-agent-skills/awaiting_reply:235f2b596ead582a945a3ae89851e74dfb10d4cfabd9ad9633a1aa1db5f65d19",
-  "_migrated_from": "rappid:@cat-agent-skills/awaiting_reply:839bdab1be444813ba1ccc68d32f8d5e355b2382f8cebd09d4cfad2c0e241ca3",
+  "rappid": "rappid:@cat-agent-skills/awaiting_reply:723e271f43a6210d5a05ba61952d0fbd27a4a33b0696407095def70ed338b699",
+  "_migrated_from": "rappid:@cat-agent-skills/awaiting_reply:235f2b596ead582a945a3ae89851e74dfb10d4cfabd9ad9633a1aa1db5f65d19",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/awaiting_reply:839bdab1be444813ba1ccc68d32f8d5e355b2382f8cebd09d4cfad2c0e241ca3"
+    "rappid:@cat-agent-skills/awaiting_reply:839bdab1be444813ba1ccc68d32f8d5e355b2382f8cebd09d4cfad2c0e241ca3",
+    "rappid:@cat-agent-skills/awaiting_reply:235f2b596ead582a945a3ae89851e74dfb10d4cfabd9ad9633a1aa1db5f65d19"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -28,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.6,
-  "sha256": "d02f3e9ab8faeaabb60ad68970f996c478687c29f591f9a0bce8459a68a6968e",
+  "lines": 272,
+  "size_kb": 13.7,
+  "sha256": "b7aa264d0020c3aa19ae1edc112ef65f8ddcd16dcc3ec5d78bd9775e3b957719",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

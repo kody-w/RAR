@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/transcript2prototype",
   "agent_file": "transcript2prototype_agent.py",
-  "agent_sha256": "73d95878bc3f14510eefa8dd16707d5cc49e9c51becd7f2f4e4351197bdce939",
+  "agent_sha256": "8a6a12130be0fdac137a316a07076b917304e15242b8b81c609efcb1c6a4a3d1",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "Transcript2PrototypeAgent",
   "host_dependencies": [],

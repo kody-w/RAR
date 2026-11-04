@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/doc_format_converter",
   "agent_file": "doc_format_converter_agent.py",
-  "agent_sha256": "23adb975b7c161e8ac5e8c9af419d38a2c1eae82abe86a26cd99bc570ba2c1ee",
+  "agent_sha256": "f4717f434448dedb4118c9bac67f91897994ccf3a9cee2ebed68021661ec4131",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DocFormatConverter",
   "host_dependencies": [],

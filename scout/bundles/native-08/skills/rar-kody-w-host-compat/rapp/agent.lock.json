@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/host_compat_agent",
   "agent_file": "host_compat_agent.py",
-  "agent_sha256": "a85517d560dcab529e0c4fc1dce80472c27ca85e6620e6202aee695c2f4dfa79",
+  "agent_sha256": "284c111aa88d5588b9873c97f04d44676223ea37a80240a5e7b884bbdc7170c8",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "HostCompatAgent",
   "host_dependencies": [],

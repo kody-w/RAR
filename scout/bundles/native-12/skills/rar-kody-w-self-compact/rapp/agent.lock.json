@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/self_compact_agent",
   "agent_file": "self_compact_agent.py",
-  "agent_sha256": "ad47db5e49459bdc85e90cf7a6a1fa7201061b358925ae5d7290b8c32a790c9e",
+  "agent_sha256": "4e3d29f41ac869e4eaf99a8c499d27f37a811bd019d61c1551d8c5adb98585a8",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "SelfCompactAgent",
   "host_dependencies": [],

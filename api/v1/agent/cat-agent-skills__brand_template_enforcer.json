@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__brand_template_enforcer",
   "name": "Brand Template Enforcer",
   "rar_name": "@cat-agent-skills/brand_template_enforcer",
-  "rappid": "rappid:@cat-agent-skills/brand_template_enforcer:3c4d913fd0ea22e7755c24e2ad48f912cd96025ff82bb6b42ee3d087423cda21",
-  "_migrated_from": "rappid:@cat-agent-skills/brand_template_enforcer:e4038f625b385e5b958f14db899a02e54706917a52db54daa35a5a4ea0372b37",
+  "rappid": "rappid:@cat-agent-skills/brand_template_enforcer:204119a1a37e92a3fc31d42c055f22caa07f10dd7728f568ba4f1b2c4f3e6e6a",
+  "_migrated_from": "rappid:@cat-agent-skills/brand_template_enforcer:3c4d913fd0ea22e7755c24e2ad48f912cd96025ff82bb6b42ee3d087423cda21",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/brand_template_enforcer:e4038f625b385e5b958f14db899a02e54706917a52db54daa35a5a4ea0372b37"
+    "rappid:@cat-agent-skills/brand_template_enforcer:e4038f625b385e5b958f14db899a02e54706917a52db54daa35a5a4ea0372b37",
+    "rappid:@cat-agent-skills/brand_template_enforcer:3c4d913fd0ea22e7755c24e2ad48f912cd96025ff82bb6b42ee3d087423cda21"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.2.2",
@@ -27,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.3,
-  "sha256": "c4732fde24a93d74c774a8b69f5ad43d891add5ea8d12223073f6488db1555e6",
+  "lines": 272,
+  "size_kb": 13.5,
+  "sha256": "9b55307c395f49f3800d1bafe751f64efa1519e40b9e69b3a57e9bebbc02c541",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

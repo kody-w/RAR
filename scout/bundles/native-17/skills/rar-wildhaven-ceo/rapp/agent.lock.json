@@ -1,7 +1,7 @@
 {
   "agent": "@wildhaven/ceo_agent",
   "agent_file": "ceo_agent.py",
-  "agent_sha256": "c1e49265becbe104dceacd371dcbc6cce39aa53f3a36075fd47f06d9cf476896",
+  "agent_sha256": "9bc2697ed4ed6eab9ca6036297a39968c5a7ab9e7aeaaf43630c705b0a3c733a",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CEOAgent",
   "host_dependencies": [],

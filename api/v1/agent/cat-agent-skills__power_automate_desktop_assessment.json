@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__power_automate_desktop_assessment",
   "name": "Power Automate Desktop Assessment",
   "rar_name": "@cat-agent-skills/power_automate_desktop_assessment",
-  "rappid": "rappid:@cat-agent-skills/power_automate_desktop_assessment:014418d9da2a8a31c01d5791acd3ee6163b15fd26f835d289baac4463f393d83",
-  "_migrated_from": "rappid:@cat-agent-skills/power_automate_desktop_assessment:8d1e5257f8692878f13e84bea3b4af8466574e7ec50df89b1bc1f7e0a3ff4ddb",
+  "rappid": "rappid:@cat-agent-skills/power_automate_desktop_assessment:c7dc6abd8c43d47be603fdaab6769ecd1183c5361667dd8ea718f22a98fcf59a",
+  "_migrated_from": "rappid:@cat-agent-skills/power_automate_desktop_assessment:014418d9da2a8a31c01d5791acd3ee6163b15fd26f835d289baac4463f393d83",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/power_automate_desktop_assessment:8d1e5257f8692878f13e84bea3b4af8466574e7ec50df89b1bc1f7e0a3ff4ddb"
+    "rappid:@cat-agent-skills/power_automate_desktop_assessment:8d1e5257f8692878f13e84bea3b4af8466574e7ec50df89b1bc1f7e0a3ff4ddb",
+    "rappid:@cat-agent-skills/power_automate_desktop_assessment:014418d9da2a8a31c01d5791acd3ee6163b15fd26f835d289baac4463f393d83"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.1.2",
@@ -26,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.6,
-  "sha256": "6ff056fe92c6b801457fd674f9e59f20cb8d232458838a03d7506839420897ec",
+  "lines": 272,
+  "size_kb": 13.9,
+  "sha256": "6c1fa43efa6dfc4b2812aa7a445ddbbd121f75290f2dbfee020c30425e347d3b",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

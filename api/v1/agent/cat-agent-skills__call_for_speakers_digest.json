@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__call_for_speakers_digest",
   "name": "Call for Speakers Digest",
   "rar_name": "@cat-agent-skills/call_for_speakers_digest",
-  "rappid": "rappid:@cat-agent-skills/call_for_speakers_digest:dbd1e56318ca3372fe58cfe44118190288a35c506b4316cf4cee97aaaf84178a",
-  "_migrated_from": "rappid:@cat-agent-skills/call_for_speakers_digest:2c46e3e22f9e2a1f774b5e958b70f7682ffab68b0ac87fcada8675fb3281dda2",
+  "rappid": "rappid:@cat-agent-skills/call_for_speakers_digest:94e4f141c08fe3c6f0fc358deb6e0fd856e9e233fcb2f929db72760707492c1e",
+  "_migrated_from": "rappid:@cat-agent-skills/call_for_speakers_digest:dbd1e56318ca3372fe58cfe44118190288a35c506b4316cf4cee97aaaf84178a",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/call_for_speakers_digest:2c46e3e22f9e2a1f774b5e958b70f7682ffab68b0ac87fcada8675fb3281dda2"
+    "rappid:@cat-agent-skills/call_for_speakers_digest:2c46e3e22f9e2a1f774b5e958b70f7682ffab68b0ac87fcada8675fb3281dda2",
+    "rappid:@cat-agent-skills/call_for_speakers_digest:dbd1e56318ca3372fe58cfe44118190288a35c506b4316cf4cee97aaaf84178a"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -25,9 +26,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 13.0,
-  "sha256": "d0d10eab87e4ada8b21db20e33224b2e3b97d5c23eac20300aa8864d64ea5d98",
+  "lines": 272,
+  "size_kb": 14.2,
+  "sha256": "5ea0d443f429476b193cd018fdf370d484de2bd510263c087c133d8dc0146951",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

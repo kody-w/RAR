@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/microsoft_deck_studio_agent",
   "agent_file": "microsoft_deck_studio_agent.py",
-  "agent_sha256": "6aa3761fd90b1be592520185359a02a0bc0651c0c0bd86edb8fe9ff879138445",
+  "agent_sha256": "1ff2b23806ff4a7ce64b9b4d21f249ac53e9a6efd5b57b839e95a9077e2e68f0",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MicrosoftDeckStudio",
   "host_dependencies": [],

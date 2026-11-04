@@ -9,13 +9,13 @@
       "purpose": "Full digital-twin lifecycle in one drop-in agent. Source: agents/@rapp/twin_agent.py.",
       "source": "agents/@rapp/twin_agent.py",
       "size": 73629,
-      "sha256": "878729c7a59ce520c487d02e6986845a79babce12a6e10ecbbe5e9eec1b71dda"
+      "sha256": "ca59d24cc598580225532ed9cbe5932dcc37957f77325d2dfccbe78a92826460"
     },
     "egg_hatcher_agent.py": {
       "purpose": "Universal .egg cartridge router. Source: agents/@rapp/egg_hatcher_agent.py.",
       "source": "agents/@rapp/egg_hatcher_agent.py",
       "size": 14802,
-      "sha256": "bba2848c59de6883ad0f3d190ff0fe4e9f44f595016c95f4453d2764d3f4e78f"
+      "sha256": "7391fce3a02e8ee274332fbd71c5850495998d2e656732837b1ef104b99aef8e"
     }
   },
   "install": {

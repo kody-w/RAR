@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@kody-w/bond_rhythm_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "7bfa5d0afca6919cedff2409abf22fdd8a715525de81426e68025429ef7cb585"
+ },
+ "canonical_path": "agents/@kody-w/ecosystem-grail-stack/bond_rhythm_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_29f582738c940ea54424cfa952820078509a137ebed5987d2881fc803b8fe6b0",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "88bb285bbf26b68fee053d24bf70c08ae1ec42e4c3a03b9afe7de2c404a5a219",
+  "receipt": "rar_3986f0ad684a124115d27900ebc5d6d4adfb8b5beb05ed14f1236dbccfa0cbda",
+  "version": "1.0.1"
+ },
+ "quality_tier": "verified",
+ "request_id": "req_29f582738c940ea54424cfa9",
+ "revision_id": "29f582738c940ea54424cfa952820078509a137ebed5987d2881fc803b8fe6b0",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "1.0.1"
+}

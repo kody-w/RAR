@@ -123,6 +123,10 @@ def _minimal_repo(tmp_path, ledger=None):
     (tmp_path / "agents" / "@test").mkdir(parents=True)
     (tmp_path / "state").mkdir()
     shutil.copy(REPO_ROOT / "build_registry.py", tmp_path / "build_registry.py")
+    shutil.copytree(
+        REPO_ROOT / "tools", tmp_path / "tools",
+        ignore=shutil.ignore_patterns("__pycache__"),
+    )
     # build_registry.py imports rapp_sdk once an agent validates cleanly.
     shutil.copy(REPO_ROOT / "rapp_sdk.py", tmp_path / "rapp_sdk.py")
     (tmp_path / "agents" / "@test" / "foo_agent.py").write_text(

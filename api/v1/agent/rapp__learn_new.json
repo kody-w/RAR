@@ -3,8 +3,8 @@
   "id": "rapp__learn_new",
   "name": "LearnNew",
   "rar_name": "@rapp/learn_new",
-  "rappid": "rappid:@rapp/learn_new:c4b8bc31d77e6e460c24997e26ae988ecf0edbe9e3dabe88dcf4ba3b8f6dcb27",
-  "_migrated_from": "rappid:@rapp/learn_new:8df55e355eb7fa32b515e98019dd03a680a84bc79a22ef55f0d4eecb958661d8",
+  "rappid": "rappid:@rapp/learn_new:bbb6f06b52828adcacbad4a34482570efa4c6e8642d104af2f0c6678623a34b5",
+  "_migrated_from": "rappid:@rapp/learn_new:c4b8bc31d77e6e460c24997e26ae988ecf0edbe9e3dabe88dcf4ba3b8f6dcb27",
   "_migrated_from_all": [
     "rappid:v2:agent:@rapp/learn_new:0edcecec861b4dce7ad6c06ef77a320d",
     "rappid:@rapp/learn_new:4b849a9bd8534e3b76132d60b6f2a1ba2c5ca6361641166cb5be288f3e2d231f",
@@ -14,7 +14,8 @@
     "rappid:@rapp/learn_new:7e14bd18ea44be508c650c34cbda9422ba552af0527e0442fd3b76078e68f264",
     "rappid:@rapp/learn_new:ff058f9019a8f9acb77fd76d1bc2fa9475c2f34b1087733b081761e1a704f177",
     "rappid:@rapp/learn_new:342da6c949dd9380c74cc8b5cd29e467f0e2e7ce8c031a292b10ae696ec8decf",
-    "rappid:@rapp/learn_new:8df55e355eb7fa32b515e98019dd03a680a84bc79a22ef55f0d4eecb958661d8"
+    "rappid:@rapp/learn_new:8df55e355eb7fa32b515e98019dd03a680a84bc79a22ef55f0d4eecb958661d8",
+    "rappid:@rapp/learn_new:c4b8bc31d77e6e460c24997e26ae988ecf0edbe9e3dabe88dcf4ba3b8f6dcb27"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.4.1",
@@ -36,9 +37,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 2188,
-  "size_kb": 92.5,
-  "sha256": "0d3df4dbd6ee8f7d9786cc7cbd2c35616fb61bd0813cd85150b6c339fe6618e2",
+  "lines": 2198,
+  "size_kb": 93.6,
+  "sha256": "3cc1431dca7e6aee411f653c9ea2746e2161b1fe8db3fdeb5cbc72c0c803f4f9",
   "has_card": true,
   "added_at": "2026-04-20T12:38:45-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

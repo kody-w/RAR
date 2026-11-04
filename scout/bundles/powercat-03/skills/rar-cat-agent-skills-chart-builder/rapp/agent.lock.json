@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/chart_builder",
   "agent_file": "chart_builder_agent.py",
-  "agent_sha256": "a3ce3929b7708296679c21b8f9a0e58efd70e3cf3c18c6d5e465ed6585c7c3b1",
+  "agent_sha256": "f4ed638b191940f09a2bf01dde7ab052dbca6fba9627b2bfb957f3de8ffa0917",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ChartBuilder",
   "host_dependencies": [],

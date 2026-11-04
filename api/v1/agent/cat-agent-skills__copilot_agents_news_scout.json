@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__copilot_agents_news_scout",
   "name": "Copilot & Agents News Scout",
   "rar_name": "@cat-agent-skills/copilot_agents_news_scout",
-  "rappid": "rappid:@cat-agent-skills/copilot_agents_news_scout:77515ad34afdb63c22f5f57fdc9d5684400aa18210689f99ac1b14a09e95bcf0",
-  "_migrated_from": "rappid:@cat-agent-skills/copilot_agents_news_scout:fa23537745d539ad86a7cdc700977824800ae86ba15209b21ddb59a0af6b1b92",
+  "rappid": "rappid:@cat-agent-skills/copilot_agents_news_scout:f2e7771f656826f6e3743fabb1cf83c36e664ec52ed1a9eb5e4c8ee67845b822",
+  "_migrated_from": "rappid:@cat-agent-skills/copilot_agents_news_scout:77515ad34afdb63c22f5f57fdc9d5684400aa18210689f99ac1b14a09e95bcf0",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/copilot_agents_news_scout:fa23537745d539ad86a7cdc700977824800ae86ba15209b21ddb59a0af6b1b92"
+    "rappid:@cat-agent-skills/copilot_agents_news_scout:fa23537745d539ad86a7cdc700977824800ae86ba15209b21ddb59a0af6b1b92",
+    "rappid:@cat-agent-skills/copilot_agents_news_scout:77515ad34afdb63c22f5f57fdc9d5684400aa18210689f99ac1b14a09e95bcf0"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -28,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.6,
-  "sha256": "9d45dca1f4eeae058b0f07c698721c49a4bc3bb408dbbc74401899aef8225a40",
+  "lines": 272,
+  "size_kb": 13.8,
+  "sha256": "0121f58ca0194995eceb2c1c014371e45312be27668c438506c656cc63bd9d96",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/knowledge_corpus_curator",
   "agent_file": "knowledge_corpus_curator_agent.py",
-  "agent_sha256": "0c3aead2f0ab4312a0b116210443d47034268810152022a21ef72612b84c7fa6",
+  "agent_sha256": "10ffef6ab60d115b4c4de25df5f583e6259ff262bdee6283a7524c223c70ebf1",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "KnowledgeCorpusCurator",
   "host_dependencies": [],

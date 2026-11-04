@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/sharepoint_list_insight_report_generator",
   "agent_file": "sharepoint_list_insight_report_generator_agent.py",
-  "agent_sha256": "c915c29c6311ad09ee768d4267ba02b6fb91324750ffc62d9cc02c2cb6b5ea82",
+  "agent_sha256": "29a7c49ea3bc92bfb00f7b609f89aff2c1d0b85e5e6323b8e64c38353388513e",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "SharepointListInsightReportGenerator",
   "host_dependencies": [],

@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/lab_column_mapper",
   "agent_file": "lab_column_mapper_agent.py",
-  "agent_sha256": "914d0b5db16447f3e2a56c419e77f313284b3b6100129f4ee95beafda594537c",
+  "agent_sha256": "0287bd0110c25b87219dd922e473ed65e8c5fec0e6ef39071b21a2d0aa8239d7",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "LabColumnMapper",
   "host_dependencies": [],

@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/rapp_leviathan_factory",
   "agent_file": "rapp_leviathan_factory_agent.py",
-  "agent_sha256": "e381f1fe6add6c47eec0d59307110f136103f8d349c611f7be0bff02edb0c6d0",
+  "agent_sha256": "ec4a05f14e2149e80674ca6270942c3650539f20ea584de7cd3055c247e8c194",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappLeviathanFactoryAgent",
   "host_dependencies": [],

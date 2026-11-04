@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@howardh/cardsmith_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "ecbabf0ca4b13f8c98558c9f773d95291d0c4c41e61604667aa32a901105491b"
+ },
+ "canonical_path": "agents/@howardh/cardsmith_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_b35dca642b4d73a22318dc3b9330400a7ff8ccb93444259caf3e3d3c605ea2a5",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "d7389ce10549693f4f97098379ca86c4ddbb22c9b4b93f891c99ae2f1aa0d4d4",
+  "receipt": "rar_3301f6f1c1be3e5706ce003372e42b431174e15380958413fc9b38d0a5a6962d",
+  "version": "1.0.1"
+ },
+ "quality_tier": "community",
+ "request_id": "req_b35dca642b4d73a22318dc3b",
+ "revision_id": "b35dca642b4d73a22318dc3b9330400a7ff8ccb93444259caf3e3d3c605ea2a5",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "1.0.1"
+}

@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@kody-w/flight_recorder",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "f07d76a30266eab0a367c47a6dacf9403cb08cae684c0e02b0252c0cea79da02"
+ },
+ "canonical_path": "agents/@kody-w/flight_recorder_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_5bad2677e70bc5d5de7536248d953a08289572518b552bb682faa47ea0f565e6",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "6a3976cfba0492a585ccab318125caed4ca0820e05dddf4119e98d5f22dea659",
+  "receipt": "rar_6935f0ff5d40e09b8eb57fa86a8e0eb7037391e8944b0655b556405fb17bd4ff",
+  "version": "1.0.1"
+ },
+ "quality_tier": "community",
+ "request_id": "req_5bad2677e70bc5d5de753624",
+ "revision_id": "5bad2677e70bc5d5de7536248d953a08289572518b552bb682faa47ea0f565e6",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "1.0.1"
+}

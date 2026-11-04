@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/matrix_arena_agent",
   "agent_file": "matrix_arena_agent.py",
-  "agent_sha256": "313121fc5f72c6664069d2b016bf5f3a4566bad3f7bbebe29b411b26cf02425a",
+  "agent_sha256": "1d1c4fe075943ca79f7873608a2a683448a0bd8d3c97e89b640b4d8690cee7f1",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MatrixArenaAgent",
   "host_dependencies": [],

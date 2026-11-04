@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__copilot_studio_knowledge_readiness",
   "name": "Copilot Studio Knowledge Readiness",
   "rar_name": "@cat-agent-skills/copilot_studio_knowledge_readiness",
-  "rappid": "rappid:@cat-agent-skills/copilot_studio_knowledge_readiness:1134251a5573d3fc3ccd455411cd06207f7dea8508cdcd3aa2c6afcc6b78e106",
-  "_migrated_from": "rappid:@cat-agent-skills/copilot_studio_knowledge_readiness:4dd93ba8ba3c513b6da177909b6235dc315e4190baa98a490e946791c2ab492a",
+  "rappid": "rappid:@cat-agent-skills/copilot_studio_knowledge_readiness:aba7df9045ed6e5fca9b86f52a74fb0cdde962699e3fed7ce37943e38a0dfd51",
+  "_migrated_from": "rappid:@cat-agent-skills/copilot_studio_knowledge_readiness:1134251a5573d3fc3ccd455411cd06207f7dea8508cdcd3aa2c6afcc6b78e106",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/copilot_studio_knowledge_readiness:4dd93ba8ba3c513b6da177909b6235dc315e4190baa98a490e946791c2ab492a"
+    "rappid:@cat-agent-skills/copilot_studio_knowledge_readiness:4dd93ba8ba3c513b6da177909b6235dc315e4190baa98a490e946791c2ab492a",
+    "rappid:@cat-agent-skills/copilot_studio_knowledge_readiness:1134251a5573d3fc3ccd455411cd06207f7dea8508cdcd3aa2c6afcc6b78e106"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -29,9 +30,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 13.0,
-  "sha256": "ff5febf605e0ed1a3f38a7e99ef1f90a3eef5861fcdd7ffe650fa70cda95c97d",
+  "lines": 272,
+  "size_kb": 14.2,
+  "sha256": "9e86d57d4ff70581b2367925a2653531ce3b14d3dde20848b17b720b60511a93",
   "has_card": true,
   "added_at": "2026-08-11T09:43:05Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

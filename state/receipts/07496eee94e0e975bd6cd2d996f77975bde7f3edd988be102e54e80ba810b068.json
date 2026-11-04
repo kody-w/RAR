@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@cat-agent-skills/gantt_chart_generator",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "061ce3cfa4ea2f9aa26ffd7d11a22e3555748d5b254ca6ce2d6eb091b2c48a3a"
+ },
+ "canonical_path": "agents/@cat-agent-skills/gantt_chart_generator_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_07496eee94e0e975bd6cd2d996f77975bde7f3edd988be102e54e80ba810b068",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "e65f1661b81bf0103d70144a51f6b3ac3d022e795400f9e8c93ea1780eed398c",
+  "receipt": "rar_b04cbf372b29b571efdd71ae56d89cd842b6146dff992fe2b1eeef10cfc87263",
+  "version": "3.0.2"
+ },
+ "quality_tier": "frontier",
+ "request_id": "req_07496eee94e0e975bd6cd2d9",
+ "revision_id": "07496eee94e0e975bd6cd2d996f77975bde7f3edd988be102e54e80ba810b068",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "3.0.2"
+}

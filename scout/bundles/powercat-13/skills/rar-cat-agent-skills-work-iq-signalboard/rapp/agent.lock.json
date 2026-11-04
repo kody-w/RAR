@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/work_iq_signalboard",
   "agent_file": "work_iq_signalboard_agent.py",
-  "agent_sha256": "aed7e0f4e887eb61a85f9bf095e590243f3d0b80feea9403a3c7ef8ec3227c8f",
+  "agent_sha256": "5c8656fd0619330356b42a88ac5ec7cdf57ad539fe5f8f82863bfbf9618e1a43",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WorkIqSignalboard",
   "host_dependencies": [],

@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/copilot_studio_probe_agent",
   "agent_file": "copilot_studio_probe_agent.py",
-  "agent_sha256": "59b3c5cdb2228e333e20ea3ef89c41dac9bb8f12a940b68d591619726d2a0367",
+  "agent_sha256": "6d84b5cefb5d1a032b208555020f96756bba3c6c0790b1d8544abafc868e1a99",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotStudioProbeAgent",
   "host_dependencies": [

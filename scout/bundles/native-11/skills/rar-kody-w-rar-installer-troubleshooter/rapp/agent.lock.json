@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/rar_installer_troubleshooter_agent",
   "agent_file": "rar_installer_troubleshooter_agent.py",
-  "agent_sha256": "b638078c3ab5fc119a5cba648640387f3ad8af7ea81b72d501e87f04bc10f8ce",
+  "agent_sha256": "2d4a3f1b82eec87bee381b89ca81f6ddc33d1466b94d4c5ec53b4bd588269dbe",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappRoadsideAgent",
   "host_dependencies": [],

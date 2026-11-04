@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/ez_sharpen_agent",
   "agent_file": "ez_sharpen_agent.py",
-  "agent_sha256": "ae232a01c0cee6bf5109635803b5cf99ba215201856d4c830b3b11ae972992e6",
+  "agent_sha256": "066d314a213177a5f0b8b0fac69652e5190b6980e5a6a6ae0a9b51b41d57420c",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "EZSharpenAgent",
   "host_dependencies": [],

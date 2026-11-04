@@ -1,7 +1,7 @@
 {
   "agent": "@rarbookworld/bookfactory",
   "agent_file": "bookfactory_agent.py",
-  "agent_sha256": "dbd9f81e249d1065bb7f86ba34e4d1f8e51ef3da51e3ca487dea0c296b9243a6",
+  "agent_sha256": "d7d3f898475786ff89b880d2c3dd777f8960836c689822fa32c06269f1a25f06",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BookFactory",
   "host_dependencies": [

@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__brand_voice_pass",
   "name": "Brand Voice Pass",
   "rar_name": "@cat-agent-skills/brand_voice_pass",
-  "rappid": "rappid:@cat-agent-skills/brand_voice_pass:2a3dc8ed7c409e2eeb90d2581c8ee9bf860f81b4a10c5c474a03954c5069250b",
-  "_migrated_from": "rappid:@cat-agent-skills/brand_voice_pass:94e423414e334076d614e523d99797c3699573165bb43f0f5c7d7eaaa048598b",
+  "rappid": "rappid:@cat-agent-skills/brand_voice_pass:136dd2e44c38232bd0cbf3248b39ea3cf91c4e4add52a2fa855e535ec91df4f4",
+  "_migrated_from": "rappid:@cat-agent-skills/brand_voice_pass:2a3dc8ed7c409e2eeb90d2581c8ee9bf860f81b4a10c5c474a03954c5069250b",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/brand_voice_pass:94e423414e334076d614e523d99797c3699573165bb43f0f5c7d7eaaa048598b"
+    "rappid:@cat-agent-skills/brand_voice_pass:94e423414e334076d614e523d99797c3699573165bb43f0f5c7d7eaaa048598b",
+    "rappid:@cat-agent-skills/brand_voice_pass:2a3dc8ed7c409e2eeb90d2581c8ee9bf860f81b4a10c5c474a03954c5069250b"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "2.1.2",
@@ -26,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.2,
-  "sha256": "6637408a4175858b78cf4da9cb7fac9012e301e6577cc18e2064dca8629caa63",
+  "lines": 272,
+  "size_kb": 13.3,
+  "sha256": "8fe0e9ae3edc03da2cc0329fd08af34c4871530aa826d606972e1d38bf2c5127",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

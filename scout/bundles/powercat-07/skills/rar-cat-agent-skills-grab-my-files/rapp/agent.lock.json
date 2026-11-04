@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/grab_my_files",
   "agent_file": "grab_my_files_agent.py",
-  "agent_sha256": "87306cef061485d897f062adf3691db5cd71059a53cae8f107662a09c353b298",
+  "agent_sha256": "4e061e2a8f91902cfcee4405227ad8e5b37c9e36652786af4f49858348569b10",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "GrabMyFiles",
   "host_dependencies": [],

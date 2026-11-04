@@ -268,10 +268,12 @@ def main():
                     )
             except Exception:
                 pass
-    if _API.exists():
-        shutil.rmtree(_API)
-    (_API / "agent").mkdir(parents=True)
-    (_API / "sprite").mkdir(parents=True)
+    # Other builders own sibling feeds (skills, stats, catalog, front).
+    for name in ("agent", "sprite"):
+        directory = _API / name
+        if directory.exists():
+            shutil.rmtree(directory)
+        directory.mkdir(parents=True)
 
     with open(_REGISTRY) as f:
         registry = json.load(f)

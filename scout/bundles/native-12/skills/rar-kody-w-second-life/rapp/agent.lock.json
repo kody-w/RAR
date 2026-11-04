@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/second_life_agent",
   "agent_file": "second_life_agent.py",
-  "agent_sha256": "bee60124864e6783bd6de6d039904dd3890a602008b56367bfdc83a754978ba3",
+  "agent_sha256": "e67740d2ab1a489c29b4b274e2d20cb9df720603ba7963a10b0fde207f6c8aa1",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "SecondLifeAgent",
   "host_dependencies": [],

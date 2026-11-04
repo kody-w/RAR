@@ -3,10 +3,11 @@
   "id": "howardh__recon_agent",
   "name": "Recon",
   "rar_name": "@howardh/recon_agent",
-  "rappid": "rappid:@howardh/recon_agent:69458559c46219143da3c8ae2fc780569a6c6a5000f945902dacfb1b4886d6a0",
-  "_migrated_from": "rappid:@howardh/recon_agent:5cadb071567b6a14a9df923ea52d73286c5343635a3b28ea2a5459700561f97f",
+  "rappid": "rappid:@howardh/recon_agent:662455257cb832e468905f723ff3c0a9ca43c5be7612c64e67bf059a7f5818f2",
+  "_migrated_from": "rappid:@howardh/recon_agent:69458559c46219143da3c8ae2fc780569a6c6a5000f945902dacfb1b4886d6a0",
   "_migrated_from_all": [
-    "rappid:@howardh/recon_agent:5cadb071567b6a14a9df923ea52d73286c5343635a3b28ea2a5459700561f97f"
+    "rappid:@howardh/recon_agent:5cadb071567b6a14a9df923ea52d73286c5343635a3b28ea2a5459700561f97f",
+    "rappid:@howardh/recon_agent:69458559c46219143da3c8ae2fc780569a6c6a5000f945902dacfb1b4886d6a0"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -29,9 +30,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 742,
-  "size_kb": 32.2,
-  "sha256": "7c13e82c07ce373aba2729caccfeab00ae44e5c80ef46c8de34e4798361f6f06",
+  "lines": 752,
+  "size_kb": 33.4,
+  "sha256": "3d26f7412310635f9b35e26a324ecfdb1af86ea26b0069e753d95a76d4c9d089",
   "has_card": true,
   "added_at": "2026-05-24T21:45:25-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

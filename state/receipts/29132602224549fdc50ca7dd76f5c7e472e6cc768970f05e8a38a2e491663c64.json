@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@kody-w/rapp_leviathan_factory",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "ec4a05f14e2149e80674ca6270942c3650539f20ea584de7cd3055c247e8c194"
+ },
+ "canonical_path": "agents/@kody-w/rapp_leviathan_factory_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_29132602224549fdc50ca7dd76f5c7e472e6cc768970f05e8a38a2e491663c64",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "e381f1fe6add6c47eec0d59307110f136103f8d349c611f7be0bff02edb0c6d0",
+  "receipt": "rar_ff044630f5e628dde0706769b5d6073d866bd3adf789df89e54fb6cba229f128",
+  "version": "0.3.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_29132602224549fdc50ca7dd",
+ "revision_id": "29132602224549fdc50ca7dd76f5c7e472e6cc768970f05e8a38a2e491663c64",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "0.3.0"
+}

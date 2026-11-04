@@ -3,10 +3,11 @@
   "id": "kody-w__copilot_studio_deploy_agent",
   "name": "CopilotStudioDeploy",
   "rar_name": "@kody-w/copilot_studio_deploy_agent",
-  "rappid": "rappid:@kody-w/copilot_studio_deploy_agent:a87918137703df1a5f3f326952b19a12bc488673bdadcbc4ac62173642523c67",
-  "_migrated_from": "rappid:@kody-w/copilot_studio_deploy_agent:8c1526f72d240164dc7b32766fabcd2c5157bacf798efd986ad8c6ea4193228d",
+  "rappid": "rappid:@kody-w/copilot_studio_deploy_agent:7d5ea3b6e26be26d66fc3d6df0fbfd3b1c856e1148b1131c9c8c96f72cf3dc8e",
+  "_migrated_from": "rappid:@kody-w/copilot_studio_deploy_agent:a87918137703df1a5f3f326952b19a12bc488673bdadcbc4ac62173642523c67",
   "_migrated_from_all": [
-    "rappid:@kody-w/copilot_studio_deploy_agent:8c1526f72d240164dc7b32766fabcd2c5157bacf798efd986ad8c6ea4193228d"
+    "rappid:@kody-w/copilot_studio_deploy_agent:8c1526f72d240164dc7b32766fabcd2c5157bacf798efd986ad8c6ea4193228d",
+    "rappid:@kody-w/copilot_studio_deploy_agent:a87918137703df1a5f3f326952b19a12bc488673bdadcbc4ac62173642523c67"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.2.0",
@@ -37,9 +38,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 4724,
-  "size_kb": 442.8,
-  "sha256": "837ba4ee8c900514f8e5951e1a230663ba5120a8cc7a62d549391e720b21a05f",
+  "lines": 4734,
+  "size_kb": 444.0,
+  "sha256": "9c15148dcff8ac706a3a49a941dc42e3b915a8e9cb0a6b8a147b0a3a60308153",
   "has_card": true,
   "added_at": "2026-06-07T20:27:02-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

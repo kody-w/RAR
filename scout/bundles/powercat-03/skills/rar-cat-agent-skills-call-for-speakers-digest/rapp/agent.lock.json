@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/call_for_speakers_digest",
   "agent_file": "call_for_speakers_digest_agent.py",
-  "agent_sha256": "d0d10eab87e4ada8b21db20e33224b2e3b97d5c23eac20300aa8864d64ea5d98",
+  "agent_sha256": "5ea0d443f429476b193cd018fdf370d484de2bd510263c087c133d8dc0146951",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CallForSpeakersDigest",
   "host_dependencies": [],

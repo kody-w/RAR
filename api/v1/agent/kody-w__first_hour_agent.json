@@ -3,10 +3,12 @@
   "id": "kody-w__first_hour_agent",
   "name": "FirstHour",
   "rar_name": "@kody-w/first_hour_agent",
-  "rappid": "rappid:@kody-w/first_hour_agent:f828369f65ae96bcdcb02f667e402e226f300516431d2a6fc7d626eb81a61256",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
+  "rappid": "rappid:@kody-w/first_hour_agent:8fdb1324698c2785397948853c5f2367d23ec6025d98b2b011e4b17405b06cd5",
+  "_migrated_from": "rappid:@kody-w/first_hour_agent:f828369f65ae96bcdcb02f667e402e226f300516431d2a6fc7d626eb81a61256",
+  "_migrated_from_all": [
+    "rappid:@kody-w/first_hour_agent:f828369f65ae96bcdcb02f667e402e226f300516431d2a6fc7d626eb81a61256"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.0",
   "publisher": "@kody-w",
   "category": "core",
@@ -22,9 +24,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 86,
-  "size_kb": 3.9,
-  "sha256": "61dd52033a67e19c2c88909a379cfd2a855a1c18f76065ecde2bb330a3681997",
+  "lines": 96,
+  "size_kb": 5.1,
+  "sha256": "c9db0320a031fc0801f3fca2d73bf8a1a3d44987e1da95d3758f933a83c46585",
   "has_card": true,
   "added_at": "2026-10-18T01:10:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

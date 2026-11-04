@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/buzzsaw",
   "agent_file": "buzzsaw_agent.py",
-  "agent_sha256": "68ffa820bc89cd8966f9929725bd9befd616ac26ad26867b828dc790b9cf13bb",
+  "agent_sha256": "b14a4f23984fbc61acc1bde61ae592e16e8732ba287a78134d71361130011663",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BuzzsawAgent",
   "host_dependencies": [],

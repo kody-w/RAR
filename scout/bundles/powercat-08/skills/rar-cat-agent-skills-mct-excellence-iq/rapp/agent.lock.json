@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/mct_excellence_iq",
   "agent_file": "mct_excellence_iq_agent.py",
-  "agent_sha256": "1212f8be9121002c644caf233cc50066c674863d108d1b5111a4768d38e5d5ba",
+  "agent_sha256": "5e72826d7dd23ae3dcbfa497f3d675289e23afbf850393f02b749d5e46912e14",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MctExcellenceIq",
   "host_dependencies": [],

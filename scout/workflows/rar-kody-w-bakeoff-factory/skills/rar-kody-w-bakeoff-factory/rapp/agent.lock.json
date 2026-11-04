@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/bakeoff_factory",
   "agent_file": "bakeoff_factory_agent.py",
-  "agent_sha256": "461620d239ee7c63430f5a5cd4412429d72a049977d5ff2beb04d0ba5e38b786",
+  "agent_sha256": "61263e01de638d1c43e7ef6af8352ba219cf101d7b109118c36aaca34b2f502b",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BakeoffFactoryAgent",
   "host_dependencies": [],

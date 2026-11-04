@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/recon_deck_agent",
   "agent_file": "recon_deck_agent.py",
-  "agent_sha256": "678ff374c053126043a75147034abf4a27d05e626c83862ef7ff0371a5781ce1",
+  "agent_sha256": "050da8810c28845a2d60cc336b33e3518805d57f02031a754901d92c55622d4c",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ReconDeckAgent",
   "host_dependencies": [],

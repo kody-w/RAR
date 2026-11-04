@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__scrollytelling_data",
   "name": "Scrollytelling Data",
   "rar_name": "@cat-agent-skills/scrollytelling_data",
-  "rappid": "rappid:@cat-agent-skills/scrollytelling_data:beb70ccb8a79c912ed0bafb26953ec66706401febfe390ec476cfdaf9f00957d",
-  "_migrated_from": "rappid:@cat-agent-skills/scrollytelling_data:9ece27f1a0b1677d61027a6828fc3046ba32a16de7e5fc572b335fb9503155fc",
+  "rappid": "rappid:@cat-agent-skills/scrollytelling_data:b0d708a510c9fad9e5cafcecfcbe2feaa9c80abfbcb260f1b128352481fd6541",
+  "_migrated_from": "rappid:@cat-agent-skills/scrollytelling_data:beb70ccb8a79c912ed0bafb26953ec66706401febfe390ec476cfdaf9f00957d",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/scrollytelling_data:9ece27f1a0b1677d61027a6828fc3046ba32a16de7e5fc572b335fb9503155fc"
+    "rappid:@cat-agent-skills/scrollytelling_data:9ece27f1a0b1677d61027a6828fc3046ba32a16de7e5fc572b335fb9503155fc",
+    "rappid:@cat-agent-skills/scrollytelling_data:beb70ccb8a79c912ed0bafb26953ec66706401febfe390ec476cfdaf9f00957d"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -25,9 +26,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.0,
-  "sha256": "a88c23f9363dafc9f717b4b7d41fbb028c2b909e8dd95bf7fed54e962955dcd5",
+  "lines": 272,
+  "size_kb": 13.2,
+  "sha256": "6f807e260a523b863fa68d29d0842a44b896e321b4ead0fe36cb7bb773d713d4",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

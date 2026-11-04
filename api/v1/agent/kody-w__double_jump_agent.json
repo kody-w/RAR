@@ -3,10 +3,11 @@
   "id": "kody-w__double_jump_agent",
   "name": "Double Jump",
   "rar_name": "@kody-w/double_jump_agent",
-  "rappid": "rappid:@kody-w/double_jump_agent:c275da883c8badef0d892e361ae4ef6438434487776579d092c900f1625e6da2",
-  "_migrated_from": "rappid:@kody-w/double_jump_agent:b82907e29dee21f297f664744935305537af6e35d40fcb3bc82b953673e3c67d",
+  "rappid": "rappid:@kody-w/double_jump_agent:5f7f9f13f21321db6a63567bfc5fc31ca7b52c33e47a2f18bdf9c68dcbc6da7e",
+  "_migrated_from": "rappid:@kody-w/double_jump_agent:c275da883c8badef0d892e361ae4ef6438434487776579d092c900f1625e6da2",
   "_migrated_from_all": [
-    "rappid:@kody-w/double_jump_agent:b82907e29dee21f297f664744935305537af6e35d40fcb3bc82b953673e3c67d"
+    "rappid:@kody-w/double_jump_agent:b82907e29dee21f297f664744935305537af6e35d40fcb3bc82b953673e3c67d",
+    "rappid:@kody-w/double_jump_agent:c275da883c8badef0d892e361ae4ef6438434487776579d092c900f1625e6da2"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -26,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 213,
-  "size_kb": 12.5,
-  "sha256": "a85073b79ec0d416a94d596ac455aa393ed33049aa615b267a5f7ff20a004ab3",
+  "lines": 223,
+  "size_kb": 13.6,
+  "sha256": "eb3e678ca3ca0a1ddb347dbf65218b716a6a78044d03d02f74b9a31a8336948b",
   "has_card": true,
   "added_at": "2026-06-20T19:46:03-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

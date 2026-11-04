@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@kody-w/hologram_dogg",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "d4ad3769e2ef14bdef527072bdda1f2d126905bfbe52f30e74ba72ca953c11ee"
+ },
+ "canonical_path": "agents/@kody-w/hologram_dogg_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_7a0b4855061150ef01f41f86aee6e5d0aa46792776215590015e1074d2d36acb",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "d775ce5751134da02ee2d825ef0a74d79192691d3f5f8a3621c13c8bddfd8bf2",
+  "receipt": "rar_140ff0b2b441692137fb9d54b46864275e3f231df8d122224c1bc07a14921071",
+  "version": "1.1.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_7a0b4855061150ef01f41f86",
+ "revision_id": "7a0b4855061150ef01f41f86aee6e5d0aa46792776215590015e1074d2d36acb",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "1.1.0"
+}

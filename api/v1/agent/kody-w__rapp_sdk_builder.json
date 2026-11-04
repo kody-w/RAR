@@ -3,10 +3,11 @@
   "id": "kody-w__rapp_sdk_builder",
   "name": "RAPP SDK Builder",
   "rar_name": "@kody-w/rapp_sdk_builder",
-  "rappid": "rappid:@kody-w/rapp_sdk_builder:a7a171009fe1df866d5530e4abdb463f8a6eba627d0538e3e48cc6ab7078ed34",
-  "_migrated_from": "rappid:@kody-w/rapp_sdk_builder:65f5989e1b72215d8a27f98661beaba281d6cc7fc54eb0ac1b0563ad7df9cbda",
+  "rappid": "rappid:@kody-w/rapp_sdk_builder:26b0ce0f1e5afa3f8a8f2402c108f721da639096e6c2a369af7430c8d50905ac",
+  "_migrated_from": "rappid:@kody-w/rapp_sdk_builder:a7a171009fe1df866d5530e4abdb463f8a6eba627d0538e3e48cc6ab7078ed34",
   "_migrated_from_all": [
-    "rappid:@kody-w/rapp_sdk_builder:65f5989e1b72215d8a27f98661beaba281d6cc7fc54eb0ac1b0563ad7df9cbda"
+    "rappid:@kody-w/rapp_sdk_builder:65f5989e1b72215d8a27f98661beaba281d6cc7fc54eb0ac1b0563ad7df9cbda",
+    "rappid:@kody-w/rapp_sdk_builder:a7a171009fe1df866d5530e4abdb463f8a6eba627d0538e3e48cc6ab7078ed34"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.2",
@@ -25,9 +26,9 @@
   "quality_tier": "official",
   "requires_env": [],
   "dependencies": [],
-  "lines": 391,
-  "size_kb": 19.3,
-  "sha256": "76799624979a91c7f4f87d64b41d1fe5add10f727c672cc25429442a38ef757a",
+  "lines": 401,
+  "size_kb": 20.4,
+  "sha256": "eaf3bf3a686d9fb08fc8f3c0b05f59075c8a334a68c5d8fe678f39aa81dc27e5",
   "has_card": true,
   "added_at": "2026-07-15T15:23:19Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

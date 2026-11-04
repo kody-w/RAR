@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/play_youtube_video_agent",
   "agent_file": "play_youtube_video_agent.py",
-  "agent_sha256": "fa592979b08d6ddeddcc1c6ebd54318f5fd3e37a528d2d22958078a5a514dafb",
+  "agent_sha256": "ba4da935eacacd05f6e4f7c8fb3acfcce6277922ff3ac78b0bef7fb4fb3cc8b6",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PlayYoutubeVideoAgent",
   "host_dependencies": [],

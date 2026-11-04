@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/agent_team_agent",
   "agent_file": "agent_team_agent.py",
-  "agent_sha256": "0ed520946386fb7d52aa8f9af1774f2656f4e9bc33d7ff911737e6f67b498332",
+  "agent_sha256": "60321dac590b9a80b2bcf85de9dea49e1617b00a6dbed28f4dcaf69d06ca40f4",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AgentTeamAgent",
   "host_dependencies": [],

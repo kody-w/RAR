@@ -1,7 +1,7 @@
 {
   "agent": "@wildhaven/penumbra_agent",
   "agent_file": "penumbra_agent.py",
-  "agent_sha256": "00a2946996be36b9234c3e9cbf916eee70fed319104bff2aef7325e437343a6f",
+  "agent_sha256": "a990cbad0828c87f1881328a1a2035676d4ee81c4cffac9df081a30946e776b9",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "Penumbra",
   "host_dependencies": [],

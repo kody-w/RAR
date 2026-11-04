@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__sharepoint_list_formatter",
   "name": "SharePoint List Formatter",
   "rar_name": "@cat-agent-skills/sharepoint_list_formatter",
-  "rappid": "rappid:@cat-agent-skills/sharepoint_list_formatter:529de51ad8c33e968f714fe76bcc0e1f21f58f007d8c0c7652e601a005865afe",
-  "_migrated_from": "rappid:@cat-agent-skills/sharepoint_list_formatter:1639c8d4c26f7d6ad5381d471b045c23e72b84dc24ff60a193b233099b584064",
+  "rappid": "rappid:@cat-agent-skills/sharepoint_list_formatter:0702f35b608a8d24f29e364dce423f7d1c9137c85e69c700c65497b34584a586",
+  "_migrated_from": "rappid:@cat-agent-skills/sharepoint_list_formatter:529de51ad8c33e968f714fe76bcc0e1f21f58f007d8c0c7652e601a005865afe",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/sharepoint_list_formatter:1639c8d4c26f7d6ad5381d471b045c23e72b84dc24ff60a193b233099b584064"
+    "rappid:@cat-agent-skills/sharepoint_list_formatter:1639c8d4c26f7d6ad5381d471b045c23e72b84dc24ff60a193b233099b584064",
+    "rappid:@cat-agent-skills/sharepoint_list_formatter:529de51ad8c33e968f714fe76bcc0e1f21f58f007d8c0c7652e601a005865afe"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -26,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.3,
-  "sha256": "9d5aac2ba3712657aade17d943de5d4935e122c800e3919e3c9202506154441b",
+  "lines": 272,
+  "size_kb": 13.6,
+  "sha256": "8d46667639bcef5592415180941620139a0b843fe27c8f605456fb68a5316ced",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

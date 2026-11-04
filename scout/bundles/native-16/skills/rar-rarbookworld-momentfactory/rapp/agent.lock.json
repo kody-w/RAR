@@ -1,7 +1,7 @@
 {
   "agent": "@rarbookworld/momentfactory",
   "agent_file": "momentfactory_agent.py",
-  "agent_sha256": "08cddf370c9a202ceb0e52ecb41dd6882d3e314d46eeb796e9e1387d9b86ecb7",
+  "agent_sha256": "7c0330f8e2a55cce2e58e26cce883b2218f146536d13e23bd5af47e5986bebaf",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MomentFactory",
   "host_dependencies": [

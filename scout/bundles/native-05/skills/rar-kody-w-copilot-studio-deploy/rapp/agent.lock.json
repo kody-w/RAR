@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/copilot_studio_deploy_agent",
   "agent_file": "copilot_studio_deploy_agent.py",
-  "agent_sha256": "837ba4ee8c900514f8e5951e1a230663ba5120a8cc7a62d549391e720b21a05f",
+  "agent_sha256": "9c15148dcff8ac706a3a49a941dc42e3b915a8e9cb0a6b8a147b0a3a60308153",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CopilotStudioDeployAgent",
   "host_dependencies": [],

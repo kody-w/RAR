@@ -1,7 +1,7 @@
 {
   "agent": "@howardh/training_quest_agent",
   "agent_file": "training_quest_agent.py",
-  "agent_sha256": "fc213fa839cf3f39312ba03c31e47e55af61dd636bbcd671d35ee48383c78ab5",
+  "agent_sha256": "a583ada09fa44f0d3d88962fea0826ae5877a09dd8639c908e6325c04cc0c36c",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "TrainingQuestAgent",
   "host_dependencies": [],

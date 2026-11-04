@@ -176,3 +176,33 @@ def test_skill_manifest_deletion_is_never_a_supported_mutation(tmp_path):
         receipts_dir=tmp_path,
     )
     assert any("cannot be deleted" in error for error in errors)
+
+
+def test_worktree_mode_checks_uncommitted_stub_bytes(tmp_path, monkeypatch, capsys):
+    lifecycle, receipts = evidence(tmp_path, action="agent.update", status="active")
+    (tmp_path / "state").mkdir()
+    (tmp_path / "state" / "agent_lifecycle.json").write_text(json.dumps(lifecycle))
+    receipts.rename(tmp_path / "state" / "receipts")
+    path = "agents/@test/example_agent.py.stub"
+    artifact = tmp_path / path
+    artifact.parent.mkdir(parents=True)
+    artifact.write_bytes(SOURCE)
+    calls = []
+
+    def git(root, *args):
+        calls.append(args)
+        assert "HEAD" not in args[3:], "working-tree changes must not stop at HEAD"
+        return f"M\t{path}\n" if args[-1] == "agents/" else ""
+
+    monkeypatch.setattr(check, "_git", git)
+    monkeypatch.setattr(check, "_previous_content", lambda *args: SOURCE)
+    monkeypatch.setattr(sys, "argv", [
+        "check_notarized_changes.py", "--base", "HEAD",
+        "--repo-root", str(tmp_path), "--worktree",
+    ])
+    assert check.main() == 0
+    assert "OK 1 changed agent artifact(s)" in capsys.readouterr().out
+    assert calls
+    artifact.write_bytes(SOURCE + b"# tampered\n")
+    assert check.main() == 1
+    assert "digest does not match" in capsys.readouterr().out

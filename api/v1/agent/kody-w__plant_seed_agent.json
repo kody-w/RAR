@@ -3,10 +3,11 @@
   "id": "kody-w__plant_seed_agent",
   "name": "Plant Seed",
   "rar_name": "@kody-w/plant_seed_agent",
-  "rappid": "rappid:@kody-w/plant_seed_agent:fec577fdf84092afd21ee75a0aac96ef98dc52538cecaee16ada93055bac1cd9",
-  "_migrated_from": "rappid:@kody-w/plant_seed_agent:403d902fb0226ffbd74220e8c58685b084e0f2bcd915c26e41b846b603d4e5ef",
+  "rappid": "rappid:@kody-w/plant_seed_agent:c0aaa543fb909254433fd2f730168e0a7f8efe151373809ddf766e7ed0a13477",
+  "_migrated_from": "rappid:@kody-w/plant_seed_agent:fec577fdf84092afd21ee75a0aac96ef98dc52538cecaee16ada93055bac1cd9",
   "_migrated_from_all": [
-    "rappid:@kody-w/plant_seed_agent:403d902fb0226ffbd74220e8c58685b084e0f2bcd915c26e41b846b603d4e5ef"
+    "rappid:@kody-w/plant_seed_agent:403d902fb0226ffbd74220e8c58685b084e0f2bcd915c26e41b846b603d4e5ef",
+    "rappid:@kody-w/plant_seed_agent:fec577fdf84092afd21ee75a0aac96ef98dc52538cecaee16ada93055bac1cd9"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.4",
@@ -28,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 578,
-  "size_kb": 26.5,
-  "sha256": "86727bec5fc6c29e5925402e0d26fc8b76078755fa3fb1664904a4f1cf190ad6",
+  "lines": 588,
+  "size_kb": 27.6,
+  "sha256": "9a7f94b9461517e0bf9a6c4fdb12c8450d53b34307ce36dac3bae576ed178a06",
   "has_card": true,
   "added_at": "2026-05-09T15:25:19-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

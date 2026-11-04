@@ -3,11 +3,12 @@
   "id": "rapp__fleet_commander",
   "name": "FleetCommander",
   "rar_name": "@rapp/fleet_commander",
-  "rappid": "rappid:@rapp/fleet_commander:e094d1a11f86c58081db8daa6bfa2dd4f5853fe1598f14112953f3d12b0eeebc",
-  "_migrated_from": "rappid:@rapp/fleet_commander:376e8806101cd98d3ae8433a02fe4a7d3522630eaaa518f8050e3b305e80382f",
+  "rappid": "rappid:@rapp/fleet_commander:bff394a15b1bc93cafbab128886b28f3c4f674d6a37c8c6287295aab14c799ad",
+  "_migrated_from": "rappid:@rapp/fleet_commander:e094d1a11f86c58081db8daa6bfa2dd4f5853fe1598f14112953f3d12b0eeebc",
   "_migrated_from_all": [
     "rappid:v2:agent:@rapp/fleet_commander:ad1f3782296fae46bfad91f33e93e4f8",
-    "rappid:@rapp/fleet_commander:376e8806101cd98d3ae8433a02fe4a7d3522630eaaa518f8050e3b305e80382f"
+    "rappid:@rapp/fleet_commander:376e8806101cd98d3ae8433a02fe4a7d3522630eaaa518f8050e3b305e80382f",
+    "rappid:@rapp/fleet_commander:e094d1a11f86c58081db8daa6bfa2dd4f5853fe1598f14112953f3d12b0eeebc"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -28,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 797,
-  "size_kb": 31.1,
-  "sha256": "2ba26bb68c2fdaf8f75f5068fe244d227330e8ab96c7ee6516c6d2530b386487",
+  "lines": 807,
+  "size_kb": 32.3,
+  "sha256": "2352d839c61457a7cd0d108e56d64814cff7f3dcdabe942d07404063e25016e4",
   "has_card": true,
   "added_at": "2026-04-21T13:35:42-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

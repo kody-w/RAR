@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/skill_authoring_coach",
   "agent_file": "skill_authoring_coach_agent.py",
-  "agent_sha256": "b367fbfdfd349e0947f87666afc5f82890b1500c3e600fda8d63b669fe7695f8",
+  "agent_sha256": "d87d562cb6ff69f03c5fbe70ec218c4a216e2f3a22cb4aa2055fdc360addc454",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "SkillAuthoringCoach",
   "host_dependencies": [],

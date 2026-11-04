@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/flight_recorder",
   "agent_file": "flight_recorder_agent.py",
-  "agent_sha256": "6a3976cfba0492a585ccab318125caed4ca0820e05dddf4119e98d5f22dea659",
+  "agent_sha256": "f07d76a30266eab0a367c47a6dacf9403cb08cae684c0e02b0252c0cea79da02",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "FlightRecorderAgent",
   "host_dependencies": [

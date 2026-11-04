@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/eu_greenwashing_analysis",
   "agent_file": "eu_greenwashing_analysis_agent.py",
-  "agent_sha256": "a134c53dbb6e99e2879716f7e8341eef10280ddd10792464cf9fae79edeb6b59",
+  "agent_sha256": "6200a163f12cc7b5b12ef9742949a0bfe927e668231f5965e68fcd1f77cb7238",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "EuGreenwashingAnalysis",
   "host_dependencies": [],

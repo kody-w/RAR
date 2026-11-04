@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@wildhaven/penumbra_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "a990cbad0828c87f1881328a1a2035676d4ee81c4cffac9df081a30946e776b9"
+ },
+ "canonical_path": "agents/@wildhaven/penumbra_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_187747c292da729bb19171ddbc6220d96a91d6f3bc96cadb8a10806a876c1b93",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "00a2946996be36b9234c3e9cbf916eee70fed319104bff2aef7325e437343a6f",
+  "receipt": "rar_734d4d52fe7e909e09a2539b2cafaeb06a8bace0b00f329311d9076aa1166f9c",
+  "version": "1.0.2"
+ },
+ "quality_tier": "official",
+ "request_id": "req_187747c292da729bb19171dd",
+ "revision_id": "187747c292da729bb19171ddbc6220d96a91d6f3bc96cadb8a10806a876c1b93",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "1.0.2"
+}

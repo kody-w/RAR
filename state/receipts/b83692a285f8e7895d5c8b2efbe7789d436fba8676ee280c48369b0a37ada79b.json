@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@cat-agent-skills/whiteboard_to_infographic",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "0d39d06f2819bbe36cb4e09d6d08401cba0232f23a379f9af09035cb7ba4af4b"
+ },
+ "canonical_path": "agents/@cat-agent-skills/whiteboard_to_infographic_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_b83692a285f8e7895d5c8b2efbe7789d436fba8676ee280c48369b0a37ada79b",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "11818cb6790bb3fa12ce584fccfe160c66297eecba69ae252c3de296a25c47a8",
+  "receipt": "rar_aa102245d626d90b868f9495226d4c0fba67b496bb38768e57aabe2558d28592",
+  "version": "3.0.2"
+ },
+ "quality_tier": "frontier",
+ "request_id": "req_b83692a285f8e7895d5c8b2e",
+ "revision_id": "b83692a285f8e7895d5c8b2efbe7789d436fba8676ee280c48369b0a37ada79b",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "3.0.2"
+}

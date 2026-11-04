@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/commons_life_agent",
   "agent_file": "commons_life_agent.py",
-  "agent_sha256": "1f097fe46efeb8c2298fde16d0469016cb62bb59b4448d954bb6757fe53f27bc",
+  "agent_sha256": "4d130862e28b92a3a3519a8b823905bffb90f35678565bb1743a714f20d0da70",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CommonsLifeAgent",
   "host_dependencies": [],

@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@kody-w/copilot_studio_deploy_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "9c15148dcff8ac706a3a49a941dc42e3b915a8e9cb0a6b8a147b0a3a60308153"
+ },
+ "canonical_path": "agents/@kody-w/copilot_studio_deploy_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_42dd0e390471d7177b7448449df351352086f258d31f685623965c34f6de4352",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "837ba4ee8c900514f8e5951e1a230663ba5120a8cc7a62d549391e720b21a05f",
+  "receipt": "rar_100f470643f346e84633a1bdc4e310e49724feff91db6347a520eaac8390e324",
+  "version": "1.2.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_42dd0e390471d7177b744844",
+ "revision_id": "42dd0e390471d7177b7448449df351352086f258d31f685623965c34f6de4352",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "1.2.0"
+}

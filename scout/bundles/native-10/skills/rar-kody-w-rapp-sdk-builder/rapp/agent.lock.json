@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/rapp_sdk_builder",
   "agent_file": "rapp_sdk_builder_agent.py",
-  "agent_sha256": "76799624979a91c7f4f87d64b41d1fe5add10f727c672cc25429442a38ef757a",
+  "agent_sha256": "eaf3bf3a686d9fb08fc8f3c0b05f59075c8a334a68c5d8fe678f39aa81dc27e5",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappSdkBuilderAgent",
   "host_dependencies": [],

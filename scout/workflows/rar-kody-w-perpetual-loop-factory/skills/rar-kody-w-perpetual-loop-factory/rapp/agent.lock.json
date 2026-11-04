@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/perpetual_loop_factory",
   "agent_file": "perpetual_loop_factory_agent.py",
-  "agent_sha256": "1e53fe183fd90dfda9e8c438e9d8b3fb82f98254763757ed87a9c28869477f53",
+  "agent_sha256": "0d2ef9275392dd839e64c7140ef5f57fbb9a108e5ee0ee619d4c77d29811616d",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PerpetualLoopFactoryAgent",
   "host_dependencies": [],

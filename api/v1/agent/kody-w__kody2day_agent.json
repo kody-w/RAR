@@ -3,10 +3,11 @@
   "id": "kody-w__kody2day_agent",
   "name": "Kody2day",
   "rar_name": "@kody-w/kody2day_agent",
-  "rappid": "rappid:@kody-w/kody2day_agent:3a240421c0028ce6f269a34b5b84edbe5072fe8633119320a3858b959c386090",
-  "_migrated_from": "rappid:@kody-w/kody2day_agent:94943d30dfd8cd306a40785c2f0862f1949d3b9ec0d21ecbeaea07178cfb6055",
+  "rappid": "rappid:@kody-w/kody2day_agent:0656b9e95216d25076b0444620164b2c132a9d90bee3318354101bbcf33197e6",
+  "_migrated_from": "rappid:@kody-w/kody2day_agent:3a240421c0028ce6f269a34b5b84edbe5072fe8633119320a3858b959c386090",
   "_migrated_from_all": [
-    "rappid:@kody-w/kody2day_agent:94943d30dfd8cd306a40785c2f0862f1949d3b9ec0d21ecbeaea07178cfb6055"
+    "rappid:@kody-w/kody2day_agent:94943d30dfd8cd306a40785c2f0862f1949d3b9ec0d21ecbeaea07178cfb6055",
+    "rappid:@kody-w/kody2day_agent:3a240421c0028ce6f269a34b5b84edbe5072fe8633119320a3858b959c386090"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.0",
@@ -28,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 297,
-  "size_kb": 14.5,
-  "sha256": "e4dd13bc20c0f1d3c4333cdbefe6f1e09359a7fc7da5309822248d41ba3b0638",
+  "lines": 307,
+  "size_kb": 15.6,
+  "sha256": "3c0814050b74a0b9f7fb44220ed66600430ab8779601f469be8c20ac86521a99",
   "has_card": true,
   "added_at": "2026-08-18T21:17:02-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

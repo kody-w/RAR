@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/acroform_writer",
   "agent_file": "acroform_writer_agent.py",
-  "agent_sha256": "443631d1d4364661b643c3d85cf3a0fadab6021e31c0796662765d71940be22a",
+  "agent_sha256": "d9cb428f86f969b809e2bb18378be5096f7e87a590f6bd2d8321d18e6087091d",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AcroformWriter",
   "host_dependencies": [],

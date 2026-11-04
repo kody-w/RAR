@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/forge_provenance_agent",
   "agent_file": "forge_provenance_agent.py",
-  "agent_sha256": "38ea315503f3d7085e5d27c93efbf45c96b2f1e07849a43614749df2b7cb4d69",
+  "agent_sha256": "9698949e8248472aa11df8dd58192826b3cbdab56ee3fd8c2ff5fa6819d9f14c",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ForgeProvenanceAgent",
   "host_dependencies": [],

@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/rappter_engine_agent",
   "agent_file": "rappter_engine_agent.py",
-  "agent_sha256": "5679d82a2ea53a7dc8ae3b9c78e932ed83d068947f07d53be3af7582e32f7fd9",
+  "agent_sha256": "4d532a0027f1424511d571af7f1c8e31d2fb73cfc00b10320d119e94dc00422e",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappterEngine",
   "host_dependencies": [],

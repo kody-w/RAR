@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/rappterpedia_agent",
   "agent_file": "rappterpedia_agent.py",
-  "agent_sha256": "8c34061cf1ed1fa86071adb0c21896e629879d155405908404d5d6a390233fbb",
+  "agent_sha256": "078d5bbb37e91cb052e9cfdc540aa5024d6a573f0be14df860c7df4c4ba08f69",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappterpediaAgent",
   "host_dependencies": [],

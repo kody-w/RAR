@@ -3,10 +3,11 @@
   "id": "kody-w__deal_desk_agent",
   "name": "DealDesk",
   "rar_name": "@kody-w/deal_desk_agent",
-  "rappid": "rappid:@kody-w/deal_desk_agent:d521ad72bb9a0aee8626109a1596a2606ed470650418266c43648248f7f67b4e",
-  "_migrated_from": "rappid:@kody-w/deal_desk_agent:528a8a89f504677a339b8660f9085b28989aaaa4cf36008bf22f79154b8e3bfc",
+  "rappid": "rappid:@kody-w/deal_desk_agent:16bed842e18fe5cbfcd04adae5445a09cf180a08538d085605a971e20e4160a0",
+  "_migrated_from": "rappid:@kody-w/deal_desk_agent:d521ad72bb9a0aee8626109a1596a2606ed470650418266c43648248f7f67b4e",
   "_migrated_from_all": [
-    "rappid:@kody-w/deal_desk_agent:528a8a89f504677a339b8660f9085b28989aaaa4cf36008bf22f79154b8e3bfc"
+    "rappid:@kody-w/deal_desk_agent:528a8a89f504677a339b8660f9085b28989aaaa4cf36008bf22f79154b8e3bfc",
+    "rappid:@kody-w/deal_desk_agent:d521ad72bb9a0aee8626109a1596a2606ed470650418266c43648248f7f67b4e"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.1.1",
@@ -29,9 +30,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 245,
-  "size_kb": 10.1,
-  "sha256": "4f0a8d4f0c0a8ddd9f4f02b29efcfedb30080938bc14b66ce752170a3a3f88dd",
+  "lines": 255,
+  "size_kb": 11.2,
+  "sha256": "68e3972b5c4a6b1b9f7105524aab0313aefcb121581beb8683fd98a0b90e2827",
   "has_card": true,
   "added_at": "2026-05-24T21:45:25-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -3,10 +3,11 @@
   "id": "rapp__rar_steward",
   "name": "RarStewardAgent",
   "rar_name": "@rapp/rar_steward",
-  "rappid": "rappid:@rapp/rar_steward:d086c9d44fcaf1993b4488594c5a6e6dc0beb5a8abcfe9448a66606474ad72e2",
-  "_migrated_from": "rappid:@rapp/rar_steward:bc615bf33f491ee8af49505ed98e0456b44b566ce61c5956ed054a459bbd02a1",
+  "rappid": "rappid:@rapp/rar_steward:a1d40f1e1870844a56405962cbb82a50011c05743c92359ad9288174cc1a05a5",
+  "_migrated_from": "rappid:@rapp/rar_steward:d086c9d44fcaf1993b4488594c5a6e6dc0beb5a8abcfe9448a66606474ad72e2",
   "_migrated_from_all": [
-    "rappid:@rapp/rar_steward:bc615bf33f491ee8af49505ed98e0456b44b566ce61c5956ed054a459bbd02a1"
+    "rappid:@rapp/rar_steward:bc615bf33f491ee8af49505ed98e0456b44b566ce61c5956ed054a459bbd02a1",
+    "rappid:@rapp/rar_steward:d086c9d44fcaf1993b4488594c5a6e6dc0beb5a8abcfe9448a66606474ad72e2"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -28,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 475,
-  "size_kb": 23.4,
-  "sha256": "e8cb15fe4f51fefb7c9f05fe3722dc7eccd67ab22beca8398591479d8fcc9e3e",
+  "lines": 485,
+  "size_kb": 24.6,
+  "sha256": "e02083e45e0704bddd5a681e08490a92c9ef06c44277d09000aba99f65cacd57",
   "has_card": true,
   "added_at": "2026-06-09T21:45:37-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

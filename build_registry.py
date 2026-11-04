@@ -33,6 +33,8 @@ import subprocess
 import sys
 from pathlib import Path
 from datetime import datetime, timezone
+from tools.build_agent_pages import build_agent_pages
+from tools.stamp_ticket import strip_ticket
 
 AGENTS_DIR = Path("agents")
 SWARMS_DIR = Path("swarms")
@@ -636,6 +638,16 @@ def check_version_immutability(name: str, version: str, sha256: str, file_path: 
                     and agent.get("_file") == file_path):
                 prev_hash = agent.get("_sha256")
                 if prev_hash and prev_hash != sha256:
+                    # The exact loading ticket is a comment-only migration.
+                    # Removing it must restore the previously published bytes;
+                    # lifecycle validation still requires a new matching receipt.
+                    if Path(file_path).is_file():
+                        content = Path(file_path).read_bytes()
+                        original = strip_ticket(content, agent)
+                        if original != content and hashlib.sha256(
+                            original.replace(b"\r\n", b"\n")
+                        ).hexdigest() == prev_hash:
+                            return None
                     return (f"Version {version} already published with different content "
                             f"(hash mismatch). Bump the version number.")
     except (json.JSONDecodeError, KeyError):
@@ -1488,6 +1500,8 @@ def build_registry():
     if duplicates:
         return 1
 
+    changed_pages = build_agent_pages(agents)
+    print(f"  Agent ticket pages: {len(agents)} ({changed_pages} files changed)")
     return 0
 
 

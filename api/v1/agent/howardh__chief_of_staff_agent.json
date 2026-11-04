@@ -3,11 +3,12 @@
   "id": "howardh__chief_of_staff_agent",
   "name": "ChiefOfStaff",
   "rar_name": "@howardh/chief_of_staff_agent",
-  "rappid": "rappid:@howardh/chief_of_staff_agent:3ec8015046317493d6c2a369ce5b8fd2af844bce82354394e08237b3f8fc7b2b",
-  "_migrated_from": "rappid:@howardh/chief_of_staff_agent:2e1420b480929d893e768d01b6f2235ba1bbf57dd871913ecde8204ffadc751f",
+  "rappid": "rappid:@howardh/chief_of_staff_agent:592e142bd499deb283fa6a57d51bd1cbf842595a9ee78b61c7e248001af71276",
+  "_migrated_from": "rappid:@howardh/chief_of_staff_agent:3ec8015046317493d6c2a369ce5b8fd2af844bce82354394e08237b3f8fc7b2b",
   "_migrated_from_all": [
     "rappid:v2:agent:@howardh/chief_of_staff_agent:f624281fea118bbe53fc6726d7154398",
-    "rappid:@howardh/chief_of_staff_agent:2e1420b480929d893e768d01b6f2235ba1bbf57dd871913ecde8204ffadc751f"
+    "rappid:@howardh/chief_of_staff_agent:2e1420b480929d893e768d01b6f2235ba1bbf57dd871913ecde8204ffadc751f",
+    "rappid:@howardh/chief_of_staff_agent:3ec8015046317493d6c2a369ce5b8fd2af844bce82354394e08237b3f8fc7b2b"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -29,9 +30,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 683,
-  "size_kb": 32.5,
-  "sha256": "5d904f34d63faa2271e66a6d1c6f033c269136c840a1bd4d4dcc57875bbf8354",
+  "lines": 693,
+  "size_kb": 33.6,
+  "sha256": "fedbb91cc50aca1912b9b29727b385cf6a4e06507e808d67ccb690a8eb4df9bc",
   "has_card": true,
   "added_at": "2026-04-28T17:29:54-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

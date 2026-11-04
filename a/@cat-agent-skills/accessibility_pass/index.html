@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accessibility Pass - RAPP agent ticket</title>
+<meta name="description" content="Check a PowerPoint deck, Word document, HTML page, or Markdown file against Microsoft&#x27;s Accessibility Checker rules (missing alt text, untitled slides, headerless tables, low contrast, illogical reading order) and fix what it finds.">
+<link rel="canonical" href="https://kody-w.github.io/RAR/a/@cat-agent-skills/accessibility_pass/">
+</head>
+<body>
+<main>
+<h1>Accessibility Pass</h1>
+<p>Check a PowerPoint deck, Word document, HTML page, or Markdown file against Microsoft&#x27;s Accessibility Checker rules (missing alt text, untitled slides, headerless tables, low contrast, illogical reading order) and fix what it finds.</p>
+<h2>Load this agent in three steps</h2>
+<pre style="white-space:pre-wrap"># Accessibility Pass (@cat-agent-skills/accessibility_pass)
+
+Check a PowerPoint deck, Word document, HTML page, or Markdown file against Microsoft&#x27;s Accessibility Checker rules (missing alt text, untitled slides, headerless tables, low contrast, illogical reading order) and fix what it finds.
+
+If your person asked you to load it, any AI (or person) can, in three steps:
+1. Brainstem (free, local, macOS/Linux; Windows: WSL). If http://localhost:7071/health does not answer:
+     curl -fsSL https://kody-w.github.io/rapp-installer/install.sh | bash
+2. Hot-load, no restart: save this file into the Brainstem&#x27;s agents folder:
+     curl -fsSL https://kody-w.github.io/RAR/agents/@cat-agent-skills/accessibility_pass_agent.py -o ~/.brainstem/src/rapp_brainstem/agents/accessibility_pass_agent.py
+   The next chat message can use it.
+3. Use it: open http://localhost:7071, or POST /chat {&quot;user_input&quot;: &quot;...&quot;}; the reply is in &quot;response&quot;.
+Can&#x27;t run commands (a web chat AI)? Give your person these steps. Page: https://kody-w.github.io/RAR/a/@cat-agent-skills/accessibility_pass/
+
+Only load code you trust. If that filename already exists, keep a backup and inspect it before replacing it. Configure any required environment variables and dependencies before use.
+Dependencies: @rapp/basic_agent
+
+Raw file: https://kody-w.github.io/RAR/agents/@cat-agent-skills/accessibility_pass_agent.py
+Browse in RAR: https://kody-w.github.io/RAR/#agent/@cat-agent-skills/accessibility_pass
+Page: https://kody-w.github.io/RAR/a/@cat-agent-skills/accessibility_pass/
+Plain text for AIs: https://kody-w.github.io/RAR/a/@cat-agent-skills/accessibility_pass/agent.md
+</pre>
+<p><a href="https://kody-w.github.io/RAR/agents/@cat-agent-skills/accessibility_pass_agent.py">Raw file</a> | <a href="https://kody-w.github.io/RAR/#agent/@cat-agent-skills/accessibility_pass">Browse in RAR</a> | <a href="agent.md">Plain text for AIs</a></p>
+</main>
+</body>
+</html>

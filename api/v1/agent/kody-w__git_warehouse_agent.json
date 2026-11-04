@@ -3,10 +3,11 @@
   "id": "kody-w__git_warehouse_agent",
   "name": "Git Warehouse",
   "rar_name": "@kody-w/git_warehouse_agent",
-  "rappid": "rappid:@kody-w/git_warehouse_agent:e788661deb97dad1e9062580afbb2199004b2e2cc7a494062ada34e977fc4aa4",
-  "_migrated_from": "rappid:@kody-w/git_warehouse_agent:663ca6918cb6ae0fcc0d83d790e16ca22aa24b667f96f006cb407c16d0a9632c",
+  "rappid": "rappid:@kody-w/git_warehouse_agent:1a82a875314287a140cee785bc1084bb25587415b00cbba0ec9709765700bd06",
+  "_migrated_from": "rappid:@kody-w/git_warehouse_agent:e788661deb97dad1e9062580afbb2199004b2e2cc7a494062ada34e977fc4aa4",
   "_migrated_from_all": [
-    "rappid:@kody-w/git_warehouse_agent:663ca6918cb6ae0fcc0d83d790e16ca22aa24b667f96f006cb407c16d0a9632c"
+    "rappid:@kody-w/git_warehouse_agent:663ca6918cb6ae0fcc0d83d790e16ca22aa24b667f96f006cb407c16d0a9632c",
+    "rappid:@kody-w/git_warehouse_agent:e788661deb97dad1e9062580afbb2199004b2e2cc7a494062ada34e977fc4aa4"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -26,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 205,
-  "size_kb": 12.0,
-  "sha256": "2848608c2c13c7ff65f8d434845cb522b4940049c6207d80a604c2da54a57ad2",
+  "lines": 215,
+  "size_kb": 13.1,
+  "sha256": "eb7b05da0183c37da67b7c1a480731cce05da42753401aa4df86581373c307c3",
   "has_card": true,
   "added_at": "2026-06-20T18:41:00-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

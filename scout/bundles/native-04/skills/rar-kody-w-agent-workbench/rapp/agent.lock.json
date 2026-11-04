@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/agent_workbench",
   "agent_file": "agent_workbench_agent.py",
-  "agent_sha256": "00b19b2e98b854333dbf7d89d74980f3e54c4f5753f31ac9039cf8f8ed30e2b4",
+  "agent_sha256": "c0a0329cdb06728062ac11043d8989c1c1262c33f69f0afdf9d65e87f0d0575c",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AgentWorkbenchAgent",
   "host_dependencies": [

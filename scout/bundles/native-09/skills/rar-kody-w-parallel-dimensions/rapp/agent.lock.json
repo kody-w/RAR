@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/parallel_dimensions_agent",
   "agent_file": "parallel_dimensions_agent.py",
-  "agent_sha256": "ad3d5af03678ded14558a1f449a5ba4002e15dbb1ee101c37349da16ba7b2c2b",
+  "agent_sha256": "d1e6ed9c0a69f581b705a4e8ee01440d5a0e3b5ad9efa9a78fcd156eb4ac1aad",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ParallelDimensionsAgent",
   "host_dependencies": [],

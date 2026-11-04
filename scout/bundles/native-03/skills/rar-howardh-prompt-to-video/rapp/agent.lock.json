@@ -1,7 +1,7 @@
 {
   "agent": "@howardh/prompt_to_video_agent",
   "agent_file": "prompt_to_video_agent.py",
-  "agent_sha256": "3bcdd845998ff84158cc2c2ab54fefcb54b0e3a6106fd4bfb8e59252b58694c6",
+  "agent_sha256": "ed75b1d6e1bedafee181b2eefc0a1e98a64533df1c7067383cc10450bea4c83f",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PromptToVideoAgent",
   "host_dependencies": [],

@@ -3,11 +3,12 @@
   "id": "kody-w__workiq",
   "name": "WorkIQ",
   "rar_name": "@kody-w/workiq",
-  "rappid": "rappid:@kody-w/workiq:335d8184efc1555eeb67637785d677688a23171f96326ff8c3be764cd14bb0c0",
-  "_migrated_from": "rappid:@kody-w/workiq:7d99714efccc6959f7addab14ff8798a743062a844810e13da0367b7af4c1d91",
+  "rappid": "rappid:@kody-w/workiq:9edb4e7479b6d2303839666034c8dde91c0126b014957a0210ca8d0380715c4b",
+  "_migrated_from": "rappid:@kody-w/workiq:335d8184efc1555eeb67637785d677688a23171f96326ff8c3be764cd14bb0c0",
   "_migrated_from_all": [
     "rappid:@kody-w/workiq:54ca00599803d99f2796d3ea329ae9f4eb73037bd0c22d1d72898393f61175e9",
-    "rappid:@kody-w/workiq:7d99714efccc6959f7addab14ff8798a743062a844810e13da0367b7af4c1d91"
+    "rappid:@kody-w/workiq:7d99714efccc6959f7addab14ff8798a743062a844810e13da0367b7af4c1d91",
+    "rappid:@kody-w/workiq:335d8184efc1555eeb67637785d677688a23171f96326ff8c3be764cd14bb0c0"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.1.2",
@@ -29,9 +30,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 526,
-  "size_kb": 20.6,
-  "sha256": "e5cb90e2a731de05214243cc96ad52946ee5c4ef6c96cb724349469172bd8dc4",
+  "lines": 536,
+  "size_kb": 21.7,
+  "sha256": "7f6de288bc1e6756834a22d68cf832b987c9d5a28ef3338e658a6948a5b18fab",
   "has_card": true,
   "added_at": "2026-05-24T21:45:25-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

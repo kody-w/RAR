@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/commons_post",
   "agent_file": "commons_post_agent.py",
-  "agent_sha256": "18c3fe91ac122cada3edde4cd2a7e01c2d0ffcf311a5f426f4a60e0cd416a6d5",
+  "agent_sha256": "04f13fff1a7aab7e1566d2c71a96826c91e4222cd6f8c470b548e0cb4343d7ab",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CommonsPostAgent",
   "host_dependencies": [],

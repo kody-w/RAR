@@ -1,7 +1,7 @@
 {
   "agent": "@discreetRappers/email_drafting_agent",
   "agent_file": "email_drafting_agent.py",
-  "agent_sha256": "b068d41da7ee04fa27d8ff0b267977914aab1eae186017ad47572e2b2c6cb399",
+  "agent_sha256": "65ba2c8d5d2817d99fdf6463b1da6e4722a6a627b8b3a77120999bf930fb80e6",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "EmailDraftingAgent",
   "host_dependencies": [],

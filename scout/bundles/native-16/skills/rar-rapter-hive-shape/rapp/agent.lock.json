@@ -1,7 +1,7 @@
 {
   "agent": "@rapter/hive_shape_agent",
   "agent_file": "hive_shape_agent.py",
-  "agent_sha256": "c4cdee134802fd1ced521940c6ef38d0a5dba2503acc4e8cd8da5e4367d075a3",
+  "agent_sha256": "a1c3e6b99c86bf1a8622779c5900fd17ef4c9b1a9feb93affb436e32fdaa4836",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "HiveShapeAgent",
   "host_dependencies": [],

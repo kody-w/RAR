@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__clipchamp_video",
   "name": "Clipchamp Narrated Demo Video",
   "rar_name": "@cat-agent-skills/clipchamp_video",
-  "rappid": "rappid:@cat-agent-skills/clipchamp_video:937a0539eb50088657fbea71a23575b0ff9e7d733517fcf6b55947040043a143",
-  "_migrated_from": "rappid:@cat-agent-skills/clipchamp_video:81b4c35388e8b689eedabaa91c5c32d2186a886e29dbca3b1cb081556bb70727",
+  "rappid": "rappid:@cat-agent-skills/clipchamp_video:579bd79dd150977b932d31f813dfce5e2352af00cb51c7dbb6cc34961fc77413",
+  "_migrated_from": "rappid:@cat-agent-skills/clipchamp_video:937a0539eb50088657fbea71a23575b0ff9e7d733517fcf6b55947040043a143",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/clipchamp_video:81b4c35388e8b689eedabaa91c5c32d2186a886e29dbca3b1cb081556bb70727"
+    "rappid:@cat-agent-skills/clipchamp_video:81b4c35388e8b689eedabaa91c5c32d2186a886e29dbca3b1cb081556bb70727",
+    "rappid:@cat-agent-skills/clipchamp_video:937a0539eb50088657fbea71a23575b0ff9e7d733517fcf6b55947040043a143"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -29,9 +30,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.5,
-  "sha256": "99c1a93abfecee1f36363f05c06d8b7f08c9a63e141aeb6e4f2014b6c50b4a4c",
+  "lines": 272,
+  "size_kb": 13.7,
+  "sha256": "d2cfd098c26b1ed16c4eb39226dc8486860550d40cd1b8f1c0c6672dc6793515",
   "has_card": true,
   "added_at": "2026-08-23T19:15:32-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__microsoft_ai_platform_advisor",
   "name": "Microsoft AI Platform Advisor",
   "rar_name": "@cat-agent-skills/microsoft_ai_platform_advisor",
-  "rappid": "rappid:@cat-agent-skills/microsoft_ai_platform_advisor:b14819b2121e6214dc62f972d5e4b8978848f9bf021d917ab8feb786d17cb3b7",
-  "_migrated_from": "rappid:@cat-agent-skills/microsoft_ai_platform_advisor:d46d69e288abcb8bdb34a878981b684269bfad2c969733149c4c8830f60812fa",
+  "rappid": "rappid:@cat-agent-skills/microsoft_ai_platform_advisor:c09791d1070d170c93c63d0056119725859c117adc88adeeeea0f883f2d92a62",
+  "_migrated_from": "rappid:@cat-agent-skills/microsoft_ai_platform_advisor:b14819b2121e6214dc62f972d5e4b8978848f9bf021d917ab8feb786d17cb3b7",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/microsoft_ai_platform_advisor:d46d69e288abcb8bdb34a878981b684269bfad2c969733149c4c8830f60812fa"
+    "rappid:@cat-agent-skills/microsoft_ai_platform_advisor:d46d69e288abcb8bdb34a878981b684269bfad2c969733149c4c8830f60812fa",
+    "rappid:@cat-agent-skills/microsoft_ai_platform_advisor:b14819b2121e6214dc62f972d5e4b8978848f9bf021d917ab8feb786d17cb3b7"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -29,9 +30,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.8,
-  "sha256": "2a51178d9d3362113c7b11eecdb5b13b9ef1fc5e30fd699dea41b19f12f3f82f",
+  "lines": 272,
+  "size_kb": 14.0,
+  "sha256": "7f2dc23f9d0ed9d385011b60976185e5cb7f1869b13f07b4f02e7dec0e229e38",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

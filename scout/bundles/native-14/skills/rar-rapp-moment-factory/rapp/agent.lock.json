@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/moment_factory_agent",
   "agent_file": "moment_factory_agent.py",
-  "agent_sha256": "02a5b7154b7bd205223d58d3d61489bfa725ad7218915a0012709fe0d5f1ccf8",
+  "agent_sha256": "57786378d57cca18fb846fb4dce7d167734d4826d41dfcadc8569f3ca91a19e9",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MomentFactory",
   "host_dependencies": [],

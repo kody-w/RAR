@@ -1,7 +1,7 @@
 {
   "agent": "@discreetRappers/powerpoint_generator_agent",
   "agent_file": "powerpoint_generator_agent.py",
-  "agent_sha256": "5a9fc79dfbf2038ba411e2789dc988713389b2219ff5ce721b02d684d88a23f5",
+  "agent_sha256": "e1c71838845673ea756b0fea8afa04d3c9014964423cdaf354547df96af9a7e6",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PowerPointGeneratorAgentV2",
   "host_dependencies": [

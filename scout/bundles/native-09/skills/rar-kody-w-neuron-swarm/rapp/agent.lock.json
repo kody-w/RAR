@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/neuron_swarm",
   "agent_file": "neuron_swarm_agent.py",
-  "agent_sha256": "911cbdf5536d55be0da3f49cf86f6b96fb4dde7eeb05fdd1ae7f67ea945e0498",
+  "agent_sha256": "271579577537088ee30aa14aa9bc28887d9f564cda195bdeb777d5a0da897815",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "NeuronSwarmAgent",
   "host_dependencies": [],

@@ -55,6 +55,24 @@ never a layer. Full rules and the lessons behind them: https://kody-w.github.io/
 `rapp-alm/1`: https://github.com/kody-w/rapp-1/pull/59).
 
 ## 5. Data surfaces
+Agent links `https://kody-w.github.io/RAR/#agent/@publisher/slug` also have a JavaScript-free ticket:
+`https://kody-w.github.io/RAR/a/@publisher/slug/` (HTML) or `agent.md` under that directory (plain text).
+Fetch the ticket for the agent's description, raw file and three loading steps. Every listed agent file
+carries those steps as top-of-file comments; gated listings explain the private-source access requirement.
+
+Maintainers: `python3 tools/stamp_ticket.py` stamps only registry-listed artifacts; `--check` writes nothing.
+Synchronize any pinned stack copies and mint matching receipts with `scripts/mint_maintainer_receipts.py`
+(repeat `--agent @publisher/slug` to restrict the pass), then run `python3 build_registry.py` to regenerate
+the registry and static tickets. The exact ticket-only insertion may retain its version only when removing
+the ticket restores the prior published hash; all code changes still require a version bump.
+Use `python3 scripts/check_notarized_changes.py --base HEAD --worktree` before committing to check actual
+uncommitted artifact bytes, including gated stubs. The default CI mode checks committed changes.
+Refresh the derived API, Scout copies and front-page feed with `scripts/build_pokedex_api.py`,
+`scripts/build_static_api.py`, `scripts/build_scout_exports.py`, `scripts/build_skills_catalog.py`
+and `scripts/build_front_page.py`.
+Scout honestly marks newly notarized but uncommitted bytes as `working-tree`; the ticket-only provenance
+gate requires that stripping the exact ticket recovers the prior receipt digest and a real historical blob.
+
 Every catalog, registry or site follows **rapp-static-api/1.1** (https://github.com/kody-w/rapp-static-apis):
 one hand-written input, one idempotent build, a schema-tagged `registry.json`, `api/v<major>/*.json`,
 append-only `versions/`, `llms.txt`. Browsers never call api.github.com and never defeat the cache.

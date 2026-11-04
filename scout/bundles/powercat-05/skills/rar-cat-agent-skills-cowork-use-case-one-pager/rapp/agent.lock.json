@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/cowork_use_case_one_pager",
   "agent_file": "cowork_use_case_one_pager_agent.py",
-  "agent_sha256": "36fd44a76d80525c9ac4de4a7428e0bc4be342ca07dc8c6c8f1ade0df11a895f",
+  "agent_sha256": "ea74002cbb93d2e5d5d336f091b9f4b6d89012e4669548ce3057b6443d09d75f",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CoworkUseCaseOnePager",
   "host_dependencies": [],

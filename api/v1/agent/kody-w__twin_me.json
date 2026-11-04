@@ -3,10 +3,11 @@
   "id": "kody-w__twin_me",
   "name": "TwinMe",
   "rar_name": "@kody-w/twin_me",
-  "rappid": "rappid:@kody-w/twin_me:95db972df632baf44d344c3eafdb2b296ff27e3789ac1481e0a1fbd9ebdfc91c",
-  "_migrated_from": "rappid:@kody-w/twin_me:8ad0dc7e2fa0cdbd3fd2942505b32ec2ac5beba14b55a407f8570b7a70c3c943",
+  "rappid": "rappid:@kody-w/twin_me:4b98007475446de0dd00e466ebdf2c4c6937af67459fa466bd1773b4cdd9ec7a",
+  "_migrated_from": "rappid:@kody-w/twin_me:95db972df632baf44d344c3eafdb2b296ff27e3789ac1481e0a1fbd9ebdfc91c",
   "_migrated_from_all": [
-    "rappid:@kody-w/twin_me:8ad0dc7e2fa0cdbd3fd2942505b32ec2ac5beba14b55a407f8570b7a70c3c943"
+    "rappid:@kody-w/twin_me:8ad0dc7e2fa0cdbd3fd2942505b32ec2ac5beba14b55a407f8570b7a70c3c943",
+    "rappid:@kody-w/twin_me:95db972df632baf44d344c3eafdb2b296ff27e3789ac1481e0a1fbd9ebdfc91c"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.3",
@@ -29,9 +30,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 781,
-  "size_kb": 33.1,
-  "sha256": "d3e0e553b21db6ba2323ebf1119a019bf44b898438fae6432284671359593896",
+  "lines": 791,
+  "size_kb": 34.3,
+  "sha256": "821f3c97589ab2bd5ab346d36a2458621f39d568f205b9391893308099efabed",
   "has_card": true,
   "added_at": "2026-06-08T13:48:48-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

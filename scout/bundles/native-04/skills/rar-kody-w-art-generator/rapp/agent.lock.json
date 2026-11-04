@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/art_generator_agent",
   "agent_file": "art_generator_agent.py",
-  "agent_sha256": "abf32aa1c916a7c4b1606e434d3468e2f75c4bd725eafc304f022aeaae489712",
+  "agent_sha256": "bc54973a21c902f273d1340391840ab8b1025232dadcd17175d0c1a2a77fd34c",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ArtGeneratorAgent",
   "host_dependencies": [

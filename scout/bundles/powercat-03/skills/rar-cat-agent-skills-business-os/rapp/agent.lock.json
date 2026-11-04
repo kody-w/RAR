@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/business_os",
   "agent_file": "business_os_agent.py",
-  "agent_sha256": "6482b513441d7a7adb56c67fbd6733482e86851f16e151ff3d9f112c8e661bac",
+  "agent_sha256": "50b4ed46678a131759dff285b8e288b0d0ecaf9cda86969b1d25453f21926a58",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BusinessOs",
   "host_dependencies": [],

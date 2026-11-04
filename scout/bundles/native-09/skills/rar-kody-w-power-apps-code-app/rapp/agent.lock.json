@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/power_apps_code_app_agent",
   "agent_file": "power_apps_code_app_agent.py",
-  "agent_sha256": "fbcd47231e85c44efedbdc661b1e20da4f8cc77f45bbc20d53d7355c25269a10",
+  "agent_sha256": "b080f45c3105b46c5b049ae7678e0b2844ec67ee52da6ed6a025f6ce1c45f074",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PowerAppsCodeApp",
   "host_dependencies": [],

@@ -3,10 +3,11 @@
   "id": "kody-w__flight_recorder",
   "name": "FlightRecorder",
   "rar_name": "@kody-w/flight_recorder",
-  "rappid": "rappid:@kody-w/flight_recorder:9a613108ca90bb5562b5c1dd7869616c4c42c3edeabc4c5df7b5c52efabbf7ca",
-  "_migrated_from": "rappid:@kody-w/flight_recorder:81d0647b991b89f8a494f28c8b0c6c3ffe0c30c4c6dc3337654a5f674efab17e",
+  "rappid": "rappid:@kody-w/flight_recorder:be8f4fa1790970a0cd45badf5269623621c9b74a06e2c140f946de8c9b82bdc2",
+  "_migrated_from": "rappid:@kody-w/flight_recorder:9a613108ca90bb5562b5c1dd7869616c4c42c3edeabc4c5df7b5c52efabbf7ca",
   "_migrated_from_all": [
-    "rappid:@kody-w/flight_recorder:81d0647b991b89f8a494f28c8b0c6c3ffe0c30c4c6dc3337654a5f674efab17e"
+    "rappid:@kody-w/flight_recorder:81d0647b991b89f8a494f28c8b0c6c3ffe0c30c4c6dc3337654a5f674efab17e",
+    "rappid:@kody-w/flight_recorder:9a613108ca90bb5562b5c1dd7869616c4c42c3edeabc4c5df7b5c52efabbf7ca"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -32,9 +33,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 536,
-  "size_kb": 22.7,
-  "sha256": "6a3976cfba0492a585ccab318125caed4ca0820e05dddf4119e98d5f22dea659",
+  "lines": 546,
+  "size_kb": 23.8,
+  "sha256": "f07d76a30266eab0a367c47a6dacf9403cb08cae684c0e02b0252c0cea79da02",
   "has_card": true,
   "added_at": "2026-06-27T13:28:13-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

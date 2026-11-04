@@ -3,11 +3,12 @@
   "id": "rapp__rapplication_agent",
   "name": "Rapplication",
   "rar_name": "@rapp/rapplication_agent",
-  "rappid": "rappid:@rapp/rapplication_agent:2cb0b31e7b9749611867ba68163c09e70fc2a4cbea9f7c9e9afdffc0c68064c8",
-  "_migrated_from": "rappid:@rapp/rapplication_agent:0dd79b9e987e430475f9ecb2bd2d5d8c57067af26ed65273f980fe7b0f06fa0d",
+  "rappid": "rappid:@rapp/rapplication_agent:79b04d373c4b31da40756177c738928eb872f5c2767a9cb56242b613e0329d28",
+  "_migrated_from": "rappid:@rapp/rapplication_agent:2cb0b31e7b9749611867ba68163c09e70fc2a4cbea9f7c9e9afdffc0c68064c8",
   "_migrated_from_all": [
     "rappid:v2:agent:@rapp/rapplication_agent:b9157463be242d97e8c0a789e7a755fe",
-    "rappid:@rapp/rapplication_agent:0dd79b9e987e430475f9ecb2bd2d5d8c57067af26ed65273f980fe7b0f06fa0d"
+    "rappid:@rapp/rapplication_agent:0dd79b9e987e430475f9ecb2bd2d5d8c57067af26ed65273f980fe7b0f06fa0d",
+    "rappid:@rapp/rapplication_agent:2cb0b31e7b9749611867ba68163c09e70fc2a4cbea9f7c9e9afdffc0c68064c8"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.2",
@@ -27,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 592,
-  "size_kb": 23.2,
-  "sha256": "a40d2ce08abde9774ebb4d34f02577a31e15a2ef66d2064953ab08a3f39baa0b",
+  "lines": 602,
+  "size_kb": 24.4,
+  "sha256": "c7bbf9955cd91626d099d580ab612f4081b0b81bd0b3b35033445872461de01c",
   "has_card": true,
   "added_at": "2026-04-27T18:52:27-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

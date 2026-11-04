@@ -10,6 +10,7 @@ from pathlib import Path
 import re
 
 import pytest
+from tools.stamp_ticket import strip_ticket, ticket_text
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -150,8 +151,13 @@ def _publisher_safe_text(text: str, role: str) -> str:
 
 
 def scan_public_text(label: str, text: str, role: str = "content") -> list[str]:
-    """Return privacy findings without relying on repository-specific code."""
+    """Scan private data, allowing only the exact public loading ticket."""
 
+    agent = {"name": IDENTITY, "_file": SOURCE.relative_to(ROOT).as_posix()}
+    if role == "source":
+        text = strip_ticket(text.encode("utf-8"), agent).decode("utf-8")
+    elif role == "skill":
+        text = text.replace(ticket_text(agent), "")
     findings: list[str] = []
 
     def add(category: str, detail: str) -> None:
@@ -415,6 +421,23 @@ The public identity is @publisher/rapp_projects and depends on @rapp/basic_agent
 {"project_slug": "sample_project", "customer_name": "<customer>"}
 https://raw.githubusercontent.com/kody-w/RAR/main/agents/%40kody-w/rapp_projects_agent.py
 """
+
+def test_privacy_scanner_exempts_only_the_exact_public_loading_ticket():
+    ticket = ticket_text({
+        "name": IDENTITY, "_file": SOURCE.relative_to(ROOT).as_posix(),
+    })
+    assert scan_public_text("ticket", ticket + SAFE_GENERIC_EXAMPLES, "source") == []
+    assert scan_public_text("skill", "```python\n" + ticket + "```\n", "skill") == []
+    assert scan_public_text(
+        "modified ticket", ticket.replace("localhost", "customer.internal"), "source",
+    )
+    assert scan_public_text(
+        "after ticket", ticket + "\n# customer.internal\n", "source",
+    )
+    assert scan_public_text(
+        "modified skill", "```python\n" + ticket.replace("localhost", "customer.internal") + "```\n",
+        "skill",
+    )
 
 
 def test_privacy_scanner_accepts_generic_examples_and_public_identity_locations():

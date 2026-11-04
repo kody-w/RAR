@@ -1,7 +1,7 @@
 {
   "agent": "@discreetRappers/agent_transpiler_agent",
   "agent_file": "agent_transpiler_agent.py",
-  "agent_sha256": "5ae4e24760415ab5d1ad427c6a2f52518d4919d2811bee13914e65f3b159210c",
+  "agent_sha256": "312593bc75ba9d3314aa20c8745986b1fe9d99569fbd35ea0a2723d2815e3ec5",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AgentTranspilerAgent",
   "host_dependencies": [

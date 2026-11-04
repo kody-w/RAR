@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/regulation_monitor",
   "agent_file": "regulation_monitor_agent.py",
-  "agent_sha256": "71a681e76f421b7dd2588d5388df0c864edcc7661eb979212c188cd6dcbde484",
+  "agent_sha256": "ce654fcd227627fd462961af89fec4cb8c416bc90754779e76bfa97cde0fbd2b",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RegulationMonitor",
   "host_dependencies": [],

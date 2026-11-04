@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__knowledge_source_router",
   "name": "Knowledge Source Router",
   "rar_name": "@cat-agent-skills/knowledge_source_router",
-  "rappid": "rappid:@cat-agent-skills/knowledge_source_router:8204fe25528ccd9c1836fd1e8f160a9aaffc438f04a0d416c8cc6ca4c64d4ff0",
-  "_migrated_from": "rappid:@cat-agent-skills/knowledge_source_router:f7eab8e974d3b705e8fe07cc69928c805b68b7ea030d63e5cae89e8649f75811",
+  "rappid": "rappid:@cat-agent-skills/knowledge_source_router:c870cdc6e118d9f816ed83b139c644c2ad3cb56b348e4dc7a26e2bd9d4d60207",
+  "_migrated_from": "rappid:@cat-agent-skills/knowledge_source_router:8204fe25528ccd9c1836fd1e8f160a9aaffc438f04a0d416c8cc6ca4c64d4ff0",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/knowledge_source_router:f7eab8e974d3b705e8fe07cc69928c805b68b7ea030d63e5cae89e8649f75811"
+    "rappid:@cat-agent-skills/knowledge_source_router:f7eab8e974d3b705e8fe07cc69928c805b68b7ea030d63e5cae89e8649f75811",
+    "rappid:@cat-agent-skills/knowledge_source_router:8204fe25528ccd9c1836fd1e8f160a9aaffc438f04a0d416c8cc6ca4c64d4ff0"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "4.0.2",
@@ -26,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 11.8,
-  "sha256": "b8e2822507b13775fff2410fd66bb59f29f9c622a8d8e45b844f4fa235f54569",
+  "lines": 272,
+  "size_kb": 13.0,
+  "sha256": "28de060ce9e856846c1ed608ec2cee0367fb8584d3b8b16ad583db18d97fe305",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

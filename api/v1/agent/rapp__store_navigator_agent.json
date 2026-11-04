@@ -3,11 +3,12 @@
   "id": "rapp__store_navigator_agent",
   "name": "StoreNavigator",
   "rar_name": "@rapp/store_navigator_agent",
-  "rappid": "rappid:@rapp/store_navigator_agent:7e677fb9809a17c1acd0706b03ffd65f6449e733455714b256a6b1e671e407e1",
-  "_migrated_from": "rappid:@rapp/store_navigator_agent:ef258a0d18366eb740ecb26e6b348108be58872eab9b9a2480f33491a858445c",
+  "rappid": "rappid:@rapp/store_navigator_agent:5ff993117debb919dfa4b92bd5b5e982396af215547f470a899db16a97972454",
+  "_migrated_from": "rappid:@rapp/store_navigator_agent:7e677fb9809a17c1acd0706b03ffd65f6449e733455714b256a6b1e671e407e1",
   "_migrated_from_all": [
     "rappid:v2:agent:@rapp/store_navigator_agent:be39e9015e595c226b93e3ce44b76fd5",
-    "rappid:@rapp/store_navigator_agent:ef258a0d18366eb740ecb26e6b348108be58872eab9b9a2480f33491a858445c"
+    "rappid:@rapp/store_navigator_agent:ef258a0d18366eb740ecb26e6b348108be58872eab9b9a2480f33491a858445c",
+    "rappid:@rapp/store_navigator_agent:7e677fb9809a17c1acd0706b03ffd65f6449e733455714b256a6b1e671e407e1"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "0.1.4",
@@ -27,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 424,
-  "size_kb": 16.6,
-  "sha256": "d66b3003e0a562b0af69dfa070eae0a4ca6dc97cb53438b9e636c2ffa55214ef",
+  "lines": 434,
+  "size_kb": 17.8,
+  "sha256": "909f0778d6d9066e668adffc72f75be4d55de9552ab781df337afe6fd54e0d03",
   "has_card": true,
   "added_at": "2026-04-27T21:52:47Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

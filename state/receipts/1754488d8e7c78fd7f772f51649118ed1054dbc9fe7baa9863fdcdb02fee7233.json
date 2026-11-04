@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@howardh/prompt_to_video_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "ed75b1d6e1bedafee181b2eefc0a1e98a64533df1c7067383cc10450bea4c83f"
+ },
+ "canonical_path": "agents/@howardh/prompt_to_video_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_1754488d8e7c78fd7f772f51649118ed1054dbc9fe7baa9863fdcdb02fee7233",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "3bcdd845998ff84158cc2c2ab54fefcb54b0e3a6106fd4bfb8e59252b58694c6",
+  "receipt": "rar_30e27ccf2b4ee366d195e0dce4c4f48b221386dac84368817d1c5cfd3417f29a",
+  "version": "1.1.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_1754488d8e7c78fd7f772f51",
+ "revision_id": "1754488d8e7c78fd7f772f51649118ed1054dbc9fe7baa9863fdcdb02fee7233",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "1.1.0"
+}

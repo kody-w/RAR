@@ -2,7 +2,7 @@
   "schema": "rar-catalog/1.0",
   "audience": "consumer",
   "description": "Agents appropriate for an individual audience. Enterprise-only agents are excluded.",
-  "generated": "2026-11-04T17:17:47Z",
+  "generated": "2026-11-04T19:52:11Z",
   "count": 199,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/consumer.json",
   "agents": [
@@ -42,11 +42,11 @@
         "path": "agents/@bill/neuron_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@bill/neuron_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@bill/neuron_agent.py",
-        "sha256": "093ac6ab4dcd123fdf55998ddc8f1dc904be9bb4b27d7eb82e118099e353fcc1"
+        "sha256": "e0af759764d7c236755c42e600539fc64a7f17ddc3fac358077f6b23bd8bcb30"
       },
       "stats": {
-        "lines": 384,
-        "size_kb": 27.7,
+        "lines": 394,
+        "size_kb": 28.9,
         "added_at": "2026-05-12T13:37:05-04:00"
       }
     },
@@ -82,11 +82,11 @@
         "path": "agents/@borg/borg_agent.py.card",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@borg/borg_agent.py.card",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@borg/borg_agent.py.card",
-        "sha256": "7710557fc30ce2098c1b4d136004bc7e979ed8441b91dba95c38de830905166f"
+        "sha256": "f381aedc272544bba4bac2329153244c037376b964bb2978fd9092306caae8c8"
       },
       "stats": {
-        "lines": 990,
-        "size_kb": 39.7,
+        "lines": 1000,
+        "size_kb": 40.9,
         "added_at": "2026-04-04T11:22:10-04:00"
       }
     },
@@ -123,11 +123,11 @@
         "path": "agents/@cat-agent-skills/accessibility_pass_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/accessibility_pass_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/accessibility_pass_agent.py",
-        "sha256": "2ce6f88d58c2f5c0ca93ed74369fbcfafcca0c06ec2f5492710a5a20a3ca8f8d"
+        "sha256": "87ab5363801dd38441801dd9d3cfc6ec1fa5da08c259b741f21dc1026b289b09"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.5,
+        "lines": 272,
+        "size_kb": 13.7,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -163,11 +163,11 @@
         "path": "agents/@cat-agent-skills/acroform_writer_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/acroform_writer_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/acroform_writer_agent.py",
-        "sha256": "443631d1d4364661b643c3d85cf3a0fadab6021e31c0796662765d71940be22a"
+        "sha256": "d9cb428f86f969b809e2bb18378be5096f7e87a590f6bd2d8321d18e6087091d"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.2,
+        "lines": 272,
+        "size_kb": 13.4,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -206,11 +206,11 @@
         "path": "agents/@cat-agent-skills/action_items_todo_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/action_items_todo_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/action_items_todo_agent.py",
-        "sha256": "1c5c79a035333e0169c363cc1f60b4849ce2a8297ef496801fa6e95e5988e3ed"
+        "sha256": "e25f86131c9f129f445e79151a7dc8cce0859a7e1025062b538fc7c5fb142929"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.4,
+        "lines": 272,
+        "size_kb": 13.6,
         "added_at": "2026-08-23T19:15:32-04:00"
       }
     },
@@ -246,11 +246,11 @@
         "path": "agents/@cat-agent-skills/agent_evaluation_designer_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/agent_evaluation_designer_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/agent_evaluation_designer_agent.py",
-        "sha256": "092e5313a720a8566584b69405d92d384a4563943ea16bf6cb84abf87dd60ff3"
+        "sha256": "3eb41727a5557227f7de268386141ced0eb30e2a55b6fd292c8ce8d6f93f7b97"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.7,
+        "lines": 272,
+        "size_kb": 13.9,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -287,11 +287,11 @@
         "path": "agents/@cat-agent-skills/agent_harness_explorer_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/agent_harness_explorer_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/agent_harness_explorer_agent.py",
-        "sha256": "ae4ce30f551513975fd4b56323c880f35f9894e07285212f88b81f65ce2f8eae"
+        "sha256": "4e86bceb09a0a54ccd4332a264a2601cd15a61f27f86be2cbf1a859693f83cd5"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.5,
+        "lines": 272,
+        "size_kb": 13.7,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -330,11 +330,11 @@
         "path": "agents/@cat-agent-skills/agent_performance_triage_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/agent_performance_triage_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/agent_performance_triage_agent.py",
-        "sha256": "d5ab5d95947d61784c790645d416c6ead847ceededcefbe615a1b505b80d59b3"
+        "sha256": "c733f72d68b4a9d519b6a7ff701c963143d0a361037a576be6f8f298fe17ca82"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.2,
+        "lines": 272,
+        "size_kb": 13.5,
         "added_at": "2026-08-28T04:52:39Z"
       }
     },
@@ -371,11 +371,11 @@
         "path": "agents/@cat-agent-skills/ai_demo_assistant_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/ai_demo_assistant_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/ai_demo_assistant_agent.py",
-        "sha256": "0165c6ce3d00a88f977723874a6fb0151cd850b987b27b34359d4a8f111f09c2"
+        "sha256": "81d3ff99c254c9028c88fe4f843eb0a271892a3a97fac80c6b6a2340a0acb687"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.4,
+        "lines": 272,
+        "size_kb": 13.6,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -409,11 +409,11 @@
         "path": "agents/@cat-agent-skills/ai_first_process_redesign_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/ai_first_process_redesign_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/ai_first_process_redesign_agent.py",
-        "sha256": "fed0d3782855d0c5ce6e0aaa4c9ffb05a91f85f2a156b281c18d7fd7cf3afaa0"
+        "sha256": "e3d9ccd12cc26c79c1e294a7e0af59f2d7eb628d2366098ee45835223936c01b"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 11.6,
+        "lines": 272,
+        "size_kb": 12.8,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -450,11 +450,11 @@
         "path": "agents/@cat-agent-skills/anonymised_case_study_writer_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/anonymised_case_study_writer_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/anonymised_case_study_writer_agent.py",
-        "sha256": "a33da39c5a36434bb8c16f1d206623b4f32f7826daa65859162fce827c579996"
+        "sha256": "49d3b3efccee510686f44a4fed6b95a9b507f706bb3c594d126aa9cda655b398"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.3,
+        "lines": 272,
+        "size_kb": 13.5,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -492,11 +492,11 @@
         "path": "agents/@cat-agent-skills/awaiting_reply_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/awaiting_reply_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/awaiting_reply_agent.py",
-        "sha256": "d02f3e9ab8faeaabb60ad68970f996c478687c29f591f9a0bce8459a68a6968e"
+        "sha256": "b7aa264d0020c3aa19ae1edc112ef65f8ddcd16dcc3ec5d78bd9775e3b957719"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.6,
+        "lines": 272,
+        "size_kb": 13.7,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -533,11 +533,11 @@
         "path": "agents/@cat-agent-skills/b2b_outreach_suite_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/b2b_outreach_suite_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/b2b_outreach_suite_agent.py",
-        "sha256": "b50fc4375cf3ba5d548b20ed337a1afea0fbc564076f6cab1da021097fb34fd0"
+        "sha256": "8cc4246e1e7974a219004eefc17de83bb2b40c83523cc4f89c47d14275832397"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.5,
+        "lines": 272,
+        "size_kb": 13.7,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -574,11 +574,11 @@
         "path": "agents/@cat-agent-skills/blog_content_auditor_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/blog_content_auditor_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/blog_content_auditor_agent.py",
-        "sha256": "d164db261994db6d69cdd075d45da8ad058dc87bea407088e9fe06935dbd58d7"
+        "sha256": "902a9938856104a577bedd98478f6436adf0d6c55935978ff18563beec80d169"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.2,
+        "lines": 272,
+        "size_kb": 13.4,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -615,11 +615,11 @@
         "path": "agents/@cat-agent-skills/blog_post_structure_pass_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/blog_post_structure_pass_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/blog_post_structure_pass_agent.py",
-        "sha256": "7aa974d9e64cd44bf8b7d1c0b45c56396849d26beefbdb9d853de01547392519"
+        "sha256": "43bbdec88cbd22f1df3c807a5ec76ded944fe911c957b5b1f5eb84cc660be546"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.2,
+        "lines": 272,
+        "size_kb": 13.5,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -657,11 +657,11 @@
         "path": "agents/@cat-agent-skills/booth_loop_video_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/booth_loop_video_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/booth_loop_video_agent.py",
-        "sha256": "e7d0efd552cb1b7678b8324be22afc0e9e6ebee21df4fef2a23393d575f5b113"
+        "sha256": "575d67a2bcd525e8ebc8092fd3e0cee5e5ed253e5f72d9a6e2cda8505ca17753"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.4,
+        "lines": 272,
+        "size_kb": 13.6,
         "added_at": "2026-08-11T09:43:05Z"
       }
     },
@@ -698,11 +698,11 @@
         "path": "agents/@cat-agent-skills/brand_template_enforcer_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/brand_template_enforcer_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/brand_template_enforcer_agent.py",
-        "sha256": "c4732fde24a93d74c774a8b69f5ad43d891add5ea8d12223073f6488db1555e6"
+        "sha256": "9b55307c395f49f3800d1bafe751f64efa1519e40b9e69b3a57e9bebbc02c541"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.3,
+        "lines": 272,
+        "size_kb": 13.5,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -738,11 +738,11 @@
         "path": "agents/@cat-agent-skills/brand_voice_pass_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/brand_voice_pass_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/brand_voice_pass_agent.py",
-        "sha256": "6637408a4175858b78cf4da9cb7fac9012e301e6577cc18e2064dca8629caa63"
+        "sha256": "8fe0e9ae3edc03da2cc0329fd08af34c4871530aa826d606972e1d38bf2c5127"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.2,
+        "lines": 272,
+        "size_kb": 13.3,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -780,11 +780,11 @@
         "path": "agents/@cat-agent-skills/breathing_room_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/breathing_room_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/breathing_room_agent.py",
-        "sha256": "fe3c40feeeb2605e05593311b3be9795246c664abc303adc3c2602715001418b"
+        "sha256": "c1c264754985128b9c1ffd20b0e9b22a6766c10b6b2e72a0714764af07e00b0a"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.2,
+        "lines": 272,
+        "size_kb": 13.4,
         "added_at": "2026-09-08T16:38:03-04:00"
       }
     },
@@ -822,11 +822,11 @@
         "path": "agents/@cat-agent-skills/browser_uat_analyst_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/browser_uat_analyst_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/browser_uat_analyst_agent.py",
-        "sha256": "04643dc07fd9ae22b95b57a4dc006100bfe3cbe9f2336dad00061f7953b55223"
+        "sha256": "1c9fbb8d48aaf02473498265789011da312ac8431035b97dbb21a8d021a8f256"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.8,
+        "lines": 272,
+        "size_kb": 14.0,
         "added_at": "2026-08-11T09:43:05Z"
       }
     },
@@ -864,11 +864,11 @@
         "path": "agents/@cat-agent-skills/business_os_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/business_os_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/business_os_agent.py",
-        "sha256": "6482b513441d7a7adb56c67fbd6733482e86851f16e151ff3d9f112c8e661bac"
+        "sha256": "50b4ed46678a131759dff285b8e288b0d0ecaf9cda86969b1d25453f21926a58"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 13.0,
+        "lines": 272,
+        "size_kb": 14.2,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -903,11 +903,11 @@
         "path": "agents/@cat-agent-skills/call_for_speakers_digest_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/call_for_speakers_digest_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/call_for_speakers_digest_agent.py",
-        "sha256": "d0d10eab87e4ada8b21db20e33224b2e3b97d5c23eac20300aa8864d64ea5d98"
+        "sha256": "5ea0d443f429476b193cd018fdf370d484de2bd510263c087c133d8dc0146951"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 13.0,
+        "lines": 272,
+        "size_kb": 14.2,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -943,11 +943,11 @@
         "path": "agents/@cat-agent-skills/campaign_deck_builder_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/campaign_deck_builder_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/campaign_deck_builder_agent.py",
-        "sha256": "e7d5cb5432ba712afe2da34ab2bec2654a82864cd513b584af374c5a67f49e33"
+        "sha256": "c83e942f9e64a210e436258385a286a7ad7808a844d8e3b0bfcba90cdae4917a"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.3,
+        "lines": 272,
+        "size_kb": 13.5,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -982,11 +982,11 @@
         "path": "agents/@cat-agent-skills/chart_builder_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/chart_builder_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/chart_builder_agent.py",
-        "sha256": "a3ce3929b7708296679c21b8f9a0e58efd70e3cf3c18c6d5e465ed6585c7c3b1"
+        "sha256": "f4ed638b191940f09a2bf01dde7ab052dbca6fba9627b2bfb957f3de8ffa0917"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.1,
+        "lines": 272,
+        "size_kb": 13.3,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -1020,11 +1020,11 @@
         "path": "agents/@cat-agent-skills/classic_text_adventure_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/classic_text_adventure_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/classic_text_adventure_agent.py",
-        "sha256": "09395f5d6e086ccbeb20463fd8726db778b02f174064e42616b0ab3b4d7e5fac"
+        "sha256": "4c4a86cbf7aeee5e0f57eff39d2e15f30542f45222da4cb6bad6b6993f190995"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 11.7,
+        "lines": 272,
+        "size_kb": 12.9,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -1063,11 +1063,11 @@
         "path": "agents/@cat-agent-skills/clipchamp_video_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/clipchamp_video_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/clipchamp_video_agent.py",
-        "sha256": "99c1a93abfecee1f36363f05c06d8b7f08c9a63e141aeb6e4f2014b6c50b4a4c"
+        "sha256": "d2cfd098c26b1ed16c4eb39226dc8486860550d40cd1b8f1c0c6672dc6793515"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.5,
+        "lines": 272,
+        "size_kb": 13.7,
         "added_at": "2026-08-23T19:15:32-04:00"
       }
     },
@@ -1106,11 +1106,11 @@
         "path": "agents/@cat-agent-skills/clt_hr_assistant_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/clt_hr_assistant_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/clt_hr_assistant_agent.py",
-        "sha256": "f5b73a62818607a07ab31b5e8dc4218a277a3e7c1d97f5847706efa80d1bd0aa"
+        "sha256": "f009d97229e7ac098108d20b4188d705620dfaebc5f359b00ec2bd747bbe2eea"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.2,
+        "lines": 272,
+        "size_kb": 13.4,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -1143,11 +1143,11 @@
         "path": "agents/@cat-agent-skills/commenting_content_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/commenting_content_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/commenting_content_agent.py",
-        "sha256": "896dfb9f478e7ef61d68fb5008dbe8c805c595a8217abc0e5c3a29e685322821"
+        "sha256": "9c7b154df5c10cdacffbad111641404a33a2d64cc6cb64867c867d8df66f8489"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.0,
+        "lines": 272,
+        "size_kb": 13.2,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -1181,11 +1181,11 @@
         "path": "agents/@cat-agent-skills/competitive_battlecard_builder_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/competitive_battlecard_builder_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/competitive_battlecard_builder_agent.py",
-        "sha256": "c2ecfa863e2631bbee32804ad0b3e1d10b4af20af55d7938b5d97c88c56e92f8"
+        "sha256": "89f511488361213aaf07ded3e0492e5111c9ad61267bbdcaf45e2363e34deff7"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.8,
+        "lines": 272,
+        "size_kb": 14.0,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -1222,11 +1222,11 @@
         "path": "agents/@cat-agent-skills/conference_session_abstract_pack_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/conference_session_abstract_pack_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/conference_session_abstract_pack_agent.py",
-        "sha256": "2f037010b37d46b3b8c438a051efa8a15331159a047f2d7bf66dc4ab81cfa2b2"
+        "sha256": "84d48403786831ecf324b56d1a8686cd7b9ea6797c0a356761ad9295533b4dda"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.3,
+        "lines": 272,
+        "size_kb": 13.5,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -1262,11 +1262,11 @@
         "path": "agents/@cat-agent-skills/copilot_agent_advisor_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/copilot_agent_advisor_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/copilot_agent_advisor_agent.py",
-        "sha256": "9de2c8ca78c8387755c34f06b7c478530cb3e84df8efe19abf60e1ad42e8932d"
+        "sha256": "cf82b12d57ab776f1e9e989e305df5f5cb1acbf749e45dc601841f6e62d83b2d"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.6,
+        "lines": 272,
+        "size_kb": 13.8,
         "added_at": "2026-08-18T18:26:12-04:00"
       }
     },
@@ -1303,11 +1303,11 @@
         "path": "agents/@cat-agent-skills/copilot_studio_agent_test_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/copilot_studio_agent_test_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/copilot_studio_agent_test_agent.py",
-        "sha256": "571bdedba33c20a1913db0d63202aba452b953bb1a6bfe1bb09559c9fb986c64"
+        "sha256": "1075b0924639851f5066ff8f70c560ddf98829c6bbff4bf5fbfbc8bdb0cffd91"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.5,
+        "lines": 272,
+        "size_kb": 13.7,
         "added_at": "2026-08-11T09:43:05Z"
       }
     },
@@ -1344,11 +1344,11 @@
         "path": "agents/@cat-agent-skills/copilot_studio_harness_picker_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/copilot_studio_harness_picker_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/copilot_studio_harness_picker_agent.py",
-        "sha256": "8075c230d2a97c1096252928ca33d87849b787515ea071d1b27fbea0cd27af6d"
+        "sha256": "1260a59deabc3fa4f801f715786f4e643a4ef09184950388aae09939855f7091"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.5,
+        "lines": 272,
+        "size_kb": 13.7,
         "added_at": "2026-08-11T09:43:05Z"
       }
     },
@@ -1383,11 +1383,11 @@
         "path": "agents/@cat-agent-skills/copilot_studio_test_planner_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/copilot_studio_test_planner_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/copilot_studio_test_planner_agent.py",
-        "sha256": "b844fedd3d1befa33932d43c296c9fc3ede7185c6a805ccd59b5dd0ce70a20c6"
+        "sha256": "1ff5ecc58626978dfa6177c233f43cb7f545aec0fd3025735830c380f44b8564"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.0,
+        "lines": 272,
+        "size_kb": 13.2,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -1425,11 +1425,11 @@
         "path": "agents/@cat-agent-skills/copilot_studio_topic_blueprint_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/copilot_studio_topic_blueprint_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/copilot_studio_topic_blueprint_agent.py",
-        "sha256": "a9be9e59a4cacd1eef693c098ba55c3cac648f190e65d3a0361b5094fcfa48f3"
+        "sha256": "e2024d790e12876be0154250bf26a90cee1e959d35146d58c5a4107b9f58ce36"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.7,
+        "lines": 272,
+        "size_kb": 13.9,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -1466,11 +1466,11 @@
         "path": "agents/@cat-agent-skills/cowork_use_case_one_pager_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/cowork_use_case_one_pager_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/cowork_use_case_one_pager_agent.py",
-        "sha256": "36fd44a76d80525c9ac4de4a7428e0bc4be342ca07dc8c6c8f1ade0df11a895f"
+        "sha256": "ea74002cbb93d2e5d5d336f091b9f4b6d89012e4669548ce3057b6443d09d75f"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.3,
+        "lines": 272,
+        "size_kb": 13.5,
         "added_at": "2026-08-17T18:03:09-04:00"
       }
     },
@@ -1507,11 +1507,11 @@
         "path": "agents/@cat-agent-skills/doc_format_converter_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/doc_format_converter_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/doc_format_converter_agent.py",
-        "sha256": "23adb975b7c161e8ac5e8c9af419d38a2c1eae82abe86a26cd99bc570ba2c1ee"
+        "sha256": "f4717f434448dedb4118c9bac67f91897994ccf3a9cee2ebed68021661ec4131"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.3,
+        "lines": 272,
+        "size_kb": 13.5,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -1548,11 +1548,11 @@
         "path": "agents/@cat-agent-skills/eu_greenwashing_analysis_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/eu_greenwashing_analysis_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/eu_greenwashing_analysis_agent.py",
-        "sha256": "a134c53dbb6e99e2879716f7e8341eef10280ddd10792464cf9fae79edeb6b59"
+        "sha256": "6200a163f12cc7b5b12ef9742949a0bfe927e668231f5965e68fcd1f77cb7238"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.8,
+        "lines": 272,
+        "size_kb": 14.0,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -1586,11 +1586,11 @@
         "path": "agents/@cat-agent-skills/exam_prep_learning_plan_builder_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/exam_prep_learning_plan_builder_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/exam_prep_learning_plan_builder_agent.py",
-        "sha256": "03a5fb8c787b71080cb833cb37f80dd8b7a981731a2b71086670ad239f59a2cc"
+        "sha256": "bd985899fe983b4f68a0f915ee19628c54d774f79167fafef7a7e2866cbe7fdb"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.6,
+        "lines": 272,
+        "size_kb": 13.8,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -1625,11 +1625,11 @@
         "path": "agents/@cat-agent-skills/explainer_video_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/explainer_video_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/explainer_video_agent.py",
-        "sha256": "9b6c64387e7189d3525390d4505dc759e7542d6c656deae1f0c1414bdb4ba0bc"
+        "sha256": "9686a832209ed4f3e113bf25dc1f2bbd172540b760616a84fc96b45fc3d87f52"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.1,
+        "lines": 272,
+        "size_kb": 13.3,
         "added_at": "2026-08-23T19:15:32-04:00"
       }
     },
@@ -1666,11 +1666,11 @@
         "path": "agents/@cat-agent-skills/gantt_chart_generator_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/gantt_chart_generator_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/gantt_chart_generator_agent.py",
-        "sha256": "e65f1661b81bf0103d70144a51f6b3ac3d022e795400f9e8c93ea1780eed398c"
+        "sha256": "061ce3cfa4ea2f9aa26ffd7d11a22e3555748d5b254ca6ce2d6eb091b2c48a3a"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.5,
+        "lines": 272,
+        "size_kb": 13.7,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -1707,11 +1707,11 @@
         "path": "agents/@cat-agent-skills/generating_podcast_script_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/generating_podcast_script_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/generating_podcast_script_agent.py",
-        "sha256": "7829c0c907532eeddf7c64df1787e7755bd40cf1c3ef745e991f4de682414a4d"
+        "sha256": "088f3508f57592e23049713c53ec4dbbe00dba83ce2fe83bef96a6e98a3aed17"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.4,
+        "lines": 272,
+        "size_kb": 13.6,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -1747,11 +1747,11 @@
         "path": "agents/@cat-agent-skills/grab_my_files_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/grab_my_files_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/grab_my_files_agent.py",
-        "sha256": "87306cef061485d897f062adf3691db5cd71059a53cae8f107662a09c353b298"
+        "sha256": "4e061e2a8f91902cfcee4405227ad8e5b37c9e36652786af4f49858348569b10"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.3,
+        "lines": 272,
+        "size_kb": 13.5,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -1787,11 +1787,11 @@
         "path": "agents/@cat-agent-skills/idea_refiner_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/idea_refiner_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/idea_refiner_agent.py",
-        "sha256": "e738ccce46e81b957aee2b02fb6e92e0c6f7a007f8d264a0539158190464d5d4"
+        "sha256": "48843aa159ca7a02aebbc259496476dc6c4e7aeb87efc227372c9fd55711cd84"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.5,
+        "lines": 272,
+        "size_kb": 13.7,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -1829,11 +1829,11 @@
         "path": "agents/@cat-agent-skills/institutional_knowledge_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/institutional_knowledge_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/institutional_knowledge_agent.py",
-        "sha256": "dea44d1c2bf0f7803a9848d3d09ce9e461afd0b5dad71a53f21c4e8f374a544b"
+        "sha256": "489ff33a6d36e72d27f064145f456dd7ae0a8cc8194bfbc704bd650b013ea9c7"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.6,
+        "lines": 272,
+        "size_kb": 13.8,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -1869,11 +1869,11 @@
         "path": "agents/@cat-agent-skills/iterative_file_editing_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/iterative_file_editing_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/iterative_file_editing_agent.py",
-        "sha256": "a4d257098864c459b987e5f2d613b74b9ce2dfca94886c34306fbb4869d073db"
+        "sha256": "2250fc38fc33af9fc658a7a03db2db27ddcde3a4f9263e061f0a01561369a12e"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.7,
+        "lines": 272,
+        "size_kb": 13.9,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -1912,11 +1912,11 @@
         "path": "agents/@cat-agent-skills/lab_column_mapper_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/lab_column_mapper_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/lab_column_mapper_agent.py",
-        "sha256": "914d0b5db16447f3e2a56c419e77f313284b3b6100129f4ee95beafda594537c"
+        "sha256": "0287bd0110c25b87219dd922e473ed65e8c5fec0e6ef39071b21a2d0aa8239d7"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.9,
+        "lines": 272,
+        "size_kb": 14.1,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -1952,11 +1952,11 @@
         "path": "agents/@cat-agent-skills/linkedin_content_system_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/linkedin_content_system_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/linkedin_content_system_agent.py",
-        "sha256": "8f2cf6fa8bde17f9ba6a01d54864ee5b1c02c560ece7c7488862e58cb7a441e7"
+        "sha256": "354dcb11218d125b0d047e466c38e3923af74d37dfc7bcd9a47de2e742b84fab"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.2,
+        "lines": 272,
+        "size_kb": 13.5,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -1991,11 +1991,11 @@
         "path": "agents/@cat-agent-skills/linkedin_content_writer_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/linkedin_content_writer_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/linkedin_content_writer_agent.py",
-        "sha256": "0cd18fa07894aca3d64e11c86ed0a6d8eff173f27962ee6a8897dd2afff2c6b2"
+        "sha256": "a6d7fa21211ae1f4b734b11aded5d0278fb3c47fd78e3c763bf630ebaacf691f"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.2,
+        "lines": 272,
+        "size_kb": 13.5,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -2034,11 +2034,11 @@
         "path": "agents/@cat-agent-skills/mct_excellence_iq_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/mct_excellence_iq_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/mct_excellence_iq_agent.py",
-        "sha256": "1212f8be9121002c644caf233cc50066c674863d108d1b5111a4768d38e5d5ba"
+        "sha256": "5e72826d7dd23ae3dcbfa497f3d675289e23afbf850393f02b749d5e46912e14"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.8,
+        "lines": 272,
+        "size_kb": 14.0,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -2076,11 +2076,11 @@
         "path": "agents/@cat-agent-skills/meeting_analyzer_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/meeting_analyzer_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/meeting_analyzer_agent.py",
-        "sha256": "cff073328a4f633a926aca3452f228aa971695a532761e72af7a40d99c3f14cd"
+        "sha256": "9b13ab416edb7d4f7013b1e210c393170b136d2b21efd1b02702ef7abccfc95d"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.7,
+        "lines": 272,
+        "size_kb": 13.9,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -2119,11 +2119,11 @@
         "path": "agents/@cat-agent-skills/microsoft_ai_platform_advisor_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/microsoft_ai_platform_advisor_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/microsoft_ai_platform_advisor_agent.py",
-        "sha256": "2a51178d9d3362113c7b11eecdb5b13b9ef1fc5e30fd699dea41b19f12f3f82f"
+        "sha256": "7f2dc23f9d0ed9d385011b60976185e5cb7f1869b13f07b4f02e7dec0e229e38"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.8,
+        "lines": 272,
+        "size_kb": 14.0,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -2162,11 +2162,11 @@
         "path": "agents/@cat-agent-skills/monte_carlo_analysis_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/monte_carlo_analysis_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/monte_carlo_analysis_agent.py",
-        "sha256": "d859c727b6e268c23f6f7f423d0bc639d26deaef4653339360369ae84fae43e9"
+        "sha256": "f49b373bef4d20968b986d891cefaaffae7ff569a1388820214f144147ed06d5"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.4,
+        "lines": 272,
+        "size_kb": 13.6,
         "added_at": "2026-08-11T09:43:05Z"
       }
     },
@@ -2203,11 +2203,11 @@
         "path": "agents/@cat-agent-skills/own_voice_builder_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/own_voice_builder_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/own_voice_builder_agent.py",
-        "sha256": "e93e7c7eaf21c72cb54ae3b66789bc10826ea31a644041608de32228d84a5ee5"
+        "sha256": "119badda228da2db2f7f2f54e60355d7fa9a424acd2f954acb659a9e41b4b498"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.4,
+        "lines": 272,
+        "size_kb": 13.6,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -2244,11 +2244,11 @@
         "path": "agents/@cat-agent-skills/pattern_radar_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/pattern_radar_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/pattern_radar_agent.py",
-        "sha256": "9930229a7779137b593687d7660122e4af578d169583fbe1c7cd891c624ac443"
+        "sha256": "90a634b339d0eba2c582866b47bb51b2256d8ec11182e3503bebd5486dbe1d1b"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.3,
+        "lines": 272,
+        "size_kb": 13.5,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -2285,11 +2285,11 @@
         "path": "agents/@cat-agent-skills/pattern_radar_automation_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/pattern_radar_automation_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/pattern_radar_automation_agent.py",
-        "sha256": "ab2782b399f23ea2a6097225af0525071d5d663d639f77cd09aef47502710bad"
+        "sha256": "319cb185009cc709612e02345f0c748a7e79856f0213477ae666fd0287f20ad2"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.6,
+        "lines": 272,
+        "size_kb": 13.8,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -2325,11 +2325,11 @@
         "path": "agents/@cat-agent-skills/persona_reaction_panel_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/persona_reaction_panel_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/persona_reaction_panel_agent.py",
-        "sha256": "adb83b8e6e07fe792cd7d5f581885ca1a6ada5be3413e82fe4a4620520596f53"
+        "sha256": "df0ee4b0cb412b509cf0dd8f9eb98c6373665213472e3b933a078379eab7b0f7"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.7,
+        "lines": 272,
+        "size_kb": 13.9,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -2365,11 +2365,11 @@
         "path": "agents/@cat-agent-skills/pov_line_generator_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/pov_line_generator_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/pov_line_generator_agent.py",
-        "sha256": "cbe57f8ea3671d17ab8daec288c8f57ce7641a9c070570cc3fb0e36ade9117d8"
+        "sha256": "a44620f4c73e4333235c8caf48c5f63607e423bd181878e3a813b3c995c1e3d0"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.2,
+        "lines": 272,
+        "size_kb": 13.4,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -2406,11 +2406,11 @@
         "path": "agents/@cat-agent-skills/power_bi_model_review_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/power_bi_model_review_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/power_bi_model_review_agent.py",
-        "sha256": "e64985886d803c3a693e66c6c88de9e55e8272a0255c7f5e47df71428d507619"
+        "sha256": "d2a0cd620bbd24235f28f89f5f7fcdb1ebf7791ea5aaba31cf09e001caf52e86"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.7,
+        "lines": 272,
+        "size_kb": 13.9,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -2445,11 +2445,11 @@
         "path": "agents/@cat-agent-skills/powerpoint_deck_designer_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/powerpoint_deck_designer_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/powerpoint_deck_designer_agent.py",
-        "sha256": "9cac059a7de8f0fdec2dc6744e1bcee1a2b344cf30fa5e31763619598e6298ea"
+        "sha256": "b9c8aa7b2f3052164205c19ea8e9ca9271e45709807145a51465b9618f906336"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.7,
+        "lines": 272,
+        "size_kb": 13.9,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -2485,11 +2485,11 @@
         "path": "agents/@cat-agent-skills/presentation_talk_track_builder_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/presentation_talk_track_builder_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/presentation_talk_track_builder_agent.py",
-        "sha256": "461da3b8ecd91d4ae5cc1ae9bc856fda9995910e9ab1048863a1b4435f9c04a0"
+        "sha256": "f164a6beb6d907f4b605378966693ea50532a14d39c7bb7d8b1c5a66e65a2794"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.7,
+        "lines": 272,
+        "size_kb": 13.9,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -2525,11 +2525,11 @@
         "path": "agents/@cat-agent-skills/process_sop_architect_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/process_sop_architect_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/process_sop_architect_agent.py",
-        "sha256": "174c35849b502c0837ad6690e7045929d441db09a00f385fe55e768f99c81a83"
+        "sha256": "c3e86bfb91394e7c5d71411fab845e334b0ee2dd85a93e1fbaad9fe40ba07bc4"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.3,
+        "lines": 272,
+        "size_kb": 13.5,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -2562,11 +2562,11 @@
         "path": "agents/@cat-agent-skills/redlining_content_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/redlining_content_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/redlining_content_agent.py",
-        "sha256": "28f933da117e15feeca641c67a251548a586847b5641189c1780a8633db5b5f8"
+        "sha256": "23f87285631370ceeebed84404c33b157dde7837d12fcffb70a243232f687688"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.1,
+        "lines": 272,
+        "size_kb": 13.3,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -2602,11 +2602,11 @@
         "path": "agents/@cat-agent-skills/rich_html_presentation_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/rich_html_presentation_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/rich_html_presentation_agent.py",
-        "sha256": "f8f6f22899b994c7047f09873a6508f5e4a0aad70f5551620130f1793d8bfdb4"
+        "sha256": "840d0228ff9167063d5c04517549c9a9b64c22fa85f9e8a8da393481809fb956"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.3,
+        "lines": 272,
+        "size_kb": 13.5,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -2645,11 +2645,11 @@
         "path": "agents/@cat-agent-skills/route_map_visualizer_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/route_map_visualizer_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/route_map_visualizer_agent.py",
-        "sha256": "1b02f419c31f24a0b8e108a23abe9a6c0007030ef20d5d10c1833c293035080c"
+        "sha256": "2f00ce5f28aaef338a2dcf9c25b34c562518cbee5d91d999961a8254e22a5115"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.3,
+        "lines": 272,
+        "size_kb": 13.5,
         "added_at": "2026-08-17T18:03:09-04:00"
       }
     },
@@ -2684,11 +2684,11 @@
         "path": "agents/@cat-agent-skills/scrollytelling_data_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/scrollytelling_data_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/scrollytelling_data_agent.py",
-        "sha256": "a88c23f9363dafc9f717b4b7d41fbb028c2b909e8dd95bf7fed54e962955dcd5"
+        "sha256": "6f807e260a523b863fa68d29d0842a44b896e321b4ead0fe36cb7bb773d713d4"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.0,
+        "lines": 272,
+        "size_kb": 13.2,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -2724,11 +2724,11 @@
         "path": "agents/@cat-agent-skills/sharepoint_list_formatter_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/sharepoint_list_formatter_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/sharepoint_list_formatter_agent.py",
-        "sha256": "9d5aac2ba3712657aade17d943de5d4935e122c800e3919e3c9202506154441b"
+        "sha256": "8d46667639bcef5592415180941620139a0b843fe27c8f605456fb68a5316ced"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.3,
+        "lines": 272,
+        "size_kb": 13.6,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -2764,11 +2764,11 @@
         "path": "agents/@cat-agent-skills/skill_authoring_coach_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/skill_authoring_coach_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/skill_authoring_coach_agent.py",
-        "sha256": "b367fbfdfd349e0947f87666afc5f82890b1500c3e600fda8d63b669fe7695f8"
+        "sha256": "d87d562cb6ff69f03c5fbe70ec218c4a216e2f3a22cb4aa2055fdc360addc454"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.3,
+        "lines": 272,
+        "size_kb": 13.5,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -2807,11 +2807,11 @@
         "path": "agents/@cat-agent-skills/stoic_negotiator_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/stoic_negotiator_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/stoic_negotiator_agent.py",
-        "sha256": "c39474c15d45f3a477eb894f916d8f5fb8374755f6327fada1a1d2243ac4dfd1"
+        "sha256": "c74fb9856ed7018e68218cddcd1930ac99ccd995855c5106c6feb4cab241d398"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.7,
+        "lines": 272,
+        "size_kb": 13.9,
         "added_at": "2026-08-11T09:43:05Z"
       }
     },
@@ -2848,11 +2848,11 @@
         "path": "agents/@cat-agent-skills/style_analyzer_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/style_analyzer_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/style_analyzer_agent.py",
-        "sha256": "640028ca7ac28a8544a35fd8371ecdd351608fe501ca4b59525f116e1e3c0b7c"
+        "sha256": "1363ed8c46022859bf6dc1a2b7e0d09752f35890797cdc99d9530e2af2965880"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.4,
+        "lines": 272,
+        "size_kb": 13.6,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -2890,11 +2890,11 @@
         "path": "agents/@cat-agent-skills/tool_tracer_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/tool_tracer_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/tool_tracer_agent.py",
-        "sha256": "94d1c0edc220629574391ccfba7db23a74bcced8cd5a12e608f317dbfae87151"
+        "sha256": "795258346e89a87dcd4972fa952b9f58ed8e728ee53155c36f30dc0ff307ef89"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.3,
+        "lines": 272,
+        "size_kb": 13.4,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -2931,11 +2931,11 @@
         "path": "agents/@cat-agent-skills/travel_cost_estimator_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/travel_cost_estimator_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/travel_cost_estimator_agent.py",
-        "sha256": "9f4e84c8f1066bcc5bf9698772221e2591e0d94f8b680fc9f47dd4c8320c7da1"
+        "sha256": "183b5866237d0c907e5fea7feb4e9813add71493a2cf7499a273dbcd08e9989a"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.7,
+        "lines": 272,
+        "size_kb": 13.9,
         "added_at": "2026-08-11T09:43:05Z"
       }
     },
@@ -2970,11 +2970,11 @@
         "path": "agents/@cat-agent-skills/vacation_urgent_forwarder_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/vacation_urgent_forwarder_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/vacation_urgent_forwarder_agent.py",
-        "sha256": "533f53f2a72c2b74cc2cd7496823a3c4d5ae60309c4774d192b6fd7b39c2bf84"
+        "sha256": "c4a04ec663c7617f56de6dfe01f5dff6d5ee25a69d631c6e6d25f66d513f1024"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.5,
+        "lines": 272,
+        "size_kb": 13.7,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -3013,11 +3013,11 @@
         "path": "agents/@cat-agent-skills/wcag_power_platform_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/wcag_power_platform_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/wcag_power_platform_agent.py",
-        "sha256": "37075dfcfef21add8a31629f5621e192de0f1738315b147f734d0f645cf5dff7"
+        "sha256": "fcd22c913fc835ae83ff41a7ab8e9bd01ea977e290a401462651c622c0ae156c"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.6,
+        "lines": 272,
+        "size_kb": 13.8,
         "added_at": "2026-08-17T18:03:09-04:00"
       }
     },
@@ -3052,11 +3052,11 @@
         "path": "agents/@cat-agent-skills/what_to_use_when_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/what_to_use_when_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/what_to_use_when_agent.py",
-        "sha256": "e80b02d38ecd766df8a02832be60359de48e852c670e6be8764e72cf25538337"
+        "sha256": "de37690c140876aa9124ffc85a7712d4c93d0a5423e25cc6814416fcaba0e993"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.4,
+        "lines": 272,
+        "size_kb": 13.5,
         "added_at": "2026-08-11T09:43:05Z"
       }
     },
@@ -3094,11 +3094,11 @@
         "path": "agents/@cat-agent-skills/whiteboard_to_infographic_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/whiteboard_to_infographic_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/whiteboard_to_infographic_agent.py",
-        "sha256": "11818cb6790bb3fa12ce584fccfe160c66297eecba69ae252c3de296a25c47a8"
+        "sha256": "0d39d06f2819bbe36cb4e09d6d08401cba0232f23a379f9af09035cb7ba4af4b"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.4,
+        "lines": 272,
+        "size_kb": 13.6,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -3136,11 +3136,11 @@
         "path": "agents/@cat-agent-skills/wikipedia_human_style_writing_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/wikipedia_human_style_writing_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/wikipedia_human_style_writing_agent.py",
-        "sha256": "fd27623e4e77260d8a51a01f90010f62888a7b07f3eb2d4dbd7363d5ccf6e8bd"
+        "sha256": "ec40d454b5af83d585e82045cc3a98514cf04def8ec70f25a3e94f819abe8bf2"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.4,
+        "lines": 272,
+        "size_kb": 13.6,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -3178,11 +3178,11 @@
         "path": "agents/@cat-agent-skills/work_brief_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/work_brief_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/work_brief_agent.py",
-        "sha256": "fc84cf7ea8d9f0a140a10a5f7199b9267aafff543fe973e715b2f8f476591f0a"
+        "sha256": "3b957309d4ac4c7c604387d0814fd917c04feedd0f453bd24b110ea15152f1d2"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.1,
+        "lines": 272,
+        "size_kb": 13.3,
         "added_at": "2026-07-31T22:43:16-04:00"
       }
     },
@@ -3219,11 +3219,11 @@
         "path": "agents/@cat-agent-skills/work_iq_signalboard_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/work_iq_signalboard_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@cat-agent-skills/work_iq_signalboard_agent.py",
-        "sha256": "aed7e0f4e887eb61a85f9bf095e590243f3d0b80feea9403a3c7ef8ec3227c8f"
+        "sha256": "5c8656fd0619330356b42a88ac5ec7cdf57ad539fe5f8f82863bfbf9618e1a43"
       },
       "stats": {
-        "lines": 262,
-        "size_kb": 12.4,
+        "lines": 272,
+        "size_kb": 13.5,
         "added_at": "2026-08-17T18:03:09-04:00"
       }
     },
@@ -3258,11 +3258,11 @@
         "path": "agents/@discreetRappers/agent_generator_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/agent_generator_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@discreetRappers/agent_generator_agent.py",
-        "sha256": "11b58f135dce6bd67bf595c7d5a31576e695a768bf6dba4d46709427e209e61c"
+        "sha256": "396da3af57b237a0b36dcca2adb1520220be5b65813dd89d09ae59d3d26a9aa2"
       },
       "stats": {
-        "lines": 1257,
-        "size_kb": 48.0,
+        "lines": 1267,
+        "size_kb": 49.2,
         "added_at": "2026-04-06T16:39:03-04:00"
       }
     },
@@ -3300,11 +3300,11 @@
         "path": "agents/@discreetRappers/agent_transpiler_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/agent_transpiler_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@discreetRappers/agent_transpiler_agent.py",
-        "sha256": "5ae4e24760415ab5d1ad427c6a2f52518d4919d2811bee13914e65f3b159210c"
+        "sha256": "312593bc75ba9d3314aa20c8745986b1fe9d99569fbd35ea0a2723d2815e3ec5"
       },
       "stats": {
-        "lines": 1035,
-        "size_kb": 39.2,
+        "lines": 1045,
+        "size_kb": 40.3,
         "added_at": "2026-04-06T16:39:03-04:00"
       }
     },
@@ -3340,11 +3340,11 @@
         "path": "agents/@discreetRappers/architecture_diagram_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/architecture_diagram_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@discreetRappers/architecture_diagram_agent.py",
-        "sha256": "97485b27444625b332f52f9df07e46ed70d6a24dd250eba01bb78660056c36ba"
+        "sha256": "d5cac1baac38b585dead94b556dd7c6a5feb8772944bca8b6d88be70985161be"
       },
       "stats": {
-        "lines": 996,
-        "size_kb": 38.4,
+        "lines": 1006,
+        "size_kb": 39.6,
         "added_at": "2026-04-06T16:39:03-04:00"
       }
     },
@@ -3384,11 +3384,11 @@
         "path": "agents/@discreetRappers/copilot_studio_transpiler_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/copilot_studio_transpiler_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@discreetRappers/copilot_studio_transpiler_agent.py",
-        "sha256": "acccbacba2be5acb4aa7583abb1c85aee291c5205f4d7915d6eeafc579c86934"
+        "sha256": "ee87bb1000f7f33a408097d912f3cd41946d0feb5ce40e7abe37f1938c8acefb"
       },
       "stats": {
-        "lines": 2154,
-        "size_kb": 88.5,
+        "lines": 2164,
+        "size_kb": 89.7,
         "added_at": "2026-04-06T16:39:03-04:00"
       }
     },
@@ -3428,11 +3428,11 @@
         "path": "agents/@discreetRappers/demo_script_generator_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/demo_script_generator_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@discreetRappers/demo_script_generator_agent.py",
-        "sha256": "8c3f230c67c330e7334e103653e34b810fbbcf2fe2acd120f7806f5f0cf26149"
+        "sha256": "1c4123d0d87b13fbc12e728e4b6f0e48d73ab4484ba277c667fecf11f1202f5d"
       },
       "stats": {
-        "lines": 1201,
-        "size_kb": 58.4,
+        "lines": 1211,
+        "size_kb": 59.6,
         "added_at": "2026-04-06T16:39:03-04:00"
       }
     },
@@ -3467,11 +3467,11 @@
         "path": "agents/@discreetRappers/email_drafting_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/email_drafting_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@discreetRappers/email_drafting_agent.py",
-        "sha256": "b068d41da7ee04fa27d8ff0b267977914aab1eae186017ad47572e2b2c6cb399"
+        "sha256": "65ba2c8d5d2817d99fdf6463b1da6e4722a6a627b8b3a77120999bf930fb80e6"
       },
       "stats": {
-        "lines": 149,
-        "size_kb": 6.0,
+        "lines": 159,
+        "size_kb": 7.2,
         "added_at": "2026-04-06T16:39:03-04:00"
       }
     },
@@ -3507,11 +3507,11 @@
         "path": "agents/@discreetRappers/powerpoint_generator_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/powerpoint_generator_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@discreetRappers/powerpoint_generator_agent.py",
-        "sha256": "5a9fc79dfbf2038ba411e2789dc988713389b2219ff5ce721b02d684d88a23f5"
+        "sha256": "e1c71838845673ea756b0fea8afa04d3c9014964423cdaf354547df96af9a7e6"
       },
       "stats": {
-        "lines": 1551,
-        "size_kb": 61.3,
+        "lines": 1561,
+        "size_kb": 62.5,
         "added_at": "2026-04-06T16:39:03-04:00"
       }
     },
@@ -3545,11 +3545,11 @@
         "path": "agents/@discreetRappers/project_tracker_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/project_tracker_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@discreetRappers/project_tracker_agent.py",
-        "sha256": "b9df9cb9d4f0743092aae62cabc5a156bd6b7f73fd773fce14584278f1c56fa4"
+        "sha256": "6ce05fe89b9c16b52949a4e36991f5d9536cb7981aa891d93b4fc53419bd4849"
       },
       "stats": {
-        "lines": 894,
-        "size_kb": 39.2,
+        "lines": 904,
+        "size_kb": 40.3,
         "added_at": "2026-04-06T16:39:03-04:00"
       }
     },
@@ -3589,11 +3589,11 @@
         "path": "agents/@discreetRappers/rapp_pipeline_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/rapp_pipeline_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@discreetRappers/rapp_pipeline_agent.py",
-        "sha256": "feb4bd1dfa316f9aaa83bea4e4c220084794d1207ebee2ba4c3d823aa6bc7b44"
+        "sha256": "a5dc861857f4108578603c1ce6a547ee766c55cd2eb8b0bd5f6cfd1378954089"
       },
       "stats": {
-        "lines": 2999,
-        "size_kb": 121.6,
+        "lines": 3009,
+        "size_kb": 122.7,
         "added_at": "2026-04-06T16:39:03-04:00"
       }
     },
@@ -3629,11 +3629,11 @@
         "path": "agents/@discreetRappers/scripted_demo_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/scripted_demo_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@discreetRappers/scripted_demo_agent.py",
-        "sha256": "feb243a6c7bbd7bf0cb329b0a8c60a6f6d88949e1893f89ccaa1cf2da31a80bc"
+        "sha256": "04e240a1092a8e71d446ab7662792b69cbe54e48d78fa46ec76b4ff19cb78df4"
       },
       "stats": {
-        "lines": 1301,
-        "size_kb": 54.2,
+        "lines": 1311,
+        "size_kb": 55.4,
         "added_at": "2026-04-06T16:39:03-04:00"
       }
     },
@@ -3669,11 +3669,11 @@
         "path": "agents/@howardh/cardsmith_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/cardsmith_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@howardh/cardsmith_agent.py",
-        "sha256": "d7389ce10549693f4f97098379ca86c4ddbb22c9b4b93f891c99ae2f1aa0d4d4"
+        "sha256": "ecbabf0ca4b13f8c98558c9f773d95291d0c4c41e61604667aa32a901105491b"
       },
       "stats": {
-        "lines": 318,
-        "size_kb": 32.1,
+        "lines": 328,
+        "size_kb": 33.3,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },
@@ -3711,11 +3711,11 @@
         "path": "agents/@howardh/chief_of_staff_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/chief_of_staff_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@howardh/chief_of_staff_agent.py",
-        "sha256": "5d904f34d63faa2271e66a6d1c6f033c269136c840a1bd4d4dcc57875bbf8354"
+        "sha256": "fedbb91cc50aca1912b9b29727b385cf6a4e06507e808d67ccb690a8eb4df9bc"
       },
       "stats": {
-        "lines": 683,
-        "size_kb": 32.5,
+        "lines": 693,
+        "size_kb": 33.6,
         "added_at": "2026-04-28T17:29:54-04:00"
       }
     },
@@ -3752,11 +3752,11 @@
         "path": "agents/@howardh/markdown_to_slides_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/markdown_to_slides_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@howardh/markdown_to_slides_agent.py",
-        "sha256": "ab0a2046a0a241148fdae0bfb68ce8f4f16317e96cfe9beabb0f285aaded07b7"
+        "sha256": "b895958c9b7f074a4a51ca5456c3aa3b3e54061291f6ea4fe19d5eb4ae1c95cb"
       },
       "stats": {
-        "lines": 236,
-        "size_kb": 7.9,
+        "lines": 246,
+        "size_kb": 9.1,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },
@@ -3795,11 +3795,11 @@
         "path": "agents/@howardh/prompt_to_video_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/prompt_to_video_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@howardh/prompt_to_video_agent.py",
-        "sha256": "3bcdd845998ff84158cc2c2ab54fefcb54b0e3a6106fd4bfb8e59252b58694c6"
+        "sha256": "ed75b1d6e1bedafee181b2eefc0a1e98a64533df1c7067383cc10450bea4c83f"
       },
       "stats": {
-        "lines": 792,
-        "size_kb": 26.3,
+        "lines": 802,
+        "size_kb": 27.4,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },
@@ -3838,11 +3838,11 @@
         "path": "agents/@howardh/recon_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/recon_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@howardh/recon_agent.py",
-        "sha256": "7c13e82c07ce373aba2729caccfeab00ae44e5c80ef46c8de34e4798361f6f06"
+        "sha256": "3d26f7412310635f9b35e26a324ecfdb1af86ea26b0069e753d95a76d4c9d089"
       },
       "stats": {
-        "lines": 742,
-        "size_kb": 32.2,
+        "lines": 752,
+        "size_kb": 33.4,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },
@@ -3879,11 +3879,11 @@
         "path": "agents/@howardh/training_quest_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/training_quest_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@howardh/training_quest_agent.py",
-        "sha256": "fc213fa839cf3f39312ba03c31e47e55af61dd636bbcd671d35ee48383c78ab5"
+        "sha256": "a583ada09fa44f0d3d88962fea0826ae5877a09dd8639c908e6325c04cc0c36c"
       },
       "stats": {
-        "lines": 689,
-        "size_kb": 45.6,
+        "lines": 699,
+        "size_kb": 46.7,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },
@@ -3922,11 +3922,11 @@
         "path": "agents/@howardh/tuftelove_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/tuftelove_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@howardh/tuftelove_agent.py",
-        "sha256": "f5bba7ff967f166255b5220496ae7e86cb5f636730cb01a43abbf32113ebd46d"
+        "sha256": "fe047c604edf53eac949ec02837dac4c6b32cba0db69d3d99119dbc3e50caf14"
       },
       "stats": {
-        "lines": 512,
-        "size_kb": 28.3,
+        "lines": 522,
+        "size_kb": 29.5,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },
@@ -3968,11 +3968,11 @@
         "path": "agents/@howardh/vaultmind_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/vaultmind_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@howardh/vaultmind_agent.py",
-        "sha256": "e669b4fb17fde143672f311dd544159d611928b298587a90f03f5f9f068eaafe"
+        "sha256": "6e2af2a79f6dcb1ba6fbf2ea9331d5f8a571b9842efa39727f4605333a3a846a"
       },
       "stats": {
-        "lines": 3257,
-        "size_kb": 146.1,
+        "lines": 3267,
+        "size_kb": 147.3,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },
@@ -4010,11 +4010,11 @@
         "path": "agents/@kody-w/agent_team_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/agent_team_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/agent_team_agent.py",
-        "sha256": "0ed520946386fb7d52aa8f9af1774f2656f4e9bc33d7ff911737e6f67b498332"
+        "sha256": "60321dac590b9a80b2bcf85de9dea49e1617b00a6dbed28f4dcaf69d06ca40f4"
       },
       "stats": {
-        "lines": 390,
-        "size_kb": 15.8,
+        "lines": 400,
+        "size_kb": 16.9,
         "added_at": "2026-05-05T10:49:27-04:00"
       }
     },
@@ -4051,11 +4051,11 @@
         "path": "agents/@kody-w/agent_workbench_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/agent_workbench_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/agent_workbench_agent.py",
-        "sha256": "00b19b2e98b854333dbf7d89d74980f3e54c4f5753f31ac9039cf8f8ed30e2b4"
+        "sha256": "c0a0329cdb06728062ac11043d8989c1c1262c33f69f0afdf9d65e87f0d0575c"
       },
       "stats": {
-        "lines": 737,
-        "size_kb": 29.2,
+        "lines": 747,
+        "size_kb": 30.3,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },
@@ -4091,11 +4091,11 @@
         "path": "agents/@kody-w/arena_compete_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/arena_compete_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/arena_compete_agent.py",
-        "sha256": "cb5fdc2203b8127d5f174fbe9773c1f8f24e01dcdfb7162fb0a17ad40a2239db"
+        "sha256": "3e5333752068fae52cdd93dafa259c357d697dc8af1ec7707f2d2f25eb556b10"
       },
       "stats": {
-        "lines": 227,
-        "size_kb": 13.3,
+        "lines": 237,
+        "size_kb": 14.5,
         "added_at": "2026-06-20T19:39:59-04:00"
       }
     },
@@ -4132,11 +4132,11 @@
         "path": "agents/@kody-w/art_generator_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/art_generator_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/art_generator_agent.py",
-        "sha256": "abf32aa1c916a7c4b1606e434d3468e2f75c4bd725eafc304f022aeaae489712"
+        "sha256": "bc54973a21c902f273d1340391840ab8b1025232dadcd17175d0c1a2a77fd34c"
       },
       "stats": {
-        "lines": 371,
-        "size_kb": 11.2,
+        "lines": 381,
+        "size_kb": 12.4,
         "added_at": "2026-08-18T03:01:53Z"
       }
     },
@@ -4174,11 +4174,11 @@
         "path": "agents/@kody-w/bakeoff_factory_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/bakeoff_factory_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/bakeoff_factory_agent.py",
-        "sha256": "461620d239ee7c63430f5a5cd4412429d72a049977d5ff2beb04d0ba5e38b786"
+        "sha256": "61263e01de638d1c43e7ef6af8352ba219cf101d7b109118c36aaca34b2f502b"
       },
       "stats": {
-        "lines": 860,
-        "size_kb": 36.2,
+        "lines": 870,
+        "size_kb": 37.4,
         "added_at": "2026-05-16T16:03:13-04:00"
       }
     },
@@ -4215,11 +4215,11 @@
         "path": "agents/@kody-w/ecosystem-grail-stack/bond_rhythm_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/bond_rhythm_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/ecosystem-grail-stack/bond_rhythm_agent.py",
-        "sha256": "88bb285bbf26b68fee053d24bf70c08ae1ec42e4c3a03b9afe7de2c404a5a219"
+        "sha256": "7bfa5d0afca6919cedff2409abf22fdd8a715525de81426e68025429ef7cb585"
       },
       "stats": {
-        "lines": 368,
-        "size_kb": 15.1,
+        "lines": 378,
+        "size_kb": 16.3,
         "added_at": "2026-05-09T15:25:16-04:00"
       }
     },
@@ -4256,11 +4256,11 @@
         "path": "agents/@kody-w/buzzsaw.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/buzzsaw.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/buzzsaw.py",
-        "sha256": "68ffa820bc89cd8966f9929725bd9befd616ac26ad26867b828dc790b9cf13bb"
+        "sha256": "b14a4f23984fbc61acc1bde61ae592e16e8732ba287a78134d71361130011663"
       },
       "stats": {
-        "lines": 299,
-        "size_kb": 15.4,
+        "lines": 309,
+        "size_kb": 16.5,
         "added_at": "2026-08-02T22:38:06-04:00"
       }
     },
@@ -4297,11 +4297,11 @@
         "path": "agents/@kody-w/ecosystem-grail-stack/chain_composer_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/chain_composer_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/ecosystem-grail-stack/chain_composer_agent.py",
-        "sha256": "5c3eec3b482e9a812b963cfb7570175ec73fe1cec384269a9c9a0a9866347d18"
+        "sha256": "2a6fe3cccb8c2ae3cb649def409dcbf714fea0e7760bbf0e3a95c989557f84a4"
       },
       "stats": {
-        "lines": 409,
-        "size_kb": 16.9,
+        "lines": 419,
+        "size_kb": 18.1,
         "added_at": "2026-05-09T15:25:18-04:00"
       }
     },
@@ -4337,11 +4337,11 @@
         "path": "agents/@kody-w/commons_life_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/commons_life_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/commons_life_agent.py",
-        "sha256": "1f097fe46efeb8c2298fde16d0469016cb62bb59b4448d954bb6757fe53f27bc"
+        "sha256": "4d130862e28b92a3a3519a8b823905bffb90f35678565bb1743a714f20d0da70"
       },
       "stats": {
-        "lines": 321,
-        "size_kb": 21.1,
+        "lines": 331,
+        "size_kb": 22.2,
         "added_at": "2026-06-20T19:05:34-04:00"
       }
     },
@@ -4377,11 +4377,11 @@
         "path": "agents/@kody-w/commons_show_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/commons_show_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/commons_show_agent.py",
-        "sha256": "c7b97c5fbe3611f175f3812831450a5e559a4fcee17cb46fdad27b30d26a49ee"
+        "sha256": "9287c090fce8d7a702aaddcb1223ea739ee2ac8988048239b7f78d16e8d94a0f"
       },
       "stats": {
-        "lines": 342,
-        "size_kb": 20.3,
+        "lines": 352,
+        "size_kb": 21.5,
         "added_at": "2026-06-20T18:41:00-04:00"
       }
     },
@@ -4418,11 +4418,11 @@
         "path": "agents/@kody-w/connected_solution_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/connected_solution_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/connected_solution_agent.py",
-        "sha256": "23c5edf7914db69119e2463a528c4d6a2dee964b94f5f6b90f9dffbd1d58c9af"
+        "sha256": "2653cc11fe301bc460b4fd94cffb59bfc854f1d88fb5f35a363e3b4aba52e6ce"
       },
       "stats": {
-        "lines": 2739,
-        "size_kb": 127.8,
+        "lines": 2749,
+        "size_kb": 129.0,
         "added_at": "2026-06-22T21:04:42-04:00"
       }
     },
@@ -4457,11 +4457,11 @@
         "path": "agents/@kody-w/context_memory_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/context_memory_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/context_memory_agent.py",
-        "sha256": "611d0957274b1f584acd9f763bb789b616eca4c1e4297665064bfeef9ed37e7a"
+        "sha256": "66c3a78c7dd9d6705e49ea4e6505103ddf5666e30ec4054874056bd05424d081"
       },
       "stats": {
-        "lines": 183,
-        "size_kb": 8.4,
+        "lines": 193,
+        "size_kb": 9.6,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },
@@ -4508,11 +4508,11 @@
         "path": "agents/@kody-w/copilot_studio_deploy_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_deploy_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/copilot_studio_deploy_agent.py",
-        "sha256": "837ba4ee8c900514f8e5951e1a230663ba5120a8cc7a62d549391e720b21a05f"
+        "sha256": "9c15148dcff8ac706a3a49a941dc42e3b915a8e9cb0a6b8a147b0a3a60308153"
       },
       "stats": {
-        "lines": 4724,
-        "size_kb": 442.8,
+        "lines": 4734,
+        "size_kb": 444.0,
         "added_at": "2026-06-07T20:27:02-04:00"
       }
     },
@@ -4556,11 +4556,11 @@
         "path": "agents/@kody-w/copilot_studio_forge_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_forge_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/copilot_studio_forge_agent.py",
-        "sha256": "b74dc71864503e47340899674b0e8b9c17f4e8fc617298ed83e5f148bf87e709"
+        "sha256": "f30e91e542090161fd2b559f4565c5c63b0fd93cb51f9a208256eb6c2d689667"
       },
       "stats": {
-        "lines": 5338,
-        "size_kb": 218.9,
+        "lines": 5348,
+        "size_kb": 220.1,
         "added_at": "2026-07-07T00:52:21Z"
       }
     },
@@ -4596,11 +4596,11 @@
         "path": "agents/@kody-w/copilot_studio_parity_deploy_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_parity_deploy_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/copilot_studio_parity_deploy_agent.py",
-        "sha256": "e651d4f65d4cee2243e7c2bbfe35854d8c57aebda7db3a2fbc64a4338591ef14"
+        "sha256": "503f23d3431603a245dd5b43bbe140a986fc626764cbd57e03f481d279794484"
       },
       "stats": {
-        "lines": 7530,
-        "size_kb": 262.5,
+        "lines": 7540,
+        "size_kb": 263.7,
         "added_at": "2026-08-11T17:28:15Z"
       }
     },
@@ -4640,11 +4640,11 @@
         "path": "agents/@kody-w/copilot_studio_probe_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_probe_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/copilot_studio_probe_agent.py",
-        "sha256": "59b3c5cdb2228e333e20ea3ef89c41dac9bb8f12a940b68d591619726d2a0367"
+        "sha256": "6d84b5cefb5d1a032b208555020f96756bba3c6c0790b1d8544abafc868e1a99"
       },
       "stats": {
-        "lines": 153,
-        "size_kb": 7.0,
+        "lines": 163,
+        "size_kb": 8.2,
         "added_at": "2026-07-07T00:32:03Z"
       }
     },
@@ -4680,11 +4680,11 @@
         "path": "agents/@kody-w/double_jump_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/double_jump_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/double_jump_agent.py",
-        "sha256": "a85073b79ec0d416a94d596ac455aa393ed33049aa615b267a5f7ff20a004ab3"
+        "sha256": "eb3e678ca3ca0a1ddb347dbf65218b716a6a78044d03d02f74b9a31a8336948b"
       },
       "stats": {
-        "lines": 213,
-        "size_kb": 12.5,
+        "lines": 223,
+        "size_kb": 13.6,
         "added_at": "2026-06-20T19:46:03-04:00"
       }
     },
@@ -4721,11 +4721,11 @@
         "path": "agents/@kody-w/education_shorts_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/education_shorts_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/education_shorts_agent.py",
-        "sha256": "e8dae3c739c30dd6ea7a3c690a4aa6aaa25cbbfd26ab906d274ec9b520f28715"
+        "sha256": "36711e8da4ce32d9b11fc02c18e925f955ca0588dcc65a5ea08099d1f4233f1f"
       },
       "stats": {
-        "lines": 259,
-        "size_kb": 14.9,
+        "lines": 269,
+        "size_kb": 16.1,
         "added_at": "2026-08-18T18:19:54-04:00"
       }
     },
@@ -4762,11 +4762,11 @@
         "path": "agents/@kody-w/estate_factory_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/estate_factory_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/estate_factory_agent.py",
-        "sha256": "7558023b529e952b58084d09cf0c93c1a8cdea34684302e62e6dba5b0ccbc238"
+        "sha256": "46b070177e96da94f21bacbd45bfb0fa19f01d9aa79af7727bf1ff8aadd8e7b3"
       },
       "stats": {
-        "lines": 934,
-        "size_kb": 37.3,
+        "lines": 944,
+        "size_kb": 38.5,
         "added_at": "2026-05-16T16:30:24-04:00"
       }
     },
@@ -4803,8 +4803,8 @@
         "sha256": ""
       },
       "stats": {
-        "lines": 40,
-        "size_kb": 1.3,
+        "lines": 50,
+        "size_kb": 2.5,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },
@@ -4840,11 +4840,11 @@
         "path": "agents/@kody-w/ez_sharpen_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ez_sharpen_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/ez_sharpen_agent.py",
-        "sha256": "ae232a01c0cee6bf5109635803b5cf99ba215201856d4c830b3b11ae972992e6"
+        "sha256": "066d314a213177a5f0b8b0fac69652e5190b6980e5a6a6ae0a9b51b41d57420c"
       },
       "stats": {
-        "lines": 413,
-        "size_kb": 25.8,
+        "lines": 423,
+        "size_kb": 27.0,
         "added_at": "2026-06-20T18:58:25-04:00"
       }
     },
@@ -4881,11 +4881,11 @@
         "path": "agents/@kody-w/factory_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/factory_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/factory_agent.py",
-        "sha256": "e81878cc359660ac98047c607bea3245cda5967f4725091ded356597309c2b77"
+        "sha256": "72dc8b72531aa6133effb8dc23175b85889d63f7aa2bece4970ddca60792ddbf"
       },
       "stats": {
-        "lines": 495,
-        "size_kb": 18.1,
+        "lines": 505,
+        "size_kb": 19.3,
         "added_at": "2026-08-11T17:32:02Z"
       }
     },
@@ -4919,11 +4919,11 @@
         "path": "agents/@kody-w/first_hour_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/first_hour_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/first_hour_agent.py",
-        "sha256": "61dd52033a67e19c2c88909a379cfd2a855a1c18f76065ecde2bb330a3681997"
+        "sha256": "c9db0320a031fc0801f3fca2d73bf8a1a3d44987e1da95d3758f933a83c46585"
       },
       "stats": {
-        "lines": 86,
-        "size_kb": 3.9,
+        "lines": 96,
+        "size_kb": 5.1,
         "added_at": "2026-10-18T01:10:16-04:00"
       }
     },
@@ -4965,11 +4965,11 @@
         "path": "agents/@kody-w/flight_recorder_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/flight_recorder_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/flight_recorder_agent.py",
-        "sha256": "6a3976cfba0492a585ccab318125caed4ca0820e05dddf4119e98d5f22dea659"
+        "sha256": "f07d76a30266eab0a367c47a6dacf9403cb08cae684c0e02b0252c0cea79da02"
       },
       "stats": {
-        "lines": 536,
-        "size_kb": 22.7,
+        "lines": 546,
+        "size_kb": 23.8,
         "added_at": "2026-06-27T13:28:13-04:00"
       }
     },
@@ -5005,11 +5005,11 @@
         "path": "agents/@kody-w/fragments_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/fragments_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/fragments_agent.py",
-        "sha256": "88e1749ee4ace1f506b6ee9c2c4fa2ce38e33107315f2b35f5919a489956be13"
+        "sha256": "4d13906d0277d672c4b54489527e7fc8042c54ae6a32c2024fec407b0ee6d381"
       },
       "stats": {
-        "lines": 135,
-        "size_kb": 6.7,
+        "lines": 145,
+        "size_kb": 7.9,
         "added_at": "2026-11-03T21:53:43-05:00"
       }
     },
@@ -5048,11 +5048,11 @@
         "path": "agents/@kody-w/full_rapp_leviathan_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/full_rapp_leviathan_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/full_rapp_leviathan_agent.py",
-        "sha256": "78dac24c84eeca02f8e40144562d9ace2dd4da28b8fd7ca8f78b8b075feaad5a"
+        "sha256": "5f9093cc6020d9e24ec906d7dd16483ec159b06b33bb26bfcb9c2f2a1edb3fef"
       },
       "stats": {
-        "lines": 1546,
-        "size_kb": 48.5,
+        "lines": 1556,
+        "size_kb": 49.7,
         "added_at": "2026-08-11T09:43:05Z"
       }
     },
@@ -5088,11 +5088,11 @@
         "path": "agents/@kody-w/git_warehouse_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/git_warehouse_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/git_warehouse_agent.py",
-        "sha256": "2848608c2c13c7ff65f8d434845cb522b4940049c6207d80a604c2da54a57ad2"
+        "sha256": "eb7b05da0183c37da67b7c1a480731cce05da42753401aa4df86581373c307c3"
       },
       "stats": {
-        "lines": 205,
-        "size_kb": 12.0,
+        "lines": 215,
+        "size_kb": 13.1,
         "added_at": "2026-06-20T18:41:00-04:00"
       }
     },
@@ -5127,11 +5127,11 @@
         "path": "agents/@kody-w/github_agent_library_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/github_agent_library_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/github_agent_library_agent.py",
-        "sha256": "7d25b2d553356cfcb2f74921552b984d8e348ab56f20984fcda831eb65336923"
+        "sha256": "b9bd6d0f87082877c37cca17be3a1d5ba873dcf736ce9805538eb8affcfadbab"
       },
       "stats": {
-        "lines": 957,
-        "size_kb": 43.7,
+        "lines": 967,
+        "size_kb": 44.9,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },
@@ -5165,11 +5165,11 @@
         "path": "agents/@kody-w/hello_world_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/hello_world_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/hello_world_agent.py",
-        "sha256": "d2695f70a412909546a49586487a471e6bca9c2d215d0367d440a80473b75bd1"
+        "sha256": "dacc1cacd80777c63efa1e7ea140fca761df3a6f0df5d0bf116748ea30823009"
       },
       "stats": {
-        "lines": 39,
-        "size_kb": 1.2,
+        "lines": 49,
+        "size_kb": 2.4,
         "added_at": "2026-04-06T16:39:03-04:00"
       }
     },
@@ -5206,11 +5206,11 @@
         "path": "agents/@kody-w/hologram_dogg_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/hologram_dogg_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/hologram_dogg_agent.py",
-        "sha256": "d775ce5751134da02ee2d825ef0a74d79192691d3f5f8a3621c13c8bddfd8bf2"
+        "sha256": "d4ad3769e2ef14bdef527072bdda1f2d126905bfbe52f30e74ba72ca953c11ee"
       },
       "stats": {
-        "lines": 225,
-        "size_kb": 8.2,
+        "lines": 235,
+        "size_kb": 9.4,
         "added_at": "2026-08-29T00:44:02Z"
       }
     },
@@ -5251,11 +5251,11 @@
         "path": "agents/@kody-w/host_compat_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/host_compat_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/host_compat_agent.py",
-        "sha256": "a85517d560dcab529e0c4fc1dce80472c27ca85e6620e6202aee695c2f4dfa79"
+        "sha256": "284c111aa88d5588b9873c97f04d44676223ea37a80240a5e7b884bbdc7170c8"
       },
       "stats": {
-        "lines": 1617,
-        "size_kb": 80.7,
+        "lines": 1627,
+        "size_kb": 81.8,
         "added_at": "2026-09-07T19:31:02-04:00"
       }
     },
@@ -5291,11 +5291,11 @@
         "path": "agents/@kody-w/install_rappter_distro_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/install_rappter_distro_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/install_rappter_distro_agent.py",
-        "sha256": "15ee1708f83dc55022bdf74d625b6b443d59f73371cd2f4c68100651c8f001d2"
+        "sha256": "91f2128926d613cc537ff4b3e5327a35b0268d0eabd548a828d5009af956b803"
       },
       "stats": {
-        "lines": 940,
-        "size_kb": 36.4,
+        "lines": 950,
+        "size_kb": 37.6,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },
@@ -5331,11 +5331,11 @@
         "path": "agents/@kody-w/journal_recall_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/journal_recall_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/journal_recall_agent.py",
-        "sha256": "f97b91e25360b4feb4cd29957e5615339d25394198093d859eaa5e8e45977fac"
+        "sha256": "f6358978b97b93606c74b987803dfc099f42e3ff143825040616102d5f8201bf"
       },
       "stats": {
-        "lines": 107,
-        "size_kb": 5.0,
+        "lines": 117,
+        "size_kb": 6.2,
         "added_at": "2026-11-03T17:23:03-05:00"
       }
     },
@@ -5373,11 +5373,11 @@
         "path": "agents/@kody-w/kody2day_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/kody2day_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/kody2day_agent.py",
-        "sha256": "e4dd13bc20c0f1d3c4333cdbefe6f1e09359a7fc7da5309822248d41ba3b0638"
+        "sha256": "3c0814050b74a0b9f7fb44220ed66600430ab8779601f469be8c20ac86521a99"
       },
       "stats": {
-        "lines": 297,
-        "size_kb": 14.5,
+        "lines": 307,
+        "size_kb": 15.6,
         "added_at": "2026-08-18T21:17:02-04:00"
       }
     },
@@ -5416,11 +5416,11 @@
         "path": "agents/@kody-w/kody2day_studio_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/kody2day_studio_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/kody2day_studio_agent.py",
-        "sha256": "520f26e2500bd6ec02288d510735b6ed1c3997ca824735865695c47ae17645d9"
+        "sha256": "d20355f26593583aedbfb7d091a6d6a36b9e1798294baec17cfdc05cfa90b1bb"
       },
       "stats": {
-        "lines": 328,
-        "size_kb": 17.0,
+        "lines": 338,
+        "size_kb": 18.2,
         "added_at": "2026-08-18T22:13:18-04:00"
       }
     },
@@ -5457,11 +5457,11 @@
         "path": "agents/@kody-w/ecosystem-grail-stack/launch_to_public_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/launch_to_public_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/ecosystem-grail-stack/launch_to_public_agent.py",
-        "sha256": "857168ad0d4421f9099e93a63c4805ad22e229c31526b4d1cab37f9548fdff0e"
+        "sha256": "15f570244d281c16313f2711c180910bd839fce61609a37545358e63b7c1ea24"
       },
       "stats": {
-        "lines": 797,
-        "size_kb": 34.5,
+        "lines": 807,
+        "size_kb": 35.7,
         "added_at": "2026-05-09T15:25:17-04:00"
       }
     },
@@ -5499,8 +5499,8 @@
         "sha256": ""
       },
       "stats": {
-        "lines": 42,
-        "size_kb": 1.4,
+        "lines": 52,
+        "size_kb": 2.6,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },
@@ -5535,11 +5535,11 @@
         "path": "agents/@kody-w/manage_memory_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/manage_memory_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/manage_memory_agent.py",
-        "sha256": "a3866eaef31b35e1a7b9bb17755d42950e3b62ab4c04b051f3f0e27808acb435"
+        "sha256": "a37beaa2ab5282d9a36fbb1a10b1144649ef1a254baa437caaee0a3f87c30d1a"
       },
       "stats": {
-        "lines": 255,
-        "size_kb": 10.8,
+        "lines": 265,
+        "size_kb": 12.0,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },
@@ -5575,11 +5575,11 @@
         "path": "agents/@kody-w/matrix_arena_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/matrix_arena_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/matrix_arena_agent.py",
-        "sha256": "313121fc5f72c6664069d2b016bf5f3a4566bad3f7bbebe29b411b26cf02425a"
+        "sha256": "1d1c4fe075943ca79f7873608a2a683448a0bd8d3c97e89b640b4d8690cee7f1"
       },
       "stats": {
-        "lines": 275,
-        "size_kb": 14.0,
+        "lines": 285,
+        "size_kb": 15.2,
         "added_at": "2026-06-20T19:39:59-04:00"
       }
     },
@@ -5619,11 +5619,11 @@
         "path": "agents/@kody-w/microsoft_deck_studio_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/microsoft_deck_studio_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/microsoft_deck_studio_agent.py",
-        "sha256": "6aa3761fd90b1be592520185359a02a0bc0651c0c0bd86edb8fe9ff879138445"
+        "sha256": "1ff2b23806ff4a7ce64b9b4d21f249ac53e9a6efd5b57b839e95a9077e2e68f0"
       },
       "stats": {
-        "lines": 602,
-        "size_kb": 38.1,
+        "lines": 612,
+        "size_kb": 39.3,
         "added_at": "2026-07-02T19:31:47Z"
       }
     },
@@ -5661,11 +5661,11 @@
         "path": "agents/@kody-w/neuron_swarm_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/neuron_swarm_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/neuron_swarm_agent.py",
-        "sha256": "911cbdf5536d55be0da3f49cf86f6b96fb4dde7eeb05fdd1ae7f67ea945e0498"
+        "sha256": "271579577537088ee30aa14aa9bc28887d9f564cda195bdeb777d5a0da897815"
       },
       "stats": {
-        "lines": 363,
-        "size_kb": 18.8,
+        "lines": 373,
+        "size_kb": 19.9,
         "added_at": "2026-06-26T23:08:53-04:00"
       }
     },
@@ -5701,11 +5701,11 @@
         "path": "agents/@kody-w/parallel_dimensions_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/parallel_dimensions_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/parallel_dimensions_agent.py",
-        "sha256": "ad3d5af03678ded14558a1f449a5ba4002e15dbb1ee101c37349da16ba7b2c2b"
+        "sha256": "d1e6ed9c0a69f581b705a4e8ee01440d5a0e3b5ad9efa9a78fcd156eb4ac1aad"
       },
       "stats": {
-        "lines": 258,
-        "size_kb": 9.4,
+        "lines": 268,
+        "size_kb": 10.6,
         "added_at": "2026-10-24T04:16:07Z"
       }
     },
@@ -5743,11 +5743,11 @@
         "path": "agents/@kody-w/perpetual_loop_factory_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/perpetual_loop_factory_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/perpetual_loop_factory_agent.py",
-        "sha256": "1e53fe183fd90dfda9e8c438e9d8b3fb82f98254763757ed87a9c28869477f53"
+        "sha256": "0d2ef9275392dd839e64c7140ef5f57fbb9a108e5ee0ee619d4c77d29811616d"
       },
       "stats": {
-        "lines": 1352,
-        "size_kb": 54.3,
+        "lines": 1362,
+        "size_kb": 55.5,
         "added_at": "2026-05-05T08:57:33-04:00"
       }
     },
@@ -5785,11 +5785,11 @@
         "path": "agents/@kody-w/ecosystem-grail-stack/plant_seed_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/plant_seed_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/ecosystem-grail-stack/plant_seed_agent.py",
-        "sha256": "86727bec5fc6c29e5925402e0d26fc8b76078755fa3fb1664904a4f1cf190ad6"
+        "sha256": "9a7f94b9461517e0bf9a6c4fdb12c8450d53b34307ce36dac3bae576ed178a06"
       },
       "stats": {
-        "lines": 578,
-        "size_kb": 26.5,
+        "lines": 588,
+        "size_kb": 27.6,
         "added_at": "2026-05-09T15:25:19-04:00"
       }
     },
@@ -5824,11 +5824,11 @@
         "path": "agents/@kody-w/play_youtube_video_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/play_youtube_video_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/play_youtube_video_agent.py",
-        "sha256": "fa592979b08d6ddeddcc1c6ebd54318f5fd3e37a528d2d22958078a5a514dafb"
+        "sha256": "ba4da935eacacd05f6e4f7c8fb3acfcce6277922ff3ac78b0bef7fb4fb3cc8b6"
       },
       "stats": {
-        "lines": 155,
-        "size_kb": 5.0,
+        "lines": 165,
+        "size_kb": 6.2,
         "added_at": "2026-08-18T03:06:50Z"
       }
     },
@@ -5869,11 +5869,11 @@
         "path": "agents/@kody-w/power_apps_code_app_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/power_apps_code_app_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/power_apps_code_app_agent.py",
-        "sha256": "fbcd47231e85c44efedbdc661b1e20da4f8cc77f45bbc20d53d7355c25269a10"
+        "sha256": "b080f45c3105b46c5b049ae7678e0b2844ec67ee52da6ed6a025f6ce1c45f074"
       },
       "stats": {
-        "lines": 861,
-        "size_kb": 39.6,
+        "lines": 871,
+        "size_kb": 40.8,
         "added_at": "2026-07-22T15:35:38-04:00"
       }
     },
@@ -5911,11 +5911,11 @@
         "path": "agents/@kody-w/project_tracker_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/project_tracker_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/project_tracker_agent.py",
-        "sha256": "b6270faf10379411b7a0065a91b571299bbb3f9a8c6072d041f24580c70d7e7c"
+        "sha256": "0a9452444854c420edbf73b617d392c1a63510890a663455f69d56a4e4ea0fc6"
       },
       "stats": {
-        "lines": 535,
-        "size_kb": 26.9,
+        "lines": 545,
+        "size_kb": 28.1,
         "added_at": "2026-07-24T16:53:40Z"
       }
     },
@@ -5951,11 +5951,11 @@
         "path": "agents/@kody-w/prompt_extractor.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/prompt_extractor.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/prompt_extractor.py",
-        "sha256": "9b03c1b6d286d219e1f19966eea18eb2ef9c980213455963226b264c038440ba"
+        "sha256": "ece05fd7f282eb9dc85f002df0fd03cd09ba82cfcb8c2acb1a54eaf83279747d"
       },
       "stats": {
-        "lines": 735,
-        "size_kb": 27.6,
+        "lines": 745,
+        "size_kb": 28.8,
         "added_at": "2026-08-03T09:47:21-04:00"
       }
     },
@@ -5992,11 +5992,11 @@
         "path": "agents/@kody-w/prototype_lock_factory_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/prototype_lock_factory_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/prototype_lock_factory_agent.py",
-        "sha256": "916f1fb4e63074c6302593d80a28f31779ef070b6e4352ec4c45cda14cab431b"
+        "sha256": "eb9308df4af313ea90fd0ef432c2b69d04635135c0c1d368e1886f775eedb2b0"
       },
       "stats": {
-        "lines": 468,
-        "size_kb": 17.0,
+        "lines": 478,
+        "size_kb": 18.2,
         "added_at": "2026-08-17T22:07:23Z"
       }
     },
@@ -6030,11 +6030,11 @@
         "path": "agents/@kody-w/rapp_leviathan_factory_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_leviathan_factory_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/rapp_leviathan_factory_agent.py",
-        "sha256": "e381f1fe6add6c47eec0d59307110f136103f8d349c611f7be0bff02edb0c6d0"
+        "sha256": "ec4a05f14e2149e80674ca6270942c3650539f20ea584de7cd3055c247e8c194"
       },
       "stats": {
-        "lines": 77,
-        "size_kb": 2.3,
+        "lines": 87,
+        "size_kb": 3.5,
         "added_at": "2026-05-16T16:33:02-04:00"
       }
     },
@@ -6070,11 +6070,11 @@
         "path": "agents/@kody-w/rapp_projects_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_projects_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/rapp_projects_agent.py",
-        "sha256": "e994af96f664097a291b4a1446ba8b8e36e911d7ccacd5aa58d984f64fb3afca"
+        "sha256": "f4102700cea9eefca33d876a04ba7b077e4111bf045492af678d2854058d97f1"
       },
       "stats": {
-        "lines": 4341,
-        "size_kb": 148.5,
+        "lines": 4351,
+        "size_kb": 149.7,
         "added_at": "2026-08-31T11:52:12-04:00"
       }
     },
@@ -6109,11 +6109,11 @@
         "path": "agents/@kody-w/rapp_sdk_builder_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_sdk_builder_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/rapp_sdk_builder_agent.py",
-        "sha256": "76799624979a91c7f4f87d64b41d1fe5add10f727c672cc25429442a38ef757a"
+        "sha256": "eaf3bf3a686d9fb08fc8f3c0b05f59075c8a334a68c5d8fe678f39aa81dc27e5"
       },
       "stats": {
-        "lines": 391,
-        "size_kb": 19.3,
+        "lines": 401,
+        "size_kb": 20.4,
         "added_at": "2026-07-15T15:23:19Z"
       }
     },
@@ -6152,11 +6152,11 @@
         "path": "agents/@kody-w/rapp_sentinel_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_sentinel_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/rapp_sentinel_agent.py",
-        "sha256": "bfbd0a5baed8da9e3c813a90fc36a20961798f9d93e8ebe164425047d0dc8884"
+        "sha256": "21c1590863a76733ea61aad02ff93d6ef2f89b5f386d76a2417c4794e5bc944d"
       },
       "stats": {
-        "lines": 412,
-        "size_kb": 21.4,
+        "lines": 422,
+        "size_kb": 22.5,
         "added_at": "2026-08-18T20:49:04-04:00"
       }
     },
@@ -6195,11 +6195,11 @@
         "path": "agents/@kody-w/rapp_skill_bridge_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_skill_bridge_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/rapp_skill_bridge_agent.py",
-        "sha256": "32d08f268896a835b4c63b9484ad95f1b1234216e0274f92c8455a6e32f406a5"
+        "sha256": "52bac89841d98a5d1218c0e665e2fdd6dd44ddd6d7d5aa52bbe4cf676141aae4"
       },
       "stats": {
-        "lines": 1416,
-        "size_kb": 57.8,
+        "lines": 1426,
+        "size_kb": 59.0,
         "added_at": "2026-07-23T12:26:59-04:00"
       }
     },
@@ -6233,11 +6233,11 @@
         "path": "agents/@kody-w/rapp_x_notary_canary_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_x_notary_canary_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/rapp_x_notary_canary_agent.py",
-        "sha256": "5d34d87380925aa0f60c14e0066c8aa5e59ecd884bf19034619ebea58ad27149"
+        "sha256": "c006e2637b31eb84db60a7832d730b37cd004d497b7d7ae589f2464706f03918"
       },
       "stats": {
-        "lines": 43,
-        "size_kb": 1.3,
+        "lines": 53,
+        "size_kb": 2.5,
         "added_at": "2026-07-18T23:41:02Z"
       }
     },
@@ -6274,11 +6274,11 @@
         "path": "agents/@kody-w/rappter_engine_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rappter_engine_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/rappter_engine_agent.py",
-        "sha256": "5679d82a2ea53a7dc8ae3b9c78e932ed83d068947f07d53be3af7582e32f7fd9"
+        "sha256": "4d532a0027f1424511d571af7f1c8e31d2fb73cfc00b10320d119e94dc00422e"
       },
       "stats": {
-        "lines": 479,
-        "size_kb": 17.4,
+        "lines": 489,
+        "size_kb": 18.6,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },
@@ -6315,11 +6315,11 @@
         "path": "agents/@kody-w/rappterbook_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rappterbook_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/rappterbook_agent.py",
-        "sha256": "1ec5f32b891f3aca40dc247573c79a27b5bbe097fb7f7a40ecd69c4cc15776d9"
+        "sha256": "e890cb23948e07fd72ae980dc35102f72b1c691b1399370d88d7ef2cd23e5267"
       },
       "stats": {
-        "lines": 160,
-        "size_kb": 6.3,
+        "lines": 170,
+        "size_kb": 7.5,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },
@@ -6356,11 +6356,11 @@
         "path": "agents/@kody-w/rappterpedia_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rappterpedia_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/rappterpedia_agent.py",
-        "sha256": "8c34061cf1ed1fa86071adb0c21896e629879d155405908404d5d6a390233fbb"
+        "sha256": "078d5bbb37e91cb052e9cfdc540aa5024d6a573f0be14df860c7df4c4ba08f69"
       },
       "stats": {
-        "lines": 540,
-        "size_kb": 24.2,
+        "lines": 550,
+        "size_kb": 25.4,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },
@@ -6397,11 +6397,11 @@
         "path": "agents/@kody-w/rar_installer_troubleshooter_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rar_installer_troubleshooter_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/rar_installer_troubleshooter_agent.py",
-        "sha256": "b638078c3ab5fc119a5cba648640387f3ad8af7ea81b72d501e87f04bc10f8ce"
+        "sha256": "2d4a3f1b82eec87bee381b89ca81f6ddc33d1466b94d4c5ec53b4bd588269dbe"
       },
       "stats": {
-        "lines": 3006,
-        "size_kb": 105.4,
+        "lines": 3016,
+        "size_kb": 106.6,
         "added_at": "2026-09-01T04:22:15Z"
       }
     },
@@ -6439,11 +6439,11 @@
         "path": "agents/@kody-w/rar_remote_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rar_remote_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/rar_remote_agent.py",
-        "sha256": "6fe73b97844e2046ef4f3fc83d9dc0f65a1159c1b778796bfc8f76c0c4b1e63a"
+        "sha256": "c4743a86ee97d68c37ecacd7a811e98452ad49f092baa1ee83150fb3a036eac3"
       },
       "stats": {
-        "lines": 1403,
-        "size_kb": 59.7,
+        "lines": 1413,
+        "size_kb": 60.8,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },
@@ -6484,11 +6484,11 @@
         "path": "agents/@kody-w/recon_deck_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/recon_deck_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/recon_deck_agent.py",
-        "sha256": "678ff374c053126043a75147034abf4a27d05e626c83862ef7ff0371a5781ce1"
+        "sha256": "050da8810c28845a2d60cc336b33e3518805d57f02031a754901d92c55622d4c"
       },
       "stats": {
-        "lines": 175,
-        "size_kb": 6.9,
+        "lines": 185,
+        "size_kb": 8.1,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },
@@ -6524,11 +6524,11 @@
         "path": "agents/@kody-w/second_life_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/second_life_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/second_life_agent.py",
-        "sha256": "bee60124864e6783bd6de6d039904dd3890a602008b56367bfdc83a754978ba3"
+        "sha256": "e67740d2ab1a489c29b4b274e2d20cb9df720603ba7963a10b0fde207f6c8aa1"
       },
       "stats": {
-        "lines": 119,
-        "size_kb": 5.6,
+        "lines": 129,
+        "size_kb": 6.7,
         "added_at": "2026-06-20T18:41:00-04:00"
       }
     },
@@ -6565,11 +6565,11 @@
         "path": "agents/@kody-w/self_compact_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/self_compact_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/self_compact_agent.py",
-        "sha256": "ad47db5e49459bdc85e90cf7a6a1fa7201061b358925ae5d7290b8c32a790c9e"
+        "sha256": "4e3d29f41ac869e4eaf99a8c499d27f37a811bd019d61c1551d8c5adb98585a8"
       },
       "stats": {
-        "lines": 294,
-        "size_kb": 13.2,
+        "lines": 304,
+        "size_kb": 14.3,
         "added_at": "2026-10-24T04:02:39Z"
       }
     },
@@ -6606,11 +6606,11 @@
         "path": "agents/@kody-w/skill_toaster_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/skill_toaster_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/skill_toaster_agent.py",
-        "sha256": "e90d6b7dc0ffe83e5274346aeb17f79e94894ee345685f897fbd8aa0e9ea6508"
+        "sha256": "48aea57c434c6992922172546b2ae02f219015377a34be1ce5dfdb837d9d2b0c"
       },
       "stats": {
-        "lines": 907,
-        "size_kb": 43.9,
+        "lines": 917,
+        "size_kb": 45.0,
         "added_at": "2026-08-01T21:33:29-04:00"
       }
     },
@@ -6646,11 +6646,11 @@
         "path": "agents/@kody-w/source_capture_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/source_capture_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/source_capture_agent.py",
-        "sha256": "d91eaa6092fa5f3b81f17de21926b3bfa1268370609ec9208e312d8a6d036971"
+        "sha256": "89d785bcb732d5d8cfb685873d539272f9fccdaeb5c4d556c9f3b39ba2830986"
       },
       "stats": {
-        "lines": 623,
-        "size_kb": 30.8,
+        "lines": 633,
+        "size_kb": 32.0,
         "added_at": "2026-11-04T14:16:00Z"
       }
     },
@@ -6686,11 +6686,11 @@
         "path": "agents/@kody-w/thread_tracker_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/thread_tracker_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/thread_tracker_agent.py",
-        "sha256": "dcf4d630cab0eaa9a6919e052cb14429416a1607f4e581a397a58430c7f8ad98"
+        "sha256": "c6768a7a25c21f3047e8cb47a96528f83f126742bdbafb9f13e4df4ebb30aad5"
       },
       "stats": {
-        "lines": 267,
-        "size_kb": 9.0,
+        "lines": 277,
+        "size_kb": 10.2,
         "added_at": "2026-10-24T04:09:13Z"
       }
     },
@@ -6728,11 +6728,11 @@
         "path": "agents/@kody-w/twin_egg_hatcher_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/twin_egg_hatcher_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/twin_egg_hatcher_agent.py",
-        "sha256": "2b59ec448480ebb09d910683e37b1e5925edcf7aa26b3695da6f2a6aa882ca9f"
+        "sha256": "300dd7302be574e2460c2ccd873c930fb9a6f07057078afbe3da114c84b23ef2"
       },
       "stats": {
-        "lines": 1167,
-        "size_kb": 43.3,
+        "lines": 1177,
+        "size_kb": 44.5,
         "added_at": "2026-05-24T21:45:25-04:00"
       }
     },
@@ -6771,11 +6771,11 @@
         "path": "agents/@kody-w/twin_me_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/twin_me_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/twin_me_agent.py",
-        "sha256": "d3e0e553b21db6ba2323ebf1119a019bf44b898438fae6432284671359593896"
+        "sha256": "821f3c97589ab2bd5ab346d36a2458621f39d568f205b9391893308099efabed"
       },
       "stats": {
-        "lines": 781,
-        "size_kb": 33.1,
+        "lines": 791,
+        "size_kb": 34.3,
         "added_at": "2026-06-08T13:48:48-04:00"
       }
     },
@@ -6811,11 +6811,11 @@
         "path": "agents/@kody-w/vibe_coding_loop_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/vibe_coding_loop_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/vibe_coding_loop_agent.py",
-        "sha256": "931c9224a42c1a609821a5d2fb5b7303a7434fb625d59eae8f8027a7ef7b046e"
+        "sha256": "c0329a49a1dccb8873b83964d0fa8ce231a24ede94051343162b37bef7149b1f"
       },
       "stats": {
-        "lines": 355,
-        "size_kb": 14.7,
+        "lines": 365,
+        "size_kb": 15.9,
         "added_at": "2026-05-03T14:51:56-04:00"
       }
     },
@@ -6851,11 +6851,11 @@
         "path": "agents/@kody-w/windows_vm_install_lab_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/windows_vm_install_lab_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/windows_vm_install_lab_agent.py",
-        "sha256": "cb3249f0118aa4edf62f99daa353c1fa9ad50c79684832158351cdf81b9ca1bb"
+        "sha256": "fc726fa63a72e17477e2358af45d9ee652adf5496439df752362372f3b58f9af"
       },
       "stats": {
-        "lines": 808,
-        "size_kb": 49.4,
+        "lines": 818,
+        "size_kb": 50.6,
         "added_at": "2026-08-18T03:03:49Z"
       }
     },
@@ -6895,11 +6895,11 @@
         "path": "agents/@kody-w/wp_publish_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/wp_publish_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/wp_publish_agent.py",
-        "sha256": "2240c6e471f6c3c54e35e62553e9cd9af314cd520790120d23e88045120ee87a"
+        "sha256": "0d2e51f233adabe41c5be35467adf84009cd0fd7a424bfaeee3fd83c807c7fb4"
       },
       "stats": {
-        "lines": 276,
-        "size_kb": 11.8,
+        "lines": 286,
+        "size_kb": 12.9,
         "added_at": "2026-08-11T09:50:23Z"
       }
     },
@@ -6931,11 +6931,11 @@
         "path": "agents/@rapp/basic_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/basic_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/basic_agent.py",
-        "sha256": "ce51cc4afe312a24a8f2b0034663d415b94660a88b5aeb328f0898a562df4fc5"
+        "sha256": "84809dbeb5a57867d3341909cae42c9a286ddbaec97e5b4084f3b89c4a4e564b"
       },
       "stats": {
-        "lines": 29,
-        "size_kb": 1.3,
+        "lines": 39,
+        "size_kb": 2.4,
         "added_at": "2026-04-06T14:07:43-04:00"
       }
     },
@@ -6971,11 +6971,11 @@
         "path": "agents/@rapp/commons_post_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/commons_post_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/commons_post_agent.py",
-        "sha256": "18c3fe91ac122cada3edde4cd2a7e01c2d0ffcf311a5f426f4a60e0cd416a6d5"
+        "sha256": "04f13fff1a7aab7e1566d2c71a96826c91e4222cd6f8c470b548e0cb4343d7ab"
       },
       "stats": {
-        "lines": 237,
-        "size_kb": 9.9,
+        "lines": 247,
+        "size_kb": 11.0,
         "added_at": "2026-05-11T13:43:55-04:00"
       }
     },
@@ -7012,11 +7012,11 @@
         "path": "agents/@rapp/drift_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/drift_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/drift_agent.py",
-        "sha256": "00ffb4b96beb3024e1b412caf5d2191a84846e73091132eefa30ffe6c2c5e31c"
+        "sha256": "b40ed2f9d3cd95038078b0ae7514b31a8da5e36a5b3b56c170d625606f97176b"
       },
       "stats": {
-        "lines": 685,
-        "size_kb": 36.3,
+        "lines": 695,
+        "size_kb": 37.4,
         "added_at": "2026-06-09T21:40:07-04:00"
       }
     },
@@ -7056,11 +7056,11 @@
         "path": "agents/@rapp/drift_watcher_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/drift_watcher_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/drift_watcher_agent.py",
-        "sha256": "6f2aedf636bbbde6a3b692c2d920c6af283291885886eba3f523179766529dee"
+        "sha256": "0d87442bbc4330abef6f282af1e095f43c930580b20f1b3ac9ec010fad4187cd"
       },
       "stats": {
-        "lines": 418,
-        "size_kb": 20.2,
+        "lines": 428,
+        "size_kb": 21.3,
         "added_at": "2026-06-10T09:05:29-04:00"
       }
     },
@@ -7097,11 +7097,11 @@
         "path": "agents/@rapp/egg_hatcher_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/egg_hatcher_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/egg_hatcher_agent.py",
-        "sha256": "bba2848c59de6883ad0f3d190ff0fe4e9f44f595016c95f4453d2764d3f4e78f"
+        "sha256": "7391fce3a02e8ee274332fbd71c5850495998d2e656732837b1ef104b99aef8e"
       },
       "stats": {
-        "lines": 347,
-        "size_kb": 14.5,
+        "lines": 357,
+        "size_kb": 15.6,
         "added_at": "2026-05-11T10:53:36-04:00"
       }
     },
@@ -7137,11 +7137,11 @@
         "path": "agents/@rapp/estate_outbound_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/estate_outbound_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/estate_outbound_agent.py",
-        "sha256": "f4f677f2bba5a12b5967fc39a8d0bdb1afad7ad4de57d32d2df8a80dd2bf1b32"
+        "sha256": "a918d6922c3ac93566aa0de306edee4caaba38b91d5b4818a00d338ab5c84861"
       },
       "stats": {
-        "lines": 178,
-        "size_kb": 6.7,
+        "lines": 188,
+        "size_kb": 7.8,
         "added_at": "2026-05-11T13:59:12-04:00"
       }
     },
@@ -7173,11 +7173,11 @@
         "path": "agents/@rapp/exec_brief_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/exec_brief_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/exec_brief_agent.py",
-        "sha256": "b43fbf2ac29f381c41c6cd7e2a247ffb7a6143c579e095c4ab2d961bf26ef45d"
+        "sha256": "6a532d4551853ff4ec03b015ae683962b339dbbcdc609990e0259d70347dea9c"
       },
       "stats": {
-        "lines": 685,
-        "size_kb": 27.2,
+        "lines": 695,
+        "size_kb": 28.3,
         "added_at": "2026-04-27T21:23:24Z"
       }
     },
@@ -7214,11 +7214,11 @@
         "path": "agents/@rapp/fleet_commander_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/fleet_commander_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/fleet_commander_agent.py",
-        "sha256": "2ba26bb68c2fdaf8f75f5068fe244d227330e8ab96c7ee6516c6d2530b386487"
+        "sha256": "2352d839c61457a7cd0d108e56d64814cff7f3dcdabe942d07404063e25016e4"
       },
       "stats": {
-        "lines": 797,
-        "size_kb": 31.1,
+        "lines": 807,
+        "size_kb": 32.3,
         "added_at": "2026-04-21T13:35:42-04:00"
       }
     },
@@ -7257,11 +7257,11 @@
         "path": "agents/@kody-w/forge_provenance_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/forge_provenance_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/forge_provenance_agent.py",
-        "sha256": "38ea315503f3d7085e5d27c93efbf45c96b2f1e07849a43614749df2b7cb4d69"
+        "sha256": "9698949e8248472aa11df8dd58192826b3cbdab56ee3fd8c2ff5fa6819d9f14c"
       },
       "stats": {
-        "lines": 265,
-        "size_kb": 11.7,
+        "lines": 275,
+        "size_kb": 12.8,
         "added_at": "2026-08-26T17:29:33-04:00"
       }
     },
@@ -7293,11 +7293,11 @@
         "path": "agents/@rapp/hacker_news_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/hacker_news_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/hacker_news_agent.py",
-        "sha256": "51dd9c04dd7eb5a0701c5008a3797945b6188eb39d7de93b2a0467e03e1049a2"
+        "sha256": "1dd72a3c109f51919101198c8ea6dd4ab48e38f9ab52a2f324382a69acb911ae"
       },
       "stats": {
-        "lines": 115,
-        "size_kb": 4.2,
+        "lines": 125,
+        "size_kb": 5.4,
         "added_at": "2026-05-02T14:14:24-04:00"
       }
     },
@@ -7335,11 +7335,11 @@
         "path": "agents/@rapp/learn_new_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/learn_new_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/learn_new_agent.py",
-        "sha256": "0d3df4dbd6ee8f7d9786cc7cbd2c35616fb61bd0813cd85150b6c339fe6618e2"
+        "sha256": "3cc1431dca7e6aee411f653c9ea2746e2161b1fe8db3fdeb5cbc72c0c803f4f9"
       },
       "stats": {
-        "lines": 2188,
-        "size_kb": 92.5,
+        "lines": 2198,
+        "size_kb": 93.6,
         "added_at": "2026-04-20T12:38:45-04:00"
       }
     },
@@ -7375,11 +7375,11 @@
         "path": "agents/@rapp/moment_factory_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/moment_factory_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/moment_factory_agent.py",
-        "sha256": "02a5b7154b7bd205223d58d3d61489bfa725ad7218915a0012709fe0d5f1ccf8"
+        "sha256": "57786378d57cca18fb846fb4dce7d167734d4826d41dfcadc8569f3ca91a19e9"
       },
       "stats": {
-        "lines": 512,
-        "size_kb": 23.6,
+        "lines": 522,
+        "size_kb": 24.8,
         "added_at": "2026-04-27T21:16:54Z"
       }
     },
@@ -7413,11 +7413,11 @@
         "path": "agents/@rapp/ping_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/ping_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/ping_agent.py",
-        "sha256": "4761dcecf8af3893153407860dc6786ac8cd7d3654966bb57923143db885f0af"
+        "sha256": "bcd367fbb3174f0128309a6f98df1b461f012dfdea619e4dae9b301c8b607bf9"
       },
       "stats": {
-        "lines": 37,
-        "size_kb": 1.2,
+        "lines": 47,
+        "size_kb": 2.3,
         "added_at": "2026-04-27T23:08:42Z"
       }
     },
@@ -7454,11 +7454,11 @@
         "path": "agents/@rapp/pitch_deck_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/pitch_deck_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/pitch_deck_agent.py",
-        "sha256": "ca3c2f325342769f9d799ccb0fc0cd41a23f90d2e6ddfb1dcb7c79d7bdd78145"
+        "sha256": "515d8cf7589e9ddfb4dd4a0575245f08e87b02a86837385df5b5c926f5958d1e"
       },
       "stats": {
-        "lines": 1087,
-        "size_kb": 56.0,
+        "lines": 1097,
+        "size_kb": 57.1,
         "added_at": "2026-04-27T21:24:10Z"
       }
     },
@@ -7499,11 +7499,11 @@
         "path": "agents/@rapp/rapp_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rapp_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/rapp_agent.py",
-        "sha256": "137f52017fe47f6263fe54b15baa5cdd65d86f664debbe4e26cbbd835f4abedb"
+        "sha256": "827cc07976687631087dd00ceb7d5d78082eb2f025467215cadac68e81d10a71"
       },
       "stats": {
-        "lines": 2979,
-        "size_kb": 172.6,
+        "lines": 2989,
+        "size_kb": 173.7,
         "added_at": "2026-06-09T21:40:04-04:00"
       }
     },
@@ -7544,11 +7544,11 @@
         "path": "agents/@rapp/rapp_dogg_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rapp_dogg_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/rapp_dogg_agent.py",
-        "sha256": "14bbe3f9f1b3cf98cc5f95eff631bb362db580f331822efc24577682788f7bb4"
+        "sha256": "6a2309f2838a8e890f721d0291a19254986fc9b5ebe11e5d859b48a6d2167853"
       },
       "stats": {
-        "lines": 812,
-        "size_kb": 41.7,
+        "lines": 822,
+        "size_kb": 42.9,
         "added_at": "2026-08-26T16:49:28-04:00"
       }
     },
@@ -7585,11 +7585,11 @@
         "path": "agents/@rapp/rapp_publish_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rapp_publish_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/rapp_publish_agent.py",
-        "sha256": "fc199e9cd0c478971f5c67d818d6405d32e0035974da2187e29292bf36adc6ed"
+        "sha256": "838117db87ab4909829de672e666504941b99c348d8bd5a9e3eb5a5542c69688"
       },
       "stats": {
-        "lines": 501,
-        "size_kb": 20.6,
+        "lines": 511,
+        "size_kb": 21.8,
         "added_at": "2026-04-27T23:18:27Z"
       }
     },
@@ -7625,11 +7625,11 @@
         "path": "agents/@rapp/rapplication_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rapplication_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/rapplication_agent.py",
-        "sha256": "a40d2ce08abde9774ebb4d34f02577a31e15a2ef66d2064953ab08a3f39baa0b"
+        "sha256": "c7bbf9955cd91626d099d580ab612f4081b0b81bd0b3b35033445872461de01c"
       },
       "stats": {
-        "lines": 592,
-        "size_kb": 23.2,
+        "lines": 602,
+        "size_kb": 24.4,
         "added_at": "2026-04-27T18:52:27-04:00"
       }
     },
@@ -7667,11 +7667,11 @@
         "path": "agents/@rapp/rar_steward_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rar_steward_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/rar_steward_agent.py",
-        "sha256": "e8cb15fe4f51fefb7c9f05fe3722dc7eccd67ab22beca8398591479d8fcc9e3e"
+        "sha256": "e02083e45e0704bddd5a681e08490a92c9ef06c44277d09000aba99f65cacd57"
       },
       "stats": {
-        "lines": 475,
-        "size_kb": 23.4,
+        "lines": 485,
+        "size_kb": 24.6,
         "added_at": "2026-06-09T21:45:37-04:00"
       }
     },
@@ -7707,11 +7707,11 @@
         "path": "agents/@rapp/store_navigator_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/store_navigator_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/store_navigator_agent.py",
-        "sha256": "d66b3003e0a562b0af69dfa070eae0a4ca6dc97cb53438b9e636c2ffa55214ef"
+        "sha256": "909f0778d6d9066e668adffc72f75be4d55de9552ab781df337afe6fd54e0d03"
       },
       "stats": {
-        "lines": 424,
-        "size_kb": 16.6,
+        "lines": 434,
+        "size_kb": 17.8,
         "added_at": "2026-04-27T21:52:47Z"
       }
     },
@@ -7747,11 +7747,11 @@
         "path": "agents/@rapp/swarm_factory_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/swarm_factory_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/swarm_factory_agent.py",
-        "sha256": "cfe3a0cffffb9d6395bf3d9377239e24500d3f7ab23c00b059da62f16a529ae0"
+        "sha256": "54ef914e46c15b4127235a1e17dd3a1d0257fbae0f9cede71a33173d52da4d93"
       },
       "stats": {
-        "lines": 752,
-        "size_kb": 40.4,
+        "lines": 762,
+        "size_kb": 41.6,
         "added_at": "2026-04-20T12:38:45-04:00"
       }
     },
@@ -7790,11 +7790,11 @@
         "path": "agents/@rapp/twin_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/twin_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/twin_agent.py",
-        "sha256": "878729c7a59ce520c487d02e6986845a79babce12a6e10ecbbe5e9eec1b71dda"
+        "sha256": "ca59d24cc598580225532ed9cbe5932dcc37957f77325d2dfccbe78a92826460"
       },
       "stats": {
-        "lines": 1773,
-        "size_kb": 71.9,
+        "lines": 1783,
+        "size_kb": 73.0,
         "added_at": "2026-05-11T10:53:36-04:00"
       }
     },
@@ -7826,11 +7826,11 @@
         "path": "agents/@rapp/vibe_builder_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/vibe_builder_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/vibe_builder_agent.py",
-        "sha256": "8fd77f26eacf4f4f22b7b48c06cc22e0fa76af51c2d20bb21a2194cc16de967f"
+        "sha256": "c5e273a8c24b444d326c42dc45bba66e933b3a759893bc4ed1b20776ccb0539b"
       },
       "stats": {
-        "lines": 532,
-        "size_kb": 20.2,
+        "lines": 542,
+        "size_kb": 21.4,
         "added_at": "2026-04-27T21:15:33Z"
       }
     },
@@ -7868,11 +7868,11 @@
         "path": "agents/@rapter/hive_census_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapter/hive_census_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapter/hive_census_agent.py",
-        "sha256": "c078c513615c23f87edf14ee12514105af913e06577cfe53b2e2b2368963d4ff"
+        "sha256": "0cfcf32f07e2cfa253c4cef082160ef14743303ca387f83381e66d4483e1db2c"
       },
       "stats": {
-        "lines": 222,
-        "size_kb": 9.9,
+        "lines": 232,
+        "size_kb": 11.1,
         "added_at": "2026-08-26T17:18:46-04:00"
       }
     },
@@ -7911,11 +7911,11 @@
         "path": "agents/@rapter/hive_shape_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapter/hive_shape_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapter/hive_shape_agent.py",
-        "sha256": "c4cdee134802fd1ced521940c6ef38d0a5dba2503acc4e8cd8da5e4367d075a3"
+        "sha256": "a1c3e6b99c86bf1a8622779c5900fd17ef4c9b1a9feb93affb436e32fdaa4836"
       },
       "stats": {
-        "lines": 338,
-        "size_kb": 14.7,
+        "lines": 348,
+        "size_kb": 15.9,
         "added_at": "2026-08-26T17:18:46-04:00"
       }
     },
@@ -7956,11 +7956,11 @@
         "path": "agents/@rapter/rapp_dogg_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapter/rapp_dogg_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapter/rapp_dogg_agent.py",
-        "sha256": "bf6bd60cb5c17a940141985ed82be8eac8112213af58fcf1fd80403b1573ff11"
+        "sha256": "1a0d63eea1f887c89d03a2dc32d4bc3f1d94653d424444149d8224c146aa8c87"
       },
       "stats": {
-        "lines": 797,
-        "size_kb": 40.6,
+        "lines": 807,
+        "size_kb": 41.8,
         "added_at": "2026-08-26T17:18:46-04:00"
       }
     },
@@ -8000,11 +8000,11 @@
         "path": "agents/@rarbookworld/bookfactory_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/bookfactory_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rarbookworld/bookfactory_agent.py",
-        "sha256": "dbd9f81e249d1065bb7f86ba34e4d1f8e51ef3da51e3ca487dea0c296b9243a6"
+        "sha256": "d7d3f898475786ff89b880d2c3dd777f8960836c689822fa32c06269f1a25f06"
       },
       "stats": {
-        "lines": 823,
-        "size_kb": 37.5,
+        "lines": 833,
+        "size_kb": 38.7,
         "added_at": "2026-04-19T18:58:15-04:00"
       }
     },
@@ -8044,11 +8044,11 @@
         "path": "agents/@rarbookworld/momentfactory_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/momentfactory_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rarbookworld/momentfactory_agent.py",
-        "sha256": "08cddf370c9a202ceb0e52ecb41dd6882d3e314d46eeb796e9e1387d9b86ecb7"
+        "sha256": "7c0330f8e2a55cce2e58e26cce883b2218f146536d13e23bd5af47e5986bebaf"
       },
       "stats": {
-        "lines": 527,
-        "size_kb": 23.9,
+        "lines": 537,
+        "size_kb": 25.1,
         "added_at": "2026-04-19T18:58:15-04:00"
       }
     },
@@ -8087,11 +8087,11 @@
         "path": "agents/@wildhaven/bellows_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/bellows_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@wildhaven/bellows_agent.py",
-        "sha256": "70aca84f711e97ddfc78ac555e826b60332ce5eae25bc90e85c7d8f42dddc608"
+        "sha256": "b80d52b3ed24ff6b50e1be11b08117c7581b0b6563f7a4ad01738963c901bc00"
       },
       "stats": {
-        "lines": 474,
-        "size_kb": 18.8,
+        "lines": 484,
+        "size_kb": 20.0,
         "added_at": "2026-05-16T13:08:37-04:00"
       }
     },
@@ -8129,11 +8129,11 @@
         "path": "agents/@wildhaven/ceo_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/ceo_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@wildhaven/ceo_agent.py",
-        "sha256": "c1e49265becbe104dceacd371dcbc6cce39aa53f3a36075fd47f06d9cf476896"
+        "sha256": "9bc2697ed4ed6eab9ca6036297a39968c5a7ab9e7aeaaf43630c705b0a3c733a"
       },
       "stats": {
-        "lines": 322,
-        "size_kb": 13.2,
+        "lines": 332,
+        "size_kb": 14.4,
         "added_at": "2026-04-05T16:48:32-04:00"
       }
     },
@@ -8171,11 +8171,11 @@
         "path": "agents/@wildhaven/penumbra_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/penumbra_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@wildhaven/penumbra_agent.py",
-        "sha256": "00a2946996be36b9234c3e9cbf916eee70fed319104bff2aef7325e437343a6f"
+        "sha256": "a990cbad0828c87f1881328a1a2035676d4ee81c4cffac9df081a30946e776b9"
       },
       "stats": {
-        "lines": 285,
-        "size_kb": 10.5,
+        "lines": 295,
+        "size_kb": 11.7,
         "added_at": "2026-05-16T12:50:07-04:00"
       }
     }

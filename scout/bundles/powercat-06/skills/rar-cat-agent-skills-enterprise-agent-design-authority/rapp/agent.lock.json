@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/enterprise_agent_design_authority",
   "agent_file": "enterprise_agent_design_authority_agent.py",
-  "agent_sha256": "6332036335d5ea258d4f3f653326bece852ce05b4ac1cd5e7f10b442b0f8c49b",
+  "agent_sha256": "4b5321c8bc9c9f1b4b5796650d54bc2e0d8503f8d957409875fc1ee01ce01a1b",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "EnterpriseAgentDesignAuthority",
   "host_dependencies": [],

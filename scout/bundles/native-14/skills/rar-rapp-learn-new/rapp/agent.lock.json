@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/learn_new",
   "agent_file": "learn_new_agent.py",
-  "agent_sha256": "0d3df4dbd6ee8f7d9786cc7cbd2c35616fb61bd0813cd85150b6c339fe6618e2",
+  "agent_sha256": "3cc1431dca7e6aee411f653c9ea2746e2161b1fe8db3fdeb5cbc72c0c803f4f9",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "LearnNewAgent",
   "host_dependencies": [],

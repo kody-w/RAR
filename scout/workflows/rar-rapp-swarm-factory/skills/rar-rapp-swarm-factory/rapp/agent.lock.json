@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/swarm_factory_agent",
   "agent_file": "swarm_factory_agent.py",
-  "agent_sha256": "cfe3a0cffffb9d6395bf3d9377239e24500d3f7ab23c00b059da62f16a529ae0",
+  "agent_sha256": "54ef914e46c15b4127235a1e17dd3a1d0257fbae0f9cede71a33173d52da4d93",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "SwarmFactoryAgent",
   "host_dependencies": [],

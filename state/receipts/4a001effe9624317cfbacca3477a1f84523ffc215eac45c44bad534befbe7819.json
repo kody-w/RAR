@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@cat-agent-skills/knowledge_source_router",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "28de060ce9e856846c1ed608ec2cee0367fb8584d3b8b16ad583db18d97fe305"
+ },
+ "canonical_path": "agents/@cat-agent-skills/knowledge_source_router_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_4a001effe9624317cfbacca3477a1f84523ffc215eac45c44bad534befbe7819",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "b8e2822507b13775fff2410fd66bb59f29f9c622a8d8e45b844f4fa235f54569",
+  "receipt": "rar_2bacc84b4b7bc00b108636112f656d1170a5c8947c4dfb2e02926a1a8a63564e",
+  "version": "4.0.2"
+ },
+ "quality_tier": "frontier",
+ "request_id": "req_4a001effe9624317cfbacca3",
+ "revision_id": "4a001effe9624317cfbacca3477a1f84523ffc215eac45c44bad534befbe7819",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "4.0.2"
+}

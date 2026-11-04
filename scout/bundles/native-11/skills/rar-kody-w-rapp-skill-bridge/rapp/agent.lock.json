@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/rapp_skill_bridge_agent",
   "agent_file": "rapp_skill_bridge_agent.py",
-  "agent_sha256": "32d08f268896a835b4c63b9484ad95f1b1234216e0274f92c8455a6e32f406a5",
+  "agent_sha256": "52bac89841d98a5d1218c0e665e2fdd6dd44ddd6d7d5aa52bbe4cf676141aae4",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappSkillBridge",
   "host_dependencies": [

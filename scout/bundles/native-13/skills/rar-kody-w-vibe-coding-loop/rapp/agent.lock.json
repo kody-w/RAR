@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/vibe_coding_loop",
   "agent_file": "vibe_coding_loop_agent.py",
-  "agent_sha256": "931c9224a42c1a609821a5d2fb5b7303a7434fb625d59eae8f8027a7ef7b046e",
+  "agent_sha256": "c0329a49a1dccb8873b83964d0fa8ce231a24ede94051343162b37bef7149b1f",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "VibeCodingLoopAgent",
   "host_dependencies": [],

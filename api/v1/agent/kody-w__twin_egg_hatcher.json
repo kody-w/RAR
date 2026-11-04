@@ -3,11 +3,12 @@
   "id": "kody-w__twin_egg_hatcher",
   "name": "HatchTwinEgg",
   "rar_name": "@kody-w/twin_egg_hatcher",
-  "rappid": "rappid:@kody-w/twin_egg_hatcher:fccc575dc71bc6d66308aa87aff50fe070692c63ff83c21106840a6d1349fe2a",
-  "_migrated_from": "rappid:@kody-w/twin_egg_hatcher:d6802d18761f81ebef3758b3d1d2bc78eae68ceb9d2309f04d046e578309c999",
+  "rappid": "rappid:@kody-w/twin_egg_hatcher:5da93e4013a4d77739004ee358fa530d532af5251b70ade26040196d98dcd17e",
+  "_migrated_from": "rappid:@kody-w/twin_egg_hatcher:fccc575dc71bc6d66308aa87aff50fe070692c63ff83c21106840a6d1349fe2a",
   "_migrated_from_all": [
     "rappid:@kody-w/twin_egg_hatcher:f7a37cc24aabbc9d9b0f20555b5df6f6724e8acb3d8fb39a36a332d571c566dc",
-    "rappid:@kody-w/twin_egg_hatcher:d6802d18761f81ebef3758b3d1d2bc78eae68ceb9d2309f04d046e578309c999"
+    "rappid:@kody-w/twin_egg_hatcher:d6802d18761f81ebef3758b3d1d2bc78eae68ceb9d2309f04d046e578309c999",
+    "rappid:@kody-w/twin_egg_hatcher:fccc575dc71bc6d66308aa87aff50fe070692c63ff83c21106840a6d1349fe2a"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.1.0",
@@ -29,9 +30,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 1167,
-  "size_kb": 43.3,
-  "sha256": "2b59ec448480ebb09d910683e37b1e5925edcf7aa26b3695da6f2a6aa882ca9f",
+  "lines": 1177,
+  "size_kb": 44.5,
+  "sha256": "300dd7302be574e2460c2ccd873c930fb9a6f07057078afbe3da114c84b23ef2",
   "has_card": true,
   "added_at": "2026-05-24T21:45:25-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

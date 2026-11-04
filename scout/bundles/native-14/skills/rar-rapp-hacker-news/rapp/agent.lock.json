@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/hacker_news",
   "agent_file": "hacker_news_agent.py",
-  "agent_sha256": "51dd9c04dd7eb5a0701c5008a3797945b6188eb39d7de93b2a0467e03e1049a2",
+  "agent_sha256": "1dd72a3c109f51919101198c8ea6dd4ab48e38f9ab52a2f324382a69acb911ae",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "HackerNewsAgent",
   "host_dependencies": [],

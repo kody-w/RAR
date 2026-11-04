@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/brand_voice_pass",
   "agent_file": "brand_voice_pass_agent.py",
-  "agent_sha256": "6637408a4175858b78cf4da9cb7fac9012e301e6577cc18e2064dca8629caa63",
+  "agent_sha256": "8fe0e9ae3edc03da2cc0329fd08af34c4871530aa826d606972e1d38bf2c5127",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BrandVoicePass",
   "host_dependencies": [],

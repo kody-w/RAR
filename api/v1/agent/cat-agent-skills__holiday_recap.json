@@ -3,10 +3,12 @@
   "id": "cat-agent-skills__holiday_recap",
   "name": "Holiday Recap",
   "rar_name": "@cat-agent-skills/holiday_recap",
-  "rappid": "rappid:@cat-agent-skills/holiday_recap:07e1512d5fdbde4f03b35692323a820f8cf81b461c9b567214cd5d6007a5bc87",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
+  "rappid": "rappid:@cat-agent-skills/holiday_recap:4f88f3e8442ae1acf5ee0ef0f73c1fe50a3da8180ade5b2ba8c9cb2f50ffb2e9",
+  "_migrated_from": "rappid:@cat-agent-skills/holiday_recap:07e1512d5fdbde4f03b35692323a820f8cf81b461c9b567214cd5d6007a5bc87",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/holiday_recap:07e1512d5fdbde4f03b35692323a820f8cf81b461c9b567214cd5d6007a5bc87"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
   "publisher": "@cat-agent-skills",
   "category": "productivity",
@@ -27,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.3,
-  "sha256": "2c2f3afcaaf83a61a8e802af8b22881c167e51e5fb4b813636c06dc77ce2e32a",
+  "lines": 272,
+  "size_kb": 13.5,
+  "sha256": "0b187c270dc5fe3382fefdb070aeb9946a808706a8dce261c598b2bb9883407b",
   "has_card": true,
   "added_at": "2026-09-08T16:38:03-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

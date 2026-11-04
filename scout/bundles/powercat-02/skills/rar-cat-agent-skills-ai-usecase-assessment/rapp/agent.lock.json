@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/ai_usecase_assessment",
   "agent_file": "ai_usecase_assessment_agent.py",
-  "agent_sha256": "4211e33a8a354bc5487314ad0398877fad82a50b75c97f855d3d613c61aa9a53",
+  "agent_sha256": "a0e344bae6eb0ee5cf9cc52c14d873e9db7d95e0f3c7e3c7f68bee5739b908f8",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "AiUsecaseAssessment",
   "host_dependencies": [],

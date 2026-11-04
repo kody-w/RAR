@@ -3,10 +3,12 @@
   "id": "rapp__forge_provenance_agent",
   "name": "Forge Provenance",
   "rar_name": "@rapp/forge_provenance_agent",
-  "rappid": "rappid:@rapp/forge_provenance_agent:027c01f76551537295bb7d9d7904e3b4853bfd629b64bc4acc8271c4bff45c63",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
+  "rappid": "rappid:@rapp/forge_provenance_agent:762e2d9f3cb9a2dbf34263881f2e0926616f0051c09ab3ebec8a8abbf6e263c7",
+  "_migrated_from": "rappid:@rapp/forge_provenance_agent:027c01f76551537295bb7d9d7904e3b4853bfd629b64bc4acc8271c4bff45c63",
+  "_migrated_from_all": [
+    "rappid:@rapp/forge_provenance_agent:027c01f76551537295bb7d9d7904e3b4853bfd629b64bc4acc8271c4bff45c63"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.0",
   "publisher": "@rapp",
   "category": "core",
@@ -27,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 265,
-  "size_kb": 11.7,
-  "sha256": "38ea315503f3d7085e5d27c93efbf45c96b2f1e07849a43614749df2b7cb4d69",
+  "lines": 275,
+  "size_kb": 12.8,
+  "sha256": "9698949e8248472aa11df8dd58192826b3cbdab56ee3fd8c2ff5fa6819d9f14c",
   "has_card": true,
   "added_at": "2026-08-26T17:29:33-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

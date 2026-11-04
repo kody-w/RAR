@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__anonymised_case_study_writer",
   "name": "Anonymised Case Study Writer",
   "rar_name": "@cat-agent-skills/anonymised_case_study_writer",
-  "rappid": "rappid:@cat-agent-skills/anonymised_case_study_writer:2c5abfe05e11ef3770deb6c15d4d5bea1bf62c34276d105c1a0c385bd40b045e",
-  "_migrated_from": "rappid:@cat-agent-skills/anonymised_case_study_writer:0a2f1ed24aef2423c3330ad5b72548fcdbd1c904651065a662ba8ca241268c9f",
+  "rappid": "rappid:@cat-agent-skills/anonymised_case_study_writer:eba5de9674596cac8f6b4af473718686d1b2792bd6ea1ed8074715008ace86bd",
+  "_migrated_from": "rappid:@cat-agent-skills/anonymised_case_study_writer:2c5abfe05e11ef3770deb6c15d4d5bea1bf62c34276d105c1a0c385bd40b045e",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/anonymised_case_study_writer:0a2f1ed24aef2423c3330ad5b72548fcdbd1c904651065a662ba8ca241268c9f"
+    "rappid:@cat-agent-skills/anonymised_case_study_writer:0a2f1ed24aef2423c3330ad5b72548fcdbd1c904651065a662ba8ca241268c9f",
+    "rappid:@cat-agent-skills/anonymised_case_study_writer:2c5abfe05e11ef3770deb6c15d4d5bea1bf62c34276d105c1a0c385bd40b045e"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "2.1.2",
@@ -27,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.3,
-  "sha256": "a33da39c5a36434bb8c16f1d206623b4f32f7826daa65859162fce827c579996",
+  "lines": 272,
+  "size_kb": 13.5,
+  "sha256": "49d3b3efccee510686f44a4fed6b95a9b507f706bb3c594d126aa9cda655b398",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

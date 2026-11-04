@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/drift_watcher",
   "agent_file": "drift_watcher_agent.py",
-  "agent_sha256": "6f2aedf636bbbde6a3b692c2d920c6af283291885886eba3f523179766529dee",
+  "agent_sha256": "0d87442bbc4330abef6f282af1e095f43c930580b20f1b3ac9ec010fad4187cd",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DriftWatcherAgent",
   "host_dependencies": [],

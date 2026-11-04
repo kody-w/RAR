@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/b2b_outreach_suite",
   "agent_file": "b2b_outreach_suite_agent.py",
-  "agent_sha256": "b50fc4375cf3ba5d548b20ed337a1afea0fbc564076f6cab1da021097fb34fd0",
+  "agent_sha256": "8cc4246e1e7974a219004eefc17de83bb2b40c83523cc4f89c47d14275832397",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "B2bOutreachSuite",
   "host_dependencies": [],

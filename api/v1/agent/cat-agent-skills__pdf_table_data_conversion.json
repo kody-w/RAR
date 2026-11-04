@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__pdf_table_data_conversion",
   "name": "PDF Table Data Conversion",
   "rar_name": "@cat-agent-skills/pdf_table_data_conversion",
-  "rappid": "rappid:@cat-agent-skills/pdf_table_data_conversion:6b5858bfd5106b7e2ae96bf1de620f9f46e5fa7120e04f4a19eff55b798b54fd",
-  "_migrated_from": "rappid:@cat-agent-skills/pdf_table_data_conversion:deb867307a6bd283cca54d26945dc2b3d1ac038ae4368313981ec0e0f27018b4",
+  "rappid": "rappid:@cat-agent-skills/pdf_table_data_conversion:03fda9b4ad56091176028114db7bec510b644b199e7822b26aa7a34e3f7c4b4d",
+  "_migrated_from": "rappid:@cat-agent-skills/pdf_table_data_conversion:6b5858bfd5106b7e2ae96bf1de620f9f46e5fa7120e04f4a19eff55b798b54fd",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/pdf_table_data_conversion:deb867307a6bd283cca54d26945dc2b3d1ac038ae4368313981ec0e0f27018b4"
+    "rappid:@cat-agent-skills/pdf_table_data_conversion:deb867307a6bd283cca54d26945dc2b3d1ac038ae4368313981ec0e0f27018b4",
+    "rappid:@cat-agent-skills/pdf_table_data_conversion:6b5858bfd5106b7e2ae96bf1de620f9f46e5fa7120e04f4a19eff55b798b54fd"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -28,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.5,
-  "sha256": "8bcc954b577b135098beb82f05358cd014cd4bc96fd361763859a2762af5c0a3",
+  "lines": 272,
+  "size_kb": 13.7,
+  "sha256": "c2f7ffba47f5e99eb59ff6fe2453844e159de3085d334c9748b900508c361d04",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

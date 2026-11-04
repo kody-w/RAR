@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__booth_loop_video",
   "name": "Booth Loop Video",
   "rar_name": "@cat-agent-skills/booth_loop_video",
-  "rappid": "rappid:@cat-agent-skills/booth_loop_video:0ef2def61d8ee5dcf4b977bb5932a67a1ae0889c83bf8592fb45cc1f6dfe79e8",
-  "_migrated_from": "rappid:@cat-agent-skills/booth_loop_video:38b66f514706049af68a154513cec63b2c880cc9ad0fb86d309d60631f34277d",
+  "rappid": "rappid:@cat-agent-skills/booth_loop_video:bf46f39517ad42b14c4b30a9ae04dc8c1693776cafda5c1630107bb68468ae9d",
+  "_migrated_from": "rappid:@cat-agent-skills/booth_loop_video:0ef2def61d8ee5dcf4b977bb5932a67a1ae0889c83bf8592fb45cc1f6dfe79e8",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/booth_loop_video:38b66f514706049af68a154513cec63b2c880cc9ad0fb86d309d60631f34277d"
+    "rappid:@cat-agent-skills/booth_loop_video:38b66f514706049af68a154513cec63b2c880cc9ad0fb86d309d60631f34277d",
+    "rappid:@cat-agent-skills/booth_loop_video:0ef2def61d8ee5dcf4b977bb5932a67a1ae0889c83bf8592fb45cc1f6dfe79e8"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -28,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.4,
-  "sha256": "e7d0efd552cb1b7678b8324be22afc0e9e6ebee21df4fef2a23393d575f5b113",
+  "lines": 272,
+  "size_kb": 13.6,
+  "sha256": "575d67a2bcd525e8ebc8092fd3e0cee5e5ed253e5f72d9a6e2cda8505ca17753",
   "has_card": true,
   "added_at": "2026-08-11T09:43:05Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/process_sop_architect",
   "agent_file": "process_sop_architect_agent.py",
-  "agent_sha256": "174c35849b502c0837ad6690e7045929d441db09a00f385fe55e768f99c81a83",
+  "agent_sha256": "c3e86bfb91394e7c5d71411fab845e334b0ee2dd85a93e1fbaad9fe40ba07bc4",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ProcessSopArchitect",
   "host_dependencies": [],

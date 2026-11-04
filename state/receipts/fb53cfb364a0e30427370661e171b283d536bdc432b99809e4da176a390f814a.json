@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@kody-w/education_shorts_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "36711e8da4ce32d9b11fc02c18e925f955ca0588dcc65a5ea08099d1f4233f1f"
+ },
+ "canonical_path": "agents/@kody-w/education_shorts_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_fb53cfb364a0e30427370661e171b283d536bdc432b99809e4da176a390f814a",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "e8dae3c739c30dd6ea7a3c690a4aa6aaa25cbbfd26ab906d274ec9b520f28715",
+  "receipt": "rar_c487d51f509db15b0b2858f91d28bf222f3ce10421f0e42e38386fbf56ee0902",
+  "version": "1.0.0"
+ },
+ "quality_tier": "official",
+ "request_id": "req_fb53cfb364a0e30427370661",
+ "revision_id": "fb53cfb364a0e30427370661e171b283d536bdc432b99809e4da176a390f814a",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "1.0.0"
+}

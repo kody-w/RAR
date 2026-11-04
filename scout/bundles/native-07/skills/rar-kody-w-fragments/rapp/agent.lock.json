@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/fragments_agent",
   "agent_file": "fragments_agent.py",
-  "agent_sha256": "88e1749ee4ace1f506b6ee9c2c4fa2ce38e33107315f2b35f5919a489956be13",
+  "agent_sha256": "4d13906d0277d672c4b54489527e7fc8042c54ae6a32c2024fec407b0ee6d381",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "FragmentsAgent",
   "host_dependencies": [

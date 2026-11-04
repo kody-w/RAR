@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/rapp_x_notary_canary_agent",
   "agent_file": "rapp_x_notary_canary_agent.py",
-  "agent_sha256": "5d34d87380925aa0f60c14e0066c8aa5e59ecd884bf19034619ebea58ad27149",
+  "agent_sha256": "c006e2637b31eb84db60a7832d730b37cd004d497b7d7ae589f2464706f03918",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappXNotaryCanaryAgent",
   "host_dependencies": [],

@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/rapp_projects",
   "agent_file": "rapp_projects_agent.py",
-  "agent_sha256": "e994af96f664097a291b4a1446ba8b8e36e911d7ccacd5aa58d984f64fb3afca",
+  "agent_sha256": "f4102700cea9eefca33d876a04ba7b077e4111bf045492af678d2854058d97f1",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RappProjectsAgent",
   "host_dependencies": [],

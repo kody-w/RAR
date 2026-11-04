@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@cat-agent-skills/stoic_negotiator",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "c74fb9856ed7018e68218cddcd1930ac99ccd995855c5106c6feb4cab241d398"
+ },
+ "canonical_path": "agents/@cat-agent-skills/stoic_negotiator_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_f617c98375b33727dd1e56e344f537c2d2ad82c8c72f22947fc2afc07b2495ba",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "c39474c15d45f3a477eb894f916d8f5fb8374755f6327fada1a1d2243ac4dfd1",
+  "receipt": "rar_2d132d8f643f5c7115c4e338deee753c01b978837481828d59f6844e95db3055",
+  "version": "3.0.2"
+ },
+ "quality_tier": "frontier",
+ "request_id": "req_f617c98375b33727dd1e56e3",
+ "revision_id": "f617c98375b33727dd1e56e344f537c2d2ad82c8c72f22947fc2afc07b2495ba",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "3.0.2"
+}

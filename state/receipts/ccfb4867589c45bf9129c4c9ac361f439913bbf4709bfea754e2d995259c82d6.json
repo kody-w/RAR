@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@kody-w/plant_seed_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "9a7f94b9461517e0bf9a6c4fdb12c8450d53b34307ce36dac3bae576ed178a06"
+ },
+ "canonical_path": "agents/@kody-w/ecosystem-grail-stack/plant_seed_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_ccfb4867589c45bf9129c4c9ac361f439913bbf4709bfea754e2d995259c82d6",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "86727bec5fc6c29e5925402e0d26fc8b76078755fa3fb1664904a4f1cf190ad6",
+  "receipt": "rar_d074be2f99f0ecebca2f36dde23dc034f949e7dee15d8c464fcffce2a3f2309c",
+  "version": "1.0.4"
+ },
+ "quality_tier": "verified",
+ "request_id": "req_ccfb4867589c45bf9129c4c9",
+ "revision_id": "ccfb4867589c45bf9129c4c9ac361f439913bbf4709bfea754e2d995259c82d6",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "1.0.4"
+}

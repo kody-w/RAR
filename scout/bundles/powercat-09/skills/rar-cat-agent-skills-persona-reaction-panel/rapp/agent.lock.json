@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/persona_reaction_panel",
   "agent_file": "persona_reaction_panel_agent.py",
-  "agent_sha256": "adb83b8e6e07fe792cd7d5f581885ca1a6ada5be3413e82fe4a4620520596f53",
+  "agent_sha256": "df0ee4b0cb412b509cf0dd8f9eb98c6373665213472e3b933a078379eab7b0f7",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PersonaReactionPanel",
   "host_dependencies": [],

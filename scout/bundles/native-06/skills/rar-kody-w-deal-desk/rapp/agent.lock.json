@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/deal_desk_agent",
   "agent_file": "deal_desk_agent.py",
-  "agent_sha256": "4f0a8d4f0c0a8ddd9f4f02b29efcfedb30080938bc14b66ce752170a3a3f88dd",
+  "agent_sha256": "68e3972b5c4a6b1b9f7105524aab0313aefcb121581beb8683fd98a0b90e2827",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "DealDeskAgent",
   "host_dependencies": [],

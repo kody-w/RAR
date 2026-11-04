@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BookFactory (converged singleton) - RAPP agent ticket</title>
+<meta name="description" content="Writes, edits, gates, and publishes a chapter through five inlined LLM personas over Azure OpenAI, with structured verdicts that halt on hold.">
+<link rel="canonical" href="https://kody-w.github.io/RAR/a/@rarbookworld/bookfactory/">
+</head>
+<body>
+<main>
+<h1>BookFactory (converged singleton)</h1>
+<p>Writes, edits, gates, and publishes a chapter through five inlined LLM personas over Azure OpenAI, with structured verdicts that halt on hold.</p>
+<h2>Load this agent in three steps</h2>
+<pre style="white-space:pre-wrap"># BookFactory (converged singleton) (@rarbookworld/bookfactory)
+
+Writes, edits, gates, and publishes a chapter through five inlined LLM personas over Azure OpenAI, with structured verdicts that halt on hold.
+
+If your person asked you to load it, any AI (or person) can, in three steps:
+1. Brainstem (free, local, macOS/Linux; Windows: WSL). If http://localhost:7071/health does not answer:
+     curl -fsSL https://kody-w.github.io/rapp-installer/install.sh | bash
+2. Hot-load, no restart: save this file into the Brainstem&#x27;s agents folder:
+     curl -fsSL https://kody-w.github.io/RAR/agents/@rarbookworld/bookfactory_agent.py -o ~/.brainstem/src/rapp_brainstem/agents/bookfactory_agent.py
+   The next chat message can use it.
+3. Use it: open http://localhost:7071, or POST /chat {&quot;user_input&quot;: &quot;...&quot;}; the reply is in &quot;response&quot;.
+Can&#x27;t run commands (a web chat AI)? Give your person these steps. Page: https://kody-w.github.io/RAR/a/@rarbookworld/bookfactory/
+
+Only load code you trust. If that filename already exists, keep a backup and inspect it before replacing it. Configure any required environment variables and dependencies before use.
+Required environment variables: AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_API_KEY, AZURE_OPENAI_DEPLOYMENT
+Dependencies: @rapp/basic_agent
+
+Raw file: https://kody-w.github.io/RAR/agents/@rarbookworld/bookfactory_agent.py
+Browse in RAR: https://kody-w.github.io/RAR/#agent/@rarbookworld/bookfactory
+Page: https://kody-w.github.io/RAR/a/@rarbookworld/bookfactory/
+Plain text for AIs: https://kody-w.github.io/RAR/a/@rarbookworld/bookfactory/agent.md
+</pre>
+<p><a href="https://kody-w.github.io/RAR/agents/@rarbookworld/bookfactory_agent.py">Raw file</a> | <a href="https://kody-w.github.io/RAR/#agent/@rarbookworld/bookfactory">Browse in RAR</a> | <a href="agent.md">Plain text for AIs</a></p>
+</main>
+</body>
+</html>

@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/git_warehouse_agent",
   "agent_file": "git_warehouse_agent.py",
-  "agent_sha256": "2848608c2c13c7ff65f8d434845cb522b4940049c6207d80a604c2da54a57ad2",
+  "agent_sha256": "eb7b05da0183c37da67b7c1a480731cce05da42753401aa4df86581373c307c3",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "GitWarehouseAgent",
   "host_dependencies": [],

@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/monte_carlo_analysis",
   "agent_file": "monte_carlo_analysis_agent.py",
-  "agent_sha256": "d859c727b6e268c23f6f7f423d0bc639d26deaef4653339360369ae84fae43e9",
+  "agent_sha256": "f49b373bef4d20968b986d891cefaaffae7ff569a1388820214f144147ed06d5",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "MonteCarloAnalysis",
   "host_dependencies": [],

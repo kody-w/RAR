@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/own_voice_builder",
   "agent_file": "own_voice_builder_agent.py",
-  "agent_sha256": "e93e7c7eaf21c72cb54ae3b66789bc10826ea31a644041608de32228d84a5ee5",
+  "agent_sha256": "119badda228da2db2f7f2f54e60355d7fa9a424acd2f954acb659a9e41b4b498",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "OwnVoiceBuilder",
   "host_dependencies": [],

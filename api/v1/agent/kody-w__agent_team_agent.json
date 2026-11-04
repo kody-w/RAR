@@ -3,10 +3,11 @@
   "id": "kody-w__agent_team_agent",
   "name": "AgentTeam",
   "rar_name": "@kody-w/agent_team_agent",
-  "rappid": "rappid:@kody-w/agent_team_agent:980cfbb18181a3fb321ee656ed6b2afc1b189314731279ee4506dea705026b5d",
-  "_migrated_from": "rappid:@kody-w/agent_team_agent:0bafc1d39c52a65726403e84eac2d519d463987a56249a755b5936d6a38bc1f1",
+  "rappid": "rappid:@kody-w/agent_team_agent:d7ba42ed9fe19fda11fd0a7e2eb61cb05a41c0c487a36052d5bbbf767d925bdc",
+  "_migrated_from": "rappid:@kody-w/agent_team_agent:980cfbb18181a3fb321ee656ed6b2afc1b189314731279ee4506dea705026b5d",
   "_migrated_from_all": [
-    "rappid:@kody-w/agent_team_agent:0bafc1d39c52a65726403e84eac2d519d463987a56249a755b5936d6a38bc1f1"
+    "rappid:@kody-w/agent_team_agent:0bafc1d39c52a65726403e84eac2d519d463987a56249a755b5936d6a38bc1f1",
+    "rappid:@kody-w/agent_team_agent:980cfbb18181a3fb321ee656ed6b2afc1b189314731279ee4506dea705026b5d"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "0.1.2",
@@ -28,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 390,
-  "size_kb": 15.8,
-  "sha256": "0ed520946386fb7d52aa8f9af1774f2656f4e9bc33d7ff911737e6f67b498332",
+  "lines": 400,
+  "size_kb": 16.9,
+  "sha256": "60321dac590b9a80b2bcf85de9dea49e1617b00a6dbed28f4dcaf69d06ca40f4",
   "has_card": true,
   "added_at": "2026-05-05T10:49:27-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

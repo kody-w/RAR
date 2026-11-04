@@ -3,10 +3,12 @@
   "id": "kody-w__manage_memory_agent",
   "name": "ManageMemory",
   "rar_name": "@kody-w/manage_memory_agent",
-  "rappid": "rappid:@kody-w/manage_memory_agent:a7592c7e0286ee0d4aeee375a303b68a4cc33a8ca674c18cea48f9e57d39f13a",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
+  "rappid": "rappid:@kody-w/manage_memory_agent:f0f9a3736d4f59682b591938d8cb1d463be5619e6d464c81b4a0c37d30e44d7a",
+  "_migrated_from": "rappid:@kody-w/manage_memory_agent:a7592c7e0286ee0d4aeee375a303b68a4cc33a8ca674c18cea48f9e57d39f13a",
+  "_migrated_from_all": [
+    "rappid:@kody-w/manage_memory_agent:a7592c7e0286ee0d4aeee375a303b68a4cc33a8ca674c18cea48f9e57d39f13a"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.0",
   "publisher": "@kody-w",
   "category": "core",
@@ -23,9 +25,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 255,
-  "size_kb": 10.8,
-  "sha256": "a3866eaef31b35e1a7b9bb17755d42950e3b62ab4c04b051f3f0e27808acb435",
+  "lines": 265,
+  "size_kb": 12.0,
+  "sha256": "a37beaa2ab5282d9a36fbb1a10b1144649ef1a254baa437caaee0a3f87c30d1a",
   "has_card": true,
   "added_at": "2026-05-24T21:45:25-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

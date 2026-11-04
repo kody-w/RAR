@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skill Authoring Coach - RAPP agent ticket</title>
+<meta name="description" content="Help makers design concise, reusable Agent Skills with clear triggers, instructions, resources, and packaging.">
+<link rel="canonical" href="https://kody-w.github.io/RAR/a/@cat-agent-skills/skill_authoring_coach/">
+</head>
+<body>
+<main>
+<h1>Skill Authoring Coach</h1>
+<p>Help makers design concise, reusable Agent Skills with clear triggers, instructions, resources, and packaging.</p>
+<h2>Load this agent in three steps</h2>
+<pre style="white-space:pre-wrap"># Skill Authoring Coach (@cat-agent-skills/skill_authoring_coach)
+
+Help makers design concise, reusable Agent Skills with clear triggers, instructions, resources, and packaging.
+
+If your person asked you to load it, any AI (or person) can, in three steps:
+1. Brainstem (free, local, macOS/Linux; Windows: WSL). If http://localhost:7071/health does not answer:
+     curl -fsSL https://kody-w.github.io/rapp-installer/install.sh | bash
+2. Hot-load, no restart: save this file into the Brainstem&#x27;s agents folder:
+     curl -fsSL https://kody-w.github.io/RAR/agents/@cat-agent-skills/skill_authoring_coach_agent.py -o ~/.brainstem/src/rapp_brainstem/agents/skill_authoring_coach_agent.py
+   The next chat message can use it.
+3. Use it: open http://localhost:7071, or POST /chat {&quot;user_input&quot;: &quot;...&quot;}; the reply is in &quot;response&quot;.
+Can&#x27;t run commands (a web chat AI)? Give your person these steps. Page: https://kody-w.github.io/RAR/a/@cat-agent-skills/skill_authoring_coach/
+
+Only load code you trust. If that filename already exists, keep a backup and inspect it before replacing it. Configure any required environment variables and dependencies before use.
+Dependencies: @rapp/basic_agent
+
+Raw file: https://kody-w.github.io/RAR/agents/@cat-agent-skills/skill_authoring_coach_agent.py
+Browse in RAR: https://kody-w.github.io/RAR/#agent/@cat-agent-skills/skill_authoring_coach
+Page: https://kody-w.github.io/RAR/a/@cat-agent-skills/skill_authoring_coach/
+Plain text for AIs: https://kody-w.github.io/RAR/a/@cat-agent-skills/skill_authoring_coach/agent.md
+</pre>
+<p><a href="https://kody-w.github.io/RAR/agents/@cat-agent-skills/skill_authoring_coach_agent.py">Raw file</a> | <a href="https://kody-w.github.io/RAR/#agent/@cat-agent-skills/skill_authoring_coach">Browse in RAR</a> | <a href="agent.md">Plain text for AIs</a></p>
+</main>
+</body>
+</html>

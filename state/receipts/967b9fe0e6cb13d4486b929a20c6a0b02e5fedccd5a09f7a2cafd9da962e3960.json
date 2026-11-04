@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@rapter/hive_census_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "0cfcf32f07e2cfa253c4cef082160ef14743303ca387f83381e66d4483e1db2c"
+ },
+ "canonical_path": "agents/@rapter/hive_census_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_967b9fe0e6cb13d4486b929a20c6a0b02e5fedccd5a09f7a2cafd9da962e3960",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "c078c513615c23f87edf14ee12514105af913e06577cfe53b2e2b2368963d4ff",
+  "receipt": "rar_3e98432563660212aff02a36fa3fc5082da15d3d537c4d81398e1efdd6c8a876",
+  "version": "1.0.0"
+ },
+ "quality_tier": "verified",
+ "request_id": "req_967b9fe0e6cb13d4486b929a",
+ "revision_id": "967b9fe0e6cb13d4486b929a20c6a0b02e5fedccd5a09f7a2cafd9da962e3960",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "1.0.0"
+}

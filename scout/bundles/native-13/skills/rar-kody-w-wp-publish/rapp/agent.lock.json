@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/wp_publish_agent",
   "agent_file": "wp_publish_agent.py",
-  "agent_sha256": "2240c6e471f6c3c54e35e62553e9cd9af314cd520790120d23e88045120ee87a",
+  "agent_sha256": "0d2e51f233adabe41c5be35467adf84009cd0fd7a424bfaeee3fd83c807c7fb4",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WordPressPublishAgent",
   "host_dependencies": [

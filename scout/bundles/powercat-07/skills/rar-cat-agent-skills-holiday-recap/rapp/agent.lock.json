@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/holiday_recap",
   "agent_file": "holiday_recap_agent.py",
-  "agent_sha256": "2c2f3afcaaf83a61a8e802af8b22881c167e51e5fb4b813636c06dc77ce2e32a",
+  "agent_sha256": "0b187c270dc5fe3382fefdb070aeb9946a808706a8dce261c598b2bb9883407b",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "HolidayRecap",
   "host_dependencies": [],

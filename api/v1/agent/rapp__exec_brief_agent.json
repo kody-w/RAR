@@ -3,11 +3,12 @@
   "id": "rapp__exec_brief_agent",
   "name": "Executive Brief",
   "rar_name": "@rapp/exec_brief_agent",
-  "rappid": "rappid:@rapp/exec_brief_agent:64838303ca3c7c1eb3f8a7683ab42f4850743c074448d5d17d523cced4124f3f",
-  "_migrated_from": "rappid:@rapp/exec_brief_agent:fb8f5cabfad968d4fd88958e5bb51bd3ad90a948be5fc8ca1b56caae654f0f90",
+  "rappid": "rappid:@rapp/exec_brief_agent:483c4a9c64e61b96d3f5767a81ef9c4fe303c276b3f503790f6fe74046742a26",
+  "_migrated_from": "rappid:@rapp/exec_brief_agent:64838303ca3c7c1eb3f8a7683ab42f4850743c074448d5d17d523cced4124f3f",
   "_migrated_from_all": [
     "rappid:v2:agent:@rapp/exec_brief_agent:4f2fea99af55fc820d350f71f91b4e12",
-    "rappid:@rapp/exec_brief_agent:fb8f5cabfad968d4fd88958e5bb51bd3ad90a948be5fc8ca1b56caae654f0f90"
+    "rappid:@rapp/exec_brief_agent:fb8f5cabfad968d4fd88958e5bb51bd3ad90a948be5fc8ca1b56caae654f0f90",
+    "rappid:@rapp/exec_brief_agent:64838303ca3c7c1eb3f8a7683ab42f4850743c074448d5d17d523cced4124f3f"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.2.2",
@@ -23,9 +24,9 @@
   "quality_tier": "official",
   "requires_env": [],
   "dependencies": [],
-  "lines": 685,
-  "size_kb": 27.2,
-  "sha256": "b43fbf2ac29f381c41c6cd7e2a247ffb7a6143c579e095c4ab2d961bf26ef45d",
+  "lines": 695,
+  "size_kb": 28.3,
+  "sha256": "6a532d4551853ff4ec03b015ae683962b339dbbcdc609990e0259d70347dea9c",
   "has_card": true,
   "added_at": "2026-04-27T21:23:24Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

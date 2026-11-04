@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/style_analyzer",
   "agent_file": "style_analyzer_agent.py",
-  "agent_sha256": "640028ca7ac28a8544a35fd8371ecdd351608fe501ca4b59525f116e1e3c0b7c",
+  "agent_sha256": "1363ed8c46022859bf6dc1a2b7e0d09752f35890797cdc99d9530e2af2965880",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "StyleAnalyzer",
   "host_dependencies": [],

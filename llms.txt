@@ -4,6 +4,7 @@
 > Install for a person from any AI (GitHub Copilot Agent mode by default): the RAPP skill https://kody-w.github.io/grail-layers/skills/rar-easy-mode/SKILL.md — they say "Show me RAR" or "Give me <names> using RAR Easy Mode and test it for me".
 
 - Catalog (JSON): https://kody-w.github.io/RAR/registry.json
+- Agent tickets: rewrite https://kody-w.github.io/RAR/#agent/@pub/name to https://kody-w.github.io/RAR/a/@pub/name/agent.md and fetch it for the agent and the three load steps (no JavaScript required).
 - Packs and starters (one cart): https://kody-w.github.io/RAR/distros.html
 - Agent template: https://kody-w.github.io/RAR/template_agent.py
 - Install anything: curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- <pack or @publisher/agent> ...

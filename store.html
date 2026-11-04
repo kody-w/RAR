@@ -6072,7 +6072,7 @@ function loadSharedCart() {
 function esc(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = String(s); return d.innerHTML; }
 function copyEl(id) { navigator.clipboard.writeText(document.getElementById(id)?.value || document.getElementById(id)?.textContent?.trim()); showToast('Copied!', 'success'); }
 function shareAgent(name) {
-  const url = `${window.location.origin}${window.location.pathname}#agent/${encodeURIComponent(name)}`;
+  const url = new URL('a/' + name + '/', window.location.href).href;
   navigator.clipboard.writeText(url);
   showToast('Agent link copied!', 'success');
 }

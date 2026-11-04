@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__explainer_video",
   "name": "Explainer Video",
   "rar_name": "@cat-agent-skills/explainer_video",
-  "rappid": "rappid:@cat-agent-skills/explainer_video:fcfe84bc041d4183819eddbf4ba67b53902716600795c3a7732b409f5e67fa3d",
-  "_migrated_from": "rappid:@cat-agent-skills/explainer_video:f3c910e834b7da80b7e7ac2c32e632996cec9b33fc77aa8eb960abbe8851aaa6",
+  "rappid": "rappid:@cat-agent-skills/explainer_video:d1ffa45f0e59652d8615682e90c4ab3671403ed7f5d572dba36f2406eeee8194",
+  "_migrated_from": "rappid:@cat-agent-skills/explainer_video:fcfe84bc041d4183819eddbf4ba67b53902716600795c3a7732b409f5e67fa3d",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/explainer_video:f3c910e834b7da80b7e7ac2c32e632996cec9b33fc77aa8eb960abbe8851aaa6"
+    "rappid:@cat-agent-skills/explainer_video:f3c910e834b7da80b7e7ac2c32e632996cec9b33fc77aa8eb960abbe8851aaa6",
+    "rappid:@cat-agent-skills/explainer_video:fcfe84bc041d4183819eddbf4ba67b53902716600795c3a7732b409f5e67fa3d"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -25,9 +26,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.1,
-  "sha256": "9b6c64387e7189d3525390d4505dc759e7542d6c656deae1f0c1414bdb4ba0bc",
+  "lines": 272,
+  "size_kb": 13.3,
+  "sha256": "9686a832209ed4f3e113bf25dc1f2bbd172540b760616a84fc96b45fc3d87f52",
   "has_card": true,
   "added_at": "2026-08-23T19:15:32-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

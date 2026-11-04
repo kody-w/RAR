@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/source_capture_agent",
   "agent_file": "source_capture_agent.py",
-  "agent_sha256": "d91eaa6092fa5f3b81f17de21926b3bfa1268370609ec9208e312d8a6d036971",
+  "agent_sha256": "89d785bcb732d5d8cfb685873d539272f9fccdaeb5c4d556c9f3b39ba2830986",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "SourceCaptureAgent",
   "host_dependencies": [],

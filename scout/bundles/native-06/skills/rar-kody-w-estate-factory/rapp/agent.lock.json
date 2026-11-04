@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/estate_factory",
   "agent_file": "estate_factory_agent.py",
-  "agent_sha256": "7558023b529e952b58084d09cf0c93c1a8cdea34684302e62e6dba5b0ccbc238",
+  "agent_sha256": "46b070177e96da94f21bacbd45bfb0fa19f01d9aa79af7727bf1ff8aadd8e7b3",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "EstateFactoryAgent",
   "host_dependencies": [],

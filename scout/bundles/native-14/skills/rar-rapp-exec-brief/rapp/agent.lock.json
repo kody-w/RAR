@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/exec_brief_agent",
   "agent_file": "exec_brief_agent.py",
-  "agent_sha256": "b43fbf2ac29f381c41c6cd7e2a247ffb7a6143c579e095c4ab2d961bf26ef45d",
+  "agent_sha256": "6a532d4551853ff4ec03b015ae683962b339dbbcdc609990e0259d70347dea9c",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ExecBrief",
   "host_dependencies": [],

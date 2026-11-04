@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/knowledge_source_router",
   "agent_file": "knowledge_source_router_agent.py",
-  "agent_sha256": "b8e2822507b13775fff2410fd66bb59f29f9c622a8d8e45b844f4fa235f54569",
+  "agent_sha256": "28de060ce9e856846c1ed608ec2cee0367fb8584d3b8b16ad583db18d97fe305",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "KnowledgeSourceRouter",
   "host_dependencies": [],

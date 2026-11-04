@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/github_agent_library_agent",
   "agent_file": "github_agent_library_agent.py",
-  "agent_sha256": "7d25b2d553356cfcb2f74921552b984d8e348ab56f20984fcda831eb65336923",
+  "agent_sha256": "b9bd6d0f87082877c37cca17be3a1d5ba873dcf736ce9805538eb8affcfadbab",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "GitHubAgentLibraryManager",
   "host_dependencies": [

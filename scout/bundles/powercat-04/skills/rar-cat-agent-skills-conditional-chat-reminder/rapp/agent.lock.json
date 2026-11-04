@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/conditional_chat_reminder",
   "agent_file": "conditional_chat_reminder_agent.py",
-  "agent_sha256": "1452500a768e389d1c97a53057224a79ac96991e2267344caed384994b7a8c46",
+  "agent_sha256": "903949cd5aff8c68b6177aff8e377b4e321f90c6d9e30f3fb6db7e177293e57c",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ConditionalChatReminder",
   "host_dependencies": [],

@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__pattern_radar",
   "name": "Pattern Radar",
   "rar_name": "@cat-agent-skills/pattern_radar",
-  "rappid": "rappid:@cat-agent-skills/pattern_radar:f61ab91412def5534671c8e927a7bcf429ca960ece122f02c659dcb59cad3d5e",
-  "_migrated_from": "rappid:@cat-agent-skills/pattern_radar:e1a98cb01ed9baf41c3a4b5f6429e3d3b0781962d51ed3c25571863d9a350526",
+  "rappid": "rappid:@cat-agent-skills/pattern_radar:ae85c3aa59c2cc73fe2080f4bd9e8219c14d2acafc1f2508dc46e74c5c1b9503",
+  "_migrated_from": "rappid:@cat-agent-skills/pattern_radar:f61ab91412def5534671c8e927a7bcf429ca960ece122f02c659dcb59cad3d5e",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/pattern_radar:e1a98cb01ed9baf41c3a4b5f6429e3d3b0781962d51ed3c25571863d9a350526"
+    "rappid:@cat-agent-skills/pattern_radar:e1a98cb01ed9baf41c3a4b5f6429e3d3b0781962d51ed3c25571863d9a350526",
+    "rappid:@cat-agent-skills/pattern_radar:f61ab91412def5534671c8e927a7bcf429ca960ece122f02c659dcb59cad3d5e"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -27,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.3,
-  "sha256": "9930229a7779137b593687d7660122e4af578d169583fbe1c7cd891c624ac443",
+  "lines": 272,
+  "size_kb": 13.5,
+  "sha256": "90a634b339d0eba2c582866b47bb51b2256d8ec11182e3503bebd5486dbe1d1b",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

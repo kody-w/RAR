@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/twin_egg_hatcher",
   "agent_file": "twin_egg_hatcher_agent.py",
-  "agent_sha256": "2b59ec448480ebb09d910683e37b1e5925edcf7aa26b3695da6f2a6aa882ca9f",
+  "agent_sha256": "300dd7302be574e2460c2ccd873c930fb9a6f07057078afbe3da114c84b23ef2",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "HatchTwinEggAgent",
   "host_dependencies": [],

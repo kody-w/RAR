@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/route_map_visualizer",
   "agent_file": "route_map_visualizer_agent.py",
-  "agent_sha256": "1b02f419c31f24a0b8e108a23abe9a6c0007030ef20d5d10c1833c293035080c",
+  "agent_sha256": "2f00ce5f28aaef338a2dcf9c25b34c562518cbee5d91d999961a8254e22a5115",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RouteMapVisualizer",
   "host_dependencies": [],

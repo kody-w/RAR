@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/first_hour_agent",
   "agent_file": "first_hour_agent.py",
-  "agent_sha256": "61dd52033a67e19c2c88909a379cfd2a855a1c18f76065ecde2bb330a3681997",
+  "agent_sha256": "c9db0320a031fc0801f3fca2d73bf8a1a3d44987e1da95d3758f933a83c46585",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "FirstHourAgent",
   "host_dependencies": [],

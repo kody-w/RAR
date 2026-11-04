@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/fleet_commander",
   "agent_file": "fleet_commander_agent.py",
-  "agent_sha256": "2ba26bb68c2fdaf8f75f5068fe244d227330e8ab96c7ee6516c6d2530b386487",
+  "agent_sha256": "2352d839c61457a7cd0d108e56d64814cff7f3dcdabe942d07404063e25016e4",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "FleetCommanderAgent",
   "host_dependencies": [],

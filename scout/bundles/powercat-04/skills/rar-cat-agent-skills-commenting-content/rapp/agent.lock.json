@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/commenting_content",
   "agent_file": "commenting_content_agent.py",
-  "agent_sha256": "896dfb9f478e7ef61d68fb5008dbe8c805c595a8217abc0e5c3a29e685322821",
+  "agent_sha256": "9c7b154df5c10cdacffbad111641404a33a2d64cc6cb64867c867d8df66f8489",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CommentingContent",
   "host_dependencies": [],

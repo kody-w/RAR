@@ -3,10 +3,11 @@
   "id": "kody-w__kody2day_studio_agent",
   "name": "Kody2day Studio",
   "rar_name": "@kody-w/kody2day_studio_agent",
-  "rappid": "rappid:@kody-w/kody2day_studio_agent:bd7bc2d13c776af6001bd7df114df718a3e6aad92280158ea6e8aeea376e5a29",
-  "_migrated_from": "rappid:@kody-w/kody2day_studio_agent:fb85c59f59d7c4c1c6ba26e636f6567383c46e5bc16ad11875ed9e2bdca173e6",
+  "rappid": "rappid:@kody-w/kody2day_studio_agent:92b77df2471c4ee4db7b03ab7931cc0054984068e247e250ac4f0e6730d9c205",
+  "_migrated_from": "rappid:@kody-w/kody2day_studio_agent:bd7bc2d13c776af6001bd7df114df718a3e6aad92280158ea6e8aeea376e5a29",
   "_migrated_from_all": [
-    "rappid:@kody-w/kody2day_studio_agent:fb85c59f59d7c4c1c6ba26e636f6567383c46e5bc16ad11875ed9e2bdca173e6"
+    "rappid:@kody-w/kody2day_studio_agent:fb85c59f59d7c4c1c6ba26e636f6567383c46e5bc16ad11875ed9e2bdca173e6",
+    "rappid:@kody-w/kody2day_studio_agent:bd7bc2d13c776af6001bd7df114df718a3e6aad92280158ea6e8aeea376e5a29"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.0",
@@ -29,9 +30,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 328,
-  "size_kb": 17.0,
-  "sha256": "520f26e2500bd6ec02288d510735b6ed1c3997ca824735865695c47ae17645d9",
+  "lines": 338,
+  "size_kb": 18.2,
+  "sha256": "d20355f26593583aedbfb7d091a6d6a36b9e1798294baec17cfdc05cfa90b1bb",
   "has_card": true,
   "added_at": "2026-08-18T22:13:18-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

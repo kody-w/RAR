@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/bond_rhythm_agent",
   "agent_file": "bond_rhythm_agent.py",
-  "agent_sha256": "88bb285bbf26b68fee053d24bf70c08ae1ec42e4c3a03b9afe7de2c404a5a219",
+  "agent_sha256": "7bfa5d0afca6919cedff2409abf22fdd8a715525de81426e68025429ef7cb585",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BondRhythmAgent",
   "host_dependencies": [],

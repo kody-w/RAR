@@ -3,10 +3,11 @@
   "id": "kody-w__rappter_engine_agent",
   "name": "RappterEngine",
   "rar_name": "@kody-w/rappter_engine_agent",
-  "rappid": "rappid:@kody-w/rappter_engine_agent:361750ea315ebcd743884c3ae0d4a9a99439bdf32d91170a378863f82ac69e21",
-  "_migrated_from": "rappid:@kody-w/rappter_engine_agent:8afa3bc0e18b1c7be1a8ef31a9904add0775b3e911f048bcf289901d84cb94ec",
+  "rappid": "rappid:@kody-w/rappter_engine_agent:6790b5c8f6705c46888ac4a90f596918d5a231988e55ba7bc73e106f4ba68192",
+  "_migrated_from": "rappid:@kody-w/rappter_engine_agent:361750ea315ebcd743884c3ae0d4a9a99439bdf32d91170a378863f82ac69e21",
   "_migrated_from_all": [
-    "rappid:@kody-w/rappter_engine_agent:8afa3bc0e18b1c7be1a8ef31a9904add0775b3e911f048bcf289901d84cb94ec"
+    "rappid:@kody-w/rappter_engine_agent:8afa3bc0e18b1c7be1a8ef31a9904add0775b3e911f048bcf289901d84cb94ec",
+    "rappid:@kody-w/rappter_engine_agent:361750ea315ebcd743884c3ae0d4a9a99439bdf32d91170a378863f82ac69e21"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -27,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 479,
-  "size_kb": 17.4,
-  "sha256": "5679d82a2ea53a7dc8ae3b9c78e932ed83d068947f07d53be3af7582e32f7fd9",
+  "lines": 489,
+  "size_kb": 18.6,
+  "sha256": "4d532a0027f1424511d571af7f1c8e31d2fb73cfc00b10320d119e94dc00422e",
   "has_card": true,
   "added_at": "2026-05-24T21:45:25-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

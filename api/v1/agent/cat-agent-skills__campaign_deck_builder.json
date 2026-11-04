@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__campaign_deck_builder",
   "name": "Campaign Deck Builder",
   "rar_name": "@cat-agent-skills/campaign_deck_builder",
-  "rappid": "rappid:@cat-agent-skills/campaign_deck_builder:d13bb1fb56f86b471a6922b07e49cca342d1e368703d53ca59c1c1984d9c3945",
-  "_migrated_from": "rappid:@cat-agent-skills/campaign_deck_builder:655c07724d8519e43432beca64570b96371a0ab752d6113bbbe3c29ee5c4f5a0",
+  "rappid": "rappid:@cat-agent-skills/campaign_deck_builder:17351fe3427d8c97d5d565cd1d23a665a74216b59960558f1c6d6671253bc25e",
+  "_migrated_from": "rappid:@cat-agent-skills/campaign_deck_builder:d13bb1fb56f86b471a6922b07e49cca342d1e368703d53ca59c1c1984d9c3945",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/campaign_deck_builder:655c07724d8519e43432beca64570b96371a0ab752d6113bbbe3c29ee5c4f5a0"
+    "rappid:@cat-agent-skills/campaign_deck_builder:655c07724d8519e43432beca64570b96371a0ab752d6113bbbe3c29ee5c4f5a0",
+    "rappid:@cat-agent-skills/campaign_deck_builder:d13bb1fb56f86b471a6922b07e49cca342d1e368703d53ca59c1c1984d9c3945"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -26,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.3,
-  "sha256": "e7d5cb5432ba712afe2da34ab2bec2654a82864cd513b584af374c5a67f49e33",
+  "lines": 272,
+  "size_kb": 13.5,
+  "sha256": "c83e942f9e64a210e436258385a286a7ad7808a844d8e3b0bfcba90cdae4917a",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

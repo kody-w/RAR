@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/breathing_room",
   "agent_file": "breathing_room_agent.py",
-  "agent_sha256": "fe3c40feeeb2605e05593311b3be9795246c664abc303adc3c2602715001418b",
+  "agent_sha256": "c1c264754985128b9c1ffd20b0e9b22a6766c10b6b2e72a0714764af07e00b0a",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "BreathingRoom",
   "host_dependencies": [],

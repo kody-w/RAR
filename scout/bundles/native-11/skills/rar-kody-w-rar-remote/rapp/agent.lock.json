@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/rar_remote_agent",
   "agent_file": "rar_remote_agent.py",
-  "agent_sha256": "6fe73b97844e2046ef4f3fc83d9dc0f65a1159c1b778796bfc8f76c0c4b1e63a",
+  "agent_sha256": "c4743a86ee97d68c37ecacd7a811e98452ad49f092baa1ee83150fb3a036eac3",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RARRemoteAgent",
   "host_dependencies": [

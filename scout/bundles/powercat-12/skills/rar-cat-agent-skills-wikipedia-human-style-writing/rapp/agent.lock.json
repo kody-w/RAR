@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/wikipedia_human_style_writing",
   "agent_file": "wikipedia_human_style_writing_agent.py",
-  "agent_sha256": "fd27623e4e77260d8a51a01f90010f62888a7b07f3eb2d4dbd7363d5ccf6e8bd",
+  "agent_sha256": "ec40d454b5af83d585e82045cc3a98514cf04def8ec70f25a3e94f819abe8bf2",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "WikipediaHumanStyleWriting",
   "host_dependencies": [],

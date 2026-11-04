@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/vacation_urgent_forwarder",
   "agent_file": "vacation_urgent_forwarder_agent.py",
-  "agent_sha256": "533f53f2a72c2b74cc2cd7496823a3c4d5ae60309c4774d192b6fd7b39c2bf84",
+  "agent_sha256": "c4a04ec663c7617f56de6dfe01f5dff6d5ee25a69d631c6e6d25f66d513f1024",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "VacationUrgentForwarder",
   "host_dependencies": [],

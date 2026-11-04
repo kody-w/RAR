@@ -3,10 +3,11 @@
   "id": "howardh__tuftelove_agent",
   "name": "TufteLove",
   "rar_name": "@howardh/tuftelove_agent",
-  "rappid": "rappid:@howardh/tuftelove_agent:c19440889ad45240e6ad6ed463f7f5f1b69139f21b96560215844d04ed1e68af",
-  "_migrated_from": "rappid:@howardh/tuftelove_agent:a5c51bdfbbfa7e2b7d09af7ae332fe65bdbf17d7afa585edcc0da5c12f126a17",
+  "rappid": "rappid:@howardh/tuftelove_agent:17daf7cca16ad8cf0cee0c24d5fcdce57de97c4836b7237ae190393c23c70185",
+  "_migrated_from": "rappid:@howardh/tuftelove_agent:c19440889ad45240e6ad6ed463f7f5f1b69139f21b96560215844d04ed1e68af",
   "_migrated_from_all": [
-    "rappid:@howardh/tuftelove_agent:a5c51bdfbbfa7e2b7d09af7ae332fe65bdbf17d7afa585edcc0da5c12f126a17"
+    "rappid:@howardh/tuftelove_agent:a5c51bdfbbfa7e2b7d09af7ae332fe65bdbf17d7afa585edcc0da5c12f126a17",
+    "rappid:@howardh/tuftelove_agent:c19440889ad45240e6ad6ed463f7f5f1b69139f21b96560215844d04ed1e68af"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -29,9 +30,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 512,
-  "size_kb": 28.3,
-  "sha256": "f5bba7ff967f166255b5220496ae7e86cb5f636730cb01a43abbf32113ebd46d",
+  "lines": 522,
+  "size_kb": 29.5,
+  "sha256": "fe047c604edf53eac949ec02837dac4c6b32cba0db69d3d99119dbc3e50caf14",
   "has_card": true,
   "added_at": "2026-05-24T21:45:25-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

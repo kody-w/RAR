@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@kody-w/parallel_dimensions_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "d1e6ed9c0a69f581b705a4e8ee01440d5a0e3b5ad9efa9a78fcd156eb4ac1aad"
+ },
+ "canonical_path": "agents/@kody-w/parallel_dimensions_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_6547ad1b500059b7fa23cfefcc617033c6639e3edd81eff720b52a3d3b7ed247",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "ad3d5af03678ded14558a1f449a5ba4002e15dbb1ee101c37349da16ba7b2c2b",
+  "receipt": "rar_0a5f9aed49e9702012fd2c582e410a8381612d44c4361285224e33d7192bc220",
+  "version": "1.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_6547ad1b500059b7fa23cfef",
+ "revision_id": "6547ad1b500059b7fa23cfefcc617033c6639e3edd81eff720b52a3d3b7ed247",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "1.0.0"
+}

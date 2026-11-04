@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/competitive_battlecard_builder",
   "agent_file": "competitive_battlecard_builder_agent.py",
-  "agent_sha256": "c2ecfa863e2631bbee32804ad0b3e1d10b4af20af55d7938b5d97c88c56e92f8",
+  "agent_sha256": "89f511488361213aaf07ded3e0492e5111c9ad61267bbdcaf45e2363e34deff7",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "CompetitiveBattlecardBuilder",
   "host_dependencies": [],

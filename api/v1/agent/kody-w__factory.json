@@ -3,10 +3,11 @@
   "id": "kody-w__factory",
   "name": "RAPP to Copilot Studio Factory",
   "rar_name": "@kody-w/factory",
-  "rappid": "rappid:@kody-w/factory:039012560f136cabaca7c0d1ad793fbbe4b18060547d839e1779eadf161921ea",
-  "_migrated_from": "rappid:@kody-w/factory:6186dee7acf01f377afded08b7ebc328cc8de88f86e45420fb2e89a858536a39",
+  "rappid": "rappid:@kody-w/factory:8f9efa3d31292b724137703fc7bdd3d5f8e3bf762290eb012ff7c2ce907697aa",
+  "_migrated_from": "rappid:@kody-w/factory:039012560f136cabaca7c0d1ad793fbbe4b18060547d839e1779eadf161921ea",
   "_migrated_from_all": [
-    "rappid:@kody-w/factory:6186dee7acf01f377afded08b7ebc328cc8de88f86e45420fb2e89a858536a39"
+    "rappid:@kody-w/factory:6186dee7acf01f377afded08b7ebc328cc8de88f86e45420fb2e89a858536a39",
+    "rappid:@kody-w/factory:039012560f136cabaca7c0d1ad793fbbe4b18060547d839e1779eadf161921ea"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.3",
@@ -27,9 +28,9 @@
     "@rapp/basic_agent",
     "@kody-w/copilot_studio_parity_deploy"
   ],
-  "lines": 495,
-  "size_kb": 18.1,
-  "sha256": "e81878cc359660ac98047c607bea3245cda5967f4725091ded356597309c2b77",
+  "lines": 505,
+  "size_kb": 19.3,
+  "sha256": "72dc8b72531aa6133effb8dc23175b85889d63f7aa2bece4970ddca60792ddbf",
   "has_card": true,
   "added_at": "2026-08-11T17:32:02Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

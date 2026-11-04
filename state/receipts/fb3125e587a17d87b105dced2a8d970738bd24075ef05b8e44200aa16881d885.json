@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@kody-w/play_youtube_video_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "ba4da935eacacd05f6e4f7c8fb3acfcce6277922ff3ac78b0bef7fb4fb3cc8b6"
+ },
+ "canonical_path": "agents/@kody-w/play_youtube_video_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_fb3125e587a17d87b105dced2a8d970738bd24075ef05b8e44200aa16881d885",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "fa592979b08d6ddeddcc1c6ebd54318f5fd3e37a528d2d22958078a5a514dafb",
+  "receipt": "rar_c903f6dae8cd79548f33c21989f392f974ab99a2cdccafcd7f1e9e7c9e5b8e59",
+  "version": "1.0.0"
+ },
+ "quality_tier": "community",
+ "request_id": "req_fb3125e587a17d87b105dced",
+ "revision_id": "fb3125e587a17d87b105dced2a8d970738bd24075ef05b8e44200aa16881d885",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "1.0.0"
+}

@@ -1,7 +1,7 @@
 {
   "agent": "@discreetRappers/rapp_pipeline_agent",
   "agent_file": "rapp_pipeline_agent.py",
-  "agent_sha256": "feb4bd1dfa316f9aaa83bea4e4c220084794d1207ebee2ba4c3d823aa6bc7b44",
+  "agent_sha256": "a5dc861857f4108578603c1ce6a547ee766c55cd2eb8b0bd5f6cfd1378954089",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "RAPPAgent",
   "host_dependencies": [

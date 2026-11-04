@@ -3,11 +3,12 @@
   "id": "discreetRappers__dynamics_crud_agent",
   "name": "DynamicsCRUD",
   "rar_name": "@discreetRappers/dynamics_crud_agent",
-  "rappid": "rappid:@discreetRappers/dynamics_crud_agent:b4568f21d1a3dd4b92a925c3c740b83b90a04ca7c037fb4265c0a5979f5ced0b",
-  "_migrated_from": "rappid:@discreetRappers/dynamics_crud_agent:538d33d9b04a7b8c36c531d485bdb86996ed3777422f8a66e094fc12d0a196d3",
+  "rappid": "rappid:@discreetRappers/dynamics_crud_agent:7418f244dc2788ab70488028e36e98965066e2d5d0e78f711b33202b5a07e798",
+  "_migrated_from": "rappid:@discreetRappers/dynamics_crud_agent:b4568f21d1a3dd4b92a925c3c740b83b90a04ca7c037fb4265c0a5979f5ced0b",
   "_migrated_from_all": [
     "rappid:v2:agent:@discreetRappers/dynamics_crud_agent:7829a1d0a0d53506eae7d975e38d37e6",
-    "rappid:@discreetRappers/dynamics_crud_agent:538d33d9b04a7b8c36c531d485bdb86996ed3777422f8a66e094fc12d0a196d3"
+    "rappid:@discreetRappers/dynamics_crud_agent:538d33d9b04a7b8c36c531d485bdb86996ed3777422f8a66e094fc12d0a196d3",
+    "rappid:@discreetRappers/dynamics_crud_agent:b4568f21d1a3dd4b92a925c3c740b83b90a04ca7c037fb4265c0a5979f5ced0b"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -27,9 +28,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 418,
-  "size_kb": 21.2,
-  "sha256": "4e5e25a1d96fb04d15be965f7694df521b343684c68eb165da12aab4fbb8e52e",
+  "lines": 428,
+  "size_kb": 22.4,
+  "sha256": "5ecb7c5df541c3659764417cb7cc0122fec1954583390881e4e9fee7bea60e3a",
   "has_card": true,
   "added_at": "2026-04-06T16:39:03-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

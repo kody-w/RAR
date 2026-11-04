@@ -3,10 +3,11 @@
   "id": "kody-w__second_life_agent",
   "name": "Second Life",
   "rar_name": "@kody-w/second_life_agent",
-  "rappid": "rappid:@kody-w/second_life_agent:d0afb24ca5f747c8cc5c89347b59ac294a12275d637e53d2e2bf283d32d24304",
-  "_migrated_from": "rappid:@kody-w/second_life_agent:f8fd149dbad0dc1317fc82e581ecb088f125bacb5c3eef6d9a40c493fe1dd759",
+  "rappid": "rappid:@kody-w/second_life_agent:0fe54db526c61d3a5b3f6b7e4e48f9fc7cf5062f3308b57c52add9da615c7289",
+  "_migrated_from": "rappid:@kody-w/second_life_agent:d0afb24ca5f747c8cc5c89347b59ac294a12275d637e53d2e2bf283d32d24304",
   "_migrated_from_all": [
-    "rappid:@kody-w/second_life_agent:f8fd149dbad0dc1317fc82e581ecb088f125bacb5c3eef6d9a40c493fe1dd759"
+    "rappid:@kody-w/second_life_agent:f8fd149dbad0dc1317fc82e581ecb088f125bacb5c3eef6d9a40c493fe1dd759",
+    "rappid:@kody-w/second_life_agent:d0afb24ca5f747c8cc5c89347b59ac294a12275d637e53d2e2bf283d32d24304"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.1",
@@ -26,9 +27,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 119,
-  "size_kb": 5.6,
-  "sha256": "bee60124864e6783bd6de6d039904dd3890a602008b56367bfdc83a754978ba3",
+  "lines": 129,
+  "size_kb": 6.7,
+  "sha256": "e67740d2ab1a489c29b4b274e2d20cb9df720603ba7963a10b0fde207f6c8aa1",
   "has_card": true,
   "added_at": "2026-06-20T18:41:00-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

@@ -3,10 +3,11 @@
   "id": "kody-w__perpetual_loop_factory",
   "name": "PerpetualLoopFactory",
   "rar_name": "@kody-w/perpetual_loop_factory",
-  "rappid": "rappid:@kody-w/perpetual_loop_factory:2b6c15262eb69bc1fe3691ff054e9d2f91668d6e134f250e8c6bf279b3fe11f5",
-  "_migrated_from": "rappid:@kody-w/perpetual_loop_factory:1c9d728dad130aa8e0383501566055b810ffdd1322adc604a6972d5ce7b913f0",
+  "rappid": "rappid:@kody-w/perpetual_loop_factory:05f90c96e7774e19572efd355027da8774d29a6e1e3766bafeacffa224aa6c1f",
+  "_migrated_from": "rappid:@kody-w/perpetual_loop_factory:2b6c15262eb69bc1fe3691ff054e9d2f91668d6e134f250e8c6bf279b3fe11f5",
   "_migrated_from_all": [
-    "rappid:@kody-w/perpetual_loop_factory:1c9d728dad130aa8e0383501566055b810ffdd1322adc604a6972d5ce7b913f0"
+    "rappid:@kody-w/perpetual_loop_factory:1c9d728dad130aa8e0383501566055b810ffdd1322adc604a6972d5ce7b913f0",
+    "rappid:@kody-w/perpetual_loop_factory:2b6c15262eb69bc1fe3691ff054e9d2f91668d6e134f250e8c6bf279b3fe11f5"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "1.0.3",
@@ -28,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 1352,
-  "size_kb": 54.3,
-  "sha256": "1e53fe183fd90dfda9e8c438e9d8b3fb82f98254763757ed87a9c28869477f53",
+  "lines": 1362,
+  "size_kb": 55.5,
+  "sha256": "0d2ef9275392dd839e64c7140ef5f57fbb9a108e5ee0ee619d4c77d29811616d",
   "has_card": true,
   "added_at": "2026-05-05T08:57:33-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

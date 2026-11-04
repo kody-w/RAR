@@ -3,11 +3,12 @@
   "id": "rarbookworld__momentfactory",
   "name": "MomentFactory (converged singleton)",
   "rar_name": "@rarbookworld/momentfactory",
-  "rappid": "rappid:@rarbookworld/momentfactory:5e2b4d285c830da3303df4f4349cac47d048dfe9787213c1ad0399863260059a",
-  "_migrated_from": "rappid:@rarbookworld/momentfactory:b582303218152a71e18589eae58a785699c3e27cb784677e21ee45aa3d8ba5d2",
+  "rappid": "rappid:@rarbookworld/momentfactory:d67ba3fa5cbe5a6a89f3693da4b0d4afd7ddfb11f917f8a53216ed691dc32095",
+  "_migrated_from": "rappid:@rarbookworld/momentfactory:5e2b4d285c830da3303df4f4349cac47d048dfe9787213c1ad0399863260059a",
   "_migrated_from_all": [
     "rappid:v2:agent:@rarbookworld/momentfactory:d339ee576abe2968190a246caa6354d8",
-    "rappid:@rarbookworld/momentfactory:b582303218152a71e18589eae58a785699c3e27cb784677e21ee45aa3d8ba5d2"
+    "rappid:@rarbookworld/momentfactory:b582303218152a71e18589eae58a785699c3e27cb784677e21ee45aa3d8ba5d2",
+    "rappid:@rarbookworld/momentfactory:5e2b4d285c830da3303df4f4349cac47d048dfe9787213c1ad0399863260059a"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "0.1.2",
@@ -31,9 +32,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 527,
-  "size_kb": 23.9,
-  "sha256": "08cddf370c9a202ceb0e52ecb41dd6882d3e314d46eeb796e9e1387d9b86ecb7",
+  "lines": 537,
+  "size_kb": 25.1,
+  "sha256": "7c0330f8e2a55cce2e58e26cce883b2218f146536d13e23bd5af47e5986bebaf",
   "has_card": true,
   "added_at": "2026-04-19T18:58:15-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

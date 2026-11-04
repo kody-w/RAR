@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/skill_toaster_agent",
   "agent_file": "skill_toaster_agent.py",
-  "agent_sha256": "e90d6b7dc0ffe83e5274346aeb17f79e94894ee345685f897fbd8aa0e9ea6508",
+  "agent_sha256": "48aea57c434c6992922172546b2ae02f219015377a34be1ce5dfdb837d9d2b0c",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "SkillToasterEngine",
   "host_dependencies": [],

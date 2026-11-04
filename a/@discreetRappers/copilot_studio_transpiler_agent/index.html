@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CopilotStudioTranspiler - RAPP agent ticket</title>
+<meta name="description" content="Transpiles RAPP Python agents to fully native Copilot Studio solutions without Azure Function dependency.">
+<link rel="canonical" href="https://kody-w.github.io/RAR/a/@discreetRappers/copilot_studio_transpiler_agent/">
+</head>
+<body>
+<main>
+<h1>CopilotStudioTranspiler</h1>
+<p>Transpiles RAPP Python agents to fully native Copilot Studio solutions without Azure Function dependency.</p>
+<h2>Load this agent in three steps</h2>
+<pre style="white-space:pre-wrap"># CopilotStudioTranspiler (@discreetRappers/copilot_studio_transpiler_agent)
+
+Transpiles RAPP Python agents to fully native Copilot Studio solutions without Azure Function dependency.
+
+If your person asked you to load it, any AI (or person) can, in three steps:
+1. Brainstem (free, local, macOS/Linux; Windows: WSL). If http://localhost:7071/health does not answer:
+     curl -fsSL https://kody-w.github.io/rapp-installer/install.sh | bash
+2. Hot-load, no restart: save this file into the Brainstem&#x27;s agents folder:
+     curl -fsSL https://kody-w.github.io/RAR/agents/@discreetRappers/copilot_studio_transpiler_agent.py -o ~/.brainstem/src/rapp_brainstem/agents/copilot_studio_transpiler_agent.py
+   The next chat message can use it.
+3. Use it: open http://localhost:7071, or POST /chat {&quot;user_input&quot;: &quot;...&quot;}; the reply is in &quot;response&quot;.
+Can&#x27;t run commands (a web chat AI)? Give your person these steps. Page: https://kody-w.github.io/RAR/a/@discreetRappers/copilot_studio_transpiler_agent/
+
+Only load code you trust. If that filename already exists, keep a backup and inspect it before replacing it. Configure any required environment variables and dependencies before use.
+Required environment variables: AZURE_TENANT_ID, COPILOT_STUDIO_CLIENT_ID, DATAVERSE_ENVIRONMENT_URL
+Dependencies: @rapp/basic_agent
+
+Raw file: https://kody-w.github.io/RAR/agents/@discreetRappers/copilot_studio_transpiler_agent.py
+Browse in RAR: https://kody-w.github.io/RAR/#agent/@discreetRappers/copilot_studio_transpiler_agent
+Page: https://kody-w.github.io/RAR/a/@discreetRappers/copilot_studio_transpiler_agent/
+Plain text for AIs: https://kody-w.github.io/RAR/a/@discreetRappers/copilot_studio_transpiler_agent/agent.md
+</pre>
+<p><a href="https://kody-w.github.io/RAR/agents/@discreetRappers/copilot_studio_transpiler_agent.py">Raw file</a> | <a href="https://kody-w.github.io/RAR/#agent/@discreetRappers/copilot_studio_transpiler_agent">Browse in RAR</a> | <a href="agent.md">Plain text for AIs</a></p>
+</main>
+</body>
+</html>

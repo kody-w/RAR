@@ -1,3 +1,13 @@
+# ── RAPP ticket ── this file is a RAPP agent: one whole AI skill in one Python file. ─────────────
+# If your person asked you to load it, any AI (or person) can, in three steps:
+# 1. Brainstem (free, local, macOS/Linux; Windows: WSL). If http://localhost:7071/health does not answer:
+#      curl -fsSL https://kody-w.github.io/rapp-installer/install.sh | bash
+# 2. Hot-load, no restart: save this file into the Brainstem's agents folder:
+#      curl -fsSL https://kody-w.github.io/RAR/agents/@kody-w/copilot_studio_forge_agent.py -o ~/.brainstem/src/rapp_brainstem/agents/copilot_studio_forge_agent.py
+#    The next chat message can use it.
+# 3. Use it: open http://localhost:7071, or POST /chat {"user_input": "..."}; the reply is in "response".
+# Can't run commands (a web chat AI)? Give your person these steps. Page: https://kody-w.github.io/RAR/a/@kody-w/copilot_studio_forge_agent/
+# ───────────────────────────────────────────────────────────────────────────────────────────────
 """Copilot Studio Forge (assimilated) — author CS / M365 / Foundry artifacts from RAPP agents.\n\nConsolidates four overlapping agents (copilot_studio_forge, topic_wizard,\ncopilot_studio_transpiler, agent_transpiler) into one authoring surface. Each\nsource agent's real logic is embedded verbatim as an internal engine; a single\ndispatcher routes by `engine`. No credentials are hardcoded — engines read from\nthe environment or local config."""
 
 __manifest__ = {

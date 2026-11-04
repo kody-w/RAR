@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@cat-agent-skills/copilot_studio_harness_picker",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "1260a59deabc3fa4f801f715786f4e643a4ef09184950388aae09939855f7091"
+ },
+ "canonical_path": "agents/@cat-agent-skills/copilot_studio_harness_picker_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_c63277737efd6e83b40c031bc58f91cd9b0d3b2164c02ba087a57103b57b6087",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "8075c230d2a97c1096252928ca33d87849b787515ea071d1b27fbea0cd27af6d",
+  "receipt": "rar_a523a4bea0969e4e79f5a6f15750bc21c3b386a44d130dae8dc574ebe43306c8",
+  "version": "3.1.2"
+ },
+ "quality_tier": "frontier",
+ "request_id": "req_c63277737efd6e83b40c031b",
+ "revision_id": "c63277737efd6e83b40c031bc58f91cd9b0d3b2164c02ba087a57103b57b6087",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "3.1.2"
+}

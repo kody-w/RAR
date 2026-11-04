@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/scrollytelling_data",
   "agent_file": "scrollytelling_data_agent.py",
-  "agent_sha256": "a88c23f9363dafc9f717b4b7d41fbb028c2b909e8dd95bf7fed54e962955dcd5",
+  "agent_sha256": "6f807e260a523b863fa68d29d0842a44b896e321b4ead0fe36cb7bb773d713d4",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "ScrollytellingData",
   "host_dependencies": [],

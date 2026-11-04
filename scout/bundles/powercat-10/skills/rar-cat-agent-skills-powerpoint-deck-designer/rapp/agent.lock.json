@@ -1,7 +1,7 @@
 {
   "agent": "@cat-agent-skills/powerpoint_deck_designer",
   "agent_file": "powerpoint_deck_designer_agent.py",
-  "agent_sha256": "9cac059a7de8f0fdec2dc6744e1bcee1a2b344cf30fa5e31763619598e6298ea",
+  "agent_sha256": "b9c8aa7b2f3052164205c19ea8e9ca9271e45709807145a51465b9618f906336",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PowerpointDeckDesigner",
   "host_dependencies": [],

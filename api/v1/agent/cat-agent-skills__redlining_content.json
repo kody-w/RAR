@@ -3,10 +3,11 @@
   "id": "cat-agent-skills__redlining_content",
   "name": "Redlining Content",
   "rar_name": "@cat-agent-skills/redlining_content",
-  "rappid": "rappid:@cat-agent-skills/redlining_content:662ef9500fdae4d8589087c5f87ef35518d994e236b8f9e335ac431737467197",
-  "_migrated_from": "rappid:@cat-agent-skills/redlining_content:8d14652d434b7699d327dcbac2945d184a3412ab216040056ad992d64cd89d2a",
+  "rappid": "rappid:@cat-agent-skills/redlining_content:ecd7c7b1454cfe8395e992cf1d9e12fce9b15781f43779b6ec7dbb0bd829c8bf",
+  "_migrated_from": "rappid:@cat-agent-skills/redlining_content:662ef9500fdae4d8589087c5f87ef35518d994e236b8f9e335ac431737467197",
   "_migrated_from_all": [
-    "rappid:@cat-agent-skills/redlining_content:8d14652d434b7699d327dcbac2945d184a3412ab216040056ad992d64cd89d2a"
+    "rappid:@cat-agent-skills/redlining_content:8d14652d434b7699d327dcbac2945d184a3412ab216040056ad992d64cd89d2a",
+    "rappid:@cat-agent-skills/redlining_content:662ef9500fdae4d8589087c5f87ef35518d994e236b8f9e335ac431737467197"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
   "version": "3.0.2",
@@ -23,9 +24,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 262,
-  "size_kb": 12.1,
-  "sha256": "28f933da117e15feeca641c67a251548a586847b5641189c1780a8633db5b5f8",
+  "lines": 272,
+  "size_kb": 13.3,
+  "sha256": "23f87285631370ceeebed84404c33b157dde7837d12fcffb70a243232f687688",
   "has_card": true,
   "added_at": "2026-07-31T22:43:16-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

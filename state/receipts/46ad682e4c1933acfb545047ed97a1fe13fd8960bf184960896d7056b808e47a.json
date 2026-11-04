@@ -1,0 +1,44 @@
+{
+ "acceptance": {
+  "checks": [
+   "manifest",
+   "content_sha256",
+   "registry_build",
+   "full_test_suite"
+  ],
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "policy": "rar-maintainer-migration/1.0",
+  "workflow_run": "local-maintainer-migration-2026-11-04"
+ },
+ "action": "agent.update",
+ "agent": "@discreetRappers/sales_assistant_agent",
+ "artifact": {
+  "algorithm": "sha256-lf-v1",
+  "digest": "806446e21316d4362938d86ea3be72fe0281167ec2d0e0d0167c04ff1a61e9a9"
+ },
+ "canonical_path": "agents/@discreetRappers/sales_assistant_agent.py",
+ "controller": {
+  "github_id": 1735900,
+  "github_login": "kody-w"
+ },
+ "created_at": "2026-11-04T19:45:01.364575+00:00",
+ "id": "rar_46ad682e4c1933acfb545047ed97a1fe13fd8960bf184960896d7056b808e47a",
+ "issuer": "github:kody-w/RAR",
+ "previous": {
+  "digest": "3b1ed8a43356939dfeb5d7a5bff8d47de45655c7179c82509d20d5acd78ba695",
+  "receipt": "rar_b8ea9f864d2f48c004f1af41891f2f6e1d4f9bb79bbe24828d33b72f7190a845",
+  "version": "1.0.1"
+ },
+ "quality_tier": "community",
+ "request_id": "req_46ad682e4c1933acfb545047",
+ "revision_id": "46ad682e4c1933acfb545047ed97a1fe13fd8960bf184960896d7056b808e47a",
+ "schema": "rar-receipt/1.0",
+ "status": "notarized",
+ "submission": {
+  "github_id": 1735900,
+  "github_login": "kody-w",
+  "note": "Add exact comment-only RAPP loading tickets; agent code and docstrings unchanged"
+ },
+ "version": "1.0.1"
+}
