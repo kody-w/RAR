@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-11-04T13:04:50Z",
+ "generated_at": "2026-11-04T21:03:24Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,9 +10,9 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 12,
-  "size_kb": 122174,
+  "size_kb": 134547,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-11-04T12:54:06Z",
+  "pushed_at": "2026-11-04T21:03:07Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
@@ -31,12 +31,12 @@
   "view_uniques_daily_sum": 128,
   "days_tracked": 85,
   "tracking_since": "2026-07-14",
-  "agents": 225,
+  "agents": 226,
   "swarms": 2,
   "publishers": 10,
   "categories": 14,
-  "total_lines": 139281,
-  "total_kb": 6449.2,
+  "total_lines": 142164,
+  "total_kb": 6747.8,
   "votes": 1,
   "upvotes": 1,
   "voters": 1,
@@ -741,7 +741,7 @@
   "clones_14d": 2005,
   "views_14d": 27,
   "live": true,
-  "as_of": "2026-11-04T13:04:50Z"
+  "as_of": "2026-11-04T21:03:24Z"
  },
  "cdn": {
   "total_hits": 560,
@@ -2162,8 +2162,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 2188,
-    "size_kb": 92.5,
+    "lines": 2198,
+    "size_kb": 93.6,
     "added_at": "2026-04-20T12:38:45-04:00",
     "file": "agents/@rapp/learn_new_agent.py",
     "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback."
@@ -2179,8 +2179,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 390,
-    "size_kb": 15.8,
+    "lines": 400,
+    "size_kb": 16.9,
     "added_at": "2026-05-05T10:49:27-04:00",
     "file": "agents/@kody-w/agent_team_agent.py",
     "description": "Turns a project goal into an outcome frame, persona route, and paste-ready GitHub issue body for the Agent Team Starter Kit in one LLM call."
@@ -2196,8 +2196,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 262,
-    "size_kb": 12.9,
+    "lines": 272,
+    "size_kb": 14.1,
     "added_at": "2026-07-31T22:43:16-04:00",
     "file": "agents/@cat-agent-skills/lab_column_mapper_agent.py",
     "description": "When a health system's lab results ingestion pipeline hits an unknown column header, this skill semantically matches the source column against the canonical clinical schema (LOINC-anchored), scoped by lab and clinical domain, and writes a suggested mapping to a Dataverse review queue for a clinical informatics steward to approve."
@@ -2215,8 +2215,8 @@
     "score": 1,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 861,
-    "size_kb": 39.6,
+    "lines": 871,
+    "size_kb": 40.8,
     "added_at": "2026-07-22T15:35:38-04:00",
     "file": "agents/@kody-w/power_apps_code_app_agent.py",
     "description": "Generates a complete Power Apps code app (vite + React + @microsoft/power-apps) from a structured spec, deploys it via the PAC CLI (pac code init / npm build / pac code push), and packages it for team sharing - a portable source zip with one-command deploy scripts, plus an ALM solution zip where the environment supports code-app solution components."
@@ -2234,8 +2234,8 @@
     "score": 0,
     "reviews": 1,
     "rating": 5.0,
-    "lines": 412,
-    "size_kb": 21.4,
+    "lines": 422,
+    "size_kb": 22.5,
     "added_at": "2026-08-18T20:49:04-04:00",
     "file": "agents/@kody-w/rapp_sentinel_agent.py",
     "description": "Run the RAPP Sentinel from the brainstem: free health verdicts over your declared GitHub targets, a roll-call of N mutually-verifying AI watchers, published heads peers can check, overnight standup reports \u2014 a watchdog that can't quietly lie."
@@ -2254,8 +2254,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 7530,
-    "size_kb": 262.5,
+    "lines": 7540,
+    "size_kb": 263.7,
     "added_at": "2026-08-11T17:28:15Z",
     "file": "agents/@kody-w/copilot_studio_parity_deploy_agent.py",
     "description": "Compiles caller-selected local RAPP agents into a provisioned, functionally parity-tested Copilot Studio Draft."
@@ -2271,8 +2271,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 6945,
-    "size_kb": 387.9,
+    "lines": 6955,
+    "size_kb": 389.1,
     "added_at": "2026-06-17T17:06:07-04:00",
     "file": "agents/@kody-w/transcript2prototype_agent.py",
     "description": "Turns a business transcript into a working prototype \u2014 demo script, injected M365 demo iframe, generated agents, twin test runs, factory export."
@@ -2288,8 +2288,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 5338,
-    "size_kb": 218.9,
+    "lines": 5348,
+    "size_kb": 220.1,
     "added_at": "2026-07-07T00:52:21Z",
     "file": "agents/@kody-w/copilot_studio_forge_agent.py",
     "description": "Authors Copilot Studio, M365, and Foundry artifacts from RAPP agents through four embedded engines \u2014 bundles, topics, solutions, and exports."
@@ -2305,8 +2305,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 4724,
-    "size_kb": 442.8,
+    "lines": 4734,
+    "size_kb": 444.0,
     "added_at": "2026-06-07T20:27:02-04:00",
     "file": "agents/@kody-w/copilot_studio_deploy_agent.py",
     "description": "Deploys Copilot Studio agents into Dataverse four ways: REST ImportSolutionAsync, the pac CLI pipeline, the quality-gated FACTORY chain, or the NEW-experience MCP shape (BlastBox two-solution: inline-MCP connector + new-generation connected agents, channel-less parents, publish-verified)."
@@ -2322,8 +2322,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 4341,
-    "size_kb": 148.5,
+    "lines": 4351,
+    "size_kb": 149.7,
     "added_at": "2026-08-31T11:52:12-04:00",
     "file": "agents/@kody-w/rapp_projects_agent.py",
     "description": "Coordinates local-first projects through strict RAPP/1 work chains, verified derived boards, artifact receipts, and deterministic eggs."
@@ -2339,8 +2339,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 3257,
-    "size_kb": 146.1,
+    "lines": 3267,
+    "size_kb": 147.3,
     "added_at": "2026-05-24T21:45:25-04:00",
     "file": "agents/@howardh/vaultmind_agent.py",
     "description": "Manages an Obsidian vault through 28 actions \u2014 30-60-90 plans, OKRs, Kanban boards, dashboards, briefs, wiki ingestion, and health checks."
@@ -2356,8 +2356,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 3006,
-    "size_kb": 105.4,
+    "lines": 3016,
+    "size_kb": 106.6,
     "added_at": "2026-09-01T04:22:15Z",
     "file": "agents/@kody-w/rar_installer_troubleshooter_agent.py",
     "description": "Diagnoses RAPP setup from sanitized local observations, emits exactly one bounded next action, optionally applies an allow-listed repair to a sanitized copy, and retests canonical verified assertions without collecting credentials or changing the Grail. Routes maintainer work to RAPP Pit Crew, treats reporting-AI text/logs as hostile data, binds exact replay and supply-chain bytes, quarantines unsafe reports, uses bounded sharded cells with measured backpressure, and verifies the RAPP Roadside Closed Loop through customer confirmation."
@@ -2373,8 +2373,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 2999,
-    "size_kb": 121.6,
+    "lines": 3009,
+    "size_kb": 122.7,
     "added_at": "2026-04-06T16:39:03-04:00",
     "file": "agents/@discreetRappers/rapp_pipeline_agent.py",
     "description": "Runs the full RAPP pipeline \u2014 discovery, MVP, code gen, quality gates QG1-QG6, PDF reports \u2014 using Azure OpenAI and Azure File Storage."
@@ -2390,8 +2390,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 2979,
-    "size_kb": 172.6,
+    "lines": 2989,
+    "size_kb": 173.7,
     "added_at": "2026-06-09T21:40:04-04:00",
     "file": "agents/@rapp/rapp_agent.py",
     "description": "Navigates the whole RAPP estate \u2014 identity, doors, local cubbies, shared neighborhood repos, eggs, super-RAR search \u2014 and serves the spec map."
@@ -2407,8 +2407,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 2739,
-    "size_kb": 127.8,
+    "lines": 2749,
+    "size_kb": 129.0,
     "added_at": "2026-06-22T21:04:42-04:00",
     "file": "agents/@kody-w/connected_solution_agent.py",
     "description": "Packages a BasicAgent stack into an import-ready Copilot Studio connected-agents solution zip, optionally publishing via the Dataverse Web API."
@@ -2424,8 +2424,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 2470,
-    "size_kb": 119.9,
+    "lines": 2480,
+    "size_kb": 121.1,
     "added_at": "2026-04-06T16:39:03-04:00",
     "file": "agents/@discreetRappers/sharepoint_contract_analysis_agent.py",
     "description": "Analyzes contract documents in Azure File Storage with Azure OpenAI \u2014 clause extraction, risk flagging, and comparison."
@@ -2441,8 +2441,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 2188,
-    "size_kb": 92.5,
+    "lines": 2198,
+    "size_kb": 93.6,
     "added_at": "2026-04-20T12:38:45-04:00",
     "file": "agents/@rapp/learn_new_agent.py",
     "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback."
@@ -2458,8 +2458,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 2154,
-    "size_kb": 88.5,
+    "lines": 2164,
+    "size_kb": 89.7,
     "added_at": "2026-04-06T16:39:03-04:00",
     "file": "agents/@discreetRappers/copilot_studio_transpiler_agent.py",
     "description": "Transpiles RAPP Python agents to fully native Copilot Studio solutions without Azure Function dependency."
@@ -2475,8 +2475,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 1773,
-    "size_kb": 71.9,
+    "lines": 1783,
+    "size_kb": 73.0,
     "added_at": "2026-05-11T10:53:36-04:00",
     "file": "agents/@rapp/twin_agent.py",
     "description": "Manages the local digital-twin lifecycle \u2014 summon, hatch eggs, boot each twin as its own brainstem, stop, chat, inspect \u2014 under ~/.rapp/twins/."
@@ -2492,14 +2492,31 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 1617,
-    "size_kb": 80.7,
+    "lines": 1627,
+    "size_kb": 81.8,
     "added_at": "2026-09-07T19:31:02-04:00",
     "file": "agents/@kody-w/host_compat_agent.py",
     "description": "Makes a Brainstem speak every agent-host dialect from one file: Claude Code, GitHub Copilot CLI and open Agent Skills \u2014 skills, plugins, slash commands/prompts, subagent personas, hooks, MCP servers, instruction files \u2014 plus cross-host search of your local Claude Code and Copilot CLI session transcripts."
    }
   ],
   "newest": [
+   {
+    "name": "@kody-w/source_capture_agent",
+    "display_name": "Source Capture",
+    "publisher": "@kody-w",
+    "category": "productivity",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 633,
+    "size_kb": 32.0,
+    "added_at": "2026-11-04T14:16:00Z",
+    "file": "agents/@kody-w/source_capture_agent.py",
+    "description": "Archive assistant-fed browser chats and CLI exports locally, with cross-source SQLite search and JSONL/Markdown export. Claude, ChatGPT and Gemini tested on simulated UIs only."
+   },
    {
     "name": "@kody-w/fragments_agent",
     "display_name": "Fragments",
@@ -2511,8 +2528,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 135,
-    "size_kb": 6.7,
+    "lines": 145,
+    "size_kb": 7.9,
     "added_at": "2026-11-03T21:53:43-05:00",
     "file": "agents/@kody-w/fragments_agent.py",
     "description": "Paste a document once and address it by a short hash forever: store, get, pin into every chat, unpin, forget, list. Fragment text stays untrusted data on the device."
@@ -2528,8 +2545,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 107,
-    "size_kb": 5.0,
+    "lines": 117,
+    "size_kb": 6.2,
     "added_at": "2026-11-03T17:23:03-05:00",
     "file": "agents/@kody-w/journal_recall_agent.py",
     "description": "Finds earlier conversations in the owner's Brainstem Journal (what did I ask about X, what did we say last Tuesday) and pauses or resumes the journal's recording from chat."
@@ -2545,8 +2562,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 258,
-    "size_kb": 9.4,
+    "lines": 268,
+    "size_kb": 10.6,
     "added_at": "2026-10-24T04:16:07Z",
     "file": "agents/@kody-w/parallel_dimensions_agent.py",
     "description": "Tracks independent what-if branches, detects conflicting assertions, and merges only compatible dimensions using an append-only local record."
@@ -2562,8 +2579,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 267,
-    "size_kb": 9.0,
+    "lines": 277,
+    "size_kb": 10.2,
     "added_at": "2026-10-24T04:09:13Z",
     "file": "agents/@kody-w/thread_tracker_agent.py",
     "description": "Routes remarks into durable local topic threads, lists open work, and parks or closes threads without deleting their history."
@@ -2579,8 +2596,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 294,
-    "size_kb": 13.2,
+    "lines": 304,
+    "size_kb": 14.3,
     "added_at": "2026-10-24T04:02:39Z",
     "file": "agents/@kody-w/self_compact_agent.py",
     "description": "The brainstem compacts its own context: a gauge on every chat, hints as it fills, and at the cutoff every other tool waits until the model writes a note to itself that survives when old turns drop out."
@@ -2596,8 +2613,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 86,
-    "size_kb": 3.9,
+    "lines": 96,
+    "size_kb": 5.1,
     "added_at": "2026-10-18T01:10:16-04:00",
     "file": "agents/@kody-w/first_hour_agent.py",
     "description": "Walks you through your first hour with your Brainstem, one step at a time."
@@ -2613,8 +2630,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 262,
-    "size_kb": 12.2,
+    "lines": 272,
+    "size_kb": 13.4,
     "added_at": "2026-09-08T16:38:03-04:00",
     "file": "agents/@cat-agent-skills/breathing_room_agent.py",
     "description": "Shows where your own week has room to breathe and where it does not, from your calendar and what you send: meeting density, back-to-back runs, deep-work blocks, evenings and weekends, and the load already building three to ten days out. When a day or a coming week is overloaded it points to the most movable meetings, and it recognises time off rather than reading it as a quiet week. Reports on yo\u2026"
@@ -2630,8 +2647,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 262,
-    "size_kb": 12.3,
+    "lines": 272,
+    "size_kb": 13.5,
     "added_at": "2026-09-08T16:38:03-04:00",
     "file": "agents/@cat-agent-skills/holiday_recap_agent.py",
     "description": "Catch up after annual leave in one pass \u2014 a single prioritised briefing of the mail, meetings, and Teams conversations you missed, with deep links and one-click follow-up actions."
@@ -2647,8 +2664,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 1617,
-    "size_kb": 80.7,
+    "lines": 1627,
+    "size_kb": 81.8,
     "added_at": "2026-09-07T19:31:02-04:00",
     "file": "agents/@kody-w/host_compat_agent.py",
     "description": "Makes a Brainstem speak every agent-host dialect from one file: Claude Code, GitHub Copilot CLI and open Agent Skills \u2014 skills, plugins, slash commands/prompts, subagent personas, hooks, MCP servers, instruction files \u2014 plus cross-host search of your local Claude Code and Copilot CLI session transcripts."
@@ -2664,8 +2681,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 3006,
-    "size_kb": 105.4,
+    "lines": 3016,
+    "size_kb": 106.6,
     "added_at": "2026-09-01T04:22:15Z",
     "file": "agents/@kody-w/rar_installer_troubleshooter_agent.py",
     "description": "Diagnoses RAPP setup from sanitized local observations, emits exactly one bounded next action, optionally applies an allow-listed repair to a sanitized copy, and retests canonical verified assertions without collecting credentials or changing the Grail. Routes maintainer work to RAPP Pit Crew, treats reporting-AI text/logs as hostile data, binds exact replay and supply-chain bytes, quarantines unsafe reports, uses bounded sharded cells with measured backpressure, and verifies the RAPP Roadside Closed Loop through customer confirmation."
@@ -2681,8 +2698,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 4341,
-    "size_kb": 148.5,
+    "lines": 4351,
+    "size_kb": 149.7,
     "added_at": "2026-08-31T11:52:12-04:00",
     "file": "agents/@kody-w/rapp_projects_agent.py",
     "description": "Coordinates local-first projects through strict RAPP/1 work chains, verified derived boards, artifact receipts, and deterministic eggs."
@@ -2698,8 +2715,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 225,
-    "size_kb": 8.2,
+    "lines": 235,
+    "size_kb": 9.4,
     "added_at": "2026-08-29T00:44:02Z",
     "file": "agents/@kody-w/hologram_dogg_agent.py",
     "description": "Lists the public RAR hologram DOGG channel and asks a local RAPP Zoo to summon a named, hash-verified character or data projection. Downloads data only; the zoo owns the sandboxed renderer."
@@ -2715,8 +2732,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 262,
-    "size_kb": 12.2,
+    "lines": 272,
+    "size_kb": 13.5,
     "added_at": "2026-08-28T04:52:39Z",
     "file": "agents/@cat-agent-skills/agent_performance_triage_agent.py",
     "description": "Turn a live agent's analytics and transcripts into a diagnosis and a prioritized improvement backlog."
@@ -2732,28 +2749,11 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 262,
-    "size_kb": 12.5,
+    "lines": 272,
+    "size_kb": 13.7,
     "added_at": "2026-08-28T04:52:39Z",
     "file": "agents/@cat-agent-skills/agent_red_team_agent.py",
     "description": "Adversarial assurance review for agents you own: prompt injection, oversharing, leakage and tool misuse, mapped to fixes."
-   },
-   {
-    "name": "@rapp/forge_provenance_agent",
-    "display_name": "Forge Provenance",
-    "publisher": "@rapp",
-    "category": "core",
-    "tier": "official",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 265,
-    "size_kb": 11.7,
-    "added_at": "2026-08-26T17:29:33-04:00",
-    "file": "agents/@kody-w/forge_provenance_agent.py",
-    "description": "Stamp a forged artifact bundle with the fingerprint of the RAPP agent it came from, then prove later that it never drifted. Reports per file: current, STALE (source moved), HAND-EDITED (derived file was edited and the edit will be lost), MISSING, or UNSTAMPED (provenance unknown, which never renders as healthy). Fingerprints the agent's declarative surface, read with ast and never imported, so a comment change does not cry wolf but a description change does."
    }
   ],
   "publishers": [
@@ -2763,16 +2763,16 @@
     "downloads": 3,
     "score": 0,
     "reviews": 0,
-    "lines": 25414,
+    "lines": 26384,
     "rating": 0.0
    },
    {
     "name": "@kody-w",
-    "agents": 74,
+    "agents": 75,
     "downloads": 4,
     "score": 1,
     "reviews": 1,
-    "lines": 68000,
+    "lines": 69373,
     "rating": 5.0
    },
    {
@@ -2781,7 +2781,7 @@
     "downloads": 8,
     "score": 0,
     "reviews": 0,
-    "lines": 16420,
+    "lines": 16650,
     "rating": 0.0
    },
    {
@@ -2790,7 +2790,7 @@
     "downloads": 0,
     "score": 0,
     "reviews": 0,
-    "lines": 17056,
+    "lines": 17186,
     "rating": 0.0
    },
    {
@@ -2799,7 +2799,7 @@
     "downloads": 0,
     "score": 0,
     "reviews": 0,
-    "lines": 7229,
+    "lines": 7309,
     "rating": 0.0
    },
    {
@@ -2808,7 +2808,7 @@
     "downloads": 0,
     "score": 0,
     "reviews": 0,
-    "lines": 1357,
+    "lines": 1387,
     "rating": 0.0
    },
    {
@@ -2817,7 +2817,7 @@
     "downloads": 0,
     "score": 0,
     "reviews": 0,
-    "lines": 1081,
+    "lines": 1111,
     "rating": 0.0
    },
    {
@@ -2826,7 +2826,7 @@
     "downloads": 0,
     "score": 0,
     "reviews": 0,
-    "lines": 1350,
+    "lines": 1370,
     "rating": 0.0
    },
    {
@@ -2835,7 +2835,7 @@
     "downloads": 0,
     "score": 0,
     "reviews": 0,
-    "lines": 384,
+    "lines": 394,
     "rating": 0.0
    },
    {
@@ -2844,14 +2844,14 @@
     "downloads": 0,
     "score": 0,
     "reviews": 0,
-    "lines": 990,
+    "lines": 1000,
     "rating": 0.0
    }
   ],
   "categories": [
    {
     "name": "productivity",
-    "agents": 47,
+    "agents": 48,
     "downloads": 4,
     "score": 0,
     "reviews": 0
@@ -2950,7 +2950,7 @@
   ],
   "tiers": {
    "frontier": 97,
-   "community": 72,
+   "community": 73,
    "official": 46,
    "verified": 8,
    "private": 2
