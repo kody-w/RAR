@@ -4,40 +4,64 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Distros — RAR</title>
-<!-- Every RAR stack (distro) with a QR code beside it. Scan with a phone paired to your
-     Brainstem (over Tailscale) to summon it; or say its 7-word chant on s.html.
-     The QR encodes https://kody-w.github.io/RAR/s.html#<seed> and is drawn in the browser;
-     the link is never sent to a QR service. Unverified stacks get no QR.
-     "Rip it open": a dimmed modal, one sealed foil pack, click to rip, then ONE card at a time
-     (kind, title, meaning, rarity), ending on the summon card. Read from the pack's own
-     stacks/<name>/pack.json (a thin view over the same JSON). Trading-card-game lessons: one
-     click skips to the end, Close is always there, the summon link never depends on the reveal,
-     and prefers-reduced-motion gets no animation. -->
+<!-- Every RAR stack (distro) as a gallery card: name, two facts, a big icon, tags, one button.
+     "View Details" holds the rest: what it is, its 7-word chant, a QR code (drawn in the browser, never sent to a
+     QR service; unverified stacks get none), the summon link, and "Rip it open" (the pack reveal: one card at a time).
+     A thin view over registry.json and each stacks/<name>/pack.json. Layout after the UTM gallery (Kody, 2026-11-04). -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"
         integrity="sha384-mZT2gIty7ZDdOGkxfP6joZcYdMW1Jvj9dRlfpTmaJAKKXTqzygtB22k7FLe+KZC1"
         crossorigin="anonymous"></script>
 <style>
+  * { box-sizing: border-box; }
   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-         background: #0d1117; color: #e6edf3; margin: 0; padding: 28px 16px; }
-  main { max-width: 860px; margin: 0 auto; }
-  h1 { margin: 0 0 4px; } .sub { color: #8b949e; margin: 0 0 24px; }
-  .row { display: flex; gap: 20px; align-items: center; background: #161b22; border: 1px solid #30363d;
-         border-radius: 16px; padding: 20px; margin-bottom: 14px; }
-  .info { flex: 1; min-width: 0; }
-  .info h2 { margin: 0 0 6px; font-size: 20px; }
-  .info p { margin: 6px 0; line-height: 1.45; color: #c9d1d9; }
-  .chant { font-size: 13px; color: #8b949e; letter-spacing: .02em; }
-  .chant b { color: #e6edf3; }
-  .qr { width: 156px; height: 156px; background: #fff; border-radius: 10px; padding: 8px; flex: none;
-        display: flex; align-items: center; justify-content: center; }
-  .qr img { width: 140px; height: 140px; image-rendering: pixelated; }
-  .off { width: 156px; flex: none; text-align: center; color: #f0883e; font-size: 14px; }
-  a { color: #58a6ff; }
-  button.rip { margin-top: 10px; background: linear-gradient(135deg, #58a6ff, #bc8cff); color: #fff; border: 0;
-               border-radius: 999px; padding: 9px 18px; font-size: 14px; font-weight: 700; cursor: pointer;
-               box-shadow: 0 6px 20px rgba(88,166,255,.25); }
-  button.rip:hover { filter: brightness(1.08); }
-  /* ---- the modal ---- */
+         background: #fff; color: #212529; margin: 0; padding: 28px 16px 40px; }
+  main { max-width: 1500px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 26px; }
+  h1 { margin: 0 0 6px; font-size: 32px; font-weight: 600; }
+  .sub { color: #6c757d; margin: 0 auto; max-width: 720px; line-height: 1.5; }
+  .sub a { color: #0d6efd; }
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+  @media (max-width: 1000px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+  .tile { border: 1px solid #dee2e6; border-radius: 6px; display: flex; flex-direction: column; background: #fff; }
+  .tile .body { padding: 20px 16px 18px; text-align: center; flex: 1; display: flex; flex-direction: column; align-items: center; }
+  .tile h2 { margin: 0 0 8px; font-size: 28px; font-weight: 500; word-break: break-word; }
+  .facts { display: flex; gap: 18px; justify-content: center; color: #212529; font-size: 18px; margin-bottom: 18px; flex-wrap: wrap; }
+  .facts span { display: inline-flex; align-items: center; gap: 7px; }
+  .facts svg { width: 18px; height: 18px; }
+  .logo { width: 150px; height: 150px; margin: 6px 0 22px; display: flex; align-items: center; justify-content: center; }
+  .logo svg { width: 150px; height: 150px; }
+  .tags { display: flex; gap: 5px; justify-content: center; flex-wrap: wrap; margin-top: auto; }
+  .pill { border-radius: 999px; padding: 3px 9px; font-size: 14px; font-weight: 700; color: #fff; }
+  .pill.blue { background: #0d6efd; } .pill.green { background: #198754; } .pill.gold { background: #ffc107; color: #212529; }
+  .pill.gray { background: #6c757d; }
+  .tile .foot { background: #f8f9fa; border-top: 1px solid #dee2e6; padding: 10px; text-align: center; border-radius: 0 0 6px 6px; }
+  .btn { background: #0d6efd; color: #fff; border: 0; border-radius: 6px; padding: 9px 16px; font-size: 19px; cursor: pointer; text-decoration: none; display: inline-block; }
+  .btn:hover { background: #0b5ed7; }
+  .btn.ghost { background: #fff; color: #0d6efd; border: 1px solid #0d6efd; }
+  .pager { display: flex; justify-content: center; margin-top: 32px; }
+  .pager button { border: 1px solid #dee2e6; background: #fff; color: #0d6efd; min-width: 40px; height: 40px; font-size: 17px; cursor: pointer; margin-left: -1px; }
+  .pager button:first-child { border-radius: 6px 0 0 6px; } .pager button:last-child { border-radius: 0 6px 6px 0; }
+  .pager button.on { background: #0d6efd; color: #fff; border-color: #0d6efd; }
+  .pager button:disabled { color: #adb5bd; cursor: default; }
+  /* ---- View Details ---- */
+  .detail { position: fixed; inset: 0; background: rgba(0,0,0,.5); display: none; align-items: center; justify-content: center; z-index: 90; padding: 16px; }
+  .detail.open { display: flex; }
+  .sheet { background: #fff; border-radius: 8px; max-width: 640px; width: 100%; max-height: 92vh; overflow: auto; }
+  .sheet .top { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid #dee2e6; }
+  .sheet .top h3 { margin: 0; font-size: 22px; font-weight: 500; }
+  .sheet .x { background: none; border: 0; font-size: 26px; cursor: pointer; color: #6c757d; line-height: 1; }
+  .sheet .mid { padding: 20px; display: flex; gap: 20px; align-items: flex-start; }
+  .sheet .mid p { margin: 0 0 12px; line-height: 1.5; }
+  .sheet .chant { font-size: 13px; color: #6c757d; letter-spacing: .02em; } .sheet .chant b { color: #212529; }
+  .sheet .qr { width: 156px; height: 156px; flex: none; border: 1px solid #dee2e6; border-radius: 6px; padding: 7px; display: flex; align-items: center; justify-content: center; }
+  .sheet .qr img { width: 140px; height: 140px; image-rendering: pixelated; }
+  .sheet .off { width: 156px; flex: none; text-align: center; color: #b02a37; font-size: 14px; }
+  .sheet .bot { display: flex; gap: 10px; justify-content: flex-end; padding: 14px 20px; background: #f8f9fa; border-top: 1px solid #dee2e6; flex-wrap: wrap; }
+  .sheet .bot .btn { font-size: 16px; }
+  @media (max-width: 560px) { .sheet .mid { flex-direction: column; align-items: center; } }
+  /* ---- Rip it open: the pack reveal (one card at a time) ---- */
+  .veil, .veil .card { color: #e6edf3; }
   .veil { position: fixed; inset: 0; background: rgba(2,6,12,.86); display: none; align-items: center;
           justify-content: center; z-index: 100; flex-direction: column; gap: 14px; padding: 20px; }
   .veil.open { display: flex; }
@@ -98,22 +122,25 @@
   @media (prefers-reduced-motion: reduce) {
     .pack::after, .pack.ripping, .pack.ripping .tear, .pack.gone, .card { animation: none !important; }
   }
-  @media (max-width: 560px) { .row { flex-direction: column; align-items: flex-start; } }
 </style>
 </head>
 <body>
 <main>
-  <h1>Distros</h1>
-  <p class="sub">Scan a code with your phone to summon that distro into your own Brainstem, or say its chant at
-    <a href="s.html">s.html</a>. First time? Install the <b>Summon</b> distro and pair your phone.
-    Curious what is inside a pack? <b>Rip it open.</b></p>
-  <div id="list">Loading…</div>
+  <header>
+    <h1>Distros</h1>
+    <p class="sub">Each distro is your own Brainstem for one job, on the unchanged grail. Open one to scan its code with your
+      phone, say its chant at <a href="s.html">s.html</a>, or rip the pack open to see what is inside.</p>
+  </header>
+  <div class="grid" id="list">Loading…</div>
+  <nav class="pager" id="pager" aria-label="Pages"></nav>
 </main>
+<div class="detail" id="detail" role="dialog" aria-modal="true" aria-label="Distro details"></div>
 <div class="veil" id="veil" role="dialog" aria-modal="true" aria-label="Pack reveal"></div>
 <script>
 (function () {
   "use strict";
   var PAGE = "https://kody-w.github.io/RAR/s.html#";
+  var PER_PAGE = 9;
   var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var RARITY = { kernel: "mythic", layer: "rare", agent: "uncommon", notes: "common", file: "common" };
   var GLYPH = { kernel: "⬡", layer: "☰", agent: "⚙", notes: "✉", file: "⬚", summon: "✨" };
@@ -126,6 +153,24 @@
     return q.createImgTag(4, 0);
   }
   function wait(ms) { return new Promise(function (res) { setTimeout(res, REDUCED ? 0 : ms); }); }
+  function size(n) { return n >= 1048576 ? (n / 1048576).toFixed(2) + " MB" : n >= 1024 ? Math.round(n / 1024) + " KB" : n + " B"; }
+
+  // One big icon per distro (drawn here, no image requests). Unknown names get the plain monitor.
+  var ICON = {
+    "grail-layers": '<rect x="18" y="86" width="114" height="26" rx="6" fill="#6f42c1"/><rect x="28" y="56" width="94" height="26" rx="6" fill="#0d6efd"/><rect x="40" y="26" width="70" height="26" rx="6" fill="#20c997"/>',
+    "rooms": '<rect x="12" y="22" width="86" height="60" rx="14" fill="#0d6efd"/><path d="M34 82 L28 102 L52 82Z" fill="#0d6efd"/><rect x="58" y="62" width="80" height="56" rx="14" fill="#20c997"/><path d="M114 118 L122 136 L100 118Z" fill="#20c997"/><circle cx="40" cy="52" r="6" fill="#fff"/><circle cx="56" cy="52" r="6" fill="#fff"/><circle cx="72" cy="52" r="6" fill="#fff"/>',
+    "judge": '<rect x="71" y="22" width="8" height="98" fill="#495057"/><rect x="40" y="118" width="70" height="10" rx="4" fill="#495057"/><rect x="24" y="34" width="102" height="6" rx="3" fill="#495057"/><path d="M34 40 L14 84 H54Z" fill="none" stroke="#fd7e14" stroke-width="5"/><path d="M14 84 a20 12 0 0 0 40 0Z" fill="#fd7e14"/><path d="M116 40 L96 84 H136Z" fill="none" stroke="#fd7e14" stroke-width="5"/><path d="M96 84 a20 12 0 0 0 40 0Z" fill="#fd7e14"/>',
+    "claude-workflows": '<circle cx="30" cy="40" r="16" fill="#d97757"/><circle cx="120" cy="40" r="16" fill="#d97757"/><circle cx="75" cy="112" r="16" fill="#d97757"/><path d="M46 40 H104 M38 54 L66 98 M112 54 L84 98" stroke="#495057" stroke-width="6" stroke-linecap="round"/>',
+    "fleet-management": '<rect x="14" y="20" width="56" height="40" rx="6" fill="#0d6efd"/><rect x="80" y="20" width="56" height="40" rx="6" fill="#0d6efd"/><rect x="14" y="80" width="56" height="40" rx="6" fill="#0d6efd"/><rect x="80" y="80" width="56" height="40" rx="6" fill="#20c997"/><rect x="30" y="60" width="24" height="8" fill="#495057"/><rect x="96" y="60" width="24" height="8" fill="#495057"/><rect x="30" y="120" width="24" height="8" fill="#495057"/><rect x="96" y="120" width="24" height="8" fill="#495057"/>',
+    "microsoft-365-team": '<circle cx="50" cy="48" r="20" fill="#5b5fc7"/><path d="M14 122 a36 36 0 0 1 72 0Z" fill="#5b5fc7"/><circle cx="104" cy="56" r="16" fill="#7f85f5"/><path d="M78 122 a28 30 0 0 1 56 0Z" fill="#7f85f5"/>',
+    "neighborhood-starter": '<path d="M10 76 L44 46 L78 76 V128 H10Z" fill="#198754"/><rect x="34" y="96" width="20" height="32" fill="#fff"/><path d="M72 66 L108 34 L142 66 V128 H72Z" fill="#20c997"/><rect x="98" y="92" width="20" height="36" fill="#fff"/><rect x="0" y="128" width="150" height="6" fill="#495057"/>',
+    "organism-lifecycle": '<path d="M75 128 C 20 110, 14 52, 75 18 C 136 52, 130 110, 75 128Z" fill="#198754"/><path d="M75 128 V 40" stroke="#fff" stroke-width="5"/><path d="M75 70 L52 54 M75 92 L100 74" stroke="#fff" stroke-width="4"/>',
+    "summon": '<rect x="18" y="18" width="46" height="46" rx="4" fill="none" stroke="#212529" stroke-width="8"/><rect x="31" y="31" width="20" height="20" fill="#212529"/><rect x="86" y="18" width="46" height="46" rx="4" fill="none" stroke="#212529" stroke-width="8"/><rect x="99" y="31" width="20" height="20" fill="#212529"/><rect x="18" y="86" width="46" height="46" rx="4" fill="none" stroke="#212529" stroke-width="8"/><rect x="31" y="99" width="20" height="20" fill="#212529"/><path d="M110 82 l7 18 18 7 -18 7 -7 18 -7 -18 -18 -7 18 -7Z" fill="#ffc107"/>'
+  };
+  var MONITOR = '<rect x="16" y="16" width="118" height="84" rx="10" fill="none" stroke="#000" stroke-width="9"/><path d="M16 82 H134" stroke="#000" stroke-width="9"/><circle cx="75" cy="91" r="5" fill="#000"/><path d="M62 100 L56 128 M88 100 L94 128 M44 130 H106" stroke="#000" stroke-width="9" stroke-linecap="round"/>';
+  function logo(name) { return '<svg viewBox="0 0 150 150" aria-hidden="true">' + (ICON[name] || MONITOR) + "</svg>"; }
+  var I_FILES = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 0h5.5L14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm5 1v3.5A1.5 1.5 0 0 0 10.5 6H13v8a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5z"/></svg>';
+  var I_SIZE = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 11a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zM3 10.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/><path d="M16 11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V9.51c0-.418.105-.83.305-1.197l2.472-4.531A1.5 1.5 0 0 1 4.094 3h7.812a1.5 1.5 0 0 1 1.317.782l2.472 4.53c.2.368.305.78.305 1.198V11zM3.655 4.26 1.592 8.043C1.724 8.014 1.86 8 2 8h12c.14 0 .276.014.408.042L12.345 4.26a.5.5 0 0 0-.439-.26H4.094a.5.5 0 0 0-.44.26zM1 10v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1z"/></svg>';
 
   // The cards a pack holds: parts (publisher-scoped, 1.2+) first, then every other file. The summon card is last.
   function cardsFor(p, pack) {
@@ -210,32 +255,76 @@
     };
   }
 
+  var detail = document.getElementById("detail");
+  function closeDetail() { detail.classList.remove("open"); detail.innerHTML = ""; }
+  detail.addEventListener("click", function (e) { if (e.target === detail) closeDetail(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && detail.classList.contains("open") && !veil.classList.contains("open")) closeDetail(); });
+
+  function openDetail(p, link, pj) {
+    var parts = (pj && pj.install && pj.install.parts) || [];
+    var layers = parts.filter(function (x) { return !pj.install.seed || pj.install.seed.indexOf(x.id) >= 0; });
+    detail.innerHTML = "<div class='sheet'><div class='top'><h3>" + esc(p.display_name) + " <small style='color:#6c757d;font-size:15px'>" +
+      esc((pj && pj.version) || p.version || "") + "</small></h3><button type='button' class='x' aria-label='Close'>×</button></div>" +
+      "<div class='mid'><div style='flex:1;min-width:0'><p>" + esc(p.purpose) + "</p>" +
+      (layers.length ? "<p><b>Runs on the unchanged grail with:</b> " + layers.map(function (x) { return esc(x.id); }).join(", ") + "</p>" : "") +
+      (p._incantation ? "<div class='chant'>Chant: <b>" + esc(p._incantation) + "</b></div>" : "") + "</div>" +
+      (link ? "<div class='qr' title='" + esc(link) + "'>" + (qrImg(link) || "") + "</div>" : "<div class='off'>Not verified yet, so it can't be summoned.</div>") +
+      "</div><div class='bot'><button type='button' class='btn ghost' data-rip>Rip it open</button>" +
+      (link ? "<a class='btn' href='" + esc(link) + "'>Summon it</a>" : "") + "</div></div>";
+    detail.classList.add("open");
+    detail.querySelector(".x").onclick = closeDetail;
+    detail.querySelector("[data-rip]").onclick = function () { rip(p, link); };
+  }
+
+  function cardFor(p) {
+    var ok = p._verified === true && p._seed;
+    var link = ok ? PAGE + p._seed : null;
+    var n = (p.files && Object.keys(p.files).length) || 0;
+    var el = document.createElement("div"); el.className = "tile";
+    el.innerHTML = "<div class='body'><h2>" + esc(p.display_name) + "</h2>" +
+      "<div class='facts'><span>" + I_FILES + "Files: " + n + "</span><span class='sz'>" + I_SIZE + "Size: …</span></div>" +
+      "<div class='logo'>" + logo(p.name) + "</div><div class='tags'><span class='pill blue'>RAR</span>" +
+      "<span class='pill green'>" + (p.kernel ? "distro" : "agent pack") + "</span>" +
+      (ok ? "" : "<span class='pill gray'>unverified</span>") + "</div></div>" +
+      "<div class='foot'><button type='button' class='btn'>View Details</button></div>";
+    var pj = null;
+    // The pack's own pack.json: total size, and whether grail layers ride with it.
+    fetch(p.path + "/pack.json", { cache: "no-cache" }).then(function (r) { return r.ok ? r.text().then(parseExact) : null; })
+      .catch(function () { return null; }).then(function (j) {
+        pj = j;
+        var total = 0;
+        Object.keys((j && j.files) || {}).forEach(function (f) { total += (j.files[f] && j.files[f].size) || 0; });
+        el.querySelector(".sz").innerHTML = I_SIZE + "Size: " + (total ? size(total) : "—");
+        if (j && j.install && j.install.parts && j.install.parts.length) {
+          el.querySelector(".tags").insertAdjacentHTML("beforeend", "<span class='pill gold'>layered</span>");
+        }
+      });
+    el.querySelector(".btn").onclick = function () { openDetail(p, link, pj); };
+    return el;
+  }
+
+  var packs = [], page = 1;
+  function render() {
+    var list = document.getElementById("list"), pager = document.getElementById("pager");
+    var pages = Math.max(1, Math.ceil(packs.length / PER_PAGE));
+    page = Math.min(Math.max(1, page), pages);
+    list.innerHTML = "";
+    packs.slice((page - 1) * PER_PAGE, page * PER_PAGE).forEach(function (p) { list.appendChild(cardFor(p)); });
+    var b = "<button type='button' data-go='" + (page - 1) + "'" + (page === 1 ? " disabled" : "") + " aria-label='Previous'>«</button>";
+    for (var i = 1; i <= pages; i++) b += "<button type='button' data-go='" + i + "'" + (i === page ? " class='on' aria-current='page'" : "") + ">" + i + "</button>";
+    b += "<button type='button' data-go='" + (page + 1) + "'" + (page === pages ? " disabled" : "") + " aria-label='Next'>»</button>";
+    pager.innerHTML = b;
+    Array.prototype.forEach.call(pager.querySelectorAll("button"), function (x) {
+      x.onclick = function () { page = +x.getAttribute("data-go"); render(); window.scrollTo(0, 0); };
+    });
+  }
+
   fetch("registry.json", { cache: "no-cache" }).then(function (r) { return r.text(); }).then(parseExact).then(function (reg) {
-    var packs = (reg.stack_packs || []).slice().sort(function (a, b) {
+    packs = (reg.stack_packs || []).slice().sort(function (a, b) {
       return (b._verified === true) - (a._verified === true) || String(a.display_name).localeCompare(b.display_name);
     });
-    var list = document.getElementById("list");
-    if (!packs.length) { list.textContent = "No distros yet."; return; }
-    list.innerHTML = "";
-    packs.forEach(function (p) {
-      var row = document.createElement("div"); row.className = "row";
-      var ok = p._verified === true && p._seed;
-      var link = ok ? PAGE + p._seed : null;
-      row.innerHTML = "<div class='info'><h2>" + esc(p.display_name) + "</h2><p>" + esc(p.purpose) + "</p>" +
-        (p._incantation ? "<div class='chant'>Chant: <b>" + esc(p._incantation) + "</b></div>" : "") +
-        (ok ? "<p><a href='" + esc(link) + "'>Open summon page</a></p>" : "") +
-        "<button type='button' class='rip'>Rip it open</button></div>";
-      var side = document.createElement("div");
-      if (ok) {
-        side.className = "qr"; side.title = link;
-        side.innerHTML = qrImg(link) || "<a href='" + esc(link) + "'>Open</a>";
-      } else {
-        side.className = "off"; side.textContent = "Not verified yet, so it can't be summoned.";
-      }
-      row.appendChild(side);
-      row.querySelector(".rip").onclick = function () { rip(p, link); };
-      list.appendChild(row);
-    });
+    if (!packs.length) { document.getElementById("list").textContent = "No distros yet."; return; }
+    render();
   }).catch(function () { document.getElementById("list").textContent = "Couldn't load the registry."; });
 })();
 </script>
