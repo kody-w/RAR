@@ -7192,6 +7192,10 @@
    "added": "2026-08-01T21:33:29-04:00",
    "updated": "2026-09-08T16:38:03-04:00"
   },
+  "agents/@kody-w/source_capture_agent.py": {
+   "added": "2026-11-04T14:16:00Z",
+   "updated": "2026-11-04T14:16:00Z"
+  },
   "agents/@kody-w/thread_tracker_agent.py": {
    "added": "2026-10-24T04:09:13Z",
    "updated": "2026-10-24T04:09:13Z"
