@@ -2,8 +2,8 @@
   "schema": "rapp-rar-stack/1.2",
   "name": "grail-layers",
   "display_name": "Grail layers",
-  "version": "1.2.4",
-  "purpose": "Updates for every Brainstem that install over the unchanged grail and can fail without breaking it. A supervisor applies each layer in memory at start, probes /chat, and falls back to plain grail on any failure. providers (the one provider part): Responses-API models (gpt-6.1-sol, gpt-6-luna) and models running on this machine (Ollama, as ollama/<name>) work in the unchanged grail. journal_tap: every chat turn is recorded in the owner's Brainstem Journal by default. responses_models and local_models are kept served as aliases of providers.",
+  "version": "1.3.0",
+  "purpose": "The one distro for everything new, on the unchanged grail. Layers applied in memory (the supervisor probes /chat and falls back to plain grail on any failure): providers (Responses-API models like gpt-6.1-sol, plus this machine's Ollama models) and journal_tap (every chat turn recorded in your Brainstem Journal). Agents: Journal Recall (find earlier conversations, pause recording) and Fragments (paste once, address by hash, pin into every chat). Use it from the llm CLI with github.com/kody-w/llm-brainstem.",
   "install": {
     "type": "grail_layers",
     "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/install.sh | bash",
@@ -98,8 +98,8 @@
   },
   "files": {
     "README.md": {
-      "size": 1779,
-      "sha256": "6bdf9c103d2aeee5185494bee311abf07482b6583b9bde68b102ad3f5bbcd82c"
+      "size": 2328,
+      "sha256": "b0072af4c395d55fab3e4896e833f939c9a1bf0a3b6caf9544ae4fe1baf4eb26"
     },
     "responses_models.py": {
       "size": 5902,
@@ -120,6 +120,21 @@
     "providers.py": {
       "size": 7877,
       "sha256": "eec63ad97a31e4a8f3465633cc6d6050c14147554822ff943665a9ea09fc7218"
+    },
+    "journal_recall_agent.py": {
+      "size": 5148,
+      "sha256": "f97b91e25360b4feb4cd29957e5615339d25394198093d859eaa5e8e45977fac",
+      "source": "agents/@kody-w/journal_recall_agent.py"
+    },
+    "fragments_agent.py": {
+      "size": 6893,
+      "sha256": "88e1749ee4ace1f506b6ee9c2c4fa2ce38e33107315f2b35f5919a489956be13",
+      "source": "agents/@kody-w/fragments_agent.py"
     }
+  },
+  "kernel": {
+    "sha256": "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
+    "file": "brainstem.py",
+    "version": "0.6.17"
   }
 }

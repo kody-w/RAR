@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-04T03:15:18.282531+00:00",
+  "generated_at": "2026-11-04T12:43:35.258810+00:00",
   "stats": {
     "total_agents": 225,
     "total_swarms": 2,
@@ -13742,8 +13742,8 @@
     {
       "name": "claude-workflows",
       "display_name": "Claude Workflows",
-      "version": "1.1.0",
-      "schema": "rapp-rar-stack/1.2",
+      "version": "1.2.0",
+      "schema": "rapp-rar-stack/1.1",
       "path": "stacks/claude-workflows",
       "purpose": "Run Claude Managed Agents with dynamic multi-agent workflows from Brainstem chat: start a job from a template with a hard spending cap, watch its phases, collect its output files. WorkflowBuilder assembles new workflow templates from parts in chat; other AI ecosystems plug in as drop-in targets.",
       "files": {
@@ -13761,11 +13761,6 @@
         }
       },
       "_verified": true,
-      "kernel": {
-        "sha256": "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
-        "file": "brainstem.py",
-        "version": "0.6.17"
-      },
       "_seed": 7100592804908253184,
       "_incantation": "FORGE FUSE PANTHER BEREFT MARCH CREED TEMPER"
     },
@@ -13793,13 +13788,13 @@
     {
       "name": "grail-layers",
       "display_name": "Grail layers",
-      "version": "1.2.4",
+      "version": "1.3.0",
       "schema": "rapp-rar-stack/1.2",
       "path": "stacks/grail-layers",
-      "purpose": "Updates for every Brainstem that install over the unchanged grail and can fail without breaking it. A supervisor applies each layer in memory at start, probes /chat, and falls back to plain grail on any failure. providers (the one provider part): Responses-API models (gpt-6.1-sol, gpt-6-luna) and mo",
+      "purpose": "The one distro for everything new, on the unchanged grail. Layers applied in memory (the supervisor probes /chat and falls back to plain grail on any failure): providers (Responses-API models like gpt-6.1-sol, plus this machine's Ollama models) and journal_tap (every chat turn recorded in your Brain",
       "files": {
         "README.md": {
-          "sha256": "6bdf9c103d2aeee5185494bee311abf07482b6583b9bde68b102ad3f5bbcd82c",
+          "sha256": "b0072af4c395d55fab3e4896e833f939c9a1bf0a3b6caf9544ae4fe1baf4eb26",
           "verified": true
         },
         "responses_models.py": {
@@ -13821,17 +13816,30 @@
         "providers.py": {
           "sha256": "eec63ad97a31e4a8f3465633cc6d6050c14147554822ff943665a9ea09fc7218",
           "verified": true
+        },
+        "journal_recall_agent.py": {
+          "sha256": "f97b91e25360b4feb4cd29957e5615339d25394198093d859eaa5e8e45977fac",
+          "verified": true
+        },
+        "fragments_agent.py": {
+          "sha256": "88e1749ee4ace1f506b6ee9c2c4fa2ce38e33107315f2b35f5919a489956be13",
+          "verified": true
         }
       },
       "_verified": true,
-      "_seed": 11298904168309194752,
-      "_incantation": "FORGE FORGE PANTHER SILL STEPPE PROPHECY BRAND"
+      "kernel": {
+        "sha256": "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
+        "file": "brainstem.py",
+        "version": "0.6.17"
+      },
+      "_seed": 11298904168309211136,
+      "_incantation": "FORGE FUSE PANTHER SILL STEPPE PROPHECY BRAND"
     },
     {
       "name": "judge",
       "display_name": "Regression Judge",
-      "version": "1.1.0",
-      "schema": "rapp-rar-stack/1.2",
+      "version": "1.2.0",
+      "schema": "rapp-rar-stack/1.1",
       "path": "stacks/judge",
       "purpose": "Catches regressions: record questions and answers once, then after any change replay them on the live Brainstem and a teacher grades each new answer against the original (same, better, worse, broken), with a side-by-side report.",
       "files": {
@@ -13845,11 +13853,6 @@
         }
       },
       "_verified": true,
-      "kernel": {
-        "sha256": "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
-        "file": "brainstem.py",
-        "version": "0.6.17"
-      },
       "_seed": 17889783379558146048,
       "_incantation": "FORGE CHISEL PANTHER BULWARK WISE PACK BIND"
     },
@@ -13919,8 +13922,8 @@
     {
       "name": "rooms",
       "display_name": "Rooms (test)",
-      "version": "0.2.0",
-      "schema": "rapp-rar-stack/1.2",
+      "version": "0.3.0",
+      "schema": "rapp-rar-stack/1.1",
       "path": "stacks/rooms",
       "purpose": "Test distro: group chat of AI seats on one Brainstem, each with its own personality and private memory; turn budgets, pick-up-where-it-stopped and hand-back to the owner.",
       "files": {
@@ -13945,7 +13948,7 @@
       "kernel": {
         "sha256": "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
         "file": "brainstem.py",
-        "version": "0.6.17"
+        "version": "0.6.16"
       },
       "_seed": 17920793872363962368,
       "_incantation": "FORGE FUSE PANTHER BLOOM EFFACE DROIT BIND"
