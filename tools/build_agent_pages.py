@@ -65,31 +65,37 @@ def agent_markdown(agent: dict) -> str:
     )
 
 
+def agent_page_contents(agent: dict) -> dict[str, str]:
+    """Render the two owned filenames without writing or creating directories."""
+    agent_path(agent)
+    markdown = agent_markdown(agent)
+    html = (
+        '<!doctype html>\n<html lang="en">\n<head>\n'
+        '<meta charset="utf-8">\n'
+        '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
+        f"<title>{escape(agent['display_name'])} - RAPP agent ticket</title>\n"
+        f'<meta name="description" content="{escape(agent["description"], quote=True)}">\n'
+        f'<link rel="canonical" href="{escape(page_url(agent), quote=True)}">\n'
+        '</head>\n<body>\n<main>\n'
+        f"<h1>{escape(agent['display_name'])}</h1>\n"
+        f"<p>{escape(agent['description'])}</p>\n"
+        '<h2>Load this agent in three steps</h2>\n'
+        f'<pre style="white-space:pre-wrap">{escape(markdown)}</pre>\n'
+        f'<p><a href="{escape(SITE + "/" + quote(str(agent_path(agent)), safe="@/"), quote=True)}">Raw file</a> | '
+        f'<a href="{escape(SITE + "/#agent/" + quote(agent["name"], safe="@/"), quote=True)}">Browse in RAR</a> | '
+        '<a href="agent.md">Plain text for AIs</a></p>\n'
+        '</main>\n</body>\n</html>\n'
+    )
+    return {"agent.md": markdown, "index.html": html}
+
+
 def build_agent_pages(agents: list[dict], root: Path = Path(".")) -> int:
     changed = 0
     for agent in agents:
-        agent_path(agent)
+        contents = agent_page_contents(agent)
         directory = root / "a" / agent["name"]
-        markdown = agent_markdown(agent)
-        html = (
-            '<!doctype html>\n<html lang="en">\n<head>\n'
-            '<meta charset="utf-8">\n'
-            '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
-            f"<title>{escape(agent['display_name'])} - RAPP agent ticket</title>\n"
-            f'<meta name="description" content="{escape(agent["description"], quote=True)}">\n'
-            f'<link rel="canonical" href="{escape(page_url(agent), quote=True)}">\n'
-            '</head>\n<body>\n<main>\n'
-            f"<h1>{escape(agent['display_name'])}</h1>\n"
-            f"<p>{escape(agent['description'])}</p>\n"
-            '<h2>Load this agent in three steps</h2>\n'
-            f'<pre style="white-space:pre-wrap">{escape(markdown)}</pre>\n'
-            f'<p><a href="{escape(SITE + "/" + quote(str(agent_path(agent)), safe="@/"), quote=True)}">Raw file</a> | '
-            f'<a href="{escape(SITE + "/#agent/" + quote(agent["name"], safe="@/"), quote=True)}">Browse in RAR</a> | '
-            '<a href="agent.md">Plain text for AIs</a></p>\n'
-            '</main>\n</body>\n</html>\n'
-        )
         directory.mkdir(parents=True, exist_ok=True)
-        for filename, content in (("agent.md", markdown), ("index.html", html)):
+        for filename, content in contents.items():
             path = directory / filename
             if not path.exists() or path.read_text(encoding="utf-8") != content:
                 path.write_text(content, encoding="utf-8")

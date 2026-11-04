@@ -10,6 +10,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+import pytest
 from tools.stamp_ticket import strip_ticket
 
 
@@ -109,6 +110,55 @@ def git_history_contains_sha256(path, expected_sha256):
         ):
             return True
     return False
+
+
+def recorded_source_bytes(record, path, root=ROOT):
+    commit = record["source_commit"]
+    if commit == "working-tree":
+        source = path.read_bytes()
+    else:
+        assert re.fullmatch(r"[a-f0-9]{40}", commit), "invalid source commit"
+        source = subprocess.check_output(
+            ["git", "show", f"{commit}:{path.relative_to(root).as_posix()}"],
+            cwd=root,
+        )
+    assert hashlib.sha256(source.replace(b"\r\n", b"\n")).hexdigest() == record["source_sha256"]
+    return source
+
+
+@pytest.mark.parametrize("recorded", ["stamp-commit", "working-tree"])
+def test_recorded_source_binds_ticketed_bytes_not_the_historical_commit(tmp_path, monkeypatch, recorded):
+    from tools.stamp_ticket import stamp_source
+
+    agent = {"name": IDENTITY, "_file": AGENT.relative_to(ROOT).as_posix()}
+    original = b'"""Original agent documentation."""\nVALUE = 1\n'
+    stamped = stamp_source(original, agent)
+    path = tmp_path / agent["_file"]
+    path.parent.mkdir(parents=True)
+    path.write_bytes(stamped)
+    historical_commit, stamp_commit = "a" * 40, "b" * 40
+    blobs = {historical_commit: original, stamp_commit: stamped}
+
+    def show(command, **kwargs):
+        assert command[:2] == ["git", "show"]
+        commit, relative = command[2].split(":", 1)
+        assert relative == agent["_file"]
+        return blobs[commit]
+
+    monkeypatch.setattr(subprocess, "check_output", show)
+    record = {
+        "source_commit": stamp_commit if recorded == "stamp-commit" else recorded,
+        "source_sha256": hashlib.sha256(stamped).hexdigest(),
+    }
+    source = recorded_source_bytes(record, path, tmp_path)
+    assert source == stamped
+    assert strip_ticket(source, agent) == blobs[historical_commit]
+    with pytest.raises(AssertionError):
+        recorded_source_bytes({**record, "source_commit": historical_commit}, path, tmp_path)
+    blobs[stamp_commit] = stamped.replace(b"VALUE = 1", b"VALUE = 2")
+    path.write_bytes(blobs[stamp_commit])
+    with pytest.raises(AssertionError):
+        recorded_source_bytes(record, path, tmp_path)
 
 
 def load_agent_module():
@@ -282,12 +332,15 @@ def test_build_receipt_binds_the_generated_publication():
     assert front_record["audience"] == evidence["front_audience"] == "both"
     assert record["source_sha256"] == source_sha256
     assert record["skill_sha256"] == skill_sha256
-    assert record["source_commit"] in {"working-tree", evidence["agent_source_commit"]}
+    # Current provenance pins the stamped bytes; build evidence pins the
+    # immutable pre-ticket source. They need not name the same commit.
+    published_source = recorded_source_bytes(record, AGENT)
+    assert published_source == AGENT.read_bytes()
     historical_blob = subprocess.check_output(
         ["git", "show", f"{evidence['agent_source_commit']}:{AGENT.relative_to(ROOT).as_posix()}"],
         cwd=ROOT,
     )
-    assert historical_blob == historical_source
+    assert historical_blob == strip_ticket(published_source, registry_record) == historical_source
     assert evidence["source_tests"] >= 97
     assert evidence["targeted_tests"] >= 98
     assert evidence["publication_release_tests"] >= 179

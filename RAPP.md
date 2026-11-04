@@ -72,6 +72,10 @@ Refresh the derived API, Scout copies and front-page feed with `scripts/build_po
 and `scripts/build_front_page.py`.
 Scout honestly marks newly notarized but uncommitted bytes as `working-tree`; the ticket-only provenance
 gate requires that stripping the exact ticket recovers the prior receipt digest and a real historical blob.
+After committing, Scout's `source_commit` identifies the ticketed bytes, while historical build evidence
+still identifies the pre-ticket source. Verify each digest against its own commit; removing the exact
+ticket must recover the historical bytes. The retiring-name ratchet exempts only the two exact generated
+ticket pages for each registry entry, not hand-written files or modified pages under `a/`.
 
 Every catalog, registry or site follows **rapp-static-api/1.1** (https://github.com/kody-w/rapp-static-apis):
 one hand-written input, one idempotent build, a schema-tagged `registry.json`, `api/v<major>/*.json`,

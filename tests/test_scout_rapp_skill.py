@@ -16,7 +16,8 @@ import sys
 import zipfile
 
 import pytest
-from tools.stamp_ticket import strip_ticket
+from scripts import build_scout_exports
+from tools.stamp_ticket import stamp_source, strip_ticket
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -217,6 +218,11 @@ def test_every_primary_skill_is_reversible_and_exactly_pinned():
 
 def assert_source_provenance(record, registry):
     if re.fullmatch(r"[a-f0-9]{40}", record["source_commit"]):
+        committed = subprocess.check_output(
+            ["git", "show", f"{record['source_commit']}:{registry['_file']}"],
+            cwd=ROOT,
+        )
+        assert sha256(lf(committed)) == record["source_sha256"] == registry["_sha256"]
         return
     assert record["source_commit"] == "working-tree"
     source = (ROOT / registry["_file"]).read_bytes()
@@ -243,6 +249,38 @@ def assert_source_provenance(record, registry):
             ) == original
             for commit in history
         )
+
+
+@pytest.mark.parametrize("ticketed", [False, True])
+def test_source_resolver_pins_the_commit_with_matching_bytes_after_stamping(tmp_path, monkeypatch, ticketed):
+    entry = {
+        "name": "@test/example_agent",
+        "_file": "agents/@test/example_agent.py",
+    }
+    original = b'"""Original agent documentation."""\nVALUE = 1\n'
+    stamped = stamp_source(original, entry)
+    path = tmp_path / entry["_file"]
+    path.parent.mkdir(parents=True)
+    path.write_bytes(stamped)
+    original_commit, stamp_commit = "a" * 40, "b" * 40
+    expected = stamped if ticketed else original
+    entry["_sha256"] = sha256(expected)
+
+    def run(command, **kwargs):
+        if command[:2] == ["git", "log"]:
+            output = f"{stamp_commit}\n{original_commit}\n"
+        else:
+            assert command[:2] == ["git", "show"]
+            commit, relative = command[2].split(":", 1)
+            assert relative == entry["_file"]
+            output = {original_commit: original, stamp_commit: stamped}[commit]
+        return subprocess.CompletedProcess(command, 0, stdout=output)
+
+    monkeypatch.setattr(build_scout_exports, "ROOT", tmp_path)
+    monkeypatch.setattr(build_scout_exports.subprocess, "run", run)
+    assert build_scout_exports._resolve_registry_source(entry, path) == (
+        expected, stamp_commit if ticketed else original_commit,
+    )
 
 
 def test_drifted_current_files_use_notarized_historical_bytes_or_exact_tickets():
