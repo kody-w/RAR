@@ -5940,7 +5940,12 @@ function updateCartUI() {
     return;
   }
 
-  body.innerHTML = [...cart].map(name => {
+  const packsIn = [...cart].filter(n => n.charAt(0) !== '@');
+  const installLine = 'curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- ' + [...cart].sort((x, y) => (x[0] === '@') - (y[0] === '@') || x.localeCompare(y)).join(' ');
+  body.innerHTML = `<div class="cart-item" style="display:block"><div class="cart-item-name">Install everything into your Brainstem</div>
+      <code style="display:block;font-size:.7rem;white-space:normal;word-break:break-all;margin-top:4px">${esc(installLine)}</code>
+      <button class="cart-item-remove" style="position:static;margin-top:4px" onclick="navigator.clipboard&&navigator.clipboard.writeText(${esc(JSON.stringify(installLine))});this.textContent='Copied'">Copy</button>
+      ${packsIn.length ? `<div class="cart-item-ns">Packs from the distro page: ${esc(packsIn.join(', '))}</div>` : ''}</div>` + [...cart].map(name => {
     const a = allAgents.find(x => x.name === name);
     if (!a) return '';
     return `<div class="cart-item">

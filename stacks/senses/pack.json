@@ -1,0 +1,54 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "senses",
+  "display_name": "Senses",
+  "version": "1.0.0",
+  "purpose": "Extra ways to say every reply (headline, tl;dr, explain simply, emoji, haiku, spark). Each one adds its own field beside the answer; keep only the ones you want.",
+  "install": {
+    "type": "agent_pack",
+    "agents": [],
+    "destination": "~/.brainstem/senses/",
+    "includes": [
+      "grail-layers"
+    ],
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- senses"
+  },
+  "moved_from": {
+    "eli5_sense.py": "https://raw.githubusercontent.com/kody-w/RAPP_Sense_Store/main/senses/@rapp/eli5_sense.py",
+    "emoji_sense.py": "https://raw.githubusercontent.com/kody-w/RAPP_Sense_Store/main/senses/@rapp/emoji_sense.py",
+    "haiku_sense.py": "https://raw.githubusercontent.com/kody-w/RAPP_Sense_Store/main/senses/@rapp/haiku_sense.py",
+    "headline_sense.py": "https://raw.githubusercontent.com/kody-w/RAPP_Sense_Store/main/senses/@rapp/headline_sense.py",
+    "tldr_sense.py": "https://raw.githubusercontent.com/kody-w/RAPP_Sense_Store/main/senses/@rapp/tldr_sense.py",
+    "spark_sense.py": "https://raw.githubusercontent.com/kody-w/RAPP_Sense_Store/main/senses/@kody-w/spark_sense.py"
+  },
+  "files": {
+    "eli5_sense.py": {
+      "size": 1239,
+      "sha256": "576307675f2a91d984133c8fc5300200b6d43ef6cb90fef9fa5507da8339ee2c"
+    },
+    "emoji_sense.py": {
+      "size": 1195,
+      "sha256": "e6a66c784c98084ed30ea708b2019d5150fac2b84c20030c195b2f22f0855e03"
+    },
+    "haiku_sense.py": {
+      "size": 1133,
+      "sha256": "af0b3fcd34ae019d91f64aeacaba7e38d79d4297d38bc0f09972384cc3686129"
+    },
+    "headline_sense.py": {
+      "size": 1127,
+      "sha256": "70f8cf64b5b74f9779c8a0f795cebb906401a09d6b85c81eb2768809c8d8e3b9"
+    },
+    "tldr_sense.py": {
+      "size": 1136,
+      "sha256": "79ff5e04fdd9e3518b359c66eaf141538c88848527207ff70ab5628e8c0bfc5e"
+    },
+    "spark_sense.py": {
+      "size": 3835,
+      "sha256": "af421a84f0e55ac872ad0c21f5b1b6fb554c48485d4cc4eccb523b4545060f58"
+    },
+    "README.md": {
+      "size": 244,
+      "sha256": "2f689a024f46986c2247ffb51b940b84ef4c4beb68624dc6797eed6373a7f629"
+    }
+  }
+}

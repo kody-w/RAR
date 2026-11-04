@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-04T13:58:27.827431+00:00",
+  "generated_at": "2026-11-04T14:04:49.611104+00:00",
   "stats": {
     "total_agents": 225,
     "total_swarms": 2,
@@ -13788,7 +13788,7 @@
     {
       "name": "grail-layers",
       "display_name": "Grail layers",
-      "version": "1.4.0",
+      "version": "1.5.0",
       "schema": "rapp-rar-stack/1.2",
       "path": "stacks/grail-layers",
       "purpose": "The one distro for everything new, on the unchanged grail. Layers applied in memory (the supervisor probes /chat and falls back to plain grail on any failure): providers (Responses-API models like gpt-6.1-sol, plus this machine's Ollama models) and journal_tap (every chat turn recorded in your Brain",
@@ -13827,6 +13827,10 @@
         },
         "providers_1_1.py": {
           "sha256": "0b011eed4870598e2ba070547d55e41afaf17d73c63fd761fc3a459bdc98671d",
+          "verified": true
+        },
+        "senses_and_pages.py": {
+          "sha256": "e1fdc20414d166ca612e6670971e0bcbc0a3a1cfa7cdd72f63071a091efcc476",
           "verified": true
         }
       },
@@ -13897,6 +13901,31 @@
       "_verified": true,
       "_seed": 18165375178786217984,
       "_incantation": "FORGE CHISEL PANTHER JOIST DEN SQUIRE BIND"
+    },
+    {
+      "name": "moving-day",
+      "display_name": "Moving Day",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "path": "stacks/moving-day",
+      "purpose": "Your new computer becomes your old one: one file carries your agents, soul, memory, model, private topics and packs (never sign-in or secrets), unpacked on the new computer in one sentence.",
+      "files": {
+        "moving_day_agent.py": {
+          "sha256": "e3173f94f404433c62c2250ca01ee67b0d6208d7468830417691e6a7c0c333a4",
+          "verified": true
+        },
+        "moving_page.py": {
+          "sha256": "1dfdac38b1e79337fbacf1cfec5a46d8acd843d44522f27caeaec2cb8706a4fe",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "8fb55107d1706b5b4f08668f28d404c789a742163c17e19d36ced95dd1b7adea",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "_seed": 1870861920299393024,
+      "_incantation": "FORGE CHISEL PANTHER SHARD SLED BLISS ANVIL"
     },
     {
       "name": "neighborhood-starter",
@@ -14017,6 +14046,47 @@
       "_incantation": "FORGE FUSE PANTHER BLOOM EFFACE DROIT BIND"
     },
     {
+      "name": "senses",
+      "display_name": "Senses",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "path": "stacks/senses",
+      "purpose": "Extra ways to say every reply (headline, tl;dr, explain simply, emoji, haiku, spark). Each one adds its own field beside the answer; keep only the ones you want.",
+      "files": {
+        "eli5_sense.py": {
+          "sha256": "576307675f2a91d984133c8fc5300200b6d43ef6cb90fef9fa5507da8339ee2c",
+          "verified": true
+        },
+        "emoji_sense.py": {
+          "sha256": "e6a66c784c98084ed30ea708b2019d5150fac2b84c20030c195b2f22f0855e03",
+          "verified": true
+        },
+        "haiku_sense.py": {
+          "sha256": "af0b3fcd34ae019d91f64aeacaba7e38d79d4297d38bc0f09972384cc3686129",
+          "verified": true
+        },
+        "headline_sense.py": {
+          "sha256": "70f8cf64b5b74f9779c8a0f795cebb906401a09d6b85c81eb2768809c8d8e3b9",
+          "verified": true
+        },
+        "tldr_sense.py": {
+          "sha256": "79ff5e04fdd9e3518b359c66eaf141538c88848527207ff70ab5628e8c0bfc5e",
+          "verified": true
+        },
+        "spark_sense.py": {
+          "sha256": "af421a84f0e55ac872ad0c21f5b1b6fb554c48485d4cc4eccb523b4545060f58",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "2f689a024f46986c2247ffb51b940b84ef4c4beb68624dc6797eed6373a7f629",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "_seed": 2225479605945368576,
+      "_incantation": "FORGE FORGE PANTHER ENIGMA BLISS BROADSWORD ANVIL"
+    },
+    {
       "name": "starter-business",
       "display_name": "Business starter",
       "version": "1.0.0",
@@ -14053,7 +14123,7 @@
     {
       "name": "starter-personal",
       "display_name": "Personal starter",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "schema": "rapp-rar-stack/1.2",
       "path": "stacks/starter-personal",
       "purpose": "For your own life: everything new on the grail, a Brainstem that looks after its computer, private topics that stay home, and who inherits it.",

@@ -2,15 +2,16 @@
   "schema": "rapp-rar-stack/1.2",
   "name": "starter-personal",
   "display_name": "Personal starter",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "purpose": "For your own life: everything new on the grail, a Brainstem that looks after its computer, private topics that stay home, and who inherits it.",
   "install": {
     "type": "packs",
     "includes": [
       "grail-layers",
+      "inheritance",
+      "moving-day",
       "night-watch",
-      "private-mode",
-      "inheritance"
+      "private-mode"
     ],
     "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- starter-personal"
   },

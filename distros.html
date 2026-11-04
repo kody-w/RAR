@@ -177,8 +177,8 @@
   var PAGE = "https://kody-w.github.io/RAR/s.html#";
   var PER_PAGE = 9;
   var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var RARITY = { kernel: "mythic", layer: "rare", agent: "uncommon", notes: "common", file: "common" };
-  var GLYPH = { kernel: "⬡", layer: "☰", agent: "⚙", notes: "✉", file: "⬚", summon: "✨" };
+  var RARITY = { kernel: "mythic", layer: "rare", agent: "uncommon", sense: "uncommon", page: "uncommon", notes: "common", file: "common" };
+  var GLYPH = { kernel: "⬡", layer: "☰", agent: "⚙", sense: "◉", page: "▤", notes: "✉", file: "⬚", summon: "✨" };
   function esc(s) { var d = document.createElement("div"); d.textContent = String(s == null ? "" : s); return d.innerHTML; }
   // 64-bit seeds lose precision as JS numbers: quote them before parsing.
   function parseExact(t) { return JSON.parse(t.replace(/("_seed"\s*:\s*)(\d+)/g, '$1"$2"')); }
@@ -192,6 +192,8 @@
 
   // One big icon per distro (drawn here, no image requests). Unknown names get the plain monitor.
   var ICON = {
+    "moving-day": '<rect x="20" y="50" width="110" height="70" rx="8" fill="#fd7e14"/><rect x="20" y="40" width="110" height="18" rx="6" fill="#e8590c"/><rect x="62" y="40" width="26" height="80" fill="#ffd8a8"/><path d="M75 20 L95 36 H55Z" fill="#0d6efd"/>',
+    "senses": '<circle cx="75" cy="75" r="46" fill="none" stroke="#0d6efd" stroke-width="8"/><circle cx="75" cy="75" r="26" fill="none" stroke="#20c997" stroke-width="8"/><circle cx="75" cy="75" r="9" fill="#6f42c1"/>',
     "grail-layers": '<rect x="18" y="86" width="114" height="26" rx="6" fill="#6f42c1"/><rect x="28" y="56" width="94" height="26" rx="6" fill="#0d6efd"/><rect x="40" y="26" width="70" height="26" rx="6" fill="#20c997"/>',
     "rooms": '<rect x="12" y="22" width="86" height="60" rx="14" fill="#0d6efd"/><path d="M34 82 L28 102 L52 82Z" fill="#0d6efd"/><rect x="58" y="62" width="80" height="56" rx="14" fill="#20c997"/><path d="M114 118 L122 136 L100 118Z" fill="#20c997"/><circle cx="40" cy="52" r="6" fill="#fff"/><circle cx="56" cy="52" r="6" fill="#fff"/><circle cx="72" cy="52" r="6" fill="#fff"/>',
     "judge": '<rect x="71" y="22" width="8" height="98" fill="#495057"/><rect x="40" y="118" width="70" height="10" rx="4" fill="#495057"/><rect x="24" y="34" width="102" height="6" rx="3" fill="#495057"/><path d="M34 40 L14 84 H54Z" fill="none" stroke="#fd7e14" stroke-width="5"/><path d="M14 84 a20 12 0 0 0 40 0Z" fill="#fd7e14"/><path d="M116 40 L96 84 H136Z" fill="none" stroke="#fd7e14" stroke-width="5"/><path d="M96 84 a20 12 0 0 0 40 0Z" fill="#fd7e14"/>',
@@ -227,9 +229,11 @@
     Object.keys((pack && pack.files) || p.files || {}).forEach(function (f) {
       if (seen[f]) return;
       var rec = (p.files && p.files[f]) || {};
-      var kind = /_agent\.py$/.test(f) ? "agent" : /readme/i.test(f) ? "notes" : "file";
+      var kind = /_agent\.py$/.test(f) ? "agent" : /_sense\.py$/.test(f) ? "sense" : /_(page|organ)\.py$/.test(f) ? "page" : /readme/i.test(f) ? "notes" : "file";
+      var WHAT = { agent: "One Python file; drops into your Brainstem's agents folder.", sense: "Adds one extra way to say every reply, beside the answer.",
+                   page: "Adds its own page to your Brainstem, on this computer only.", notes: "What the maker wrote about this pack." };
       cards.push({ kind: kind === "agent" ? "agent file" : kind, rarity: RARITY[kind], glyph: GLYPH[kind], title: f,
-                   what: kind === "agent" ? "One Python file; drops into your Brainstem's agents folder." : kind === "notes" ? "What the maker wrote about this pack." : "",
+                   what: WHAT[kind] || "",
                    sha: rec.sha256 || (((pack || {}).files || {})[f] || {}).sha256, ok: rec.verified === true });
     });
     return cards;
@@ -362,11 +366,17 @@
 
   var packs = [], page = 1, chosen = {};
   var ADD = "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- ";
+  // One cart for all of RAR: the store page and this page share it. Names starting with @ are catalog agents.
+  function shared() { try { return JSON.parse(localStorage.getItem("rar_cart") || "[]"); } catch (e) { return []; } }
+  shared().forEach(function (n) { if (n.charAt(0) !== "@") chosen[n] = true; });
   function cart() {
     var names = Object.keys(chosen), bar = document.getElementById("cart");
-    bar.classList.toggle("on", names.length > 0);
-    document.getElementById("cartn").textContent = names.length + " pack" + (names.length === 1 ? "" : "s") + " in your cart";
-    document.getElementById("cartcmd").textContent = ADD + names.sort().join(" ");
+    var agents = shared().filter(function (n) { return n.charAt(0) === "@"; });
+    try { localStorage.setItem("rar_cart", JSON.stringify(agents.concat(names.sort()))); } catch (e) {}
+    bar.classList.toggle("on", names.length + agents.length > 0);
+    document.getElementById("cartn").textContent = names.length + " pack" + (names.length === 1 ? "" : "s") +
+      (agents.length ? " and " + agents.length + " agent" + (agents.length === 1 ? "" : "s") + " from the store" : "") + " in your cart";
+    document.getElementById("cartcmd").textContent = ADD + names.sort().concat(agents.sort()).join(" ");
   }
   document.getElementById("cartcopy").onclick = function () {
     var t = document.getElementById("cartcmd").textContent, b = this;
@@ -410,7 +420,7 @@
         cardsFor(x.p, x.pj).forEach(function (c) {
           var isPart = c.kind.indexOf("layer") === 0 || c.kind.indexOf("kernel") === 0;
           if (isPart && seed && seed.indexOf(c.title) < 0) return;  // published but not seeded: the installer leaves it out too
-          var key = /_agent\.py$/.test(c.title) ? c.title : (c.kind.indexOf("layer") === 0 || c.kind.indexOf("kernel") === 0 ? c.title : null);
+          var key = /_(agent|sense|page|organ)\.py$/.test(c.title) ? c.title : (c.kind.indexOf("layer") === 0 || c.kind.indexOf("kernel") === 0 ? c.title : null);
           if (c.sha && seenSha[c.sha]) return;  // the same bytes from two packs: one card
           if (c.sha) seenSha[c.sha] = true;
           c.from = x.p.display_name; c.key = key;

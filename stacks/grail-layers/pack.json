@@ -2,7 +2,7 @@
   "schema": "rapp-rar-stack/1.2",
   "name": "grail-layers",
   "display_name": "Grail layers",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "purpose": "The one distro for everything new, on the unchanged grail. Layers applied in memory (the supervisor probes /chat and falls back to plain grail on any failure): providers (Responses-API models like gpt-6.1-sol, plus this machine's Ollama models) and journal_tap (every chat turn recorded in your Brainstem Journal). Agents: Journal Recall (find earlier conversations, pause recording) and Fragments (paste once, address by hash, pin into every chat). Use it from the llm CLI with github.com/kody-w/llm-brainstem.",
   "install": {
     "type": "grail_layers",
@@ -76,13 +76,26 @@
           "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
           "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
         ]
+      },
+      {
+        "id": "@kody-w/senses_and_pages",
+        "kind": "layer",
+        "point": "agents",
+        "file": "senses_and_pages.py",
+        "sha256": "e1fdc20414d166ca612e6670971e0bcbc0a3a1cfa7cdd72f63071a091efcc476",
+        "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/senses_and_pages.py",
+        "proven_grail": [
+          "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a"
+        ],
+        "what": "Senses and pages over the unchanged grail. A sense adds one extra field to every plain chat reply (a headline, a short version); a page adds its own web routes at /api/<name>/. Before this, only rappter-distro's own kernel loaded them; that loader is now an alias of this part. Organ is an alias of page."
       }
     ],
     "seed": [
+      "@kody-w/journal_tap",
       "@kody-w/providers",
-      "@kody-w/journal_tap"
+      "@kody-w/senses_and_pages"
     ],
-    "parts_note": "rapp-rar-stack/1.2: `parts` is the current list (publisher-scoped ids, kind layer|kernel, one point each, sha256 + locator; the installer seeds the device's rapp/1 chain from it). `layers`, `default_enabled` and `proven_grail` are kept as an alias of `parts` for older installers; status: alias, retiring when a measured check shows zero readers. `seed` (1.2.1) names the parts the installer seeds; the rest are published for \"update my brainstem with …\".",
+    "parts_note": "rapp-rar-stack/1.2: `parts` is the current list (publisher-scoped ids, kind layer|kernel, one point each, sha256 + locator; the installer seeds the device's rapp/1 chain from it). `layers`, `default_enabled` and `proven_grail` are kept as an alias of `parts` for older installers; status: alias, retiring when a measured check shows zero readers. `seed` (1.2.1) names the parts the installer seeds; the rest are published for \"update my brainstem with \u2026\".",
     "layers": [
       "providers_1_1.py"
     ],
@@ -134,6 +147,10 @@
     "providers_1_1.py": {
       "size": 10506,
       "sha256": "0b011eed4870598e2ba070547d55e41afaf17d73c63fd761fc3a459bdc98671d"
+    },
+    "senses_and_pages.py": {
+      "size": 5966,
+      "sha256": "e1fdc20414d166ca612e6670971e0bcbc0a3a1cfa7cdd72f63071a091efcc476"
     }
   },
   "kernel": {

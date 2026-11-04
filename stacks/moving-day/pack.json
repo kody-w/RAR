@@ -1,0 +1,35 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "moving-day",
+  "display_name": "Moving Day",
+  "version": "1.0.0",
+  "purpose": "Your new computer becomes your old one: one file carries your agents, soul, memory, model, private topics and packs (never sign-in or secrets), unpacked on the new computer in one sentence.",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "moving_day_agent.py"
+    ],
+    "pages": [
+      "moving_page.py"
+    ],
+    "destination": "agents/",
+    "includes": [
+      "grail-layers"
+    ],
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- moving-day"
+  },
+  "files": {
+    "moving_day_agent.py": {
+      "size": 9515,
+      "sha256": "e3173f94f404433c62c2250ca01ee67b0d6208d7468830417691e6a7c0c333a4"
+    },
+    "moving_page.py": {
+      "size": 990,
+      "sha256": "1dfdac38b1e79337fbacf1cfec5a46d8acd843d44522f27caeaec2cb8706a4fe"
+    },
+    "README.md": {
+      "size": 352,
+      "sha256": "8fb55107d1706b5b4f08668f28d404c789a742163c17e19d36ced95dd1b7adea"
+    }
+  }
+}
