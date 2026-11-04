@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-11-03T12:52:16Z",
+ "generated_at": "2026-11-04T13:04:50Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,33 +10,33 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 12,
-  "size_kb": 117013,
+  "size_kb": 122174,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-11-03T08:57:40Z",
+  "pushed_at": "2026-11-04T12:54:06Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": null
  },
  "totals": {
-  "downloads": 14515,
-  "clones": 14050,
-  "cdn_hits": 455,
+  "downloads": 14988,
+  "clones": 14418,
+  "cdn_hits": 560,
   "release_downloads": 10,
   "agent_file_downloads": 15,
-  "clones_excluding_ci_estimate": 9178,
-  "ci_clone_estimate": 4872,
-  "page_views": 284,
-  "clone_uniques_14d": 335,
-  "view_uniques_14d": 15,
-  "clone_uniques_daily_sum": 2512,
-  "view_uniques_daily_sum": 127,
-  "days_tracked": 84,
+  "clones_excluding_ci_estimate": 9488,
+  "ci_clone_estimate": 4930,
+  "page_views": 285,
+  "clone_uniques_14d": 312,
+  "view_uniques_14d": 14,
+  "clone_uniques_daily_sum": 2546,
+  "view_uniques_daily_sum": 128,
+  "days_tracked": 85,
   "tracking_since": "2026-07-14",
-  "agents": 223,
+  "agents": 225,
   "swarms": 2,
   "publishers": 10,
-  "categories": 13,
-  "total_lines": 138763,
-  "total_kb": 6426.2,
+  "categories": 14,
+  "total_lines": 139281,
+  "total_kb": 6449.2,
   "votes": 1,
   "upvotes": 1,
   "voters": 1,
@@ -648,6 +648,13 @@
    "clones": 119,
    "clone_uniques": 26,
    "views": 6,
+   "cdn": 105
+  },
+  {
+   "date": "2026-11-03",
+   "clones": 368,
+   "clone_uniques": 34,
+   "views": 1,
    "cdn": 0
   }
  ],
@@ -656,8 +663,8 @@
    {
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "count": 5,
-    "uniques": 5
+    "count": 6,
+    "uniques": 6
    },
    {
     "path": "/kody-w/RAR/discussions/15",
@@ -717,8 +724,8 @@
   "referrers": [
    {
     "referrer": "github.com",
-    "count": 6,
-    "uniques": 5
+    "count": 7,
+    "uniques": 6
    },
    {
     "referrer": "aocr.org",
@@ -731,15 +738,15 @@
     "uniques": 1
    }
   ],
-  "clones_14d": 1991,
+  "clones_14d": 2005,
   "views_14d": 27,
   "live": true,
-  "as_of": "2026-11-03T12:52:16Z"
+  "as_of": "2026-11-04T13:04:50Z"
  },
  "cdn": {
-  "total_hits": 455,
-  "bandwidth": 6438176,
-  "rank": 842213,
+  "total_hits": 560,
+  "bandwidth": 7020284,
+  "rank": 763978,
   "agent_hits": 15,
   "files": [
    {
@@ -2155,8 +2162,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 2184,
-    "size_kb": 92.3,
+    "lines": 2188,
+    "size_kb": 92.5,
     "added_at": "2026-04-20T12:38:45-04:00",
     "file": "agents/@rapp/learn_new_agent.py",
     "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback."
@@ -2434,8 +2441,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 2184,
-    "size_kb": 92.3,
+    "lines": 2188,
+    "size_kb": 92.5,
     "added_at": "2026-04-20T12:38:45-04:00",
     "file": "agents/@rapp/learn_new_agent.py",
     "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback."
@@ -2493,6 +2500,40 @@
    }
   ],
   "newest": [
+   {
+    "name": "@kody-w/fragments_agent",
+    "display_name": "Fragments",
+    "publisher": "@kody-w",
+    "category": "memory",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 135,
+    "size_kb": 6.7,
+    "added_at": "2026-11-03T21:53:43-05:00",
+    "file": "agents/@kody-w/fragments_agent.py",
+    "description": "Paste a document once and address it by a short hash forever: store, get, pin into every chat, unpin, forget, list. Fragment text stays untrusted data on the device."
+   },
+   {
+    "name": "@kody-w/journal_recall_agent",
+    "display_name": "Journal Recall",
+    "publisher": "@kody-w",
+    "category": "memory",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 107,
+    "size_kb": 5.0,
+    "added_at": "2026-11-03T17:23:03-05:00",
+    "file": "agents/@kody-w/journal_recall_agent.py",
+    "description": "Finds earlier conversations in the owner's Brainstem Journal (what did I ask about X, what did we say last Tuesday) and pauses or resumes the journal's recording from chat."
+   },
    {
     "name": "@kody-w/parallel_dimensions_agent",
     "display_name": "Parallel Dimensions",
@@ -2713,40 +2754,6 @@
     "added_at": "2026-08-26T17:29:33-04:00",
     "file": "agents/@kody-w/forge_provenance_agent.py",
     "description": "Stamp a forged artifact bundle with the fingerprint of the RAPP agent it came from, then prove later that it never drifted. Reports per file: current, STALE (source moved), HAND-EDITED (derived file was edited and the edit will be lost), MISSING, or UNSTAMPED (provenance unknown, which never renders as healthy). Fingerprints the agent's declarative surface, read with ast and never imported, so a comment change does not cry wolf but a description change does."
-   },
-   {
-    "name": "@rapter/hive_census_agent",
-    "display_name": "Hive Census",
-    "publisher": "@rapter",
-    "category": "core",
-    "tier": "verified",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 222,
-    "size_kb": 9.9,
-    "added_at": "2026-08-26T17:18:46-04:00",
-    "file": "agents/@rapter/hive_census_agent.py",
-    "description": "Emit this box's census as deterministic static JSON \u2014 protocol revision, anchor hash, resident populations, posture, trust \u2014 computed from local filesystem and git facts with NO language-model call. Byte-stable for the same inputs, sorted and string-valued so it drops straight into a rapp/1 frame payload and two boxes computing the same census produce the same hash. Counts things, never names them."
-   },
-   {
-    "name": "@rapter/hive_shape_agent",
-    "display_name": "Hive Shape",
-    "publisher": "@rapter",
-    "category": "core",
-    "tier": "verified",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 338,
-    "size_kb": 14.7,
-    "added_at": "2026-08-26T17:18:46-04:00",
-    "file": "agents/@rapter/hive_shape_agent.py",
-    "description": "Look at every cubby in a hive at once and report its SHAPE \u2014 divergence (who disagrees about what the world is), silence (who did not answer, always named), mass (where the population actually lives), and spread (how unlike each other the members are). Private by construction: publishes nothing, writes no frame, and leaves the picture on the operator's machine."
    }
   ],
   "publishers": [
@@ -2761,11 +2768,11 @@
    },
    {
     "name": "@kody-w",
-    "agents": 72,
+    "agents": 74,
     "downloads": 4,
     "score": 1,
     "reviews": 1,
-    "lines": 67486,
+    "lines": 68000,
     "rating": 5.0
    },
    {
@@ -2774,7 +2781,7 @@
     "downloads": 8,
     "score": 0,
     "reviews": 0,
-    "lines": 16416,
+    "lines": 16420,
     "rating": 0.0
    },
    {
@@ -2913,6 +2920,13 @@
     "reviews": 0
    },
    {
+    "name": "memory",
+    "agents": 2,
+    "downloads": 0,
+    "score": 0,
+    "reviews": 0
+   },
+   {
     "name": "b2b_sales",
     "agents": 1,
     "downloads": 0,
@@ -2936,7 +2950,7 @@
   ],
   "tiers": {
    "frontier": 97,
-   "community": 70,
+   "community": 72,
    "official": 46,
    "verified": 8,
    "private": 2
