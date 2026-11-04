@@ -1,0 +1,46 @@
+{
+  "artifact_type": "skill",
+  "author": "kody-w",
+  "category": "devtools",
+  "compatibility": {
+    "rapp_protocol": "optional"
+  },
+  "description": "Install RAR packs, starters and store agents into your own Brainstem and test them from one plain sentence, in GitHub Copilot Chat Agent mode or any AI that can run commands.",
+  "display_name": "RAR Easy Mode",
+  "install": {
+    "destination": "skills/rar-easy-mode",
+    "strategy": "copy-files"
+  },
+  "name": "@kody-w/rar-easy-mode",
+  "protocol_conformance": {
+    "evidence": [],
+    "profile": null,
+    "status": "not_assessed"
+  },
+  "schema": "rar-skill/1.0",
+  "source": {
+    "entrypoint": "skills/rar-easy-mode/SKILL.md",
+    "files": [
+      {
+        "media_type": "text/markdown",
+        "path": "skills/rar-easy-mode/SKILL.md",
+        "sha256": "2f7f6ed660199aecd419fa16884a0c7c854550104c5027c24950a797bca5f477"
+      },
+      {
+        "media_type": "text/x-python",
+        "path": "skills/rar-easy-mode/rar_easy_mode_agent.py",
+        "sha256": "e4e91e95dbada6941dc231d4a030326244cdb61b7f0dc048a293a5115930ec57"
+      }
+    ],
+    "repository": "kody-w/grail-layers",
+    "revision": "5ac9288f467488039df732a756f5863e890b3b13"
+  },
+  "tags": [
+    "install",
+    "easy-mode",
+    "copilot",
+    "rapp-1",
+    "local-first"
+  ],
+  "version": "1.0.0"
+}
