@@ -2,14 +2,27 @@
   "schema": "rapp-rar-stack/1.2",
   "name": "grail-layers",
   "display_name": "Grail layers",
-  "version": "1.2.3",
-  "purpose": "Updates for every Brainstem that install over the unchanged grail and can fail without breaking it. A supervisor applies each layer in memory at start, probes /chat, and falls back to plain grail on any failure. First layer: Responses-API models (gpt-6.1-sol, gpt-6-luna) work in the unchanged grail. Second layer: every chat turn is recorded in the owner's Brainstem Journal by default (journal_tap). Third layer: models running on this machine (Ollama) appear in the model list and answer chat, tools included (local_models).",
+  "version": "1.2.4",
+  "purpose": "Updates for every Brainstem that install over the unchanged grail and can fail without breaking it. A supervisor applies each layer in memory at start, probes /chat, and falls back to plain grail on any failure. providers (the one provider part): Responses-API models (gpt-6.1-sol, gpt-6-luna) and models running on this machine (Ollama, as ollama/<name>) work in the unchanged grail. journal_tap: every chat turn is recorded in the owner's Brainstem Journal by default. responses_models and local_models are kept served as aliases of providers.",
   "install": {
     "type": "grail_layers",
     "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/install.sh | bash",
     "uninstall": "curl -fsSL https://kody-w.github.io/grail-layers/uninstall.sh | bash",
     "supervisor": "https://kody-w.github.io/grail-layers/grail_layers.py",
     "parts": [
+      {
+        "id": "@kody-w/providers",
+        "kind": "layer",
+        "point": "provider",
+        "file": "providers.py",
+        "sha256": "eec63ad97a31e4a8f3465633cc6d6050c14147554822ff943665a9ea09fc7218",
+        "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/providers.py",
+        "proven_grail": [
+          "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
+          "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
+        ],
+        "what": "The one provider part: Responses-API-only models (gpt-6.1-sol, gpt-6-luna) and this machine's Ollama models (ollama/<name>, tools included) in the unchanged grail. responses_models and local_models are aliases of this part (status: alias; still served, not seeded)."
+      },
       {
         "id": "@kody-w/responses_models",
         "kind": "layer",
@@ -21,7 +34,8 @@
           "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
           "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
         ],
-        "what": "Models that only speak the Responses API (gpt-6.1-sol, gpt-6-luna) become usable in the unchanged grail."
+        "what": "Models that only speak the Responses API (gpt-6.1-sol, gpt-6-luna) become usable in the unchanged grail.",
+        "status": "alias of @kody-w/providers"
       },
       {
         "id": "@kody-w/journal_tap",
@@ -47,7 +61,8 @@
           "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
           "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
         ],
-        "what": "Models running on this machine (Ollama, http://127.0.0.1:11434) join the model list as ollama/<name> and answer chat with tools, no Copilot needed for them. No Ollama: nothing changes."
+        "what": "Models running on this machine (Ollama, http://127.0.0.1:11434) join the model list as ollama/<name> and answer chat with tools, no Copilot needed for them. No Ollama: nothing changes.",
+        "status": "alias of @kody-w/providers"
       },
       {
         "id": "@kody-w/lispy_brainstem",
@@ -64,19 +79,18 @@
       }
     ],
     "seed": [
-      "@kody-w/responses_models",
-      "@kody-w/journal_tap",
-      "@kody-w/local_models"
+      "@kody-w/providers",
+      "@kody-w/journal_tap"
     ],
-    "parts_note": "rapp-rar-stack/1.2: `parts` is the current list (publisher-scoped ids, kind layer|kernel, one point each, sha256 + locator; the installer seeds the device's rapp/1 chain from it). `layers`, `default_enabled` and `proven_grail` are kept as an alias of `parts` for older installers; status: alias, retiring when a measured check shows zero readers. `seed` (1.2.1) names the parts the installer seeds; the rest are published for \"update my brainstem with \u2026\".",
+    "parts_note": "rapp-rar-stack/1.2: `parts` is the current list (publisher-scoped ids, kind layer|kernel, one point each, sha256 + locator; the installer seeds the device's rapp/1 chain from it). `layers`, `default_enabled` and `proven_grail` are kept as an alias of `parts` for older installers; status: alias, retiring when a measured check shows zero readers. `seed` (1.2.1) names the parts the installer seeds; the rest are published for \"update my brainstem with …\".",
     "layers": [
-      "responses_models.py"
+      "providers.py"
     ],
     "default_enabled": [
-      "responses_models"
+      "providers"
     ],
     "proven_grail": {
-      "responses_models.py": [
+      "providers.py": [
         "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
         "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
       ]
@@ -84,8 +98,8 @@
   },
   "files": {
     "README.md": {
-      "size": 1352,
-      "sha256": "50aa36856975dd94898afda5a89dbba2f359a78cda64c94ab510bf57e51e11c8"
+      "size": 1779,
+      "sha256": "6bdf9c103d2aeee5185494bee311abf07482b6583b9bde68b102ad3f5bbcd82c"
     },
     "responses_models.py": {
       "size": 5902,
@@ -102,6 +116,10 @@
     "local_models.py": {
       "size": 3625,
       "sha256": "884148aa85d3c405bfe1d642d0c309d6100fa6e71a03a05c2d468324ab56c3f8"
+    },
+    "providers.py": {
+      "size": 7877,
+      "sha256": "eec63ad97a31e4a8f3465633cc6d6050c14147554822ff943665a9ea09fc7218"
     }
   }
 }

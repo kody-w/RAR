@@ -8,10 +8,11 @@
      Brainstem (over Tailscale) to summon it; or say its 7-word chant on s.html.
      The QR encodes https://kody-w.github.io/RAR/s.html#<seed> and is drawn in the browser;
      the link is never sent to a QR service. Unverified stacks get no QR.
-     "Rip it open" tears the pack and deals its parts as cards, read from the pack's own
-     stacks/<name>/pack.json (a thin view over the same JSON). Trading-card-game lessons: the
-     reveal is one click to skip, never gates the summon link, and is instant under
-     prefers-reduced-motion. -->
+     "Rip it open": a dimmed modal, one sealed foil pack, click to rip, then ONE card at a time
+     (kind, title, meaning, rarity), ending on the summon card. Read from the pack's own
+     stacks/<name>/pack.json (a thin view over the same JSON). Trading-card-game lessons: one
+     click skips to the end, Close is always there, the summon link never depends on the reveal,
+     and prefers-reduced-motion gets no animation. -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"
         integrity="sha384-mZT2gIty7ZDdOGkxfP6joZcYdMW1Jvj9dRlfpTmaJAKKXTqzygtB22k7FLe+KZC1"
         crossorigin="anonymous"></script>
@@ -21,7 +22,7 @@
   main { max-width: 860px; margin: 0 auto; }
   h1 { margin: 0 0 4px; } .sub { color: #8b949e; margin: 0 0 24px; }
   .row { display: flex; gap: 20px; align-items: center; background: #161b22; border: 1px solid #30363d;
-         border-radius: 16px; padding: 20px; margin-bottom: 14px; flex-wrap: wrap; }
+         border-radius: 16px; padding: 20px; margin-bottom: 14px; }
   .info { flex: 1; min-width: 0; }
   .info h2 { margin: 0 0 6px; font-size: 20px; }
   .info p { margin: 6px 0; line-height: 1.45; color: #c9d1d9; }
@@ -36,56 +37,66 @@
                border-radius: 999px; padding: 9px 18px; font-size: 14px; font-weight: 700; cursor: pointer;
                box-shadow: 0 6px 20px rgba(88,166,255,.25); }
   button.rip:hover { filter: brightness(1.08); }
-  button.rip[disabled] { opacity: .5; cursor: default; }
-  /* ---- the pack ---- */
-  .table { flex-basis: 100%; display: none; }
-  .table.open { display: block; }
-  .stage { position: relative; min-height: 250px; display: flex; align-items: center; justify-content: center; }
-  .pack { position: relative; width: 200px; height: 250px; border-radius: 14px;
-          background: linear-gradient(160deg, #1f6feb 0%, #8957e5 45%, #f778ba 100%);
-          box-shadow: 0 20px 50px rgba(0,0,0,.55), inset 0 0 0 2px rgba(255,255,255,.18);
+  /* ---- the modal ---- */
+  .veil { position: fixed; inset: 0; background: rgba(2,6,12,.86); display: none; align-items: center;
+          justify-content: center; z-index: 100; flex-direction: column; gap: 14px; padding: 20px; }
+  .veil.open { display: flex; }
+  .veil .cap { color: #c9d1d9; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; text-align: center; }
+  .veil .cap b { color: #ffd33d; }
+  .veil .note { color: #8b949e; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
+  .veil button.x { background: #161b22; color: #e6edf3; border: 1px solid #30363d; border-radius: 8px;
+                   padding: 6px 14px; cursor: pointer; font-size: 13px; }
+  .veil button.x:hover { border-color: #484f58; }
+  .pack { position: relative; width: 240px; height: 340px; border-radius: 14px; cursor: pointer;
+          background: linear-gradient(160deg, #0f3d2e 0%, #1a5a44 40%, #0b2a20 100%);
+          box-shadow: 0 30px 70px rgba(0,0,0,.7), inset 0 0 0 2px rgba(255,215,120,.45);
           display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
-          padding: 16px; color: #fff; overflow: hidden; }
+          padding: 18px; color: #f3e9c8; overflow: hidden; }
   .pack::before { content: ""; position: absolute; inset: 0;
-          background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.45) 50%, transparent 70%);
-          transform: translateX(-120%); animation: foil 2.2s ease-in-out infinite; }
+          background: repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 6px, transparent 6px 14px); }
+  .pack::after { content: ""; position: absolute; inset: 0;
+          background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.35) 50%, transparent 65%);
+          transform: translateX(-120%); animation: foil 2.6s ease-in-out infinite; }
   @keyframes foil { to { transform: translateX(120%); } }
-  .pack .name { font-size: 20px; font-weight: 800; line-height: 1.15; text-shadow: 0 2px 6px rgba(0,0,0,.4); }
-  .pack .count { margin-top: 10px; font-size: 13px; opacity: .9; }
-  .pack .tear { position: absolute; top: 0; left: 0; right: 0; height: 44px;
-          background: linear-gradient(160deg, #1f6feb, #8957e5); border-bottom: 2px dashed rgba(255,255,255,.6);
-          transform-origin: left top; }
-  .pack.ripping .tear { animation: tear .55s cubic-bezier(.3,1.4,.6,1) forwards; }
+  .pack .brand { font-size: 12px; letter-spacing: .3em; text-transform: uppercase; opacity: .85; }
+  .pack .name { font-size: 22px; font-weight: 800; line-height: 1.15; margin: 14px 0 6px; text-shadow: 0 2px 8px rgba(0,0,0,.5); }
+  .pack .seal { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; opacity: .8; }
+  .pack .star { font-size: 28px; margin: 18px 0; color: #ffd33d; }
+  .pack .count { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; opacity: .85; }
+  .pack .tear { position: absolute; top: 0; left: 0; right: 0; height: 52px; transform-origin: left top;
+          background: linear-gradient(160deg, #134b38, #1a5a44); border-bottom: 2px dashed rgba(255,215,120,.6); }
+  .pack.ripping .tear { animation: tear .6s cubic-bezier(.3,1.4,.6,1) forwards; }
   @keyframes tear { 40% { transform: rotate(-8deg) translate(-6px, -4px); }
-                    100% { transform: rotate(-70deg) translate(-150px, -40px); opacity: 0; } }
-  .pack.ripping { animation: shake .55s ease-in-out; }
+                    100% { transform: rotate(-70deg) translate(-180px, -40px); opacity: 0; } }
+  .pack.ripping { animation: shake .6s ease-in-out; }
   @keyframes shake { 25% { transform: rotate(-2deg); } 50% { transform: rotate(2.5deg); } 75% { transform: rotate(-1.5deg); } }
-  .pack.gone { animation: drop .5s ease-in forwards; }
-  @keyframes drop { to { transform: translateY(120px) scale(.8); opacity: 0; } }
-  .hand { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
-  .card { width: 168px; min-height: 230px; border-radius: 12px; background: #0d1117; border: 1px solid #30363d;
-          padding: 12px; display: flex; flex-direction: column; gap: 6px; transform-style: preserve-3d;
-          animation: deal .6s cubic-bezier(.2,.9,.3,1.1) both; position: relative; }
-  .card::before { content: ""; position: absolute; inset: -1px; border-radius: 12px; padding: 1px;
-          background: linear-gradient(135deg, #58a6ff, #bc8cff); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-          -webkit-mask-composite: xor; mask-composite: exclude; opacity: .7; }
-  @keyframes deal { from { transform: translateY(-140px) rotateY(180deg) scale(.6); opacity: 0; }
-                    60% { opacity: 1; } to { transform: none; opacity: 1; } }
-  .card .kind { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #8b949e; }
-  .card .title { font-weight: 700; font-size: 14px; word-break: break-word; }
-  .card .what { font-size: 12.5px; color: #c9d1d9; line-height: 1.35; flex: 1; }
-  .card .sha { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: #8b949e; }
-  .card .ok { color: #3fb950; font-size: 12px; }
-  .card.rare { background: radial-gradient(120% 120% at 20% 0%, #2d1f5e, #0d1117 60%); }
-  .card.rare::before { background: linear-gradient(135deg, #f778ba, #ffd33d, #58a6ff); opacity: 1; }
-  .card.summon { background: linear-gradient(160deg, #0f2a4a, #0d1117); align-items: flex-start; }
-  .card.summon a.go { display: inline-block; margin-top: 4px; background: #238636; color: #fff; border-radius: 8px;
-          padding: 7px 12px; font-weight: 700; text-decoration: none; font-size: 13px; }
-  .bar { display: flex; gap: 10px; align-items: center; justify-content: center; margin-top: 12px; color: #8b949e; font-size: 13px; }
-  .bar button { background: transparent; color: #8b949e; border: 1px solid #30363d; border-radius: 8px; padding: 5px 10px; cursor: pointer; }
-  .bar button:hover { color: #e6edf3; border-color: #484f58; }
+  .pack.gone { animation: drop .45s ease-in forwards; }
+  @keyframes drop { to { transform: translateY(140px) scale(.8); opacity: 0; } }
+  .card { width: 260px; min-height: 360px; border-radius: 14px; background: #0d1117; border: 1px solid #30363d;
+          padding: 16px; display: flex; flex-direction: column; gap: 8px; cursor: pointer; position: relative;
+          animation: flip .55s cubic-bezier(.2,.9,.3,1.1) both; box-shadow: 0 30px 70px rgba(0,0,0,.7); }
+  .card::before { content: ""; position: absolute; inset: -1px; border-radius: 14px; padding: 1.5px; opacity: .8;
+          background: var(--edge, linear-gradient(135deg, #58a6ff, #bc8cff));
+          -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+  @keyframes flip { from { transform: rotateY(180deg) scale(.7); opacity: 0; } 60% { opacity: 1; } to { transform: none; opacity: 1; } }
+  .card .art { height: 120px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+          font-size: 44px; background: var(--art, linear-gradient(160deg, #1f6feb, #8957e5)); color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,.4); }
+  .card .kind { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #8b949e; }
+  .card .title { font-weight: 800; font-size: 17px; word-break: break-word; line-height: 1.2; }
+  .card .what { font-size: 13px; color: #c9d1d9; line-height: 1.4; flex: 1; }
+  .card .foot { display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #8b949e; }
+  .card .foot .sha { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .card .foot .ok { color: #3fb950; }
+  .card.mythic { --edge: linear-gradient(135deg, #f778ba, #ffd33d, #58a6ff); --art: radial-gradient(120% 120% at 20% 0%, #5b2a86, #1b0d33 70%); }
+  .card.rare { --edge: linear-gradient(135deg, #58a6ff, #bc8cff); --art: linear-gradient(160deg, #1f6feb, #8957e5); }
+  .card.uncommon { --edge: linear-gradient(135deg, #3fb950, #58a6ff); --art: linear-gradient(160deg, #1a7f37, #0f5132); }
+  .card.common { --edge: linear-gradient(135deg, #8b949e, #484f58); --art: linear-gradient(160deg, #30363d, #161b22); }
+  .card.summon { --edge: linear-gradient(135deg, #3fb950, #ffd33d); --art: linear-gradient(160deg, #0f2a4a, #0d1117); }
+  .card a.go { display: inline-block; background: #238636; color: #fff; border-radius: 8px; padding: 8px 14px;
+          font-weight: 700; text-decoration: none; font-size: 13px; }
+  .card .one { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: #8b949e; word-break: break-all; }
   @media (prefers-reduced-motion: reduce) {
-    .pack::before, .pack.ripping, .pack.ripping .tear, .pack.gone, .card { animation: none !important; }
+    .pack::after, .pack.ripping, .pack.ripping .tear, .pack.gone, .card { animation: none !important; }
   }
   @media (max-width: 560px) { .row { flex-direction: column; align-items: flex-start; } }
 </style>
@@ -98,11 +109,14 @@
     Curious what is inside a pack? <b>Rip it open.</b></p>
   <div id="list">Loading…</div>
 </main>
+<div class="veil" id="veil" role="dialog" aria-modal="true" aria-label="Pack reveal"></div>
 <script>
 (function () {
   "use strict";
   var PAGE = "https://kody-w.github.io/RAR/s.html#";
   var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var RARITY = { kernel: "mythic", layer: "rare", agent: "uncommon", notes: "common", file: "common" };
+  var GLYPH = { kernel: "⬡", layer: "☰", agent: "⚙", notes: "✉", file: "⬚", summon: "✨" };
   function esc(s) { var d = document.createElement("div"); d.textContent = String(s == null ? "" : s); return d.innerHTML; }
   // 64-bit seeds lose precision as JS numbers: quote them before parsing.
   function parseExact(t) { return JSON.parse(t.replace(/("_seed"\s*:\s*)(\d+)/g, '$1"$2"')); }
@@ -113,69 +127,87 @@
   }
   function wait(ms) { return new Promise(function (res) { setTimeout(res, REDUCED ? 0 : ms); }); }
 
-  // The cards a pack holds: parts (publisher-scoped, 1.2+) first, then every other file, then the summon card.
+  // The cards a pack holds: parts (publisher-scoped, 1.2+) first, then every other file. The summon card is last.
   function cardsFor(p, pack) {
     var cards = [], seen = {};
     var parts = (pack && pack.install && pack.install.parts) || [];
     parts.forEach(function (x) {
       seen[x.file] = true;
-      cards.push({ kind: (x.kind || "part") + (x.point ? " · " + x.point : ""), title: x.id || x.file,
-                   what: x.what || "", sha: x.sha256, rare: x.kind === "kernel",
+      var kind = x.kind === "kernel" ? "kernel" : "layer";
+      cards.push({ kind: kind + (x.point ? " · " + x.point : ""), rarity: RARITY[kind], glyph: GLYPH[kind],
+                   title: x.id || x.file, what: x.what || "", sha: x.sha256,
                    ok: !!(p.files && p.files[x.file] && p.files[x.file].verified) });
     });
     Object.keys((pack && pack.files) || p.files || {}).forEach(function (f) {
       if (seen[f]) return;
       var rec = (p.files && p.files[f]) || {};
-      cards.push({ kind: /\.py$/.test(f) ? "agent file" : /readme/i.test(f) ? "notes" : "file", title: f,
-                   what: "", sha: rec.sha256 || ((pack.files || {})[f] || {}).sha256, ok: rec.verified === true });
+      var kind = /_agent\.py$/.test(f) ? "agent" : /readme/i.test(f) ? "notes" : "file";
+      cards.push({ kind: kind === "agent" ? "agent file" : kind, rarity: RARITY[kind], glyph: GLYPH[kind], title: f,
+                   what: kind === "agent" ? "One Python file; drops into your Brainstem's agents folder." : kind === "notes" ? "What the maker wrote about this pack." : "",
+                   sha: rec.sha256 || (((pack || {}).files || {})[f] || {}).sha256, ok: rec.verified === true });
     });
     return cards;
   }
-  function cardEl(c, i) {
+  function cardEl(c, i, n) {
     var el = document.createElement("div");
-    el.className = "card" + (c.rare ? " rare" : "");
-    el.style.animationDelay = (REDUCED ? 0 : i * 0.22) + "s";
-    el.innerHTML = "<div class='kind'>" + esc(c.kind) + "</div><div class='title'>" + esc(c.title) + "</div>" +
-      "<div class='what'>" + esc(c.what) + "</div>" +
-      (c.sha ? "<div class='sha' title='" + esc(c.sha) + "'>sha256 " + esc(String(c.sha).slice(0, 12)) + "…</div>" : "") +
-      (c.ok ? "<div class='ok'>✓ bytes match the pack</div>" : "");
+    el.className = "card " + c.rarity;
+    el.innerHTML = "<div class='art'>" + c.glyph + "</div><div class='kind'>" + esc(c.kind) + "</div>" +
+      "<div class='title'>" + esc(c.title) + "</div><div class='what'>" + esc(c.what) + "</div>" +
+      "<div class='foot'>" + (c.sha ? "<span class='sha' title='" + esc(c.sha) + "'>sha256 " + esc(String(c.sha).slice(0, 10)) + "…</span>" : "<span></span>") +
+      (c.ok ? "<span class='ok'>✓ bytes match</span>" : "<span></span>") + "</div>";
     return el;
   }
-  function summonEl(p, pack, link, i) {
+  function summonEl(p, pack, link) {
     var el = document.createElement("div"); el.className = "card summon";
-    el.style.animationDelay = (REDUCED ? 0 : i * 0.22) + "s";
     var one = pack && pack.install && pack.install.one_liner;
-    el.innerHTML = "<div class='kind'>summon</div><div class='title'>" + esc(p.display_name) + " " + esc(p.version || "") + "</div>" +
-      (p._incantation ? "<div class='what'>Chant: <b>" + esc(p._incantation) + "</b></div>" : "") +
-      (one ? "<div class='sha' title='" + esc(one) + "'>" + esc(one) + "</div>" : "") +
-      (link ? "<a class='go' href='" + esc(link) + "'>Summon it</a>" : "<div class='what'>Not verified yet, so it can't be summoned.</div>");
+    el.innerHTML = "<div class='art'>" + GLYPH.summon + "</div><div class='kind'>summon</div><div class='title'>" +
+      esc(p.display_name) + " " + esc((pack && pack.version) || p.version || "") + "</div>" +
+      "<div class='what'>" + (p._incantation ? "Chant: <b>" + esc(p._incantation) + "</b>" : "") + "</div>" +
+      (one ? "<div class='one'>" + esc(one) + "</div>" : "") +
+      "<div class='foot'>" + (link ? "<a class='go' href='" + esc(link) + "'>Summon it</a>" : "<span>Not verified yet, so it can't be summoned.</span>") + "</div>";
     return el;
   }
 
-  function rip(p, row, btn, link) {
-    var table = row.querySelector(".table");
-    if (table.classList.contains("open")) { table.classList.remove("open"); btn.textContent = "Rip it open"; return; }
-    btn.textContent = "Close"; table.classList.add("open");
-    table.innerHTML = "<div class='stage'><div class='pack'><div class='tear'></div><div class='name'>" + esc(p.display_name) +
-      "</div><div class='count'>" + Object.keys(p.files || {}).length + " things inside</div></div></div>" +
-      "<div class='bar'><button type='button' class='skip'>Skip the reveal</button></div>";
-    var stage = table.querySelector(".stage"), pack = stage.querySelector(".pack");
-    var skipped = false;
-    table.querySelector(".skip").onclick = function () { skipped = true; };
-    fetch(p.path + "/pack.json", { cache: "no-cache" }).then(function (r) { return r.ok ? r.text().then(parseExact) : null; })
-      .catch(function () { return null; }).then(function (pj) {
-        var cards = cardsFor(p, pj);
-        return wait(250).then(function () { pack.classList.add("ripping"); return wait(skipped ? 0 : 600); })
-          .then(function () { pack.classList.add("gone"); return wait(skipped ? 0 : 450); })
-          .then(function () {
-            stage.innerHTML = ""; var hand = document.createElement("div"); hand.className = "hand"; stage.appendChild(hand);
-            if (skipped || REDUCED) hand.style.setProperty("--instant", "1");
-            cards.forEach(function (c, i) { var el = cardEl(c, skipped ? 0 : i); hand.appendChild(el); });
-            hand.appendChild(summonEl(p, pj, link, skipped ? 0 : cards.length));
-            table.querySelector(".bar").innerHTML = "<span>" + cards.length + " part" + (cards.length === 1 ? "" : "s") +
-              " dealt from " + esc(p.path) + "/pack.json</span>";
-          });
-      });
+  var veil = document.getElementById("veil");
+  function closeVeil() { veil.classList.remove("open"); veil.innerHTML = ""; }
+  veil.addEventListener("click", function (e) { if (e.target === veil) closeVeil(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && veil.classList.contains("open")) closeVeil(); });
+
+  function rip(p, link) {
+    var count = Object.keys(p.files || {}).length;
+    veil.innerHTML = "<div class='pack'><div class='tear'></div><div class='brand'>RAR</div><div class='seal'>Sealed foil pack</div>" +
+      "<div class='name'>" + esc(p.display_name) + "</div><div class='star'>✦</div>" +
+      "<div class='count'>" + count + " card" + (count === 1 ? "" : "s") + " · 1 summon card</div></div>" +
+      "<div class='cap' id='cap'>Click the pack to rip it</div><div class='note'>Read from " + esc(p.path) + "/pack.json</div>" +
+      "<div><button type='button' class='x' id='skip'>Skip to the end</button> <button type='button' class='x' id='close'>Close</button></div>";
+    veil.classList.add("open");
+    var pack = veil.querySelector(".pack"), cap = veil.querySelector("#cap");
+    var state = { cards: null, pj: null, i: -1, ripped: false, skipped: false };
+    veil.querySelector("#close").onclick = closeVeil;
+    var loaded = fetch(p.path + "/pack.json", { cache: "no-cache" }).then(function (r) { return r.ok ? r.text().then(parseExact) : null; })
+      .catch(function () { return null; }).then(function (pj) { state.pj = pj; state.cards = cardsFor(p, pj); return state; });
+    function show(i) {
+      var old = veil.querySelector(".card, .pack"); if (old) old.remove();
+      var total = state.cards.length + 1;
+      var el = i < state.cards.length ? cardEl(state.cards[i], i, total) : summonEl(p, state.pj, link);
+      veil.insertBefore(el, cap);
+      var c = i < state.cards.length ? state.cards[i] : null;
+      cap.innerHTML = (i + 1) + " / " + total + " · <b>" + (c ? c.rarity : "summon") + "</b>" +
+        (i + 1 < total ? " · click for next card" : " · that is the whole pack");
+      el.onclick = function () { if (i + 1 < total) show(i + 1); };
+      state.i = i;
+    }
+    veil.querySelector("#skip").onclick = function () {
+      state.skipped = true;
+      loaded.then(function () { show(state.cards.length); });
+    };
+    pack.onclick = function () {
+      if (state.ripped) return;
+      state.ripped = true; cap.textContent = "Ripping…";
+      pack.classList.add("ripping");
+      loaded.then(function () { return wait(600); }).then(function () { pack.classList.add("gone"); return wait(450); })
+        .then(function () { if (!state.skipped) show(0); });
+    };
   }
 
   fetch("registry.json", { cache: "no-cache" }).then(function (r) { return r.text(); }).then(parseExact).then(function (reg) {
@@ -201,9 +233,7 @@
         side.className = "off"; side.textContent = "Not verified yet, so it can't be summoned.";
       }
       row.appendChild(side);
-      var table = document.createElement("div"); table.className = "table"; row.appendChild(table);
-      var btn = row.querySelector(".rip");
-      btn.onclick = function () { rip(p, row, btn, link); };
+      row.querySelector(".rip").onclick = function () { rip(p, link); };
       list.appendChild(row);
     });
   }).catch(function () { document.getElementById("list").textContent = "Couldn't load the registry."; });

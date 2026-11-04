@@ -8,7 +8,9 @@ Updates that install OVER the unchanged grail (the Brainstem kernel) and can fai
 
 | Layer | What it adds |
 |---|---|
-| `responses_models` | Models that only speak the Responses API (for example gpt-6.1-sol and gpt-6-luna) become usable in the unchanged grail. |
+| `providers` (seeded) | The one provider part: models that only speak the Responses API (gpt-6.1-sol, gpt-6-luna) and the models running on this machine (Ollama, as `ollama/<name>`, tools included) become usable in the unchanged grail. |
+| `journal_tap` (seeded) | Every chat turn is recorded in the owner's Brainstem Journal on this device, by default; pause it from chat. No journal running: nothing happens. |
+| `responses_models`, `local_models` | Status: **alias of `providers`** (one point, one occupant). Still served at their URLs for older shapes; not seeded. |
 | `lispy_brainstem` (kernel, not seeded) | A whole Brainstem whose kernel is LisPy, as one file. Say "update my brainstem with @kody-w/lispy_brainstem"; it is tried in the lab first and "undo" puts the grail kernel back. |
 
 Since pack 1.2 every entry is a **part**: `{id "@publisher/name", kind layer|kernel, point, file, sha256, locator}`.
