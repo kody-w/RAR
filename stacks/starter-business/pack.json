@@ -2,17 +2,19 @@
   "schema": "rapp-rar-stack/1.2",
   "name": "starter-business",
   "display_name": "Business starter",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "purpose": "For a small business: the grail with every model, Night Watch, Private Mode for client matters, a Microsoft 365 agent team, Claude workflows and a regression judge for your agents.",
   "install": {
     "type": "packs",
     "includes": [
-      "grail-layers",
-      "night-watch",
-      "private-mode",
-      "microsoft-365-team",
       "claude-workflows",
-      "judge"
+      "grail-layers",
+      "judge",
+      "microsoft-365-team",
+      "night-watch",
+      "paperwork-desk",
+      "private-mode",
+      "work-receipts"
     ],
     "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- starter-business"
   },

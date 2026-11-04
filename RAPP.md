@@ -42,7 +42,12 @@ touching anything, boots the layers in a lab and sends a real `/chat` before goi
 tool name = upgrade with a kept copy; different bytes under a taken name = a scoped name), and undoes in one step.
 `--plan-json` shows the plan and changes nothing; `--skip <file>` leaves a card out.
 
+Easy mode (you do it all for the person): load the RAPP skill https://kody-w.github.io/grail-layers/skills/rar-easy-mode/SKILL.md
+(GitHub Copilot Chat in Agent mode is the default host; any AI that can run commands works; a Brainstem can run it as
+`rar_easy_mode_agent.py` beside it). The person only says "Show me RAR" or "Give me <names> ... and test it for me".
 ## 4. Lifecycle (ALM) rules you must follow
+Status: PROPOSAL (`rapp-alm/1`, https://github.com/kody-w/rapp-1/pull/59, not yet accepted). Follow it, but where it
+differs from the accepted rapp/1 spec, the accepted spec wins; re-read this page before relying on it.
 Author → publish (immutable version + shas) → verify (RAR CI, receipts) → cart → plan → gate → install →
 upgrade → undo → alias → tombstone (only after measured zero use). Ids are publisher-scoped from the first publish
 (`@you/part`). A pack only adds; it never edits the kernel or another publisher's part. A use case is an agent,

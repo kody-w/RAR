@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-04T14:24:21.697539+00:00",
+  "generated_at": "2026-11-04T15:20:30.929901+00:00",
   "stats": {
     "total_agents": 226,
     "total_swarms": 2,
@@ -13524,6 +13524,7 @@
         }
       },
       "_verified": true,
+      "shelf": "app",
       "_seed": 3321709878707232768,
       "_incantation": "FORGE CHISEL PANTHER BEREFT SHRIEK COMMAND BLADE"
     },
@@ -13545,6 +13546,7 @@
         }
       },
       "_verified": true,
+      "shelf": "app",
       "_seed": 15167808110090788864,
       "_incantation": "FORGE CHISEL PANTHER COBALT SCYTHE HYMN ETCH"
     },
@@ -13570,6 +13572,7 @@
         }
       },
       "_verified": true,
+      "shelf": "pack",
       "_seed": 7100592804908253184,
       "_incantation": "FORGE FUSE PANTHER BEREFT MARCH CREED TEMPER"
     },
@@ -13591,6 +13594,7 @@
         }
       },
       "_verified": true,
+      "shelf": "app",
       "_seed": 11402832094720696320,
       "_incantation": "FORGE CHISEL PANTHER STALLION HERALD HEIRLOOM BRAND"
     },
@@ -13612,6 +13616,7 @@
         }
       },
       "_verified": true,
+      "shelf": "app",
       "_seed": 17329503791988350976,
       "_incantation": "FORGE CHISEL PANTHER SANCTIFY THROW STOKE BIND"
     },
@@ -13633,13 +13638,14 @@
         }
       },
       "_verified": true,
+      "shelf": "pack",
       "_seed": 17440304482002819656,
       "_incantation": "PLUME DOMINION LUSTER DINT JADE OMEN BIND"
     },
     {
       "name": "grail-layers",
       "display_name": "Grail layers",
-      "version": "1.5.0",
+      "version": "1.5.1",
       "schema": "rapp-rar-stack/1.2",
       "path": "stacks/grail-layers",
       "purpose": "The one distro for everything new, on the unchanged grail. Layers applied in memory (the supervisor probes /chat and falls back to plain grail on any failure): providers (Responses-API models like gpt-6.1-sol, plus this machine's Ollama models) and journal_tap (every chat turn recorded in your Brain",
@@ -13681,7 +13687,7 @@
           "verified": true
         },
         "senses_and_pages.py": {
-          "sha256": "e1fdc20414d166ca612e6670971e0bcbc0a3a1cfa7cdd72f63071a091efcc476",
+          "sha256": "ebbebee33204c296bd97b930160751e77c34dd29becf966e9c7741fd8abe66df",
           "verified": true
         }
       },
@@ -13691,6 +13697,7 @@
         "file": "brainstem.py",
         "version": "0.6.17"
       },
+      "shelf": "pack",
       "_seed": 11298904168309211136,
       "_incantation": "FORGE FUSE PANTHER SILL STEPPE PROPHECY BRAND"
     },
@@ -13708,6 +13715,7 @@
         }
       },
       "_verified": true,
+      "shelf": "pack",
       "_seed": 18205994896412639232,
       "_incantation": "FORGE FORGE PANTHER KINGDOM VAULT TEMPLAR BIND"
     },
@@ -13729,6 +13737,7 @@
         }
       },
       "_verified": true,
+      "shelf": "app",
       "_seed": 13901077956484145152,
       "_incantation": "FORGE CHISEL PANTHER ENVOY SOAK BURST STAMP"
     },
@@ -13750,6 +13759,7 @@
         }
       },
       "_verified": true,
+      "shelf": "pack",
       "_seed": 17889783379558146048,
       "_incantation": "FORGE CHISEL PANTHER BULWARK WISE PACK BIND"
     },
@@ -13771,6 +13781,7 @@
         }
       },
       "_verified": true,
+      "shelf": "app",
       "_seed": 10267934643709812736,
       "_incantation": "FORGE CHISEL PANTHER DIRGE PALADIN MATRIX CHISEL"
     },
@@ -13792,6 +13803,7 @@
         }
       },
       "_verified": true,
+      "shelf": "app",
       "_seed": 18300474856845615104,
       "_incantation": "FORGE CHISEL PANTHER HALBERD GORGE AWAKEN BIND"
     },
@@ -13813,8 +13825,31 @@
         }
       },
       "_verified": true,
+      "shelf": "pack",
       "_seed": 18165375178786217984,
       "_incantation": "FORGE CHISEL PANTHER JOIST DEN SQUIRE BIND"
+    },
+    {
+      "name": "money-watch",
+      "display_name": "Money Watch",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "path": "stacks/money-watch",
+      "purpose": "Read your bank and card exports on this computer only: it catches price rises, duplicate charges and renewals coming up, and tells you once. Nothing is ever sent anywhere.",
+      "files": {
+        "money_watch_agent.py": {
+          "sha256": "b0d722471a508a83448911da7cccdfc5cdb85fbe204ebcdeda2f8de5e07b2657",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "26fbd998d5b2022881e6cc8ba5d6a5482c138b6e189e2efc1e00a6ea1dea82a4",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 14569915131677908992,
+      "_incantation": "FORGE CHISEL PANTHER STANCE ARRAY SOAK STAMP"
     },
     {
       "name": "moving-day",
@@ -13838,6 +13873,7 @@
         }
       },
       "_verified": true,
+      "shelf": "pack",
       "_seed": 1870861920299393024,
       "_incantation": "FORGE CHISEL PANTHER SHARD SLED BLISS ANVIL"
     },
@@ -13859,6 +13895,7 @@
         }
       },
       "_verified": true,
+      "shelf": "pack",
       "_seed": 6633108683007991808,
       "_incantation": "FORGE CHISEL PANTHER KEEP ION CONSUL SMELT"
     },
@@ -13880,6 +13917,7 @@
         }
       },
       "_verified": true,
+      "shelf": "pack",
       "_seed": 14313598458479517696,
       "_incantation": "FORGE CHISEL PANTHER TURRET SEAR POISE STAMP"
     },
@@ -13901,6 +13939,7 @@
         }
       },
       "_verified": true,
+      "shelf": "app",
       "_seed": 1651304922999693312,
       "_incantation": "FORGE CHISEL PANTHER BLOOM REMAIN FEINT ANVIL"
     },
@@ -13922,8 +13961,35 @@
         }
       },
       "_verified": true,
+      "shelf": "pack",
       "_seed": 14843056862517018624,
       "_incantation": "FORGE FUSE PANTHER GROOM CLANG ARISE STAMP"
+    },
+    {
+      "name": "paperwork-desk",
+      "display_name": "Paperwork Desk",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "path": "stacks/paperwork-desk",
+      "purpose": "Drop in a lease, a policy or a warranty; it files the paper on this computer, finds every deadline (renewal, claim by, expiry) and tells you once before each one. Ask it anything about your papers later.",
+      "files": {
+        "paperwork_desk_agent.py": {
+          "sha256": "71cff5fad899ac769dd166ea550ea608af320a2d0c036c91704239a3296a4630",
+          "verified": true
+        },
+        "paperwork_page.py": {
+          "sha256": "f6ea3518969e0c9911fb4c013342a6c998143ea60b86e6aa9155e79f0c1bada5",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "8ca6558ef2fc2c1e567f9d0df488c17539af621d4f7d67baddb5e6434de1228c",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 1139286654574403584,
+      "_incantation": "FORGE CHISEL PANTHER STRIKE HEIRLOOM ORCHID FORGE"
     },
     {
       "name": "pii-scout",
@@ -13943,6 +14009,7 @@
         }
       },
       "_verified": true,
+      "shelf": "app",
       "_seed": 8835783867647401984,
       "_incantation": "FORGE CHISEL PANTHER FRIDGE PREFECT LOST WELD"
     },
@@ -13964,6 +14031,7 @@
         }
       },
       "_verified": true,
+      "shelf": "pack",
       "_seed": 3615053568043655168,
       "_incantation": "FORGE CHISEL PANTHER SINGE MOTE SHADE RUNE"
     },
@@ -13985,6 +14053,7 @@
         }
       },
       "_verified": true,
+      "shelf": "app",
       "_seed": 12954676483971883008,
       "_incantation": "FORGE CHISEL PANTHER DISMISS VENOM WHIRL CAST"
     },
@@ -14006,6 +14075,7 @@
         }
       },
       "_verified": true,
+      "shelf": "app",
       "_seed": 744629879340802048,
       "_incantation": "FORGE CHISEL PANTHER BROADSWORD PANTHER CHAIN FORGE"
     },
@@ -14027,6 +14097,7 @@
         }
       },
       "_verified": true,
+      "shelf": "app",
       "_seed": 11341501868699295744,
       "_incantation": "FORGE CHISEL PANTHER ERADICATE BARK CONJURE BRAND"
     },
@@ -14048,6 +14119,7 @@
         }
       },
       "_verified": true,
+      "shelf": "app",
       "_seed": 15136910703773884416,
       "_incantation": "FORGE CHISEL PANTHER GORGE BELLOW SAGE ETCH"
     },
@@ -14069,6 +14141,7 @@
         }
       },
       "_verified": true,
+      "shelf": "app",
       "_seed": 13136106163231793152,
       "_incantation": "FORGE CHISEL PANTHER BARROW FORT HEX CAST"
     },
@@ -14090,6 +14163,7 @@
         }
       },
       "_verified": true,
+      "shelf": "app",
       "_seed": 4966212221660045312,
       "_incantation": "FORGE CHISEL PANTHER PROWESS PROCLAIM ELDER SHARD"
     },
@@ -14111,6 +14185,7 @@
         }
       },
       "_verified": true,
+      "shelf": "app",
       "_seed": 6391394812716654592,
       "_incantation": "FORGE CHISEL PANTHER WOVEN RHYME DROIT SMELT"
     },
@@ -14145,6 +14220,7 @@
         "file": "brainstem.py",
         "version": "0.6.16"
       },
+      "shelf": "pack",
       "_seed": 17920793872363962368,
       "_incantation": "FORGE FUSE PANTHER BLOOM EFFACE DROIT BIND"
     },
@@ -14186,6 +14262,7 @@
         }
       },
       "_verified": true,
+      "shelf": "pack",
       "_seed": 2225479605945368576,
       "_incantation": "FORGE FORGE PANTHER ENIGMA BLISS BROADSWORD ANVIL"
     },
@@ -14207,13 +14284,14 @@
         }
       },
       "_verified": true,
+      "shelf": "app",
       "_seed": 8980610023134601216,
       "_incantation": "FORGE CHISEL PANTHER RAPID ION CENTURION WELD"
     },
     {
       "name": "starter-business",
       "display_name": "Business starter",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "schema": "rapp-rar-stack/1.2",
       "path": "stacks/starter-business",
       "purpose": "For a small business: the grail with every model, Night Watch, Private Mode for client matters, a Microsoft 365 agent team, Claude workflows and a regression judge for your agents.",
@@ -14224,6 +14302,7 @@
         }
       },
       "_verified": true,
+      "shelf": "starter",
       "_seed": 6642089966430060544,
       "_incantation": "FORGE FORGE PANTHER MUSK LION MONARCH SMELT"
     },
@@ -14241,13 +14320,14 @@
         }
       },
       "_verified": true,
+      "shelf": "starter",
       "_seed": 1164997647363211264,
       "_incantation": "FORGE FORGE PANTHER DAGGER INFERNO MOLD ANVIL"
     },
     {
       "name": "starter-personal",
       "display_name": "Personal starter",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "schema": "rapp-rar-stack/1.2",
       "path": "stacks/starter-personal",
       "purpose": "For your own life: everything new on the grail, a Brainstem that looks after its computer, private topics that stay home, and who inherits it.",
@@ -14258,6 +14338,7 @@
         }
       },
       "_verified": true,
+      "shelf": "starter",
       "_seed": 13471067076349132800,
       "_incantation": "FORGE FORGE PANTHER SHAMAN CRIMSON ARRAY CAST"
     },
@@ -14279,6 +14360,7 @@
         }
       },
       "_verified": true,
+      "shelf": "pack",
       "_seed": 2288792079516053954,
       "_incantation": "KNOLL SECT RAY ABYSS RAVAGE SAFFRON ANVIL"
     },
@@ -14300,6 +14382,7 @@
         }
       },
       "_verified": true,
+      "shelf": "app",
       "_seed": 5906658335469346816,
       "_incantation": "FORGE CHISEL PANTHER CASCADE RIFT CHARM SMELT"
     },
@@ -14321,6 +14404,7 @@
         }
       },
       "_verified": true,
+      "shelf": "app",
       "_seed": 192799570479030272,
       "_incantation": "FORGE CHISEL PANTHER DAGGER ORBIT WARP FORGE"
     },
@@ -14342,6 +14426,7 @@
         }
       },
       "_verified": true,
+      "shelf": "app",
       "_seed": 16756029940331192320,
       "_incantation": "FORGE CHISEL PANTHER COVE PULSAR THEFT CARVE"
     },
@@ -14363,8 +14448,31 @@
         }
       },
       "_verified": true,
+      "shelf": "app",
       "_seed": 2308479191810580480,
       "_incantation": "FORGE CHISEL PANTHER LARCH COSMIC BLADE BLADE"
+    },
+    {
+      "name": "work-receipts",
+      "display_name": "Work Receipts",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "path": "stacks/work-receipts",
+      "purpose": "A plain record of what your AI did and when, from the journal on this computer: a report for any range of days, a CSV export with its fingerprint, and search.",
+      "files": {
+        "work_receipts_agent.py": {
+          "sha256": "77efa5881b83c67133acac2cdf0d81d116b1be72c47f2c0e89e5b379ae192f73",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "1ed2f017335ba86b002d3875d5ad6270fefe978eca8da5244679820e81917d71",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 12441458485151932416,
+      "_incantation": "FORGE CHISEL PANTHER GROOM RAPID TEMPLAR MOLD"
     }
   ],
   "releases": [

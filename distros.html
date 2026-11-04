@@ -58,6 +58,9 @@
   .pick input { width: 18px; height: 18px; accent-color: #0d6efd; }
   .tile.chosen { border-color: #0d6efd; box-shadow: 0 0 0 3px rgba(13,110,253,.25); }
   .incl { font-size: 13px; color: #6c757d; margin-top: 6px; }
+  .shelves { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+  .shelves button { font-size: 15px; padding: 8px 14px; border-radius: 999px; border: 1px solid #ced4da; background: #fff; color: #212529; cursor: pointer; }
+  .shelves button.on { background: #212529; color: #fff; border-color: #212529; }
   .cart { position: fixed; left: 0; right: 0; bottom: 0; background: #212529; color: #fff; padding: 12px 16px; display: none;
           align-items: center; gap: 12px; justify-content: center; flex-wrap: wrap; z-index: 50; box-shadow: 0 -6px 20px rgba(0,0,0,.2); }
   .cart.on { display: flex; }
@@ -167,7 +170,8 @@
   <div class="grid" id="list">Loading…</div>
   <nav class="pager" id="pager" aria-label="Pages"></nav>
   <div class="cart" id="cart" role="region" aria-label="Selected packs"><span id="cartn"></span><button type="button" class="btn" id="cartrip">Rip them all</button><code id="cartcmd"></code>
-    <button type="button" class="btn ghost" id="cartcopy">Copy</button><button type="button" class="btn ghost" id="cartclear">Clear</button></div>
+    <button type="button" class="btn ghost" id="cartcopy">Copy</button><button type="button" class="btn ghost" id="cartai" title="Copies a plain sentence for GitHub Copilot Chat (Agent mode) or any AI that can run commands">Do it with an AI</button><button type="button" class="btn ghost" id="cartclear">Clear</button>
+    <small id="cartaihint" hidden>Copied. 1) <a href="https://kody-w.github.io/grail-layers/skills/rar-easy-mode/SKILL.md" download="SKILL.md">Download this skill</a> and drag it into GitHub Copilot Chat in Agent mode (or any AI that runs commands). 2) Paste and send. It installs, tests and tells you what passed.</small></div>
 </main>
 <div class="detail" id="detail" role="dialog" aria-modal="true" aria-label="Distro details"></div>
 <div class="veil" id="veil" role="dialog" aria-modal="true" aria-label="Pack reveal"></div>
@@ -192,6 +196,9 @@
 
   // One big icon per distro (drawn here, no image requests). Unknown names get the plain monitor.
   var ICON = {
+    "paperwork-desk": '<rect x="34" y="18" width="82" height="110" rx="6" fill="#fff" stroke="#495057" stroke-width="5"/><rect x="48" y="40" width="54" height="6" fill="#495057"/><rect x="48" y="56" width="54" height="6" fill="#adb5bd"/><rect x="48" y="72" width="40" height="6" fill="#adb5bd"/><circle cx="104" cy="108" r="20" fill="#dc3545"/><rect x="102" y="96" width="4" height="14" fill="#fff"/><rect x="102" y="113" width="4" height="4" fill="#fff"/>',
+    "money-watch": '<circle cx="75" cy="75" r="54" fill="#198754"/><text x="75" y="98" font-size="70" text-anchor="middle" fill="#fff" font-family="system-ui" font-weight="700">$</text>',
+    "work-receipts": '<path d="M38 16 H112 V132 L100 124 L88 132 L75 124 L62 132 L50 124 L38 132Z" fill="#fff" stroke="#495057" stroke-width="5"/><rect x="52" y="38" width="46" height="6" fill="#495057"/><rect x="52" y="56" width="46" height="6" fill="#adb5bd"/><rect x="52" y="74" width="30" height="6" fill="#adb5bd"/>',
     "moving-day": '<rect x="20" y="50" width="110" height="70" rx="8" fill="#fd7e14"/><rect x="20" y="40" width="110" height="18" rx="6" fill="#e8590c"/><rect x="62" y="40" width="26" height="80" fill="#ffd8a8"/><path d="M75 20 L95 36 H55Z" fill="#0d6efd"/>',
     "senses": '<circle cx="75" cy="75" r="46" fill="none" stroke="#0d6efd" stroke-width="8"/><circle cx="75" cy="75" r="26" fill="none" stroke="#20c997" stroke-width="8"/><circle cx="75" cy="75" r="9" fill="#6f42c1"/>',
     "grail-layers": '<rect x="18" y="86" width="114" height="26" rx="6" fill="#6f42c1"/><rect x="28" y="56" width="94" height="26" rx="6" fill="#0d6efd"/><rect x="40" y="26" width="70" height="26" rx="6" fill="#20c997"/>',
@@ -332,7 +339,7 @@
       "<div class='minipack' role='button' tabindex='0' aria-label='Rip open the " + esc(p.display_name) + " pack'><div class='crimp'></div>" +
       "<div class='brand'>RAR</div><div class='art'>" + logo(p.name) + "</div><div class='seal'>Sealed pack</div>" +
       "<div class='count'>" + n + " card" + (n === 1 ? "" : "s") + " \u00b7 1 summon card</div></div><div class='tags'><span class='pill blue'>RAR</span>" +
-      "<span class='pill green'>" + (/^starter-/.test(p.name) ? "starter" : p.kernel ? "distro" : "pack") + "</span>" +
+      "<span class='pill green'>" + (/^starter-/.test(p.name) ? "starter" : p.shelf === "app" ? "app" : p.kernel ? "distro" : "pack") + "</span>" +
       (ok ? "" : "<span class='pill gray'>unverified</span>") + "</div></div>" +
       "<label class='pick'><input type='checkbox'" + (chosen[p.name] ? " checked" : "") + "> Add to cart</label>" +
       "<div class='incl'></div>" +
@@ -381,6 +388,11 @@
   document.getElementById("cartcopy").onclick = function () {
     var t = document.getElementById("cartcmd").textContent, b = this;
     (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 1500); });
+  };
+  document.getElementById("cartai").onclick = function () {
+    var names = Object.keys(chosen).sort().concat(shared().filter(function (n) { return n.charAt(0) === "@"; }).sort());
+    var t = "Give me " + names.join(" ") + " using RAR Easy Mode and test it for me", b = this;
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { b.textContent = "Copied"; document.getElementById("cartaihint").hidden = false; setTimeout(function () { b.textContent = "Do it with an AI"; }, 1500); });
   };
   document.getElementById("cartrip").onclick = function () { ripCart(Object.keys(chosen).sort()); };
 
@@ -476,12 +488,28 @@
     };
   }
   document.getElementById("cartclear").onclick = function () { chosen = {}; cart(); render(); };
+  var shelf = "all";
+  var SHELVES = [["all", "Everything"], ["starter", "Starters"], ["pack", "Packs that look after you"], ["app", "Apps"]];
+  function shelfBar() {
+    var bar = document.getElementById("shelves");
+    if (!bar) { bar = document.createElement("div"); bar.id = "shelves"; bar.className = "shelves";
+      document.getElementById("list").parentNode.insertBefore(bar, document.getElementById("list")); }
+    bar.innerHTML = SHELVES.map(function (x) {
+      var n = x[0] === "all" ? packs.length : packs.filter(function (p) { return (p.shelf || "pack") === x[0]; }).length;
+      return "<button type='button' data-s='" + x[0] + "'" + (shelf === x[0] ? " class='on' aria-pressed='true'" : " aria-pressed='false'") + ">" + x[1] + " (" + n + ")</button>";
+    }).join("");
+    Array.prototype.forEach.call(bar.querySelectorAll("button"), function (b) {
+      b.onclick = function () { shelf = b.getAttribute("data-s"); page = 1; render(); };
+    });
+  }
   function render() {
     var list = document.getElementById("list"), pager = document.getElementById("pager");
-    var pages = Math.max(1, Math.ceil(packs.length / PER_PAGE));
+    shelfBar();
+    var shown = packs.filter(function (p) { return shelf === "all" || (p.shelf || "pack") === shelf; });
+    var pages = Math.max(1, Math.ceil(shown.length / PER_PAGE));
     page = Math.min(Math.max(1, page), pages);
     list.innerHTML = "";
-    packs.slice((page - 1) * PER_PAGE, page * PER_PAGE).forEach(function (p) { list.appendChild(cardFor(p)); });
+    shown.slice((page - 1) * PER_PAGE, page * PER_PAGE).forEach(function (p) { list.appendChild(cardFor(p)); });
     var b = "<button type='button' data-go='" + (page - 1) + "'" + (page === 1 ? " disabled" : "") + " aria-label='Previous'>«</button>";
     for (var i = 1; i <= pages; i++) b += "<button type='button' data-go='" + i + "'" + (i === page ? " class='on' aria-current='page'" : "") + ">" + i + "</button>";
     b += "<button type='button' data-go='" + (page + 1) + "'" + (page === pages ? " disabled" : "") + " aria-label='Next'>»</button>";
@@ -497,7 +525,7 @@
       return (b._verified === true) - (a._verified === true) || sb - sa || String(a.display_name).localeCompare(b.display_name);
     });
     if (!packs.length) { document.getElementById("list").textContent = "No distros yet."; return; }
-    render();
+    render(); cart();  // show what is already in the shared cart (from this page or the store page)
   }).catch(function () { document.getElementById("list").textContent = "Couldn't load the registry."; });
 })();
 </script>

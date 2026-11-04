@@ -1,0 +1,28 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "money-watch",
+  "display_name": "Money Watch",
+  "version": "1.0.0",
+  "purpose": "Read your bank and card exports on this computer only: it catches price rises, duplicate charges and renewals coming up, and tells you once. Nothing is ever sent anywhere.",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "money_watch_agent.py"
+    ],
+    "destination": "agents/",
+    "includes": [
+      "private-mode"
+    ],
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- money-watch"
+  },
+  "files": {
+    "money_watch_agent.py": {
+      "size": 16716,
+      "sha256": "b0d722471a508a83448911da7cccdfc5cdb85fbe204ebcdeda2f8de5e07b2657"
+    },
+    "README.md": {
+      "size": 187,
+      "sha256": "26fbd998d5b2022881e6cc8ba5d6a5482c138b6e189e2efc1e00a6ea1dea82a4"
+    }
+  }
+}

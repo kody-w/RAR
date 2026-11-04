@@ -578,6 +578,9 @@ def build_stack_packs(taken_seeds: set, root: Path = Path("stacks")) -> list[dic
         }
         if isinstance(pack.get("kernel"), dict):
             entry["kernel"] = pack["kernel"]
+        # The shelf a person browses: starters fill the cart, apps came from the RAPP Store, packs are the rest.
+        entry["shelf"] = ("starter" if name.startswith("starter-") else
+                          "app" if pack.get("kind_label") == "rapplication" else "pack")
         seed = compute_seed(f"@stacks/{name}", "pipeline", "community",
                             list(pack.get("capabilities") or [])[:31], agent_files)
         if seed not in taken_seeds:
@@ -1457,8 +1460,11 @@ def build_registry():
         except (json.JSONDecodeError, KeyError):
             pass
 
-    with open(REGISTRY_FILE, "w", encoding="utf-8") as f:
+    # Atomic write: a concurrent reader (another build, a test) never sees a half-written registry.
+    tmp = f"{REGISTRY_FILE}.{os.getpid()}.tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
         json.dump(registry, f, indent=2)
+    os.replace(tmp, REGISTRY_FILE)
 
     print(f"OK Registry built: {len(agents)} agents from {len(publishers)} publishers")
     print(f"  Swarms: {len(converged_swarms)} converged + {len(stack_swarms)} stacks = {len(all_swarms)} total")

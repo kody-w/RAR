@@ -1,0 +1,28 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "work-receipts",
+  "display_name": "Work Receipts",
+  "version": "1.0.0",
+  "purpose": "A plain record of what your AI did and when, from the journal on this computer: a report for any range of days, a CSV export with its fingerprint, and search.",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "work_receipts_agent.py"
+    ],
+    "destination": "agents/",
+    "includes": [
+      "grail-layers"
+    ],
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- work-receipts"
+  },
+  "files": {
+    "work_receipts_agent.py": {
+      "size": 10568,
+      "sha256": "77efa5881b83c67133acac2cdf0d81d116b1be72c47f2c0e89e5b379ae192f73"
+    },
+    "README.md": {
+      "size": 176,
+      "sha256": "1ed2f017335ba86b002d3875d5ad6270fefe978eca8da5244679820e81917d71"
+    }
+  }
+}

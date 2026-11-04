@@ -80,9 +80,10 @@ def _attach(app):
             except Exception as e:
                 return flask.jsonify({"error": f"page {_m.name} failed: {e}"}), 500
             return (flask.jsonify(result), status) if isinstance(result, (dict, list)) else (result, status)
-        methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
+        # rapp/1 section 8: pages are read-only views; every change goes through /chat, never a sibling route.
+        methods = ["GET"]
         try:
-            app.add_url_rule(f"/api/{m.name}", f"_page_{m.name}_root", view, methods=methods)
+            app.add_url_rule(f"/api/{m.name}", f"_page_{m.name}_root", view, methods=methods, strict_slashes=False)
             app.add_url_rule(f"/api/{m.name}/<path:rest>", f"_page_{m.name}_path", view, methods=methods)
             _say(f"page {m.name} at /api/{m.name}/")
         except Exception as e:

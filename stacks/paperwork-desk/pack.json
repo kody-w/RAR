@@ -1,0 +1,32 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "paperwork-desk",
+  "display_name": "Paperwork Desk",
+  "version": "1.0.0",
+  "purpose": "Drop in a lease, a policy or a warranty; it files the paper on this computer, finds every deadline (renewal, claim by, expiry) and tells you once before each one. Ask it anything about your papers later.",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "paperwork_desk_agent.py"
+    ],
+    "destination": "agents/",
+    "includes": [
+      "grail-layers"
+    ],
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- paperwork-desk"
+  },
+  "files": {
+    "paperwork_desk_agent.py": {
+      "size": 12427,
+      "sha256": "71cff5fad899ac769dd166ea550ea608af320a2d0c036c91704239a3296a4630"
+    },
+    "paperwork_page.py": {
+      "size": 2033,
+      "sha256": "f6ea3518969e0c9911fb4c013342a6c998143ea60b86e6aa9155e79f0c1bada5"
+    },
+    "README.md": {
+      "size": 222,
+      "sha256": "8ca6558ef2fc2c1e567f9d0df488c17539af621d4f7d67baddb5e6434de1228c"
+    }
+  }
+}
