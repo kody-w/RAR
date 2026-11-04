@@ -19052,6 +19052,17 @@
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.1"
     },
+    "@kody-w/fragments_agent": {
+      "canonical_path": "agents/@kody-w/fragments_agent.py",
+      "latest_receipt": "rar_11ea298d4421d75d0fe926feea3a57d5d93efb100da87ac01491bf19f4f50684",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "quality_tier": "community",
+      "sha256": "88e1749ee4ace1f506b6ee9c2c4fa2ce38e33107315f2b35f5919a489956be13",
+      "status": "active",
+      "updated_at": "2026-11-04T02:42:10.717250+00:00",
+      "version": "1.0.0"
+    },
     "@kody-w/full_rapp_leviathan": {
       "canonical_path": "agents/@kody-w/full_rapp_leviathan_agent.py",
       "latest_receipt": "rar_4ed7782f3454ec64bc31c704562b27359d71344cf3e4366e4e87d8e3a046c6a2",
@@ -20165,5 +20176,5 @@
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-11-03T22:20:15.845357+00:00"
+  "updated_at": "2026-11-04T02:42:10.717250+00:00"
 }
