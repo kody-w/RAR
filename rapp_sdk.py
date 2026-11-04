@@ -32,7 +32,7 @@ VALID_CATEGORIES = [
     "b2b_sales", "b2c_sales", "healthcare", "financial_services", "manufacturing",
     "energy", "federal_government", "slg_government", "human_resources",
     "it_management", "professional_services", "retail_cpg", "software_digital_products",
-    "analysis", "creative", "meta", "platform", "workflow",
+    "analysis", "creative", "meta", "platform", "workflow", "memory",
 ]
 
 VALID_TIERS = [
