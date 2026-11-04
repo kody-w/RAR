@@ -11,13 +11,13 @@
     "manifest": "sha256-canonical-json-v1"
   },
   "inputs": {
-    "canonical_manifests": "8f55b83407988dc104b5ec4f0e01a4ab1e1452a0770ff3ff7249810030b0c1ae",
+    "canonical_manifests": "b3db907d4b20894ca52b84988590e7b577d561477cf6b48167b04f15c5e08e63",
     "scout_catalog": "073595c1d2538fac6bbabe220b3cdf379b709dc851682a4daaaf628f3b7351b7",
     "scout_toaster": {
       "commit": "d54ba8484b5c5dae6406d2090c03115d12985446",
       "sha256": "d340043178aa4160f76a179b8b1086971e09207b212aff2ab2c0752b69173e17"
     },
-    "skill_lifecycle": "5f31434b47a4a142c93ca00b00ca0ead7d6cc1eb333c706fbca8e57fd64b9022"
+    "skill_lifecycle": "06c4cf035f005a9e81ed95c37f48891822754b2ac502e4fbe06e61ee5b875b54"
   },
   "schema": "rar-skills-catalog/1.0",
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/skills.json",
@@ -149,7 +149,7 @@
       "manifest": {
         "hash_algorithm": "sha256-canonical-json-v1",
         "path": "skills/@kody-w/rar-easy-mode/manifest.json",
-        "sha256": "edc6d9f022ec1a34506a93bab1127fad7febe804e034e880b957f37384c4bb57",
+        "sha256": "74a1d8b485a2f05fcf34389f0040fa0318988502f5a63656b2b0f6e015beb706",
         "url": "https://raw.githubusercontent.com/kody-w/RAR/main/skills/@kody-w/rar-easy-mode/manifest.json"
       },
       "name": "@kody-w/rar-easy-mode",
@@ -161,9 +161,9 @@
       },
       "relationships": [],
       "review": {
-        "accepted_at": "2026-11-04T16:48:06.338965+00:00",
-        "receipt": "rar_skill_4203d8efba019a0d0b59e76013070875ef6f0afd35a2cf93ab92304caf1465c3",
-        "revision_id": "4203d8efba019a0d0b59e76013070875ef6f0afd35a2cf93ab92304caf1465c3",
+        "accepted_at": "2026-11-04T17:17:47.731283+00:00",
+        "receipt": "rar_skill_ad2a8d128b1f8b8c3c41331b3a3b30293e9bb515bf06d5f114da8427b88d1bdc",
+        "revision_id": "ad2a8d128b1f8b8c3c41331b3a3b30293e9bb515bf06d5f114da8427b88d1bdc",
         "status": "notarized"
       },
       "search_terms": [
@@ -203,24 +203,24 @@
       "slug": "rar-easy-mode",
       "source": {
         "entrypoint": "skills/rar-easy-mode/SKILL.md",
-        "entrypoint_url": "https://raw.githubusercontent.com/kody-w/grail-layers/5ac9288f467488039df732a756f5863e890b3b13/skills/rar-easy-mode/SKILL.md",
+        "entrypoint_url": "https://raw.githubusercontent.com/kody-w/grail-layers/fb86ffe5a634da88c54773bd9f2ec78c6b81494f/skills/rar-easy-mode/SKILL.md",
         "files": [
           {
             "media_type": "text/markdown",
             "path": "skills/rar-easy-mode/SKILL.md",
-            "sha256": "2f7f6ed660199aecd419fa16884a0c7c854550104c5027c24950a797bca5f477",
-            "url": "https://raw.githubusercontent.com/kody-w/grail-layers/5ac9288f467488039df732a756f5863e890b3b13/skills/rar-easy-mode/SKILL.md"
+            "sha256": "3391f2e26df451102dd1e7aece623cfc9fdc21a527e8edcaa44e8349a9babae5",
+            "url": "https://raw.githubusercontent.com/kody-w/grail-layers/fb86ffe5a634da88c54773bd9f2ec78c6b81494f/skills/rar-easy-mode/SKILL.md"
           },
           {
             "media_type": "text/x-python",
             "path": "skills/rar-easy-mode/rar_easy_mode_agent.py",
-            "sha256": "e4e91e95dbada6941dc231d4a030326244cdb61b7f0dc048a293a5115930ec57",
-            "url": "https://raw.githubusercontent.com/kody-w/grail-layers/5ac9288f467488039df732a756f5863e890b3b13/skills/rar-easy-mode/rar_easy_mode_agent.py"
+            "sha256": "8033a44b9eb5afcf2ee6b184ada0a5b4b44e8b85462b416c16305bee336cec79",
+            "url": "https://raw.githubusercontent.com/kody-w/grail-layers/fb86ffe5a634da88c54773bd9f2ec78c6b81494f/skills/rar-easy-mode/rar_easy_mode_agent.py"
           }
         ],
         "hash_algorithm": "sha256",
         "repository": "kody-w/grail-layers",
-        "revision": "5ac9288f467488039df732a756f5863e890b3b13"
+        "revision": "fb86ffe5a634da88c54773bd9f2ec78c6b81494f"
       },
       "tags": [
         "install",
@@ -229,7 +229,7 @@
         "rapp-1",
         "local-first"
       ],
-      "version": "1.0.0"
+      "version": "1.1.0"
     },
     {
       "artifact_type": "skill",

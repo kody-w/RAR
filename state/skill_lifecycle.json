@@ -15,16 +15,16 @@
     },
     "@kody-w/rar-easy-mode": {
       "status": "active",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "canonical_path": "skills/@kody-w/rar-easy-mode/manifest.json",
-      "sha256": "edc6d9f022ec1a34506a93bab1127fad7febe804e034e880b957f37384c4bb57",
+      "sha256": "74a1d8b485a2f05fcf34389f0040fa0318988502f5a63656b2b0f6e015beb706",
       "source_repository": "kody-w/grail-layers",
-      "source_revision": "5ac9288f467488039df732a756f5863e890b3b13",
-      "latest_receipt": "rar_skill_4203d8efba019a0d0b59e76013070875ef6f0afd35a2cf93ab92304caf1465c3",
-      "updated_at": "2026-11-04T16:48:06.338965+00:00"
+      "source_revision": "fb86ffe5a634da88c54773bd9f2ec78c6b81494f",
+      "latest_receipt": "rar_skill_ad2a8d128b1f8b8c3c41331b3a3b30293e9bb515bf06d5f114da8427b88d1bdc",
+      "updated_at": "2026-11-04T17:17:47.731283+00:00"
     }
   },
-  "updated_at": "2026-11-04T16:48:06.338965+00:00"
+  "updated_at": "2026-11-04T17:17:47.731283+00:00"
 }

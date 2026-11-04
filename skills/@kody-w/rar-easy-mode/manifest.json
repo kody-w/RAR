@@ -24,16 +24,16 @@
       {
         "media_type": "text/markdown",
         "path": "skills/rar-easy-mode/SKILL.md",
-        "sha256": "2f7f6ed660199aecd419fa16884a0c7c854550104c5027c24950a797bca5f477"
+        "sha256": "3391f2e26df451102dd1e7aece623cfc9fdc21a527e8edcaa44e8349a9babae5"
       },
       {
         "media_type": "text/x-python",
         "path": "skills/rar-easy-mode/rar_easy_mode_agent.py",
-        "sha256": "e4e91e95dbada6941dc231d4a030326244cdb61b7f0dc048a293a5115930ec57"
+        "sha256": "8033a44b9eb5afcf2ee6b184ada0a5b4b44e8b85462b416c16305bee336cec79"
       }
     ],
     "repository": "kody-w/grail-layers",
-    "revision": "5ac9288f467488039df732a756f5863e890b3b13"
+    "revision": "fb86ffe5a634da88c54773bd9f2ec78c6b81494f"
   },
   "tags": [
     "install",
@@ -42,5 +42,5 @@
     "rapp-1",
     "local-first"
   ],
-  "version": "1.0.0"
+  "version": "1.1.0"
 }

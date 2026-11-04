@@ -1,0 +1,69 @@
+{
+  "acceptance": {
+    "checks": [
+      "skill_metadata_schema",
+      "namespace",
+      "manifest_sha256",
+      "immutable_source_revision",
+      "source_file_sha256",
+      "base_precondition",
+      "deterministic_catalog_build",
+      "focused_test_suite"
+    ],
+    "github_id": 1735900,
+    "github_login": "kody-w",
+    "policy": "rar-skill-notary/1.0",
+    "workflow_run": "41876083851"
+  },
+  "action": "skill.update",
+  "artifact": {
+    "algorithm": "sha256-canonical-json-v1",
+    "digest": "74a1d8b485a2f05fcf34389f0040fa0318988502f5a63656b2b0f6e015beb706"
+  },
+  "artifact_type": "skill",
+  "canonical_path": "skills/@kody-w/rar-easy-mode/manifest.json",
+  "controller": {
+    "github_id": 1735900,
+    "github_login": "kody-w"
+  },
+  "created_at": "2026-11-04T17:17:47.731283+00:00",
+  "id": "rar_skill_ad2a8d128b1f8b8c3c41331b3a3b30293e9bb515bf06d5f114da8427b88d1bdc",
+  "issuer": "github:kody-w/RAR",
+  "previous": {
+    "digest": "edc6d9f022ec1a34506a93bab1127fad7febe804e034e880b957f37384c4bb57",
+    "receipt": "rar_skill_4203d8efba019a0d0b59e76013070875ef6f0afd35a2cf93ab92304caf1465c3",
+    "version": "1.0.0"
+  },
+  "protocol_conformance": {
+    "evidence": [],
+    "profile": null,
+    "status": "not_assessed"
+  },
+  "request_id": "req_2b50ca423a7f576b30ab2b40",
+  "revision_id": "ad2a8d128b1f8b8c3c41331b3a3b30293e9bb515bf06d5f114da8427b88d1bdc",
+  "schema": "rar-skill-receipt/1.0",
+  "skill": "@kody-w/rar-easy-mode",
+  "source": {
+    "files": [
+      {
+        "path": "skills/rar-easy-mode/SKILL.md",
+        "sha256": "3391f2e26df451102dd1e7aece623cfc9fdc21a527e8edcaa44e8349a9babae5"
+      },
+      {
+        "path": "skills/rar-easy-mode/rar_easy_mode_agent.py",
+        "sha256": "8033a44b9eb5afcf2ee6b184ada0a5b4b44e8b85462b416c16305bee336cec79"
+      }
+    ],
+    "repository": "kody-w/grail-layers",
+    "revision": "fb86ffe5a634da88c54773bd9f2ec78c6b81494f"
+  },
+  "status": "notarized",
+  "submission": {
+    "github_id": 1735900,
+    "github_login": "kody-w",
+    "issue_node_id": "I_kwDOR48twc8AAAABcgI1Jg",
+    "issue_number": 1591,
+    "source_body_sha256": "5a518384d2e70669aa897c725c7150e5940e01e226df6ae87af69afe8532cc6f"
+  },
+  "version": "1.1.0"
+}
