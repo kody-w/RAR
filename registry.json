@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-04T20:46:38.881617+00:00",
+  "generated_at": "2026-11-04T20:48:26.437912+00:00",
   "stats": {
     "total_agents": 226,
     "total_swarms": 2,
@@ -13645,9 +13645,9 @@
       },
       "_verified": true,
       "kernel": {
-        "sha256": "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
+        "sha256": "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4",
         "file": "brainstem.py",
-        "version": "0.6.17",
+        "version": "0.6.16",
         "proven": [
           "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
           "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
@@ -14172,7 +14172,7 @@
       },
       "_verified": true,
       "kernel": {
-        "sha256": "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a",
+        "sha256": "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4",
         "file": "brainstem.py",
         "version": "0.6.16"
       },
