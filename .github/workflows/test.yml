@@ -142,7 +142,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install test deps
-        run: pip install pytest pyyaml
+        run: pip install pytest pyyaml requests  # requests: layer files (providers) import it
       - name: Prepare trusted pending migrations
         run: |
           result=$(python scripts/apply_maintainer_migrations.py)
