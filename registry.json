@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-04T21:41:26.263172+00:00",
+  "generated_at": "2026-11-04T21:59:37.169682+00:00",
   "stats": {
     "total_agents": 226,
     "total_swarms": 2,
@@ -13879,18 +13879,18 @@
     {
       "name": "night-watch",
       "display_name": "Night Watch",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "schema": "rapp-rar-stack/1.2",
       "status": "current",
       "path": "stacks/night-watch",
       "purpose": "Your Brainstem looks after its own computer (disk, its services, nightly drills) and your premium-model use against a monthly limit you set (Spend Guard; a warning, nothing is blocked). It tells you once, in one sentence, only when something needs you.",
       "files": {
         "night_watch_agent.py": {
-          "sha256": "3125dd6817072fc74e0373dc034cdbf37096de53b0a57215b6475a4fbf79645a",
+          "sha256": "bf5f7e8cde561ccd9164e256f94c213cf048d515561f561c3aaaeb34e371e9bb",
           "verified": true
         },
         "README.md": {
-          "sha256": "708ef4e975628ca342d564d8373b605d7ffcb0c1e05edd7ed6391131fc4e5fe5",
+          "sha256": "7258df794899de00d00fa004c9a9aeeda8f54846b24b033066dcc8a1a0035569",
           "verified": true
         }
       },
@@ -13975,18 +13975,18 @@
     {
       "name": "pii-scout",
       "display_name": "PII Scout",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "schema": "rapp-rar-stack/1.2",
       "status": "current",
       "path": "stacks/pii-scout",
       "purpose": "Scan a folder for what must not be published \u2014 secrets, credential files, captured sessions, emails, home paths and any names you supply. Reports file and count, never the value.",
       "files": {
         "pii_scout_agent.py": {
-          "sha256": "fcdbbcc12a04f5f7aebc69d619895c2edf7872354ac03821c0665b7818683513",
+          "sha256": "9f0292b1bd30239c6bd56f36e9ec6c7a4edafcb0411c7f1a9ca7969135e67def",
           "verified": true
         },
         "README.md": {
-          "sha256": "ecf3abb57c57af6debdcf72c34af05da81785118e2e03b0d861b88add11d94fb",
+          "sha256": "d17ff67989ac08e32cdaebc7ac4eadf6c611e2d95cab9e97208088bb1c01fde4",
           "verified": true
         }
       },
@@ -14364,18 +14364,18 @@
     {
       "name": "thoughtbox",
       "display_name": "Thoughtbox",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "schema": "rapp-rar-stack/1.2",
       "status": "current",
       "path": "stacks/thoughtbox",
-      "purpose": "Local-first reflection journal \u2014 append, list, search, tag, export, import. Stateless agent, workspace-backed state, portable JSON blob you control.",
+      "purpose": "Local-first reflection journal \u2014 append, list, search, tag, export, import. Durable local storage by default, optional workspace-backed state, portable JSON blob you control.",
       "files": {
         "thoughtbox_agent.py": {
-          "sha256": "d93b56abcc578d8299df787816142c3d0553a018d45e611ad54ac453bf11933b",
+          "sha256": "c2fba98adfdd3eeede27a1dbf1103dfae4f7a3655901de03ef68f06597e1d73f",
           "verified": true
         },
         "README.md": {
-          "sha256": "e4af762a28680274d29673569eed4e70af0f060f33bf06be817a60d31a3c146f",
+          "sha256": "6752bd1f198eb6fe4cdd0141069a08268e0631eec075716be23d3ac8d28882ce",
           "verified": true
         }
       },
