@@ -10,6 +10,9 @@ iterable (the double-jump loop runs against it). This singleton is the
 SHIP-TIME artifact: no sibling-import dependencies, no helper modules,
 no repo layout assumptions. Just BasicAgent + an LLM key in the
 environment, and the public BookFactory.perform(source, ...) → chapter.
+The host must supply utils.llm.call_llm. Dispatch failures abort the run,
+return an incomplete report, and are never saved as final chapter content.
+run-status.json identifies the current run; older workspace artifacts may remain.
 
 Inlined personas (sacred SOULs preserved verbatim):
   - Writer
@@ -51,7 +54,7 @@ __manifest__ = {
     "name": "@rapp/book-factory-singleton",
     "tier": "core",
     "trust": "community",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "tags": ["composite", "creative-pipeline", "twin-stack", "singleton"],
     "delegates_to_inlined": [
         "@rapp/persona-writer",
@@ -437,7 +440,7 @@ class BookFactory(BasicAgent):
         self.metadata = {
             "name": self.name,
             "description": "Five-persona content pipeline. Source → Writer → Editor → "
-                           "CEO → Publisher → Reviewer. Returns the final chapter.",
+                           "CEO → Publisher → Reviewer. Returns the final chapter or an explicit incomplete report.",
             "parameters": {
                 "type": "object",
                 "properties": {
@@ -454,7 +457,7 @@ class BookFactory(BasicAgent):
     def perform(self, source="", chapter_title="Untitled chapter",
                 author="@rapp", workspace=None, **kwargs):
         ws = workspace or os.environ.get("TWIN_WORKSPACE") or "/tmp/book-factory"
-        os.makedirs(ws, exist_ok=True)
+        stage = "Setup"
 
         def save(name, content):
             path = os.path.join(ws, name)
@@ -462,28 +465,45 @@ class BookFactory(BasicAgent):
                 f.write(content if isinstance(content, str) else str(content))
             return path
 
-        save("00-source.md", source)
+        def status(state, error=None):
+            return save("run-status.json", json.dumps({
+                "status": state, "stage": stage, "error": error,
+                "note": "Only a complete run certifies the final chapter; older artifacts may remain.",
+            }, indent=2))
 
-        # 1. Writer
-        draft = _InternalPersonaWriter().perform(input=source, chapter_title=chapter_title)
-        save("01-draft.md", draft)
+        try:
+            os.makedirs(ws, exist_ok=True)
+            status("incomplete")
+            save("00-source.md", source)
 
-        # 2. Editor (composite — calls cutweak + factcheck + voicecheck)
-        edited = _InternalPersonaEditor().perform(input=draft)
-        save("02-edited.md", edited)
+            stage = "Writer"
+            draft = _InternalPersonaWriter().perform(input=source, chapter_title=chapter_title)
+            save("01-draft.md", draft)
 
-        # 3. CEO (composite — calls risk + decision)
-        ceo_note = _InternalPersonaCEO().perform(input=edited)
-        save("03-ceo-note.md", ceo_note)
+            stage = "Editor"
+            edited = _InternalPersonaEditor().perform(input=draft)
+            save("02-edited.md", edited)
 
-        # 4. Publisher
-        final = _InternalPersonaPublisher().perform(input=edited, ceo_note=ceo_note,
-                                                  title=chapter_title, author=author)
-        save("04-final-chapter.md", final)
+            stage = "CEO"
+            ceo_note = _InternalPersonaCEO().perform(input=edited)
+            save("03-ceo-note.md", ceo_note)
 
-        # 5. Reviewer (read it cold)
-        review = _InternalPersonaReviewer().perform(input=final)
-        save("05-review.md", review)
+            stage = "Publisher"
+            final = _InternalPersonaPublisher().perform(input=edited, ceo_note=ceo_note,
+                                                      title=chapter_title, author=author)
+
+            stage = "Reviewer"
+            review = _InternalPersonaReviewer().perform(input=final)
+            save("04-final-chapter.md", final)
+            save("05-review.md", review)
+            status("complete")
+        except (_InternalStageError, OSError) as error:
+            message = f"Book factory incomplete at {stage}: {error}. Workspace: {ws}."
+            try:
+                status("incomplete", str(error))
+            except OSError as status_error:
+                return message + f" Could not write run-status.json: {status_error}."
+            return message + " See run-status.json; older artifacts are not outputs of this failed run."
 
         # Summary header + the final chapter (the artifact the caller wants)
         return (
@@ -504,14 +524,23 @@ class BookFactory(BasicAgent):
 
 # ─── Inlined LLM dispatch (one copy for the whole singleton) ──────────
 
+class _InternalStageError(RuntimeError):
+    pass
+
+
 def _llm_call(soul: str, user_prompt: str) -> str:
     messages = [{"role": "system", "content": soul},
                 {"role": "user", "content": user_prompt}]
     try:
         from utils.llm import call_llm
-        return call_llm(messages)
+        result = call_llm(messages)
     except Exception as e:
-        return f"(LLM dispatch error: {e})"
+        raise _InternalStageError(f"LLM dispatch failed: {e}") from e
+    if not isinstance(result, str) or not result.strip():
+        raise _InternalStageError("LLM dispatch returned empty or non-text content")
+    if result.lstrip().startswith(("(LLM dispatch error:", "(LLM error:", "(LLM dispatch unavailable:")):
+        raise _InternalStageError(result)
+    return result
 
 
 def _post(*args, **kwargs):

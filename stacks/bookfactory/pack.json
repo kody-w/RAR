@@ -2,8 +2,8 @@
   "schema": "rapp-rar-stack/1.2",
   "name": "bookfactory",
   "display_name": "BookFactory",
-  "version": "0.3.0",
-  "purpose": "Five-persona content pipeline (Writer \u2192 Editor \u2192 CEO \u2192 Publisher \u2192 Reviewer). One call, one chapter back.",
+  "version": "0.3.1",
+  "purpose": "Five-persona content pipeline (Writer \u2192 Editor \u2192 CEO \u2192 Publisher \u2192 Reviewer). Requires host LLM dispatch; returns a chapter on success or an explicit incomplete report on failure.",
   "kind_label": "rapplication",
   "install": {
     "type": "agent_pack",
@@ -21,12 +21,12 @@
   },
   "files": {
     "bookfactory_agent.py": {
-      "size": 23555,
-      "sha256": "7419619b65eacd27dbfa418f391ba755b9d30fffbf084be211cfa011286b73d9"
+      "size": 25033,
+      "sha256": "2678db00b7586e5946996bb8689f48ffd50b07fb9788b0442228cdd2767c0c0f"
     },
     "README.md": {
-      "size": 266,
-      "sha256": "c832be7c8aa4b75e12f463a702208bc8c6e6a037c19221c56f17f9151b97eef7"
+      "size": 981,
+      "sha256": "c11b21956976b7eee024c88209543ed70f5a8ef29211e99a11d3d97c9f248d94"
     }
   },
   "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/bookfactory/ui/index.html"
