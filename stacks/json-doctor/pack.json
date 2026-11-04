@@ -2,8 +2,8 @@
   "schema": "rapp-rar-stack/1.2",
   "name": "json-doctor",
   "display_name": "JSON Doctor",
-  "version": "1.0.0",
-  "purpose": "Inspect, validate, diff or query JSON and JSONL without opening it. Infers shape with per-field coverage, points at the exact line and column of a syntax error, and compares two files structurally.",
+  "version": "1.0.1",
+  "purpose": "Inspect, validate, schema/shape diff or query JSON and JSONL. Diff compares inferred top-level field names, types and coverage, not values or nested structure; validation locates syntax errors.",
   "kind_label": "rapplication",
   "install": {
     "type": "agent_pack",
@@ -21,12 +21,12 @@
   },
   "files": {
     "json_doctor_agent.py": {
-      "size": 10970,
-      "sha256": "e532be574326b108ede0dbbd7d3c012cf275c9f2aee51793864c45546938f20e"
+      "size": 11513,
+      "sha256": "05b7aa1d4325ba038b890c0747889b7f942e7830facf0527909cd8dac127739f"
     },
     "README.md": {
-      "size": 350,
-      "sha256": "03d088148d474a65448335cb4bea46102701155b97dd65d05b9210b116282f71"
+      "size": 616,
+      "sha256": "3509ba048b1ab06d267aa13767ca6af148e9c87310059c4eea0a6b68e21a6d08"
     }
   },
   "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/json_doctor/ui/index.html"

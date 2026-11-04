@@ -4,10 +4,11 @@ Four things you actually need when a JSON file is too big to read:
 
     inspect   what shape is this? (inferred schema, key coverage, sample values)
     validate  is it well-formed, and where exactly does it break?
-    diff      what changed between two of them, structurally?
+    diff      inferred schema/shape diff (top-level fields, types and coverage)
     query     pull a value out by dotted path, including through arrays
 
 Works on .json and .jsonl. No network, no credentials, no dependencies.
+Diff ignores values, nested structure and record order; identical_shape does not mean identical documents.
 
 WHY IT REPORTS COVERAGE, NOT JUST KEYS
 
@@ -52,7 +53,7 @@ __manifest__ = {
     "name": "@rapp/json-doctor",
     "tier": "core",
     "trust": "community",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "tags": ["data", "json", "schema", "diff", "local-first", "singleton"],
     "example_call": {
         "args": {"action": "inspect", "path": "data.json"},
@@ -157,9 +158,9 @@ class JsonDoctorAgent(BasicAgent):
         self.metadata = {
             "name": self.name,
             "description": (
-                "Inspect, validate, diff or query a JSON/JSONL file. Infers the "
+                "Inspect, validate, schema/shape diff or query a JSON/JSONL file. Infers the "
                 "shape with per-field coverage, points at the exact line and "
-                "column of a syntax error, compares two files structurally, and "
+                "column of a syntax error, compares top-level field names, types and coverage (not values or nested structure), and "
                 "pulls values out by dotted path."),
             "parameters": {
                 "type": "object",
@@ -169,7 +170,7 @@ class JsonDoctorAgent(BasicAgent):
                                "description": "What to do."},
                     "path": {"type": "string", "description": "Path to the JSON/JSONL file."},
                     "other": {"type": "string",
-                              "description": "Second file, for action=diff."},
+                              "description": "Second file for schema/shape diff; ignores values and nested structure."},
                     "key": {"type": "string",
                             "description": "Dotted path for action=query, e.g. users.0.name"},
                 },
@@ -241,6 +242,10 @@ class JsonDoctorAgent(BasicAgent):
                                         f"{fa[k]['coverage']} -> {fb[k]['coverage']}"})
                 return json.dumps({
                     "status": "ok",
+                    "comparison": "schema/shape",
+                    "note": "Compares inferred top-level field names, types and coverage only; "
+                            "ignores values, nested structure and record order. "
+                            "identical_shape does not mean identical documents.",
                     "identical_shape": not (added or removed or changed),
                     "fields_added": added, "fields_removed": removed,
                     "fields_changed": changed,
