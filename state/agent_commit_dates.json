@@ -7032,6 +7032,10 @@
    "added": "2026-08-26T17:29:33-04:00",
    "updated": "2026-08-26T17:29:33-04:00"
   },
+  "agents/@kody-w/fragments_agent.py": {
+   "added": "2026-11-03T21:53:43-05:00",
+   "updated": "2026-11-03T21:53:43-05:00"
+  },
   "agents/@kody-w/full_rapp_leviathan_agent.py": {
    "added": "2026-08-11T09:43:05Z",
    "updated": "2026-08-11T13:34:43Z"
@@ -7059,6 +7063,10 @@
   "agents/@kody-w/install_rappter_distro_agent.py": {
    "added": "2026-05-24T21:45:25-04:00",
    "updated": "2026-07-21T19:28:49-04:00"
+  },
+  "agents/@kody-w/journal_recall_agent.py": {
+   "added": "2026-11-03T17:23:03-05:00",
+   "updated": "2026-11-03T17:23:03-05:00"
   },
   "agents/@kody-w/kody2day_agent.py": {
    "added": "2026-08-18T21:17:02-04:00",

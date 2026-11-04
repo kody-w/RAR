@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "business",
   "description": "Agents appropriate for an enterprise audience. Consumer-only agents (games, collectibles, novelty) are excluded so a host application can surface this slice directly without curating it again.",
-  "generated": "2026-11-03T17:35:46Z",
-  "count": 220,
+  "generated": "2026-11-04T13:58:28Z",
+  "count": 222,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/business.json",
   "agents": [
     {
@@ -5895,6 +5895,46 @@
         "status": "not_assessed",
         "evidence": []
       },
+      "id": "kody-w__fragments_agent",
+      "name": "@kody-w/fragments_agent",
+      "display_name": "Fragments",
+      "description": "Paste a document once and address it by a short hash forever: store, get, pin into every chat, unpin, forget, list. Fragment text stays untrusted data on the device.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "kody-w",
+      "category": "memory",
+      "tags": [
+        "fragments",
+        "memory",
+        "context",
+        "hash",
+        "pin"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/fragments_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/fragments_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/fragments_agent.py",
+        "sha256": "88e1749ee4ace1f506b6ee9c2c4fa2ce38e33107315f2b35f5919a489956be13"
+      },
+      "stats": {
+        "lines": 135,
+        "size_kb": 6.7,
+        "added_at": "2026-11-03T21:53:43-05:00"
+      }
+    },
+    {
+      "artifact_type": "agent",
+      "protocol_conformance": {
+        "profile": null,
+        "status": "not_assessed",
+        "evidence": []
+      },
       "id": "kody-w__full_rapp_leviathan",
       "name": "@kody-w/full_rapp_leviathan",
       "display_name": "FullRappLeviathan",
@@ -6172,6 +6212,46 @@
         "lines": 940,
         "size_kb": 36.4,
         "added_at": "2026-05-24T21:45:25-04:00"
+      }
+    },
+    {
+      "artifact_type": "agent",
+      "protocol_conformance": {
+        "profile": null,
+        "status": "not_assessed",
+        "evidence": []
+      },
+      "id": "kody-w__journal_recall_agent",
+      "name": "@kody-w/journal_recall_agent",
+      "display_name": "Journal Recall",
+      "description": "Finds earlier conversations in the owner's Brainstem Journal (what did I ask about X, what did we say last Tuesday) and pauses or resumes the journal's recording from chat.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "kody-w",
+      "category": "memory",
+      "tags": [
+        "journal",
+        "memory",
+        "history",
+        "search",
+        "recall"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/journal_recall_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/journal_recall_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/journal_recall_agent.py",
+        "sha256": "f97b91e25360b4feb4cd29957e5615339d25394198093d859eaa5e8e45977fac"
+      },
+      "stats": {
+        "lines": 107,
+        "size_kb": 5.0,
+        "added_at": "2026-11-03T17:23:03-05:00"
       }
     },
     {

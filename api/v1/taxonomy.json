@@ -1,6 +1,6 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-11-03T17:35:46Z",
+  "generated": "2026-11-04T13:58:28Z",
   "categories": [
     {
       "name": "productivity",
@@ -43,6 +43,10 @@
       "count": 5
     },
     {
+      "name": "memory",
+      "count": 2
+    },
+    {
       "name": "b2b_sales",
       "count": 1
     },
@@ -62,7 +66,7 @@
     },
     {
       "name": "@kody-w",
-      "count": 72
+      "count": 74
     },
     {
       "name": "@rapp",
@@ -104,7 +108,7 @@
     },
     {
       "name": "community",
-      "count": 70
+      "count": 72
     },
     {
       "name": "official",
@@ -197,6 +201,10 @@
       "count": 8
     },
     {
+      "name": "memory",
+      "count": 7
+    },
+    {
       "name": "copilot-studio",
       "count": 7
     },
@@ -247,10 +255,6 @@
     {
       "name": "drift",
       "count": 6
-    },
-    {
-      "name": "memory",
-      "count": 5
     },
     {
       "name": "core",
@@ -558,6 +562,10 @@
     },
     {
       "name": "deploy",
+      "count": 3
+    },
+    {
+      "name": "context",
       "count": 3
     },
     {
@@ -873,7 +881,7 @@
       "count": 2
     },
     {
-      "name": "context",
+      "name": "recall",
       "count": 2
     },
     {
@@ -1314,10 +1322,6 @@
     },
     {
       "name": "conversion",
-      "count": 1
-    },
-    {
-      "name": "office",
       "count": 1
     }
   ]
