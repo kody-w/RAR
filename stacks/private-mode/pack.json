@@ -2,7 +2,7 @@
   "schema": "rapp-rar-stack/1.2",
   "name": "private-mode",
   "display_name": "Private Mode",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "purpose": "Name the topics that must never leave this computer (health, money, a person). Chats about them are answered by a local model, whatever model is picked; with no local model running they are refused, never sent out.",
   "install": {
     "type": "agent_pack",
@@ -17,8 +17,8 @@
   },
   "files": {
     "private_mode_agent.py": {
-      "size": 4722,
-      "sha256": "527884bf54125df5a7b33a8846d2f4dbc1d9ad8f961d83e5cb4ac330b36a7a87"
+      "size": 4845,
+      "sha256": "3a4b1a0c040c1d4b97bf931233110e32ea60e916ecce66b492af2ca031b8ad2f"
     },
     "README.md": {
       "size": 580,

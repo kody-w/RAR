@@ -12,7 +12,7 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/private_mode_agent",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "Private Mode",
     "description": "Name topics (health, money, a person) that must never leave this computer; chats about them are answered by a local model or not at all.",
     "author": "kody-w",
@@ -56,9 +56,15 @@ class PrivateModeAgent(BasicAgent):
         try:
             with open(FILE) as f:
                 d = json.load(f)
-            return d if isinstance(d, dict) else {"topics": []}
+            d = d if isinstance(d, dict) else {"topics": []}
         except Exception:
             return {"topics": []}
+        topics = d.get("topics") or []
+        fixed = list(dict.fromkeys(_clean(t) or t for t in topics if isinstance(t, str)))
+        if fixed != topics:  # heal lists written before 1.0.1, every turn (system_context loads it each chat)
+            d["topics"] = fixed
+            self._save(d)
+        return d
 
     def _save(self, d):
         os.makedirs(os.path.dirname(FILE), exist_ok=True)
@@ -78,9 +84,6 @@ class PrivateModeAgent(BasicAgent):
     def perform(self, action="list", topic=None, text=None, **_):
         d = self._load()
         topics = d.setdefault("topics", [])
-        fixed = [_clean(t) or t for t in topics]  # heal lists written before 1.0.1
-        if fixed != topics:
-            d["topics"] = topics = list(dict.fromkeys(fixed)); self._save(d)
         if action == "add_topic":
             t = _clean(topic)
             if not t:
