@@ -9,3 +9,9 @@
 - Agent template: https://kody-w.github.io/RAR/template_agent.py
 - Install anything: curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- <pack or @publisher/agent> ...
 - Protocol: https://kody-w.github.io/rapp-1/llms.txt
+
+## Endpoints for AIs
+- Guide (install packs and agents for your person, test them): https://kody-w.github.io/grail-layers/skills/rar-easy-mode/SKILL.md
+- Any agent, as plain text with load steps: https://kody-w.github.io/RAR/a/{publisher}/{name}/agent.md
+- Catalog: https://kody-w.github.io/RAR/registry.json · agents: https://kody-w.github.io/RAR/api/v1/index.json · skills: https://kody-w.github.io/RAR/api/v1/skills.json
+- A running Brainstem with the ticket-page pack explains itself at GET http://localhost:7071/api/ticket

@@ -13,7 +13,8 @@
       "moving-day",
       "night-watch",
       "paperwork-desk",
-      "private-mode"
+      "private-mode",
+      "ticket-page"
     ],
     "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- starter-personal"
   },
