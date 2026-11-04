@@ -20173,8 +20173,19 @@
       "status": "active",
       "updated_at": "2026-07-22T01:05:34.168967+00:00",
       "version": "1.0.2"
+    },
+    "@kody-w/source_capture_agent": {
+      "status": "active",
+      "version": "0.1.0",
+      "quality_tier": "community",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "agents/@kody-w/source_capture_agent.py",
+      "sha256": "d91eaa6092fa5f3b81f17de21926b3bfa1268370609ec9208e312d8a6d036971",
+      "latest_receipt": "rar_02d118347b8a4b50515de40593edfddb70a4ac60948b4d561be705f6ea1a36b1",
+      "updated_at": "2026-11-04T14:12:01.088263+00:00"
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-11-04T02:42:10.717250+00:00"
+  "updated_at": "2026-11-04T14:12:01.088263+00:00"
 }

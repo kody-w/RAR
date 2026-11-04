@@ -27,7 +27,7 @@
   "lines": 107,
   "size_kb": 5.0,
   "sha256": "f97b91e25360b4feb4cd29957e5615339d25394198093d859eaa5e8e45977fac",
-  "has_card": false,
+  "has_card": true,
   "added_at": "2026-11-03T17:23:03-05:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__journal_recall_agent.svg",

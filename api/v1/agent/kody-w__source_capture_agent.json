@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__source_capture_agent",
+  "name": "Source Capture",
+  "rar_name": "@kody-w/source_capture_agent",
+  "rappid": "rappid:@kody-w/source_capture_agent:49d1e65c559f9c4a43ac8ce9d3b66cca11f14b03124617876991163f72c6ac79",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "0.1.0",
+  "publisher": "@kody-w",
+  "category": "productivity",
+  "tags": [
+    "capture",
+    "search",
+    "claude",
+    "chatgpt",
+    "gemini"
+  ],
+  "description": "Archive assistant-fed browser chats and CLI exports locally, with cross-source SQLite search and JSONL/Markdown export. Claude, ChatGPT and Gemini tested on simulated UIs only.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 623,
+  "size_kb": 30.8,
+  "sha256": "d91eaa6092fa5f3b81f17de21926b3bfa1268370609ec9208e312d8a6d036971",
+  "has_card": true,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__source_capture_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/source_capture_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__source_capture_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__source_capture_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/source_capture_agent.py"
+}

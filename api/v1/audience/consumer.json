@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "consumer",
   "description": "Agents appropriate for an individual audience. Enterprise-only agents are excluded.",
-  "generated": "2026-11-04T13:58:28Z",
-  "count": 198,
+  "generated": "2026-11-04T14:13:11Z",
+  "count": 199,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/consumer.json",
   "agents": [
     {
@@ -6612,6 +6612,46 @@
         "lines": 907,
         "size_kb": 43.9,
         "added_at": "2026-08-01T21:33:29-04:00"
+      }
+    },
+    {
+      "artifact_type": "agent",
+      "protocol_conformance": {
+        "profile": null,
+        "status": "not_assessed",
+        "evidence": []
+      },
+      "id": "kody-w__source_capture_agent",
+      "name": "@kody-w/source_capture_agent",
+      "display_name": "Source Capture",
+      "description": "Archive assistant-fed browser chats and CLI exports locally, with cross-source SQLite search and JSONL/Markdown export. Claude, ChatGPT and Gemini tested on simulated UIs only.",
+      "version": "0.1.0",
+      "publisher": "@kody-w",
+      "author": "kody-w",
+      "category": "productivity",
+      "tags": [
+        "capture",
+        "search",
+        "claude",
+        "chatgpt",
+        "gemini"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/source_capture_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/source_capture_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/source_capture_agent.py",
+        "sha256": "d91eaa6092fa5f3b81f17de21926b3bfa1268370609ec9208e312d8a6d036971"
+      },
+      "stats": {
+        "lines": 623,
+        "size_kb": 30.8,
+        "added_at": null
       }
     },
     {
