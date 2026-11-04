@@ -6,6 +6,8 @@ from pathlib import Path
 
 import pytest
 
+from tools.build_agent_pages import agent_page_contents
+
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = ("index", "distros", "skills", "install", "front", "store",
@@ -22,8 +24,9 @@ DESTINATIONS = [
 
 
 class NavigationParser(HTMLParser):
-    def __init__(self):
+    def __init__(self, root=""):
         super().__init__()
+        self.root = root
         self.placeholders = 0
         self.stylesheets = 0
         self.scripts = 0
@@ -42,7 +45,7 @@ class NavigationParser(HTMLParser):
         if tag == "noscript":
             self.in_noscript = True
         if tag == "a" and attrs.get("class") == "rar-brand":
-            assert attrs.get("href") == "index.html"
+            assert attrs.get("href") == self.root + "index.html"
             self.brands += 1
         if tag == "details" and attrs.get("class") == "rar-more":
             self.dropdowns += 1
@@ -57,10 +60,10 @@ class NavigationParser(HTMLParser):
                 self.primary_targets.add(attrs["href"])
             if self.in_legacy_header:
                 self.legacy_targets.add(attrs["href"])
-        if tag == "link" and attrs.get("href") == "nav.css":
+        if tag == "link" and attrs.get("href") == self.root + "nav.css":
             assert attrs.get("rel") == "stylesheet"
             self.stylesheets += 1
-        if tag == "script" and attrs.get("src") == "nav.js":
+        if tag == "script" and attrs.get("src") == self.root + "nav.js":
             assert "defer" in attrs
             self.scripts += 1
         if tag == "a" and self.in_noscript:
@@ -96,3 +99,15 @@ def test_shared_script_destinations_match_fallback():
     source = (ROOT / "nav.js").read_text(encoding="utf-8")
     assert re.findall(r"\['([^']+)', '([^']+)'\]", source) == DESTINATIONS
     assert all((ROOT / target).is_file() for _, target in DESTINATIONS)
+
+
+def test_nested_agent_page_navigation_uses_the_repository_root():
+    agent = {
+        "name": "@test/example_agent", "_file": "agents/@test/example_agent.py",
+        "display_name": "Example", "description": "One description. Another sentence.",
+    }
+    parser = NavigationParser("../../../")
+    parser.feed(agent_page_contents(agent)["index.html"])
+    assert parser.placeholders == parser.stylesheets == parser.scripts == 1
+    assert parser.brands == parser.dropdowns == 1
+    assert parser.links == [(label, "../../../" + target) for label, target in DESTINATIONS]

@@ -14,7 +14,7 @@ from urllib.parse import urlsplit
 import pytest
 
 import build_registry
-from tools.build_agent_pages import agent_markdown, build_agent_pages
+from tools.build_agent_pages import agent_markdown, agent_page_contents, build_agent_pages
 from tools.stamp_ticket import ROOT, SITE, page_url, stamp_source, strip_ticket, ticket_text
 
 AGENTS = json.loads((ROOT / "registry.json").read_text(encoding="utf-8"))["agents"]
@@ -74,7 +74,10 @@ def test_every_registry_artifact_has_exact_ticket_and_static_pages(agent):
     assert markdown == agent_markdown(agent)
     assert agent["name"] in markdown
     assert agent["description"] in markdown
-    assert "<script" not in html.lower()
+    assert html == agent_page_contents(agent)["index.html"]
+    assert '<script src="../../../nav.js" defer></script>' in html
+    assert '<link rel="stylesheet" href="../../../nav.css">' in html
+    assert '<summary>Advanced: do it by hand</summary>' in html
     assert 'href="agent.md"' in html
     assert "/#agent/" + agent["name"] in html
     assert 'POST /chat {"user_input": "..."}' in markdown

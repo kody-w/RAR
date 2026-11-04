@@ -8,6 +8,7 @@ import subprocess
 import pytest
 
 from tests.test_install_prompt import InstallParser
+from tools.build_agent_pages import agent_page_contents, copilot_prompt
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -150,3 +151,19 @@ def test_gated_agent_keeps_access_instructions_without_public_hotload(render_mod
 
 def test_canonical_agent_route_still_opens(render_modal):
     assert render_modal(SOURCE_CAPTURE)["clipboard"] is not None
+
+
+@pytest.mark.parametrize("agent", json.loads((ROOT / "registry.json").read_text())["agents"],
+                         ids=lambda a: a["name"])
+def test_ticket_prompt_matches_modal_exactly(render_modal, agent):
+    modal = render_modal(agent)
+    page = parse(agent_page_contents(agent)["index.html"])
+    assert page.elements["manual-ticket"]["text"] == agent_page_contents(agent)["agent.md"]
+    assert "open" not in page.elements["advanced-ticket"]["attrs"]
+    if agent.get("type") == "stub":
+        assert copilot_prompt(agent) == ""
+        assert "copy-source" not in page.elements
+        assert modal["clipboard"] is None
+    else:
+        assert page.elements["copy-source"]["text"] == modal["clipboard"] == copilot_prompt(agent)
+        assert page.elements["copy-source"]["attrs"]["readonly"] is None

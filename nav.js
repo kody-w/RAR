@@ -12,11 +12,12 @@
     ['For AIs', 'llms.txt'],
   ];
   const primary = nav.querySelector('.rar-primary');
-  const currentPage = location.pathname.split('/').pop() || 'index.html';
+  const root = nav.dataset.root || '';
+  const currentPage = root ? '' : location.pathname.split('/').pop() || 'index.html';
   for (const [label, href] of destinations) {
     const link = document.createElement('a');
     link.textContent = label;
-    link.setAttribute('href', href);
+    link.setAttribute('href', root + href);
     if (href === currentPage) link.setAttribute('aria-current', 'page');
     primary.appendChild(link);
   }
