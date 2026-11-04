@@ -4,6 +4,8 @@ Each chat turn it runs a few cheap checks (at most every 10 minutes): free disk 
 fall back to plain grail, whether its own services answer, last night's drills. A new problem is told once, in one
 sentence; nothing is said while all is well. "check my computer" lists everything; "fix it" does only safe fixes
 (restarting the Brainstem's own helper services), never deletes anything.
+Missing service configuration or missing, invalid, future-dated, or older-than-36-hour drill reports are unknown,
+not passed. Drill freshness uses the report file's modification time; services require a live health response.
 """
 import json
 import os
@@ -17,7 +19,7 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/night_watch_agent",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "display_name": "Night Watch",
     "description": "Your Brainstem looks after its own computer: disk space, its own services and drills; tells you once, in one sentence, only when something needs you.",
     "author": "kody-w",
@@ -31,6 +33,7 @@ __manifest__ = {
 HOME = os.environ.get("GRAIL_LAYERS_HOME") or os.path.expanduser("~/.brainstem/layers")
 STATE = os.path.join(HOME, "night-watch.json")
 EVERY = 600
+DRILL_MAX_AGE = 36 * 3600
 # Spend Guard (folded in from the Spend Guard pack idea): Copilot is flat-rate, but premium models draw on a monthly
 # allowance. The kernel does not expose that allowance, so this counts premium-model replies in the journal on this
 # computer (an estimate) against a monthly limit the owner sets. Local models and the included models never count.
@@ -45,8 +48,9 @@ SERVICES = {  # helper services the Brainstem may run beside it: url, launchd la
 def _json(path):
     try:
         with open(path) as f:
-            return json.load(f)
-    except Exception:
+            data = json.load(f)
+        return data if isinstance(data, dict) else None
+    except (OSError, ValueError):
         return None
 
 
@@ -86,22 +90,43 @@ def checks():
     if limit:
         used = premium_used()
         if used is not None and used >= limit:
-            found.append(("spend:over", f"you have used about {used} premium replies this month, past your limit of {limit} (only a warning: nothing is blocked)"))
+            found.append(("spend:over", f"local journal estimate: about {used} premium replies this month, past your limit of {limit} (not billed usage or remaining allowance; only a warning: nothing is blocked)"))
         elif used is not None and used >= 0.8 * limit:
-            found.append(("spend:near", f"you have used about {used} of your {limit} premium replies this month (only a warning: nothing is blocked)"))
+            found.append(("spend:near", f"local journal estimate: about {used} of your {limit} premium replies this month (not billed usage or remaining allowance; only a warning: nothing is blocked)"))
     du = shutil.disk_usage(os.path.expanduser("~"))
     free = du.free / du.total
     if free < 0.10:
         found.append(("disk", f"your disk is {100 - free * 100:.0f}% full ({du.free / 1e9:.0f} GB left)"))
-    boot = _json(os.path.join(HOME, "last-boot.json")) or {}
-    if boot.get("fallback"):
+    boot = _json(os.path.join(HOME, "last-boot.json"))
+    if boot is None or not isinstance(boot.get("fallback"), bool):
+        found.append(("fallback:unknown", "Brainstem boot status unknown: no valid boot report"))
+    elif boot["fallback"]:
         found.append(("fallback", f"the Brainstem started as plain grail because {boot.get('why', 'a layer failed')}"))
+    if not SERVICES:
+        found.append(("service:unknown", "service health unknown / not configured: no helper services declared"))
     for name, (url, label) in SERVICES.items():
-        if _plist(label) and not _up(url):
+        if not _plist(label):
+            found.append((f"service:{name}", f"the {name} service health is unknown / not configured: no launchd configuration"))
+        elif not _up(url):
             found.append((f"service:{name}", f"the {name} service is not answering"))
     for drill in ("chaos", "succession"):
-        r = _json(os.path.join(HOME, drill, "latest.json"))
-        if r and r.get("survived") is not None and r.get("survived") != r.get("total"):
+        path = os.path.join(HOME, drill, "latest.json")
+        r = _json(path)
+        if r is None:
+            found.append((f"drill:{drill}", f"the {drill} drill status is unknown / not configured: missing or unreadable report"))
+            continue
+        survived, total = r.get("survived"), r.get("total")
+        if type(survived) is not int or type(total) is not int or not 0 <= survived <= total or total == 0:
+            found.append((f"drill:{drill}", f"the {drill} drill status is unknown: invalid result counts"))
+            continue
+        try:
+            age = time.time() - os.path.getmtime(path)
+        except OSError:
+            found.append((f"drill:{drill}", f"the {drill} drill status is unknown: report freshness unavailable"))
+            continue
+        if not 0 <= age <= DRILL_MAX_AGE:
+            found.append((f"drill:{drill}", f"the {drill} drill status is unknown: stale or future-dated report (requires evidence within 36 hours)"))
+        elif survived != total:
             found.append((f"drill:{drill}", f"last night's {drill} drill passed {r.get('survived')} of {r.get('total')}"))
     return found
 
@@ -163,7 +188,7 @@ class NightWatchAgent(BasicAgent):
             if used is None:
                 return "I cannot count yet: the journal on this computer has no record of your chats."
             return (f"About {used} premium replies so far this month" + (f", of your limit of {n}." if n else ". No limit is set.") +
-                    " This is an estimate from this computer's journal; local models and included models are not counted, and nothing is ever blocked.")
+                    " This is an estimate from this computer's journal, not billed usage or remaining allowance; local models and included models are not counted, and nothing is ever blocked.")
         found = checks()
         st = self._state(); st["found"], st["at"] = found, time.time(); self._save(st)
         if action == "fix":
@@ -181,4 +206,5 @@ class NightWatchAgent(BasicAgent):
                              ("service", "its services answer"), ("drill", "last night's drills passed")) if k not in keys]
         if not found:
             return "All good: " + ", ".join(ok) + "."
-        return "Needs attention: " + "; ".join(s for _, s in found) + ". Everything else is fine: " + ", ".join(ok) + "."
+        return ("Needs attention: " + "; ".join(s for _, s in found) + "." +
+                (" Checks with current evidence: " + ", ".join(ok) + "." if ok else ""))
