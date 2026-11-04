@@ -1,0 +1,33 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "wildhaven-ceo",
+  "display_name": "WildhavenCEO",
+  "version": "0.1.0",
+  "purpose": "A CEO workspace agent. Drop a vault of strategy / legal / budget / pitch / playbook documents in, then ask questions and get answers in a confident operator's voice. Wraps the pattern from kody-w/wildhaven-ceo: 'talk to the workspace' as the whole interface \u2014 no reading files, no learning the org, the agent does that for you.",
+  "kind_label": "rapplication",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "wildhaven_ceo_agent.py"
+    ],
+    "destination": "agents/",
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- wildhaven-ceo"
+  },
+  "moved_from": {
+    "store": "https://kody-w.github.io/RAPP_Store/",
+    "id": "wildhaven_ceo",
+    "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@wildhaven/wildhaven_ceo/singleton/wildhaven_ceo_agent.py",
+    "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@wildhaven/wildhaven_ceo/ui/index.html"
+  },
+  "files": {
+    "wildhaven_ceo_agent.py": {
+      "size": 11893,
+      "sha256": "63ba8bea6a3fa294de04fcc385a257e24c6a14e768ed6e9546fe32a22a594d22"
+    },
+    "README.md": {
+      "size": 485,
+      "sha256": "8c00ead954b518c888ce6e2dc7d63d05b591ae5c9fd7c477ceff7b6ae3630c93"
+    }
+  },
+  "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@wildhaven/wildhaven_ceo/ui/index.html"
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "csv-surgeon",
+  "display_name": "CSV Surgeon",
+  "version": "1.0.0",
+  "purpose": "Profile a CSV \u2014 per-column types, null rate, cardinality, min/max \u2014 or find ragged rows, duplicate and whitespace-padded headers, duplicate records, or slice rows. Stdlib only, no network.",
+  "kind_label": "rapplication",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "csv_surgeon_agent.py"
+    ],
+    "destination": "agents/",
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- csv-surgeon"
+  },
+  "moved_from": {
+    "store": "https://kody-w.github.io/RAPP_Store/",
+    "id": "csv_surgeon",
+    "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/csv_surgeon/singleton/csv_surgeon_agent.py",
+    "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/csv_surgeon/ui/index.html"
+  },
+  "files": {
+    "csv_surgeon_agent.py": {
+      "size": 11501,
+      "sha256": "4d500fd77ebdc677d2860167748f06d1280bfd10de365f759e3b0e9a682b4076"
+    },
+    "README.md": {
+      "size": 345,
+      "sha256": "b9478104df1249f766474d34d6ef4baec674bfe709e13c8b4bafe787421e9891"
+    }
+  },
+  "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/csv_surgeon/ui/index.html"
+}

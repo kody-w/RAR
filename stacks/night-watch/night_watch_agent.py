@@ -17,7 +17,7 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/night_watch_agent",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "display_name": "Night Watch",
     "description": "Your Brainstem looks after its own computer: disk space, its own services and drills; tells you once, in one sentence, only when something needs you.",
     "author": "kody-w",
@@ -31,6 +31,12 @@ __manifest__ = {
 HOME = os.environ.get("GRAIL_LAYERS_HOME") or os.path.expanduser("~/.brainstem/layers")
 STATE = os.path.join(HOME, "night-watch.json")
 EVERY = 600
+# Spend Guard (folded in from the Spend Guard pack idea): Copilot is flat-rate, but premium models draw on a monthly
+# allowance. The kernel does not expose that allowance, so this counts premium-model replies in the journal on this
+# computer (an estimate) against a monthly limit the owner sets. Local models and the included models never count.
+BUDGET = os.path.join(HOME, "spend-guard.json")
+JOURNAL = os.path.join(os.environ.get("JOURNAL_STORE") or os.path.expanduser("~/.brainstem/journal"), "frames.jsonl")
+INCLUDED = ("gpt-4.1", "gpt-4o", "gpt-4o-mini", "gpt-5-mini")
 SERVICES = {  # helper services the Brainstem may run beside it: url, launchd label
     "journal": ("http://127.0.0.1:7074/health", "com.airaptr.brainstem-journal"),
 }
@@ -56,8 +62,33 @@ def _plist(label):
     return os.path.exists(os.path.expanduser(f"~/Library/LaunchAgents/{label}.plist"))
 
 
+def premium_used(month=None):
+    month = month or time.strftime("%Y-%m")
+    n = 0
+    try:
+        with open(JOURNAL) as f:
+            for line in f:
+                try:
+                    fr = json.loads(line)
+                except Exception:
+                    continue
+                m = fr.get("model") or ""
+                if str(fr.get("at", "")).startswith(month) and m and not m.startswith("ollama/") and m not in INCLUDED:
+                    n += 1
+    except OSError:
+        return None
+    return n
+
+
 def checks():
     found = []
+    limit = (_json(BUDGET) or {}).get("monthly")
+    if limit:
+        used = premium_used()
+        if used is not None and used >= limit:
+            found.append(("spend:over", f"you have used about {used} premium replies this month, past your limit of {limit} (only a warning: nothing is blocked)"))
+        elif used is not None and used >= 0.8 * limit:
+            found.append(("spend:near", f"you have used about {used} of your {limit} premium replies this month (only a warning: nothing is blocked)"))
     du = shutil.disk_usage(os.path.expanduser("~"))
     free = du.free / du.total
     if free < 0.10:
@@ -81,9 +112,12 @@ class NightWatchAgent(BasicAgent):
         self.metadata = {
             "name": self.name,
             "description": ("Looks after this computer for the owner: disk space, the Brainstem's own services and "
-                            "drills. Use for 'check my computer', 'is everything ok', 'fix it'."),
+                            "drills, and premium-model use against a monthly limit (Spend Guard). Use for 'check my computer', "
+                            "'is everything ok', 'fix it', 'how much have I used', 'warn me past N premium replies'."),
             "parameters": {"type": "object", "properties": {
-                "action": {"type": "string", "enum": ["check", "fix"]}}, "required": ["action"]},
+                "action": {"type": "string", "enum": ["check", "fix", "set_spend_limit", "spend"]},
+                "limit": {"type": "integer", "description": "for set_spend_limit: premium replies allowed per month (0 turns it off)"}},
+                "required": ["action"]},
         }
         super().__init__(name=self.name, metadata=self.metadata)
 
@@ -113,7 +147,23 @@ class NightWatchAgent(BasicAgent):
         except Exception:
             return None
 
-    def perform(self, action="check", **_):
+    def perform(self, action="check", limit=None, **_):
+        if action == "set_spend_limit":
+            try:
+                n = max(0, int(limit or 0))
+            except (TypeError, ValueError):
+                return "Tell me a whole number of premium replies per month, or 0 to turn the limit off."
+            os.makedirs(HOME, exist_ok=True)
+            with open(BUDGET, "w") as f:
+                json.dump({"monthly": n}, f)
+            return (f"Done. I will tell you once at {int(n * 0.8)} and again at {n} premium replies this month."
+                    if n else "The spend limit is off.")
+        if action == "spend":
+            used, n = premium_used(), (_json(BUDGET) or {}).get("monthly")
+            if used is None:
+                return "I cannot count yet: the journal on this computer has no record of your chats."
+            return (f"About {used} premium replies so far this month" + (f", of your limit of {n}." if n else ". No limit is set.") +
+                    " This is an estimate from this computer's journal; local models and included models are not counted, and nothing is ever blocked.")
         found = checks()
         st = self._state(); st["found"], st["at"] = found, time.time(); self._save(st)
         if action == "fix":
@@ -125,7 +175,10 @@ class NightWatchAgent(BasicAgent):
                     done.append(f"restarted the {name} service ({'answering now' if _up(url) else 'still not answering'})")
             rest = [s for k, s in found if not k.startswith("service:")]
             return ("; ".join(done) or "Nothing I can fix safely.") + (" Still needs you: " + "; ".join(rest) if rest else "")
+        du = shutil.disk_usage(os.path.expanduser("~"))
+        keys = {k.split(":")[0] for k, _ in found}
+        ok = [x for k, x in (("disk", f"{du.free / 1e9:.0f} GB free"), ("fallback", "the Brainstem started normally"),
+                             ("service", "its services answer"), ("drill", "last night's drills passed")) if k not in keys]
         if not found:
-            du = shutil.disk_usage(os.path.expanduser("~"))
-            return f"All good: {du.free / 1e9:.0f} GB free, the Brainstem started normally, its services answer."
-        return "Needs attention: " + "; ".join(s for _, s in found) + "."
+            return "All good: " + ", ".join(ok) + "."
+        return "Needs attention: " + "; ".join(s for _, s in found) + ". Everything else is fine: " + ", ".join(ok) + "."

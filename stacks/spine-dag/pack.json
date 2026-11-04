@@ -1,0 +1,33 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "spine-dag",
+  "display_name": "SpineDAG",
+  "version": "1.0.0",
+  "purpose": "Universal Directed-Acyclic-Graph analyser. Point it at any folder, code project, Excel workbook, JSON/YAML config, or block of prose; it builds the dependency graph, finds hubs, leaves, orphans, cycles, and the critical path, scores Spine Health 0-100, and returns Markdown with a Mermaid diagram, ASCII tree, and a <spine-dag-json> envelope a UI can render.",
+  "kind_label": "rapplication",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "spine_dag_agent.py"
+    ],
+    "destination": "agents/",
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- spine-dag"
+  },
+  "moved_from": {
+    "store": "https://kody-w.github.io/RAPP_Store/",
+    "id": "spine_dag",
+    "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@blazingbeard/spine_dag/singleton/spine_dag_agent.py",
+    "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@blazingbeard/spine_dag/ui/index.html"
+  },
+  "files": {
+    "spine_dag_agent.py": {
+      "size": 28216,
+      "sha256": "3f71c8e61bc69f8553bbdaecaf6dd5bdf78b7df29702fbd26ef0c53fc1246776"
+    },
+    "README.md": {
+      "size": 506,
+      "sha256": "72a8a4357e504f693f69add35bcef9dfd0adadb4f56d3166f7d3ecc365fdbb6b"
+    }
+  },
+  "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@blazingbeard/spine_dag/ui/index.html"
+}

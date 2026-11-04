@@ -1,0 +1,33 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "bookfactory",
+  "display_name": "BookFactory",
+  "version": "0.3.0",
+  "purpose": "Five-persona content pipeline (Writer \u2192 Editor \u2192 CEO \u2192 Publisher \u2192 Reviewer). One call, one chapter back.",
+  "kind_label": "rapplication",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "bookfactory_agent.py"
+    ],
+    "destination": "agents/",
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- bookfactory"
+  },
+  "moved_from": {
+    "store": "https://kody-w.github.io/RAPP_Store/",
+    "id": "bookfactory",
+    "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/bookfactory/singleton/bookfactory_agent.py",
+    "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/bookfactory/ui/index.html"
+  },
+  "files": {
+    "bookfactory_agent.py": {
+      "size": 23555,
+      "sha256": "7419619b65eacd27dbfa418f391ba755b9d30fffbf084be211cfa011286b73d9"
+    },
+    "README.md": {
+      "size": 266,
+      "sha256": "c832be7c8aa4b75e12f463a702208bc8c6e6a037c19221c56f17f9151b97eef7"
+    }
+  },
+  "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/bookfactory/ui/index.html"
+}

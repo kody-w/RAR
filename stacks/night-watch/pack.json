@@ -2,8 +2,8 @@
   "schema": "rapp-rar-stack/1.2",
   "name": "night-watch",
   "display_name": "Night Watch",
-  "version": "1.0.0",
-  "purpose": "Your Brainstem looks after the computer it lives on: disk space, its own services, last night's drills. It tells you once, in one sentence, only when something needs you, and fixes what is safe to fix.",
+  "version": "1.1.0",
+  "purpose": "Your Brainstem looks after its own computer (disk, its services, nightly drills) and your premium-model use against a monthly limit you set (Spend Guard; a warning, nothing is blocked). It tells you once, in one sentence, only when something needs you.",
   "install": {
     "type": "agent_pack",
     "agents": [
@@ -14,8 +14,8 @@
   },
   "files": {
     "night_watch_agent.py": {
-      "size": 5646,
-      "sha256": "f1e89eaf1645ebf08afe79f0d14bf85371e8cf539f72589a36897469e51d1eb7"
+      "size": 8952,
+      "sha256": "3125dd6817072fc74e0373dc034cdbf37096de53b0a57215b6475a4fbf79645a"
     },
     "README.md": {
       "size": 381,

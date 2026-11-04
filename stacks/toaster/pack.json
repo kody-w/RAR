@@ -1,0 +1,33 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "toaster",
+  "display_name": "Toaster",
+  "version": "1.0.0",
+  "purpose": "Carry a capability between agent.py, SKILL.md, openclaw and openrappter without losing fidelity. Toast a raw skill so it gains a typed contract and becomes measurable, then soak it to prove it does not drift across conversion routes.",
+  "kind_label": "rapplication",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "toaster_agent.py"
+    ],
+    "destination": "agents/",
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- toaster"
+  },
+  "moved_from": {
+    "store": "https://kody-w.github.io/RAPP_Store/",
+    "id": "toaster",
+    "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/toaster/singleton/toaster_agent.py",
+    "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/toaster/ui/index.html"
+  },
+  "files": {
+    "toaster_agent.py": {
+      "size": 73820,
+      "sha256": "d4d540104c288152b2761b7890aaf263e58af286acaf702d09422b6f3f198e16"
+    },
+    "README.md": {
+      "size": 378,
+      "sha256": "c344265fa5d14981aee7220207bd614729b4c6f8b1174cc38f1bb5ff2ed97e06"
+    }
+  },
+  "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/toaster/ui/index.html"
+}

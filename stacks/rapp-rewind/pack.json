@@ -1,0 +1,33 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "rapp-rewind",
+  "display_name": "RAPP Rewind",
+  "version": "1.2.1",
+  "purpose": "Native macOS searchable screen memory with explicit Start/Pause/Stop, app-owned ScreenCaptureKit, on-device Vision OCR, and local SQLite FTS5. Capture, OCR, indexing, and search stay on this Mac; optional RAPP host integration is separate.",
+  "kind_label": "rapplication",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "rapp_rewind_agent.py"
+    ],
+    "destination": "agents/",
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- rapp-rewind"
+  },
+  "moved_from": {
+    "store": "https://kody-w.github.io/RAPP_Store/",
+    "id": "rapp_rewind",
+    "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-rewind/6023d9b1e75b3a1401f4671d7114dab499f3cdfa/rapp_rewind/singleton/rapp_rewind_agent.py",
+    "ui_url": "https://raw.githubusercontent.com/kody-w/rapp-rewind/6023d9b1e75b3a1401f4671d7114dab499f3cdfa/rapp_rewind/ui/index.html"
+  },
+  "files": {
+    "rapp_rewind_agent.py": {
+      "size": 8552,
+      "sha256": "65e86577bd45dc30713a5b1ebb103ec411d0d2b0fa32721bec66425ee92ba947"
+    },
+    "README.md": {
+      "size": 392,
+      "sha256": "bffee8cb6fd775efcd711175b49b71e72814ae1f4e204e222a4f67c7fef3f3b9"
+    }
+  },
+  "ui_url": "https://raw.githubusercontent.com/kody-w/rapp-rewind/6023d9b1e75b3a1401f4671d7114dab499f3cdfa/rapp_rewind/ui/index.html"
+}

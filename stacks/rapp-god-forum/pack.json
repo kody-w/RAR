@@ -1,0 +1,33 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "rapp-god-forum",
+  "display_name": "rapp-god Forum",
+  "version": "1.0.0",
+  "purpose": "The agentic forum for the full RAPP stack \u2014 a threaded discussion forum where people and agents talk through the whole thing end to end (brainstem, kited layer, RACon, commons, registry, agents, governance). Mirrors the RAPP Commons pattern (rapp-commons-protocol/2.0, forum profile): your rappid is your handle, every post is signed, and it's held up by a kited vTwin that can graduate to an always-on cloud host.",
+  "kind_label": "rapplication",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "forum_agent.py"
+    ],
+    "destination": "agents/",
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- rapp-god-forum"
+  },
+  "moved_from": {
+    "store": "https://kody-w.github.io/RAPP_Store/",
+    "id": "rapp_god_forum",
+    "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/rapp_god_forum/singleton/forum_agent.py",
+    "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/rapp_god_forum/ui/index.html"
+  },
+  "files": {
+    "forum_agent.py": {
+      "size": 10823,
+      "sha256": "b5a98826f4698b0082dc1c5164af0ed4441f64be9bd2571b505f859ce8a08f04"
+    },
+    "README.md": {
+      "size": 575,
+      "sha256": "9432c05451ad296fc0c69583d16656ae8b8b845cc490b2698d0cc5d2d7f60d72"
+    }
+  },
+  "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/rapp_god_forum/ui/index.html"
+}

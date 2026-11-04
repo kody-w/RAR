@@ -1,0 +1,33 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "rapp-crispy",
+  "display_name": "RAPP Crispy",
+  "version": "1.5.1",
+  "purpose": "Native macOS 14+ meeting app with graphical record/stop/cancel, app-owned microphone permissions, explicitly named Apple AVFoundation voice processing, bundled local Whisper transcription, meeting history and audio/transcript views. Optional screen/window capture is video only. Notes stay disabled until a provider is selected, approved and requested. Existing Python/CLI integration remains secondary; DeepFilterNet, RNNoise and compatible loopback routing are optional unbundled legacy paths, not the native default.",
+  "kind_label": "rapplication",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "rapp_crispy_agent.py"
+    ],
+    "destination": "agents/",
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- rapp-crispy"
+  },
+  "moved_from": {
+    "store": "https://kody-w.github.io/RAPP_Store/",
+    "id": "rapp_crispy",
+    "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-crispy/29fcb581a6a9d10c20fdbd96d5867c27ede0d3c9/rapp_crispy/singleton/rapp_crispy_agent.py",
+    "ui_url": "https://raw.githubusercontent.com/kody-w/rapp-crispy/29fcb581a6a9d10c20fdbd96d5867c27ede0d3c9/rapp_crispy/ui/index.html"
+  },
+  "files": {
+    "rapp_crispy_agent.py": {
+      "size": 35521,
+      "sha256": "d3133031a2e4ffc3be0ed282c2df7b73ca49e46e07b259dc704539904aaefe74"
+    },
+    "README.md": {
+      "size": 672,
+      "sha256": "1b1c12e835a842ae311b279e3ccf72aa94b8d499c57d06aff291c1373dfba988"
+    }
+  },
+  "ui_url": "https://raw.githubusercontent.com/kody-w/rapp-crispy/29fcb581a6a9d10c20fdbd96d5867c27ede0d3c9/rapp_crispy/ui/index.html"
+}

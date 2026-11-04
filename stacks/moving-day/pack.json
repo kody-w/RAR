@@ -2,8 +2,8 @@
   "schema": "rapp-rar-stack/1.2",
   "name": "moving-day",
   "display_name": "Moving Day",
-  "version": "1.0.0",
-  "purpose": "Your new computer becomes your old one: one file carries your agents, soul, memory, model, private topics and packs (never sign-in or secrets), unpacked on the new computer in one sentence.",
+  "version": "1.2.0",
+  "purpose": "Your new computer becomes your old one, and another Mac can cover for this one. Pack once or keep a nightly standby copy in iCloud Drive; unpack or take over on the other Mac in one sentence. Agents, soul, memory, model, private topics and packs come along as a verified rapp/1 egg; sign-in and secrets never do.",
   "install": {
     "type": "agent_pack",
     "agents": [
@@ -20,8 +20,8 @@
   },
   "files": {
     "moving_day_agent.py": {
-      "size": 9515,
-      "sha256": "e3173f94f404433c62c2250ca01ee67b0d6208d7468830417691e6a7c0c333a4"
+      "size": 14200,
+      "sha256": "41c60f298b0fad8b73a935463ab78786606e6b068ec63fed97c550d148b15a3b"
     },
     "moving_page.py": {
       "size": 990,

@@ -1,0 +1,33 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "coe-starter-kit",
+  "display_name": "CoE Starter Kit",
+  "version": "1.0.0",
+  "purpose": "Bill Whalen's Agent Team (BWAT) starter kit as one rapplication. Run it and it bootstraps an outcome-first delivery team into your brainstem \u2014 Outcome Framer, Intake, Outcome Validator, PM, and Bill's twin \u2014 each pulled over HTTPS and sha256-pinned. Self-contained, stdlib-only.",
+  "kind_label": "rapplication",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "coe_starter_kit_agent.py"
+    ],
+    "destination": "agents/",
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- coe-starter-kit"
+  },
+  "moved_from": {
+    "store": "https://kody-w.github.io/RAPP_Store/",
+    "id": "coe_starter_kit",
+    "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@bill/coe_starter_kit/singleton/coe_starter_kit_agent.py",
+    "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@bill/coe_starter_kit/ui/index.html"
+  },
+  "files": {
+    "coe_starter_kit_agent.py": {
+      "size": 11253,
+      "sha256": "50a04db67238b2bedd3817fa3ab4225032fb050531671b5dde126881efac4fbe"
+    },
+    "README.md": {
+      "size": 443,
+      "sha256": "c5543a295b6d0675f71f3b1ea82322f17d17b03fd861252c3b69ceaf8b27d122"
+    }
+  },
+  "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@bill/coe_starter_kit/ui/index.html"
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "thoughtbox",
+  "display_name": "Thoughtbox",
+  "version": "1.0.0",
+  "purpose": "Local-first reflection journal \u2014 append, list, search, tag, export, import. Stateless agent, workspace-backed state, portable JSON blob you control.",
+  "kind_label": "rapplication",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "thoughtbox_agent.py"
+    ],
+    "destination": "agents/",
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- thoughtbox"
+  },
+  "moved_from": {
+    "store": "https://kody-w.github.io/RAPP_Store/",
+    "id": "thoughtbox",
+    "singleton_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/apps/@kody-w/thoughtbox/singleton/thoughtbox_agent.py",
+    "ui_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/apps/@kody-w/thoughtbox/ui/index.html"
+  },
+  "files": {
+    "thoughtbox_agent.py": {
+      "size": 11272,
+      "sha256": "d93b56abcc578d8299df787816142c3d0553a018d45e611ad54ac453bf11933b"
+    },
+    "README.md": {
+      "size": 301,
+      "sha256": "e4af762a28680274d29673569eed4e70af0f060f33bf06be817a60d31a3c146f"
+    }
+  },
+  "ui_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/apps/@kody-w/thoughtbox/ui/index.html"
+}

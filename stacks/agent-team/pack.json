@@ -1,0 +1,33 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "agent-team",
+  "display_name": "AgentTeam",
+  "version": "0.1.0",
+  "purpose": "The persona-routing brain of Bill Whalen's Agent Team Starter Kit, ported to a single rapplication. Given a project goal, returns the outcome frame, persona route, paste-ready GitHub issue body, and the needs-you questions the team would surface.",
+  "kind_label": "rapplication",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "agent_team_agent.py"
+    ],
+    "destination": "agents/",
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- agent-team"
+  },
+  "moved_from": {
+    "store": "https://kody-w.github.io/RAPP_Store/",
+    "id": "agent_team",
+    "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/agent_team/singleton/agent_team_agent.py",
+    "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/agent_team/ui/index.html"
+  },
+  "files": {
+    "agent_team_agent.py": {
+      "size": 16267,
+      "sha256": "c950b295557f7d25471aeff87b5caac9b51cf49633d9f71108c6e80d24db947f"
+    },
+    "README.md": {
+      "size": 396,
+      "sha256": "ebf00177f15ce0d9fb22f5c14eaf5a9be93d15f2674d69f7fb3461d67677fd20"
+    }
+  },
+  "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@kody-w/agent_team/ui/index.html"
+}

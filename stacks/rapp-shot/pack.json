@@ -1,0 +1,33 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "rapp-shot",
+  "display_name": "RAPP Shot",
+  "version": "1.3.1",
+  "purpose": "Native macOS screenshot capture, editable annotations and crop, local Vision OCR, and opaque credential redaction with review before copying or exporting. Detection is per line and can miss secrets; inspect the final preview. Optional Python adapters integrate an already-installed app or legacy CLI.",
+  "kind_label": "rapplication",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "rapp_shot_agent.py"
+    ],
+    "destination": "agents/",
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- rapp-shot"
+  },
+  "moved_from": {
+    "store": "https://kody-w.github.io/RAPP_Store/",
+    "id": "rapp_shot",
+    "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-shot/538d55f6d36fa9d0a6b7f4b323ab0480cb45a8ac/rapp_shot/singleton/rapp_shot_agent.py",
+    "ui_url": "https://raw.githubusercontent.com/kody-w/rapp-shot/538d55f6d36fa9d0a6b7f4b323ab0480cb45a8ac/rapp_shot/ui/index.html"
+  },
+  "files": {
+    "rapp_shot_agent.py": {
+      "size": 12148,
+      "sha256": "bc817f0fdf172cb4e16bbba507e8381838f444033cc0b277d0f55c679d72f61d"
+    },
+    "README.md": {
+      "size": 449,
+      "sha256": "66e06ce6d226ec39dc26dd1f7c1291c642f7960107edfcbf88e01a9d470a3c5f"
+    }
+  },
+  "ui_url": "https://raw.githubusercontent.com/kody-w/rapp-shot/538d55f6d36fa9d0a6b7f4b323ab0480cb45a8ac/rapp_shot/ui/index.html"
+}

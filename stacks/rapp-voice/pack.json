@@ -1,0 +1,33 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "rapp-voice",
+  "display_name": "RAPP Voice",
+  "version": "1.1.1",
+  "purpose": "Native macOS dictation with local whisper.cpp recognition, a weighted dictionary, app-aware cleanup, and safe insertion or manual-copy fallback. Optional cloud polish is off until explicitly consented.",
+  "kind_label": "rapplication",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "rapp_voice_agent.py"
+    ],
+    "destination": "agents/",
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- rapp-voice"
+  },
+  "moved_from": {
+    "store": "https://kody-w.github.io/RAPP_Store/",
+    "id": "rapp_voice",
+    "singleton_url": "https://raw.githubusercontent.com/kody-w/rapp-voice/c9be9f1936dd848030cf5f5833b1e7cb5e6b1c2b/rapp_voice/singleton/rapp_voice_agent.py",
+    "ui_url": "https://raw.githubusercontent.com/kody-w/rapp-voice/c9be9f1936dd848030cf5f5833b1e7cb5e6b1c2b/rapp_voice/ui/index.html"
+  },
+  "files": {
+    "rapp_voice_agent.py": {
+      "size": 12589,
+      "sha256": "39028adae65b34b524fc615ca4bb7a135d4bf5720c7a5bccb51328891f52b398"
+    },
+    "README.md": {
+      "size": 352,
+      "sha256": "5140dbde2acc6e16099e8a96550f6f5ba23db4f80cf9ca68a388dafdd1a5c9f3"
+    }
+  },
+  "ui_url": "https://raw.githubusercontent.com/kody-w/rapp-voice/c9be9f1936dd848030cf5f5833b1e7cb5e6b1c2b/rapp_voice/ui/index.html"
+}
