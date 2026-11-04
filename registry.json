@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-04T20:08:38.341863+00:00",
+  "generated_at": "2026-11-04T20:24:30.386765+00:00",
   "stats": {
     "total_agents": 226,
     "total_swarms": 2,
@@ -14337,6 +14337,28 @@
       "shelf": "app",
       "_seed": 5906658335469346816,
       "_incantation": "FORGE CHISEL PANTHER CASCADE RIFT CHARM SMELT"
+    },
+    {
+      "name": "ticket-page",
+      "display_name": "Ticket Page",
+      "version": "1.0.0",
+      "schema": "rapp-rar-stack/1.2",
+      "path": "stacks/ticket-page",
+      "purpose": "Every Brainstem explains itself to visiting AIs at GET /api/ticket: what it is, how to chat, which agents are loaded, how to add one.",
+      "files": {
+        "ticket_page.py": {
+          "sha256": "216d6c1f74109c430b3375413fa2c42e1225028ed91fac0533ce447e3d0c84b6",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "bb9bf07e1ddff1b19e5a8e748948e29e0ed55923da1840edff264746d4daf5cd",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 9669355720365047808,
+      "_incantation": "FORGE FORGE PANTHER PORTENT BASALT AIM CHISEL"
     },
     {
       "name": "toaster",
