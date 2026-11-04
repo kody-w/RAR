@@ -1,9 +1,11 @@
-"""wildhaven_ceo_agent.py — talk to your workspace in operator voice.
+"""wildhaven_ceo_agent.py — CEO prompt wrapper for supplied context, in operator voice.
 
 A converged single-file agent based on the pattern in `kody-w/wildhaven-ceo`:
-the user pastes (or links) a vault of strategy / legal / budget / pitch /
-playbook documents and asks questions; the agent answers in their voice,
-referencing the documents as authority, never paraphrasing or hedging.
+the caller supplies relevant strategy / legal / budget / pitch / playbook
+text in workspace_context and asks questions. No retrieval: this agent does
+not read files, crawl URLs, index a vault or remember documents between calls.
+Paths and links alone do not supply their contents. Without supplied context,
+answers are generic operator-style inferences, not workspace-grounded findings.
 
 Designed to drop into any RAPP brainstem's `agents/` directory and run
 headless via the standard chat path, AND mount its UI in the
@@ -42,12 +44,11 @@ __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@wildhaven/wildhaven_ceo",
     "display_name": "WildhavenCEO",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": (
-        "CEO workspace agent. Pastes/links a vault of strategy, legal, "
-        "budget, pitch, and playbook documents and asks questions; "
-        "answers in a confident operator's voice, treating the vault as "
-        "the source of truth."
+        "CEO prompt wrapper using text supplied in workspace_context. "
+        "No retrieval: no file reads, URL fetching, vault indexing or persistent memory. "
+        "Without context, answers are explicitly generic inferences."
     ),
     "author": "@wildhaven",
     "tags": ["ceo", "persona", "workspace", "vault", "operator", "rapplication"],
@@ -74,8 +75,10 @@ __manifest__ = {
 _SOUL_BASE = """You are a CEO workspace agent. You speak in the voice of the
 operator running the company — direct, decisive, plain language, skin in
 the game. The user is the operator. They aren't asking for advice from a
-consultant; they're talking to a thinking partner who already knows the
-business as well as they do.
+consultant; they're talking to a thinking partner using only the supplied
+business context. This is a prompt wrapper with no retrieval: do not claim
+to read files, fetch URLs, index a vault or remember earlier calls. Paths
+and URLs are references only, not the contents of documents.
 
 CORE BEHAVIORS:
 
@@ -114,7 +117,7 @@ def _system_prompt(action: str, voice_style: str | None,
     ]
     if workspace_context:
         parts.append(
-            "\nWORKSPACE CONTEXT (this is the vault — treat as authoritative):\n"
+            "\nWORKSPACE CONTEXT (supplied text only, not a retrieved vault):\n"
             "<vault>\n" + workspace_context.strip() + "\n</vault>\n"
         )
     else:
@@ -202,12 +205,12 @@ class WildhavenCeoAgent(BasicAgent):
         self.metadata = {
             "name": self.name,
             "description": (
-                "Talk to your CEO workspace. Pass `workspace_context` "
-                "(strategy, legal, budget, pitch, playbook documents) plus "
+                "CEO prompt wrapper with no retrieval. Pass relevant document text in `workspace_context` "
+                "(strategy, legal, budget, pitch, playbooks) on every call, plus "
                 "an `action` (ask / decide / respond_to / daily_brief / "
                 "quarterly_review) and a question. The agent answers in "
-                "operator voice, vault-grounded, with one specific next "
-                "action."
+                "operator voice, grounded only in supplied text, with one specific next "
+                "action. Does not read files, fetch URLs or retain a vault; without context, answers are generic."
             ),
             "parameters": {
                 "type": "object",
@@ -228,7 +231,7 @@ class WildhavenCeoAgent(BasicAgent):
                     "workspace_context": {
                         "type": "string",
                         "description": (
-                            "A text dump of relevant vault documents. "
+                            "Relevant document text supplied on this call, not paths or links to fetch. "
                             "Optional but recommended; without it, the "
                             "agent flags it's inferring from generic CEO "
                             "posture."
