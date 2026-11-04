@@ -15,6 +15,47 @@
   }
   a { color: #58a6ff; text-decoration: none; }
   a:hover { text-decoration: underline; }
+  body.rar-install > #rar-nav { margin-bottom: 24px; }
+  .copilot-install {
+    max-width: 620px; width: 100%; padding: 24px; margin-bottom: 24px;
+    background: #161b22; border: 2px solid #238636; border-radius: 12px;
+  }
+  .copilot-install h1 { font-size: 26px; line-height: 1.2; margin-bottom: 16px; }
+  .copilot-install ol { padding-left: 22px; font-size: 14px; line-height: 1.5; }
+  .copilot-install li + li { margin-top: 12px; }
+  .copilot-install .setup-links { color: #8b949e; margin-top: 4px; }
+  #install-prompt {
+    margin: 12px 0; padding: 16px; background: #0d1117;
+    border: 1px solid #30363d; border-radius: 8px;
+    font-size: 14px; line-height: 1.5; overflow-wrap: anywhere;
+  }
+  #copy-prompt {
+    width: 100%; min-height: 48px; padding: 12px 20px;
+    background: #238636; color: #fff; border: 0; border-radius: 8px;
+    font: inherit; font-weight: 600; cursor: pointer;
+  }
+  #copy-prompt:hover { background: #2ea043; }
+  #copy-prompt:focus-visible, .advanced-install > summary:focus-visible {
+    outline: 2px solid #58a6ff; outline-offset: 4px;
+  }
+  #copy-prompt-status { margin-top: 8px; color: #8b949e; font-size: 13px; }
+  #copy-prompt-status:empty { margin: 0; }
+  .advanced-install { max-width: 620px; width: 100%; margin-bottom: 32px; }
+  .advanced-install > summary { cursor: pointer; padding: 12px 0; font-size: 15px; }
+  .advanced-install .hero { margin: 20px 0 24px; }
+  .advanced-install .hero .logo { font-size: 40px; }
+  .advanced-install .hero h2 { font-size: 28px; margin-bottom: 8px; }
+  .advanced-install .install-widget { margin-bottom: 0; }
+  .advanced-install #install-cmd { min-width: 0; overflow-wrap: anywhere; }
+  @media (max-width: 640px) {
+    .copilot-install { padding: 16px; }
+    .copilot-install h1 { font-size: 22px; }
+    #install-prompt { padding: 12px; font-size: 13px; }
+    .advanced-install .install-tabs { padding: 0 8px; }
+    .advanced-install .install-tabs-left .dots { display: none; }
+    .advanced-install .install-tab { padding: 8px; }
+    .advanced-install .install-body { padding: 16px; }
+  }
   code {
     font-family: "SF Mono", "Fira Code", monospace; font-size: 13px;
     background: #161b22; padding: 2px 6px; border-radius: 4px;
@@ -224,9 +265,24 @@
 </div></details>
 </nav>
 
+<section class="copilot-install" aria-labelledby="copilot-install-title">
+  <h1 id="copilot-install-title">Install with GitHub Copilot in VS Code</h1>
+  <ol>
+    <li>Open VS Code &rarr; Copilot Chat &rarr; Agent mode.
+      <p class="setup-links">Don't have VS Code? <a href="https://code.visualstudio.com/download">Download VS Code</a>. <a href="https://code.visualstudio.com/docs/copilot/setup">Set up Copilot</a>.</p>
+    </li>
+    <li>Copy this prompt, paste it into Copilot Chat, and send it.</li>
+  </ol>
+  <p id="install-prompt">Install the RAPP Brainstem on this computer and get it running. Follow https://kody-w.github.io/grail-layers/skills/rar-easy-mode/SKILL.md exactly. Ask me before anything that needs my password or a sign-in code, show me the GitHub code when it appears, and finish by sending one test message to the Brainstem and showing me the reply. Then open http://localhost:&lt;port&gt;/ (using the actual port) in VS Code's integrated browser for a short guided tour, typing and sending a chat message with browser tools so I can watch. If those tools are unavailable, use Browser: Open Integrated Browser and guide me manually, stating that limitation.</p>
+  <button type="button" id="copy-prompt" onclick="copyPrompt()">Copy prompt</button>
+  <p id="copy-prompt-status" role="status" aria-live="polite"></p>
+</section>
+
+<details class="advanced-install" id="advanced-install">
+<summary>Advanced: install from a terminal</summary>
 <div class="hero">
   <div class="logo">R</div>
-  <h1>RAPP Brainstem</h1>
+  <h2>RAPP Brainstem</h2>
   <p>A local-first AI agent server for the RAPP Agent Registry.<br>Cloud AI or fully on-device with Ollama. Your choice.</p>
   <div class="tagline">Start simple. Layer up when you're ready.</div>
 </div>
@@ -261,12 +317,13 @@
     <div class="comment" id="install-comment"># Works everywhere. Installs everything.</div>
     <div class="prompt">
       <span class="dollar">$</span>
-      <span id="install-cmd"></span>
+      <span id="install-cmd">curl -fsSL https://raw.githubusercontent.com/kody-w/RAR/main/scripts/install.sh | bash</span>
       <span class="copy-icon" id="copy-icon">copy</span>
     </div>
   </div>
   <div class="install-hint" id="install-hint"></div>
 </div>
+</details>
 
 <div class="tiers">
 
@@ -454,6 +511,38 @@
 </div>
 
 <script>
+  async function copyPrompt() {
+    const text = document.getElementById('install-prompt').textContent;
+    const status = document.getElementById('copy-prompt-status');
+    status.textContent = '';
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      try {
+        await navigator.clipboard.writeText(text);
+        status.textContent = 'Prompt copied. Paste it into Copilot Chat.';
+        return;
+      } catch (error) {
+        // Clipboard permissions can be denied; try the selectable fallback.
+      }
+    }
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('aria-label', 'Install prompt to copy');
+    textarea.style.cssText = 'display:block;width:100%;min-height:180px;margin-top:12px;';
+    status.replaceChildren(textarea);
+    textarea.focus();
+    textarea.select();
+    try {
+      if (document.execCommand('copy')) {
+        status.textContent = 'Prompt copied. Paste it into Copilot Chat.';
+        document.getElementById('copy-prompt').focus();
+        return;
+      }
+    } catch (error) {
+      // Leave the selected prompt available for manual copying.
+    }
+    status.append('Automatic copy was blocked. Copy the selected prompt above, then paste it into Copilot Chat.');
+  }
+
   // ── AI Mode: cloud (GitHub Copilot) vs local (Ollama) ──
   let aiMode = 'cloud'; // 'cloud' | 'local'
 
