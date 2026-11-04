@@ -2,8 +2,8 @@
   "schema": "rapp-rar-stack/1.2",
   "name": "thoughtbox",
   "display_name": "Thoughtbox",
-  "version": "1.0.0",
-  "purpose": "Local-first reflection journal \u2014 append, list, search, tag, export, import. Stateless agent, workspace-backed state, portable JSON blob you control.",
+  "version": "1.0.1",
+  "purpose": "Local-first reflection journal \u2014 append, list, search, tag, export, import. Durable local storage by default, optional workspace-backed state, portable JSON blob you control.",
   "kind_label": "rapplication",
   "install": {
     "type": "agent_pack",
@@ -21,12 +21,12 @@
   },
   "files": {
     "thoughtbox_agent.py": {
-      "size": 11272,
-      "sha256": "d93b56abcc578d8299df787816142c3d0553a018d45e611ad54ac453bf11933b"
+      "size": 12859,
+      "sha256": "c2fba98adfdd3eeede27a1dbf1103dfae4f7a3655901de03ef68f06597e1d73f"
     },
     "README.md": {
-      "size": 301,
-      "sha256": "e4af762a28680274d29673569eed4e70af0f060f33bf06be817a60d31a3c146f"
+      "size": 733,
+      "sha256": "6752bd1f198eb6fe4cdd0141069a08268e0631eec075716be23d3ac8d28882ce"
     }
   },
   "ui_url": "https://raw.githubusercontent.com/kody-w/RAPP_Store/main/apps/@kody-w/thoughtbox/ui/index.html"

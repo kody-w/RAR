@@ -6,15 +6,15 @@ rapplication; the agent works headless without it too.
 
 State model
 -----------
-The agent is stateless on disk by default — it routes all reads/writes
-through the rapplication workspace API (SPEC §12). Entries live under
-the workspace key `entries.json` and are an append-only list of dicts:
+Entries use paired rapplication workspace callbacks (SPEC §12) when supplied.
+Otherwise they live in `thoughtbox/entries.json` under BRAINSTEM_DATA_DIR,
+defaulting to the Brainstem's `.brainstem_data` directory beside `agents/`.
+Entries are a list of dicts:
 
     [{"id": "<uuid>", "text": "...", "tags": ["..."], "ts": "<iso8601>"}, ...]
 
-If the host brainstem doesn't expose a workspace, the agent falls back
-to an in-memory list scoped to the brainstem process — useful for
-quick demos but volatile.
+Default writes are atomic and flushed to disk. Read or write failures return
+an error; they never fall back to volatile memory or report a saved entry.
 
 Why local-first
 ---------------
@@ -26,9 +26,11 @@ actions that produce/consume a JSON blob the user controls.
 from __future__ import annotations
 
 import json
-import time
+import os
+import tempfile
 import uuid
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any
 
 try:
@@ -41,7 +43,7 @@ __manifest__ = {
     "schema": "rapp-application/1.0",
     "id": "thoughtbox",
     "name": "Thoughtbox",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "publisher": "@kody-w",
     "summary": "Local-first reflection journal. Append, list, search, tag, export, import.",
     "category": "productivity",
@@ -108,37 +110,63 @@ AGENT = {
 }
 
 
-_FALLBACK_STORE: list[dict[str, Any]] = []
-
-
 def _now_iso() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+def _entries_path() -> Path:
+    root = os.environ.get("BRAINSTEM_DATA_DIR")
+    directory = Path(root).expanduser() if root else Path(__file__).resolve().parent.parent / ".brainstem_data"
+    return directory / "thoughtbox" / "entries.json"
+
+
+def _uses_workspace(context: dict | None) -> bool:
+    if not context or not any(key in context for key in ("workspace_read", "workspace_write")):
+        return False
+    if not all(callable(context.get(key)) for key in ("workspace_read", "workspace_write")):
+        raise ValueError("workspace_read and workspace_write must both be callable")
+    return True
+
+
 def _load(context: dict | None) -> list[dict[str, Any]]:
-    """Read the entries list from workspace, falling back to in-memory."""
-    if context and callable(context.get("workspace_read")):
+    """Read one durable backend; errors must not turn into an empty journal."""
+    if _uses_workspace(context):
+        raw = context["workspace_read"]("entries.json")
+        if raw is None or raw == "":
+            return []
+    else:
         try:
-            raw = context["workspace_read"]("entries.json")
-            if raw:
-                data = json.loads(raw)
-                if isinstance(data, list):
-                    return data
-        except (json.JSONDecodeError, OSError, RuntimeError):
-            pass
-    return _FALLBACK_STORE
+            raw = _entries_path().read_text(encoding="utf-8")
+        except FileNotFoundError:
+            return []
+    data = json.loads(raw)
+    if not isinstance(data, list) or not all(isinstance(entry, dict) for entry in data):
+        raise ValueError("entries.json must contain a list of entry objects")
+    return data
 
 
 def _save(entries: list[dict[str, Any]], context: dict | None) -> None:
-    """Persist entries via workspace, or update fallback list in place."""
-    global _FALLBACK_STORE
-    if context and callable(context.get("workspace_write")):
-        try:
-            context["workspace_write"]("entries.json", json.dumps(entries, indent=2))
-            return
-        except (OSError, RuntimeError):
-            pass
-    _FALLBACK_STORE = entries
+    """Persist before acknowledging success, without corrupting the old file."""
+    raw = json.dumps(entries, indent=2)
+    if _uses_workspace(context):
+        if context["workspace_write"]("entries.json", raw) is False:
+            raise OSError("workspace_write reported failure")
+        return
+    path = _entries_path()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w", encoding="utf-8", dir=path.parent, prefix=".entries-", delete=False,
+        ) as handle:
+            temporary = Path(handle.name)
+            handle.write(raw)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary, path)
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
 
 
 def _format_entries(entries: list[dict[str, Any]], limit: int) -> str:
@@ -291,7 +319,10 @@ def run(context: dict | None = None, **kwargs: Any) -> str:
     limit = int(kwargs.get("limit") or 50)
     limit = max(1, min(limit, 1000))
 
-    entries = list(_load(context))
+    try:
+        entries = _load(context)
+    except (OSError, ValueError, TypeError, RuntimeError) as error:
+        return json.dumps({"ok": False, "error": f"Could not read entries: {error}"}, indent=2)
     persistent_actions = {"append", "import_json", "delete"}
 
     if action == "append":
@@ -314,7 +345,10 @@ def run(context: dict | None = None, **kwargs: Any) -> str:
         result = {"ok": False, "error": f"unknown action: {action!r}"}
 
     if result.get("ok") and action in persistent_actions:
-        _save(entries, context)
+        try:
+            _save(entries, context)
+        except (OSError, ValueError, TypeError, RuntimeError) as error:
+            return json.dumps({"ok": False, "error": f"Could not persist entries: {error}"}, indent=2)
 
     return json.dumps(result, indent=2)
 
