@@ -24,6 +24,8 @@ DESIGN RULES, all of them learned the hard way
   * Long base64 runs are skipped for IDENTITY matching only. Random base64
     contains short names by chance; reporting that as PII trains people to
     ignore real findings. Secrets are still matched everywhere, including blobs.
+  * Any skipped file or directory makes the scan incomplete and not safe to
+    publish. A complete scan only covers the reported patterns, not all PII.
 """
 
 import json
@@ -56,7 +58,7 @@ __manifest__ = {
     "name": "@rapp/pii-scout",
     "tier": "core",
     "trust": "community",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "tags": ["security", "publishing", "gate", "local-first", "singleton"],
     "example_call": {
         "args": {"path": ".", "terms": "acme,globex"},
@@ -128,8 +130,15 @@ class PiiScoutAgent(BasicAgent):
         path = kwargs.get("path") or "."
         if not os.path.isdir(path):
             return json.dumps({"status": "error",
+                               "safe_to_publish": False,
                                "message": f"not a directory: {path}"}, indent=2)
-        cap = int(kwargs.get("max_findings") or 100)
+        try:
+            cap = int(kwargs.get("max_findings") or 100)
+            if cap < 1:
+                raise ValueError("non-positive cap")
+        except (TypeError, ValueError):
+            return json.dumps({"status": "error", "safe_to_publish": False,
+                               "message": "max_findings must be a positive integer"}, indent=2)
         raw = (kwargs.get("terms") or os.environ.get("PII_SCOUT_TERMS") or "").strip()
         terms = [t.strip() for t in raw.split(",") if t.strip()]
 
@@ -137,22 +146,44 @@ class PiiScoutAgent(BasicAgent):
         for t in terms:
             anchored = t.isupper() and len(t) <= 4
             body = t if re.search(r"[\[\](){}|+*?\\]", t) else re.escape(t)
-            rules.append((t, re.compile((r"\b" + body + r"\b") if anchored else body, re.I)))
+            try:
+                rules.append((t, re.compile((r"\b" + body + r"\b") if anchored else body, re.I)))
+            except re.error:
+                return json.dumps({"status": "error", "safe_to_publish": False,
+                                   "message": "invalid name pattern in terms"}, indent=2)
 
         findings, scanned, skipped = [], 0, 0
-        for root, dirs, files in os.walk(path):
-            dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
+        skipped_paths = []
+
+        def walk_error(error):
+            skipped_paths.append({
+                "file": os.path.relpath(error.filename or path, path),
+                "reason": "unreadable directory",
+            })
+
+        for root, dirs, files in os.walk(path, onerror=walk_error):
+            for directory in dirs[:]:
+                fp = os.path.join(root, directory)
+                reason = ("excluded directory" if directory in SKIP_DIRS else
+                          "symlink directory" if os.path.islink(fp) else None)
+                if reason:
+                    skipped_paths.append({"file": os.path.relpath(fp, path), "reason": reason})
+                    dirs.remove(directory)
             for fn in files:
                 fp = os.path.join(root, fn)
                 rel = os.path.relpath(fp, path)
                 if FORBIDDEN.search(rel) and not ALLOWED.search(rel):
                     findings.append({"kind": "forbidden-file", "file": rel,
                                      "why": "this file class must never be published"})
+                if os.path.islink(fp):
+                    skipped_paths.append({"file": rel, "reason": "symlink file"})
+                    continue
                 try:
-                    with open(fp, "r", encoding="utf-8", errors="ignore") as fh:
+                    with open(fp, "r", encoding="utf-8") as fh:
                         text = fh.read()
-                except Exception:
+                except (OSError, UnicodeError):
                     skipped += 1
+                    skipped_paths.append({"file": rel, "reason": "unreadable or non-UTF-8 file"})
                     continue
                 scanned += 1
                 n = len(SECRETS.findall(text))
@@ -171,20 +202,34 @@ class PiiScoutAgent(BasicAgent):
                     if c:
                         findings.append({"kind": "name", "file": rel,
                                          "term": term, "matches": c})
-                if len(findings) >= cap:
-                    break
 
-        clean_run = not findings
+        complete = not skipped_paths
+        clean_run = complete and not findings
         out = {
             "status": "ok",
-            "verdict": "CLEAN" if clean_run else "DO-NOT-PUBLISH",
+            "verdict": ("not safe to publish: scan incomplete" if not complete else
+                        "NO MATCHES IN COVERED PATTERNS" if clean_run else "DO-NOT-PUBLISH"),
             "safe_to_publish": clean_run,
+            "scan_complete": complete,
             "scanned_files": scanned,
             "unreadable_skipped": skipped,
+            "skipped": skipped_paths,
             "names_checked": len(terms),
+            "patterns_checked": {
+                "secrets": ["GitHub tokens", "AWS access key IDs", "private key headers",
+                            "Slack tokens", "sk-prefixed keys", "Google API keys",
+                            "explicit credential assignments"],
+                "file_classes": ["environment and credential files", "private key files",
+                                 "captured browser snapshots", "HAR files"],
+                "identity": ["email addresses", "Unix home paths"],
+                "supplied_names": len(terms),
+                "identity_limit": "Base64 runs of 120+ characters excluded from identity checks.",
+            },
             "findings": findings[:cap],
+            "findings_truncated": len(findings) > cap,
             "note": "Values are never reported — only file and count. A report "
-                    "that quotes the secret is a second copy of it.",
+                    "that quotes the secret is a second copy of it. No matches "
+                    "only covers the listed patterns; it is not proof of no PII.",
         }
         if not terms:
             out["warning"] = (

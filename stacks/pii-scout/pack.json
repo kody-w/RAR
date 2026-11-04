@@ -2,7 +2,7 @@
   "schema": "rapp-rar-stack/1.2",
   "name": "pii-scout",
   "display_name": "PII Scout",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "purpose": "Scan a folder for what must not be published \u2014 secrets, credential files, captured sessions, emails, home paths and any names you supply. Reports file and count, never the value.",
   "kind_label": "rapplication",
   "install": {
@@ -21,12 +21,12 @@
   },
   "files": {
     "pii_scout_agent.py": {
-      "size": 8850,
-      "sha256": "fcdbbcc12a04f5f7aebc69d619895c2edf7872354ac03821c0665b7818683513"
+      "size": 11418,
+      "sha256": "9f0292b1bd30239c6bd56f36e9ec6c7a4edafcb0411c7f1a9ca7969135e67def"
     },
     "README.md": {
-      "size": 329,
-      "sha256": "ecf3abb57c57af6debdcf72c34af05da81785118e2e03b0d861b88add11d94fb"
+      "size": 649,
+      "sha256": "d17ff67989ac08e32cdaebc7ac4eadf6c611e2d95cab9e97208088bb1c01fde4"
     }
   },
   "ui_url": "https://raw.githubusercontent.com/kody-w/rapp_store/main/apps/@rapp/pii_scout/ui/index.html"
