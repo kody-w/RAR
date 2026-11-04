@@ -27,8 +27,8 @@ publish to it. This page is the summary; where it and a linked spec disagree, th
 |---|---|---|---|
 | agent | `*_agent.py` | `agents/` | a tool the AI can call; the only way to add capability |
 | layer | `grail-layer/1` Python with `apply()` | applied in memory by the supervisor | serves every user (providers, journal); declares `TOUCHES` (exclusive) or `WRAPS` (composable) and `PROVEN_GRAIL` shas |
-| sense | `*_sense.py` (`name, delimiter, response_key, system_prompt`) | `~/.brainstem/senses/` | one extra field beside each plain `/chat` reply (headline, tl;dr) |
-| page | `*_page.py` (`name, handle(method, path, body)`) | `~/.brainstem/pages/` | a local page at `/api/<name>/`; a convenience with no RAPP semantics. `organ` is an alias of page |
+| sense | `*_sense.py` (`name, delimiter, response_key, system_prompt`) | `~/.brainstem/senses/` | one extra field beside each plain `/chat` reply (headline, tl;dr). Senses and pages hot-load like agents: no restart; only a new layer restarts once |
+| page | `*_page.py` (`name, handle(method, path, body)`) | `~/.brainstem/pages/` | a local read-only page (GET) at `/api/<name>/`; a convenience with no RAPP semantics; changes go through `/chat`. `organ` is an alias of page |
 | pack | `stacks/<name>/pack.json` (`rapp-rar-stack/1.2`) | the cart | a list of the parts above, sha-pinned, with optional `includes` (other packs). A starter or distro is a pack |
 | egg | rapp/1 §9 ZIP (`organism`, `rapplication`, ...) | anywhere | a pack plus your data: a whole Brainstem you can move or hatch |
 

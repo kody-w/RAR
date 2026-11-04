@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-04T15:22:34.391006+00:00",
+  "generated_at": "2026-11-04T15:58:21.416868+00:00",
   "stats": {
     "total_agents": 226,
     "total_swarms": 2,
@@ -13645,7 +13645,7 @@
     {
       "name": "grail-layers",
       "display_name": "Grail layers",
-      "version": "1.5.1",
+      "version": "1.5.2",
       "schema": "rapp-rar-stack/1.2",
       "path": "stacks/grail-layers",
       "purpose": "The one distro for everything new, on the unchanged grail. Layers applied in memory (the supervisor probes /chat and falls back to plain grail on any failure): providers (Responses-API models like gpt-6.1-sol, plus this machine's Ollama models) and journal_tap (every chat turn recorded in your Brain",
@@ -13687,7 +13687,7 @@
           "verified": true
         },
         "senses_and_pages.py": {
-          "sha256": "ebbebee33204c296bd97b930160751e77c34dd29becf966e9c7741fd8abe66df",
+          "sha256": "08970b0033d417486f0307eaae07d05c19bbf96cf32083d9a1f0ef3ab007185e",
           "verified": true
         }
       },

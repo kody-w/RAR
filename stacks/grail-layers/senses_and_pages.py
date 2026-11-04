@@ -38,14 +38,24 @@ def _say(msg):
     print(f"[senses_and_pages] {msg}", file=sys.stderr, flush=True)
 
 
+_CACHE = {}  # path -> ((mtime_ns, size), module): re-run a file only when it changes on disk
+
+
 def _load(path, prefix):
     try:
+        st = os.stat(path); key = (st.st_mtime_ns, st.st_size)
+        hit = _CACHE.get(path)
+        if hit and hit[0] == key:
+            return hit[1]
         spec = importlib.util.spec_from_file_location(prefix + os.path.basename(path)[:-3], path)
         m = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(m)
+        _CACHE[path] = (key, m)
         return m
     except Exception as e:
         _say(f"{os.path.basename(path)} did not load ({e}); skipped")
+        if "key" in locals():
+            _CACHE[path] = (key, None)  # a broken file is reported once, retried when it changes
         return None
 
 
@@ -71,23 +81,26 @@ def _pages():
 
 
 def _attach(app):
+    """One standing route; the pages folder is re-read on every request (like agents/), so a new or changed
+    page needs no restart. rapp/1 section 8: pages are read-only views (GET); every change goes through /chat."""
     import flask
-    for m in _pages():
-        def view(rest="", _m=m):
-            body = flask.request.get_json(silent=True) or {}
-            try:
-                result, status = _m.handle(flask.request.method, rest, body)
-            except Exception as e:
-                return flask.jsonify({"error": f"page {_m.name} failed: {e}"}), 500
-            return (flask.jsonify(result), status) if isinstance(result, (dict, list)) else (result, status)
-        # rapp/1 section 8: pages are read-only views; every change goes through /chat, never a sibling route.
-        methods = ["GET"]
+
+    def view(page, rest=""):
+        m = next((x for x in _pages() if x.name == page), None)
+        if m is None:
+            return flask.jsonify({"error": f"no page named {page}"}), 404
         try:
-            app.add_url_rule(f"/api/{m.name}", f"_page_{m.name}_root", view, methods=methods, strict_slashes=False)
-            app.add_url_rule(f"/api/{m.name}/<path:rest>", f"_page_{m.name}_path", view, methods=methods)
-            _say(f"page {m.name} at /api/{m.name}/")
+            result, status = m.handle(flask.request.method, rest, {})
         except Exception as e:
-            _say(f"page {m.name} not added ({e})")
+            return flask.jsonify({"error": f"page {page} failed: {e}"}), 500
+        return (flask.jsonify(result), status) if isinstance(result, (dict, list)) else (result, status)
+    try:
+        app.add_url_rule("/api/<page>", "_pages_root", view, methods=["GET"], strict_slashes=False)
+        app.add_url_rule("/api/<page>/<path:rest>", "_pages_path", view, methods=["GET"])
+        _say("pages at /api/<name>/ (read fresh every request: " + ", ".join(m.name for m in _pages()) + ")")
+    except Exception as e:
+        _say(f"pages not added ({e})")
+
 
     @app.before_request
     def _mark():

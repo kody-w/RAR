@@ -2,7 +2,7 @@
   "schema": "rapp-rar-stack/1.2",
   "name": "grail-layers",
   "display_name": "Grail layers",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "purpose": "The one distro for everything new, on the unchanged grail. Layers applied in memory (the supervisor probes /chat and falls back to plain grail on any failure): providers (Responses-API models like gpt-6.1-sol, plus this machine's Ollama models) and journal_tap (every chat turn recorded in your Brainstem Journal). Agents: Journal Recall (find earlier conversations, pause recording) and Fragments (paste once, address by hash, pin into every chat). Use it from the llm CLI with github.com/kody-w/llm-brainstem.",
   "install": {
     "type": "grail_layers",
@@ -82,12 +82,12 @@
         "kind": "layer",
         "point": "agents",
         "file": "senses_and_pages.py",
-        "sha256": "ebbebee33204c296bd97b930160751e77c34dd29becf966e9c7741fd8abe66df",
+        "sha256": "08970b0033d417486f0307eaae07d05c19bbf96cf32083d9a1f0ef3ab007185e",
         "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/senses_and_pages.py",
         "proven_grail": [
           "35618683ebc3d1c2bfaff47f60182fd756f3a8de53c53dd907ec1099d631930a"
         ],
-        "what": "Senses and pages over the unchanged grail. A sense adds one extra field to every plain chat reply (a headline, a short version); a page adds a read-only view at /api/<name>/ (GET only; every change goes through /chat, rapp/1 section 8). Before this, only rappter-distro's own kernel loaded them; that loader is now an alias of this part. Organ is an alias of page."
+        "what": "Senses and pages over the unchanged grail. A sense adds one extra field to every plain chat reply (a headline, a short version); a page adds a read-only view at /api/<name>/ (GET only; every change goes through /chat, rapp/1 section 8). Senses and pages hot-load like agents/: add, change or remove the file and the next request sees it, no restart. Before this, only rappter-distro's own kernel loaded them; that loader is now an alias of this part. Organ is an alias of page."
       }
     ],
     "seed": [
@@ -149,8 +149,8 @@
       "sha256": "0b011eed4870598e2ba070547d55e41afaf17d73c63fd761fc3a459bdc98671d"
     },
     "senses_and_pages.py": {
-      "size": 6065,
-      "sha256": "ebbebee33204c296bd97b930160751e77c34dd29becf966e9c7741fd8abe66df"
+      "size": 6613,
+      "sha256": "08970b0033d417486f0307eaae07d05c19bbf96cf32083d9a1f0ef3ab007185e"
     }
   },
   "kernel": {
