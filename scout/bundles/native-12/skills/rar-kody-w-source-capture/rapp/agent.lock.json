@@ -1,0 +1,139 @@
+{
+  "agent": "@kody-w/source_capture_agent",
+  "agent_file": "source_capture_agent.py",
+  "agent_sha256": "d91eaa6092fa5f3b81f17de21926b3bfa1268370609ec9208e312d8a6d036971",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "SourceCaptureAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Archive assistant-fed browser chats and CLI exports locally, with cross-source SQLite search and JSONL/Markdown export. Claude, ChatGPT and Gemini tested on simulated UIs only.",
+    "display_name": "Source Capture",
+    "example_call": {
+      "args": {
+        "action": "status",
+        "run_id": "<run_id from begin>"
+      }
+    },
+    "license": "MIT",
+    "name": "@kody-w/source_capture_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "capture",
+      "search",
+      "claude",
+      "chatgpt",
+      "gemini"
+    ],
+    "version": "0.1.0"
+  },
+  "runtime_name": "SourceCapture",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "enum": [
+          "begin",
+          "discover",
+          "capture",
+          "mark_failed",
+          "status",
+          "finish",
+          "list",
+          "search",
+          "read",
+          "import_file",
+          "export",
+          "index"
+        ],
+        "type": "string"
+      },
+      "chunk_index": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "format": {
+        "enum": [
+          "llm-json",
+          "json",
+          "jsonl",
+          "text",
+          "markdown"
+        ],
+        "type": "string"
+      },
+      "items": {
+        "items": {
+          "properties": {
+            "source_id": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "source_id",
+            "title"
+          ],
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "last_chunk": {
+        "type": "boolean"
+      },
+      "offset": {
+        "description": "Character offset for read; item offset for list.",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "pagination_exhausted": {
+        "description": "True only after browser pagination and relevant views were checked; not proof of account completeness.",
+        "type": "boolean"
+      },
+      "path": {
+        "description": "User-authorized local file to import; no commands are executed.",
+        "type": "string"
+      },
+      "query": {
+        "type": "string"
+      },
+      "reason": {
+        "type": "string"
+      },
+      "run_id": {
+        "type": "string"
+      },
+      "scope": {
+        "description": "Account/workspace and views being captured; no secrets.",
+        "type": "string"
+      },
+      "source": {
+        "description": "E.g. Claude, ChatGPT, Gemini, Copilot, local files.",
+        "type": "string"
+      },
+      "source_id": {
+        "type": "string"
+      },
+      "text": {
+        "description": "Full source text, not a summary. Maximum 2 MiB per chunk.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "0.1.0"
+}
