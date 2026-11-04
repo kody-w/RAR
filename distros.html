@@ -63,6 +63,12 @@
   .cart.on { display: flex; }
   .cart code { background: #000; color: #9ef0b0; padding: 8px 10px; border-radius: 6px; font-size: 13px; max-width: 70vw; overflow-x: auto; white-space: nowrap; }
   .cart .btn { font-size: 15px; padding: 7px 14px; }
+  .keep { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #e6edf3; margin-top: 4px; cursor: pointer; }
+  .keep input { width: 18px; height: 18px; accent-color: #3fb950; }
+  .card.dropped { opacity: .45; filter: grayscale(.8); }
+  .card .from { font-size: 11px; color: #8b949e; }
+  .sumlist { font-size: 12px; line-height: 1.5; max-height: 150px; overflow: auto; color: #c9d1d9; }
+  .sumlist s { color: #8b949e; }
   body { padding-bottom: 90px; }
   .pager { display: flex; justify-content: center; margin-top: 32px; }
   .pager button { border: 1px solid #dee2e6; background: #fff; color: #0d6efd; min-width: 40px; height: 40px; font-size: 17px; cursor: pointer; margin-left: -1px; }
@@ -155,12 +161,13 @@
     <h1>Distros</h1>
     <p class="sub">Every distro is a sealed pack: your own Brainstem for one job, on the unchanged grail. Rip one open to
       see every card inside. The last card is the summon card, with its QR code and chant (or say the chant at <a href="s.html">s.html</a>).
-      <b>Pick several</b> and they all install into your one Brainstem, all or nothing. Starter packs pick a set for you.</p>
+      <b>Add several to your cart and rip them all together:</b> keep or drop each card, and everything you keep installs into
+      your one Brainstem, all or nothing, in the same order whatever order you picked. Starter packs fill the cart for you.</p>
   </header>
   <div class="grid" id="list">Loading…</div>
   <nav class="pager" id="pager" aria-label="Pages"></nav>
-  <div class="cart" id="cart" role="region" aria-label="Selected packs"><span id="cartn"></span><code id="cartcmd"></code>
-    <button type="button" class="btn" id="cartcopy">Copy</button><button type="button" class="btn ghost" id="cartclear">Clear</button></div>
+  <div class="cart" id="cart" role="region" aria-label="Selected packs"><span id="cartn"></span><button type="button" class="btn" id="cartrip">Rip them all</button><code id="cartcmd"></code>
+    <button type="button" class="btn ghost" id="cartcopy">Copy</button><button type="button" class="btn ghost" id="cartclear">Clear</button></div>
 </main>
 <div class="detail" id="detail" role="dialog" aria-modal="true" aria-label="Distro details"></div>
 <div class="veil" id="veil" role="dialog" aria-modal="true" aria-label="Pack reveal"></div>
@@ -321,9 +328,9 @@
       "<div class='minipack' role='button' tabindex='0' aria-label='Rip open the " + esc(p.display_name) + " pack'><div class='crimp'></div>" +
       "<div class='brand'>RAR</div><div class='art'>" + logo(p.name) + "</div><div class='seal'>Sealed pack</div>" +
       "<div class='count'>" + n + " card" + (n === 1 ? "" : "s") + " \u00b7 1 summon card</div></div><div class='tags'><span class='pill blue'>RAR</span>" +
-      "<span class='pill green'>" + (p.kernel ? "distro" : "agent pack") + "</span>" +
+      "<span class='pill green'>" + (/^starter-/.test(p.name) ? "starter" : p.kernel ? "distro" : "pack") + "</span>" +
       (ok ? "" : "<span class='pill gray'>unverified</span>") + "</div></div>" +
-      "<label class='pick'><input type='checkbox'" + (chosen[p.name] ? " checked" : "") + "> Add to my Brainstem</label>" +
+      "<label class='pick'><input type='checkbox'" + (chosen[p.name] ? " checked" : "") + "> Add to cart</label>" +
       "<div class='incl'></div>" +
       "<div class='foot'><button type='button' class='btn'>Rip it open</button></div>";
     if (chosen[p.name]) el.classList.add("chosen");
@@ -358,13 +365,106 @@
   function cart() {
     var names = Object.keys(chosen), bar = document.getElementById("cart");
     bar.classList.toggle("on", names.length > 0);
-    document.getElementById("cartn").textContent = names.length + " pack" + (names.length === 1 ? "" : "s") + " for your Brainstem:";
-    document.getElementById("cartcmd").textContent = ADD + names.join(" ");
+    document.getElementById("cartn").textContent = names.length + " pack" + (names.length === 1 ? "" : "s") + " in your cart";
+    document.getElementById("cartcmd").textContent = ADD + names.sort().join(" ");
   }
   document.getElementById("cartcopy").onclick = function () {
     var t = document.getElementById("cartcmd").textContent, b = this;
     (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 1500); });
   };
+  document.getElementById("cartrip").onclick = function () { ripCart(Object.keys(chosen).sort()); };
+
+  // ---- Rip the whole cart: one sealed bundle, every card once (same bytes = one card), one card at a time,
+  // a Keep toggle on each, then a summary with the one install line (--skip for every card you dropped).
+  function getPack(p) {
+    return fetch(p.path + "/pack.json", { cache: "no-cache" }).then(function (r) { return r.ok ? r.text().then(parseExact) : null; }).catch(function () { return null; });
+  }
+  function resolveCart(names) {  // the installer's order: includes first, everything sorted, each pack once
+    var byName = {}; packs.forEach(function (p) { byName[p.name] = p; });
+    var seen = {}, out = [];
+    function walk(list) {
+      return list.slice().sort().reduce(function (pr, n) {
+        return pr.then(function () {
+          if (seen[n] || !byName[n]) return; seen[n] = true;
+          return getPack(byName[n]).then(function (pj) {
+            return walk((pj && pj.install && pj.install.includes) || []).then(function () { out.push({ p: byName[n], pj: pj }); });
+          });
+        });
+      }, Promise.resolve());
+    }
+    return walk(names).then(function () { return out; });
+  }
+  function ripCart(names) {
+    if (!names.length) return;
+    veil.innerHTML = "<div class='pack'><div class='tear'></div><div class='brand'>RAR</div><div class='seal'>Your cart, sealed</div>" +
+      "<div class='name'>" + names.length + " pack" + (names.length === 1 ? "" : "s") + "</div><div class='star'>\u2726</div>" +
+      "<div class='count'>" + esc(names.join(" \u00b7 ")) + "</div></div><div class='cap' id='cap'>Click to rip them all</div>" +
+      "<div><button type='button' class='x' id='skip'>Skip to the end</button> <button type='button' class='x' id='close'>Close</button></div>";
+    veil.classList.add("open");
+    veil.querySelector("#close").onclick = closeVeil;
+    var cap = veil.querySelector("#cap"), bundle = veil.querySelector(".pack"), st = { cards: [], keep: {}, ripped: false };
+    var loaded = resolveCart(names).then(function (list) {
+      var seenSha = {};
+      list.forEach(function (x) {
+        var seed = x.pj && x.pj.install && x.pj.install.seed;
+        cardsFor(x.p, x.pj).forEach(function (c) {
+          var isPart = c.kind.indexOf("layer") === 0 || c.kind.indexOf("kernel") === 0;
+          if (isPart && seed && seed.indexOf(c.title) < 0) return;  // published but not seeded: the installer leaves it out too
+          var key = /_agent\.py$/.test(c.title) ? c.title : (c.kind.indexOf("layer") === 0 || c.kind.indexOf("kernel") === 0 ? c.title : null);
+          if (c.sha && seenSha[c.sha]) return;  // the same bytes from two packs: one card
+          if (c.sha) seenSha[c.sha] = true;
+          c.from = x.p.display_name; c.key = key;
+          if (key) st.keep[key] = true;
+          st.cards.push(c);
+        });
+      });
+    });
+    function line() {
+      var drop = Object.keys(st.keep).filter(function (k) { return !st.keep[k]; }).sort();
+      return ADD + names.join(" ") + drop.map(function (k) { return " --skip " + k; }).join("");
+    }
+    function summary() {
+      var el = document.createElement("div"); el.className = "card summon";
+      var rows = st.cards.filter(function (c) { return c.key; }).map(function (c) {
+        return st.keep[c.key] ? "\u2713 " + esc(c.title) : "<s>" + esc(c.title) + "</s>";
+      }).join("<br>");
+      el.innerHTML = "<div class='art'>" + GLYPH.summon + "</div><div class='kind'>your brainstem</div><div class='title'>Install what you kept</div>" +
+        "<div class='sumlist'>" + rows + "</div><div class='one'>" + esc(line()) + "</div>" +
+        "<div class='foot'><a class='go' href='#' id='copyline'>Copy the line</a></div>";
+      el.querySelector("#copyline").onclick = function (e) {
+        e.preventDefault(); var b = this;
+        if (navigator.clipboard) navigator.clipboard.writeText(line()).then(function () { b.textContent = "Copied"; });
+      };
+      return el;
+    }
+    function show(i) {
+      var old = veil.querySelector(".card, .pack"); if (old) old.remove();
+      var total = st.cards.length + 1, el;
+      if (i < st.cards.length) {
+        var c = st.cards[i];
+        el = cardEl(c, i, total);
+        el.querySelector(".kind").insertAdjacentHTML("afterend", "<div class='from'>from " + esc(c.from) + "</div>");
+        if (c.key) {
+          el.insertAdjacentHTML("beforeend", "<label class='keep'><input type='checkbox'" + (st.keep[c.key] ? " checked" : "") + "> Keep this card</label>");
+          var box = el.querySelector(".keep input");
+          box.onclick = function (e) { e.stopPropagation(); };
+          box.onchange = function () { st.keep[c.key] = box.checked; el.classList.toggle("dropped", !box.checked); };
+          el.querySelector(".keep").onclick = function (e) { e.stopPropagation(); };
+          el.classList.toggle("dropped", !st.keep[c.key]);
+        }
+        el.onclick = function (e) { if (e.target.closest && e.target.closest(".keep")) return; show(i + 1); };
+      } else {
+        el = summary();
+      }
+      veil.insertBefore(el, cap);
+      cap.innerHTML = (i + 1) + " / " + total + (i < st.cards.length ? " \u00b7 <b>" + st.cards[i].rarity + "</b> \u00b7 click for next card" : " \u00b7 <b>everything you kept</b>");
+    }
+    veil.querySelector("#skip").onclick = function () { loaded.then(function () { show(st.cards.length); }); };
+    bundle.onclick = function () {
+      if (st.ripped) return; st.ripped = true; cap.textContent = "Ripping\u2026"; bundle.classList.add("ripping");
+      loaded.then(function () { return wait(600); }).then(function () { bundle.classList.add("gone"); return wait(450); }).then(function () { show(0); });
+    };
+  }
   document.getElementById("cartclear").onclick = function () { chosen = {}; cart(); render(); };
   function render() {
     var list = document.getElementById("list"), pager = document.getElementById("pager");
