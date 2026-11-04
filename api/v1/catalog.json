@@ -1,7 +1,7 @@
 {
   "schema": "rar-catalog/1.0",
   "description": "Every agent in RAR as a lean record. Fetch this one file to render a complete browsable catalog with no further requests, no backend, no authentication and no GitHub account. stack_packs lists every installable pack, including retired packs with status and retirement metadata.",
-  "generated": "2026-11-04T21:59:42Z",
+  "generated": "2026-11-04T22:57:25Z",
   "count": 226,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/catalog.json",
   "agents": [
@@ -9324,18 +9324,18 @@
     {
       "name": "bookfactory",
       "display_name": "BookFactory",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "schema": "rapp-rar-stack/1.2",
       "status": "current",
       "path": "stacks/bookfactory",
-      "purpose": "Five-persona content pipeline (Writer → Editor → CEO → Publisher → Reviewer). One call, one chapter back.",
+      "purpose": "Five-persona content pipeline (Writer → Editor → CEO → Publisher → Reviewer). Requires host LLM dispatch; returns a chapter on success or an explicit incomplete report on failure.",
       "files": {
         "bookfactory_agent.py": {
-          "sha256": "7419619b65eacd27dbfa418f391ba755b9d30fffbf084be211cfa011286b73d9",
+          "sha256": "2678db00b7586e5946996bb8689f48ffd50b07fb9788b0442228cdd2767c0c0f",
           "verified": true
         },
         "README.md": {
-          "sha256": "c832be7c8aa4b75e12f463a702208bc8c6e6a037c19221c56f17f9151b97eef7",
+          "sha256": "c11b21956976b7eee024c88209543ed70f5a8ef29211e99a11d3d97c9f248d94",
           "verified": true
         }
       },
@@ -9443,14 +9443,14 @@
     {
       "name": "grail-layers",
       "display_name": "Grail layers",
-      "version": "1.5.2",
+      "version": "1.5.3",
       "schema": "rapp-rar-stack/1.2",
       "status": "current",
       "path": "stacks/grail-layers",
       "purpose": "The one distro for everything new, on the unchanged grail. Layers applied in memory (the supervisor probes /chat and falls back to plain grail on any failure): providers (Responses-API models like gpt-6.1-sol, plus this machine's Ollama models) and journal_tap (every chat turn recorded in your Brain",
       "files": {
         "README.md": {
-          "sha256": "64a9522fd9d04fec09cd8a29c7f08342b62c782ce3da17bb68fca7edd80a8f24",
+          "sha256": "a62b222a7e3a372ebe9632ce3b1073f9fd156dcd122f76fc1f0382a969f89c3c",
           "verified": true
         },
         "responses_models.py": {
@@ -9482,7 +9482,7 @@
           "verified": true
         },
         "providers_1_1.py": {
-          "sha256": "9bdf1f1924d0baa740c3ad335abe33660887634f79349c2973bd38319411fcdc",
+          "sha256": "2c1bd4d3453a2ae1259e81b51f86daeee9e4a04f68bf37d5e5a4cb5f637936b9",
           "verified": true
         },
         "senses_and_pages.py": {
@@ -9531,18 +9531,18 @@
     {
       "name": "json-doctor",
       "display_name": "JSON Doctor",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "schema": "rapp-rar-stack/1.2",
       "status": "current",
       "path": "stacks/json-doctor",
-      "purpose": "Inspect, validate, diff or query JSON and JSONL without opening it. Infers shape with per-field coverage, points at the exact line and column of a syntax error, and compares two files structurally.",
+      "purpose": "Inspect, validate, schema/shape diff or query JSON and JSONL. Diff compares inferred top-level field names, types and coverage, not values or nested structure; validation locates syntax errors.",
       "files": {
         "json_doctor_agent.py": {
-          "sha256": "e532be574326b108ede0dbbd7d3c012cf275c9f2aee51793864c45546938f20e",
+          "sha256": "05b7aa1d4325ba038b890c0747889b7f942e7830facf0527909cd8dac127739f",
           "verified": true
         },
         "README.md": {
-          "sha256": "03d088148d474a65448335cb4bea46102701155b97dd65d05b9210b116282f71",
+          "sha256": "3509ba048b1ab06d267aa13767ca6af148e9c87310059c4eea0a6b68e21a6d08",
           "verified": true
         }
       },
@@ -9838,18 +9838,18 @@
     {
       "name": "private-mode",
       "display_name": "Private Mode",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "schema": "rapp-rar-stack/1.2",
       "status": "current",
       "path": "stacks/private-mode",
-      "purpose": "Name the topics that must never leave this computer (health, money, a person). Chats about them are answered by a local model, whatever model is picked; with no local model running they are refused, never sent out.",
+      "purpose": "Edit private topic substrings. Requires the active providers layer to route matching chats locally or refuse; unreadable or invalid policies refuse chat. The editor cannot verify host enforcement.",
       "files": {
         "private_mode_agent.py": {
-          "sha256": "3a4b1a0c040c1d4b97bf931233110e32ea60e916ecce66b492af2ca031b8ad2f",
+          "sha256": "66ad79114bf1f3426826bba084c5257df3cbcf10df0460069e46212fbd5ce0c7",
           "verified": true
         },
         "README.md": {
-          "sha256": "8145185df465e5e39028a8c8a318b9af03387ffbb2406cd107949cfc5875a916",
+          "sha256": "f007abb11d86547f6a9e80fc869c3c3bff8bfd4bc0b5760ce5423f55f84c7a93",
           "verified": true
         }
       },
@@ -10227,18 +10227,18 @@
     {
       "name": "ticket-page",
       "display_name": "Ticket Page",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "schema": "rapp-rar-stack/1.2",
       "status": "current",
       "path": "stacks/ticket-page",
-      "purpose": "Every Brainstem explains itself to visiting AIs at GET /api/ticket: what it is, how to chat, which agents are loaded, how to add one.",
+      "purpose": "Explain the Brainstem at GET /api/ticket: how to chat, agent files present, and how to add one. Runtime loading is explicitly unknown, not inferred from files.",
       "files": {
         "ticket_page.py": {
-          "sha256": "216d6c1f74109c430b3375413fa2c42e1225028ed91fac0533ce447e3d0c84b6",
+          "sha256": "3cd2b05a4f2f0491a8710fb56cae2b58d81f31d83347555753e97a6b5298b248",
           "verified": true
         },
         "README.md": {
-          "sha256": "bb9bf07e1ddff1b19e5a8e748948e29e0ed55923da1840edff264746d4daf5cd",
+          "sha256": "b0580f0fd9d375d7b2815b70eb34ea9b342b5904008c173ce0d9b3994c285763",
           "verified": true
         }
       },
@@ -10301,18 +10301,18 @@
     {
       "name": "wildhaven-ceo",
       "display_name": "WildhavenCEO",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "schema": "rapp-rar-stack/1.2",
       "status": "current",
       "path": "stacks/wildhaven-ceo",
-      "purpose": "A CEO workspace agent. Drop a vault of strategy / legal / budget / pitch / playbook documents in, then ask questions and get answers in a confident operator's voice. Wraps the pattern from kody-w/wildhaven-ceo: 'talk to the workspace' as the whole interface — no reading files, no learning the org, t",
+      "purpose": "CEO prompt wrapper for relevant text supplied in workspace_context on each call. No retrieval: no file reads, URL fetching, vault indexing or retained documents. Without context, responses are generic operator-style inferences. Requires host LLM dispatch.",
       "files": {
         "wildhaven_ceo_agent.py": {
-          "sha256": "63ba8bea6a3fa294de04fcc385a257e24c6a14e768ed6e9546fe32a22a594d22",
+          "sha256": "f8417b78c6fa35caff4b9484611aff2818f2b31b67733a6854a56e4bab3c8362",
           "verified": true
         },
         "README.md": {
-          "sha256": "8c00ead954b518c888ce6e2dc7d63d05b591ae5c9fd7c477ceff7b6ae3630c93",
+          "sha256": "d3ba4361a6f1ee4acd4629585bf756c0448ac86267458f5ea0fddb8d33a3eae2",
           "verified": true
         }
       },
