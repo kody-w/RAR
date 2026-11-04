@@ -163,6 +163,18 @@ def _git(repo_root: Path, *args: str) -> str:
                           text=True, check=True).stdout
 
 
+_TICKET = re.compile(r"# ── RAPP ticket ──.*?\n# ─+\n", re.S)
+
+
+def _ticket_only(repo_root: Path, base: str, path: str) -> bool:
+    try:
+        before = _git(repo_root, "show", f"{base}:{path}")
+    except subprocess.CalledProcessError:
+        return False
+    after = (repo_root / path).read_text(encoding="utf-8", errors="replace")
+    return _TICKET.search(after) is not None and _TICKET.sub("", after, count=1) == before
+
+
 def changed_agent_files(repo_root: Path, base: str) -> list[Path]:
     if not base or set(base) == {"0"}:
         base = _git(repo_root, "rev-parse", "HEAD^").strip()
@@ -176,6 +188,8 @@ def changed_agent_files(repo_root: Path, base: str) -> list[Path]:
         path = paths[-1]  # renames: the new path
         if status[0] in "AMR" and path.startswith("agents/") and path.endswith(".py") \
                 and not path.endswith("/basic_agent.py") and "/templates/" not in path:
+            if status[0] == "M" and _ticket_only(repo_root, base, path):
+                continue  # only the loading ticket was added; the agent itself did not change
             files.append(repo_root / path)
     return files
 
