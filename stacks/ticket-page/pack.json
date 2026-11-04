@@ -2,8 +2,8 @@
   "schema": "rapp-rar-stack/1.2",
   "name": "ticket-page",
   "display_name": "Ticket Page",
-  "version": "1.0.0",
-  "purpose": "Every Brainstem explains itself to visiting AIs at GET /api/ticket: what it is, how to chat, which agents are loaded, how to add one.",
+  "version": "1.0.1",
+  "purpose": "Explain the Brainstem at GET /api/ticket: how to chat, agent files present, and how to add one. Runtime loading is explicitly unknown, not inferred from files.",
   "install": {
     "type": "agent_pack",
     "agents": [],
@@ -18,12 +18,12 @@
   },
   "files": {
     "ticket_page.py": {
-      "size": 2126,
-      "sha256": "216d6c1f74109c430b3375413fa2c42e1225028ed91fac0533ce447e3d0c84b6"
+      "size": 2704,
+      "sha256": "3cd2b05a4f2f0491a8710fb56cae2b58d81f31d83347555753e97a6b5298b248"
     },
     "README.md": {
-      "size": 351,
-      "sha256": "bb9bf07e1ddff1b19e5a8e748948e29e0ed55923da1840edff264746d4daf5cd"
+      "size": 733,
+      "sha256": "b0580f0fd9d375d7b2815b70eb34ea9b342b5904008c173ce0d9b3994c285763"
     }
   }
 }

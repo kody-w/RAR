@@ -1,6 +1,7 @@
 """Ticket page: GET /api/ticket tells any visiting AI what this Brainstem is and how to use and extend it.
 
 Read-only (rapp/1 section 8: every change goes through /chat or the agents folder). Hot-loads like every page.
+Lists files present, not loaded tools: this page has no authoritative runtime loader registry.
 """
 import glob
 import os
@@ -33,12 +34,18 @@ def handle(method, path, body):
         "talk": {"method": "POST", "path": "/chat", "body": {"user_input": "..."}, "reply_field": "response",
                  "stream": "POST /chat/stream (server-sent events)", "health": "GET /health"},
         "add_an_agent": {
-            "how": "Save the agent's .py file into the agents folder. The next message can use it; no restart.",
+            "how": "Save the agent's .py file into the agents folder. Successful hot-loading makes it usable; "
+                   "check loader errors and exercise the tool. A file listing alone is not proof.",
             "agents_folder": folder,
             "catalog": "https://kody-w.github.io/RAR/",
             "ticket_for_any_agent": "https://kody-w.github.io/RAR/a/{publisher}/{name}/agent.md",
         },
-        "agents_loaded": agents,
+        "agent_files_present": agents,
+        "agents_loaded": [],
+        "agents_loaded_status": "unknown",
+        "agents_loaded_note": "No authoritative runtime loader registry is available to this page. "
+                              "Files present are not proof of successful loading. The empty agents_loaded "
+                              "list means no verified entries, not that the host has no tools.",
         "more": {"hearth_guide": "https://wildhaven-homes-llc.github.io/hearth/skill.md",
                  "rules": "https://kody-w.github.io/RAR/RAPP.md"},
     }, 200
