@@ -1,0 +1,9 @@
+# RAR — the one store for RAPP (agents, packs, senses, pages, rapplications)
+
+> Start here if you are an AI: https://kody-w.github.io/RAR/RAPP.md (the one page: rapp/1, agents, packs, lifecycle, how to participate).
+
+- Catalog (JSON): https://kody-w.github.io/RAR/registry.json
+- Packs and starters (one cart): https://kody-w.github.io/RAR/distros.html
+- Agent template: https://kody-w.github.io/RAR/template_agent.py
+- Install anything: curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- <pack or @publisher/agent> ...
+- Protocol: https://kody-w.github.io/rapp-1/llms.txt
