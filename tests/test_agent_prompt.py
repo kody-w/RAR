@@ -34,7 +34,10 @@ def test_ai_discovery_is_static_but_below_browsing():
     assert 'href="LAYERS.md"' in static
     assert "No JavaScript is needed." in parser.elements["for-ais-title"]["parents"][-1][2]["text"]
     container_content = static.split('<div class="container">', 1)[1]
-    assert container_content.lstrip().startswith('<div class="search-box">')
+    # Pages are human first: only the plain-language hero may sit above search; no AI text there.
+    head = container_content.split('<div class="search-box">', 1)[0]
+    assert head.strip() == "" or head.lstrip().startswith('<section class="home-hero"')
+    assert "llms.txt" not in head and ".md" not in head and "http" not in head
 
 
 @pytest.fixture
