@@ -19,7 +19,9 @@
     link.textContent = label;
     link.setAttribute('href', root + href);
     if (href === currentPage) link.setAttribute('aria-current', 'page');
-    primary.appendChild(link);
+    // Human first: the plain-text AI index lives under "More", not in the top bar.
+    const target = href === 'llms.txt' ? nav.querySelector('.rar-more-content') : primary;
+    (target || primary).appendChild(link);
   }
 
   const more = nav.querySelector('.rar-more-content');
