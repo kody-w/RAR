@@ -15,7 +15,7 @@
       "license_url": "",
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
-      "item_count": 133,
+      "item_count": 134,
       "source_downloads": 1589
     },
     {
@@ -31,7 +31,7 @@
       "license_url": "",
       "license_verified": true,
       "license_note": "Public Microsoft repository with an MIT LICENSE file at the root; indexed as catalog metadata only, bodies stay upstream.",
-      "item_count": 90,
+      "item_count": 93,
       "source_downloads": 0
     }
   ],
@@ -1177,7 +1177,7 @@
       "source_id": "aibast-agents-library",
       "source_slug": "field-permit-to-work",
       "name": "Field Permit to Work Agent",
-      "description": "Keep every field permit safe and on time: draft the risk assessment, check the isolation plan against the live switching state, track sign-offs and crew briefings, and verify close-out, so no crew starts work on an unconfirmed isolation.",
+      "description": "Keep every field permit safe and on time: check the work request before a permit is raised, draft the risk assessment, check the isolation plan against the live switching state, record the control room's isolation confirmation with a crew notification draft, track sign-offs, crew briefings and permit acceptance, verify close-out, and show each permit's audit trail, so no crew starts work on an un\u2026",
       "kind": "agent",
       "tags": [
         "energy",
@@ -1192,7 +1192,7 @@
       ],
       "author": "AIBAST",
       "author_github": null,
-      "version": "1.0.0",
+      "version": "1.1.0",
       "created_at": null,
       "has_bundle": false,
       "url": "https://github.com/microsoft/aibast-agents-library/blob/main/agents/@aibast-agents-library/energy_stacks/field_permit_to_work_stack/field_permit_to_work_agent.py",
@@ -1204,7 +1204,7 @@
       "stack": "field_permit_to_work",
       "vertical": "energy",
       "upstream_path": "agents/@aibast-agents-library/energy_stacks/field_permit_to_work_stack/field_permit_to_work_agent.py",
-      "upstream_sha256": "cb35fe88b717817093e5208d0487701d5e7ac28d6c1839682886e05a1a596ab8"
+      "upstream_sha256": "e4c93d7c9fe4aa97e7b1fdc112ef92fe3e722f6024ac20f18cd6a9a6e2ab6f7e"
     },
     {
       "ref": "@aibast-library/field_service_dispatch",
@@ -1407,6 +1407,40 @@
       "vertical": "financial_services",
       "upstream_path": "agents/@aibast-agents-library/financial_services_stacks/regulatory_compliance_fs_stack/regulatory_compliance_fs_agent.py",
       "upstream_sha256": "a1e75237f8f18d8e80d508c43d8bd46f9a0fc11046eace6db2274bae3622263a"
+    },
+    {
+      "ref": "@aibast-library/grid_asset_maintenance",
+      "source_id": "aibast-agents-library",
+      "source_slug": "grid-asset-maintenance",
+      "name": "Predictive Asset Maintenance Intelligence Agent",
+      "description": "Rank a distribution company's grid assets (power transformers, switchgear, underground cables and overhead lines) by failure probability over 30, 90 and 180 days from a synthetic condition-monitoring snapshot, draft the preventive work order with asset history, materials, long-lead parts and crew pre-assignment, check a completed job's field record before the asset register and fixed asset regist\u2026",
+      "kind": "agent",
+      "tags": [
+        "energy",
+        "utilities",
+        "grid-assets",
+        "predictive-maintenance",
+        "asset-management",
+        "reliability"
+      ],
+      "platforms": [
+        "rapp-brainstem"
+      ],
+      "author": "AIBAST",
+      "author_github": null,
+      "version": "1.0.0",
+      "created_at": null,
+      "has_bundle": false,
+      "url": "https://github.com/microsoft/aibast-agents-library/blob/main/agents/@aibast-agents-library/energy_stacks/grid_asset_maintenance_stack/grid_asset_maintenance_agent.py",
+      "source_signal": {
+        "quality_tier": "verified",
+        "synthetic_data": true
+      },
+      "category": "energy",
+      "stack": "grid_asset_maintenance",
+      "vertical": "energy",
+      "upstream_path": "agents/@aibast-agents-library/energy_stacks/grid_asset_maintenance_stack/grid_asset_maintenance_agent.py",
+      "upstream_sha256": "02a7878dcf6124bbb90ef51592ee5c60851e2c043e2984e7e55fa8fea8c54cfd"
     },
     {
       "ref": "@aibast-library/grid_outage_response",
@@ -1915,7 +1949,7 @@
       "source_id": "aibast-agents-library",
       "source_slug": "payments-operations",
       "name": "Payments Operations Agent",
-      "description": "Help payments operations teams clear the daily release queue faster by validating payments against scheme rules, planning exception repairs, reviewing pre-release risk, reconciling settlement accounts, and answering status questions with evidence, while every release decision stays with an authorized analyst.",
+      "description": "Help payments operations teams clear the daily release queue faster by validating payments against scheme rules, planning exception repairs, reviewing pre-release risk, reconciling settlement accounts, ordering the sanctions-alert review queue, watching correspondent limits and nostro funding, drafting customer verification for flagged payments, and answering status questions with evidence, while\u2026",
       "kind": "agent",
       "tags": [
         "payments",
@@ -1929,7 +1963,7 @@
       ],
       "author": "AIBAST",
       "author_github": null,
-      "version": "1.0.0",
+      "version": "1.1.0",
       "created_at": null,
       "has_bundle": false,
       "url": "https://github.com/microsoft/aibast-agents-library/blob/main/agents/@aibast-agents-library/financial_services_stacks/payments_operations_stack/payments_operations_agent.py",
@@ -1941,7 +1975,7 @@
       "stack": "payments_operations",
       "vertical": "financial_services",
       "upstream_path": "agents/@aibast-agents-library/financial_services_stacks/payments_operations_stack/payments_operations_agent.py",
-      "upstream_sha256": "7ea4116d83dcf96604ec23a0d3f02d08ff59e1b5a1a1a308cb0b34f4cc919a8d"
+      "upstream_sha256": "639a553f7d695ff2763155e176853187a3e98aba03dd025465837f99fe44b217"
     },
     {
       "ref": "@aibast-library/permit_license_management",
@@ -2176,6 +2210,41 @@
       "vertical": "general",
       "upstream_path": "agents/@aibast-agents-library/general_stacks/procurement_agent_stack/procurement_agent.py",
       "upstream_sha256": "8af304158ace05343a37275edc58fe2bcf5cd03f4f5d3dcf12939ad5d623e61a"
+    },
+    {
+      "ref": "@aibast-library/procurement_supplier_collaboration",
+      "source_id": "aibast-agents-library",
+      "source_slug": "procurement-supplier-collaboration",
+      "name": "Procurement and Supplier Collaboration Agent",
+      "description": "Run a utility's source-to-pay cycle for network materials from a synthetic snapshot: requisitions from the maintenance plan, capital projects and stock replenishment with the recommended route (framework direct award, mini-competition or open tender) and eligible supplier shortlist, answers to supplier questions from the published RFQ pack, weighted bid scoring with a ranked recommendation, purch\u2026",
+      "kind": "agent",
+      "tags": [
+        "procurement",
+        "sourcing",
+        "supplier-collaboration",
+        "bid-evaluation",
+        "three-way-match",
+        "energy",
+        "utilities"
+      ],
+      "platforms": [
+        "rapp-brainstem"
+      ],
+      "author": "AIBAST",
+      "author_github": null,
+      "version": "1.0.0",
+      "created_at": null,
+      "has_bundle": false,
+      "url": "https://github.com/microsoft/aibast-agents-library/blob/main/agents/@aibast-agents-library/energy_stacks/procurement_supplier_collaboration_stack/procurement_supplier_collaboration_agent.py",
+      "source_signal": {
+        "quality_tier": "verified",
+        "synthetic_data": true
+      },
+      "category": "energy",
+      "stack": "procurement_supplier_collaboration",
+      "vertical": "energy",
+      "upstream_path": "agents/@aibast-agents-library/energy_stacks/procurement_supplier_collaboration_stack/procurement_supplier_collaboration_agent.py",
+      "upstream_sha256": "4c87b37ed142c86aa8350f49c3947987f327b82ed07692e0e5f4952a893d2524"
     },
     {
       "ref": "@aibast-library/procurement_support",
@@ -2777,6 +2846,39 @@
       "upstream_sha256": "6f7e8aac2c1b221a240c9bd9c65301f3207f382c038fcd1de21eb709935ffbdd"
     },
     {
+      "ref": "@aibast-library/tiered_huddle_board",
+      "source_id": "aibast-agents-library",
+      "source_slug": "tiered-huddle-board",
+      "name": "Tiered Huddle Board Agent",
+      "description": "Run a hospital's daily tiered huddles from one live board built on a synthetic snapshot: every lane from Tier 1 through the Executive tier with each issue's clock against its tier's target, what is past target and what is waiting on the person asking, an escalation draft that restarts the clock at the next tier's target with the reason the next tier reads first and the people to page by name, the\u2026",
+      "kind": "agent",
+      "tags": [
+        "healthcare",
+        "tiered-huddles",
+        "nursing-operations",
+        "escalation",
+        "hospital-operations"
+      ],
+      "platforms": [
+        "rapp-brainstem"
+      ],
+      "author": "AIBAST",
+      "author_github": null,
+      "version": "1.0.0",
+      "created_at": null,
+      "has_bundle": false,
+      "url": "https://github.com/microsoft/aibast-agents-library/blob/main/agents/@aibast-agents-library/healthcare_stacks/tiered_huddle_board_stack/tiered_huddle_board_agent.py",
+      "source_signal": {
+        "quality_tier": "verified",
+        "synthetic_data": true
+      },
+      "category": "healthcare",
+      "stack": "tiered_huddle_board",
+      "vertical": "healthcare",
+      "upstream_path": "agents/@aibast-agents-library/healthcare_stacks/tiered_huddle_board_stack/tiered_huddle_board_agent.py",
+      "upstream_sha256": "f1d3530dce1bbe426732848af126e76cc4eddbe565d8103d2ddb8197acd97288"
+    },
+    {
       "ref": "@aibast-library/time_entry_billing",
       "source_id": "aibast-agents-library",
       "source_slug": "time-entry-billing",
@@ -3040,7 +3142,7 @@
       "stack": "",
       "vertical": "",
       "upstream_path": "agents/@aibast-agents-library/templates/workshop_agent.py",
-      "upstream_sha256": "65d36b7fc79a3908b6eeb04a34bc4725038ab6cb8f4ad8addeeccc04d57d9f01"
+      "upstream_sha256": "b852fc7239c8255775afd3ed7986e7d87a01ad11dfc70edcdcec833f22adc134"
     },
     {
       "ref": "@cat-agent-skills/accessibility_pass",
@@ -5608,6 +5710,36 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/power_platform_solution_compare",
+      "source_id": "cat-agent-skills",
+      "source_slug": "power-platform-solution-compare",
+      "name": "Power Platform Solution Compare",
+      "description": "Compare two Power Platform solution exports and get a release-style change report across all component collections, with breaking-change flags and a deployment checklist.",
+      "kind": "skill",
+      "tags": [
+        "power-platform",
+        "dataverse",
+        "alm",
+        "solutions",
+        "change-review",
+        "python",
+        "scripts"
+      ],
+      "platforms": [
+        "Cowork",
+        "Scout"
+      ],
+      "author": "Arindam Choudhury",
+      "author_github": "ari20089",
+      "version": "1.0.0",
+      "created_at": "2026-10-16T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#power-platform-solution-compare",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/powerpoint_deck_designer",
       "source_id": "cat-agent-skills",
       "source_slug": "powerpoint-deck-designer",
@@ -6893,7 +7025,7 @@
   ],
   "totals": {
     "sources": 2,
-    "items": 223,
+    "items": 227,
     "source_downloads": 1589
   }
 }
