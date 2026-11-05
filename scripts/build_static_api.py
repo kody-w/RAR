@@ -35,7 +35,7 @@ Written surface (existing URLs are retained):
 
 Usage:
     python scripts/build_static_api.py
-    python scripts/build_static_api.py --check   # verify, write nothing
+    python scripts/build_static_api.py --check   # byte-compare owned outputs; write nothing
 """
 
 from __future__ import annotations
@@ -47,6 +47,7 @@ import re
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
@@ -488,14 +489,12 @@ def sha8(payload: dict) -> str:
     return hashlib.sha256(json_bytes(payload)).hexdigest()[:12]
 
 
-def write(path: Path, payload: dict, dry: bool) -> int:
+def write(path: Path, payload: dict) -> int:
     resolved = path.resolve()
     if resolved in FOREIGN_PATHS:
         raise RuntimeError(
             f"refusing to write {path} — it is owned by build_pokedex_api.py"
         )
-    if dry:
-        return len(json.dumps(payload))
     return write_json(path, payload)
 
 
@@ -505,8 +504,17 @@ def write(path: Path, payload: dict, dry: bool) -> int:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Build the headless RAR static API.")
     parser.add_argument("--check", action="store_true",
-                        help="compute everything but write nothing")
+                        help="compare owned outputs byte-for-byte; exit 1 on drift, write nothing")
     args = parser.parse_args()
+
+    def stable_output(path: Path, payload: dict) -> dict:
+        try:
+            return stable_document(path, payload)
+        except (ValueError, TypeError, AttributeError):
+            if not args.check:
+                raise
+            # A corrupt output has no reusable timestamp; report it as drift below.
+            return payload
 
     if not REGISTRY.exists():
         print("registry.json not found — run build_registry.py first", file=sys.stderr)
@@ -661,12 +669,12 @@ def main() -> int:
     }
 
     # Finalize timestamps before hashing so status describes the served bytes.
-    catalog = stable_document(API_DIR / "catalog.json", catalog)
-    taxonomy = stable_document(API_DIR / "taxonomy.json", taxonomy)
-    match = stable_document(API_DIR / "match.json", match)
-    business_doc = stable_document(AUDIENCE_DIR / "business.json", business_doc)
-    consumer_doc = stable_document(AUDIENCE_DIR / "consumer.json", consumer_doc)
-    audience_map = stable_document(AUDIENCE_DIR / "map.json", audience_map)
+    catalog = stable_output(API_DIR / "catalog.json", catalog)
+    taxonomy = stable_output(API_DIR / "taxonomy.json", taxonomy)
+    match = stable_output(API_DIR / "match.json", match)
+    business_doc = stable_output(AUDIENCE_DIR / "business.json", business_doc)
+    consumer_doc = stable_output(AUDIENCE_DIR / "consumer.json", consumer_doc)
+    audience_map = stable_output(AUDIENCE_DIR / "map.json", audience_map)
 
     # ── status + badge
     status = {
@@ -869,18 +877,33 @@ def main() -> int:
     print(f"  slices     : business={len(business)}  consumer={len(consumer)}")
     print(f"  use cases  : {len(match['use_cases'])}, index terms {len(match['index'])}")
     print()
-    for path, payload in outputs:
-        size = write(path, payload, args.check)
-        print(f"  {'would write' if args.check else 'wrote'} "
-              f"{path.relative_to(REPO_ROOT).as_posix():<34} {size/1024:7.1f} KB")
-        if not args.check:
-            publish_frame(
-                path.relative_to(REPO_ROOT).with_suffix("").as_posix(),
-                path.suffix, path.read_bytes(),
-            )
+    drift = []
+    with TemporaryDirectory(prefix="rar-static-api-") as directory:
+        for path, payload in outputs:
+            relative = path.relative_to(REPO_ROOT)
+            if args.check:
+                destination = Path(directory) / relative
+                size = write(destination, stable_output(path, payload))
+                if not path.is_file():
+                    drift.append(f"missing: {relative.as_posix()}")
+                elif path.read_bytes() != destination.read_bytes():
+                    drift.append(f"different: {relative.as_posix()}")
+            else:
+                size = write(path, payload)
+                publish_frame(
+                    relative.with_suffix("").as_posix(),
+                    path.suffix, path.read_bytes(),
+                )
+            print(f"  {'checked' if args.check else 'wrote'} "
+                  f"{relative.as_posix():<34} {size/1024:7.1f} KB")
 
     print()
     print("  untouched: api/v1/index.json, api/v1/agent/**, api/v1/sprite/**")
+    if drift:
+        print("Static API drift detected:", file=sys.stderr)
+        for difference in drift:
+            print(f"  {difference}", file=sys.stderr)
+        return 1
     return 0
 
 

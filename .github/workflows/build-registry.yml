@@ -157,6 +157,9 @@ jobs:
           python scripts/build_skills_catalog.py
           python scripts/build_static_api.py
 
+      - name: Verify the rebuilt headless static API
+        run: python scripts/build_static_api.py --check
+
       # Static commit-dates sidecar: index.html reads this instead of making
       # up to 16 unauthenticated GitHub API calls per visitor. CI has the full
       # clone (fetch-depth: 0); the script refuses shallow history.
