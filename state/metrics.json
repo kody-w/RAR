@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-11-04T21:03:24Z",
+ "generated_at": "2026-11-05T13:18:06Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,26 +10,26 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 12,
-  "size_kb": 134547,
+  "size_kb": 122641,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-11-04T21:03:07Z",
+  "pushed_at": "2026-11-05T08:52:47Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
-  "homepage": null
+  "homepage": "https://kody-w.github.io/RAR/"
  },
  "totals": {
-  "downloads": 14988,
-  "clones": 14418,
+  "downloads": 15589,
+  "clones": 15019,
   "cdn_hits": 560,
   "release_downloads": 10,
   "agent_file_downloads": 15,
-  "clones_excluding_ci_estimate": 9488,
-  "ci_clone_estimate": 4930,
-  "page_views": 285,
-  "clone_uniques_14d": 312,
-  "view_uniques_14d": 14,
-  "clone_uniques_daily_sum": 2546,
-  "view_uniques_daily_sum": 128,
-  "days_tracked": 85,
+  "clones_excluding_ci_estimate": 10031,
+  "ci_clone_estimate": 4988,
+  "page_views": 292,
+  "clone_uniques_14d": 326,
+  "view_uniques_14d": 16,
+  "clone_uniques_daily_sum": 2594,
+  "view_uniques_daily_sum": 131,
+  "days_tracked": 86,
   "tracking_since": "2026-07-14",
   "agents": 226,
   "swarms": 2,
@@ -656,6 +656,13 @@
    "clone_uniques": 34,
    "views": 1,
    "cdn": 0
+  },
+  {
+   "date": "2026-11-04",
+   "clones": 601,
+   "clone_uniques": 48,
+   "views": 7,
+   "cdn": 0
   }
  ],
  "traffic": {
@@ -663,8 +670,8 @@
    {
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "count": 6,
-    "uniques": 6
+    "count": 11,
+    "uniques": 8
    },
    {
     "path": "/kody-w/RAR/discussions/15",
@@ -691,6 +698,12 @@
     "uniques": 1
    },
    {
+    "path": "/kody-w/RAR/blob/cd878a5d7586116958f87f0979cc65e5aef85edc/scout/bundles/powercat-06/skills/rar-cat-agent-skills-exam-prep-learning-plan-builder/SKILL.md",
+    "title": "/blob/cd878a5d7586116958f87f0979cc65e5aef85edc/scout/bundles/powercat-06/skills/rar-cat-agent-skills-exam-prep-learning-plan-builder/SKILL.md",
+    "count": 1,
+    "uniques": 1
+   },
+   {
     "path": "/kody-w/RAR/blob/main/agents/@cowork-cookbook/map_a_customer_journey_for_a_campaign_agent.py",
     "title": "/blob/main/agents/@cowork-cookbook/map_a_customer_journey_for_a_campaign_agent.py",
     "count": 1,
@@ -713,19 +726,13 @@
     "title": "/discussions/1561",
     "count": 1,
     "uniques": 1
-   },
-   {
-    "path": "/kody-w/RAR/discussions/451",
-    "title": "/discussions/451",
-    "count": 1,
-    "uniques": 1
    }
   ],
   "referrers": [
    {
     "referrer": "github.com",
-    "count": 7,
-    "uniques": 6
+    "count": 10,
+    "uniques": 7
    },
    {
     "referrer": "aocr.org",
@@ -738,15 +745,15 @@
     "uniques": 1
    }
   ],
-  "clones_14d": 2005,
-  "views_14d": 27,
+  "clones_14d": 2505,
+  "views_14d": 34,
   "live": true,
-  "as_of": "2026-11-04T21:03:24Z"
+  "as_of": "2026-11-05T13:18:06Z"
  },
  "cdn": {
   "total_hits": 560,
   "bandwidth": 7020284,
-  "rank": 763978,
+  "rank": 767760,
   "agent_hits": 15,
   "files": [
    {
