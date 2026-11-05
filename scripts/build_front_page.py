@@ -57,6 +57,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT))
+from scripts.static_api import commit_timestamp, publish_frame, write_json
+
 REGISTRY = REPO_ROOT / "registry.json"
 DISCUSSION = REPO_ROOT / "state" / "discussion_ratings.json"
 AGGREGATED = REPO_ROOT / "state" / "aggregated.json"
@@ -207,7 +210,7 @@ def load(path: Path) -> dict:
 
 
 def now_iso() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    return commit_timestamp()
 
 
 def parse_ts(raw) -> datetime | None:
@@ -416,7 +419,7 @@ def build() -> dict:
     stamps = [parse_ts(a.get("_added_at")) for a in agents]
     stamps += [parse_ts(i.get("created_at")) for i in agg_items]
     known = [s for s in stamps if s is not None]
-    reference = max(known) if known else datetime.now(timezone.utc)
+    reference = max(known) if known else parse_ts(commit_timestamp())
 
     # Per-source download ceiling. Reach is normalised inside this bracket and
     # never across it.
@@ -706,11 +709,9 @@ def write(payload: dict) -> int:
     resolved = OUT_FILE.resolve()
     if resolved not in OWNED_PATHS:
         raise RuntimeError(f"refusing to write {OUT_FILE} — not an owned path")
-    OUT_FILE.parent.mkdir(parents=True, exist_ok=True)
-    with OUT_FILE.open("w", encoding="utf-8") as fh:
-        json.dump(payload, fh, indent=2, ensure_ascii=False, sort_keys=False)
-        fh.write("\n")
-    return OUT_FILE.stat().st_size
+    size = write_json(OUT_FILE, payload)
+    publish_frame("api/v1/front", ".json", OUT_FILE.read_bytes())
+    return size
 
 
 def comparable(payload: dict) -> str:

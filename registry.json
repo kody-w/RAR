@@ -1,7 +1,10 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-04T23:12:17.441537+00:00",
+  "generated_at": "2026-11-05T03:14:46Z",
+  "static_api": "rapp-static-api/1.1",
+  "pages_base": "https://kody-w.github.io/RAR",
+  "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
   "stats": {
     "total_agents": 226,
     "total_swarms": 2,
@@ -90,7 +93,12 @@
       "_added_at": "2026-05-12T13:37:05-04:00",
       "_first_commit_sha": "fc9a72be5a9d37e99823aa8453022e7a08f00d0a",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "8db7fad6f4514b06afc8a165186f38c05a7b6ddcc91971a36660c3be22e49a21"
+      "_card_sha256": "8db7fad6f4514b06afc8a165186f38c05a7b6ddcc91971a36660c3be22e49a21",
+      "_version": {
+        "sha256": "e0af759764d7c236755c42e600539fc64a7f17ddc3fac358077f6b23bd8bcb30",
+        "sha8": "e0af759764d7",
+        "path": "versions/@bill/neuron_agent/e0af759764d7.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -168,7 +176,12 @@
         "set_code": "HOLO",
         "artist": "Howard"
       },
-      "_card_sha256": "fd52a2a0fe2072465b0e0d1c053db868ab6637ade4af844d400340586fd16709"
+      "_card_sha256": "fd52a2a0fe2072465b0e0d1c053db868ab6637ade4af844d400340586fd16709",
+      "_version": {
+        "sha256": "f381aedc272544bba4bac2329153244c037376b964bb2978fd9092306caae8c8",
+        "sha8": "f381aedc2725",
+        "path": "versions/@borg/borg_agent/f381aedc2725.py.card"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -234,7 +247,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "5b75e51a782fd075f7ca6abb5d8b7dc1b286c135a2e02d783783223460a6a16b"
+      "_card_sha256": "5b75e51a782fd075f7ca6abb5d8b7dc1b286c135a2e02d783783223460a6a16b",
+      "_version": {
+        "sha256": "87ab5363801dd38441801dd9d3cfc6ec1fa5da08c259b741f21dc1026b289b09",
+        "sha8": "87ab5363801d",
+        "path": "versions/@cat-agent-skills/accessibility_pass/87ab5363801d.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -298,7 +316,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "fff881582ee55eca67f0210942b27c7efa153ee7587758fd8c77bee716783ec4"
+      "_card_sha256": "fff881582ee55eca67f0210942b27c7efa153ee7587758fd8c77bee716783ec4",
+      "_version": {
+        "sha256": "d9cb428f86f969b809e2bb18378be5096f7e87a590f6bd2d8321d18e6087091d",
+        "sha8": "d9cb428f86f9",
+        "path": "versions/@cat-agent-skills/acroform_writer/d9cb428f86f9.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -365,7 +388,12 @@
       "_added_at": "2026-08-23T19:15:32-04:00",
       "_first_commit_sha": "1fedbdaf970b3703a6da8d5f78f8f5b6782f0279",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "fda0f5d503f3fcff63d3741ea6802884172a3a4ac44b97ef26bf2ba2f7b6a651"
+      "_card_sha256": "fda0f5d503f3fcff63d3741ea6802884172a3a4ac44b97ef26bf2ba2f7b6a651",
+      "_version": {
+        "sha256": "e25f86131c9f129f445e79151a7dc8cce0859a7e1025062b538fc7c5fb142929",
+        "sha8": "e25f86131c9f",
+        "path": "versions/@cat-agent-skills/action_items_todo/e25f86131c9f.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -429,7 +457,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "f0909ee8c00ef9d34603c6d1fae255b1ac047dd721ad3801a80412676ab6e4c1"
+      "_card_sha256": "f0909ee8c00ef9d34603c6d1fae255b1ac047dd721ad3801a80412676ab6e4c1",
+      "_version": {
+        "sha256": "3eb41727a5557227f7de268386141ced0eb30e2a55b6fd292c8ce8d6f93f7b97",
+        "sha8": "3eb41727a555",
+        "path": "versions/@cat-agent-skills/agent_evaluation_designer/3eb41727a555.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -496,7 +529,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "28a7a21ea7bbdefb84e4eaf51a7e35fa1a98337bfbe7b9472c8b99838d8b70ba"
+      "_card_sha256": "28a7a21ea7bbdefb84e4eaf51a7e35fa1a98337bfbe7b9472c8b99838d8b70ba",
+      "_version": {
+        "sha256": "4e86bceb09a0a54ccd4332a264a2601cd15a61f27f86be2cbf1a859693f83cd5",
+        "sha8": "4e86bceb09a0",
+        "path": "versions/@cat-agent-skills/agent_harness_explorer/4e86bceb09a0.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -564,7 +602,12 @@
       "_added_at": "2026-08-28T04:52:39Z",
       "_first_commit_sha": "2aac8c714d97a6ce30b3ce121d73e0593f88e4ed",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "5da4a75790fe267eb3aeaa3a6f556f0a01324f26487eeaae7761dee6bf79dc02"
+      "_card_sha256": "5da4a75790fe267eb3aeaa3a6f556f0a01324f26487eeaae7761dee6bf79dc02",
+      "_version": {
+        "sha256": "c733f72d68b4a9d519b6a7ff701c963143d0a361037a576be6f8f298fe17ca82",
+        "sha8": "c733f72d68b4",
+        "path": "versions/@cat-agent-skills/agent_performance_triage/c733f72d68b4.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -632,7 +675,12 @@
       "_added_at": "2026-08-28T04:52:39Z",
       "_first_commit_sha": "2aac8c714d97a6ce30b3ce121d73e0593f88e4ed",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "0a64fff100b90602d38f9247c50a220c1d2d1dd515506ede39c05e1525a4cb05"
+      "_card_sha256": "0a64fff100b90602d38f9247c50a220c1d2d1dd515506ede39c05e1525a4cb05",
+      "_version": {
+        "sha256": "5f01b98ad41cd2a57a431bb9af01f063d2fd645d67d6548a58d36a10b3686317",
+        "sha8": "5f01b98ad41c",
+        "path": "versions/@cat-agent-skills/agent_red_team/5f01b98ad41c.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -697,7 +745,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "9b1b4adf39382caf4e54589b293a4b45e63676a4222c98748fc1ee78d9d7ca0f"
+      "_card_sha256": "9b1b4adf39382caf4e54589b293a4b45e63676a4222c98748fc1ee78d9d7ca0f",
+      "_version": {
+        "sha256": "81d3ff99c254c9028c88fe4f843eb0a271892a3a97fac80c6b6a2340a0acb687",
+        "sha8": "81d3ff99c254",
+        "path": "versions/@cat-agent-skills/ai_demo_assistant/81d3ff99c254.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -760,7 +813,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "5d0e49dc06cc4d9a431650f1a7b0608eef65d2ad57b73dc8476ea22aab18ac3c"
+      "_card_sha256": "5d0e49dc06cc4d9a431650f1a7b0608eef65d2ad57b73dc8476ea22aab18ac3c",
+      "_version": {
+        "sha256": "e3d9ccd12cc26c79c1e294a7e0af59f2d7eb628d2366098ee45835223936c01b",
+        "sha8": "e3d9ccd12cc2",
+        "path": "versions/@cat-agent-skills/ai_first_process_redesign/e3d9ccd12cc2.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -828,7 +886,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "35d4deda871c238e2503015f693277fe31e2c182184c97df05d0436a7d7cb15a"
+      "_card_sha256": "35d4deda871c238e2503015f693277fe31e2c182184c97df05d0436a7d7cb15a",
+      "_version": {
+        "sha256": "a0e344bae6eb0ee5cf9cc52c14d873e9db7d95e0f3c7e3c7f68bee5739b908f8",
+        "sha8": "a0e344bae6eb",
+        "path": "versions/@cat-agent-skills/ai_usecase_assessment/a0e344bae6eb.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -895,7 +958,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "d185f61d2d639d360d04a68682a85dc51f08ffff10abc68c62eb701ff4c1c641"
+      "_card_sha256": "d185f61d2d639d360d04a68682a85dc51f08ffff10abc68c62eb701ff4c1c641",
+      "_version": {
+        "sha256": "49d3b3efccee510686f44a4fed6b95a9b507f706bb3c594d126aa9cda655b398",
+        "sha8": "49d3b3efccee",
+        "path": "versions/@cat-agent-skills/anonymised_case_study_writer/49d3b3efccee.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -961,7 +1029,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "2f5b32faa490da4f4de747887e67159831f08520cd6ef932e4adfa683ec74ab4"
+      "_card_sha256": "2f5b32faa490da4f4de747887e67159831f08520cd6ef932e4adfa683ec74ab4",
+      "_version": {
+        "sha256": "b7aa264d0020c3aa19ae1edc112ef65f8ddcd16dcc3ec5d78bd9775e3b957719",
+        "sha8": "b7aa264d0020",
+        "path": "versions/@cat-agent-skills/awaiting_reply/b7aa264d0020.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1028,7 +1101,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "8b20d1a43d7ef982fd3a3e499ae81fd5100698d4f0944197286734a4795f682a"
+      "_card_sha256": "8b20d1a43d7ef982fd3a3e499ae81fd5100698d4f0944197286734a4795f682a",
+      "_version": {
+        "sha256": "8cc4246e1e7974a219004eefc17de83bb2b40c83523cc4f89c47d14275832397",
+        "sha8": "8cc4246e1e79",
+        "path": "versions/@cat-agent-skills/b2b_outreach_suite/8cc4246e1e79.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1095,7 +1173,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "65b797a03e162af90cc3f394339d20211dc5ebcd93425f41f8ca050334013590"
+      "_card_sha256": "65b797a03e162af90cc3f394339d20211dc5ebcd93425f41f8ca050334013590",
+      "_version": {
+        "sha256": "902a9938856104a577bedd98478f6436adf0d6c55935978ff18563beec80d169",
+        "sha8": "902a99388561",
+        "path": "versions/@cat-agent-skills/blog_content_auditor/902a99388561.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1162,7 +1245,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "060781be44c5be1a0d6e159d6a31c44be34e1931353e5430c5bdc7b350ef9484"
+      "_card_sha256": "060781be44c5be1a0d6e159d6a31c44be34e1931353e5430c5bdc7b350ef9484",
+      "_version": {
+        "sha256": "43bbdec88cbd22f1df3c807a5ec76ded944fe911c957b5b1f5eb84cc660be546",
+        "sha8": "43bbdec88cbd",
+        "path": "versions/@cat-agent-skills/blog_post_structure_pass/43bbdec88cbd.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1228,7 +1316,12 @@
       "_added_at": "2026-08-11T09:43:05Z",
       "_first_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "35a79f84a425b0e5f65aa8ab5ebe038a69c89ea91f2bf8417add5ef63ade8503"
+      "_card_sha256": "35a79f84a425b0e5f65aa8ab5ebe038a69c89ea91f2bf8417add5ef63ade8503",
+      "_version": {
+        "sha256": "575d67a2bcd525e8ebc8092fd3e0cee5e5ed253e5f72d9a6e2cda8505ca17753",
+        "sha8": "575d67a2bcd5",
+        "path": "versions/@cat-agent-skills/booth_loop_video/575d67a2bcd5.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1293,7 +1386,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "f0502ced68d7c3aa54772920ce6604cf82f6244cb202ad7e5b165c78d2ffa225"
+      "_card_sha256": "f0502ced68d7c3aa54772920ce6604cf82f6244cb202ad7e5b165c78d2ffa225",
+      "_version": {
+        "sha256": "9b55307c395f49f3800d1bafe751f64efa1519e40b9e69b3a57e9bebbc02c541",
+        "sha8": "9b55307c395f",
+        "path": "versions/@cat-agent-skills/brand_template_enforcer/9b55307c395f.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1359,7 +1457,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "31ddb92650cca0f55f1d8a6fe2dce186335fe67efc3c8df951a30a435b619503"
+      "_card_sha256": "31ddb92650cca0f55f1d8a6fe2dce186335fe67efc3c8df951a30a435b619503",
+      "_version": {
+        "sha256": "8fe0e9ae3edc03da2cc0329fd08af34c4871530aa826d606972e1d38bf2c5127",
+        "sha8": "8fe0e9ae3edc",
+        "path": "versions/@cat-agent-skills/brand_voice_pass/8fe0e9ae3edc.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1425,7 +1528,12 @@
       "_added_at": "2026-09-08T16:38:03-04:00",
       "_first_commit_sha": "597f0992f4120ddef24dd8686c5720a9ba5b59ab",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "dd28dc371261a956b31f03ba652eb0b3a4585a25a92dd971c280dccfb435606e"
+      "_card_sha256": "dd28dc371261a956b31f03ba652eb0b3a4585a25a92dd971c280dccfb435606e",
+      "_version": {
+        "sha256": "c1c264754985128b9c1ffd20b0e9b22a6766c10b6b2e72a0714764af07e00b0a",
+        "sha8": "c1c264754985",
+        "path": "versions/@cat-agent-skills/breathing_room/c1c264754985.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1491,7 +1599,12 @@
       "_added_at": "2026-08-11T09:43:05Z",
       "_first_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "e5d376d277687d676d74be63e4d129c226949edf4f37f15313f57bbe34df5406"
+      "_card_sha256": "e5d376d277687d676d74be63e4d129c226949edf4f37f15313f57bbe34df5406",
+      "_version": {
+        "sha256": "1c9fbb8d48aaf02473498265789011da312ac8431035b97dbb21a8d021a8f256",
+        "sha8": "1c9fbb8d48aa",
+        "path": "versions/@cat-agent-skills/browser_uat_analyst/1c9fbb8d48aa.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1557,7 +1670,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "31b18332d9f393b62bed506355d5b65fca151fd545d9482612508f26794e1c34"
+      "_card_sha256": "31b18332d9f393b62bed506355d5b65fca151fd545d9482612508f26794e1c34",
+      "_version": {
+        "sha256": "50b4ed46678a131759dff285b8e288b0d0ecaf9cda86969b1d25453f21926a58",
+        "sha8": "50b4ed46678a",
+        "path": "versions/@cat-agent-skills/business_os/50b4ed46678a.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1622,7 +1740,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "bfe4d3602434668b8d49661e70404a79e9f19fa25d4432796429fd3386b81829"
+      "_card_sha256": "bfe4d3602434668b8d49661e70404a79e9f19fa25d4432796429fd3386b81829",
+      "_version": {
+        "sha256": "5ea0d443f429476b193cd018fdf370d484de2bd510263c087c133d8dc0146951",
+        "sha8": "5ea0d443f429",
+        "path": "versions/@cat-agent-skills/call_for_speakers_digest/5ea0d443f429.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1686,7 +1809,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "73d913a1228422f63ff4fa3f05ec794ff051be5ff5b2b637b63067280403c507"
+      "_card_sha256": "73d913a1228422f63ff4fa3f05ec794ff051be5ff5b2b637b63067280403c507",
+      "_version": {
+        "sha256": "c83e942f9e64a210e436258385a286a7ad7808a844d8e3b0bfcba90cdae4917a",
+        "sha8": "c83e942f9e64",
+        "path": "versions/@cat-agent-skills/campaign_deck_builder/c83e942f9e64.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1751,7 +1879,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "ff01aafccf6c616cb54cd76c6ddb48a194060b6f9223ad783254de3a16ca932c"
+      "_card_sha256": "ff01aafccf6c616cb54cd76c6ddb48a194060b6f9223ad783254de3a16ca932c",
+      "_version": {
+        "sha256": "f4ed638b191940f09a2bf01dde7ab052dbca6fba9627b2bfb957f3de8ffa0917",
+        "sha8": "f4ed638b1919",
+        "path": "versions/@cat-agent-skills/chart_builder/f4ed638b1919.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1813,7 +1946,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "3caeaf8bdf79e8f7548c85794935404e94fe5c4237a8b771d6f613aec8d9a85f"
+      "_card_sha256": "3caeaf8bdf79e8f7548c85794935404e94fe5c4237a8b771d6f613aec8d9a85f",
+      "_version": {
+        "sha256": "4c4a86cbf7aeee5e0f57eff39d2e15f30542f45222da4cb6bad6b6993f190995",
+        "sha8": "4c4a86cbf7ae",
+        "path": "versions/@cat-agent-skills/classic_text_adventure/4c4a86cbf7ae.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1880,7 +2018,12 @@
       "_added_at": "2026-08-23T19:15:32-04:00",
       "_first_commit_sha": "1fedbdaf970b3703a6da8d5f78f8f5b6782f0279",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "e553e542463ed3de4aa406f32850f70257060a2a30cc0b1272cf1fedd9635bdd"
+      "_card_sha256": "e553e542463ed3de4aa406f32850f70257060a2a30cc0b1272cf1fedd9635bdd",
+      "_version": {
+        "sha256": "d2cfd098c26b1ed16c4eb39226dc8486860550d40cd1b8f1c0c6672dc6793515",
+        "sha8": "d2cfd098c26b",
+        "path": "versions/@cat-agent-skills/clipchamp_video/d2cfd098c26b.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -1949,7 +2092,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "400946772869f79b0d4d75eafcc2a0bf102160d6361886e32855fb982586b970"
+      "_card_sha256": "400946772869f79b0d4d75eafcc2a0bf102160d6361886e32855fb982586b970",
+      "_version": {
+        "sha256": "f009d97229e7ac098108d20b4188d705620dfaebc5f359b00ec2bd747bbe2eea",
+        "sha8": "f009d97229e7",
+        "path": "versions/@cat-agent-skills/clt_hr_assistant/f009d97229e7.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2011,7 +2159,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "4021e27620245ae4924bbdf18272d98782cac5b2a81c1a3a05924c856239d2d3"
+      "_card_sha256": "4021e27620245ae4924bbdf18272d98782cac5b2a81c1a3a05924c856239d2d3",
+      "_version": {
+        "sha256": "9c7b154df5c10cdacffbad111641404a33a2d64cc6cb64867c867d8df66f8489",
+        "sha8": "9c7b154df5c1",
+        "path": "versions/@cat-agent-skills/commenting_content/9c7b154df5c1.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2073,7 +2226,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "0f69db0a13f09e6d22a4630d83e05684af9aab7dc708122416dcfb20569eded7"
+      "_card_sha256": "0f69db0a13f09e6d22a4630d83e05684af9aab7dc708122416dcfb20569eded7",
+      "_version": {
+        "sha256": "89f511488361213aaf07ded3e0492e5111c9ad61267bbdcaf45e2363e34deff7",
+        "sha8": "89f511488361",
+        "path": "versions/@cat-agent-skills/competitive_battlecard_builder/89f511488361.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2137,7 +2295,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "51ba18488d313d5315d496319eb99f22b7804480a9d165bb0df72216816f3361"
+      "_card_sha256": "51ba18488d313d5315d496319eb99f22b7804480a9d165bb0df72216816f3361",
+      "_version": {
+        "sha256": "903949cd5aff8c68b6177aff8e377b4e321f90c6d9e30f3fb6db7e177293e57c",
+        "sha8": "903949cd5aff",
+        "path": "versions/@cat-agent-skills/conditional_chat_reminder/903949cd5aff.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2204,7 +2367,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "5cc55aa86e7ff265eaceb50448af3a7bd6ff9b305b0647cd696a388aec48a95e"
+      "_card_sha256": "5cc55aa86e7ff265eaceb50448af3a7bd6ff9b305b0647cd696a388aec48a95e",
+      "_version": {
+        "sha256": "84d48403786831ecf324b56d1a8686cd7b9ea6797c0a356761ad9295533b4dda",
+        "sha8": "84d484037868",
+        "path": "versions/@cat-agent-skills/conference_session_abstract_pack/84d484037868.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2271,7 +2439,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "11b1a6651501f99238d8b283a2e61f917ce85ef28dc37091ba350139bd08f699"
+      "_card_sha256": "11b1a6651501f99238d8b283a2e61f917ce85ef28dc37091ba350139bd08f699",
+      "_version": {
+        "sha256": "cd8db2c4cd8e2a03a2e6ad4aa7879a1a9cf9f78cbaf3eb95e9ef25f0efdda293",
+        "sha8": "cd8db2c4cd8e",
+        "path": "versions/@cat-agent-skills/content_quality_auditor/cd8db2c4cd8e.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2337,7 +2510,12 @@
       "_added_at": "2026-08-18T18:26:12-04:00",
       "_first_commit_sha": "871fe0c337dfb58aec623592c8890c66d9ee5bb0",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "754bd6a0530d87c7f31ed9e14644ea06a372ce60258bb9796648c90fcc565155"
+      "_card_sha256": "754bd6a0530d87c7f31ed9e14644ea06a372ce60258bb9796648c90fcc565155",
+      "_version": {
+        "sha256": "cf82b12d57ab776f1e9e989e305df5f5cb1acbf749e45dc601841f6e62d83b2d",
+        "sha8": "cf82b12d57ab",
+        "path": "versions/@cat-agent-skills/copilot_agent_advisor/cf82b12d57ab.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2403,7 +2581,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "2f24434bd5a7df02f2dfaa05677a5f2a32f01a78415cccf4c855b4a03911044f"
+      "_card_sha256": "2f24434bd5a7df02f2dfaa05677a5f2a32f01a78415cccf4c855b4a03911044f",
+      "_version": {
+        "sha256": "0121f58ca0194995eceb2c1c014371e45312be27668c438506c656cc63bd9d96",
+        "sha8": "0121f58ca019",
+        "path": "versions/@cat-agent-skills/copilot_agents_news_scout/0121f58ca019.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2468,7 +2651,12 @@
       "_added_at": "2026-08-11T09:43:05Z",
       "_first_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "ecca165852bf7b0f88cadd782cb44a90b8b35f826cb353bb4cb1d8c28510744b"
+      "_card_sha256": "ecca165852bf7b0f88cadd782cb44a90b8b35f826cb353bb4cb1d8c28510744b",
+      "_version": {
+        "sha256": "1075b0924639851f5066ff8f70c560ddf98829c6bbff4bf5fbfbc8bdb0cffd91",
+        "sha8": "1075b0924639",
+        "path": "versions/@cat-agent-skills/copilot_studio_agent_test/1075b0924639.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2534,7 +2722,12 @@
       "_added_at": "2026-08-11T09:43:05Z",
       "_first_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "8c51546120e63b3e5149bdcf9e30f868776151922546bcf84ebc6468481a3901"
+      "_card_sha256": "8c51546120e63b3e5149bdcf9e30f868776151922546bcf84ebc6468481a3901",
+      "_version": {
+        "sha256": "1260a59deabc3fa4f801f715786f4e643a4ef09184950388aae09939855f7091",
+        "sha8": "1260a59deabc",
+        "path": "versions/@cat-agent-skills/copilot_studio_harness_picker/1260a59deabc.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2601,7 +2794,12 @@
       "_added_at": "2026-08-11T09:43:05Z",
       "_first_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "3b75f19d4e2efd9b8c2ac7627d598ade0382896f1c213f45682642d4e977c623"
+      "_card_sha256": "3b75f19d4e2efd9b8c2ac7627d598ade0382896f1c213f45682642d4e977c623",
+      "_version": {
+        "sha256": "9e86d57d4ff70581b2367925a2653531ce3b14d3dde20848b17b720b60511a93",
+        "sha8": "9e86d57d4ff7",
+        "path": "versions/@cat-agent-skills/copilot_studio_knowledge_readiness/9e86d57d4ff7.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2664,7 +2862,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "167229572c4c5bfcdd0557c3a944bf55f488b96e23347a638da95d382472dea3"
+      "_card_sha256": "167229572c4c5bfcdd0557c3a944bf55f488b96e23347a638da95d382472dea3",
+      "_version": {
+        "sha256": "1ff5ecc58626978dfa6177c233f43cb7f545aec0fd3025735830c380f44b8564",
+        "sha8": "1ff5ecc58626",
+        "path": "versions/@cat-agent-skills/copilot_studio_test_planner/1ff5ecc58626.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2730,7 +2933,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "ee0bf783ed32403b11524ffb3153f28a8d2d243db34ed2a9c219199acf48de28"
+      "_card_sha256": "ee0bf783ed32403b11524ffb3153f28a8d2d243db34ed2a9c219199acf48de28",
+      "_version": {
+        "sha256": "e2024d790e12876be0154250bf26a90cee1e959d35146d58c5a4107b9f58ce36",
+        "sha8": "e2024d790e12",
+        "path": "versions/@cat-agent-skills/copilot_studio_topic_blueprint/e2024d790e12.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2795,7 +3003,12 @@
       "_added_at": "2026-08-17T18:03:09-04:00",
       "_first_commit_sha": "409a3c18c6511b9cbf68a9f6716c5be9715b10c4",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "692793f18ee41649dd4e628cbc21e69324861dc944674bc51d6dbbea39e026b7"
+      "_card_sha256": "692793f18ee41649dd4e628cbc21e69324861dc944674bc51d6dbbea39e026b7",
+      "_version": {
+        "sha256": "ea74002cbb93d2e5d5d336f091b9f4b6d89012e4669548ce3057b6443d09d75f",
+        "sha8": "ea74002cbb93",
+        "path": "versions/@cat-agent-skills/cowork_use_case_one_pager/ea74002cbb93.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2860,7 +3073,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "0d0cdf622c229ba012ec694ae4610c042b77bc96850dfa0ba2f6dd095eeba947"
+      "_card_sha256": "0d0cdf622c229ba012ec694ae4610c042b77bc96850dfa0ba2f6dd095eeba947",
+      "_version": {
+        "sha256": "f4717f434448dedb4118c9bac67f91897994ccf3a9cee2ebed68021661ec4131",
+        "sha8": "f4717f434448",
+        "path": "versions/@cat-agent-skills/doc_format_converter/f4717f434448.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2926,7 +3144,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "f50cb56a3c3316ca4f0e8744f206baa7d362546a593ddc3afbeb3d2fe709ef94"
+      "_card_sha256": "f50cb56a3c3316ca4f0e8744f206baa7d362546a593ddc3afbeb3d2fe709ef94",
+      "_version": {
+        "sha256": "4b5321c8bc9c9f1b4b5796650d54bc2e0d8503f8d957409875fc1ee01ce01a1b",
+        "sha8": "4b5321c8bc9c",
+        "path": "versions/@cat-agent-skills/enterprise_agent_design_authority/4b5321c8bc9c.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -2993,7 +3216,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "f27415bb0e096c9d699ca15aa571713b25a13e75b4a75bb95cc8935231042987"
+      "_card_sha256": "f27415bb0e096c9d699ca15aa571713b25a13e75b4a75bb95cc8935231042987",
+      "_version": {
+        "sha256": "6200a163f12cc7b5b12ef9742949a0bfe927e668231f5965e68fcd1f77cb7238",
+        "sha8": "6200a163f12c",
+        "path": "versions/@cat-agent-skills/eu_greenwashing_analysis/6200a163f12c.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3055,7 +3283,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "51b7dc5c9587a664f4ae8c3f537c4e525cfb1eea8f627cf2a69e0d9acd46d27b"
+      "_card_sha256": "51b7dc5c9587a664f4ae8c3f537c4e525cfb1eea8f627cf2a69e0d9acd46d27b",
+      "_version": {
+        "sha256": "bd985899fe983b4f68a0f915ee19628c54d774f79167fafef7a7e2866cbe7fdb",
+        "sha8": "bd985899fe98",
+        "path": "versions/@cat-agent-skills/exam_prep_learning_plan_builder/bd985899fe98.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3118,7 +3351,12 @@
       "_added_at": "2026-08-23T19:15:32-04:00",
       "_first_commit_sha": "1fedbdaf970b3703a6da8d5f78f8f5b6782f0279",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "ffb18455738daf8a07917c79613f22a1d2046c3b5f2d01895ec46ee887d5fff3"
+      "_card_sha256": "ffb18455738daf8a07917c79613f22a1d2046c3b5f2d01895ec46ee887d5fff3",
+      "_version": {
+        "sha256": "9686a832209ed4f3e113bf25dc1f2bbd172540b760616a84fc96b45fc3d87f52",
+        "sha8": "9686a832209e",
+        "path": "versions/@cat-agent-skills/explainer_video/9686a832209e.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3183,7 +3421,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "2cb86f868db55198eb6473c8e53f2f593fa564b82edf2e77099e8644800585a4"
+      "_card_sha256": "2cb86f868db55198eb6473c8e53f2f593fa564b82edf2e77099e8644800585a4",
+      "_version": {
+        "sha256": "061ce3cfa4ea2f9aa26ffd7d11a22e3555748d5b254ca6ce2d6eb091b2c48a3a",
+        "sha8": "061ce3cfa4ea",
+        "path": "versions/@cat-agent-skills/gantt_chart_generator/061ce3cfa4ea.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3248,7 +3491,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "3bfb5fa4e8b06a95b5d92215c24a87131c00924797c6b0a825e1975871b9e2bd"
+      "_card_sha256": "3bfb5fa4e8b06a95b5d92215c24a87131c00924797c6b0a825e1975871b9e2bd",
+      "_version": {
+        "sha256": "088f3508f57592e23049713c53ec4dbbe00dba83ce2fe83bef96a6e98a3aed17",
+        "sha8": "088f3508f575",
+        "path": "versions/@cat-agent-skills/generating_podcast_script/088f3508f575.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3317,7 +3565,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "484c2cc0adf1304e7d5d2bf3a57943ee30ef39fc6eec1d9e6f08c68044236380"
+      "_card_sha256": "484c2cc0adf1304e7d5d2bf3a57943ee30ef39fc6eec1d9e6f08c68044236380",
+      "_version": {
+        "sha256": "7e0ac1c1c0852d3418f1bf9f90892ca2f4598397294b05a12aa62e7d541ed7b3",
+        "sha8": "7e0ac1c1c085",
+        "path": "versions/@cat-agent-skills/global_greenwashing_claim_auditor/7e0ac1c1c085.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3381,7 +3634,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "46d29d02cf040bf1ea062a09ccbe404b160812254e717f1f26e74d2b6a5f23c4"
+      "_card_sha256": "46d29d02cf040bf1ea062a09ccbe404b160812254e717f1f26e74d2b6a5f23c4",
+      "_version": {
+        "sha256": "4e061e2a8f91902cfcee4405227ad8e5b37c9e36652786af4f49858348569b10",
+        "sha8": "4e061e2a8f91",
+        "path": "versions/@cat-agent-skills/grab_my_files/4e061e2a8f91.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3448,7 +3706,12 @@
       "_added_at": "2026-09-08T16:38:03-04:00",
       "_first_commit_sha": "597f0992f4120ddef24dd8686c5720a9ba5b59ab",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "8b87015ea27ee1503cb0d01ff9e7cb063f4e44e2d7ac9db54e5cced04af74232"
+      "_card_sha256": "8b87015ea27ee1503cb0d01ff9e7cb063f4e44e2d7ac9db54e5cced04af74232",
+      "_version": {
+        "sha256": "0b187c270dc5fe3382fefdb070aeb9946a808706a8dce261c598b2bb9883407b",
+        "sha8": "0b187c270dc5",
+        "path": "versions/@cat-agent-skills/holiday_recap/0b187c270dc5.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3512,7 +3775,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "8839a30293c09f16aef1b034ce065c75620ad45e24418147f7a2d55ad3a01d59"
+      "_card_sha256": "8839a30293c09f16aef1b034ce065c75620ad45e24418147f7a2d55ad3a01d59",
+      "_version": {
+        "sha256": "48843aa159ca7a02aebbc259496476dc6c4e7aeb87efc227372c9fd55711cd84",
+        "sha8": "48843aa159ca",
+        "path": "versions/@cat-agent-skills/idea_refiner/48843aa159ca.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3579,7 +3847,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "e62cfe43e875f68765b75e38e52fa0c54220f08262ca85cf51888f9fb4b4c9de"
+      "_card_sha256": "e62cfe43e875f68765b75e38e52fa0c54220f08262ca85cf51888f9fb4b4c9de",
+      "_version": {
+        "sha256": "489ff33a6d36e72d27f064145f456dd7ae0a8cc8194bfbc704bd650b013ea9c7",
+        "sha8": "489ff33a6d36",
+        "path": "versions/@cat-agent-skills/institutional_knowledge/489ff33a6d36.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3643,7 +3916,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "d13dd60f02dbe7fa7817458fe3c08706a0e3d3d4eb0b1c1b748c453aa4613541"
+      "_card_sha256": "d13dd60f02dbe7fa7817458fe3c08706a0e3d3d4eb0b1c1b748c453aa4613541",
+      "_version": {
+        "sha256": "2250fc38fc33af9fc658a7a03db2db27ddcde3a4f9263e061f0a01561369a12e",
+        "sha8": "2250fc38fc33",
+        "path": "versions/@cat-agent-skills/iterative_file_editing/2250fc38fc33.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3709,7 +3987,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "01f27856b1c9e7300ef2c3abc2344f1dfc2c62fa9ed0f4697a5d67373b498dbd"
+      "_card_sha256": "01f27856b1c9e7300ef2c3abc2344f1dfc2c62fa9ed0f4697a5d67373b498dbd",
+      "_version": {
+        "sha256": "10ffef6ab60d115b4c4de25df5f583e6259ff262bdee6283a7524c223c70ebf1",
+        "sha8": "10ffef6ab60d",
+        "path": "versions/@cat-agent-skills/knowledge_corpus_curator/10ffef6ab60d.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3773,7 +4056,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "5a0d74515b304e020e4efd09f9a5a516a75dfbd9dec32d892db8e1f6eff988ea"
+      "_card_sha256": "5a0d74515b304e020e4efd09f9a5a516a75dfbd9dec32d892db8e1f6eff988ea",
+      "_version": {
+        "sha256": "28de060ce9e856846c1ed608ec2cee0367fb8584d3b8b16ad583db18d97fe305",
+        "sha8": "28de060ce9e8",
+        "path": "versions/@cat-agent-skills/knowledge_source_router/28de060ce9e8.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3840,7 +4128,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "ddc1f124f55a7c1c57d779c354b31281c2396bf443055017533ee77a18a63e0e"
+      "_card_sha256": "ddc1f124f55a7c1c57d779c354b31281c2396bf443055017533ee77a18a63e0e",
+      "_version": {
+        "sha256": "0287bd0110c25b87219dd922e473ed65e8c5fec0e6ef39071b21a2d0aa8239d7",
+        "sha8": "0287bd0110c2",
+        "path": "versions/@cat-agent-skills/lab_column_mapper/0287bd0110c2.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3906,7 +4199,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "7ef48d8a6213aa4410d0b28ef617c6ed0e702bc08f4689df7c1fc1cd31ea0553"
+      "_card_sha256": "7ef48d8a6213aa4410d0b28ef617c6ed0e702bc08f4689df7c1fc1cd31ea0553",
+      "_version": {
+        "sha256": "354dcb11218d125b0d047e466c38e3923af74d37dfc7bcd9a47de2e742b84fab",
+        "sha8": "354dcb11218d",
+        "path": "versions/@cat-agent-skills/linkedin_content_system/354dcb11218d.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -3969,7 +4267,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "c32fa24fe1feb673c0d1c7b3bb11e796c22f69503de4071f3a3f17a99c70f214"
+      "_card_sha256": "c32fa24fe1feb673c0d1c7b3bb11e796c22f69503de4071f3a3f17a99c70f214",
+      "_version": {
+        "sha256": "a6d7fa21211ae1f4b734b11aded5d0278fb3c47fd78e3c763bf630ebaacf691f",
+        "sha8": "a6d7fa21211a",
+        "path": "versions/@cat-agent-skills/linkedin_content_writer/a6d7fa21211a.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4033,7 +4336,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "f3cf286de55539e472e35beedb22ec5661e642f0fbbfb0937c646a86d567687d"
+      "_card_sha256": "f3cf286de55539e472e35beedb22ec5661e642f0fbbfb0937c646a86d567687d",
+      "_version": {
+        "sha256": "8b0277b43675440ff607ba85c746d410d864d62ddc5682363f111737c00be4c4",
+        "sha8": "8b0277b43675",
+        "path": "versions/@cat-agent-skills/lookup_dataverse_table/8b0277b43675.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4101,7 +4409,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "e01cb68997f854f3b2ef24e28bb4ce6744be62509a853cff704678dff4e1ca36"
+      "_card_sha256": "e01cb68997f854f3b2ef24e28bb4ce6744be62509a853cff704678dff4e1ca36",
+      "_version": {
+        "sha256": "5e72826d7dd23ae3dcbfa497f3d675289e23afbf850393f02b749d5e46912e14",
+        "sha8": "5e72826d7dd2",
+        "path": "versions/@cat-agent-skills/mct_excellence_iq/5e72826d7dd2.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4168,7 +4481,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "635734381481cb64eedfa1f6daf06cc08d571b079f970f6869654c6125dc9e76"
+      "_card_sha256": "635734381481cb64eedfa1f6daf06cc08d571b079f970f6869654c6125dc9e76",
+      "_version": {
+        "sha256": "9b13ab416edb7d4f7013b1e210c393170b136d2b21efd1b02702ef7abccfc95d",
+        "sha8": "9b13ab416edb",
+        "path": "versions/@cat-agent-skills/meeting_analyzer/9b13ab416edb.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4235,7 +4553,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "0dad1f0a11ca129a65d76570d2e0884492b1262fb4ed8f63a1b6599be5717ec6"
+      "_card_sha256": "0dad1f0a11ca129a65d76570d2e0884492b1262fb4ed8f63a1b6599be5717ec6",
+      "_version": {
+        "sha256": "7f2dc23f9d0ed9d385011b60976185e5cb7f1869b13f07b4f02e7dec0e229e38",
+        "sha8": "7f2dc23f9d0e",
+        "path": "versions/@cat-agent-skills/microsoft_ai_platform_advisor/7f2dc23f9d0e.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4302,7 +4625,12 @@
       "_added_at": "2026-08-11T09:43:05Z",
       "_first_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "467020d5d9439a3e13f89f1b4ed544a33117be5a9b8e84ddb38d634eaef07ff4"
+      "_card_sha256": "467020d5d9439a3e13f89f1b4ed544a33117be5a9b8e84ddb38d634eaef07ff4",
+      "_version": {
+        "sha256": "f49b373bef4d20968b986d891cefaaffae7ff569a1388820214f144147ed06d5",
+        "sha8": "f49b373bef4d",
+        "path": "versions/@cat-agent-skills/monte_carlo_analysis/f49b373bef4d.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4368,7 +4696,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "100c0bc5e737bb0a7b1fd521cae8063a09b953d77eadfc576ba038aebe042b9c"
+      "_card_sha256": "100c0bc5e737bb0a7b1fd521cae8063a09b953d77eadfc576ba038aebe042b9c",
+      "_version": {
+        "sha256": "119badda228da2db2f7f2f54e60355d7fa9a424acd2f954acb659a9e41b4b498",
+        "sha8": "119badda228d",
+        "path": "versions/@cat-agent-skills/own_voice_builder/119badda228d.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4434,7 +4767,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "ea3bda4dc8ad82288540af7d3c636a9cf1bbd25ad3ec13484235395fc206c3b5"
+      "_card_sha256": "ea3bda4dc8ad82288540af7d3c636a9cf1bbd25ad3ec13484235395fc206c3b5",
+      "_version": {
+        "sha256": "90a634b339d0eba2c582866b47bb51b2256d8ec11182e3503bebd5486dbe1d1b",
+        "sha8": "90a634b339d0",
+        "path": "versions/@cat-agent-skills/pattern_radar/90a634b339d0.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4499,7 +4837,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "6320ff0f396fad5f1abd74f00f0af49ad0f0a27d2c645459faebf220c6b6b5e2"
+      "_card_sha256": "6320ff0f396fad5f1abd74f00f0af49ad0f0a27d2c645459faebf220c6b6b5e2",
+      "_version": {
+        "sha256": "319cb185009cc709612e02345f0c748a7e79856f0213477ae666fd0287f20ad2",
+        "sha8": "319cb185009c",
+        "path": "versions/@cat-agent-skills/pattern_radar_automation/319cb185009c.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4565,7 +4908,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "b485011e44c7795b21ac21b1c83f2e3ebc5b1bcddf7b9550e837d33d006f262e"
+      "_card_sha256": "b485011e44c7795b21ac21b1c83f2e3ebc5b1bcddf7b9550e837d33d006f262e",
+      "_version": {
+        "sha256": "c2f7ffba47f5e99eb59ff6fe2453844e159de3085d334c9748b900508c361d04",
+        "sha8": "c2f7ffba47f5",
+        "path": "versions/@cat-agent-skills/pdf_table_data_conversion/c2f7ffba47f5.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4630,7 +4978,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "9384e7c5f20b53657708016cfd5f2de0c85525b47807e06f1e1ddf918339d487"
+      "_card_sha256": "9384e7c5f20b53657708016cfd5f2de0c85525b47807e06f1e1ddf918339d487",
+      "_version": {
+        "sha256": "df0ee4b0cb412b509cf0dd8f9eb98c6373665213472e3b933a078379eab7b0f7",
+        "sha8": "df0ee4b0cb41",
+        "path": "versions/@cat-agent-skills/persona_reaction_panel/df0ee4b0cb41.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4699,7 +5052,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "758738680c489f774c4e5f1ff2ce52ed754be674f00270039bbf95a8017c00e1"
+      "_card_sha256": "758738680c489f774c4e5f1ff2ce52ed754be674f00270039bbf95a8017c00e1",
+      "_version": {
+        "sha256": "16e1403a1f0863adf1bb25718efd284fb7ff0d47691a8a8a03966fd450a14530",
+        "sha8": "16e1403a1f08",
+        "path": "versions/@cat-agent-skills/phi_deidentifier/16e1403a1f08.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4765,7 +5123,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "ea0a3a12395fe13e2232604562115e5311040e00b1c43573ad282647963eb276"
+      "_card_sha256": "ea0a3a12395fe13e2232604562115e5311040e00b1c43573ad282647963eb276",
+      "_version": {
+        "sha256": "a44620f4c73e4333235c8caf48c5f63607e423bd181878e3a813b3c995c1e3d0",
+        "sha8": "a44620f4c73e",
+        "path": "versions/@cat-agent-skills/pov_line_generator/a44620f4c73e.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4830,7 +5193,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "aa94929e00bb76bf95a2da24a318315277161841c4b12b0b4c7d5912ab235ae3"
+      "_card_sha256": "aa94929e00bb76bf95a2da24a318315277161841c4b12b0b4c7d5912ab235ae3",
+      "_version": {
+        "sha256": "6c1fa43efa6dfc4b2812aa7a445ddbbd121f75290f2dbfee020c30425e347d3b",
+        "sha8": "6c1fa43efa6d",
+        "path": "versions/@cat-agent-skills/power_automate_desktop_assessment/6c1fa43efa6d.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4895,7 +5263,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "2fe9a1eebdee8eed2ac760cfda65ab5612dea6253d23b84447d755b455d3cfe6"
+      "_card_sha256": "2fe9a1eebdee8eed2ac760cfda65ab5612dea6253d23b84447d755b455d3cfe6",
+      "_version": {
+        "sha256": "3344a86f74a0583dbd4ef3455746795bec78b962fa22169be50ad5f5e6094454",
+        "sha8": "3344a86f74a0",
+        "path": "versions/@cat-agent-skills/power_automate_documentation/3344a86f74a0.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -4962,7 +5335,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "0cfad6b101f9536348494d33e1bbf2bc8a3704d4c53dbfe28f0e98965da56531"
+      "_card_sha256": "0cfad6b101f9536348494d33e1bbf2bc8a3704d4c53dbfe28f0e98965da56531",
+      "_version": {
+        "sha256": "d2a0cd620bbd24235f28f89f5f7fcdb1ebf7791ea5aaba31cf09e001caf52e86",
+        "sha8": "d2a0cd620bbd",
+        "path": "versions/@cat-agent-skills/power_bi_model_review/d2a0cd620bbd.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5025,7 +5403,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "b5dbec3162b3e980418146591d65f62bf3ab78b5573993bacd903803dfd11be7"
+      "_card_sha256": "b5dbec3162b3e980418146591d65f62bf3ab78b5573993bacd903803dfd11be7",
+      "_version": {
+        "sha256": "b9c8aa7b2f3052164205c19ea8e9ca9271e45709807145a51465b9618f906336",
+        "sha8": "b9c8aa7b2f30",
+        "path": "versions/@cat-agent-skills/powerpoint_deck_designer/b9c8aa7b2f30.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5091,7 +5474,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "b7011ea56327d9ae9991baa13b1474b7a87a332d6e60ec57b7d99bfc44b91d29"
+      "_card_sha256": "b7011ea56327d9ae9991baa13b1474b7a87a332d6e60ec57b7d99bfc44b91d29",
+      "_version": {
+        "sha256": "f164a6beb6d907f4b605378966693ea50532a14d39c7bb7d8b1c5a66e65a2794",
+        "sha8": "f164a6beb6d9",
+        "path": "versions/@cat-agent-skills/presentation_talk_track_builder/f164a6beb6d9.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5155,7 +5543,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "e1aa2c97be81659879b9c509d488d4364cebff54d80ddde465e13797cf01f597"
+      "_card_sha256": "e1aa2c97be81659879b9c509d488d4364cebff54d80ddde465e13797cf01f597",
+      "_version": {
+        "sha256": "c3e86bfb91394e7c5d71411fab845e334b0ee2dd85a93e1fbaad9fe40ba07bc4",
+        "sha8": "c3e86bfb9139",
+        "path": "versions/@cat-agent-skills/process_sop_architect/c3e86bfb9139.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5217,7 +5610,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "b29006e729624337471009943110beaae39cefd25a128867ba9b43eae9f3a63b"
+      "_card_sha256": "b29006e729624337471009943110beaae39cefd25a128867ba9b43eae9f3a63b",
+      "_version": {
+        "sha256": "23f87285631370ceeebed84404c33b157dde7837d12fcffb70a243232f687688",
+        "sha8": "23f872856313",
+        "path": "versions/@cat-agent-skills/redlining_content/23f872856313.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5282,7 +5680,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "13b58a43a9b8c1c81e7a43c4dd5acd3d1ca888b2ff24a369a82874cbae77c608"
+      "_card_sha256": "13b58a43a9b8c1c81e7a43c4dd5acd3d1ca888b2ff24a369a82874cbae77c608",
+      "_version": {
+        "sha256": "ce654fcd227627fd462961af89fec4cb8c416bc90754779e76bfa97cde0fbd2b",
+        "sha8": "ce654fcd2276",
+        "path": "versions/@cat-agent-skills/regulation_monitor/ce654fcd2276.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5347,7 +5750,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "8ea6e64e471aba15650c3b9f624d624e2342d08d62b56ebe42ef9e7188fd10c0"
+      "_card_sha256": "8ea6e64e471aba15650c3b9f624d624e2342d08d62b56ebe42ef9e7188fd10c0",
+      "_version": {
+        "sha256": "840d0228ff9167063d5c04517549c9a9b64c22fa85f9e8a8da393481809fb956",
+        "sha8": "840d0228ff91",
+        "path": "versions/@cat-agent-skills/rich_html_presentation/840d0228ff91.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5414,7 +5822,12 @@
       "_added_at": "2026-08-17T18:03:09-04:00",
       "_first_commit_sha": "409a3c18c6511b9cbf68a9f6716c5be9715b10c4",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "356bc0da9f8555851a515c5b397bf1e3ec4916a78e61351a404d60ab134ad048"
+      "_card_sha256": "356bc0da9f8555851a515c5b397bf1e3ec4916a78e61351a404d60ab134ad048",
+      "_version": {
+        "sha256": "2f00ce5f28aaef338a2dcf9c25b34c562518cbee5d91d999961a8254e22a5115",
+        "sha8": "2f00ce5f28aa",
+        "path": "versions/@cat-agent-skills/route_map_visualizer/2f00ce5f28aa.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5477,7 +5890,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "394bf6379cfb9ecc8f21bf2d38c25953f2f71eb9f254b6235b4074e7022619e5"
+      "_card_sha256": "394bf6379cfb9ecc8f21bf2d38c25953f2f71eb9f254b6235b4074e7022619e5",
+      "_version": {
+        "sha256": "6f807e260a523b863fa68d29d0842a44b896e321b4ead0fe36cb7bb773d713d4",
+        "sha8": "6f807e260a52",
+        "path": "versions/@cat-agent-skills/scrollytelling_data/6f807e260a52.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5543,7 +5961,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "e95acf136b1339cec596051a4d59f7aed82e922e76ca6badc24006278cfb293b"
+      "_card_sha256": "e95acf136b1339cec596051a4d59f7aed82e922e76ca6badc24006278cfb293b",
+      "_version": {
+        "sha256": "8d46667639bcef5592415180941620139a0b843fe27c8f605456fb68a5316ced",
+        "sha8": "8d46667639bc",
+        "path": "versions/@cat-agent-skills/sharepoint_list_formatter/8d46667639bc.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5607,7 +6030,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "9fff50be09c07fde9da4102ccdd8be08f583030b533cc27d6d62ccdff494f754"
+      "_card_sha256": "9fff50be09c07fde9da4102ccdd8be08f583030b533cc27d6d62ccdff494f754",
+      "_version": {
+        "sha256": "29a7c49ea3bc92bfb00f7b609f89aff2c1d0b85e5e6323b8e64c38353388513e",
+        "sha8": "29a7c49ea3bc",
+        "path": "versions/@cat-agent-skills/sharepoint_list_insight_report_generator/29a7c49ea3bc.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5673,7 +6101,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "a5807629d8b3dd1660b73065fba839a277bfc443d895953d36bb565034f4664b"
+      "_card_sha256": "a5807629d8b3dd1660b73065fba839a277bfc443d895953d36bb565034f4664b",
+      "_version": {
+        "sha256": "d87d562cb6ff69f03c5fbe70ec218c4a216e2f3a22cb4aa2055fdc360addc454",
+        "sha8": "d87d562cb6ff",
+        "path": "versions/@cat-agent-skills/skill_authoring_coach/d87d562cb6ff.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5736,7 +6169,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "9ad6e729d550aa04e0fb101a33c858d4367a95d2e919dce14fd1b8cefdcd06e0"
+      "_card_sha256": "9ad6e729d550aa04e0fb101a33c858d4367a95d2e919dce14fd1b8cefdcd06e0",
+      "_version": {
+        "sha256": "4743e9c8b7ee1fa73e987d108f61e04136cdc16eea4ee7d16d01fd4db0d6984d",
+        "sha8": "4743e9c8b7ee",
+        "path": "versions/@cat-agent-skills/spend_more_time_with_friends_and_family/4743e9c8b7ee.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5804,7 +6242,12 @@
       "_added_at": "2026-08-11T09:43:05Z",
       "_first_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "f6c8766b9fbc5c9b1fdc10b573fc8a6cc6619ef3a2b3ea14ce2f04e210fa1125"
+      "_card_sha256": "f6c8766b9fbc5c9b1fdc10b573fc8a6cc6619ef3a2b3ea14ce2f04e210fa1125",
+      "_version": {
+        "sha256": "c74fb9856ed7018e68218cddcd1930ac99ccd995855c5106c6feb4cab241d398",
+        "sha8": "c74fb9856ed7",
+        "path": "versions/@cat-agent-skills/stoic_negotiator/c74fb9856ed7.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5870,7 +6313,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "fcb2847ecd48473134b2bb317bfe52500ff1fc82107cacfb08e9353436428671"
+      "_card_sha256": "fcb2847ecd48473134b2bb317bfe52500ff1fc82107cacfb08e9353436428671",
+      "_version": {
+        "sha256": "1363ed8c46022859bf6dc1a2b7e0d09752f35890797cdc99d9530e2af2965880",
+        "sha8": "1363ed8c4602",
+        "path": "versions/@cat-agent-skills/style_analyzer/1363ed8c4602.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -5936,7 +6384,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "74b7e6bf3207c55fe33954d1efe24df0c4752aa0c63e581888a5f028aaa76c70"
+      "_card_sha256": "74b7e6bf3207c55fe33954d1efe24df0c4752aa0c63e581888a5f028aaa76c70",
+      "_version": {
+        "sha256": "795258346e89a87dcd4972fa952b9f58ed8e728ee53155c36f30dc0ff307ef89",
+        "sha8": "795258346e89",
+        "path": "versions/@cat-agent-skills/tool_tracer/795258346e89.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6001,7 +6454,12 @@
       "_added_at": "2026-08-11T09:43:05Z",
       "_first_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "739cba531ddc7599d319bfeb229cf75ed7b007532156dfa73c93be0396d315fb"
+      "_card_sha256": "739cba531ddc7599d319bfeb229cf75ed7b007532156dfa73c93be0396d315fb",
+      "_version": {
+        "sha256": "183b5866237d0c907e5fea7feb4e9813add71493a2cf7499a273dbcd08e9989a",
+        "sha8": "183b5866237d",
+        "path": "versions/@cat-agent-skills/travel_cost_estimator/183b5866237d.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6064,7 +6522,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "21cd8aead58dccc5a23e1448d5a94ee49a0b0e3e7f7484c7ec917b86eae1462f"
+      "_card_sha256": "21cd8aead58dccc5a23e1448d5a94ee49a0b0e3e7f7484c7ec917b86eae1462f",
+      "_version": {
+        "sha256": "c4a04ec663c7617f56de6dfe01f5dff6d5ee25a69d631c6e6d25f66d513f1024",
+        "sha8": "c4a04ec663c7",
+        "path": "versions/@cat-agent-skills/vacation_urgent_forwarder/c4a04ec663c7.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6130,7 +6593,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "420a97675f872cc9378e316550b7a59345316de3d7efd7be447da12a800bdac6"
+      "_card_sha256": "420a97675f872cc9378e316550b7a59345316de3d7efd7be447da12a800bdac6",
+      "_version": {
+        "sha256": "5da2d82c01864eb2ad6792ec0fe9535f2dffe88c3229432f661aef0e99efad33",
+        "sha8": "5da2d82c0186",
+        "path": "versions/@cat-agent-skills/vendor_contract_risk_review/5da2d82c0186.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6197,7 +6665,12 @@
       "_added_at": "2026-08-17T18:03:09-04:00",
       "_first_commit_sha": "409a3c18c6511b9cbf68a9f6716c5be9715b10c4",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "053f40d1b0ea2242bb26c24bbb7e1cfe43529532ab24ee20d01b10f19e1dead2"
+      "_card_sha256": "053f40d1b0ea2242bb26c24bbb7e1cfe43529532ab24ee20d01b10f19e1dead2",
+      "_version": {
+        "sha256": "fcd22c913fc835ae83ff41a7ab8e9bd01ea977e290a401462651c622c0ae156c",
+        "sha8": "fcd22c913fc8",
+        "path": "versions/@cat-agent-skills/wcag_power_platform/fcd22c913fc8.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6260,7 +6733,12 @@
       "_added_at": "2026-08-11T09:43:05Z",
       "_first_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "59f0544e979c557251215dce3491b95567c38b9988321fc4fb5dc4ec78baeab4"
+      "_card_sha256": "59f0544e979c557251215dce3491b95567c38b9988321fc4fb5dc4ec78baeab4",
+      "_version": {
+        "sha256": "de37690c140876aa9124ffc85a7712d4c93d0a5423e25cc6814416fcaba0e993",
+        "sha8": "de37690c1408",
+        "path": "versions/@cat-agent-skills/what_to_use_when/de37690c1408.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6326,7 +6804,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "0f9d44c56f26ecd9d3181f82514be769f973f75f0ad0250a120454e4b109109a"
+      "_card_sha256": "0f9d44c56f26ecd9d3181f82514be769f973f75f0ad0250a120454e4b109109a",
+      "_version": {
+        "sha256": "0d39d06f2819bbe36cb4e09d6d08401cba0232f23a379f9af09035cb7ba4af4b",
+        "sha8": "0d39d06f2819",
+        "path": "versions/@cat-agent-skills/whiteboard_to_infographic/0d39d06f2819.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6394,7 +6877,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "29b9fd980890492064554785f8e9511b865fcf4ad1d5cc390fcec8aa0a5fc434"
+      "_card_sha256": "29b9fd980890492064554785f8e9511b865fcf4ad1d5cc390fcec8aa0a5fc434",
+      "_version": {
+        "sha256": "ec40d454b5af83d585e82045cc3a98514cf04def8ec70f25a3e94f819abe8bf2",
+        "sha8": "ec40d454b5af",
+        "path": "versions/@cat-agent-skills/wikipedia_human_style_writing/ec40d454b5af.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6460,7 +6948,12 @@
       "_added_at": "2026-07-31T22:43:16-04:00",
       "_first_commit_sha": "88ce2fa2964e98bd34b7d3a34a117fbbd164d8bf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "3d9db57901e9271c17cbee4e349fae8710d9c623b200f1dadabdf0ebab4a4bfd"
+      "_card_sha256": "3d9db57901e9271c17cbee4e349fae8710d9c623b200f1dadabdf0ebab4a4bfd",
+      "_version": {
+        "sha256": "3b957309d4ac4c7c604387d0814fd917c04feedd0f453bd24b110ea15152f1d2",
+        "sha8": "3b957309d4ac",
+        "path": "versions/@cat-agent-skills/work_brief/3b957309d4ac.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6525,7 +7018,12 @@
       "_added_at": "2026-08-17T18:03:09-04:00",
       "_first_commit_sha": "409a3c18c6511b9cbf68a9f6716c5be9715b10c4",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "1a1a072dd09d0dd3149dad20b41093b0d69c31bb32dcb5471cad2d4afc76090b"
+      "_card_sha256": "1a1a072dd09d0dd3149dad20b41093b0d69c31bb32dcb5471cad2d4afc76090b",
+      "_version": {
+        "sha256": "5c8656fd0619330356b42a88ac5ec7cdf57ad539fe5f8f82863bfbf9618e1a43",
+        "sha8": "5c8656fd0619",
+        "path": "versions/@cat-agent-skills/work_iq_signalboard/5c8656fd0619.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6573,7 +7071,12 @@
       "_added_at": "2026-04-06T16:39:03-04:00",
       "_first_commit_sha": "4a5ea1bb2d453217e8cf5ad16c44542a06d6066d",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "dbdb95e58a21c73b2bbf16bf5d55069cc021b9a4f38f836d5bf6792ecddbde2e"
+      "_card_sha256": "dbdb95e58a21c73b2bbf16bf5d55069cc021b9a4f38f836d5bf6792ecddbde2e",
+      "_version": {
+        "sha256": "396da3af57b237a0b36dcca2adb1520220be5b65813dd89d09ae59d3d26a9aa2",
+        "sha8": "396da3af57b2",
+        "path": "versions/@discreetRappers/agent_generator_agent/396da3af57b2.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6624,7 +7127,12 @@
       "_added_at": "2026-04-06T16:39:03-04:00",
       "_first_commit_sha": "4a5ea1bb2d453217e8cf5ad16c44542a06d6066d",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "f9f63cc7e46b1896c057e565958a20ab47c21fc7134eb3edca298cee817f3413"
+      "_card_sha256": "f9f63cc7e46b1896c057e565958a20ab47c21fc7134eb3edca298cee817f3413",
+      "_version": {
+        "sha256": "312593bc75ba9d3314aa20c8745986b1fe9d99569fbd35ea0a2723d2815e3ec5",
+        "sha8": "312593bc75ba",
+        "path": "versions/@discreetRappers/agent_transpiler_agent/312593bc75ba.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6673,7 +7181,12 @@
       "_added_at": "2026-04-06T16:39:03-04:00",
       "_first_commit_sha": "4a5ea1bb2d453217e8cf5ad16c44542a06d6066d",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "6ba4b1ccc95f90a82a977ea97f7339ef4d5c7b300d28ec994459bfe39a3939fa"
+      "_card_sha256": "6ba4b1ccc95f90a82a977ea97f7339ef4d5c7b300d28ec994459bfe39a3939fa",
+      "_version": {
+        "sha256": "d5cac1baac38b585dead94b556dd7c6a5feb8772944bca8b6d88be70985161be",
+        "sha8": "d5cac1baac38",
+        "path": "versions/@discreetRappers/architecture_diagram_agent/d5cac1baac38.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6726,7 +7239,12 @@
       "_added_at": "2026-04-06T16:39:03-04:00",
       "_first_commit_sha": "4a5ea1bb2d453217e8cf5ad16c44542a06d6066d",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "da59c82024d98f689f3e5d3e26f4948b3269589627f37db8cf938d206fca30b9"
+      "_card_sha256": "da59c82024d98f689f3e5d3e26f4948b3269589627f37db8cf938d206fca30b9",
+      "_version": {
+        "sha256": "ee87bb1000f7f33a408097d912f3cd41946d0feb5ce40e7abe37f1938c8acefb",
+        "sha8": "ee87bb1000f7",
+        "path": "versions/@discreetRappers/copilot_studio_transpiler_agent/ee87bb1000f7.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6779,7 +7297,12 @@
       "_added_at": "2026-04-06T16:39:03-04:00",
       "_first_commit_sha": "4a5ea1bb2d453217e8cf5ad16c44542a06d6066d",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "d6f4e569b056cb8c2276e4b57244eb358599ac2b10e80d2f52dd01e63397e585"
+      "_card_sha256": "d6f4e569b056cb8c2276e4b57244eb358599ac2b10e80d2f52dd01e63397e585",
+      "_version": {
+        "sha256": "1c4123d0d87b13fbc12e728e4b6f0e48d73ab4484ba277c667fecf11f1202f5d",
+        "sha8": "1c4123d0d87b",
+        "path": "versions/@discreetRappers/demo_script_generator_agent/1c4123d0d87b.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6828,7 +7351,12 @@
       "_added_at": "2026-04-06T16:39:03-04:00",
       "_first_commit_sha": "4a5ea1bb2d453217e8cf5ad16c44542a06d6066d",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "ffa34bac56e2563b0a89580461bc1112725df24f9e8258fe60d4d9b56b0be313"
+      "_card_sha256": "ffa34bac56e2563b0a89580461bc1112725df24f9e8258fe60d4d9b56b0be313",
+      "_version": {
+        "sha256": "5ecb7c5df541c3659764417cb7cc0122fec1954583390881e4e9fee7bea60e3a",
+        "sha8": "5ecb7c5df541",
+        "path": "versions/@discreetRappers/dynamics_crud_agent/5ecb7c5df541.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6876,7 +7404,12 @@
       "_added_at": "2026-04-06T16:39:03-04:00",
       "_first_commit_sha": "4a5ea1bb2d453217e8cf5ad16c44542a06d6066d",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "c3374eacbd56ba104c27d2c5fa16e5af912b91cd8c83440c8e97c95ccdc2ebe7"
+      "_card_sha256": "c3374eacbd56ba104c27d2c5fa16e5af912b91cd8c83440c8e97c95ccdc2ebe7",
+      "_version": {
+        "sha256": "65ba2c8d5d2817d99fdf6463b1da6e4722a6a627b8b3a77120999bf930fb80e6",
+        "sha8": "65ba2c8d5d28",
+        "path": "versions/@discreetRappers/email_drafting_agent/65ba2c8d5d28.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6925,7 +7458,12 @@
       "_added_at": "2026-04-06T16:39:03-04:00",
       "_first_commit_sha": "4a5ea1bb2d453217e8cf5ad16c44542a06d6066d",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "0f0ca00ee5173a8a1c16c0282f7a738bf74f8f5a556ad9b9dfa1e2849414aa80"
+      "_card_sha256": "0f0ca00ee5173a8a1c16c0282f7a738bf74f8f5a556ad9b9dfa1e2849414aa80",
+      "_version": {
+        "sha256": "e1c71838845673ea756b0fea8afa04d3c9014964423cdaf354547df96af9a7e6",
+        "sha8": "e1c718388456",
+        "path": "versions/@discreetRappers/powerpoint_generator_agent/e1c718388456.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -6972,7 +7510,12 @@
       "_added_at": "2026-04-06T16:39:03-04:00",
       "_first_commit_sha": "4a5ea1bb2d453217e8cf5ad16c44542a06d6066d",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "83b4b799c4c7d58a6d524641ccc8f6fdf82b6bdba49407a5d35c0fe3a4a8804c"
+      "_card_sha256": "83b4b799c4c7d58a6d524641ccc8f6fdf82b6bdba49407a5d35c0fe3a4a8804c",
+      "_version": {
+        "sha256": "6ce05fe89b9c16b52949a4e36991f5d9536cb7981aa891d93b4fc53419bd4849",
+        "sha8": "6ce05fe89b9c",
+        "path": "versions/@discreetRappers/project_tracker_agent/6ce05fe89b9c.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7025,7 +7568,12 @@
       "_added_at": "2026-04-06T16:39:03-04:00",
       "_first_commit_sha": "4a5ea1bb2d453217e8cf5ad16c44542a06d6066d",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "0a6814f1a695df35822f4e629f2e0388842aff3be577fc439ff6384624ecb838"
+      "_card_sha256": "0a6814f1a695df35822f4e629f2e0388842aff3be577fc439ff6384624ecb838",
+      "_version": {
+        "sha256": "a5dc861857f4108578603c1ce6a547ee766c55cd2eb8b0bd5f6cfd1378954089",
+        "sha8": "a5dc861857f4",
+        "path": "versions/@discreetRappers/rapp_pipeline_agent/a5dc861857f4.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7073,7 +7621,12 @@
       "_added_at": "2026-04-06T16:39:03-04:00",
       "_first_commit_sha": "4a5ea1bb2d453217e8cf5ad16c44542a06d6066d",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "63963d299c3739804682de4fc991242d5504cc15d7fe1be61705f007e02a467e"
+      "_card_sha256": "63963d299c3739804682de4fc991242d5504cc15d7fe1be61705f007e02a467e",
+      "_version": {
+        "sha256": "806446e21316d4362938d86ea3be72fe0281167ec2d0e0d0167c04ff1a61e9a9",
+        "sha8": "806446e21316",
+        "path": "versions/@discreetRappers/sales_assistant_agent/806446e21316.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7126,7 +7679,12 @@
       "_added_at": "2026-04-06T16:39:03-04:00",
       "_first_commit_sha": "4a5ea1bb2d453217e8cf5ad16c44542a06d6066d",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "e67389ca68cd5c44455505c9a0d30d8de46bf1835f5820ed0d4b7dde661758f1"
+      "_card_sha256": "e67389ca68cd5c44455505c9a0d30d8de46bf1835f5820ed0d4b7dde661758f1",
+      "_version": {
+        "sha256": "04e240a1092a8e71d446ab7662792b69cbe54e48d78fa46ec76b4ff19cb78df4",
+        "sha8": "04e240a1092a",
+        "path": "versions/@discreetRappers/scripted_demo_agent/04e240a1092a.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7181,7 +7739,12 @@
       "_added_at": "2026-04-06T16:39:03-04:00",
       "_first_commit_sha": "4a5ea1bb2d453217e8cf5ad16c44542a06d6066d",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "33ce822866638d55b3b311b964a0e3d7055bf9962e5bbd7159821ad06eebb42a"
+      "_card_sha256": "33ce822866638d55b3b311b964a0e3d7055bf9962e5bbd7159821ad06eebb42a",
+      "_version": {
+        "sha256": "6bfac36ced9e10e89b7a35b6e3a7464d3cc66e4f8832feedbbde899852aa3893",
+        "sha8": "6bfac36ced9e",
+        "path": "versions/@discreetRappers/sharepoint_contract_analysis_agent/6bfac36ced9e.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7230,7 +7793,12 @@
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "998a1b8e72eaebf08946ff80c3782079d37406b6e76bf54209a74def5c3e71c5"
+      "_card_sha256": "998a1b8e72eaebf08946ff80c3782079d37406b6e76bf54209a74def5c3e71c5",
+      "_version": {
+        "sha256": "ecbabf0ca4b13f8c98558c9f773d95291d0c4c41e61604667aa32a901105491b",
+        "sha8": "ecbabf0ca4b1",
+        "path": "versions/@howardh/cardsmith_agent/ecbabf0ca4b1.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7281,7 +7849,12 @@
       "_added_at": "2026-04-28T17:29:54-04:00",
       "_first_commit_sha": "f50300a18ca2495e597e60a79f4c70953508bf37",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "732f40f25f521433ee145c12d69d2cf02f96f5b459ca79e8339e482bdbfa4d23"
+      "_card_sha256": "732f40f25f521433ee145c12d69d2cf02f96f5b459ca79e8339e482bdbfa4d23",
+      "_version": {
+        "sha256": "fedbb91cc50aca1912b9b29727b385cf6a4e06507e808d67ccb690a8eb4df9bc",
+        "sha8": "fedbb91cc50a",
+        "path": "versions/@howardh/chief_of_staff_agent/fedbb91cc50a.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7331,7 +7904,12 @@
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "fb140d70d19d085e2d98abdd6710e8b5d12d120e950a41942fdf1533089c3aa8"
+      "_card_sha256": "fb140d70d19d085e2d98abdd6710e8b5d12d120e950a41942fdf1533089c3aa8",
+      "_version": {
+        "sha256": "b895958c9b7f074a4a51ca5456c3aa3b3e54061291f6ea4fe19d5eb4ae1c95cb",
+        "sha8": "b895958c9b7f",
+        "path": "versions/@howardh/markdown_to_slides_agent/b895958c9b7f.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7383,7 +7961,12 @@
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "bd9de7e11087c32ca4ce4b26ff6a2952eda478038245cd63b105507486dad85f"
+      "_card_sha256": "bd9de7e11087c32ca4ce4b26ff6a2952eda478038245cd63b105507486dad85f",
+      "_version": {
+        "sha256": "ed75b1d6e1bedafee181b2eefc0a1e98a64533df1c7067383cc10450bea4c83f",
+        "sha8": "ed75b1d6e1be",
+        "path": "versions/@howardh/prompt_to_video_agent/ed75b1d6e1be.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7435,7 +8018,12 @@
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "df560dbeac9a5e20f8d8b910fc534c3d702c9687aa471655e4e3fb4878e0f601"
+      "_card_sha256": "df560dbeac9a5e20f8d8b910fc534c3d702c9687aa471655e4e3fb4878e0f601",
+      "_version": {
+        "sha256": "3d26f7412310635f9b35e26a324ecfdb1af86ea26b0069e753d95a76d4c9d089",
+        "sha8": "3d26f7412310",
+        "path": "versions/@howardh/recon_agent/3d26f7412310.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7485,7 +8073,12 @@
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "7a3df602d666e21c8a8e9c55fc0acd105cdebbc50ead1cb7b250c0629f0fe54a"
+      "_card_sha256": "7a3df602d666e21c8a8e9c55fc0acd105cdebbc50ead1cb7b250c0629f0fe54a",
+      "_version": {
+        "sha256": "a583ada09fa44f0d3d88962fea0826ae5877a09dd8639c908e6325c04cc0c36c",
+        "sha8": "a583ada09fa4",
+        "path": "versions/@howardh/training_quest_agent/a583ada09fa4.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7537,7 +8130,12 @@
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "f1bbbe1dd7f16bda26d328f473f64a4b9c8b3be8c3f6e9c408abb2a773fcd5bd"
+      "_card_sha256": "f1bbbe1dd7f16bda26d328f473f64a4b9c8b3be8c3f6e9c408abb2a773fcd5bd",
+      "_version": {
+        "sha256": "fe047c604edf53eac949ec02837dac4c6b32cba0db69d3d99119dbc3e50caf14",
+        "sha8": "fe047c604edf",
+        "path": "versions/@howardh/tuftelove_agent/fe047c604edf.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7592,7 +8190,12 @@
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "5fe0f7a92d4ed2f8443a89d40506613b09c6a85f543053c1bb8e07d6bc146d94"
+      "_card_sha256": "5fe0f7a92d4ed2f8443a89d40506613b09c6a85f543053c1bb8e07d6bc146d94",
+      "_version": {
+        "sha256": "6e2af2a79f6dcb1ba6fbf2ea9331d5f8a571b9842efa39727f4605333a3a846a",
+        "sha8": "6e2af2a79f6d",
+        "path": "versions/@howardh/vaultmind_agent/6e2af2a79f6d.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7650,7 +8253,12 @@
       "_added_at": "2026-05-05T10:49:27-04:00",
       "_first_commit_sha": "f6a8cc9a544a2f17e1365fe4cb19efa3e85cd89e",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "4b0b9fb61dfd10eb195c8bffff18a772fe482f415e892e6e84a56b2bbca6893c"
+      "_card_sha256": "4b0b9fb61dfd10eb195c8bffff18a772fe482f415e892e6e84a56b2bbca6893c",
+      "_version": {
+        "sha256": "60321dac590b9a80b2bcf85de9dea49e1617b00a6dbed28f4dcaf69d06ca40f4",
+        "sha8": "60321dac590b",
+        "path": "versions/@kody-w/agent_team_agent/60321dac590b.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7705,7 +8313,12 @@
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "3cbb92c5fa8b95f9da199fabbe4a18ff13c642090a76d5e3722285933d34fd92"
+      "_card_sha256": "3cbb92c5fa8b95f9da199fabbe4a18ff13c642090a76d5e3722285933d34fd92",
+      "_version": {
+        "sha256": "c0a0329cdb06728062ac11043d8989c1c1262c33f69f0afdf9d65e87f0d0575c",
+        "sha8": "c0a0329cdb06",
+        "path": "versions/@kody-w/agent_workbench/c0a0329cdb06.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7754,7 +8367,12 @@
       "_added_at": "2026-06-20T19:39:59-04:00",
       "_first_commit_sha": "952e42b5d80dc0dbad1b39ecf6c674c88dc7a320",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "249aeaf01ddd48e20b4d35032411beab24edd6d83f03c34da53bb7c1e434b122"
+      "_card_sha256": "249aeaf01ddd48e20b4d35032411beab24edd6d83f03c34da53bb7c1e434b122",
+      "_version": {
+        "sha256": "3e5333752068fae52cdd93dafa259c357d697dc8af1ec7707f2d2f25eb556b10",
+        "sha8": "3e5333752068",
+        "path": "versions/@kody-w/arena_compete_agent/3e5333752068.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7814,7 +8432,12 @@
       "_added_at": "2026-08-18T03:01:53Z",
       "_first_commit_sha": "9338f55e48447eed9c37c29f99f03a30fdc4bb92",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "d7b0f97d3ee142887d5656d972e4be0066ecef2b2c1304fc592c6894dc2fc25b"
+      "_card_sha256": "d7b0f97d3ee142887d5656d972e4be0066ecef2b2c1304fc592c6894dc2fc25b",
+      "_version": {
+        "sha256": "bc54973a21c902f273d1340391840ab8b1025232dadcd17175d0c1a2a77fd34c",
+        "sha8": "bc54973a21c9",
+        "path": "versions/@kody-w/art_generator_agent/bc54973a21c9.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7890,7 +8513,12 @@
       "_added_at": "2026-05-16T16:03:13-04:00",
       "_first_commit_sha": "e6cd9f56504cb8f49311fb0794ad527b3c010868",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "b81a8f375bc38fa7d401cbe0fb44351872a416cbc70a797d470569e8a3fd5618"
+      "_card_sha256": "b81a8f375bc38fa7d401cbe0fb44351872a416cbc70a797d470569e8a3fd5618",
+      "_version": {
+        "sha256": "61263e01de638d1c43e7ef6af8352ba219cf101d7b109118c36aaca34b2f502b",
+        "sha8": "61263e01de63",
+        "path": "versions/@kody-w/bakeoff_factory/61263e01de63.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7940,7 +8568,12 @@
       "_added_at": "2026-08-02T22:38:06-04:00",
       "_first_commit_sha": "ae1d6143f70e0182abd968e9c1c80ead38750484",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "934199e0e60c20847d1b9a98e42ca3558f6ffd7a9359e8fe6599d264eb9371bc"
+      "_card_sha256": "934199e0e60c20847d1b9a98e42ca3558f6ffd7a9359e8fe6599d264eb9371bc",
+      "_version": {
+        "sha256": "b14a4f23984fbc61acc1bde61ae592e16e8732ba287a78134d71361130011663",
+        "sha8": "b14a4f23984f",
+        "path": "versions/@kody-w/buzzsaw/b14a4f23984f.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -7989,7 +8622,12 @@
       "_added_at": "2026-06-20T19:05:34-04:00",
       "_first_commit_sha": "e25797036267f6fcc2fb155424802a56a7c234cc",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "2a33d3ea7204aaa3cc0985a8178822171644916751eed2307b80f90a86280956"
+      "_card_sha256": "2a33d3ea7204aaa3cc0985a8178822171644916751eed2307b80f90a86280956",
+      "_version": {
+        "sha256": "4d130862e28b92a3a3519a8b823905bffb90f35678565bb1743a714f20d0da70",
+        "sha8": "4d130862e28b",
+        "path": "versions/@kody-w/commons_life_agent/4d130862e28b.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8038,7 +8676,12 @@
       "_added_at": "2026-06-20T18:41:00-04:00",
       "_first_commit_sha": "1ce279601be2680b9089eca1ca290a0a85702cb7",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "b715fc89c10f2dc03cba5fb8398de92c49353621c2e6d6f189f092bad42f1a98"
+      "_card_sha256": "b715fc89c10f2dc03cba5fb8398de92c49353621c2e6d6f189f092bad42f1a98",
+      "_version": {
+        "sha256": "9287c090fce8d7a702aaddcb1223ea739ee2ac8988048239b7f78d16e8d94a0f",
+        "sha8": "9287c090fce8",
+        "path": "versions/@kody-w/commons_show_agent/9287c090fce8.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8088,7 +8731,12 @@
       "_added_at": "2026-06-22T21:04:42-04:00",
       "_first_commit_sha": "f6b8574fd0ef175bbaaae750cbeed0ce4d2c8a1a",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "7bffcebf26486167f72034dd33b10bef8ba47024f2eca19703084361eff2afe9"
+      "_card_sha256": "7bffcebf26486167f72034dd33b10bef8ba47024f2eca19703084361eff2afe9",
+      "_version": {
+        "sha256": "2653cc11fe301bc460b4fd94cffb59bfc854f1d88fb5f35a363e3b4aba52e6ce",
+        "sha8": "2653cc11fe30",
+        "path": "versions/@kody-w/connected_solution_agent/2653cc11fe30.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8136,7 +8784,12 @@
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "7da56937dd35b7116aed742dcba275740275458e73fc1a6a85b8712e72965fad"
+      "_card_sha256": "7da56937dd35b7116aed742dcba275740275458e73fc1a6a85b8712e72965fad",
+      "_version": {
+        "sha256": "66c3a78c7dd9d6705e49ea4e6505103ddf5666e30ec4054874056bd05424d081",
+        "sha8": "66c3a78c7dd9",
+        "path": "versions/@kody-w/context_memory_agent/66c3a78c7dd9.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8201,7 +8854,12 @@
       "_added_at": "2026-06-07T20:27:02-04:00",
       "_first_commit_sha": "30c4472aba13e5ad02d9304c6d7fe4ef031ae164",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "9a188d8f30fcfb76f1c72ed3c5b7a501a41c1455305b239cc4c4ef103fbaf359"
+      "_card_sha256": "9a188d8f30fcfb76f1c72ed3c5b7a501a41c1455305b239cc4c4ef103fbaf359",
+      "_version": {
+        "sha256": "9c15148dcff8ac706a3a49a941dc42e3b915a8e9cb0a6b8a147b0a3a60308153",
+        "sha8": "9c15148dcff8",
+        "path": "versions/@kody-w/copilot_studio_deploy_agent/9c15148dcff8.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8258,7 +8916,12 @@
       "_added_at": "2026-07-07T00:52:21Z",
       "_first_commit_sha": "f818123b2c136494ddf03bbe59add4dd454162fe",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "b17fa40818602a9864a241dadc96e13df4111975b08075e02cf0d5fca9112b42"
+      "_card_sha256": "b17fa40818602a9864a241dadc96e13df4111975b08075e02cf0d5fca9112b42",
+      "_version": {
+        "sha256": "f30e91e542090161fd2b559f4565c5c63b0fd93cb51f9a208256eb6c2d689667",
+        "sha8": "f30e91e54209",
+        "path": "versions/@kody-w/copilot_studio_forge_agent/f30e91e54209.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8312,7 +8975,12 @@
       "_added_at": "2026-08-11T17:28:15Z",
       "_first_commit_sha": "4891635294987ab41a44891dc0970bac66e5864e",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "e191119567a074bbe194c75c712a9bf8846ee4eacf04abed29326b3747c6efca"
+      "_card_sha256": "e191119567a074bbe194c75c712a9bf8846ee4eacf04abed29326b3747c6efca",
+      "_version": {
+        "sha256": "503f23d3431603a245dd5b43bbe140a986fc626764cbd57e03f481d279794484",
+        "sha8": "503f23d34316",
+        "path": "versions/@kody-w/copilot_studio_parity_deploy/503f23d34316.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8365,7 +9033,12 @@
       "_added_at": "2026-07-07T00:32:03Z",
       "_first_commit_sha": "fb1467098935dc28dbd31a1b65b2fa9ccb60d8e6",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "93f02002c531330bbe91b6d806e574f1a3e65864777cb9423ec51b608733a0ae"
+      "_card_sha256": "93f02002c531330bbe91b6d806e574f1a3e65864777cb9423ec51b608733a0ae",
+      "_version": {
+        "sha256": "6d84b5cefb5d1a032b208555020f96756bba3c6c0790b1d8544abafc868e1a99",
+        "sha8": "6d84b5cefb5d",
+        "path": "versions/@kody-w/copilot_studio_probe_agent/6d84b5cefb5d.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8417,7 +9090,12 @@
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "4475b2e4faea7e921f7f00bfa44b0a40ee1d609a8f7d7fc364d519adef7cf736"
+      "_card_sha256": "4475b2e4faea7e921f7f00bfa44b0a40ee1d609a8f7d7fc364d519adef7cf736",
+      "_version": {
+        "sha256": "68e3972b5c4a6b1b9f7105524aab0313aefcb121581beb8683fd98a0b90e2827",
+        "sha8": "68e3972b5c4a",
+        "path": "versions/@kody-w/deal_desk_agent/68e3972b5c4a.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8466,7 +9144,12 @@
       "_added_at": "2026-06-20T19:46:03-04:00",
       "_first_commit_sha": "5595a86755179cda7035620106e442a577358716",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "dd25d1fec1add33f2baea33ee501fc8267353d0955458b205d6220eddbd7658b"
+      "_card_sha256": "dd25d1fec1add33f2baea33ee501fc8267353d0955458b205d6220eddbd7658b",
+      "_version": {
+        "sha256": "eb3e678ca3ca0a1ddb347dbf65218b716a6a78044d03d02f74b9a31a8336948b",
+        "sha8": "eb3e678ca3ca",
+        "path": "versions/@kody-w/double_jump_agent/eb3e678ca3ca.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8516,7 +9199,12 @@
       "_added_at": "2026-05-09T15:25:16-04:00",
       "_first_commit_sha": "d4ab9c504eced1b0e396ded3c060160fa3e0750e",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "55484529489b231f258c171281b3be3683fcd9f38c2dc8c740a1c8ed33c95579"
+      "_card_sha256": "55484529489b231f258c171281b3be3683fcd9f38c2dc8c740a1c8ed33c95579",
+      "_version": {
+        "sha256": "7bfa5d0afca6919cedff2409abf22fdd8a715525de81426e68025429ef7cb585",
+        "sha8": "7bfa5d0afca6",
+        "path": "versions/@kody-w/bond_rhythm_agent/7bfa5d0afca6.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8566,7 +9254,12 @@
       "_added_at": "2026-05-09T15:25:18-04:00",
       "_first_commit_sha": "9592109e39449bfdc46cb3c5551487f1ad543024",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "6aa2519065918afd561a47acd1f612e783df2cb0c25b33e0ced294ee054ae07e"
+      "_card_sha256": "6aa2519065918afd561a47acd1f612e783df2cb0c25b33e0ced294ee054ae07e",
+      "_version": {
+        "sha256": "2a6fe3cccb8c2ae3cb649def409dcbf714fea0e7760bbf0e3a95c989557f84a4",
+        "sha8": "2a6fe3cccb8c",
+        "path": "versions/@kody-w/chain_composer_agent/2a6fe3cccb8c.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8616,7 +9309,12 @@
       "_added_at": "2026-05-09T15:25:17-04:00",
       "_first_commit_sha": "fc3d9ebe286252aa515888e47a878ce37ab41b20",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "dbf885ee0086759a9dd016c9b7e3b6349fc7f6df358160830a2909358ee251d1"
+      "_card_sha256": "dbf885ee0086759a9dd016c9b7e3b6349fc7f6df358160830a2909358ee251d1",
+      "_version": {
+        "sha256": "15f570244d281c16313f2711c180910bd839fce61609a37545358e63b7c1ea24",
+        "sha8": "15f570244d28",
+        "path": "versions/@kody-w/launch_to_public_agent/15f570244d28.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8667,7 +9365,12 @@
       "_added_at": "2026-05-09T15:25:19-04:00",
       "_first_commit_sha": "74df455c5fc5eb8fb5ce77adefcb261763205866",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "d9fb84ac224eeb736ff6c26b37f594841e65fdd78f531edf60f4f0da43fe47d7"
+      "_card_sha256": "d9fb84ac224eeb736ff6c26b37f594841e65fdd78f531edf60f4f0da43fe47d7",
+      "_version": {
+        "sha256": "9a7f94b9461517e0bf9a6c4fdb12c8450d53b34307ce36dac3bae576ed178a06",
+        "sha8": "9a7f94b94615",
+        "path": "versions/@kody-w/plant_seed_agent/9a7f94b94615.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8730,7 +9433,12 @@
       "_added_at": "2026-08-18T18:19:54-04:00",
       "_first_commit_sha": "17828d807f840c6d6338a3284b737735b1267142",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "e92767d56b08af67a27c3037deb5674d6e217f3962ea3eb0ef11de3e96e6ddf2"
+      "_card_sha256": "e92767d56b08af67a27c3037deb5674d6e217f3962ea3eb0ef11de3e96e6ddf2",
+      "_version": {
+        "sha256": "36711e8da4ce32d9b11fc02c18e925f955ca0588dcc65a5ea08099d1f4233f1f",
+        "sha8": "36711e8da4ce",
+        "path": "versions/@kody-w/education_shorts_agent/36711e8da4ce.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8787,7 +9495,12 @@
       "_added_at": "2026-05-16T16:30:24-04:00",
       "_first_commit_sha": "32a7596bb445e172dbea1704702d8b094e8bcedc",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "9a6e1a62900dde9cecc7edf0c2d026475b07764a3090eac67f08a9c0f32cb52f"
+      "_card_sha256": "9a6e1a62900dde9cecc7edf0c2d026475b07764a3090eac67f08a9c0f32cb52f",
+      "_version": {
+        "sha256": "46b070177e96da94f21bacbd45bfb0fa19f01d9aa79af7727bf1ff8aadd8e7b3",
+        "sha8": "46b070177e96",
+        "path": "versions/@kody-w/estate_factory/46b070177e96.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8836,7 +9549,12 @@
       "_added_at": "2026-06-20T18:58:25-04:00",
       "_first_commit_sha": "538143e9e20d77fbbf24d4d813759198d5b64688",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "6417c4f2a7a6e76d3d0e5abca25d83064cf1ebfbc920a4cd8ac925b6f831a1cd"
+      "_card_sha256": "6417c4f2a7a6e76d3d0e5abca25d83064cf1ebfbc920a4cd8ac925b6f831a1cd",
+      "_version": {
+        "sha256": "066d314a213177a5f0b8b0fac69652e5190b6980e5a6a6ae0a9b51b41d57420c",
+        "sha8": "066d314a2131",
+        "path": "versions/@kody-w/ez_sharpen_agent/066d314a2131.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8898,7 +9616,12 @@
       "_added_at": "2026-08-11T17:32:02Z",
       "_first_commit_sha": "8cb7572e8ecec18c1d2f29e8a09263d49c056c84",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "5622762aa186d2479ad0bb1bd1ce29b4c2b5baf828062a842b9403ed222648f1"
+      "_card_sha256": "5622762aa186d2479ad0bb1bd1ce29b4c2b5baf828062a842b9403ed222648f1",
+      "_version": {
+        "sha256": "72dc8b72531aa6133effb8dc23175b85889d63f7aa2bece4970ddca60792ddbf",
+        "sha8": "72dc8b72531a",
+        "path": "versions/@kody-w/factory/72dc8b72531a.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -8945,7 +9668,12 @@
       "_added_at": "2026-10-18T01:10:16-04:00",
       "_first_commit_sha": "4d986fee1ec211bc0a1357f4df8671625bbf45a6",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "a13dea2ee64bd739032ceb2d389eee8d917feb02b1660b87d174cfc980a4f383"
+      "_card_sha256": "a13dea2ee64bd739032ceb2d389eee8d917feb02b1660b87d174cfc980a4f383",
+      "_version": {
+        "sha256": "c9db0320a031fc0801f3fca2d73bf8a1a3d44987e1da95d3758f933a83c46585",
+        "sha8": "c9db0320a031",
+        "path": "versions/@kody-w/first_hour_agent/c9db0320a031.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9000,7 +9728,12 @@
       "_added_at": "2026-06-27T13:28:13-04:00",
       "_first_commit_sha": "a490fd06c577c07b4560c3452557dc881f06f384",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "f47c68f0e9f1f9a1e32fe1c0fe8887d1cf7a7f9c3d3c6f52ab021039c374f7e1"
+      "_card_sha256": "f47c68f0e9f1f9a1e32fe1c0fe8887d1cf7a7f9c3d3c6f52ab021039c374f7e1",
+      "_version": {
+        "sha256": "f07d76a30266eab0a367c47a6dacf9403cb08cae684c0e02b0252c0cea79da02",
+        "sha8": "f07d76a30266",
+        "path": "versions/@kody-w/flight_recorder/f07d76a30266.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9052,7 +9785,12 @@
       "_added_at": "2026-08-26T17:29:33-04:00",
       "_first_commit_sha": "e1c2dbed7de3fe2e7a6deaf6a8f82a0d20f860f2",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "06042c0537171350e3edeacce63d673d045ec8dbf1fb99b7b966dbe6029aab7a"
+      "_card_sha256": "06042c0537171350e3edeacce63d673d045ec8dbf1fb99b7b966dbe6029aab7a",
+      "_version": {
+        "sha256": "9698949e8248472aa11df8dd58192826b3cbdab56ee3fd8c2ff5fa6819d9f14c",
+        "sha8": "9698949e8248",
+        "path": "versions/@rapp/forge_provenance_agent/9698949e8248.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9101,7 +9839,12 @@
       "_added_at": "2026-11-03T21:53:43-05:00",
       "_first_commit_sha": "c1208a111801f65d98302609a4339779f8ad3d35",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "c5ad14d1b70c50cd21e641eed6df1fd1d09814ce6a45f79914b1f10be9beea4e"
+      "_card_sha256": "c5ad14d1b70c50cd21e641eed6df1fd1d09814ce6a45f79914b1f10be9beea4e",
+      "_version": {
+        "sha256": "4d13906d0277d672c4b54489527e7fc8042c54ae6a32c2024fec407b0ee6d381",
+        "sha8": "4d13906d0277",
+        "path": "versions/@kody-w/fragments_agent/4d13906d0277.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9162,7 +9905,12 @@
       "_added_at": "2026-08-11T09:43:05Z",
       "_first_commit_sha": "d16979f79339ed06511e0bc50c363f1286d140c7",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "26e529177e4a41bf2e4672096a2d6b2299ecc25c62f4fcac4583a999e4c2c2ca"
+      "_card_sha256": "26e529177e4a41bf2e4672096a2d6b2299ecc25c62f4fcac4583a999e4c2c2ca",
+      "_version": {
+        "sha256": "5f9093cc6020d9e24ec906d7dd16483ec159b06b33bb26bfcb9c2f2a1edb3fef",
+        "sha8": "5f9093cc6020",
+        "path": "versions/@kody-w/full_rapp_leviathan/5f9093cc6020.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9211,7 +9959,12 @@
       "_added_at": "2026-06-20T18:41:00-04:00",
       "_first_commit_sha": "1ce279601be2680b9089eca1ca290a0a85702cb7",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "98a9cab0fdba212aa5c32098ff69c97872ec89d27c83cb3c12eb38b9cdeffb1c"
+      "_card_sha256": "98a9cab0fdba212aa5c32098ff69c97872ec89d27c83cb3c12eb38b9cdeffb1c",
+      "_version": {
+        "sha256": "eb7b05da0183c37da67b7c1a480731cce05da42753401aa4df86581373c307c3",
+        "sha8": "eb7b05da0183",
+        "path": "versions/@kody-w/git_warehouse_agent/eb7b05da0183.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9259,7 +10012,12 @@
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "1b37cd9a3bbb2823dda511abec64f2a2e0734ead613e5a74864a1fb94a269ecf"
+      "_card_sha256": "1b37cd9a3bbb2823dda511abec64f2a2e0734ead613e5a74864a1fb94a269ecf",
+      "_version": {
+        "sha256": "b9bd6d0f87082877c37cca17be3a1d5ba873dcf736ce9805538eb8affcfadbab",
+        "sha8": "b9bd6d0f8708",
+        "path": "versions/@kody-w/github_agent_library_agent/b9bd6d0f8708.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9306,7 +10064,12 @@
       "_added_at": "2026-04-06T16:39:03-04:00",
       "_first_commit_sha": "4a5ea1bb2d453217e8cf5ad16c44542a06d6066d",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "faf6ac599406c967c3f8ceee0f1f184e8ce11bc8207c2fa46a2aa67090815b83"
+      "_card_sha256": "faf6ac599406c967c3f8ceee0f1f184e8ce11bc8207c2fa46a2aa67090815b83",
+      "_version": {
+        "sha256": "dacc1cacd80777c63efa1e7ea140fca761df3a6f0df5d0bf116748ea30823009",
+        "sha8": "dacc1cacd807",
+        "path": "versions/@kody-w/hello_world_agent/dacc1cacd807.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9356,7 +10119,12 @@
       "_added_at": "2026-08-29T00:44:02Z",
       "_first_commit_sha": "0313216c95b75e5aa168f655108622ba549a6481",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "56e5979e40d33cfbbbe0bd7581ff9c66a2514a0dfc466ff0411b6bf0976f67c1"
+      "_card_sha256": "56e5979e40d33cfbbbe0bd7581ff9c66a2514a0dfc466ff0411b6bf0976f67c1",
+      "_version": {
+        "sha256": "d4ad3769e2ef14bdef527072bdda1f2d126905bfbe52f30e74ba72ca953c11ee",
+        "sha8": "d4ad3769e2ef",
+        "path": "versions/@kody-w/hologram_dogg/d4ad3769e2ef.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9410,7 +10178,12 @@
       "_added_at": "2026-09-07T19:31:02-04:00",
       "_first_commit_sha": "97bb0520630a7a0e9ac17dd58dec6e85d344bfcf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "0aaf7379faf50a235febb8f8460d0ad4b680054308cc7510622d35f107718691"
+      "_card_sha256": "0aaf7379faf50a235febb8f8460d0ad4b680054308cc7510622d35f107718691",
+      "_version": {
+        "sha256": "284c111aa88d5588b9873c97f04d44676223ea37a80240a5e7b884bbdc7170c8",
+        "sha8": "284c111aa88d",
+        "path": "versions/@kody-w/host_compat_agent/284c111aa88d.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9459,7 +10232,12 @@
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "a75a9cf7516a8079f3007a1def9708b96281514b20983d8df506d0c46199c7d9"
+      "_card_sha256": "a75a9cf7516a8079f3007a1def9708b96281514b20983d8df506d0c46199c7d9",
+      "_version": {
+        "sha256": "91f2128926d613cc537ff4b3e5327a35b0268d0eabd548a828d5009af956b803",
+        "sha8": "91f2128926d6",
+        "path": "versions/@kody-w/install_rappter_distro_agent/91f2128926d6.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9508,7 +10286,12 @@
       "_added_at": "2026-11-03T17:23:03-05:00",
       "_first_commit_sha": "777f5ce19728ba74c8d1225b6d777f3d391df5b2",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "50c90af13eb8b474b14b6e76be68e094aa82a2344718d7b5fdb144d5371967c1"
+      "_card_sha256": "50c90af13eb8b474b14b6e76be68e094aa82a2344718d7b5fdb144d5371967c1",
+      "_version": {
+        "sha256": "f6358978b97b93606c74b987803dfc099f42e3ff143825040616102d5f8201bf",
+        "sha8": "f6358978b97b",
+        "path": "versions/@kody-w/journal_recall_agent/f6358978b97b.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9568,7 +10351,12 @@
       "_added_at": "2026-08-18T21:17:02-04:00",
       "_first_commit_sha": "075e7a3b8cf977f88a7fed0a615c46b2062b0c77",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "56fd215d028e122679338c9d79edb1a8dc015a6288f5ef0ecebe380b0402fa9c"
+      "_card_sha256": "56fd215d028e122679338c9d79edb1a8dc015a6288f5ef0ecebe380b0402fa9c",
+      "_version": {
+        "sha256": "3c0814050b74a0b9f7fb44220ed66600430ab8779601f469be8c20ac86521a99",
+        "sha8": "3c0814050b74",
+        "path": "versions/@kody-w/kody2day_agent/3c0814050b74.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9634,7 +10422,12 @@
       "_added_at": "2026-08-18T22:13:18-04:00",
       "_first_commit_sha": "34241ae10260c9d29669236e631d5bdd0ec1d141",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "e82a65c4a3d8eacc4ab61333dd07fa56828b6be13095c79388f0918525c887cb"
+      "_card_sha256": "e82a65c4a3d8eacc4ab61333dd07fa56828b6be13095c79388f0918525c887cb",
+      "_version": {
+        "sha256": "d20355f26593583aedbfb7d091a6d6a36b9e1798294baec17cfdc05cfa90b1bb",
+        "sha8": "d20355f26593",
+        "path": "versions/@kody-w/kody2day_studio_agent/d20355f26593.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9682,7 +10475,12 @@
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "7f9aa6609e9e3e21f76f78b6a0b29672b37526bf39f5b353c892c583f7b879b7"
+      "_card_sha256": "7f9aa6609e9e3e21f76f78b6a0b29672b37526bf39f5b353c892c583f7b879b7",
+      "_version": {
+        "sha256": "a37beaa2ab5282d9a36fbb1a10b1144649ef1a254baa437caaee0a3f87c30d1a",
+        "sha8": "a37beaa2ab52",
+        "path": "versions/@kody-w/manage_memory_agent/a37beaa2ab52.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9731,7 +10529,12 @@
       "_added_at": "2026-06-20T19:39:59-04:00",
       "_first_commit_sha": "952e42b5d80dc0dbad1b39ecf6c674c88dc7a320",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "8fcd7f2690961c43c0690f10bbdfbffa8cb49eb54ccd499db91a31fcd999fd02"
+      "_card_sha256": "8fcd7f2690961c43c0690f10bbdfbffa8cb49eb54ccd499db91a31fcd999fd02",
+      "_version": {
+        "sha256": "1d1c4fe075943ca79f7873608a2a683448a0bd8d3c97e89b640b4d8690cee7f1",
+        "sha8": "1d1c4fe07594",
+        "path": "versions/@kody-w/matrix_arena_agent/1d1c4fe07594.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9784,7 +10587,12 @@
       "_added_at": "2026-07-02T19:31:47Z",
       "_first_commit_sha": "b3ae5f05851a3fbbc956a4e10667a6fa925188f0",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "ac778f4171855bc710d2370ead9fc4b0389eb99da32e0f44813f423d8c492c03"
+      "_card_sha256": "ac778f4171855bc710d2370ead9fc4b0389eb99da32e0f44813f423d8c492c03",
+      "_version": {
+        "sha256": "1ff2b23806ff4a7ce64b9b4d21f249ac53e9a6efd5b57b839e95a9077e2e68f0",
+        "sha8": "1ff2b23806ff",
+        "path": "versions/@kody-w/microsoft_deck_studio_agent/1ff2b23806ff.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9835,7 +10643,12 @@
       "_added_at": "2026-06-26T23:08:53-04:00",
       "_first_commit_sha": "2d3ff59c24ab9bab9ad09d02bcc07ec95a3d5caf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "8dec4e2140d8b7b95689190ea2c40e301fa06208fb5194bb0df4b15dd4103a38"
+      "_card_sha256": "8dec4e2140d8b7b95689190ea2c40e301fa06208fb5194bb0df4b15dd4103a38",
+      "_version": {
+        "sha256": "271579577537088ee30aa14aa9bc28887d9f564cda195bdeb777d5a0da897815",
+        "sha8": "271579577537",
+        "path": "versions/@kody-w/neuron_swarm/271579577537.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9884,7 +10697,12 @@
       "_added_at": "2026-10-24T04:16:07Z",
       "_first_commit_sha": "50a570ba43b2a106e3f146533693846fa657df36",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "b60e1c98ba43b813b0cf0ab0b577bc5254088af77e319136e60399768898b377"
+      "_card_sha256": "b60e1c98ba43b813b0cf0ab0b577bc5254088af77e319136e60399768898b377",
+      "_version": {
+        "sha256": "d1e6ed9c0a69f581b705a4e8ee01440d5a0e3b5ad9efa9a78fcd156eb4ac1aad",
+        "sha8": "d1e6ed9c0a69",
+        "path": "versions/@kody-w/parallel_dimensions_agent/d1e6ed9c0a69.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9935,7 +10753,12 @@
       "_added_at": "2026-05-05T08:57:33-04:00",
       "_first_commit_sha": "c635bc0699a1dc0fbdcd425cddd4b6d087dfeb68",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "71f9b14c35a708d142e4e78e6e6065e48c9eb794fdde0664372705d562ea2fd0"
+      "_card_sha256": "71f9b14c35a708d142e4e78e6e6065e48c9eb794fdde0664372705d562ea2fd0",
+      "_version": {
+        "sha256": "0d2ef9275392dd839e64c7140ef5f57fbb9a108e5ee0ee619d4c77d29811616d",
+        "sha8": "0d2ef9275392",
+        "path": "versions/@kody-w/perpetual_loop_factory/0d2ef9275392.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -9991,7 +10814,12 @@
       "_added_at": "2026-08-18T03:06:50Z",
       "_first_commit_sha": "ed86f3685a8d6f3199cb12a61ee1143d619692f7",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "f8e70ce457cf9fe07317f007659893b5699ace613236c1ef641f91fcd0dc0faf"
+      "_card_sha256": "f8e70ce457cf9fe07317f007659893b5699ace613236c1ef641f91fcd0dc0faf",
+      "_version": {
+        "sha256": "ba4da935eacacd05f6e4f7c8fb3acfcce6277922ff3ac78b0bef7fb4fb3cc8b6",
+        "sha8": "ba4da935eaca",
+        "path": "versions/@kody-w/play_youtube_video_agent/ba4da935eaca.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -10045,7 +10873,12 @@
       "_added_at": "2026-07-22T15:35:38-04:00",
       "_first_commit_sha": "1f298747b7540c547ee4a8175826dfaaba35770b",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "8c9cf11c8f5ec03a6637491cf2401c494d26e8d1d6c6a6c8cf080241a87abcb4"
+      "_card_sha256": "8c9cf11c8f5ec03a6637491cf2401c494d26e8d1d6c6a6c8cf080241a87abcb4",
+      "_version": {
+        "sha256": "b080f45c3105b46c5b049ae7678e0b2844ec67ee52da6ed6a025f6ce1c45f074",
+        "sha8": "b080f45c3105",
+        "path": "versions/@kody-w/power_apps_code_app_agent/b080f45c3105.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -10094,7 +10927,12 @@
       "_added_at": "2026-05-24T12:20:22-04:00",
       "_first_commit_sha": "6168805317246db9e6ee77a559087dfea4c491ec",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "af5167351204f357f077e151dab6b321e44de2df2852f52fdaa4ebdc3f029193"
+      "_card_sha256": "af5167351204f357f077e151dab6b321e44de2df2852f52fdaa4ebdc3f029193",
+      "_version": {
+        "sha256": "0d74c48db5b63727319d7514b0743c1db08214d20c27560ebcd4902b205eeeed",
+        "sha8": "0d74c48db5b6",
+        "path": "versions/@kody-w/predictive_asset_maintenance_intelligence/0d74c48db5b6.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -10150,7 +10988,12 @@
       "_added_at": "2026-07-24T16:53:40Z",
       "_first_commit_sha": "0553d9160832ffb46ee5f0bb2d03c596d9039fa1",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "af8544de03b50abbe7300f6ba67476fd37e40573b030cfe64bd83ecb91d73a5e"
+      "_card_sha256": "af8544de03b50abbe7300f6ba67476fd37e40573b030cfe64bd83ecb91d73a5e",
+      "_version": {
+        "sha256": "0a9452444854c420edbf73b617d392c1a63510890a663455f69d56a4e4ea0fc6",
+        "sha8": "0a9452444854",
+        "path": "versions/@kody-w/project_tracker_agent/0a9452444854.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -10199,7 +11042,12 @@
       "_added_at": "2026-08-03T09:47:21-04:00",
       "_first_commit_sha": "9999f14cefcf8304a191538a68016a06fb59a4c8",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "085b4ac2784c839df37f33b1f548d0bc500303c1ae5ba0099e54cf258c696748"
+      "_card_sha256": "085b4ac2784c839df37f33b1f548d0bc500303c1ae5ba0099e54cf258c696748",
+      "_version": {
+        "sha256": "ece05fd7f282eb9dc85f002df0fd03cd09ba82cfcb8c2acb1a54eaf83279747d",
+        "sha8": "ece05fd7f282",
+        "path": "versions/@kody-w/prompt_extractor/ece05fd7f282.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -10255,7 +11103,12 @@
       "_added_at": "2026-08-17T22:07:23Z",
       "_first_commit_sha": "234384a80e84ebb7c5097959c2c9d2223fc0fabb",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "bc6c194c494d230a54416f18d307743e6e7c62e9a98026453f4b85a7b63e7ec4"
+      "_card_sha256": "bc6c194c494d230a54416f18d307743e6e7c62e9a98026453f4b85a7b63e7ec4",
+      "_version": {
+        "sha256": "eb9308df4af313ea90fd0ef432c2b69d04635135c0c1d368e1886f775eedb2b0",
+        "sha8": "eb9308df4af3",
+        "path": "versions/@kody-w/prototype_lock_factory_agent/eb9308df4af3.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -10303,7 +11156,12 @@
       "_added_at": "2026-05-16T16:33:02-04:00",
       "_first_commit_sha": "14c67230dd646569c66e22761625d258c6a7e33c",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "9c4eb137efbda52644e5f11aed0e34d577f6777a58c1952d35a4f3877f1bfda1"
+      "_card_sha256": "9c4eb137efbda52644e5f11aed0e34d577f6777a58c1952d35a4f3877f1bfda1",
+      "_version": {
+        "sha256": "ec4a05f14e2149e80674ca6270942c3650539f20ea584de7cd3055c247e8c194",
+        "sha8": "ec4a05f14e21",
+        "path": "versions/@kody-w/rapp_leviathan_factory/ec4a05f14e21.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -10352,7 +11210,12 @@
       "_added_at": "2026-08-31T11:52:12-04:00",
       "_first_commit_sha": "3f0a4dacbf782b21798e00695c03689dd776272d",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "0ea3e4454abc3d21fb1fb042d1cad6aab89e5f40f8910b20694f4153b1987a7b"
+      "_card_sha256": "0ea3e4454abc3d21fb1fb042d1cad6aab89e5f40f8910b20694f4153b1987a7b",
+      "_version": {
+        "sha256": "f4102700cea9eefca33d876a04ba7b077e4111bf045492af678d2854058d97f1",
+        "sha8": "f4102700cea9",
+        "path": "versions/@kody-w/rapp_projects/f4102700cea9.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -10400,7 +11263,12 @@
       "_added_at": "2026-07-15T15:23:19Z",
       "_first_commit_sha": "3cfcc226736dc1ab5cbe7186c18297d2bedb7310",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "dd0679caf42799df10736aa8c06e5dc17126448f4c2d72430dd9a187238da822"
+      "_card_sha256": "dd0679caf42799df10736aa8c06e5dc17126448f4c2d72430dd9a187238da822",
+      "_version": {
+        "sha256": "eaf3bf3a686d9fb08fc8f3c0b05f59075c8a334a68c5d8fe678f39aa81dc27e5",
+        "sha8": "eaf3bf3a686d",
+        "path": "versions/@kody-w/rapp_sdk_builder/eaf3bf3a686d.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -10463,7 +11331,12 @@
       "_added_at": "2026-08-18T20:49:04-04:00",
       "_first_commit_sha": "0cac8b2ead93e9791fa77022cbd654990205184e",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "41f94962279ceaa6842a55289493b735ea864560643b1ab390ff0ab47fbf911c"
+      "_card_sha256": "41f94962279ceaa6842a55289493b735ea864560643b1ab390ff0ab47fbf911c",
+      "_version": {
+        "sha256": "21c1590863a76733ea61aad02ff93d6ef2f89b5f386d76a2417c4794e5bc944d",
+        "sha8": "21c1590863a7",
+        "path": "versions/@kody-w/rapp_sentinel_agent/21c1590863a7.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -10519,7 +11392,12 @@
       "_added_at": "2026-07-23T12:26:59-04:00",
       "_first_commit_sha": "13ba36d938ea0d393c9d863b411b4ed0096648de",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "b8c3b917fedaaea3ce0214008a98206fdb70e7ffe16bde95536bd4f5e750c5d7"
+      "_card_sha256": "b8c3b917fedaaea3ce0214008a98206fdb70e7ffe16bde95536bd4f5e750c5d7",
+      "_version": {
+        "sha256": "52bac89841d98a5d1218c0e665e2fdd6dd44ddd6d7d5aa52bbe4cf676141aae4",
+        "sha8": "52bac89841d9",
+        "path": "versions/@kody-w/rapp_skill_bridge_agent/52bac89841d9.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -10566,7 +11444,12 @@
       "_added_at": "2026-07-18T23:41:02Z",
       "_first_commit_sha": "2850d7964e97e142ba32e3bbfe2a24a5e3cbc353",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "745d05cd517dc4ea101bafc1e55983c9f32af5921f0eaee48c09ece430c0f14c"
+      "_card_sha256": "745d05cd517dc4ea101bafc1e55983c9f32af5921f0eaee48c09ece430c0f14c",
+      "_version": {
+        "sha256": "c006e2637b31eb84db60a7832d730b37cd004d497b7d7ae589f2464706f03918",
+        "sha8": "c006e2637b31",
+        "path": "versions/@kody-w/rapp_x_notary_canary_agent/c006e2637b31.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -10616,7 +11499,12 @@
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "2ef28abeca078023a5324af06e75e583ca6d2bdc4338971b4a4d844505dc89fa"
+      "_card_sha256": "2ef28abeca078023a5324af06e75e583ca6d2bdc4338971b4a4d844505dc89fa",
+      "_version": {
+        "sha256": "4d532a0027f1424511d571af7f1c8e31d2fb73cfc00b10320d119e94dc00422e",
+        "sha8": "4d532a0027f1",
+        "path": "versions/@kody-w/rappter_engine_agent/4d532a0027f1.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -10666,7 +11554,12 @@
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "ceecd6ee22a86b15f6fa5daa0d83164fb19bbe75de287361d60207ac4abdf44f"
+      "_card_sha256": "ceecd6ee22a86b15f6fa5daa0d83164fb19bbe75de287361d60207ac4abdf44f",
+      "_version": {
+        "sha256": "e890cb23948e07fd72ae980dc35102f72b1c691b1399370d88d7ef2cd23e5267",
+        "sha8": "e890cb23948e",
+        "path": "versions/@kody-w/rappterbook_agent/e890cb23948e.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -10716,7 +11609,12 @@
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "a4a541750a52bdca612d2d5308c50c957405b094f2a6232c466160ec449112fc"
+      "_card_sha256": "a4a541750a52bdca612d2d5308c50c957405b094f2a6232c466160ec449112fc",
+      "_version": {
+        "sha256": "078d5bbb37e91cb052e9cfdc540aa5024d6a573f0be14df860c7df4c4ba08f69",
+        "sha8": "078d5bbb37e9",
+        "path": "versions/@kody-w/rappterpedia_agent/078d5bbb37e9.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -10777,7 +11675,12 @@
       "_added_at": "2026-09-01T04:22:15Z",
       "_first_commit_sha": "683e6191e17e71cb8d96c0a0a5e8f2d7b4b6661e",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "20883721c03409730e0ca6920f85822df3f11e330299d1bf0bceb63aca37cc35"
+      "_card_sha256": "20883721c03409730e0ca6920f85822df3f11e330299d1bf0bceb63aca37cc35",
+      "_version": {
+        "sha256": "2d4a3f1b82eec87bee381b89ca81f6ddc33d1466b94d4c5ec53b4bd588269dbe",
+        "sha8": "2d4a3f1b82ee",
+        "path": "versions/@kody-w/rar_installer_troubleshooter_agent/2d4a3f1b82ee.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -10828,7 +11731,12 @@
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "00814edd84e2e154074e2c417624b1860d13fd0cf38805e4d3277ca30e702600"
+      "_card_sha256": "00814edd84e2e154074e2c417624b1860d13fd0cf38805e4d3277ca30e702600",
+      "_version": {
+        "sha256": "c4743a86ee97d68c37ecacd7a811e98452ad49f092baa1ee83150fb3a036eac3",
+        "sha8": "c4743a86ee97",
+        "path": "versions/@kody-w/rar_remote_agent/c4743a86ee97.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -10882,7 +11790,12 @@
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "38b3538fece29d12d24224b5a18b18c844d42c358a93ec1e5b7805b923f492b8"
+      "_card_sha256": "38b3538fece29d12d24224b5a18b18c844d42c358a93ec1e5b7805b923f492b8",
+      "_version": {
+        "sha256": "050da8810c28845a2d60cc336b33e3518805d57f02031a754901d92c55622d4c",
+        "sha8": "050da8810c28",
+        "path": "versions/@kody-w/recon_deck_agent/050da8810c28.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -10931,7 +11844,12 @@
       "_added_at": "2026-06-20T18:41:00-04:00",
       "_first_commit_sha": "1ce279601be2680b9089eca1ca290a0a85702cb7",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "59277181c9089d2d9ef322706f7a973308a09f6f8aab6bd1cf493b168fd5f14c"
+      "_card_sha256": "59277181c9089d2d9ef322706f7a973308a09f6f8aab6bd1cf493b168fd5f14c",
+      "_version": {
+        "sha256": "e67740d2ab1a489c29b4b274e2d20cb9df720603ba7963a10b0fde207f6c8aa1",
+        "sha8": "e67740d2ab1a",
+        "path": "versions/@kody-w/second_life_agent/e67740d2ab1a.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -10987,7 +11905,12 @@
       "_added_at": "2026-10-24T04:02:39Z",
       "_first_commit_sha": "acb65718b1e8ae07ce85ae5b6ea25cfc874f1bcf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "083099fd332d1acfdd73b08db99103d98fbd38fa8db7c468075f2910cb1f2af9"
+      "_card_sha256": "083099fd332d1acfdd73b08db99103d98fbd38fa8db7c468075f2910cb1f2af9",
+      "_version": {
+        "sha256": "4e3d29f41ac869e4eaf99a8c499d27f37a811bd019d61c1551d8c5adb98585a8",
+        "sha8": "4e3d29f41ac8",
+        "path": "versions/@kody-w/self_compact_agent/4e3d29f41ac8.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -11037,7 +11960,12 @@
       "_added_at": "2026-08-01T21:33:29-04:00",
       "_first_commit_sha": "cdba6310faf6c2aa731f37d58cfe8e921a360080",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "8e668f73b3d460734f5c938dafb40ae217826fa5eec7af9fbc5874539b43c94c"
+      "_card_sha256": "8e668f73b3d460734f5c938dafb40ae217826fa5eec7af9fbc5874539b43c94c",
+      "_version": {
+        "sha256": "48aea57c434c6992922172546b2ae02f219015377a34be1ce5dfdb837d9d2b0c",
+        "sha8": "48aea57c434c",
+        "path": "versions/@kody-w/skill_toaster_agent/48aea57c434c.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -11093,7 +12021,12 @@
       "_added_at": "2026-11-04T14:16:00Z",
       "_first_commit_sha": "8133421c9904ea088965d358239b9ecfb05541ff",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "9cfaaf2d2fdd88ba7daaa16c741137fca340e7ff7a432ee21d995c5ff37000a0"
+      "_card_sha256": "9cfaaf2d2fdd88ba7daaa16c741137fca340e7ff7a432ee21d995c5ff37000a0",
+      "_version": {
+        "sha256": "89d785bcb732d5d8cfb685873d539272f9fccdaeb5c4d556c9f3b39ba2830986",
+        "sha8": "89d785bcb732",
+        "path": "versions/@kody-w/source_capture_agent/89d785bcb732.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -11142,7 +12075,12 @@
       "_added_at": "2026-10-24T04:09:13Z",
       "_first_commit_sha": "82c64ab86138c5d021d69d1a32df1731b399b231",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "60ecfa27a811ece67f0037dfe88bbdf7a9332f6888d312bff831ce5299f71fb1"
+      "_card_sha256": "60ecfa27a811ece67f0037dfe88bbdf7a9332f6888d312bff831ce5299f71fb1",
+      "_version": {
+        "sha256": "c6768a7a25c21f3047e8cb47a96528f83f126742bdbafb9f13e4df4ebb30aad5",
+        "sha8": "c6768a7a25c2",
+        "path": "versions/@kody-w/thread_tracker_agent/c6768a7a25c2.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -11199,7 +12137,12 @@
       "_added_at": "2026-06-17T17:06:07-04:00",
       "_first_commit_sha": "4602c5186e0ece571f0635f727d38cf01a81fb46",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "7a805559329b338692ee7ffdf2300bcc485f69dcf8abbe8ba22b28b304a3da1c"
+      "_card_sha256": "7a805559329b338692ee7ffdf2300bcc485f69dcf8abbe8ba22b28b304a3da1c",
+      "_version": {
+        "sha256": "8a6a12130be0fdac137a316a07076b917304e15242b8b81c609efcb1c6a4a3d1",
+        "sha8": "8a6a12130be0",
+        "path": "versions/@kody-w/transcript2prototype/8a6a12130be0.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -11253,7 +12196,12 @@
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "e20fcc72d17171a6c0428997d449dc7ec1420f673a25ca894b91898806fb8e6a"
+      "_card_sha256": "e20fcc72d17171a6c0428997d449dc7ec1420f673a25ca894b91898806fb8e6a",
+      "_version": {
+        "sha256": "300dd7302be574e2460c2ccd873c930fb9a6f07057078afbe3da114c84b23ef2",
+        "sha8": "300dd7302be5",
+        "path": "versions/@kody-w/twin_egg_hatcher/300dd7302be5.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -11306,7 +12254,12 @@
       "_added_at": "2026-06-08T13:48:48-04:00",
       "_first_commit_sha": "5db14098aff17d349699789944523da57b83db4f",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "87c40be2d23dc8df383fdaae1bbdfe444bfe003bdfcb9e3fb9747fe4ba3490e0"
+      "_card_sha256": "87c40be2d23dc8df383fdaae1bbdfe444bfe003bdfcb9e3fb9747fe4ba3490e0",
+      "_version": {
+        "sha256": "821f3c97589ab2bd5ab346d36a2458621f39d568f205b9391893308099efabed",
+        "sha8": "821f3c97589a",
+        "path": "versions/@kody-w/twin_me/821f3c97589a.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -11359,7 +12312,12 @@
       "_added_at": "2026-05-03T14:51:56-04:00",
       "_first_commit_sha": "6a3a339d216404f2514c2bad0e66716963fab86d",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "196b64e2071c566a4c648fd53e56c8921c3cf266bd5c56889988da8e42c91056"
+      "_card_sha256": "196b64e2071c566a4c648fd53e56c8921c3cf266bd5c56889988da8e42c91056",
+      "_version": {
+        "sha256": "c0329a49a1dccb8873b83964d0fa8ce231a24ede94051343162b37bef7149b1f",
+        "sha8": "c0329a49a1dc",
+        "path": "versions/@kody-w/vibe_coding_loop/c0329a49a1dc.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -11418,7 +12376,12 @@
       "_added_at": "2026-08-18T03:03:49Z",
       "_first_commit_sha": "078c9f76011af965f40983af7f225debec8e76b8",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "880b2ab79ed2e2b5eab632701b3d8000697d6fb2d136247cd083ab94fdb02c8f"
+      "_card_sha256": "880b2ab79ed2e2b5eab632701b3d8000697d6fb2d136247cd083ab94fdb02c8f",
+      "_version": {
+        "sha256": "fc726fa63a72e17477e2358af45d9ee652adf5496439df752362372f3b58f9af",
+        "sha8": "fc726fa63a72",
+        "path": "versions/@kody-w/windows_vm_install_lab_agent/fc726fa63a72.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -11475,7 +12438,12 @@
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "287a618bc0466e5a4f11cd51f652fff5a8d296bc3ae9360cce3ed304f9c430d8"
+      "_card_sha256": "287a618bc0466e5a4f11cd51f652fff5a8d296bc3ae9360cce3ed304f9c430d8",
+      "_version": {
+        "sha256": "7f6de288bc1e6756834a22d68cf832b987c9d5a28ef3338e658a6948a5b18fab",
+        "sha8": "7f6de288bc1e",
+        "path": "versions/@kody-w/workiq/7f6de288bc1e.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -11528,7 +12496,12 @@
       "_added_at": "2026-08-11T09:50:23Z",
       "_first_commit_sha": "4b757ee7d13ed9a803b2947b401f82a9b7811b0e",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "3b4ea8f6bcbf4d33ce428b36639a197e4906c58bb8666a2d9a450029e8e58703"
+      "_card_sha256": "3b4ea8f6bcbf4d33ce428b36639a197e4906c58bb8666a2d9a450029e8e58703",
+      "_version": {
+        "sha256": "0d2e51f233adabe41c5be35467adf84009cd0fd7a424bfaeee3fd83c807c7fb4",
+        "sha8": "0d2e51f233ad",
+        "path": "versions/@kody-w/wp_publish_agent/0d2e51f233ad.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -11573,7 +12546,12 @@
       "_added_at": "2026-04-06T14:07:43-04:00",
       "_first_commit_sha": "16f7fd56ce13b32a66f31dfc44c63946afe0bb55",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "bc2b73595951bcb1ad79fe8e93b14e2241deefe6f41fd3d6e61d0ee5e55822b5"
+      "_card_sha256": "bc2b73595951bcb1ad79fe8e93b14e2241deefe6f41fd3d6e61d0ee5e55822b5",
+      "_version": {
+        "sha256": "84809dbeb5a57867d3341909cae42c9a286ddbaec97e5b4084f3b89c4a4e564b",
+        "sha8": "84809dbeb5a5",
+        "path": "versions/@rapp/basic_agent/84809dbeb5a5.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -11632,7 +12610,12 @@
       "_added_at": "2026-05-11T13:43:55-04:00",
       "_first_commit_sha": "4e994a3881b55e01707eaca1e1ee0fddd902c8fe",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "a4d4a0dd65f69a3fc7ae2f6849d976b6d8ef56ef05e1814036ad2b9428b5c51c"
+      "_card_sha256": "a4d4a0dd65f69a3fc7ae2f6849d976b6d8ef56ef05e1814036ad2b9428b5c51c",
+      "_version": {
+        "sha256": "04f13fff1a7aab7e1566d2c71a96826c91e4222cd6f8c470b548e0cb4343d7ab",
+        "sha8": "04f13fff1a7a",
+        "path": "versions/@rapp/commons_post/04f13fff1a7a.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -11682,7 +12665,12 @@
       "_added_at": "2026-06-09T21:40:07-04:00",
       "_first_commit_sha": "f1952442eb6627946f9e306c0804202134549c62",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "5eabdb678e41bd6c55f810129940b278b7be543d76354470968e1ba04391ba3a"
+      "_card_sha256": "5eabdb678e41bd6c55f810129940b278b7be543d76354470968e1ba04391ba3a",
+      "_version": {
+        "sha256": "b40ed2f9d3cd95038078b0ae7514b31a8da5e36a5b3b56c170d625606f97176b",
+        "sha8": "b40ed2f9d3cd",
+        "path": "versions/@rapp/drift/b40ed2f9d3cd.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -11735,7 +12723,12 @@
       "_added_at": "2026-06-10T09:05:29-04:00",
       "_first_commit_sha": "8908cd98178e9a4c2b7a0e45f758e16ece7635bc",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "852a7af68c9e2ad6084b7ff78eea695be2898bb0c73b1768958ed3004ca26e2e"
+      "_card_sha256": "852a7af68c9e2ad6084b7ff78eea695be2898bb0c73b1768958ed3004ca26e2e",
+      "_version": {
+        "sha256": "0d87442bbc4330abef6f282af1e095f43c930580b20f1b3ac9ec010fad4187cd",
+        "sha8": "0d87442bbc43",
+        "path": "versions/@rapp/drift_watcher/0d87442bbc43.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -11790,7 +12783,12 @@
       "_added_at": "2026-05-11T10:53:36-04:00",
       "_first_commit_sha": "b00529de70afc67aa4a79ef59bfc4d5818ea8c17",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "7bef20173184a85b718c10ec0b9a759e71dee3dbcf1604e6b0a3002a1940c5d7"
+      "_card_sha256": "7bef20173184a85b718c10ec0b9a759e71dee3dbcf1604e6b0a3002a1940c5d7",
+      "_version": {
+        "sha256": "7391fce3a02e8ee274332fbd71c5850495998d2e656732837b1ef104b99aef8e",
+        "sha8": "7391fce3a02e",
+        "path": "versions/@rapp/egg_hatcher/7391fce3a02e.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -11853,7 +12851,12 @@
       "_added_at": "2026-05-11T13:59:12-04:00",
       "_first_commit_sha": "b1b409ae141ba89b565787d3033b75323e1fdd2b",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "a086f696077f05d06a46ae627e75856ce997bf7fc3e4f99b89817255cf0f7b25"
+      "_card_sha256": "a086f696077f05d06a46ae627e75856ce997bf7fc3e4f99b89817255cf0f7b25",
+      "_version": {
+        "sha256": "a918d6922c3ac93566aa0de306edee4caaba38b91d5b4818a00d338ab5c84861",
+        "sha8": "a918d6922c3a",
+        "path": "versions/@rapp/estate_outbound/a918d6922c3a.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -11908,7 +12911,12 @@
       "_added_at": "2026-04-27T21:23:24Z",
       "_first_commit_sha": "b6c7da374ea493a726d1dfa469cabe0d5cbdaf0f",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "f3944e0ab153ba1723e78e0f9ba03e33054fb8c8f5ac87c707d35d053da955ea"
+      "_card_sha256": "f3944e0ab153ba1723e78e0f9ba03e33054fb8c8f5ac87c707d35d053da955ea",
+      "_version": {
+        "sha256": "6a532d4551853ff4ec03b015ae683962b339dbbcdc609990e0259d70347dea9c",
+        "sha8": "6a532d455185",
+        "path": "versions/@rapp/exec_brief_agent/6a532d455185.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -11964,7 +12972,12 @@
       "_added_at": "2026-04-21T13:35:42-04:00",
       "_first_commit_sha": "8893033dba286f7269a6e171f4729639fd15fa9b",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "d7cc3c415d8374a6ebff4718cf1d0f5e86575f80f4d346d120c2b109695043a7"
+      "_card_sha256": "d7cc3c415d8374a6ebff4718cf1d0f5e86575f80f4d346d120c2b109695043a7",
+      "_version": {
+        "sha256": "2352d839c61457a7cd0d108e56d64814cff7f3dcdabe942d07404063e25016e4",
+        "sha8": "2352d839c614",
+        "path": "versions/@rapp/fleet_commander/2352d839c614.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -12009,7 +13022,12 @@
       "_added_at": "2026-05-02T14:14:24-04:00",
       "_first_commit_sha": "dce067fbc506e53999b5d29b3da64390f3961dde",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "114f3d5db59d4ca9affc1df2abb8637e9d42811ab7b66bc6546b46b7cfd5682e"
+      "_card_sha256": "114f3d5db59d4ca9affc1df2abb8637e9d42811ab7b66bc6546b46b7cfd5682e",
+      "_version": {
+        "sha256": "1dd72a3c109f51919101198c8ea6dd4ab48e38f9ab52a2f324382a69acb911ae",
+        "sha8": "1dd72a3c109f",
+        "path": "versions/@rapp/hacker_news/1dd72a3c109f.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -12066,7 +13084,12 @@
       "_added_at": "2026-04-20T12:38:45-04:00",
       "_first_commit_sha": "1e4054692e4a9b1edc6ff96245ef02af9bb4f9b3",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "df848009cc78daf0ff4b299752b94d78741ebba289009d40f836970da5ede230"
+      "_card_sha256": "df848009cc78daf0ff4b299752b94d78741ebba289009d40f836970da5ede230",
+      "_version": {
+        "sha256": "3cc1431dca7e6aee411f653c9ea2746e2161b1fe8db3fdeb5cbc72c0c803f4f9",
+        "sha8": "3cc1431dca7e",
+        "path": "versions/@rapp/learn_new/3cc1431dca7e.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -12130,7 +13153,12 @@
       "_added_at": "2026-04-27T21:16:54Z",
       "_first_commit_sha": "402803456fb795b747528ab122420beb2cfdedcf",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "5ecca79bfd6bdac332aa46b4b212a3abc8a4ecce465b00c4347ae19e581d9917"
+      "_card_sha256": "5ecca79bfd6bdac332aa46b4b212a3abc8a4ecce465b00c4347ae19e581d9917",
+      "_version": {
+        "sha256": "57786378d57cca18fb846fb4dce7d167734d4826d41dfcadc8569f3ca91a19e9",
+        "sha8": "57786378d57c",
+        "path": "versions/@rapp/moment_factory_agent/57786378d57c.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -12177,7 +13205,12 @@
       "_added_at": "2026-04-27T23:08:42Z",
       "_first_commit_sha": "029027a44fe16a408ce05f40c8a5b5bf071acd78",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "b6f4c95eb4d6fa93263de27baab2aaf760ff781f89cee155d59bc3d4f791bb9e"
+      "_card_sha256": "b6f4c95eb4d6fa93263de27baab2aaf760ff781f89cee155d59bc3d4f791bb9e",
+      "_version": {
+        "sha256": "bcd367fbb3174f0128309a6f98df1b461f012dfdea619e4dae9b301c8b607bf9",
+        "sha8": "bcd367fbb317",
+        "path": "versions/@rapp/ping_agent/bcd367fbb317.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -12228,7 +13261,12 @@
       "_added_at": "2026-04-27T21:24:10Z",
       "_first_commit_sha": "19a12cd44ac21bb729195545dd4d3e3ea0f605b8",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "a5f4e72fe20242cc4e577d87480eadb8970712a558c215a645b34af64c6ae6c1"
+      "_card_sha256": "a5f4e72fe20242cc4e577d87480eadb8970712a558c215a645b34af64c6ae6c1",
+      "_version": {
+        "sha256": "515d8cf7589e9ddfb4dd4a0575245f08e87b02a86837385df5b5c926f5958d1e",
+        "sha8": "515d8cf7589e",
+        "path": "versions/@rapp/pitch_deck_agent/515d8cf7589e.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -12282,7 +13320,12 @@
       "_added_at": "2026-06-09T21:40:04-04:00",
       "_first_commit_sha": "7b2333f1ee396314f2e926e60282a5904e3fc07c",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "fbda99afc9c184f7de6efa6302701669e071afef79af371e0ca92280bc9869b7"
+      "_card_sha256": "fbda99afc9c184f7de6efa6302701669e071afef79af371e0ca92280bc9869b7",
+      "_version": {
+        "sha256": "827cc07976687631087dd00ceb7d5d78082eb2f025467215cadac68e81d10a71",
+        "sha8": "827cc0797668",
+        "path": "versions/@rapp/rapp/827cc0797668.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -12336,7 +13379,12 @@
       "_added_at": "2026-08-26T16:49:28-04:00",
       "_first_commit_sha": "cc1106b7ecd6db76d481e2e5f4adac854fec8fc0",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "d97278b3340d7a7e85aad40bd7325067cb85a8abe835a1d56b22358a756a8ee8"
+      "_card_sha256": "d97278b3340d7a7e85aad40bd7325067cb85a8abe835a1d56b22358a756a8ee8",
+      "_version": {
+        "sha256": "6a2309f2838a8e890f721d0291a19254986fc9b5ebe11e5d859b48a6d2167853",
+        "sha8": "6a2309f2838a",
+        "path": "versions/@rapp/rapp_dogg_agent/6a2309f2838a.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -12392,7 +13440,12 @@
       "_added_at": "2026-04-27T23:18:27Z",
       "_first_commit_sha": "778c9173337e99d4a44fb0f6ec6788c17f25e555",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "f580d47e8c729595e8a880bfcd148cea0745eace360989e8bfba737b4cc684dc"
+      "_card_sha256": "f580d47e8c729595e8a880bfcd148cea0745eace360989e8bfba737b4cc684dc",
+      "_version": {
+        "sha256": "838117db87ab4909829de672e666504941b99c348d8bd5a9e3eb5a5542c69688",
+        "sha8": "838117db87ab",
+        "path": "versions/@rapp/rapp_publish_agent/838117db87ab.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -12447,7 +13500,12 @@
       "_added_at": "2026-04-27T18:52:27-04:00",
       "_first_commit_sha": "b31596b613263e611bcd7d9054816eff91c2071a",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "60d6e2e2e67092a99fe9f199200c7b13c274516c76e4f34056c04dd056c85540"
+      "_card_sha256": "60d6e2e2e67092a99fe9f199200c7b13c274516c76e4f34056c04dd056c85540",
+      "_version": {
+        "sha256": "c7bbf9955cd91626d099d580ab612f4081b0b81bd0b3b35033445872461de01c",
+        "sha8": "c7bbf9955cd9",
+        "path": "versions/@rapp/rapplication_agent/c7bbf9955cd9.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -12498,7 +13556,12 @@
       "_added_at": "2026-06-09T21:45:37-04:00",
       "_first_commit_sha": "21f71404c460bcf76cda6eac6c1a75a726fa21cd",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "89755e46f39e29d272729487a262b2ab5f0e1cecc7bb6357be70bedfeb79bf6c"
+      "_card_sha256": "89755e46f39e29d272729487a262b2ab5f0e1cecc7bb6357be70bedfeb79bf6c",
+      "_version": {
+        "sha256": "e02083e45e0704bddd5a681e08490a92c9ef06c44277d09000aba99f65cacd57",
+        "sha8": "e02083e45e07",
+        "path": "versions/@rapp/rar_steward/e02083e45e07.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -12553,7 +13616,12 @@
       "_added_at": "2026-04-27T21:52:47Z",
       "_first_commit_sha": "04f0446aa5721dd5ae04daf143317285d02e5dc0",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "49015483c918661f0fbf68419484096b8e4e827f597460f81ed53b727b600294"
+      "_card_sha256": "49015483c918661f0fbf68419484096b8e4e827f597460f81ed53b727b600294",
+      "_version": {
+        "sha256": "909f0778d6d9066e668adffc72f75be4d55de9552ab781df337afe6fd54e0d03",
+        "sha8": "909f0778d6d9",
+        "path": "versions/@rapp/store_navigator_agent/909f0778d6d9.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -12607,7 +13675,12 @@
       "_added_at": "2026-04-20T12:38:45-04:00",
       "_first_commit_sha": "1e4054692e4a9b1edc6ff96245ef02af9bb4f9b3",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "7ff0dee021c41899222c983e78299961b4af4f0b839dd0a9752a23ae2f294417"
+      "_card_sha256": "7ff0dee021c41899222c983e78299961b4af4f0b839dd0a9752a23ae2f294417",
+      "_version": {
+        "sha256": "54ef914e46c15b4127235a1e17dd3a1d0257fbae0f9cede71a33173d52da4d93",
+        "sha8": "54ef914e46c1",
+        "path": "versions/@rapp/swarm_factory_agent/54ef914e46c1.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -12659,7 +13732,12 @@
       "_added_at": "2026-05-11T10:53:36-04:00",
       "_first_commit_sha": "b00529de70afc67aa4a79ef59bfc4d5818ea8c17",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "1422c7d56540e53a2421d59c25837443f5f087b03f54e9e08bb725c941e3752e"
+      "_card_sha256": "1422c7d56540e53a2421d59c25837443f5f087b03f54e9e08bb725c941e3752e",
+      "_version": {
+        "sha256": "ca59d24cc598580225532ed9cbe5932dcc37957f77325d2dfccbe78a92826460",
+        "sha8": "ca59d24cc598",
+        "path": "versions/@rapp/twin_agent/ca59d24cc598.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -12704,7 +13782,12 @@
       "_added_at": "2026-04-27T21:15:33Z",
       "_first_commit_sha": "8a19c70962f7e44dbdd6a09117eee1cf57d3da0e",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "284f4a011a0231309359e598fec1a3f875d39b07e099f7749b8c662fc1ebd64c"
+      "_card_sha256": "284f4a011a0231309359e598fec1a3f875d39b07e099f7749b8c662fc1ebd64c",
+      "_version": {
+        "sha256": "c5e273a8c24b444d326c42dc45bba66e933b3a759893bc4ed1b20776ccb0539b",
+        "sha8": "c5e273a8c24b",
+        "path": "versions/@rapp/vibe_builder_agent/c5e273a8c24b.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -12759,7 +13842,12 @@
       "_added_at": "2026-08-26T17:18:46-04:00",
       "_first_commit_sha": "1308031e6f8f8350497f2970d717021d3a14762d",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "da6a8477be856ce22dbafb3e3e2e59d2c384db29fa4297a21ab59ad7deac1b71"
+      "_card_sha256": "da6a8477be856ce22dbafb3e3e2e59d2c384db29fa4297a21ab59ad7deac1b71",
+      "_version": {
+        "sha256": "0cfcf32f07e2cfa253c4cef082160ef14743303ca387f83381e66d4483e1db2c",
+        "sha8": "0cfcf32f07e2",
+        "path": "versions/@rapter/hive_census_agent/0cfcf32f07e2.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -12811,7 +13899,12 @@
       "_added_at": "2026-08-26T17:18:46-04:00",
       "_first_commit_sha": "1308031e6f8f8350497f2970d717021d3a14762d",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "579b45da501eab8c658c143c19f0ef2b20f4725d88791c8d1049e670764631b6"
+      "_card_sha256": "579b45da501eab8c658c143c19f0ef2b20f4725d88791c8d1049e670764631b6",
+      "_version": {
+        "sha256": "a1c3e6b99c86bf1a8622779c5900fd17ef4c9b1a9feb93affb436e32fdaa4836",
+        "sha8": "a1c3e6b99c86",
+        "path": "versions/@rapter/hive_shape_agent/a1c3e6b99c86.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -12865,7 +13958,12 @@
       "_added_at": "2026-08-26T17:18:46-04:00",
       "_first_commit_sha": "1308031e6f8f8350497f2970d717021d3a14762d",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "028a51950a86adc4fc57b94e54728c59c805d4ae95cbbefac2fedec4d7e3b59a"
+      "_card_sha256": "028a51950a86adc4fc57b94e54728c59c805d4ae95cbbefac2fedec4d7e3b59a",
+      "_version": {
+        "sha256": "1a0d63eea1f887c89d03a2dc32d4bc3f1d94653d424444149d8224c146aa8c87",
+        "sha8": "1a0d63eea1f8",
+        "path": "versions/@rapter/rapp_dogg_agent/1a0d63eea1f8.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -12924,7 +14022,12 @@
       "_added_at": "2026-04-19T18:58:15-04:00",
       "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "edb93da56551191919e46897cd3cbee5c9c36c1faa51fe93d00b6ac8724d95b5"
+      "_card_sha256": "edb93da56551191919e46897cd3cbee5c9c36c1faa51fe93d00b6ac8724d95b5",
+      "_version": {
+        "sha256": "d7d3f898475786ff89b880d2c3dd777f8960836c689822fa32c06269f1a25f06",
+        "sha8": "d7d3f8984757",
+        "path": "versions/@rarbookworld/bookfactory/d7d3f8984757.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -12983,7 +14086,12 @@
       "_added_at": "2026-04-19T18:58:15-04:00",
       "_first_commit_sha": "62535d76907aa732c0ec964f2c565ae44153df32",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "a3fb1c9563684936f41365a5b4422a2c4af365777613f250167a44f046c273d0"
+      "_card_sha256": "a3fb1c9563684936f41365a5b4422a2c4af365777613f250167a44f046c273d0",
+      "_version": {
+        "sha256": "7c0330f8e2a55cce2e58e26cce883b2218f146536d13e23bd5af47e5986bebaf",
+        "sha8": "7c0330f8e2a5",
+        "path": "versions/@rarbookworld/momentfactory/7c0330f8e2a5.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -13035,7 +14143,12 @@
       "_added_at": "2026-05-16T13:08:37-04:00",
       "_first_commit_sha": "6dbe27f4654e53eab6a0bbca82ca1702f77304ac",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "232843a3857e5f2f3115e92053d735733dc4c14c91b050fd71e230feb2f58076"
+      "_card_sha256": "232843a3857e5f2f3115e92053d735733dc4c14c91b050fd71e230feb2f58076",
+      "_version": {
+        "sha256": "b80d52b3ed24ff6b50e1be11b08117c7581b0b6563f7a4ad01738963c901bc00",
+        "sha8": "b80d52b3ed24",
+        "path": "versions/@wildhaven/bellows_agent/b80d52b3ed24.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -13086,7 +14199,12 @@
       "_added_at": "2026-04-05T16:48:32-04:00",
       "_first_commit_sha": "0165ccdc2b908885ce29c012c359d72fa8330046",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "6b004ef37153513d35e4c1aa7b83fd1b044adb456d50d08f651fd72c3fe3271b"
+      "_card_sha256": "6b004ef37153513d35e4c1aa7b83fd1b044adb456d50d08f651fd72c3fe3271b",
+      "_version": {
+        "sha256": "9bc2697ed4ed6eab9ca6036297a39968c5a7ab9e7aeaaf43630c705b0a3c733a",
+        "sha8": "9bc2697ed4ed",
+        "path": "versions/@wildhaven/ceo_agent/9bc2697ed4ed.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -13137,7 +14255,12 @@
       "_added_at": "2026-05-16T12:50:07-04:00",
       "_first_commit_sha": "8a8b0300d2b9d8958c53d3fe993fc92c9b252616",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "7ba9bb862f73ad6306b2de92027e71c803dfcf94b9f1974d78c1b540f9e062f8"
+      "_card_sha256": "7ba9bb862f73ad6306b2de92027e71c803dfcf94b9f1974d78c1b540f9e062f8",
+      "_version": {
+        "sha256": "a990cbad0828c87f1881328a1a2035676d4ee81c4cffac9df081a30946e776b9",
+        "sha8": "a990cbad0828",
+        "path": "versions/@wildhaven/penumbra_agent/a990cbad0828.py"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -13193,7 +14316,12 @@
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "d999261be636a4beafd424c54813deaa5d45eaab6881447d47840fe299a97bec"
+      "_card_sha256": "d999261be636a4beafd424c54813deaa5d45eaab6881447d47840fe299a97bec",
+      "_version": {
+        "sha256": "ae056eee5f3c84e275243e4f0c75949a9a83bf66d729f88663003fe15d76304a",
+        "sha8": "ae056eee5f3c",
+        "path": "versions/@kody-w/legal_helper/ae056eee5f3c.py.stub"
+      }
     },
     {
       "schema": "rapp-agent/1.0",
@@ -13248,7 +14376,12 @@
       "_added_at": "2026-05-24T21:45:25-04:00",
       "_first_commit_sha": "fd516f31dfe3dc22441098daa43af4b5af84e047",
       "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
-      "_card_sha256": "40ddabe82816ea66c1802d1e0a65c3c02c767706cae87966d5be19b8be120229"
+      "_card_sha256": "40ddabe82816ea66c1802d1e0a65c3c02c767706cae87966d5be19b8be120229",
+      "_version": {
+        "sha256": "150f6eb78f33dd2f5ae55f9da3f4c2856ad91f490da6f8d594665d55863ae706",
+        "sha8": "150f6eb78f33",
+        "path": "versions/@kody-w/example_private/150f6eb78f33.py.stub"
+      }
     }
   ],
   "swarms": [
@@ -14554,5 +15687,40 @@
     "owner": "kody-w",
     "repo": "RAR",
     "upstream": null
+  },
+  "summary": {
+    "total_agents": 226,
+    "total_swarms": 2,
+    "total_stubs": 2,
+    "publishers": 10,
+    "categories": 14,
+    "publisher_list": [
+      "@bill",
+      "@borg",
+      "@cat-agent-skills",
+      "@discreetRappers",
+      "@howardh",
+      "@kody-w",
+      "@rapp",
+      "@rapter",
+      "@rarbookworld",
+      "@wildhaven"
+    ],
+    "category_list": [
+      "analysis",
+      "b2b_sales",
+      "core",
+      "creative",
+      "devtools",
+      "energy",
+      "general",
+      "integrations",
+      "memory",
+      "meta",
+      "pipeline",
+      "platform",
+      "productivity",
+      "workflow"
+    ]
   }
 }

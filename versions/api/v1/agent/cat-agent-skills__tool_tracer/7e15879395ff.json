@@ -1,0 +1,45 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__tool_tracer",
+  "name": "Tool Tracer",
+  "rar_name": "@cat-agent-skills/tool_tracer",
+  "rappid": "rappid:@cat-agent-skills/tool_tracer:b8ac8008a33a4b2ef385fcbb40c06aebc34c6217f70e839b9a578146969f3851",
+  "_migrated_from": "rappid:@cat-agent-skills/tool_tracer:f9b1a7e78b766822863cfe46fdd6e7df36ffd011e626763457421a8642adefc7",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/tool_tracer:90a379a52994bdab30828a0fd5c34d11ed10bcf661e94cb46361d91c96c51dd9",
+    "rappid:@cat-agent-skills/tool_tracer:f9b1a7e78b766822863cfe46fdd6e7df36ffd011e626763457421a8642adefc7"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "transparency",
+    "observability",
+    "debugging",
+    "workflow",
+    "logging",
+    "json",
+    "productivity"
+  ],
+  "description": "On-demand tool/action trace for Copilot Studio runs (`/special-debug tool-trace` \u2192 `tool_trace.json`).",
+  "author": "Rafael Lopez Alcaraz",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.4,
+  "sha256": "795258346e89a87dcd4972fa952b9f58ed8e728ee53155c36f30dc0ff307ef89",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__tool_tracer.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/tool_tracer_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__tool_tracer.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__tool_tracer.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/tool_tracer_agent.py"
+}

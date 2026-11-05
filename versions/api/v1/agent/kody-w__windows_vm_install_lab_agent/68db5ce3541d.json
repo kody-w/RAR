@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__windows_vm_install_lab_agent",
+  "name": "Windows VM Install Lab",
+  "rar_name": "@kody-w/windows_vm_install_lab_agent",
+  "rappid": "rappid:@kody-w/windows_vm_install_lab_agent:9ffbad51bb159021ccb7f3602e61c962ed066568902686cf7c5d972bc6b4a24e",
+  "_migrated_from": "rappid:@kody-w/windows_vm_install_lab_agent:7e3e9d35eb6e62e1bec07d024fc5e0a1183dc809867088caf3190e582c813c72",
+  "_migrated_from_all": [
+    "rappid:@kody-w/windows_vm_install_lab_agent:7e3e9d35eb6e62e1bec07d024fc5e0a1183dc809867088caf3190e582c813c72"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "devtools",
+  "tags": [
+    "windows",
+    "hyper-v",
+    "installer",
+    "testing",
+    "automation"
+  ],
+  "description": "Runs an allowlisted Hyper-V Windows 11 lab for repeatable RAPP installer release testing with an embedded, hash-verified toolkit.",
+  "author": "RAPP Community",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 818,
+  "size_kb": 50.6,
+  "sha256": "fc726fa63a72e17477e2358af45d9ee652adf5496439df752362372f3b58f9af",
+  "has_card": true,
+  "added_at": "2026-08-18T03:03:49Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__windows_vm_install_lab_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/windows_vm_install_lab_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__windows_vm_install_lab_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__windows_vm_install_lab_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/windows_vm_install_lab_agent.py"
+}

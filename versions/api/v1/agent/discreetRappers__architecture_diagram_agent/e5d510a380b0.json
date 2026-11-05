@@ -1,0 +1,44 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "discreetRappers__architecture_diagram_agent",
+  "name": "ArchitectureDiagramAgent",
+  "rar_name": "@discreetRappers/architecture_diagram_agent",
+  "rappid": "rappid:@discreetRappers/architecture_diagram_agent:5ca8a4ba464d5f5ae24b0b056015b08180ae3ca105bc4a3b8303171b5be23551",
+  "_migrated_from": "rappid:@discreetRappers/architecture_diagram_agent:e3caef5687871fd76e238a8de8888833556d5ccfc21cca147f158108932190b9",
+  "_migrated_from_all": [
+    "rappid:v2:agent:@discreetRappers/architecture_diagram_agent:16d6806f58215a099bd638a22c08640b",
+    "rappid:@discreetRappers/architecture_diagram_agent:efd58d78ca02d5029fc00b2722796c7f04f7aa6a4f3b947192cadc397708bcdc",
+    "rappid:@discreetRappers/architecture_diagram_agent:e3caef5687871fd76e238a8de8888833556d5ccfc21cca147f158108932190b9"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
+  "publisher": "@discreetRappers",
+  "category": "productivity",
+  "tags": [
+    "productivity",
+    "diagrams",
+    "architecture",
+    "visualization",
+    "mermaid"
+  ],
+  "description": "Generates architecture diagrams as PNG, SVG, PDF, Mermaid, or Draw.io XML from node/connection configs via the diagrams+graphviz library.",
+  "author": "Bill Whalen",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 1006,
+  "size_kb": 39.6,
+  "sha256": "d5cac1baac38b585dead94b556dd7c6a5feb8772944bca8b6d88be70985161be",
+  "has_card": true,
+  "added_at": "2026-04-06T16:39:03-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/discreetRappers__architecture_diagram_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/architecture_diagram_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__architecture_diagram_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__architecture_diagram_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@discreetRappers/architecture_diagram_agent.py"
+}

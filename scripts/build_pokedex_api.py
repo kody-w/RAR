@@ -33,13 +33,13 @@ import hashlib
 import json
 import os
 import re
-import shutil
 import subprocess
 import sys
-import time
 from pathlib import Path
 
 _REPO = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(_REPO))
+from scripts.static_api import commit_timestamp, write_json
 _REGISTRY = _REPO / "registry.json"
 _AGENTS_ROOT = _REPO / "agents"
 _API = _REPO / "api" / "v1"
@@ -51,7 +51,7 @@ RAW_PREFIX = "https://raw.githubusercontent.com/kody-w/RAR/main"
 
 
 def _now_iso() -> str:
-    return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+    return commit_timestamp()
 
 
 def _slug(name: str) -> str:
@@ -271,9 +271,7 @@ def main():
     # Other builders own sibling feeds (skills, stats, catalog, front).
     for name in ("agent", "sprite"):
         directory = _API / name
-        if directory.exists():
-            shutil.rmtree(directory)
-        directory.mkdir(parents=True)
+        directory.mkdir(parents=True, exist_ok=True)
 
     with open(_REGISTRY) as f:
         registry = json.load(f)
@@ -350,7 +348,7 @@ def main():
             for e in entries
         ],
     }
-    (_API / "index.json").write_text(json.dumps(index, indent=2) + "\n")
+    write_json(_API / "index.json", index)
 
     print(f"  → wrote {len(entries)} agent entries to {_API.relative_to(_REPO)}/")
     print(f"  → index: api/v1/index.json")

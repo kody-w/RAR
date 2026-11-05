@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__estate_outbound",
+  "name": "EstateOutbound",
+  "rar_name": "@rapp/estate_outbound",
+  "rappid": "rappid:@rapp/estate_outbound:b0bd729313d8106bacbc7c4dc033a8b2c5437010f2f1d2c0910a65a1e7ca9dbc",
+  "_migrated_from": "rappid:@rapp/estate_outbound:8e43f6238aa88b2c43861e757846ed98757a0b19fac517c998cb8e7672813690",
+  "_migrated_from_all": [
+    "rappid:@rapp/estate_outbound:8956636fc00d4379642df53ef239d15160231d55a99fc96b1f80c57b4c543591",
+    "rappid:@rapp/estate_outbound:8e43f6238aa88b2c43861e757846ed98757a0b19fac517c998cb8e7672813690"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.2",
+  "publisher": "@rapp",
+  "category": "core",
+  "tags": [
+    "estate",
+    "outbound",
+    "federation",
+    "neighborhood",
+    "publish"
+  ],
+  "description": "Writes an already-signed neighborhood event into ~/.brainstem/outbound/ for federation roll-up; pushing to the estate repo stays manual.",
+  "author": "RAPP",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 188,
+  "size_kb": 7.8,
+  "sha256": "a918d6922c3ac93566aa0de306edee4caaba38b91d5b4818a00d338ab5c84861",
+  "has_card": true,
+  "added_at": "2026-05-11T13:59:12-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__estate_outbound.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/estate_outbound_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__estate_outbound.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__estate_outbound.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/estate_outbound_agent.py"
+}

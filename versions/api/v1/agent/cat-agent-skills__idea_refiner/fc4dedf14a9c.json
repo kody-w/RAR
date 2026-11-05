@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__idea_refiner",
+  "name": "Idea Refiner",
+  "rar_name": "@cat-agent-skills/idea_refiner",
+  "rappid": "rappid:@cat-agent-skills/idea_refiner:bdf8262e073df711f247f65687605d68d5bd9b6bdd25f47b32395a5b646c4feb",
+  "_migrated_from": "rappid:@cat-agent-skills/idea_refiner:82e422b4741c4798b4993c2336a78b6f2b4d80564df11d9f2a3d18ef5e80ef32",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/idea_refiner:af5b98c25eca9de6795356b410649615e83a133ba6d65a5128e7fc12df3228a2",
+    "rappid:@cat-agent-skills/idea_refiner:82e422b4741c4798b4993c2336a78b6f2b4d80564df11d9f2a3d18ef5e80ef32"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "productivity",
+    "planning",
+    "decision_making",
+    "refinement",
+    "brainstorming"
+  ],
+  "description": "Refines an existing plan, decision, or draft through relentless, branch-by-branch questioning. Grouped in batches of 2-5 with recommended answers, pulling facts from Work IQ where possible, until every part has been fully thought through.",
+  "author": "Mathias Salomonsen",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.7,
+  "sha256": "48843aa159ca7a02aebbc259496476dc6c4e7aeb87efc227372c9fd55711cd84",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__idea_refiner.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/idea_refiner_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__idea_refiner.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__idea_refiner.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/idea_refiner_agent.py"
+}

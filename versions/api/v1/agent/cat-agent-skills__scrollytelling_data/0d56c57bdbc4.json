@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__scrollytelling_data",
+  "name": "Scrollytelling Data",
+  "rar_name": "@cat-agent-skills/scrollytelling_data",
+  "rappid": "rappid:@cat-agent-skills/scrollytelling_data:b0d708a510c9fad9e5cafcecfcbe2feaa9c80abfbcb260f1b128352481fd6541",
+  "_migrated_from": "rappid:@cat-agent-skills/scrollytelling_data:beb70ccb8a79c912ed0bafb26953ec66706401febfe390ec476cfdaf9f00957d",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/scrollytelling_data:9ece27f1a0b1677d61027a6828fc3046ba32a16de7e5fc572b335fb9503155fc",
+    "rappid:@cat-agent-skills/scrollytelling_data:beb70ccb8a79c912ed0bafb26953ec66706401febfe390ec476cfdaf9f00957d"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
+  "publisher": "@cat-agent-skills",
+  "category": "pipeline",
+  "tags": [
+    "data",
+    "visualization",
+    "storytelling",
+    "reporting"
+  ],
+  "description": "Turns data into a scroll-driven HTML story.",
+  "author": "AndrewHessMSFT",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.2,
+  "sha256": "6f807e260a523b863fa68d29d0842a44b896e321b4ead0fe36cb7bb773d713d4",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__scrollytelling_data.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/scrollytelling_data_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__scrollytelling_data.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__scrollytelling_data.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/scrollytelling_data_agent.py"
+}

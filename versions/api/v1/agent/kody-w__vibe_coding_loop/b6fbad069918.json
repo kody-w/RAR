@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__vibe_coding_loop",
+  "name": "Vibe Coding Demo Loop",
+  "rar_name": "@kody-w/vibe_coding_loop",
+  "rappid": "rappid:@kody-w/vibe_coding_loop:fdd776370ef5bc89ff40476828f967b57770031715bb959a615c59bac20aa425",
+  "_migrated_from": "rappid:@kody-w/vibe_coding_loop:88776fe0c5df75a556e642a1a71fdcda75ff4fe4bb08719907d712b342f184ba",
+  "_migrated_from_all": [
+    "rappid:@kody-w/vibe_coding_loop:3c506fafbf0614679c9271b70b08baa5298031335ea3fa454c71dd68379491d8",
+    "rappid:@kody-w/vibe_coding_loop:88776fe0c5df75a556e642a1a71fdcda75ff4fe4bb08719907d712b342f184ba"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
+  "publisher": "@kody-w",
+  "category": "workflow",
+  "tags": [
+    "publishing",
+    "orchestration",
+    "vibe-coding",
+    "single-file-html",
+    "loop"
+  ],
+  "description": "Returns prompt and shell-command templates for shipping batches of single-file HTML demos to a Jekyll site; makes no LLM or network calls itself.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 365,
+  "size_kb": 15.9,
+  "sha256": "c0329a49a1dccb8873b83964d0fa8ce231a24ede94051343162b37bef7149b1f",
+  "has_card": true,
+  "added_at": "2026-05-03T14:51:56-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__vibe_coding_loop.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/vibe_coding_loop_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__vibe_coding_loop.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__vibe_coding_loop.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/vibe_coding_loop_agent.py"
+}

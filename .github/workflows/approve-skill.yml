@@ -153,6 +153,7 @@ jobs:
                   api/v1/skills.json api/v1/catalog.json api/v1/taxonomy.json \
                   api/v1/match.json api/v1/marketplaces.json api/v1/status.json \
                   api/v1/badge.json api/v1/audience manifest.json
+          git add versions
           test -n "$(git diff --cached --name-only)"
           git commit \
             -m "Notarize ${SKILL} from #${ISSUE_NUMBER}" \

@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__git_warehouse_agent",
+  "name": "Git Warehouse",
+  "rar_name": "@kody-w/git_warehouse_agent",
+  "rappid": "rappid:@kody-w/git_warehouse_agent:1a82a875314287a140cee785bc1084bb25587415b00cbba0ec9709765700bd06",
+  "_migrated_from": "rappid:@kody-w/git_warehouse_agent:e788661deb97dad1e9062580afbb2199004b2e2cc7a494062ada34e977fc4aa4",
+  "_migrated_from_all": [
+    "rappid:@kody-w/git_warehouse_agent:663ca6918cb6ae0fcc0d83d790e16ca22aa24b667f96f006cb407c16d0a9632c",
+    "rappid:@kody-w/git_warehouse_agent:e788661deb97dad1e9062580afbb2199004b2e2cc7a494062ada34e977fc4aa4"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
+  "publisher": "@kody-w",
+  "category": "devtools",
+  "tags": [
+    "data",
+    "datasette",
+    "git-scraping",
+    "warehouse",
+    "devtools"
+  ],
+  "description": "Builds a queryable git-tracked warehouse from any repo's data by running a shaper script, committing on change, and emitting the Datasette command.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 215,
+  "size_kb": 13.1,
+  "sha256": "eb7b05da0183c37da67b7c1a480731cce05da42753401aa4df86581373c307c3",
+  "has_card": true,
+  "added_at": "2026-06-20T18:41:00-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__git_warehouse_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/git_warehouse_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__git_warehouse_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__git_warehouse_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/git_warehouse_agent.py"
+}

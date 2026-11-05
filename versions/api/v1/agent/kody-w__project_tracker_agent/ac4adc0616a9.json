@@ -1,0 +1,44 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__project_tracker_agent",
+  "name": "Project Tracker",
+  "rar_name": "@kody-w/project_tracker_agent",
+  "rappid": "rappid:@kody-w/project_tracker_agent:4f16fd442305d4514660825c2e30b1749225963fa205e9f91842bed64fc56f77",
+  "_migrated_from": "rappid:@kody-w/project_tracker_agent:e155592fabdace10b237b756a9df28383f8289d57a7b3906fe9afb7626ae7ac1",
+  "_migrated_from_all": [
+    "rappid:@kody-w/project_tracker_agent:e155592fabdace10b237b756a9df28383f8289d57a7b3906fe9afb7626ae7ac1"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "productivity",
+  "tags": [
+    "project",
+    "tracker",
+    "portfolio",
+    "mvp",
+    "local-first",
+    "aibast",
+    "rapplication"
+  ],
+  "description": "Local-first tracker for a portfolio of AI-agent projects and their MVP statements. Speaks the aibast-agents-library project-tracker web tool's native JSON (projectTrackerData) so data round-trips via its JSON import/export. Add/update projects, set the MVP use case/description/timeline, register agents, and export a file ready to merge-import into the web tool. Data stays on this device \u2014 never in a repo or egg.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 545,
+  "size_kb": 28.1,
+  "sha256": "0a9452444854c420edbf73b617d392c1a63510890a663455f69d56a4e4ea0fc6",
+  "has_card": true,
+  "added_at": "2026-07-24T16:53:40Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__project_tracker_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/project_tracker_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__project_tracker_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__project_tracker_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/project_tracker_agent.py"
+}

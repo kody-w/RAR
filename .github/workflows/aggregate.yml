@@ -214,7 +214,7 @@ jobs:
           state/published_paths.json registry.json manifest.json \
           api/v1/catalog.json api/v1/taxonomy.json api/v1/match.json \
           api/v1/marketplaces.json api/v1/status.json api/v1/badge.json \
-          api/v1/audience api/v1/index.json api/v1/agent api/v1/sprite"
+          api/v1/audience api/v1/index.json api/v1/agent api/v1/sprite versions"
           if [ -z "$(git status --porcelain $FILES)" ]; then
             echo "No change to the catalog or the ranking; nothing to commit."
             echo "committed=false" >> "$GITHUB_OUTPUT"

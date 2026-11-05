@@ -1,0 +1,45 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__launch_to_public_agent",
+  "name": "Launch to Public",
+  "rar_name": "@kody-w/launch_to_public_agent",
+  "rappid": "rappid:@kody-w/launch_to_public_agent:d981c358b7882787fd47a74ad651327742288fd85c2fb044d41dfda1b46c9fb4",
+  "_migrated_from": "rappid:@kody-w/launch_to_public_agent:a53115c5537ff1823313cf969b4f2089b345d87e4c448f553f70dc0ad8f26a24",
+  "_migrated_from_all": [
+    "rappid:@kody-w/launch_to_public_agent:a124f8270d4746f0257e453a64f30adff330e876330c81769f2ee9ed7e7808d7",
+    "rappid:@kody-w/launch_to_public_agent:0ec91494afc86c5eb9c467a1cf73fde889b172adadfdfc2330534d350cb3db06",
+    "rappid:@kody-w/launch_to_public_agent:a53115c5537ff1823313cf969b4f2089b345d87e4c448f553f70dc0ad8f26a24"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.5",
+  "publisher": "@kody-w",
+  "category": "platform",
+  "tags": [
+    "launch",
+    "publish",
+    "local-to-global",
+    "bond-technique",
+    "operator-mediated",
+    "platform"
+  ],
+  "description": "Snapshots the local brainstem via bond.py and plants it onto a public GitHub repo with a continuation manifest and launch fingerprint.",
+  "author": "kody-w",
+  "quality_tier": "verified",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 807,
+  "size_kb": 35.7,
+  "sha256": "15f570244d281c16313f2711c180910bd839fce61609a37545358e63b7c1ea24",
+  "has_card": true,
+  "added_at": "2026-05-09T15:25:17-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__launch_to_public_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/launch_to_public_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__launch_to_public_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__launch_to_public_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/ecosystem-grail-stack/launch_to_public_agent.py"
+}

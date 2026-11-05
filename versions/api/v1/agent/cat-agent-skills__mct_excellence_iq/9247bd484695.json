@@ -1,0 +1,46 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__mct_excellence_iq",
+  "name": "MCT Excellence IQ",
+  "rar_name": "@cat-agent-skills/mct_excellence_iq",
+  "rappid": "rappid:@cat-agent-skills/mct_excellence_iq:a7866c14a3ce1647181d6eca8ce6e7a16e424cada366b190dcaf531c44565709",
+  "_migrated_from": "rappid:@cat-agent-skills/mct_excellence_iq:3233acdc92e83961193a338fa5e2fa32dcc8b044cb852a1a454aed8d1094d55c",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/mct_excellence_iq:e2513c41b70fedc0b074b15d388a0604bf2937e6fcc0b1be804610a81d907ccb",
+    "rappid:@cat-agent-skills/mct_excellence_iq:3233acdc92e83961193a338fa5e2fa32dcc8b044cb852a1a454aed8d1094d55c"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "mct",
+    "instructional_intelligence",
+    "microsoft_learning",
+    "courseware",
+    "microsoft_learn",
+    "azure",
+    "business_applications",
+    "data_ai"
+  ],
+  "description": "An AI-powered Instructional Intelligence Skill that helps Microsoft Certified Trainers design, deliver, assess, localize, and continuously improve world-class Microsoft learning experiences across Azure, Business Applications, Data & AI, Modern Work, and Security.",
+  "author": "Faride Ilanda",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 14.0,
+  "sha256": "5e72826d7dd23ae3dcbfa497f3d675289e23afbf850393f02b749d5e46912e14",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__mct_excellence_iq.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/mct_excellence_iq_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__mct_excellence_iq.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__mct_excellence_iq.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/mct_excellence_iq_agent.py"
+}

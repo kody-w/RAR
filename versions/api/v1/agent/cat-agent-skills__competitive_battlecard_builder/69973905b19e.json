@@ -1,0 +1,41 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__competitive_battlecard_builder",
+  "name": "Competitive Battlecard Builder",
+  "rar_name": "@cat-agent-skills/competitive_battlecard_builder",
+  "rappid": "rappid:@cat-agent-skills/competitive_battlecard_builder:f5e0445eff779ea6daf15655cde588aea23ecb2ea89071f969924147821f4333",
+  "_migrated_from": "rappid:@cat-agent-skills/competitive_battlecard_builder:c3cce0bb200b7d1d6c994cfa97ee16c825cdbb63db55bb7e73d33f715e510e3d",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/competitive_battlecard_builder:bcf7b1584e879d861bd8e625f051d565b9f2e68612924dd6803158e903a9a2a6",
+    "rappid:@cat-agent-skills/competitive_battlecard_builder:c3cce0bb200b7d1d6c994cfa97ee16c825cdbb63db55bb7e73d33f715e510e3d"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "sales_enablement",
+    "productivity",
+    "comparison"
+  ],
+  "description": "Build an interactive comparison app, either a sales battlecard advocating for your product against named competitors, or a neutral, unbiased comparison across two or more peer items with no side taken. Filterable by item and category, with live search, a compact scorecard, and copy-to-clipboard talking points. Every claim is tagged verified or unverified so nothing invented ends up in front of a\u2026",
+  "author": "Michael Heath",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 14.0,
+  "sha256": "89f511488361213aaf07ded3e0492e5111c9ad61267bbdcaf45e2363e34deff7",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__competitive_battlecard_builder.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/competitive_battlecard_builder_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__competitive_battlecard_builder.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__competitive_battlecard_builder.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/competitive_battlecard_builder_agent.py"
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__rapp_sdk_builder",
+  "name": "RAPP SDK Builder",
+  "rar_name": "@kody-w/rapp_sdk_builder",
+  "rappid": "rappid:@kody-w/rapp_sdk_builder:26b0ce0f1e5afa3f8a8f2402c108f721da639096e6c2a369af7430c8d50905ac",
+  "_migrated_from": "rappid:@kody-w/rapp_sdk_builder:a7a171009fe1df866d5530e4abdb463f8a6eba627d0538e3e48cc6ab7078ed34",
+  "_migrated_from_all": [
+    "rappid:@kody-w/rapp_sdk_builder:65f5989e1b72215d8a27f98661beaba281d6cc7fc54eb0ac1b0563ad7df9cbda",
+    "rappid:@kody-w/rapp_sdk_builder:a7a171009fe1df866d5530e4abdb463f8a6eba627d0538e3e48cc6ab7078ed34"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.2",
+  "publisher": "@kody-w",
+  "category": "devtools",
+  "tags": [
+    "starter",
+    "rapp",
+    "sdk",
+    "identity",
+    "frame",
+    "builder"
+  ],
+  "description": "Mints rappids, builds and verifies rapp/1 frames, scaffolds organism seeds, and lints public GitHub repos for RAPP spec compliance.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [],
+  "lines": 401,
+  "size_kb": 20.4,
+  "sha256": "eaf3bf3a686d9fb08fc8f3c0b05f59075c8a334a68c5d8fe678f39aa81dc27e5",
+  "has_card": true,
+  "added_at": "2026-07-15T15:23:19Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__rapp_sdk_builder.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_sdk_builder_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__rapp_sdk_builder.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__rapp_sdk_builder.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/rapp_sdk_builder_agent.py"
+}

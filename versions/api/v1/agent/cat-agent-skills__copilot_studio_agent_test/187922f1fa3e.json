@@ -1,0 +1,44 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__copilot_studio_agent_test",
+  "name": "Copilot Studio Agent Test",
+  "rar_name": "@cat-agent-skills/copilot_studio_agent_test",
+  "rappid": "rappid:@cat-agent-skills/copilot_studio_agent_test:aa0e230b230b1c449dd304f2b5e7406a81191dc4d25b1c9ce25ff403608806ad",
+  "_migrated_from": "rappid:@cat-agent-skills/copilot_studio_agent_test:f624d8fa7229650604fc0ed99335fc95f442ef0ebca47908e905399fc0be3a0c",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/copilot_studio_agent_test:88eb8309906b9763f2387037f866117ddcb3a136ae2abd47b5d77d60f66498bd",
+    "rappid:@cat-agent-skills/copilot_studio_agent_test:f624d8fa7229650604fc0ed99335fc95f442ef0ebca47908e905399fc0be3a0c"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "copilot_studio",
+    "testing",
+    "evaluation",
+    "quality",
+    "agents",
+    "power_platform"
+  ],
+  "description": "Test a Copilot Studio agent against your own Q&A set and get a graded pass/fail report \u2014 no browser automation.",
+  "author": "Matteo Pagani",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.7,
+  "sha256": "1075b0924639851f5066ff8f70c560ddf98829c6bbff4bf5fbfbc8bdb0cffd91",
+  "has_card": true,
+  "added_at": "2026-08-11T09:43:05Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__copilot_studio_agent_test.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/copilot_studio_agent_test_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__copilot_studio_agent_test.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__copilot_studio_agent_test.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/copilot_studio_agent_test_agent.py"
+}

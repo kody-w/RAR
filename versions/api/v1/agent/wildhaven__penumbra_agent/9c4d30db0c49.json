@@ -1,0 +1,45 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "wildhaven__penumbra_agent",
+  "name": "Penumbra",
+  "rar_name": "@wildhaven/penumbra_agent",
+  "rappid": "rappid:@wildhaven/penumbra_agent:f09b1a4941cb0408a801295e117936d788d4287090d3284dc47bdce823c19042",
+  "_migrated_from": "rappid:@wildhaven/penumbra_agent:743d998a765ce5b3279954d27dd10f901ac19cf7803b5d029e83542f75f57cc1",
+  "_migrated_from_all": [
+    "rappid:@wildhaven/penumbra_agent:70cc8d89ff3e96db3e6e9a0d064cff4cf1d509979f192c1a6f5815e8b2bec035",
+    "rappid:@wildhaven/penumbra_agent:743d998a765ce5b3279954d27dd10f901ac19cf7803b5d029e83542f75f57cc1"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.2",
+  "publisher": "@wildhaven",
+  "category": "general",
+  "tags": [
+    "eidolon",
+    "subtext",
+    "legendary",
+    "penumbra",
+    "introspection",
+    "daemon",
+    "caesura"
+  ],
+  "description": "Returns any input as twin lines \u2014 the surface text plus a whispered heuristic read of what was almost said; no LLM or network calls.",
+  "author": "Wildhaven of America",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 295,
+  "size_kb": 11.7,
+  "sha256": "a990cbad0828c87f1881328a1a2035676d4ee81c4cffac9df081a30946e776b9",
+  "has_card": true,
+  "added_at": "2026-05-16T12:50:07-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/wildhaven__penumbra_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/penumbra_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/wildhaven__penumbra_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/wildhaven__penumbra_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@wildhaven/penumbra_agent.py"
+}

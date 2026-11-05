@@ -1,0 +1,49 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__rapp",
+  "name": "RappAgent",
+  "rar_name": "@rapp/rapp",
+  "rappid": "rappid:@rapp/rapp:11035e49bab958bd0956146d942a0ecc8124d487551f783b60dc88e4c69879c6",
+  "_migrated_from": "rappid:@rapp/rapp:7b5317f54a30522cde0fec22f2174314f9aaa59a9dadb41945dc8705a7dc5226",
+  "_migrated_from_all": [
+    "rappid:@rapp/rapp:96246d625e1eac1e223b07289d0a484648762eaf9336b1a113bdf84b80ee767d",
+    "rappid:@rapp/rapp:c8aac07450d7cdd5f28b606b8c796c736dc117001332accf131426b0f9600dba",
+    "rappid:@rapp/rapp:7b5317f54a30522cde0fec22f2174314f9aaa59a9dadb41945dc8705a7dc5226"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.7",
+  "publisher": "@rapp",
+  "category": "core",
+  "tags": [
+    "rapp",
+    "ecosystem",
+    "estate",
+    "cubby",
+    "neighborhood",
+    "egg",
+    "super-rar",
+    "door",
+    "spec",
+    "universal"
+  ],
+  "description": "Navigates the whole RAPP estate \u2014 identity, doors, local cubbies, shared neighborhood repos, eggs, super-RAR search \u2014 and serves the spec map.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 2989,
+  "size_kb": 173.7,
+  "sha256": "827cc07976687631087dd00ceb7d5d78082eb2f025467215cadac68e81d10a71",
+  "has_card": true,
+  "added_at": "2026-06-09T21:40:04-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__rapp.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rapp_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rapp.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rapp.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/rapp_agent.py"
+}

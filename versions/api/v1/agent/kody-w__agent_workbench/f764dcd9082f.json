@@ -1,0 +1,44 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__agent_workbench",
+  "name": "Agent Workbench",
+  "rar_name": "@kody-w/agent_workbench",
+  "rappid": "rappid:@kody-w/agent_workbench:4901623850723fbea7e111517954a1da8d8a60f62f34c8bd8afef1a3910a08ad",
+  "_migrated_from": "rappid:@kody-w/agent_workbench:8881ee2399f4745d70b3da9e4be3b9a16b86319845eac85232ad97813b6bc41a",
+  "_migrated_from_all": [
+    "rappid:@kody-w/agent_workbench:99e15443437f0bea78df5161ab887cf5aa6480835729b7fcf2dc16cbb7c548f3",
+    "rappid:@kody-w/agent_workbench:8881ee2399f4745d70b3da9e4be3b9a16b86319845eac85232ad97813b6bc41a"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.1.2",
+  "publisher": "@kody-w",
+  "category": "devtools",
+  "tags": [
+    "devtools",
+    "workbench",
+    "scaffolding",
+    "validation",
+    "testing",
+    "publishing"
+  ],
+  "description": "Scaffolds, validates, dry-runs, diffs, and publishes single-file RAPP agents against the registry via GitHub Issues-as-API.",
+  "author": "RAPP Core Team",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 747,
+  "size_kb": 30.3,
+  "sha256": "c0a0329cdb06728062ac11043d8989c1c1262c33f69f0afdf9d65e87f0d0575c",
+  "has_card": true,
+  "added_at": "2026-05-24T21:45:25-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__agent_workbench.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/agent_workbench_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__agent_workbench.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__agent_workbench.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/agent_workbench_agent.py"
+}

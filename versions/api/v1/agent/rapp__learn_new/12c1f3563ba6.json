@@ -1,0 +1,53 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__learn_new",
+  "name": "LearnNew",
+  "rar_name": "@rapp/learn_new",
+  "rappid": "rappid:@rapp/learn_new:bbb6f06b52828adcacbad4a34482570efa4c6e8642d104af2f0c6678623a34b5",
+  "_migrated_from": "rappid:@rapp/learn_new:c4b8bc31d77e6e460c24997e26ae988ecf0edbe9e3dabe88dcf4ba3b8f6dcb27",
+  "_migrated_from_all": [
+    "rappid:v2:agent:@rapp/learn_new:0edcecec861b4dce7ad6c06ef77a320d",
+    "rappid:@rapp/learn_new:4b849a9bd8534e3b76132d60b6f2a1ba2c5ca6361641166cb5be288f3e2d231f",
+    "rappid:@rapp/learn_new:510b5eff3ae07f71d61270320a2917786728e1ebe30048c4f0aab6c62c461169",
+    "rappid:@rapp/learn_new:80d14ebdc3a2d11e9b062d8923a931bf2b0d95c7faebf90b34f87125d65079de",
+    "rappid:@rapp/learn_new:bfc87ddcf11ad1630b4a957e5d9e0effb1ce7cc805aa839e459d0fe2891b7885",
+    "rappid:@rapp/learn_new:7e14bd18ea44be508c650c34cbda9422ba552af0527e0442fd3b76078e68f264",
+    "rappid:@rapp/learn_new:ff058f9019a8f9acb77fd76d1bc2fa9475c2f34b1087733b081761e1a704f177",
+    "rappid:@rapp/learn_new:342da6c949dd9380c74cc8b5cd29e467f0e2e7ce8c031a292b10ae696ec8decf",
+    "rappid:@rapp/learn_new:8df55e355eb7fa32b515e98019dd03a680a84bc79a22ef55f0d4eecb958661d8",
+    "rappid:@rapp/learn_new:c4b8bc31d77e6e460c24997e26ae988ecf0edbe9e3dabe88dcf4ba3b8f6dcb27"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.4.1",
+  "publisher": "@rapp",
+  "category": "core",
+  "tags": [
+    "meta",
+    "generator",
+    "scaffolding",
+    "learn",
+    "swarm",
+    "templates",
+    "aibast"
+  ],
+  "description": "Creates new single-file RAPP agents by adapting a real published agent from the public microsoft/aibast-agents-library (sha256-verified, MIT-attributed, mutated not regenerated); or, with source='chat', saves an agent the chat model wrote only after its own test call passes; built-in scratch templates remain as an explicit fallback.",
+  "author": "RAPP",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 2198,
+  "size_kb": 93.6,
+  "sha256": "3cc1431dca7e6aee411f653c9ea2746e2161b1fe8db3fdeb5cbc72c0c803f4f9",
+  "has_card": true,
+  "added_at": "2026-04-20T12:38:45-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__learn_new.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/learn_new_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__learn_new.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__learn_new.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/learn_new_agent.py"
+}

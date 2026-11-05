@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__source_capture_agent",
+  "name": "Source Capture",
+  "rar_name": "@kody-w/source_capture_agent",
+  "rappid": "rappid:@kody-w/source_capture_agent:e49162c61e044e2b768b593ee29ffebc9a7cd7f96ab736106d263dff438c8524",
+  "_migrated_from": "rappid:@kody-w/source_capture_agent:49d1e65c559f9c4a43ac8ce9d3b66cca11f14b03124617876991163f72c6ac79",
+  "_migrated_from_all": [
+    "rappid:@kody-w/source_capture_agent:49d1e65c559f9c4a43ac8ce9d3b66cca11f14b03124617876991163f72c6ac79"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "0.1.0",
+  "publisher": "@kody-w",
+  "category": "productivity",
+  "tags": [
+    "capture",
+    "search",
+    "claude",
+    "chatgpt",
+    "gemini"
+  ],
+  "description": "Archive assistant-fed browser chats and CLI exports locally, with cross-source SQLite search and JSONL/Markdown export. Claude, ChatGPT and Gemini tested on simulated UIs only.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 633,
+  "size_kb": 32.0,
+  "sha256": "89d785bcb732d5d8cfb685873d539272f9fccdaeb5c4d556c9f3b39ba2830986",
+  "has_card": true,
+  "added_at": "2026-11-04T14:16:00Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__source_capture_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/source_capture_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__source_capture_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__source_capture_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/source_capture_agent.py"
+}

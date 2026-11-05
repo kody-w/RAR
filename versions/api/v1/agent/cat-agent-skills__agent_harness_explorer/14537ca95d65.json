@@ -1,0 +1,44 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__agent_harness_explorer",
+  "name": "Agent Harness Explorer",
+  "rar_name": "@cat-agent-skills/agent_harness_explorer",
+  "rappid": "rappid:@cat-agent-skills/agent_harness_explorer:5685a9594810aa1800de5b0ae808d4390fc45b044b07c6c670190d74a55c62f8",
+  "_migrated_from": "rappid:@cat-agent-skills/agent_harness_explorer:4f328d0b851defd1dd21dcb5bce21e824acdde05b0fb10c6c638ed87b8d939bc",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/agent_harness_explorer:aafe91adec5acfb932289e056c9f324e524ed0778cf22eba465f7997500dbf90",
+    "rappid:@cat-agent-skills/agent_harness_explorer:4f328d0b851defd1dd21dcb5bce21e824acdde05b0fb10c6c638ed87b8d939bc"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "2.1.2",
+  "publisher": "@cat-agent-skills",
+  "category": "devtools",
+  "tags": [
+    "diagnostics",
+    "runtime",
+    "python",
+    "capabilities",
+    "snapshots",
+    "scripts"
+  ],
+  "description": "Discover, document, and monitor what the agent harness can do \u2014 Python libraries, tools, MCP servers, and runtime capabilities \u2014 with repeatable, comparable snapshots.",
+  "author": "Chris Garty and Andrew Hess",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.7,
+  "sha256": "4e86bceb09a0a54ccd4332a264a2601cd15a61f27f86be2cbf1a859693f83cd5",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__agent_harness_explorer.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/agent_harness_explorer_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__agent_harness_explorer.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__agent_harness_explorer.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/agent_harness_explorer_agent.py"
+}

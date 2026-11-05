@@ -1,0 +1,46 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__clt_hr_assistant",
+  "name": "Assistente CLT para RH",
+  "rar_name": "@cat-agent-skills/clt_hr_assistant",
+  "rappid": "rappid:@cat-agent-skills/clt_hr_assistant:f751e186b84f95291e799ba2cb4cdf8756d2dcde34cba5b97a444e5f94c4c3b3",
+  "_migrated_from": "rappid:@cat-agent-skills/clt_hr_assistant:666314f9542a54e0617a72e696c31b314dfb8d20f40a9d47f4bad46d0f523b30",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/clt_hr_assistant:4244fb494f33341f2cb84c053f11ff8db33b14bf22d14554b94b53b86417d78d",
+    "rappid:@cat-agent-skills/clt_hr_assistant:666314f9542a54e0617a72e696c31b314dfb8d20f40a9d47f4bad46d0f523b30"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "2.1.2",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "rh",
+    "folha",
+    "clt",
+    "brasil",
+    "trabalhista",
+    "rescisao",
+    "inss",
+    "irrf"
+  ],
+  "description": "Assistente de legisla\u00e7\u00e3o trabalhista brasileira (CLT) para equipes de RH e Departamento Pessoal. Responde d\u00favidas sobre f\u00e9rias, 13\u00ba sal\u00e1rio, aviso pr\u00e9vio, jornada e tipos de rescis\u00e3o, e calcula verbas rescis\u00f3rias com mem\u00f3ria de c\u00e1lculo completa usando as tabelas oficiais vigentes de 2026 (sal\u00e1rio m\u00ednimo, INSS e IRRF, incluindo a Lei 15.270/2025).",
+  "author": "Michael Ferro Pereira",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.4,
+  "sha256": "f009d97229e7ac098108d20b4188d705620dfaebc5f359b00ec2bd747bbe2eea",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__clt_hr_assistant.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/clt_hr_assistant_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__clt_hr_assistant.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__clt_hr_assistant.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/clt_hr_assistant_agent.py"
+}

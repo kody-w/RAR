@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__agent_evaluation_designer",
+  "name": "Agent Evaluation Designer",
+  "rar_name": "@cat-agent-skills/agent_evaluation_designer",
+  "rappid": "rappid:@cat-agent-skills/agent_evaluation_designer:cb6d030de9ac1412b4bd09c775f6a4ce799a27db723ddb52add19858dae9bc60",
+  "_migrated_from": "rappid:@cat-agent-skills/agent_evaluation_designer:346736187e94017a8bf631354e69442773717294e7cf82a114c39e94d6603200",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/agent_evaluation_designer:e879c4f57913ff0d896aa35ac58219123a6e74ebf2bc4298d36491f97275fb50",
+    "rappid:@cat-agent-skills/agent_evaluation_designer:346736187e94017a8bf631354e69442773717294e7cf82a114c39e94d6603200"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "evaluation",
+    "testing",
+    "quality_assurance",
+    "go_live",
+    "decision_making"
+  ],
+  "description": "Design a rigorous, platform-aware evaluation for an AI agent - define what good looks like, pick the right grading method, build a test set, and turn results into a defensible go/no-go decision.",
+  "author": "James Papadimitriou",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.9,
+  "sha256": "3eb41727a5557227f7de268386141ced0eb30e2a55b6fd292c8ce8d6f93f7b97",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__agent_evaluation_designer.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/agent_evaluation_designer_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__agent_evaluation_designer.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__agent_evaluation_designer.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/agent_evaluation_designer_agent.py"
+}

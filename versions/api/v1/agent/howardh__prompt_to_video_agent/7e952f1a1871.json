@@ -1,0 +1,45 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "howardh__prompt_to_video_agent",
+  "name": "PromptToVideo",
+  "rar_name": "@howardh/prompt_to_video_agent",
+  "rappid": "rappid:@howardh/prompt_to_video_agent:9fe5910958682280d5039d0a1d72951c867e12a65a83abc436a85ea8d088cb1a",
+  "_migrated_from": "rappid:@howardh/prompt_to_video_agent:ae9033e46aba6b6556ed5d7bbed788dfeaa7177f830d23721917ea79c4d083b5",
+  "_migrated_from_all": [
+    "rappid:@howardh/prompt_to_video_agent:ae9033e46aba6b6556ed5d7bbed788dfeaa7177f830d23721917ea79c4d083b5"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.1.0",
+  "publisher": "@howardh",
+  "category": "productivity",
+  "tags": [
+    "video",
+    "remotion",
+    "render",
+    "mp4",
+    "scenes",
+    "presentation",
+    "prompt_to_video"
+  ],
+  "description": "Renders videos from structured scene descriptions using Remotion \u2014 title, content, quote, and list scenes with style presets.",
+  "author": "RAPP Contributor",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent",
+    "@howardh/markdown_to_slides_agent"
+  ],
+  "lines": 802,
+  "size_kb": 27.4,
+  "sha256": "ed75b1d6e1bedafee181b2eefc0a1e98a64533df1c7067383cc10450bea4c83f",
+  "has_card": true,
+  "added_at": "2026-05-24T21:45:25-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/howardh__prompt_to_video_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/prompt_to_video_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__prompt_to_video_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__prompt_to_video_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@howardh/prompt_to_video_agent.py"
+}

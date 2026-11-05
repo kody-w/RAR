@@ -1,0 +1,45 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__forge_provenance_agent",
+  "name": "Forge Provenance",
+  "rar_name": "@rapp/forge_provenance_agent",
+  "rappid": "rappid:@rapp/forge_provenance_agent:762e2d9f3cb9a2dbf34263881f2e0926616f0051c09ab3ebec8a8abbf6e263c7",
+  "_migrated_from": "rappid:@rapp/forge_provenance_agent:027c01f76551537295bb7d9d7904e3b4853bfd629b64bc4acc8271c4bff45c63",
+  "_migrated_from_all": [
+    "rappid:@rapp/forge_provenance_agent:027c01f76551537295bb7d9d7904e3b4853bfd629b64bc4acc8271c4bff45c63"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.0",
+  "publisher": "@rapp",
+  "category": "core",
+  "tags": [
+    "copilot-studio",
+    "power-platform",
+    "forge",
+    "provenance",
+    "drift",
+    "deterministic",
+    "verification",
+    "m365"
+  ],
+  "description": "Stamp a forged artifact bundle with the fingerprint of the RAPP agent it came from, then prove later that it never drifted. Reports per file: current, STALE (source moved), HAND-EDITED (derived file was edited and the edit will be lost), MISSING, or UNSTAMPED (provenance unknown, which never renders as healthy). Fingerprints the agent's declarative surface, read with ast and never imported, so a comment change does not cry wolf but a description change does.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 275,
+  "size_kb": 12.8,
+  "sha256": "9698949e8248472aa11df8dd58192826b3cbdab56ee3fd8c2ff5fa6819d9f14c",
+  "has_card": true,
+  "added_at": "2026-08-26T17:29:33-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__forge_provenance_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/forge_provenance_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__forge_provenance_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__forge_provenance_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/forge_provenance_agent.py"
+}

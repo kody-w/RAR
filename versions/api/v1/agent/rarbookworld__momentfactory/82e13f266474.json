@@ -1,0 +1,48 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rarbookworld__momentfactory",
+  "name": "MomentFactory (converged singleton)",
+  "rar_name": "@rarbookworld/momentfactory",
+  "rappid": "rappid:@rarbookworld/momentfactory:d67ba3fa5cbe5a6a89f3693da4b0d4afd7ddfb11f917f8a53216ed691dc32095",
+  "_migrated_from": "rappid:@rarbookworld/momentfactory:5e2b4d285c830da3303df4f4349cac47d048dfe9787213c1ad0399863260059a",
+  "_migrated_from_all": [
+    "rappid:v2:agent:@rarbookworld/momentfactory:d339ee576abe2968190a246caa6354d8",
+    "rappid:@rarbookworld/momentfactory:b582303218152a71e18589eae58a785699c3e27cb784677e21ee45aa3d8ba5d2",
+    "rappid:@rarbookworld/momentfactory:5e2b4d285c830da3303df4f4349cac47d048dfe9787213c1ad0399863260059a"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "0.1.2",
+  "publisher": "@rarbookworld",
+  "category": "pipeline",
+  "tags": [
+    "composite",
+    "moment-pipeline",
+    "rappterbook-engine",
+    "singleton",
+    "rapplication"
+  ],
+  "description": "Converts a moment (commit, message, idea) into a publishable Drop through seven inlined LLM personas, calling Azure OpenAI.",
+  "author": "rarbookworld",
+  "quality_tier": "community",
+  "requires_env": [
+    "AZURE_OPENAI_ENDPOINT",
+    "AZURE_OPENAI_API_KEY",
+    "AZURE_OPENAI_DEPLOYMENT"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 537,
+  "size_kb": 25.1,
+  "sha256": "7c0330f8e2a55cce2e58e26cce883b2218f146536d13e23bd5af47e5986bebaf",
+  "has_card": true,
+  "added_at": "2026-04-19T18:58:15-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rarbookworld__momentfactory.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rarbookworld/momentfactory_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__momentfactory.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rarbookworld__momentfactory.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rarbookworld/momentfactory_agent.py"
+}

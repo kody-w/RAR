@@ -1,0 +1,45 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__knowledge_corpus_curator",
+  "name": "Knowledge Corpus Curator",
+  "rar_name": "@cat-agent-skills/knowledge_corpus_curator",
+  "rappid": "rappid:@cat-agent-skills/knowledge_corpus_curator:a82868be5567ef6dbfe31522ddd4bca25ff639d4a12442984ed614a87f13bc7e",
+  "_migrated_from": "rappid:@cat-agent-skills/knowledge_corpus_curator:d6ac428fe78b48fb7bf0ba9e770eab7d0ed42e99319d4e86e847c69b0adf0e0e",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/knowledge_corpus_curator:e720f16199ecd393e3205209e0264388b8df8ad7aa7a846623e18190c977c056",
+    "rappid:@cat-agent-skills/knowledge_corpus_curator:d6ac428fe78b48fb7bf0ba9e770eab7d0ed42e99319d4e86e847c69b0adf0e0e"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "2.8.2",
+  "publisher": "@cat-agent-skills",
+  "category": "productivity",
+  "tags": [
+    "knowledge",
+    "sharepoint",
+    "governance",
+    "deduplication",
+    "documents",
+    "uploads",
+    "excel"
+  ],
+  "description": "Review uploaded knowledge-source files for duplication, redundancy, staleness, overlap, and potentially conflicting guidance, then produce an evidence-based curation backlog.",
+  "author": "Doug Bellingeri",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.9,
+  "sha256": "10ffef6ab60d115b4c4de25df5f583e6259ff262bdee6283a7524c223c70ebf1",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__knowledge_corpus_curator.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/knowledge_corpus_curator_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__knowledge_corpus_curator.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__knowledge_corpus_curator.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/knowledge_corpus_curator_agent.py"
+}

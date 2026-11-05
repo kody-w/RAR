@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__copilot_studio_test_planner",
+  "name": "Copilot Studio Test Planner",
+  "rar_name": "@cat-agent-skills/copilot_studio_test_planner",
+  "rappid": "rappid:@cat-agent-skills/copilot_studio_test_planner:65f940ecb8b46ddf24fabde52c623dfa01297009fceeb32f5836559c1349f939",
+  "_migrated_from": "rappid:@cat-agent-skills/copilot_studio_test_planner:a97782b9249d7b5a1c9e551f6fe916e90cf07759eb35836c58b28fb8e1adab0d",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/copilot_studio_test_planner:15d44b90b0ae64f439d29d067a6697d29380d26ce7125a717e21e48f7f9b4bd0",
+    "rappid:@cat-agent-skills/copilot_studio_test_planner:a97782b9249d7b5a1c9e551f6fe916e90cf07759eb35836c58b28fb8e1adab0d"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "qa",
+    "eval",
+    "regression",
+    "agent"
+  ],
+  "description": "Reads an exported Copilot Studio agent and generates a graded, runnable test suite (happy-path, paraphrase, disambiguation, negative, knowledge-grounding, multilingual, and safety cases) plus a regression set, ready to run in the free Copilot Studio test panel.",
+  "author": "Elliot Margot",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.2,
+  "sha256": "1ff5ecc58626978dfa6177c233f43cb7f545aec0fd3025735830c380f44b8564",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__copilot_studio_test_planner.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/copilot_studio_test_planner_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__copilot_studio_test_planner.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__copilot_studio_test_planner.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/copilot_studio_test_planner_agent.py"
+}

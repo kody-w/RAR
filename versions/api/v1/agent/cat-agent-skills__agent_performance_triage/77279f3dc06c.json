@@ -1,0 +1,46 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__agent_performance_triage",
+  "name": "Agent Performance Triage",
+  "rar_name": "@cat-agent-skills/agent_performance_triage",
+  "rappid": "rappid:@cat-agent-skills/agent_performance_triage:c657a3961697ac9808e8d03f3497694a458cf85cb991d32ad601e0511206c670",
+  "_migrated_from": "rappid:@cat-agent-skills/agent_performance_triage:8398c0fe7b1f09ce0b168ac3b75df0d08be705b6f7a9c56508c4689e286dccdc",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/agent_performance_triage:a9092a1a103f6eba8187fd939a6ec2e47a3444c13b96d69bb2798d1ba7d59ab6",
+    "rappid:@cat-agent-skills/agent_performance_triage:8398c0fe7b1f09ce0b168ac3b75df0d08be705b6f7a9c56508c4689e286dccdc"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
+  "publisher": "@cat-agent-skills",
+  "category": "analysis",
+  "tags": [
+    "copilot_studio",
+    "analytics",
+    "optimization",
+    "operations",
+    "post_launch",
+    "backlog",
+    "assessment",
+    "monitoring"
+  ],
+  "description": "Turn a live agent's analytics and transcripts into a diagnosis and a prioritized improvement backlog.",
+  "author": "Marco Zama",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.5,
+  "sha256": "c733f72d68b4a9d519b6a7ff701c963143d0a361037a576be6f8f298fe17ca82",
+  "has_card": true,
+  "added_at": "2026-08-28T04:52:39Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__agent_performance_triage.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/agent_performance_triage_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__agent_performance_triage.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__agent_performance_triage.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/agent_performance_triage_agent.py"
+}

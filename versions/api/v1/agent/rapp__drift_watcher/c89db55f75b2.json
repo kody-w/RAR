@@ -1,0 +1,47 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__drift_watcher",
+  "name": "DriftWatcherAgent",
+  "rar_name": "@rapp/drift_watcher",
+  "rappid": "rappid:@rapp/drift_watcher:7742889e11a1413da5703045cd8e9ea8f34bd10e2d9a67cdf2fa2baa29b96a00",
+  "_migrated_from": "rappid:@rapp/drift_watcher:5d35bca0458a831f69d875e2bc03c89584e121f551b00839ef425f27097f71b2",
+  "_migrated_from_all": [
+    "rappid:@rapp/drift_watcher:94bfdf486d2c3f4fce2bc9ea3776de3e60b0c61e7f31a1700f94e026533df188",
+    "rappid:@rapp/drift_watcher:5d35bca0458a831f69d875e2bc03c89584e121f551b00839ef425f27097f71b2"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
+  "publisher": "@rapp",
+  "category": "core",
+  "tags": [
+    "drift",
+    "spec",
+    "github",
+    "issues",
+    "pull-request",
+    "traceability",
+    "steward",
+    "alignment",
+    "operator-mediated"
+  ],
+  "description": "Watches drift-labeled GitHub Issues via the gh CLI and stages each proposed fix as a pull request; proposes only, never merges or closes.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 428,
+  "size_kb": 21.3,
+  "sha256": "0d87442bbc4330abef6f282af1e095f43c930580b20f1b3ac9ec010fad4187cd",
+  "has_card": true,
+  "added_at": "2026-06-10T09:05:29-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__drift_watcher.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/drift_watcher_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__drift_watcher.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__drift_watcher.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/drift_watcher_agent.py"
+}

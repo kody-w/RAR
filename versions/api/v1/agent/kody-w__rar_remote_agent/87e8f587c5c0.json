@@ -1,0 +1,46 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__rar_remote_agent",
+  "name": "RAR Remote Agent",
+  "rar_name": "@kody-w/rar_remote_agent",
+  "rappid": "rappid:@kody-w/rar_remote_agent:44b246f9e69a0d213ff04d8fe1971eea3bf383e2ce1e500a22e50b5cda2b90f7",
+  "_migrated_from": "rappid:@kody-w/rar_remote_agent:cba3e3ffb9266fd0730c0b792efbad58d2fa36321db447c50d8252a93efaa03d",
+  "_migrated_from_all": [
+    "rappid:@kody-w/rar_remote_agent:2ce9a916fff435ea3b88a257c8c14859a246805a5e8d7e7985766c51eaf388e9",
+    "rappid:@kody-w/rar_remote_agent:4824a515b7b8c745681b0a67e9523b105e587818a158c501253220f334e846f0",
+    "rappid:@kody-w/rar_remote_agent:cba3e3ffb9266fd0730c0b792efbad58d2fa36321db447c50d8252a93efaa03d"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.8.0",
+  "publisher": "@kody-w",
+  "category": "core",
+  "tags": [
+    "core",
+    "registry",
+    "package-manager",
+    "install",
+    "discovery",
+    "voting",
+    "community"
+  ],
+  "description": "Discovers, searches, installs, votes on, reviews, and submits RAR agents via GitHub raw fetches and Issues, using the brainstem's GitHub token.",
+  "author": "RAPP Core Team",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 1413,
+  "size_kb": 60.8,
+  "sha256": "c4743a86ee97d68c37ecacd7a811e98452ad49f092baa1ee83150fb3a036eac3",
+  "has_card": true,
+  "added_at": "2026-05-24T21:45:25-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__rar_remote_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rar_remote_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__rar_remote_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__rar_remote_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/rar_remote_agent.py"
+}

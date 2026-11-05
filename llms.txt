@@ -11,6 +11,16 @@
 - Install anything: curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- <pack or @publisher/agent> ...
 - Protocol: https://kody-w.github.io/rapp-1/llms.txt
 
+## Static API descriptor and deterministic content store
+- Descriptor: https://kody-w.github.io/RAR/manifest.json (rapp-static-api/1.1).
+- Build everything offline: `python3 build_registry.py`. Inputs include agent manifests, stack packs and marketplace metadata. `--registry-only` retains the low-level registry build for isolated tooling.
+- The descriptor exposes Pages URLs alongside all existing raw URLs. Browser transport and authenticated capabilities remain unchanged.
+- Every registry agent has `_version` with a SHA-256, 12-character `sha8`, and immutable `versions/<name>/<sha8><ext>` path. Verify the downloaded bytes before loading.
+- Status endpoint hashes cover the exact served JSON bytes and include `version_path`: https://kody-w.github.io/RAR/api/v1/status.json.
+- Frames are append-only. A changed input adds a frame; an existing frame is never deleted or overwritten, and a collision or corrupted frame fails the build.
+- Timestamps come from git commit time (or explicit `SOURCE_DATE_EPOCH` for exported inputs); unchanged documents keep their input timestamp. Rebuilds are byte-identical.
+- Full rapp-static-api/1.1 conformance is pending Kody's decision on existing browser GitHub API calls, cache bypasses and workflow concurrency. No browser feature is removed to clear lint.
+
 ## Endpoints for AIs
 - Guide (install packs and agents for your person, test them): https://kody-w.github.io/grail-layers/skills/rar-easy-mode/SKILL.md
 - Any agent, as plain text with load steps: https://kody-w.github.io/RAR/a/{publisher}/{name}/agent.md

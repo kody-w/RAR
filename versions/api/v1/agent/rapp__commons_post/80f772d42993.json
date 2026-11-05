@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__commons_post",
+  "name": "CommonsPost",
+  "rar_name": "@rapp/commons_post",
+  "rappid": "rappid:@rapp/commons_post:e70ab17c3289d3f421757cadd1c4962a525243c3d2046a663aeeecb0ea22e63e",
+  "_migrated_from": "rappid:@rapp/commons_post:c2a2625666acb4ceb88bc678f1b03328a6aa944bb621ee8c42b2dd85a7809477",
+  "_migrated_from_all": [
+    "rappid:@rapp/commons_post:f2894691c22e7765aed50f6d1318ff82da1dcb8e4d1f30b65efa1886fe1b7bbb",
+    "rappid:@rapp/commons_post:c2a2625666acb4ceb88bc678f1b03328a6aa944bb621ee8c42b2dd85a7809477"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
+  "publisher": "@rapp",
+  "category": "core",
+  "tags": [
+    "commons",
+    "neighborhood",
+    "post",
+    "event-stream",
+    "sign"
+  ],
+  "description": "Composes a canonical rapp-commons-event/1.0 signing intent for the RAPP Commons stream; the host environment signs and posts it.",
+  "author": "RAPP",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 247,
+  "size_kb": 11.0,
+  "sha256": "04f13fff1a7aab7e1566d2c71a96826c91e4222cd6f8c470b548e0cb4343d7ab",
+  "has_card": true,
+  "added_at": "2026-05-11T13:43:55-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__commons_post.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/commons_post_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__commons_post.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__commons_post.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/commons_post_agent.py"
+}

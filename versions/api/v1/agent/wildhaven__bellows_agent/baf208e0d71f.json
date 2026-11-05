@@ -1,0 +1,46 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "wildhaven__bellows_agent",
+  "name": "Bellows",
+  "rar_name": "@wildhaven/bellows_agent",
+  "rappid": "rappid:@wildhaven/bellows_agent:5ee9cf7d4402b5ace9a99a15637cce9c6dc6d1a71775d89b155aed249edd2fe1",
+  "_migrated_from": "rappid:@wildhaven/bellows_agent:5f8e3a99322c7ba061e4b7e5694e9dffe8d59270a22ebf0245c53d65c2c7a908",
+  "_migrated_from_all": [
+    "rappid:@wildhaven/bellows_agent:ee69d591584138c90fd7be3a69cbb23f8056334b6f86bc62dc3e24da313bfb33",
+    "rappid:@wildhaven/bellows_agent:5f8e3a99322c7ba061e4b7e5694e9dffe8d59270a22ebf0245c53d65c2c7a908"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.1.1",
+  "publisher": "@wildhaven",
+  "category": "general",
+  "tags": [
+    "bellows",
+    "doubledown",
+    "self-judge",
+    "creative",
+    "loop",
+    "daemon",
+    "construct",
+    "show-off-the-power"
+  ],
+  "description": "Builds a paste-ready self-critique 'doubledown' prompt for ten escalating ideas, persisting a local kill log so each loop learns from the last.",
+  "author": "Wildhaven of America",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 484,
+  "size_kb": 20.0,
+  "sha256": "b80d52b3ed24ff6b50e1be11b08117c7581b0b6563f7a4ad01738963c901bc00",
+  "has_card": true,
+  "added_at": "2026-05-16T13:08:37-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/wildhaven__bellows_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/bellows_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/wildhaven__bellows_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/wildhaven__bellows_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@wildhaven/bellows_agent.py"
+}

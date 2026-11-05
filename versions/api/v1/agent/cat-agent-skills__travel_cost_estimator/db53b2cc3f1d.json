@@ -1,0 +1,44 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__travel_cost_estimator",
+  "name": "Travel Cost Estimator",
+  "rar_name": "@cat-agent-skills/travel_cost_estimator",
+  "rappid": "rappid:@cat-agent-skills/travel_cost_estimator:a4a05dd3e425bf60b7ad81679f1e592c263f2d2c4a5395e0f9255dc01e904173",
+  "_migrated_from": "rappid:@cat-agent-skills/travel_cost_estimator:1b6925f1ae450912ac0ed0e81093eb905d3e1846dc2a791fd300e5aae9bd3af6",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/travel_cost_estimator:30a2b8ac75e933476e63f9c09e37f67993b0ff824c5123b5d7bcf82b94e35b1e",
+    "rappid:@cat-agent-skills/travel_cost_estimator:1b6925f1ae450912ac0ed0e81093eb905d3e1846dc2a791fd300e5aae9bd3af6"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "travel",
+    "expenses",
+    "browser_automation",
+    "playwright",
+    "finance",
+    "productivity"
+  ],
+  "description": "Price a business trip from live fares in your corporate booking tool, benchmark the non-bookable lines against your own approved expense reports, and produce an estimate a manager can approve \u2014 with a hard guardrail that never enters the booking funnel.",
+  "author": "Al Macey",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.9,
+  "sha256": "183b5866237d0c907e5fea7feb4e9813add71493a2cf7499a273dbcd08e9989a",
+  "has_card": true,
+  "added_at": "2026-08-11T09:43:05Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__travel_cost_estimator.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/travel_cost_estimator_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__travel_cost_estimator.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__travel_cost_estimator.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/travel_cost_estimator_agent.py"
+}

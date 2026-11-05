@@ -1,0 +1,46 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__lab_column_mapper",
+  "name": "Lab Column Mapper",
+  "rar_name": "@cat-agent-skills/lab_column_mapper",
+  "rappid": "rappid:@cat-agent-skills/lab_column_mapper:619233286005be3933efb28022a7cf06d1bbda54c072cea0922b0e7b2caf7c72",
+  "_migrated_from": "rappid:@cat-agent-skills/lab_column_mapper:bf9250e1298b38c86adad4b7b456271169ea3dabf748b64bd103995dab3a84d4",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/lab_column_mapper:b38661e67b984c8bc8f31750078c17758e794395308296010d7b1e1848e9ecb1",
+    "rappid:@cat-agent-skills/lab_column_mapper:bf9250e1298b38c86adad4b7b456271169ea3dabf748b64bd103995dab3a84d4"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "healthcare",
+    "clinical_data",
+    "lab_results",
+    "schema_drift",
+    "column_mapping",
+    "data_ingestion",
+    "loinc",
+    "azure_ai_search"
+  ],
+  "description": "When a health system's lab results ingestion pipeline hits an unknown column header, this skill semantically matches the source column against the canonical clinical schema (LOINC-anchored), scoped by lab and clinical domain, and writes a suggested mapping to a Dataverse review queue for a clinical informatics steward to approve.",
+  "author": "Rafsan Huseynov",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 14.1,
+  "sha256": "0287bd0110c25b87219dd922e473ed65e8c5fec0e6ef39071b21a2d0aa8239d7",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__lab_column_mapper.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/lab_column_mapper_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__lab_column_mapper.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__lab_column_mapper.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/lab_column_mapper_agent.py"
+}

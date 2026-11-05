@@ -1,0 +1,44 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__gantt_chart_generator",
+  "name": "Gantt Chart Builder",
+  "rar_name": "@cat-agent-skills/gantt_chart_generator",
+  "rappid": "rappid:@cat-agent-skills/gantt_chart_generator:807c8a44307c8e14bb8bd02136d8cb4ea580c182a37016e86ec131b9005d32e0",
+  "_migrated_from": "rappid:@cat-agent-skills/gantt_chart_generator:d6c8d65811488ec956482cf6beff041c69215ddcfd03482e0849dea702ded47d",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/gantt_chart_generator:a4ffec497f632fdfa097a11fa6a3aa65255a333ce28ba54c8aa544d7f883d7ca",
+    "rappid:@cat-agent-skills/gantt_chart_generator:d6c8d65811488ec956482cf6beff041c69215ddcfd03482e0849dea702ded47d"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
+  "publisher": "@cat-agent-skills",
+  "category": "devtools",
+  "tags": [
+    "gantt",
+    "timeline",
+    "project_management",
+    "matplotlib",
+    "charts",
+    "scripts"
+  ],
+  "description": "Generate clean, consistently-styled matplotlib Gantt charts from a schedule CSV or DataFrame \u2014 with group colours, completion overlays, and a today line.",
+  "author": "Nazish Qasim",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.7,
+  "sha256": "061ce3cfa4ea2f9aa26ffd7d11a22e3555748d5b254ca6ce2d6eb091b2c48a3a",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__gantt_chart_generator.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/gantt_chart_generator_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__gantt_chart_generator.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__gantt_chart_generator.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/gantt_chart_generator_agent.py"
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__sharepoint_list_formatter",
+  "name": "SharePoint List Formatter",
+  "rar_name": "@cat-agent-skills/sharepoint_list_formatter",
+  "rappid": "rappid:@cat-agent-skills/sharepoint_list_formatter:0702f35b608a8d24f29e364dce423f7d1c9137c85e69c700c65497b34584a586",
+  "_migrated_from": "rappid:@cat-agent-skills/sharepoint_list_formatter:529de51ad8c33e968f714fe76bcc0e1f21f58f007d8c0c7652e601a005865afe",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/sharepoint_list_formatter:1639c8d4c26f7d6ad5381d471b045c23e72b84dc24ff60a193b233099b584064",
+    "rappid:@cat-agent-skills/sharepoint_list_formatter:529de51ad8c33e968f714fe76bcc0e1f21f58f007d8c0c7652e601a005865afe"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
+  "publisher": "@cat-agent-skills",
+  "category": "pipeline",
+  "tags": [
+    "sharepoint",
+    "microsoft_365",
+    "productivity",
+    "tables",
+    "data"
+  ],
+  "description": "Turns any SharePoint list data into a clean, consistent markdown table. Dynamic columns based on list type and query, plus a one-click Open link for every row.",
+  "author": "Mathias Salomonsen",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.6,
+  "sha256": "8d46667639bcef5592415180941620139a0b843fe27c8f605456fb68a5316ced",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__sharepoint_list_formatter.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/sharepoint_list_formatter_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__sharepoint_list_formatter.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__sharepoint_list_formatter.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/sharepoint_list_formatter_agent.py"
+}

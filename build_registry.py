@@ -25,6 +25,7 @@ Supports three file formats:
 """
 
 import ast
+import argparse
 import hashlib
 import json
 import os
@@ -32,9 +33,10 @@ import re
 import subprocess
 import sys
 from pathlib import Path
-from datetime import datetime, timezone
+from datetime import datetime
 from tools.build_agent_pages import build_agent_pages
 from tools.stamp_ticket import strip_ticket
+from scripts.static_api import commit_timestamp, publish_frame, stable_document
 
 AGENTS_DIR = Path("agents")
 SWARMS_DIR = Path("swarms")
@@ -1439,7 +1441,10 @@ def build_registry():
     registry = {
         "schema": "rapp-registry/1.1",
         "version": "1.1.0",
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": commit_timestamp(),
+        "static_api": "rapp-static-api/1.1",
+        "pages_base": "https://kody-w.github.io/RAR",
+        "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
         "stats": {
             "total_agents": len(agents),
             "total_swarms": len(all_swarms),
@@ -1533,6 +1538,15 @@ def build_registry():
         except (json.JSONDecodeError, KeyError):
             pass
 
+    registry["summary"] = registry["stats"]
+    if not errors and not duplicates:
+        for agent in agents:
+            source = Path(agent["_file"])
+            agent["_version"] = publish_frame(
+                agent["name"], "".join(source.suffixes), source.read_bytes()
+            )
+    registry = stable_document(REGISTRY_FILE, registry)
+
     # Atomic write: a concurrent reader (another build, a test) never sees a half-written registry.
     tmp = f"{REGISTRY_FILE}.{os.getpid()}.tmp"
     with open(tmp, "w", encoding="utf-8") as f:
@@ -1567,4 +1581,22 @@ def build_registry():
 
 
 if __name__ == "__main__":
-    sys.exit(build_registry())
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--registry-only", action="store_true",
+                        help="build only the registry and ticket pages")
+    args = parser.parse_args()
+    result = build_registry()
+    if result == 0 and not args.registry_only:
+        for script in (
+            "scripts/build_pokedex_api.py",
+            "scripts/build_skills_catalog.py",
+            "scripts/build_static_api.py",
+            "scripts/build_front_page.py",
+        ):
+            result = subprocess.run([sys.executable, script], check=False).returncode
+            if result:
+                break
+    if result == 0 and not args.registry_only:
+        for path in [REGISTRY_FILE, Path("manifest.json"), *sorted(Path("api/v1").rglob("*.json"))]:
+            publish_frame(path.with_suffix("").as_posix(), path.suffix, path.read_bytes())
+    sys.exit(result)

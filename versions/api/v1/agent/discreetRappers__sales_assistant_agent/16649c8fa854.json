@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "discreetRappers__sales_assistant_agent",
+  "name": "SalesAssistant",
+  "rar_name": "@discreetRappers/sales_assistant_agent",
+  "rappid": "rappid:@discreetRappers/sales_assistant_agent:60331e9d7eecfad93b81b82940cd1de500bd7f032c3bf161f5109aa2a9d1d601",
+  "_migrated_from": "rappid:@discreetRappers/sales_assistant_agent:361b51c70840c4618ae143c2997a44256f8993778e5d1a91556bf9f11d03a08d",
+  "_migrated_from_all": [
+    "rappid:v2:agent:@discreetRappers/sales_assistant_agent:b4defb076c6e8fdcaa96b1187fffb984",
+    "rappid:@discreetRappers/sales_assistant_agent:22fda95c44a1428bf3944c7aeda990f24fef4fe4b7b93f155eb843c32c18eb6a",
+    "rappid:@discreetRappers/sales_assistant_agent:361b51c70840c4618ae143c2997a44256f8993778e5d1a91556bf9f11d03a08d"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
+  "publisher": "@discreetRappers",
+  "category": "integrations",
+  "tags": [
+    "integrations",
+    "sales",
+    "crm",
+    "natural-language"
+  ],
+  "description": "Routes natural-language CRM requests about accounts, contacts, and opportunities to the Dynamics CRUD agent, which serves built-in demo data.",
+  "author": "Bill Whalen",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 641,
+  "size_kb": 28.0,
+  "sha256": "806446e21316d4362938d86ea3be72fe0281167ec2d0e0d0167c04ff1a61e9a9",
+  "has_card": true,
+  "added_at": "2026-04-06T16:39:03-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/discreetRappers__sales_assistant_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/sales_assistant_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__sales_assistant_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__sales_assistant_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@discreetRappers/sales_assistant_agent.py"
+}

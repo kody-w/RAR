@@ -1,0 +1,44 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__content_quality_auditor",
+  "name": "Content Quality Auditor",
+  "rar_name": "@cat-agent-skills/content_quality_auditor",
+  "rappid": "rappid:@cat-agent-skills/content_quality_auditor:9cf3a09f416f5701a7b74e24d217d4b3bd90a9643102a6d004afc3a1316ff957",
+  "_migrated_from": "rappid:@cat-agent-skills/content_quality_auditor:1c7ec82e6faafd15ab780d27f4e24b215ff416ff944ad3130501ab3315b9ed97",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/content_quality_auditor:090554ecc3aefc499b4b981ac2af3d5324c6822e8c0d2b68e6fa5bc74a06bfb4",
+    "rappid:@cat-agent-skills/content_quality_auditor:1c7ec82e6faafd15ab780d27f4e24b215ff416ff944ad3130501ab3315b9ed97"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "2.1.2",
+  "publisher": "@cat-agent-skills",
+  "category": "productivity",
+  "tags": [
+    "content",
+    "quality",
+    "audit",
+    "documents",
+    "productivity",
+    "governance"
+  ],
+  "description": "Score documents, pages, posts, or artefact libraries against a configurable quality rubric and recommend fixes.",
+  "author": "Simon Owen",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.8,
+  "sha256": "cd8db2c4cd8e2a03a2e6ad4aa7879a1a9cf9f78cbaf3eb95e9ef25f0efdda293",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__content_quality_auditor.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/content_quality_auditor_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__content_quality_auditor.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__content_quality_auditor.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/content_quality_auditor_agent.py"
+}

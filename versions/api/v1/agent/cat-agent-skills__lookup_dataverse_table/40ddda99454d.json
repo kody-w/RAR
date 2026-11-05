@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__lookup_dataverse_table",
+  "name": "Dataverse Table Lookup",
+  "rar_name": "@cat-agent-skills/lookup_dataverse_table",
+  "rappid": "rappid:@cat-agent-skills/lookup_dataverse_table:c0f25db0cb947b270583a8ef02109cf1dcd8919df87d37e213e3bb762b0b837f",
+  "_migrated_from": "rappid:@cat-agent-skills/lookup_dataverse_table:55bb1ca5126803ef689a2c59895bf64d652c242c58aa37989cf3c9d91249a976",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/lookup_dataverse_table:4777286236a6f0c0cad647bdb9eced03d928c8253652572cab45fc84d8fa8238",
+    "rappid:@cat-agent-skills/lookup_dataverse_table:55bb1ca5126803ef689a2c59895bf64d652c242c58aa37989cf3c9d91249a976"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
+  "publisher": "@cat-agent-skills",
+  "category": "integrations",
+  "tags": [
+    "dataverse",
+    "mcp",
+    "data_lookup",
+    "power_platform",
+    "crm"
+  ],
+  "description": "Search any Microsoft Dataverse table, browse matching records, and drill into full record details \u2014 sourced live via the Dataverse MCP Server.",
+  "author": "Chris Garty",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.6,
+  "sha256": "8b0277b43675440ff607ba85c746d410d864d62ddc5682363f111737c00be4c4",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__lookup_dataverse_table.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/lookup_dataverse_table_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__lookup_dataverse_table.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__lookup_dataverse_table.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/lookup_dataverse_table_agent.py"
+}

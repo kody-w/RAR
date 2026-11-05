@@ -1,0 +1,44 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__work_iq_signalboard",
+  "name": "Work IQ Signalboard",
+  "rar_name": "@cat-agent-skills/work_iq_signalboard",
+  "rappid": "rappid:@cat-agent-skills/work_iq_signalboard:0e874763ccbfddd66253365ed43c69488a3954c603f47a55ebd154fa21dee0aa",
+  "_migrated_from": "rappid:@cat-agent-skills/work_iq_signalboard:4d88288c45a339f98d9501af2b5a6f4e33735c11a9649b2f024292ae2e08a39f",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/work_iq_signalboard:4800ab23a37beca5c1fa3bf835ac9c3d9738a34633db6e5f4ff0e4d7a0e9dfd5",
+    "rappid:@cat-agent-skills/work_iq_signalboard:4d88288c45a339f98d9501af2b5a6f4e33735c11a9649b2f024292ae2e08a39f"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "4.0.2",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "work_iq",
+    "microsoft_365",
+    "dashboard",
+    "visualization",
+    "work_patterns",
+    "analytics"
+  ],
+  "description": "Turn four weeks of Calendar, Mail, and Teams chat activity into a colorful dashboard of reconciled Work IQ counts.",
+  "author": "Andreas Adner",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.5,
+  "sha256": "5c8656fd0619330356b42a88ac5ec7cdf57ad539fe5f8f82863bfbf9618e1a43",
+  "has_card": true,
+  "added_at": "2026-08-17T18:03:09-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__work_iq_signalboard.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/work_iq_signalboard_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__work_iq_signalboard.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__work_iq_signalboard.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/work_iq_signalboard_agent.py"
+}

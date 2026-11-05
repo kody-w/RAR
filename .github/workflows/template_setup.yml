@@ -60,5 +60,6 @@ jobs:
           git config user.name "RAPP Setup Bot"
           git config user.email "rar-bot@users.noreply.github.com"
           git add rar.config.json registry.json binder/ staging/ agents/
+          git add versions manifest.json api/v1
           git diff --cached --quiet || git commit -m "Configure as RAPP binder instance [skip ci]"
           git push

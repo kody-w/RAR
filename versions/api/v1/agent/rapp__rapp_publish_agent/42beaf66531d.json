@@ -1,0 +1,45 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__rapp_publish_agent",
+  "name": "RappPublish",
+  "rar_name": "@rapp/rapp_publish_agent",
+  "rappid": "rappid:@rapp/rapp_publish_agent:66692f371ebc3fc8096fb0fcbf45a8d3a782655af82a06dcee9a0ff415ae2752",
+  "_migrated_from": "rappid:@rapp/rapp_publish_agent:9f84e776f1b2edc05ff59ad4090039fd0bacb014352c1a7b56d01999e4705fcb",
+  "_migrated_from_all": [
+    "rappid:v2:agent:@rapp/rapp_publish_agent:3d33b03aef705e0ec9ecad9cb23ff44f",
+    "rappid:@rapp/rapp_publish_agent:124613c321de732913329d38553b1a42928b7cc3354425cfd20f4394e0de210d",
+    "rappid:@rapp/rapp_publish_agent:9f84e776f1b2edc05ff59ad4090039fd0bacb014352c1a7b56d01999e4705fcb"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "0.2.3",
+  "publisher": "@rapp",
+  "category": "platform",
+  "tags": [
+    "publish",
+    "submission",
+    "router",
+    "ecosystem",
+    "store",
+    "registry"
+  ],
+  "description": "Classifies a RAPP artifact (agent, rapplication, or sense) and opens the matching submission issue in its store repo via the GitHub API.",
+  "author": "RAPP",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 511,
+  "size_kb": 21.8,
+  "sha256": "838117db87ab4909829de672e666504941b99c348d8bd5a9e3eb5a5542c69688",
+  "has_card": true,
+  "added_at": "2026-04-27T23:18:27Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__rapp_publish_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/rapp_publish_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rapp_publish_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__rapp_publish_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/rapp_publish_agent.py"
+}

@@ -1,0 +1,46 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "howardh__tuftelove_agent",
+  "name": "TufteLove",
+  "rar_name": "@howardh/tuftelove_agent",
+  "rappid": "rappid:@howardh/tuftelove_agent:17daf7cca16ad8cf0cee0c24d5fcdce57de97c4836b7237ae190393c23c70185",
+  "_migrated_from": "rappid:@howardh/tuftelove_agent:c19440889ad45240e6ad6ed463f7f5f1b69139f21b96560215844d04ed1e68af",
+  "_migrated_from_all": [
+    "rappid:@howardh/tuftelove_agent:a5c51bdfbbfa7e2b7d09af7ae332fe65bdbf17d7afa585edcc0da5c12f126a17",
+    "rappid:@howardh/tuftelove_agent:c19440889ad45240e6ad6ed463f7f5f1b69139f21b96560215844d04ed1e68af"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
+  "publisher": "@howardh",
+  "category": "productivity",
+  "tags": [
+    "ui",
+    "design",
+    "tufte",
+    "oversight",
+    "ux",
+    "review",
+    "accessibility",
+    "data-visualization"
+  ],
+  "description": "Advises on and reviews agent UI design using Tufte principles and Microsoft's Agent Oversight pattern taxonomy.",
+  "author": "Howard Hoy",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 522,
+  "size_kb": 29.5,
+  "sha256": "fe047c604edf53eac949ec02837dac4c6b32cba0db69d3d99119dbc3e50caf14",
+  "has_card": true,
+  "added_at": "2026-05-24T21:45:25-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/howardh__tuftelove_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/tuftelove_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__tuftelove_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__tuftelove_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@howardh/tuftelove_agent.py"
+}

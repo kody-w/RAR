@@ -1,0 +1,44 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__egg_hatcher",
+  "name": "EggHatcher",
+  "rar_name": "@rapp/egg_hatcher",
+  "rappid": "rappid:@rapp/egg_hatcher:3ae258d4ca414dc302bf8d87ed0640f5b6a00efa9b2e47f6f23a3b2b998eab95",
+  "_migrated_from": "rappid:@rapp/egg_hatcher:ce60d06a3865bddc3cb826ead0867d2be4b5811ce39d654693b4b9048aea0ee6",
+  "_migrated_from_all": [
+    "rappid:@rapp/egg_hatcher:30fa90dcb3f58852a3317d95d505e3308c9026277b6a7fa3ab1b6468a2aea526",
+    "rappid:@rapp/egg_hatcher:ce60d06a3865bddc3cb826ead0867d2be4b5811ce39d654693b4b9048aea0ee6"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.1.1",
+  "publisher": "@rapp",
+  "category": "core",
+  "tags": [
+    "egg",
+    "cartridge",
+    "hatch",
+    "organism",
+    "rapplication",
+    "lifecycle"
+  ],
+  "description": "Introspects any .egg cartridge (local path or URL) and routes it by manifest schema/type to hatch, install, or mount; refuses unknown kinds.",
+  "author": "RAPP",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 357,
+  "size_kb": 15.6,
+  "sha256": "7391fce3a02e8ee274332fbd71c5850495998d2e656732837b1ef104b99aef8e",
+  "has_card": true,
+  "added_at": "2026-05-11T10:53:36-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__egg_hatcher.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/egg_hatcher_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__egg_hatcher.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__egg_hatcher.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/egg_hatcher_agent.py"
+}

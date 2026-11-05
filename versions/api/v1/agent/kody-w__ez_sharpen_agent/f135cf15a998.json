@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__ez_sharpen_agent",
+  "name": "EZSharpen",
+  "rar_name": "@kody-w/ez_sharpen_agent",
+  "rappid": "rappid:@kody-w/ez_sharpen_agent:a833e17a4aff8280e9830b8cc659c75760cd2b24a6d1df6883cb63bab8b91ac0",
+  "_migrated_from": "rappid:@kody-w/ez_sharpen_agent:2909e7adb719253dd3b497b99135da06f61dd99f8aa44e93cc003469f484abc2",
+  "_migrated_from_all": [
+    "rappid:@kody-w/ez_sharpen_agent:32959ba5bffcd56ff1449bebcfa1b4e6b0fa6c3a9cab6f4a6850794e71433bd9",
+    "rappid:@kody-w/ez_sharpen_agent:2909e7adb719253dd3b497b99135da06f61dd99f8aa44e93cc003469f484abc2"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
+  "publisher": "@kody-w",
+  "category": "analysis",
+  "tags": [
+    "frames",
+    "interpolation",
+    "dream-catcher",
+    "fidelity",
+    "ezsharpen"
+  ],
+  "description": "Grows in-between detail for recorded commons frames by bounded interpolation, keeping only candidates consistent with signed neighbor frames.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 423,
+  "size_kb": 27.0,
+  "sha256": "066d314a213177a5f0b8b0fac69652e5190b6980e5a6a6ae0a9b51b41d57420c",
+  "has_card": true,
+  "added_at": "2026-06-20T18:58:25-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__ez_sharpen_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ez_sharpen_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__ez_sharpen_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__ez_sharpen_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/ez_sharpen_agent.py"
+}

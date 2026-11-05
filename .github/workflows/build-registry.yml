@@ -23,6 +23,9 @@ on:
       - 'state/releases.json'
       - 'state/maintainer_migrations.json'
       - 'build_registry.py'
+      - 'scripts/static_api.py'
+      - 'scripts/build_static_api.py'
+      - 'scripts/build_front_page.py'
       - 'tools/stamp_ticket.py'
       - 'tools/build_agent_pages.py'
       - 'tools/sync_layers.py'
@@ -183,6 +186,7 @@ jobs:
                   api/v1/skills.json \
                   api/v1/status.json api/v1/badge.json \
                   api/v1/audience api/v1/index.json api/v1/agent api/v1/sprite
+          git add versions api/v1/front.json
           git diff --cached --quiet || git commit -m "Auto-build registry.json [skip ci]"
           git push
 

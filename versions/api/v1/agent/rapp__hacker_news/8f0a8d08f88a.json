@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__hacker_news",
+  "name": "Hacker News",
+  "rar_name": "@rapp/hacker_news",
+  "rappid": "rappid:@rapp/hacker_news:33869eef9ca459a752546c18cad135bcf3c8d0a68c4a41967a4513b37bd3e667",
+  "_migrated_from": "rappid:@rapp/hacker_news:55e0087a15d98b87ee58b3bf8683d301730cfebcfe64f9fbe6491d76ddee3799",
+  "_migrated_from_all": [
+    "rappid:v2:agent:@rapp/hacker_news:51dd9c04dd7eb5a0701c5008a3797945",
+    "rappid:@rapp/hacker_news:55e0087a15d98b87ee58b3bf8683d301730cfebcfe64f9fbe6491d76ddee3799"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.0",
+  "publisher": "@rapp",
+  "category": "integrations",
+  "tags": [
+    "starter",
+    "news",
+    "http"
+  ],
+  "description": "Fetches the top N stories from Hacker News.",
+  "author": "RAPP",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [],
+  "lines": 125,
+  "size_kb": 5.4,
+  "sha256": "1dd72a3c109f51919101198c8ea6dd4ab48e38f9ab52a2f324382a69acb911ae",
+  "has_card": true,
+  "added_at": "2026-05-02T14:14:24-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__hacker_news.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/hacker_news_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__hacker_news.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__hacker_news.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/hacker_news_agent.py"
+}

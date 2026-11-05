@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__iterative_file_editing",
+  "name": "Iterative File Editing",
+  "rar_name": "@cat-agent-skills/iterative_file_editing",
+  "rappid": "rappid:@cat-agent-skills/iterative_file_editing:8bbfa57ff1ad5d829f34322b4035f5082d73ac28e26d8402f8480413bf9a6f3a",
+  "_migrated_from": "rappid:@cat-agent-skills/iterative_file_editing:f54f7311ad3c809b6530bc8a303bf8c91e43b3a784e39bc1ef47609672f5ae9d",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/iterative_file_editing:2a738cda5dad6a124cef4f1f5719a2a5393ac3fbd4eb5d3e52447a7397752561",
+    "rappid:@cat-agent-skills/iterative_file_editing:f54f7311ad3c809b6530bc8a303bf8c91e43b3a784e39bc1ef47609672f5ae9d"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "files",
+    "iteration",
+    "workflow",
+    "collaboration",
+    "productivity"
+  ],
+  "description": "In Copilot Studio, re-sending an edited file under the same name fails to deliver it \u2014 the change is made but never reaches the user. This skill gives each iteration a new version-numbered filename (report_v1.docx, report_v2.docx\u2026) so every update actually lands in the chat as its own attachment.",
+  "author": "Adi Leibowitz",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.9,
+  "sha256": "2250fc38fc33af9fc658a7a03db2db27ddcde3a4f9263e061f0a01561369a12e",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__iterative_file_editing.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/iterative_file_editing_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__iterative_file_editing.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__iterative_file_editing.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/iterative_file_editing_agent.py"
+}

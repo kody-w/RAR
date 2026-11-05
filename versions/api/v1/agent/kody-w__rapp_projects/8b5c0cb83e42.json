@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__rapp_projects",
+  "name": "RappProjects",
+  "rar_name": "@kody-w/rapp_projects",
+  "rappid": "rappid:@kody-w/rapp_projects:580a3fb1301321a803b2431d155e9a380e2f87e03c81a637b87d7ea5041b9c05",
+  "_migrated_from": "rappid:@kody-w/rapp_projects:bda15d2ae308f3ff842c87fe3fe3fe459101717d52aa497480fc7697a737bc6e",
+  "_migrated_from_all": [
+    "rappid:@kody-w/rapp_projects:62e72af086647516c3e4685f7e46843d11c24bfb4c07978137f84ecc6b5fb1a6",
+    "rappid:@kody-w/rapp_projects:bda15d2ae308f3ff842c87fe3fe3fe459101717d52aa497480fc7697a737bc6e"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.3",
+  "publisher": "@kody-w",
+  "category": "productivity",
+  "tags": [
+    "rapp-1",
+    "project-management",
+    "local-first",
+    "rapplication",
+    "productivity"
+  ],
+  "description": "Coordinates local-first projects through strict RAPP/1 work chains, verified derived boards, artifact receipts, and deterministic eggs.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 4351,
+  "size_kb": 149.7,
+  "sha256": "f4102700cea9eefca33d876a04ba7b077e4111bf045492af678d2854058d97f1",
+  "has_card": true,
+  "added_at": "2026-08-31T11:52:12-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__rapp_projects.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_projects_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__rapp_projects.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__rapp_projects.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/rapp_projects_agent.py"
+}

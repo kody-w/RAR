@@ -1,0 +1,44 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__anonymised_case_study_writer",
+  "name": "Anonymised Case Study Writer",
+  "rar_name": "@cat-agent-skills/anonymised_case_study_writer",
+  "rappid": "rappid:@cat-agent-skills/anonymised_case_study_writer:eba5de9674596cac8f6b4af473718686d1b2792bd6ea1ed8074715008ace86bd",
+  "_migrated_from": "rappid:@cat-agent-skills/anonymised_case_study_writer:2c5abfe05e11ef3770deb6c15d4d5bea1bf62c34276d105c1a0c385bd40b045e",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/anonymised_case_study_writer:0a2f1ed24aef2423c3330ad5b72548fcdbd1c904651065a662ba8ca241268c9f",
+    "rappid:@cat-agent-skills/anonymised_case_study_writer:2c5abfe05e11ef3770deb6c15d4d5bea1bf62c34276d105c1a0c385bd40b045e"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "2.1.2",
+  "publisher": "@cat-agent-skills",
+  "category": "productivity",
+  "tags": [
+    "writing",
+    "case_study",
+    "marketing",
+    "documents",
+    "content",
+    "privacy"
+  ],
+  "description": "Turn engagement notes into anonymised, publishable case studies without exposing client-confidential details.",
+  "author": "Simon Owen",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.5,
+  "sha256": "49d3b3efccee510686f44a4fed6b95a9b507f706bb3c594d126aa9cda655b398",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__anonymised_case_study_writer.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/anonymised_case_study_writer_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__anonymised_case_study_writer.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__anonymised_case_study_writer.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/anonymised_case_study_writer_agent.py"
+}

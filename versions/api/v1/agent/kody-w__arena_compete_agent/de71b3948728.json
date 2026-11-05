@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__arena_compete_agent",
+  "name": "Arena Compete",
+  "rar_name": "@kody-w/arena_compete_agent",
+  "rappid": "rappid:@kody-w/arena_compete_agent:1d08b480c15f94b0101cb1003b637510d9b43d3234a9a47278cbae00879aee98",
+  "_migrated_from": "rappid:@kody-w/arena_compete_agent:4e41b0960033dcdac452cfc30b52aad5788ab5472dcbe628c93e0bc1b3653909",
+  "_migrated_from_all": [
+    "rappid:@kody-w/arena_compete_agent:ae4ec8131dabf89a0b9a3a887257eabc06882a35e1cf34f83ffbc313b5358e45",
+    "rappid:@kody-w/arena_compete_agent:4e41b0960033dcdac452cfc30b52aad5788ab5472dcbe628c93e0bc1b3653909"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
+  "publisher": "@kody-w",
+  "category": "workflow",
+  "tags": [
+    "competition",
+    "learning",
+    "self-improvement",
+    "agents",
+    "tournament"
+  ],
+  "description": "Runs a learning competition of player-agents where the bottom performer adopts the leader's strategy each round; defaults to a deterministic simulation.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 237,
+  "size_kb": 14.5,
+  "sha256": "3e5333752068fae52cdd93dafa259c357d697dc8af1ec7707f2d2f25eb556b10",
+  "has_card": true,
+  "added_at": "2026-06-20T19:39:59-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__arena_compete_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/arena_compete_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__arena_compete_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__arena_compete_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/arena_compete_agent.py"
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "howardh__cardsmith_agent",
+  "name": "CardSmith",
+  "rar_name": "@howardh/cardsmith_agent",
+  "rappid": "rappid:@howardh/cardsmith_agent:9f1d5f994f1ca87dabfabdb8a215adf14ff5a59a370a7745c4b11393c1e5e4ef",
+  "_migrated_from": "rappid:@howardh/cardsmith_agent:db818f93e9eae1ca8c85cc5fa95909f7ca810b3df5d14bcd18a73081b730e083",
+  "_migrated_from_all": [
+    "rappid:@howardh/cardsmith_agent:fc02dee6c388081b8a6367b928102e5c774cb3f63594ebe642924fe8a0f6d91b",
+    "rappid:@howardh/cardsmith_agent:db818f93e9eae1ca8c85cc5fa95909f7ca810b3df5d14bcd18a73081b730e083"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
+  "publisher": "@howardh",
+  "category": "productivity",
+  "tags": [
+    "productivity",
+    "cards",
+    "visualization",
+    "trading-cards",
+    "sneakernet"
+  ],
+  "description": "Forges MTG-style trading cards for brainstem agents from a built-in card database, with forge-all and gallery-link actions.",
+  "author": "Howard",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 328,
+  "size_kb": 33.3,
+  "sha256": "ecbabf0ca4b13f8c98558c9f773d95291d0c4c41e61604667aa32a901105491b",
+  "has_card": true,
+  "added_at": "2026-05-24T21:45:25-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/howardh__cardsmith_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/cardsmith_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__cardsmith_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__cardsmith_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@howardh/cardsmith_agent.py"
+}

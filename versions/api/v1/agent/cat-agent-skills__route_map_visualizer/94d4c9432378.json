@@ -1,0 +1,46 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__route_map_visualizer",
+  "name": "Route Map Visualizer",
+  "rar_name": "@cat-agent-skills/route_map_visualizer",
+  "rappid": "rappid:@cat-agent-skills/route_map_visualizer:5ccc587d74904961640f337d94572bbd6a551f2c20935fb76a8d2655052a79a4",
+  "_migrated_from": "rappid:@cat-agent-skills/route_map_visualizer:5a4c3254d6146294257a91319cd0a520b890418e6f6ec9d77d429c7c4309e396",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/route_map_visualizer:67e62759f5ef35528d671535beac795b0873963a1e37bea1b2dabdbadb3ead23",
+    "rappid:@cat-agent-skills/route_map_visualizer:5a4c3254d6146294257a91319cd0a520b890418e6f6ec9d77d429c7c4309e396"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
+  "publisher": "@cat-agent-skills",
+  "category": "devtools",
+  "tags": [
+    "maps",
+    "routing",
+    "visualization",
+    "openstreetmap",
+    "python",
+    "leaflet",
+    "geojson",
+    "kml"
+  ],
+  "description": "Visualize routes and locations on a map. Accepts pre-ordered stops with coordinates from upstream connectors (Azure Maps, Bing Maps, Dataverse, CRM) plus optional road geometry, leg distances, and durations. Produces PNG, interactive HTML (Leaflet/OSM), GeoJSON, KML, deep links, and QR codes. Fully offline Python engine \u2014 road geometry rendered directly when provided, or OSRM used browser-side as\u2026",
+  "author": "Nazish Qasim",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.5,
+  "sha256": "2f00ce5f28aaef338a2dcf9c25b34c562518cbee5d91d999961a8254e22a5115",
+  "has_card": true,
+  "added_at": "2026-08-17T18:03:09-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__route_map_visualizer.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/route_map_visualizer_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__route_map_visualizer.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__route_map_visualizer.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/route_map_visualizer_agent.py"
+}

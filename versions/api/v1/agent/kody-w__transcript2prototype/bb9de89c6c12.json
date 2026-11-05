@@ -1,0 +1,46 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__transcript2prototype",
+  "name": "Transcript2Prototype",
+  "rar_name": "@kody-w/transcript2prototype",
+  "rappid": "rappid:@kody-w/transcript2prototype:43da4faade39c40849e1ea9f35cb5609bb3e1e822642692ef132d0de58f660b0",
+  "_migrated_from": "rappid:@kody-w/transcript2prototype:db2c115f8cd57ea8ef77a897361f57e8104f4f2fd96ba310e6a0c9862da438a0",
+  "_migrated_from_all": [
+    "rappid:@kody-w/transcript2prototype:ac3731e541781cd4748b9f3698bbb3057acba5a2e8f7309076fb319b669a49ae",
+    "rappid:@kody-w/transcript2prototype:db2c115f8cd57ea8ef77a897361f57e8104f4f2fd96ba310e6a0c9862da438a0"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.4",
+  "publisher": "@kody-w",
+  "category": "workflow",
+  "tags": [
+    "rapplication",
+    "pipeline",
+    "prototype",
+    "demo",
+    "cubby",
+    "factory",
+    "twin",
+    "m365"
+  ],
+  "description": "Turns a business transcript into a working prototype \u2014 demo script, injected M365 demo iframe, generated agents, twin test runs, factory export.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 6955,
+  "size_kb": 389.1,
+  "sha256": "8a6a12130be0fdac137a316a07076b917304e15242b8b81c609efcb1c6a4a3d1",
+  "has_card": true,
+  "added_at": "2026-06-17T17:06:07-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__transcript2prototype.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/transcript2prototype_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__transcript2prototype.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__transcript2prototype.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/transcript2prototype_agent.py"
+}

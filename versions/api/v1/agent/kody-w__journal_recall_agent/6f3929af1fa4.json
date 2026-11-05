@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__journal_recall_agent",
+  "name": "Journal Recall",
+  "rar_name": "@kody-w/journal_recall_agent",
+  "rappid": "rappid:@kody-w/journal_recall_agent:b7710d0555e3f6932a217d39b6e80e08e0bd433decf3c1ace1cc7aac94d5bb5c",
+  "_migrated_from": "rappid:@kody-w/journal_recall_agent:852e21a2af35b34c75f8d393a03f2251946526bba9bd469a2b0fba17270ef84d",
+  "_migrated_from_all": [
+    "rappid:@kody-w/journal_recall_agent:852e21a2af35b34c75f8d393a03f2251946526bba9bd469a2b0fba17270ef84d"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "memory",
+  "tags": [
+    "journal",
+    "memory",
+    "history",
+    "search",
+    "recall"
+  ],
+  "description": "Finds earlier conversations in the owner's Brainstem Journal (what did I ask about X, what did we say last Tuesday) and pauses or resumes the journal's recording from chat.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 117,
+  "size_kb": 6.2,
+  "sha256": "f6358978b97b93606c74b987803dfc099f42e3ff143825040616102d5f8201bf",
+  "has_card": true,
+  "added_at": "2026-11-03T17:23:03-05:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__journal_recall_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/journal_recall_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__journal_recall_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__journal_recall_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/journal_recall_agent.py"
+}

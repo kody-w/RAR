@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__skill_authoring_coach",
+  "name": "Skill Authoring Coach",
+  "rar_name": "@cat-agent-skills/skill_authoring_coach",
+  "rappid": "rappid:@cat-agent-skills/skill_authoring_coach:467b381d673071f259305a6f755132a9d810ba650447b95104b4477d2afbb444",
+  "_migrated_from": "rappid:@cat-agent-skills/skill_authoring_coach:58344e6baa51e9085c47c63feca4142b741d67c9ed9e9b10bb707e9ff79569a8",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/skill_authoring_coach:9b3bcb9beee1e2e015e3a030b0c3f7d2369a28873d3278de475eb31e4142f48a",
+    "rappid:@cat-agent-skills/skill_authoring_coach:58344e6baa51e9085c47c63feca4142b741d67c9ed9e9b10bb707e9ff79569a8"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "2.1.2",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "skills",
+    "authoring",
+    "documentation",
+    "productivity",
+    "agent"
+  ],
+  "description": "Help makers design concise, reusable Agent Skills with clear triggers, instructions, resources, and packaging.",
+  "author": "Simon Owen",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.5,
+  "sha256": "d87d562cb6ff69f03c5fbe70ec218c4a216e2f3a22cb4aa2055fdc360addc454",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__skill_authoring_coach.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/skill_authoring_coach_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__skill_authoring_coach.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__skill_authoring_coach.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/skill_authoring_coach_agent.py"
+}

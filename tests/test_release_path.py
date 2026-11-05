@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -127,6 +128,8 @@ def _minimal_repo(tmp_path, ledger=None):
         REPO_ROOT / "tools", tmp_path / "tools",
         ignore=shutil.ignore_patterns("__pycache__"),
     )
+    (tmp_path / "scripts").mkdir()
+    shutil.copy(REPO_ROOT / "scripts/static_api.py", tmp_path / "scripts/static_api.py")
     # build_registry.py imports rapp_sdk once an agent validates cleanly.
     shutil.copy(REPO_ROOT / "rapp_sdk.py", tmp_path / "rapp_sdk.py")
     (tmp_path / "agents" / "@test" / "foo_agent.py").write_text(
@@ -156,8 +159,9 @@ def test_build_registry_actually_projects_the_ledger(tmp_path):
         "releases": [{"tag": "v1.0.0", "release_name": "Genesis"},
                      {"tag": "v2.0.0", "release_name": "Spring 2026"}],
     })
-    subprocess.run([sys.executable, "build_registry.py"], cwd=repo,
-                   capture_output=True, text=True, timeout=120)
+    subprocess.run([sys.executable, "build_registry.py", "--registry-only"], cwd=repo,
+                   env={**os.environ, "SOURCE_DATE_EPOCH": "0"},
+                   capture_output=True, text=True, timeout=120, check=True)
     reg = json.loads((repo / "registry.json").read_text())
     assert reg.get("latest_release", {}).get("tag") == "v2.0.0", (
         "state/releases.json is not projected into registry.json — the release "
@@ -174,7 +178,8 @@ def test_registry_build_survives_a_malformed_ledger(tmp_path):
     """
     for bad in ({"releases": {"not": "a list"}}, {"releases": 7}, {"releases": "x"}):
         repo = _minimal_repo(tmp_path / f"r{abs(hash(str(bad)))}", ledger=bad)
-        r = subprocess.run([sys.executable, "build_registry.py"], cwd=repo,
+        r = subprocess.run([sys.executable, "build_registry.py", "--registry-only"], cwd=repo,
+                           env={**os.environ, "SOURCE_DATE_EPOCH": "0"},
                            capture_output=True, text=True, timeout=120)
         assert (repo / "registry.json").exists(), (
             f"build_registry.py produced no registry for ledger {bad!r}\n{r.stderr[-500:]}"

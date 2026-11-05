@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__grab_my_files",
+  "name": "Grab My Files",
+  "rar_name": "@cat-agent-skills/grab_my_files",
+  "rappid": "rappid:@cat-agent-skills/grab_my_files:05bb576b3d41f3ac02d886be257f5b648b5f95822ff1bec1d3ad1fc0536cc0f4",
+  "_migrated_from": "rappid:@cat-agent-skills/grab_my_files:e327213fb7aa6e8c9214195034e5268a89f6296bef66b40b0d7b8d9a65a0386f",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/grab_my_files:ec9f9ca2cf904ecbab2d0244365dde6be331f59e4fad2df7258ba7bcb7630a5c",
+    "rappid:@cat-agent-skills/grab_my_files:e327213fb7aa6e8c9214195034e5268a89f6296bef66b40b0d7b8d9a65a0386f"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
+  "publisher": "@cat-agent-skills",
+  "category": "pipeline",
+  "tags": [
+    "files",
+    "export",
+    "zip",
+    "download",
+    "productivity"
+  ],
+  "description": "One-tap way to bundle every file your Copilot Studio agent produced in a session into a single timestamped .zip and hand it back as a download.",
+  "author": "Rafael Alcaraz",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.5,
+  "sha256": "4e061e2a8f91902cfcee4405227ad8e5b37c9e36652786af4f49858348569b10",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__grab_my_files.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/grab_my_files_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__grab_my_files.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__grab_my_files.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/grab_my_files_agent.py"
+}

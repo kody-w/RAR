@@ -1,0 +1,42 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__linkedin_content_writer",
+  "name": "LinkedIn Content Writer",
+  "rar_name": "@cat-agent-skills/linkedin_content_writer",
+  "rappid": "rappid:@cat-agent-skills/linkedin_content_writer:97979f2e05ec89fd54e7a9d432407aeb0c0c5dc6a743d51092d154a75a9a63c9",
+  "_migrated_from": "rappid:@cat-agent-skills/linkedin_content_writer:33ab7b201d6ea40303d87dab63c2e174aae079095f84082e984f2f7f83a48122",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/linkedin_content_writer:b0f2a346d44f3a0a196966c74e629e7aef4749c150e371405456cf30bb28b104",
+    "rappid:@cat-agent-skills/linkedin_content_writer:33ab7b201d6ea40303d87dab63c2e174aae079095f84082e984f2f7f83a48122"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.3",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "linkedin",
+    "social_media",
+    "writing",
+    "content"
+  ],
+  "description": "Create credible LinkedIn content from facts, notes or drafts, with configurable voice and no invented evidence.",
+  "author": "Becky Still, Digital Boop Ltd",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.5,
+  "sha256": "a6d7fa21211ae1f4b734b11aded5d0278fb3c47fd78e3c763bf630ebaacf691f",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__linkedin_content_writer.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/linkedin_content_writer_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__linkedin_content_writer.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__linkedin_content_writer.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/linkedin_content_writer_agent.py"
+}

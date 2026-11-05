@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__legal_helper",
+  "name": "LegalHelper",
+  "rar_name": "@kody-w/legal_helper",
+  "rappid": "rappid:@kody-w/legal_helper:c6a189062a739390682de8fd17d8edd7eaa417f6bebad88e6fbd3147737eb497",
+  "_migrated_from": "rappid:@kody-w/legal_helper:fbabcce11618291d9f699b830ed645a0822468a4b7c0631743b2cdb6e0a7fa34",
+  "_migrated_from_all": [
+    "rappid:@kody-w/legal_helper:3641da4d557479b534e40421077df58aa371654203f9e294e456ef67c6d44c3b",
+    "rappid:@kody-w/legal_helper:b642c6005ea5a90cebfb2319da9db8824563baff64911d6b80af2a5003b43e20",
+    "rappid:@kody-w/legal_helper:fbabcce11618291d9f699b830ed645a0822468a4b7c0631743b2cdb6e0a7fa34"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.2",
+  "publisher": "@kody-w",
+  "category": "productivity",
+  "tags": [
+    "legal",
+    "private",
+    "stub",
+    "operator-personal"
+  ],
+  "description": "Organizes an operator's own notes and open questions to raise with a qualified attorney, never legal advice; gated stub for a private agent.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "private",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 52,
+  "size_kb": 2.6,
+  "sha256": "ae056eee5f3c84e275243e4f0c75949a9a83bf66d729f88663003fe15d76304a",
+  "has_card": true,
+  "added_at": "2026-05-24T21:45:25-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__legal_helper.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/legal_helper_agent.py.stub",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__legal_helper.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__legal_helper.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/legal_helper_agent.py.stub"
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__copilot_studio_probe_agent",
+  "name": "CopilotStudioProbe",
+  "rar_name": "@kody-w/copilot_studio_probe_agent",
+  "rappid": "rappid:@kody-w/copilot_studio_probe_agent:159bbdf72bc7dfb6ed83b5e600b81c57d7fee4bb667e26fb21fc5710ae49d184",
+  "_migrated_from": "rappid:@kody-w/copilot_studio_probe_agent:c7ec63955a23abf5c47a4ccc8e26fb45cb2a8f0445ff9bd6bf16c73cc573f3ba",
+  "_migrated_from_all": [
+    "rappid:@kody-w/copilot_studio_probe_agent:490f017dc847c25b607de45a8c4fea5eab949fd4936380f23879b736e2647e9a",
+    "rappid:@kody-w/copilot_studio_probe_agent:c7ec63955a23abf5c47a4ccc8e26fb45cb2a8f0445ff9bd6bf16c73cc573f3ba"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
+  "publisher": "@kody-w",
+  "category": "integrations",
+  "tags": [
+    "copilot-studio",
+    "direct-line",
+    "probe",
+    "testing",
+    "integration",
+    "m365"
+  ],
+  "description": "Sends a message to a deployed Copilot Studio agent over Direct Line and returns the bot's reply for runtime verification.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [
+    "COPILOT_DIRECTLINE_TOKEN_ENDPOINT",
+    "COPILOT_DIRECTLINE_SECRET"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 163,
+  "size_kb": 8.2,
+  "sha256": "6d84b5cefb5d1a032b208555020f96756bba3c6c0790b1d8544abafc868e1a99",
+  "has_card": true,
+  "added_at": "2026-07-07T00:32:03Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__copilot_studio_probe_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_probe_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__copilot_studio_probe_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__copilot_studio_probe_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/copilot_studio_probe_agent.py"
+}

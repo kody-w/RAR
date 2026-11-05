@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__education_shorts_agent",
+  "name": "Education Shorts",
+  "rar_name": "@kody-w/education_shorts_agent",
+  "rappid": "rappid:@kody-w/education_shorts_agent:c7cb03c6d4b61cf174397267d22f0bca7db0892a3d252e871af22d9aade5d2bc",
+  "_migrated_from": "rappid:@kody-w/education_shorts_agent:4fdb4f6ecd9f5f4fe20b220267d75c3046d0f622aa38326931daf4e633dbf5f6",
+  "_migrated_from_all": [
+    "rappid:@kody-w/education_shorts_agent:4fdb4f6ecd9f5f4fe20b220267d75c3046d0f622aa38326931daf4e633dbf5f6"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "creative",
+  "tags": [
+    "video",
+    "youtube-shorts",
+    "hyperframes",
+    "animation",
+    "education",
+    "creative"
+  ],
+  "description": "Turns a topic into an animated 9:16 educational YouTube Short: linted script, HyperFrames composition, check, MP4 \u2014 every stage a file on a chained ledger.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 269,
+  "size_kb": 16.1,
+  "sha256": "36711e8da4ce32d9b11fc02c18e925f955ca0588dcc65a5ea08099d1f4233f1f",
+  "has_card": true,
+  "added_at": "2026-08-18T18:19:54-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__education_shorts_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/education_shorts_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__education_shorts_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__education_shorts_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/education_shorts_agent.py"
+}

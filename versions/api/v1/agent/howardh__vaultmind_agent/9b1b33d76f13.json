@@ -1,0 +1,49 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "howardh__vaultmind_agent",
+  "name": "VaultMind",
+  "rar_name": "@howardh/vaultmind_agent",
+  "rappid": "rappid:@howardh/vaultmind_agent:ca345a0598d4e9fc7059a15d24b8ebc85c73e9149523a7d0d7172295da2ba979",
+  "_migrated_from": "rappid:@howardh/vaultmind_agent:788bb8c05119b8540a41c8626c1503fc9ea3e4dbadb2737008557588eccbf95f",
+  "_migrated_from_all": [
+    "rappid:@howardh/vaultmind_agent:7614860486bf6d1d271d692e6c08fe17afda159da18a019b48cbcb597bf1005a",
+    "rappid:@howardh/vaultmind_agent:788bb8c05119b8540a41c8626c1503fc9ea3e4dbadb2737008557588eccbf95f"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
+  "publisher": "@howardh",
+  "category": "productivity",
+  "tags": [
+    "obsidian",
+    "30-60-90",
+    "onboarding",
+    "wiki",
+    "knowledge-base",
+    "vault",
+    "automation",
+    "scheduling",
+    "monitoring"
+  ],
+  "description": "Manages an Obsidian vault through 28 actions \u2014 30-60-90 plans, OKRs, Kanban boards, dashboards, briefs, wiki ingestion, and health checks.",
+  "author": "Howard Hoy",
+  "quality_tier": "community",
+  "requires_env": [
+    "OBSIDIAN_VAULT"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 3267,
+  "size_kb": 147.3,
+  "sha256": "6e2af2a79f6dcb1ba6fbf2ea9331d5f8a571b9842efa39727f4605333a3a846a",
+  "has_card": true,
+  "added_at": "2026-05-24T21:45:25-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/howardh__vaultmind_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/vaultmind_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__vaultmind_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__vaultmind_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@howardh/vaultmind_agent.py"
+}

@@ -1,0 +1,44 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__blog_content_auditor",
+  "name": "Blog Content Auditor",
+  "rar_name": "@cat-agent-skills/blog_content_auditor",
+  "rappid": "rappid:@cat-agent-skills/blog_content_auditor:74d87a6835ebbbda52ade6579c3ba4e7a38423385e4536f3c7c7fa3728c77a54",
+  "_migrated_from": "rappid:@cat-agent-skills/blog_content_auditor:2311d4f6124f31855105b61fcdb1353d21ebf4e5a87c0fca3e0df9dcbeca9726",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/blog_content_auditor:496be8643448a74042faf743201f2521e79e7c5923e2e45d25a31cc3914754ef",
+    "rappid:@cat-agent-skills/blog_content_auditor:2311d4f6124f31855105b61fcdb1353d21ebf4e5a87c0fca3e0df9dcbeca9726"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "2.1.2",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "blog",
+    "content",
+    "audit",
+    "writing",
+    "seo",
+    "productivity"
+  ],
+  "description": "Audit blog posts or a blog library for clarity, structure, evidence, audience fit, and improvement priority.",
+  "author": "Simon Owen",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.4,
+  "sha256": "902a9938856104a577bedd98478f6436adf0d6c55935978ff18563beec80d169",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__blog_content_auditor.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/blog_content_auditor_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__blog_content_auditor.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__blog_content_auditor.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/blog_content_auditor_agent.py"
+}

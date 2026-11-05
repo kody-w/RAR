@@ -1,0 +1,45 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__holiday_recap",
+  "name": "Holiday Recap",
+  "rar_name": "@cat-agent-skills/holiday_recap",
+  "rappid": "rappid:@cat-agent-skills/holiday_recap:4f88f3e8442ae1acf5ee0ef0f73c1fe50a3da8180ade5b2ba8c9cb2f50ffb2e9",
+  "_migrated_from": "rappid:@cat-agent-skills/holiday_recap:07e1512d5fdbde4f03b35692323a820f8cf81b461c9b567214cd5d6007a5bc87",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/holiday_recap:07e1512d5fdbde4f03b35692323a820f8cf81b461c9b567214cd5d6007a5bc87"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
+  "publisher": "@cat-agent-skills",
+  "category": "productivity",
+  "tags": [
+    "productivity",
+    "outlook",
+    "teams",
+    "email",
+    "meetings",
+    "calendar",
+    "summarization",
+    "catch_up"
+  ],
+  "description": "Catch up after annual leave in one pass \u2014 a single prioritised briefing of the mail, meetings, and Teams conversations you missed, with deep links and one-click follow-up actions.",
+  "author": "Suparna Banerjee",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.5,
+  "sha256": "0b187c270dc5fe3382fefdb070aeb9946a808706a8dce261c598b2bb9883407b",
+  "has_card": true,
+  "added_at": "2026-09-08T16:38:03-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__holiday_recap.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/holiday_recap_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__holiday_recap.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__holiday_recap.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/holiday_recap_agent.py"
+}

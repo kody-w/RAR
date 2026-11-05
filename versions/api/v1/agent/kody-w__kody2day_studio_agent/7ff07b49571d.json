@@ -1,0 +1,46 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__kody2day_studio_agent",
+  "name": "Kody2day Studio",
+  "rar_name": "@kody-w/kody2day_studio_agent",
+  "rappid": "rappid:@kody-w/kody2day_studio_agent:92b77df2471c4ee4db7b03ab7931cc0054984068e247e250ac4f0e6730d9c205",
+  "_migrated_from": "rappid:@kody-w/kody2day_studio_agent:bd7bc2d13c776af6001bd7df114df718a3e6aad92280158ea6e8aeea376e5a29",
+  "_migrated_from_all": [
+    "rappid:@kody-w/kody2day_studio_agent:fb85c59f59d7c4c1c6ba26e636f6567383c46e5bc16ad11875ed9e2bdca173e6",
+    "rappid:@kody-w/kody2day_studio_agent:bd7bc2d13c776af6001bd7df114df718a3e6aad92280158ea6e8aeea376e5a29"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "creative",
+  "tags": [
+    "video",
+    "youtube",
+    "shorts",
+    "education",
+    "kody2day",
+    "hyperframes",
+    "creative",
+    "autonomous"
+  ],
+  "description": "Make the daily Kody2day episode: the day's digest \u2192 Claude writes the RAPP lesson, Copilot refutes it, the education-shorts pack renders a narrated 16:9 explainer plus byte-sized Shorts \u2192 queue with YouTube metadata.",
+  "author": "Kody Wildfeuer",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 338,
+  "size_kb": 18.2,
+  "sha256": "d20355f26593583aedbfb7d091a6d6a36b9e1798294baec17cfdc05cfa90b1bb",
+  "has_card": true,
+  "added_at": "2026-08-18T22:13:18-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__kody2day_studio_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/kody2day_studio_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__kody2day_studio_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__kody2day_studio_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/kody2day_studio_agent.py"
+}

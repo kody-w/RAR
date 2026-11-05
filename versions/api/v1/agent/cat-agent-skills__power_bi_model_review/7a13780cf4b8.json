@@ -1,0 +1,44 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__power_bi_model_review",
+  "name": "Power BI Model Review",
+  "rar_name": "@cat-agent-skills/power_bi_model_review",
+  "rappid": "rappid:@cat-agent-skills/power_bi_model_review:34fd78b8bd43041c1de277b7cf695457a55eed74286f4c4faafd5b0d261e75f3",
+  "_migrated_from": "rappid:@cat-agent-skills/power_bi_model_review:6a6ba852db9792faff6d0e65b660aad3bff0c1fc6bd616f71234346fecf3c46f",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/power_bi_model_review:fd22595cc481082423b78255a15a8f252d67b563dd90202a0069724063e36d48",
+    "rappid:@cat-agent-skills/power_bi_model_review:6a6ba852db9792faff6d0e65b660aad3bff0c1fc6bd616f71234346fecf3c46f"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
+  "publisher": "@cat-agent-skills",
+  "category": "pipeline",
+  "tags": [
+    "power_bi",
+    "dax",
+    "semantic_model",
+    "data",
+    "review",
+    "fabric"
+  ],
+  "description": "Review a Power BI or Analysis Services semantic model (TMDL, BIM/JSON, or a pasted table/measure list) for relationship, DAX, date-handling, and naming issues, with corrected DAX for anything flagged.",
+  "author": "Tim Karlsson",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.9,
+  "sha256": "d2a0cd620bbd24235f28f89f5f7fcdb1ebf7791ea5aaba31cf09e001caf52e86",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__power_bi_model_review.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/power_bi_model_review_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__power_bi_model_review.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__power_bi_model_review.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/power_bi_model_review_agent.py"
+}

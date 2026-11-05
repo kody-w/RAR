@@ -1,0 +1,44 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__blog_post_structure_pass",
+  "name": "Blog Post Structure Pass",
+  "rar_name": "@cat-agent-skills/blog_post_structure_pass",
+  "rappid": "rappid:@cat-agent-skills/blog_post_structure_pass:a21a9d1a1ccee44230408a7273d397af503cab674d69e4d2a7931ba8977eda38",
+  "_migrated_from": "rappid:@cat-agent-skills/blog_post_structure_pass:d4e9cb7c7b91545af4de544bfd4abcc5642d6ad80f8945ac5e59bd8d03df4349",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/blog_post_structure_pass:400f01c73ec944779f94e985fd0558b518385a9c752a12afbaa82e57ff10493d",
+    "rappid:@cat-agent-skills/blog_post_structure_pass:d4e9cb7c7b91545af4de544bfd4abcc5642d6ad80f8945ac5e59bd8d03df4349"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "2.1.2",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "blog",
+    "writing",
+    "authoring",
+    "content",
+    "structure",
+    "productivity"
+  ],
+  "description": "Restructure draft or existing blog posts into a stronger narrative without inventing new claims.",
+  "author": "Simon Owen",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.5,
+  "sha256": "43bbdec88cbd22f1df3c807a5ec76ded944fe911c957b5b1f5eb84cc660be546",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__blog_post_structure_pass.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/blog_post_structure_pass_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__blog_post_structure_pass.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__blog_post_structure_pass.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/blog_post_structure_pass_agent.py"
+}

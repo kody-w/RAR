@@ -1,0 +1,47 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "discreetRappers__copilot_studio_transpiler_agent",
+  "name": "CopilotStudioTranspiler",
+  "rar_name": "@discreetRappers/copilot_studio_transpiler_agent",
+  "rappid": "rappid:@discreetRappers/copilot_studio_transpiler_agent:ce4ccf8288c0e25f1e20827ade3891fce80a9ef634cfca2b788a42b23ac5926a",
+  "_migrated_from": "rappid:@discreetRappers/copilot_studio_transpiler_agent:545217ba4b70b5a1cb9fac2716bd0110b408057a6a926701988050f6255a182f",
+  "_migrated_from_all": [
+    "rappid:v2:agent:@discreetRappers/copilot_studio_transpiler_agent:acccbacba2be5acb4aa7583abb1c85ae",
+    "rappid:@discreetRappers/copilot_studio_transpiler_agent:545217ba4b70b5a1cb9fac2716bd0110b408057a6a926701988050f6255a182f"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.0",
+  "publisher": "@discreetRappers",
+  "category": "pipeline",
+  "tags": [
+    "pipeline",
+    "transpiler",
+    "copilot-studio",
+    "native",
+    "no-code"
+  ],
+  "description": "Transpiles RAPP Python agents to fully native Copilot Studio solutions without Azure Function dependency.",
+  "author": "Bill Whalen",
+  "quality_tier": "community",
+  "requires_env": [
+    "AZURE_TENANT_ID",
+    "COPILOT_STUDIO_CLIENT_ID",
+    "DATAVERSE_ENVIRONMENT_URL"
+  ],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 2164,
+  "size_kb": 89.7,
+  "sha256": "ee87bb1000f7f33a408097d912f3cd41946d0feb5ce40e7abe37f1938c8acefb",
+  "has_card": true,
+  "added_at": "2026-04-06T16:39:03-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/discreetRappers__copilot_studio_transpiler_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@discreetRappers/copilot_studio_transpiler_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__copilot_studio_transpiler_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/discreetRappers__copilot_studio_transpiler_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@discreetRappers/copilot_studio_transpiler_agent.py"
+}

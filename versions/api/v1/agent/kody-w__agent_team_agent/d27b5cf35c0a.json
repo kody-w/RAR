@@ -1,0 +1,45 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__agent_team_agent",
+  "name": "AgentTeam",
+  "rar_name": "@kody-w/agent_team_agent",
+  "rappid": "rappid:@kody-w/agent_team_agent:d7ba42ed9fe19fda11fd0a7e2eb61cb05a41c0c487a36052d5bbbf767d925bdc",
+  "_migrated_from": "rappid:@kody-w/agent_team_agent:980cfbb18181a3fb321ee656ed6b2afc1b189314731279ee4506dea705026b5d",
+  "_migrated_from_all": [
+    "rappid:@kody-w/agent_team_agent:0bafc1d39c52a65726403e84eac2d519d463987a56249a755b5936d6a38bc1f1",
+    "rappid:@kody-w/agent_team_agent:980cfbb18181a3fb321ee656ed6b2afc1b189314731279ee4506dea705026b5d"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "0.1.2",
+  "publisher": "@kody-w",
+  "category": "productivity",
+  "tags": [
+    "rapplication",
+    "agent-team",
+    "persona-routing",
+    "outcome-first",
+    "github-issues",
+    "azure",
+    "planning"
+  ],
+  "description": "Turns a project goal into an outcome frame, persona route, and paste-ready GitHub issue body for the Agent Team Starter Kit in one LLM call.",
+  "author": "@kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 400,
+  "size_kb": 16.9,
+  "sha256": "60321dac590b9a80b2bcf85de9dea49e1617b00a6dbed28f4dcaf69d06ca40f4",
+  "has_card": true,
+  "added_at": "2026-05-05T10:49:27-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__agent_team_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/agent_team_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__agent_team_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__agent_team_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/agent_team_agent.py"
+}

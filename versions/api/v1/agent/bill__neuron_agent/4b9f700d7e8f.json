@@ -1,0 +1,47 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "bill__neuron_agent",
+  "name": "Neuron",
+  "rar_name": "@bill/neuron_agent",
+  "rappid": "rappid:@bill/neuron_agent:29c80a98501aaa36572fdd4a3d080477d80dc35531f6ce1ffb4f4bc061426ad0",
+  "_migrated_from": "rappid:@bill/neuron_agent:3ffdf670d411cc6307351926dfab8d0fbb7f66314cadbf87b073a488e4f2acf3",
+  "_migrated_from_all": [
+    "rappid:@bill/neuron_agent:8a3c88f21fc23793c519b959aaf1b9e72f95bc38355003fec85304fb83ac8ea5",
+    "rappid:@bill/neuron_agent:3ffdf670d411cc6307351926dfab8d0fbb7f66314cadbf87b073a488e4f2acf3"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
+  "publisher": "@bill",
+  "category": "core",
+  "tags": [
+    "memory",
+    "neuron",
+    "knowledge-base",
+    "bootstrap",
+    "platform",
+    "copilot-studio",
+    "dataverse",
+    "d365",
+    "power-platform"
+  ],
+  "description": "Injects a compact Knowledge Base block of hardcoded Copilot Studio and Dataverse lessons into the brainstem prompt at session start.",
+  "author": "Bill Whalen",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 394,
+  "size_kb": 28.9,
+  "sha256": "e0af759764d7c236755c42e600539fc64a7f17ddc3fac358077f6b23bd8bcb30",
+  "has_card": true,
+  "added_at": "2026-05-12T13:37:05-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/bill__neuron_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@bill/neuron_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/bill__neuron_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/bill__neuron_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@bill/neuron_agent.py"
+}

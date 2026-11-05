@@ -1,0 +1,46 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__agent_red_team",
+  "name": "Agent Red Team",
+  "rar_name": "@cat-agent-skills/agent_red_team",
+  "rappid": "rappid:@cat-agent-skills/agent_red_team:c2083bab99efe95545ac402eda495594dc971ae82583f2776015491fc1d3d5ec",
+  "_migrated_from": "rappid:@cat-agent-skills/agent_red_team:850d4e3cdf94ef8bc724766b96f4c7eb0fe6eed67e09ee1a99eb1ea12ca38b99",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/agent_red_team:a48e9c8913758693093c63db61570c9ea791bf034138a5c598d97c47a406bdfa",
+    "rappid:@cat-agent-skills/agent_red_team:850d4e3cdf94ef8bc724766b96f4c7eb0fe6eed67e09ee1a99eb1ea12ca38b99"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
+  "publisher": "@cat-agent-skills",
+  "category": "analysis",
+  "tags": [
+    "copilot_studio",
+    "security",
+    "prompt_injection",
+    "governance",
+    "responsible_ai",
+    "testing",
+    "risk",
+    "assessment"
+  ],
+  "description": "Adversarial assurance review for agents you own: prompt injection, oversharing, leakage and tool misuse, mapped to fixes.",
+  "author": "Marco Zama",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.7,
+  "sha256": "5f01b98ad41cd2a57a431bb9af01f063d2fd645d67d6548a58d36a10b3686317",
+  "has_card": true,
+  "added_at": "2026-08-28T04:52:39Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__agent_red_team.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/agent_red_team_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__agent_red_team.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__agent_red_team.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/agent_red_team_agent.py"
+}

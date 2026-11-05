@@ -1,0 +1,44 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__eu_greenwashing_analysis",
+  "name": "EU Greenwashing Analysis",
+  "rar_name": "@cat-agent-skills/eu_greenwashing_analysis",
+  "rappid": "rappid:@cat-agent-skills/eu_greenwashing_analysis:9ddd1d3aa36ce4496a0c0e091d6c8a52d24ed7240985e3e58c929e98cc8e1bd8",
+  "_migrated_from": "rappid:@cat-agent-skills/eu_greenwashing_analysis:5b2dde54ea1ed0f1b619e13ee6414fa71e2395f50f80f1c73dd9cbe2507bc4b5",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/eu_greenwashing_analysis:3dc1831141fbb48efed565255ae95a03bb1da4bad48ce4ceeebe551e5c317d65",
+    "rappid:@cat-agent-skills/eu_greenwashing_analysis:5b2dde54ea1ed0f1b619e13ee6414fa71e2395f50f80f1c73dd9cbe2507bc4b5"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "compliance",
+    "sustainability",
+    "greenwashing",
+    "eu_regulation",
+    "marketing_review",
+    "esg"
+  ],
+  "description": "Detect greenwashing in product descriptions, marketing copy, and catalog entries against EU Directive 2024/825 and the Green Claims Directive. Returns a structured per-claim findings report with risk levels, regulation references, and recommended corrections.",
+  "author": "Remi Dyon",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 14.0,
+  "sha256": "6200a163f12cc7b5b12ef9742949a0bfe927e668231f5965e68fcd1f77cb7238",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__eu_greenwashing_analysis.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/eu_greenwashing_analysis_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__eu_greenwashing_analysis.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__eu_greenwashing_analysis.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/eu_greenwashing_analysis_agent.py"
+}

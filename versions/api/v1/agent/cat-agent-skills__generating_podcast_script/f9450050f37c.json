@@ -1,0 +1,44 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__generating_podcast_script",
+  "name": "Podcast Script Generator",
+  "rar_name": "@cat-agent-skills/generating_podcast_script",
+  "rappid": "rappid:@cat-agent-skills/generating_podcast_script:43ee213cd6e66becc6b1d0db6319d1a54041b20050a8c5f5d90fa46c5d90adf2",
+  "_migrated_from": "rappid:@cat-agent-skills/generating_podcast_script:3294801f1c858ab3633cadf4e19e5d7951db006022fc6220f807f8bb3f34295b",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/generating_podcast_script:64e7435356510cbef06ef81d329be334d4113279ff136360db6790adf90d6505",
+    "rappid:@cat-agent-skills/generating_podcast_script:3294801f1c858ab3633cadf4e19e5d7951db006022fc6220f807f8bb3f34295b"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.1.2",
+  "publisher": "@cat-agent-skills",
+  "category": "general",
+  "tags": [
+    "content",
+    "podcast",
+    "audio",
+    "text_to_speech",
+    "ssml",
+    "news"
+  ],
+  "description": "Turn a topic or a pile of source material \u2014 a newsletter, news digest, or set of articles \u2014 into a two-host, NotebookLM-style podcast episode, with multi-voice SSML and optional Azure Text-to-Speech audio.",
+  "author": "Remi Dyon",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.6,
+  "sha256": "088f3508f57592e23049713c53ec4dbbe00dba83ce2fe83bef96a6e98a3aed17",
+  "has_card": true,
+  "added_at": "2026-07-31T22:43:16-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__generating_podcast_script.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/generating_podcast_script_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__generating_podcast_script.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__generating_podcast_script.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/generating_podcast_script_agent.py"
+}

@@ -1,0 +1,39 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__vibe_builder_agent",
+  "name": "VibeBuilder",
+  "rar_name": "@rapp/vibe_builder_agent",
+  "rappid": "rappid:@rapp/vibe_builder_agent:80bbed62d5d5bf182f7356c6889998c669ab9ef3423c861d98162568718f25f1",
+  "_migrated_from": "rappid:@rapp/vibe_builder_agent:73d4e945749ca5c657c1b835f2fae80885897eef2d68be21403cb3bbc71ac87c",
+  "_migrated_from_all": [
+    "rappid:v2:agent:@rapp/vibe_builder_agent:294001aa426d891c7024e0e4fbd7ac6b",
+    "rappid:@rapp/vibe_builder_agent:73d4e945749ca5c657c1b835f2fae80885897eef2d68be21403cb3bbc71ac87c"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
+  "publisher": "@rapp",
+  "category": "platform",
+  "tags": [
+    "meta",
+    "builder",
+    "rapplication"
+  ],
+  "description": "Builds a complete rapplication (agent + service) from a natural language description.",
+  "author": "RAPP",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [],
+  "lines": 542,
+  "size_kb": 21.4,
+  "sha256": "c5e273a8c24b444d326c42dc45bba66e933b3a759893bc4ed1b20776ccb0539b",
+  "has_card": true,
+  "added_at": "2026-04-27T21:15:33Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__vibe_builder_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/vibe_builder_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__vibe_builder_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__vibe_builder_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/vibe_builder_agent.py"
+}

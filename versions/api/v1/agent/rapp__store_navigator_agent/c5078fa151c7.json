@@ -1,0 +1,44 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__store_navigator_agent",
+  "name": "StoreNavigator",
+  "rar_name": "@rapp/store_navigator_agent",
+  "rappid": "rappid:@rapp/store_navigator_agent:5ff993117debb919dfa4b92bd5b5e982396af215547f470a899db16a97972454",
+  "_migrated_from": "rappid:@rapp/store_navigator_agent:7e677fb9809a17c1acd0706b03ffd65f6449e733455714b256a6b1e671e407e1",
+  "_migrated_from_all": [
+    "rappid:v2:agent:@rapp/store_navigator_agent:be39e9015e595c226b93e3ce44b76fd5",
+    "rappid:@rapp/store_navigator_agent:ef258a0d18366eb740ecb26e6b348108be58872eab9b9a2480f33491a858445c",
+    "rappid:@rapp/store_navigator_agent:7e677fb9809a17c1acd0706b03ffd65f6449e733455714b256a6b1e671e407e1"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "0.1.4",
+  "publisher": "@rapp",
+  "category": "platform",
+  "tags": [
+    "meta",
+    "navigator",
+    "store",
+    "discovery",
+    "rapplication"
+  ],
+  "description": "Lists, searches, compares, and recommends rapplications from the RAPP_Store catalog over HTTP, with keyword scoring when no LLM is available.",
+  "author": "RAPP",
+  "quality_tier": "official",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 434,
+  "size_kb": 17.8,
+  "sha256": "909f0778d6d9066e668adffc72f75be4d55de9552ab781df337afe6fd54e0d03",
+  "has_card": true,
+  "added_at": "2026-04-27T21:52:47Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__store_navigator_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/store_navigator_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__store_navigator_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__store_navigator_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/store_navigator_agent.py"
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "howardh__markdown_to_slides_agent",
+  "name": "MarkdownToSlides",
+  "rar_name": "@howardh/markdown_to_slides_agent",
+  "rappid": "rappid:@howardh/markdown_to_slides_agent:bb1217c3473d80c85ef96c532072d137e329e7ae2ab2408358e91d0bcde5fa4c",
+  "_migrated_from": "rappid:@howardh/markdown_to_slides_agent:7a37839dffbe32415bcb6be25295c4cc9b1ccc0082a9cf6411cc3be7a4d92120",
+  "_migrated_from_all": [
+    "rappid:@howardh/markdown_to_slides_agent:7a37839dffbe32415bcb6be25295c4cc9b1ccc0082a9cf6411cc3be7a4d92120"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.1.0",
+  "publisher": "@howardh",
+  "category": "productivity",
+  "tags": [
+    "markdown",
+    "slides",
+    "presentation",
+    "converter",
+    "deck",
+    "pipeline"
+  ],
+  "description": "Converts markdown documents into structured JSON slide decks for presentations or video rendering.",
+  "author": "RAPP Contributor",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 246,
+  "size_kb": 9.1,
+  "sha256": "b895958c9b7f074a4a51ca5456c3aa3b3e54061291f6ea4fe19d5eb4ae1c95cb",
+  "has_card": true,
+  "added_at": "2026-05-24T21:45:25-04:00",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/howardh__markdown_to_slides_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@howardh/markdown_to_slides_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__markdown_to_slides_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/howardh__markdown_to_slides_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@howardh/markdown_to_slides_agent.py"
+}

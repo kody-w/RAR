@@ -249,6 +249,7 @@ jobs:
                   manifest.json api/v1/catalog.json api/v1/taxonomy.json \
                   api/v1/match.json api/v1/status.json api/v1/badge.json \
                   api/v1/audience
+          git add versions api/v1/front.json api/v1/index.json api/v1/agent api/v1/sprite api/v1/skills.json api/v1/marketplaces.json
           # Read from env, so the name is an argv element and is never parsed
           # as shell. Interpolating the input here would splice operator free
           # text straight into the command line.

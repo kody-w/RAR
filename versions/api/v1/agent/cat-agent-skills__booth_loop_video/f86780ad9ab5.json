@@ -1,0 +1,45 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "cat-agent-skills__booth_loop_video",
+  "name": "Booth Loop Video",
+  "rar_name": "@cat-agent-skills/booth_loop_video",
+  "rappid": "rappid:@cat-agent-skills/booth_loop_video:bf46f39517ad42b14c4b30a9ae04dc8c1693776cafda5c1630107bb68468ae9d",
+  "_migrated_from": "rappid:@cat-agent-skills/booth_loop_video:0ef2def61d8ee5dcf4b977bb5932a67a1ae0889c83bf8592fb45cc1f6dfe79e8",
+  "_migrated_from_all": [
+    "rappid:@cat-agent-skills/booth_loop_video:38b66f514706049af68a154513cec63b2c880cc9ad0fb86d309d60631f34277d",
+    "rappid:@cat-agent-skills/booth_loop_video:0ef2def61d8ee5dcf4b977bb5932a67a1ae0889c83bf8592fb45cc1f6dfe79e8"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "3.0.2",
+  "publisher": "@cat-agent-skills",
+  "category": "devtools",
+  "tags": [
+    "video",
+    "animation",
+    "python",
+    "marketing",
+    "events",
+    "design",
+    "ffmpeg"
+  ],
+  "description": "Generate a silent, looping 1920x1080 MP4 for a conference booth, kiosk, or lobby screen \u2014 rendered frame-by-frame in Python (Pillow + ffmpeg), with previews before the full render.",
+  "author": "Al Macey",
+  "quality_tier": "frontier",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 272,
+  "size_kb": 13.6,
+  "sha256": "575d67a2bcd525e8ebc8092fd3e0cee5e5ed253e5f72d9a6e2cda8505ca17753",
+  "has_card": true,
+  "added_at": "2026-08-11T09:43:05Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/cat-agent-skills__booth_loop_video.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@cat-agent-skills/booth_loop_video_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__booth_loop_video.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/cat-agent-skills__booth_loop_video.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@cat-agent-skills/booth_loop_video_agent.py"
+}

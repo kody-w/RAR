@@ -1,0 +1,43 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__self_compact_agent",
+  "name": "SelfCompact",
+  "rar_name": "@kody-w/self_compact_agent",
+  "rappid": "rappid:@kody-w/self_compact_agent:5a3fb02d3c06e02273c9b64c7b0cee910e76da9778aa14478d8d593e91eaf93d",
+  "_migrated_from": "rappid:@kody-w/self_compact_agent:fb76688993e03742aba55119e436f57f6070f434b0923c306a396b5bda3e3e78",
+  "_migrated_from_all": [
+    "rappid:@kody-w/self_compact_agent:fb76688993e03742aba55119e436f57f6070f434b0923c306a396b5bda3e3e78"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "core",
+  "tags": [
+    "context",
+    "memory",
+    "compaction",
+    "handoff",
+    "long-conversations",
+    "pi"
+  ],
+  "description": "The brainstem compacts its own context: a gauge on every chat, hints as it fills, and at the cutoff every other tool waits until the model writes a note to itself that survives when old turns drop out.",
+  "author": "@kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 304,
+  "size_kb": 14.3,
+  "sha256": "4e3d29f41ac869e4eaf99a8c499d27f37a811bd019d61c1551d8c5adb98585a8",
+  "has_card": true,
+  "added_at": "2026-10-24T04:02:39Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__self_compact_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/self_compact_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__self_compact_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__self_compact_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/self_compact_agent.py"
+}
