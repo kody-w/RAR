@@ -1,35 +1,35 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-11-05T13:18:06Z",
+ "generated_at": "2026-11-06T13:01:29Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
   "url": "https://github.com/kody-w/RAR",
   "site": "https://kody-w.github.io/RAR/",
-  "stars": 5,
+  "stars": 4,
   "forks": 1,
   "watchers": 0,
-  "open_issues": 12,
-  "size_kb": 122641,
+  "open_issues": 18,
+  "size_kb": 124018,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-11-05T08:52:47Z",
+  "pushed_at": "2026-11-06T04:34:48Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": "https://kody-w.github.io/RAR/"
  },
  "totals": {
-  "downloads": 15589,
-  "clones": 15019,
+  "downloads": 15926,
+  "clones": 15356,
   "cdn_hits": 560,
   "release_downloads": 10,
   "agent_file_downloads": 15,
-  "clones_excluding_ci_estimate": 10031,
-  "ci_clone_estimate": 4988,
-  "page_views": 292,
-  "clone_uniques_14d": 326,
-  "view_uniques_14d": 16,
-  "clone_uniques_daily_sum": 2594,
-  "view_uniques_daily_sum": 131,
-  "days_tracked": 86,
+  "clones_excluding_ci_estimate": 10310,
+  "ci_clone_estimate": 5046,
+  "page_views": 295,
+  "clone_uniques_14d": 362,
+  "view_uniques_14d": 18,
+  "clone_uniques_daily_sum": 2671,
+  "view_uniques_daily_sum": 134,
+  "days_tracked": 87,
   "tracking_since": "2026-07-14",
   "agents": 226,
   "swarms": 2,
@@ -663,6 +663,13 @@
    "clone_uniques": 48,
    "views": 7,
    "cdn": 0
+  },
+  {
+   "date": "2026-11-05",
+   "clones": 337,
+   "clone_uniques": 77,
+   "views": 3,
+   "cdn": 0
   }
  ],
  "traffic": {
@@ -722,8 +729,8 @@
     "uniques": 1
    },
    {
-    "path": "/kody-w/RAR/discussions/1561",
-    "title": "/discussions/1561",
+    "path": "/kody-w/RAR/discussions/1555",
+    "title": "/discussions/1555",
     "count": 1,
     "uniques": 1
    }
@@ -731,8 +738,8 @@
   "referrers": [
    {
     "referrer": "github.com",
-    "count": 10,
-    "uniques": 7
+    "count": 9,
+    "uniques": 6
    },
    {
     "referrer": "aocr.org",
@@ -745,15 +752,15 @@
     "uniques": 1
    }
   ],
-  "clones_14d": 2505,
-  "views_14d": 34,
+  "clones_14d": 2759,
+  "views_14d": 36,
   "live": true,
-  "as_of": "2026-11-05T13:18:06Z"
+  "as_of": "2026-11-06T13:01:29Z"
  },
  "cdn": {
   "total_hits": 560,
   "bandwidth": 7020284,
-  "rank": 767760,
+  "rank": 771860,
   "agent_hits": 15,
   "files": [
    {
