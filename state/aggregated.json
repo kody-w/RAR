@@ -15,7 +15,7 @@
       "license_url": "",
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
-      "item_count": 134,
+      "item_count": 161,
       "source_downloads": 1589
     },
     {
@@ -3174,6 +3174,31 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/accounting_for_cowork",
+      "source_id": "cat-agent-skills",
+      "source_slug": "accounting-for-cowork",
+      "name": "Accounting",
+      "description": "Reconcile accounts, prepare journal entries, analyze variances, and report. Frontier only.",
+      "kind": "plugin",
+      "tags": [
+        "accounting",
+        "reconciliation",
+        "financial-reporting"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "1.0.2",
+      "created_at": "2026-10-31T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#accounting-for-cowork",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/acroform_writer",
       "source_id": "cat-agent-skills",
       "source_slug": "acroform-writer",
@@ -3495,6 +3520,31 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/answer_research",
+      "source_id": "cat-agent-skills",
+      "source_slug": "answer-research",
+      "name": "Answer Research",
+      "description": "Research source-backed answers to support, policy, eligibility, and troubleshooting questions with explicit evidence gaps.",
+      "kind": "skill",
+      "tags": [
+        "customer-service",
+        "research",
+        "troubleshooting"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "",
+      "created_at": "2026-10-31T00:00:00.000Z",
+      "has_bundle": false,
+      "url": "https://microsoft.github.io/cat-agent-skills/#answer-research",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/audit_readiness",
       "source_id": "cat-agent-skills",
       "source_slug": "audit-readiness",
@@ -3512,8 +3562,8 @@
       "platforms": [
         "Cowork"
       ],
-      "author": "Industry Templates",
-      "author_github": "SravaniSeethi",
+      "author": "Microsoft",
+      "author_github": "microsoft",
       "version": "1.0.0",
       "created_at": "2026-09-01T00:00:00.000Z",
       "has_bundle": true,
@@ -3787,6 +3837,31 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/business_case_composer",
+      "source_id": "cat-agent-skills",
+      "source_slug": "business-case-composer",
+      "name": "Business Case Composer",
+      "description": "Draft a customer-specific business case connecting the problem, investment, and evidence-backed value.",
+      "kind": "skill",
+      "tags": [
+        "sales",
+        "business-case",
+        "customer-value"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "",
+      "created_at": "2026-10-31T00:00:00.000Z",
+      "has_bundle": false,
+      "url": "https://microsoft.github.io/cat-agent-skills/#business-case-composer",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/business_os",
       "source_id": "cat-agent-skills",
       "source_slug": "business-os",
@@ -3872,6 +3947,82 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/capital_markets_for_cowork",
+      "source_id": "cat-agent-skills",
+      "source_slug": "capital-markets-for-cowork",
+      "name": "Capital Markets",
+      "description": "Analyst work for banking, research and private equity.",
+      "kind": "plugin",
+      "tags": [
+        "financial-services",
+        "capital-markets",
+        "investment-research",
+        "due-diligence"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "1.0.7",
+      "created_at": "2026-10-31T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#capital-markets-for-cowork",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/case_preparation_brief",
+      "source_id": "cat-agent-skills",
+      "source_slug": "case-preparation-brief",
+      "name": "Case Preparation Brief",
+      "description": "Prepare a decision-ready support case brief with status, history, open commitments, and the recommended next step.",
+      "kind": "skill",
+      "tags": [
+        "customer-service",
+        "case-management",
+        "handoff"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "",
+      "created_at": "2026-10-31T00:00:00.000Z",
+      "has_bundle": false,
+      "url": "https://microsoft.github.io/cat-agent-skills/#case-preparation-brief",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/case_triage",
+      "source_id": "cat-agent-skills",
+      "source_slug": "case-triage",
+      "name": "Case Triage",
+      "description": "Prioritize support issues using impact, deadlines, commitments, and evidence-backed urgency.",
+      "kind": "skill",
+      "tags": [
+        "customer-service",
+        "triage",
+        "prioritization"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "",
+      "created_at": "2026-10-31T00:00:00.000Z",
+      "has_bundle": false,
+      "url": "https://microsoft.github.io/cat-agent-skills/#case-triage",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/chart_builder",
       "source_id": "cat-agent-skills",
       "source_slug": "chart-builder",
@@ -3925,6 +4076,34 @@
       "source_signal": {
         "downloads": 0,
         "rating": 1
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/clinical_documentation_companion",
+      "source_id": "cat-agent-skills",
+      "source_slug": "clinical-documentation-companion",
+      "name": "Clinical Docs Companion",
+      "description": "The documents that follow a signed visit note: draft the referral letter, after-visit summary and clinician handoff, build the coding rationale for codes already on the claim and check quality measures, each cited to a line of the note.",
+      "kind": "plugin",
+      "tags": [
+        "healthcare",
+        "clinical-documentation",
+        "referral",
+        "after-visit-summary",
+        "quality-measures",
+        "coding"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "1.0.3",
+      "created_at": "2026-10-28T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#clinical-documentation-companion",
+      "source_signal": {
+        "downloads": 0
       }
     },
     {
@@ -4043,6 +4222,31 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/competitive_strategy",
+      "source_id": "cat-agent-skills",
+      "source_slug": "competitive-strategy",
+      "name": "Competitive Strategy",
+      "description": "Build customer-specific competitive positioning with supported differentiators, tradeoffs, and objection responses.",
+      "kind": "skill",
+      "tags": [
+        "sales",
+        "competitive-strategy",
+        "positioning"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "",
+      "created_at": "2026-10-31T00:00:00.000Z",
+      "has_bundle": false,
+      "url": "https://microsoft.github.io/cat-agent-skills/#competitive-strategy",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/conditional_chat_reminder",
       "source_id": "cat-agent-skills",
       "source_slug": "conditional-chat-reminder",
@@ -4119,8 +4323,8 @@
       "platforms": [
         "Cowork"
       ],
-      "author": "Industry Templates",
-      "author_github": "SravaniSeethi",
+      "author": "Microsoft",
+      "author_github": "microsoft",
       "version": "1.0.0",
       "created_at": "2026-09-07T00:00:00.000Z",
       "has_bundle": true,
@@ -4535,6 +4739,31 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/customer_engagement_and_deal_risk_insights",
+      "source_id": "cat-agent-skills",
+      "source_slug": "customer-engagement-and-deal-risk-insights",
+      "name": "Customer Engagement and Deal Risk Insights",
+      "description": "Explain customer engagement and deal momentum with evidence-backed risks, blockers, and next actions.",
+      "kind": "skill",
+      "tags": [
+        "sales",
+        "customer-engagement",
+        "deal-risk"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "",
+      "created_at": "2026-10-31T00:00:00.000Z",
+      "has_bundle": false,
+      "url": "https://microsoft.github.io/cat-agent-skills/#customer-engagement-and-deal-risk-insights",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/customer_service_order_support",
       "source_id": "cat-agent-skills",
       "source_slug": "customer-service-order-support",
@@ -4552,12 +4781,93 @@
       "platforms": [
         "Cowork"
       ],
-      "author": "Industry Templates",
-      "author_github": "SravaniSeethi",
+      "author": "Microsoft",
+      "author_github": "microsoft",
       "version": "1.0.1",
       "created_at": "2026-09-05T00:00:00.000Z",
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#customer-service-order-support",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/deal_catchup",
+      "source_id": "cat-agent-skills",
+      "source_slug": "deal-catchup",
+      "name": "Deal Catch-up",
+      "description": "Summarize what changed across a scoped set of deals, separating customer movement from record housekeeping.",
+      "kind": "skill",
+      "tags": [
+        "sales",
+        "deal-updates",
+        "pipeline"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "",
+      "created_at": "2026-10-31T00:00:00.000Z",
+      "has_bundle": false,
+      "url": "https://microsoft.github.io/cat-agent-skills/#deal-catchup",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/denials_appeals_response",
+      "source_id": "cat-agent-skills",
+      "source_slug": "denials-appeals-response",
+      "name": "Denials & Appeals Response",
+      "description": "A denied claim from the remittance to a draft appeal: classify the denial and its reason codes, attach the governing payer policy and chart evidence, rank the queue by deadline then recoverable value and draft the appeal at the right level.",
+      "kind": "plugin",
+      "tags": [
+        "healthcare",
+        "denials",
+        "appeals",
+        "revenue-cycle",
+        "payer",
+        "claims"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "1.0.3",
+      "created_at": "2026-10-28T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#denials-appeals-response",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/discharge_care_transition",
+      "source_id": "cat-agent-skills",
+      "source_slug": "discharge-care-transition",
+      "name": "Discharge Transition Packet",
+      "description": "The packet for a patient going home from hospital: reconcile admission, inpatient and discharge medications, draft the discharge summary and plain language patient instructions, and build a dated follow-up checklist with owners, each cited to the record.",
+      "kind": "plugin",
+      "tags": [
+        "healthcare",
+        "discharge",
+        "care-transition",
+        "medication-reconciliation",
+        "patient-instructions",
+        "follow-up"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "1.0.3",
+      "created_at": "2026-10-28T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#discharge-care-transition",
       "source_signal": {
         "downloads": 0
       }
@@ -4593,6 +4903,56 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/draft_customer_reply",
+      "source_id": "cat-agent-skills",
+      "source_slug": "draft-customer-reply",
+      "name": "Draft Customer Reply",
+      "description": "Draft a reviewable customer support reply grounded in known facts, applicable policy, and customer needs.",
+      "kind": "skill",
+      "tags": [
+        "customer-service",
+        "communication",
+        "customer-replies"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "",
+      "created_at": "2026-10-31T00:00:00.000Z",
+      "has_bundle": false,
+      "url": "https://microsoft.github.io/cat-agent-skills/#draft-customer-reply",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/education_for_cowork",
+      "source_id": "cat-agent-skills",
+      "source_slug": "education-for-cowork",
+      "name": "Education",
+      "description": "Helps education teams with teaching, governance, and institution workflows.",
+      "kind": "plugin",
+      "tags": [
+        "education",
+        "teaching",
+        "governance"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "1.0.0",
+      "created_at": "2026-10-31T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#education-for-cowork",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/engineering_change_bom",
       "source_id": "cat-agent-skills",
       "source_slug": "engineering-change-bom",
@@ -4610,8 +4970,8 @@
       "platforms": [
         "Cowork"
       ],
-      "author": "Industry Templates",
-      "author_github": "SravaniSeethi",
+      "author": "Microsoft",
+      "author_github": "microsoft",
       "version": "1.0.0",
       "created_at": "2026-09-01T00:00:00.000Z",
       "has_bundle": true,
@@ -4732,6 +5092,112 @@
       "source_signal": {
         "downloads": 0,
         "rating": 1
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/finance_for_cowork",
+      "source_id": "cat-agent-skills",
+      "source_slug": "finance-for-cowork",
+      "name": "Finance",
+      "description": "Finance close, review prep, audits, and three-statement, DCF and LBO models.",
+      "kind": "plugin",
+      "tags": [
+        "finance",
+        "financial-modeling",
+        "reporting"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "1.0.7",
+      "created_at": "2026-10-31T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#finance-for-cowork",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/fsi_asset_management",
+      "source_id": "cat-agent-skills",
+      "source_slug": "fsi-asset-management",
+      "name": "Asset Management",
+      "description": "RFP and DDQ drafting, investment commentary, research briefs, peer product comparisons, client review prep, and consultant database refreshes for institutional asset managers.",
+      "kind": "plugin",
+      "tags": [
+        "financial-services",
+        "asset-management",
+        "rfp",
+        "ddq",
+        "investment-commentary"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "1.0.1",
+      "created_at": "2026-10-28T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#fsi-asset-management",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/fsi_commercial_banking",
+      "source_id": "cat-agent-skills",
+      "source_slug": "fsi-commercial-banking",
+      "name": "Commercial Banking",
+      "description": "Spreads, credit memos, annual review packets, covenant checks, borrower research, and RM call prep for commercial banking credit and coverage teams.",
+      "kind": "plugin",
+      "tags": [
+        "financial-services",
+        "commercial-banking",
+        "credit",
+        "covenants",
+        "spreading"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "1.0.1",
+      "created_at": "2026-10-28T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#fsi-commercial-banking",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/fsi_risk_and_compliance",
+      "source_id": "cat-agent-skills",
+      "source_slug": "fsi-risk-and-compliance",
+      "name": "Risk and Compliance",
+      "description": "Cited working papers for compliance, risk, and audit teams: regulatory change triage, policy gap tables, exam request trackers, enforcement read-across, vendor SOC 2 reviews, and KYC research records.",
+      "kind": "plugin",
+      "tags": [
+        "financial-services",
+        "compliance",
+        "regulatory-change",
+        "kyc",
+        "vendor-risk"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "1.0.29",
+      "created_at": "2026-10-28T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#fsi-risk-and-compliance",
+      "source_signal": {
+        "downloads": 0
       }
     },
     {
@@ -5027,6 +5493,31 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/knowledge_harvest",
+      "source_id": "cat-agent-skills",
+      "source_slug": "knowledge-harvest",
+      "name": "Knowledge Harvest",
+      "description": "Turn verified support resolutions into reviewable, reusable knowledge while removing identifying details.",
+      "kind": "skill",
+      "tags": [
+        "customer-service",
+        "knowledge-management",
+        "case-resolution"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "",
+      "created_at": "2026-10-31T00:00:00.000Z",
+      "has_bundle": false,
+      "url": "https://microsoft.github.io/cat-agent-skills/#knowledge-harvest",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/knowledge_source_router",
       "source_id": "cat-agent-skills",
       "source_slug": "knowledge-source-router",
@@ -5116,6 +5607,31 @@
       "created_at": "2026-07-18T00:00:00.000Z",
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#lab-column-mapper",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/legal_for_cowork",
+      "source_id": "cat-agent-skills",
+      "source_slug": "legal-for-cowork",
+      "name": "Legal",
+      "description": "Understand, organize, review, and prepare legal documents.",
+      "kind": "plugin",
+      "tags": [
+        "legal",
+        "contracts",
+        "document-review"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "1.0.10",
+      "created_at": "2026-10-31T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#legal-for-cowork",
       "source_signal": {
         "downloads": 0
       }
@@ -5222,8 +5738,8 @@
       "platforms": [
         "Cowork"
       ],
-      "author": "Industry Templates",
-      "author_github": "SravaniSeethi",
+      "author": "Microsoft",
+      "author_github": "microsoft",
       "version": "1.0.0",
       "created_at": "2026-08-01T00:00:00.000Z",
       "has_bundle": true,
@@ -5328,6 +5844,31 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/meeting_prep",
+      "source_id": "cat-agent-skills",
+      "source_slug": "meeting-prep",
+      "name": "Meeting Prep",
+      "description": "Prepare an evidence-backed brief for an upcoming customer conversation, including what to learn, say, prove, and ask.",
+      "kind": "skill",
+      "tags": [
+        "sales",
+        "meeting-preparation",
+        "customer-engagement"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "",
+      "created_at": "2026-10-31T00:00:00.000Z",
+      "has_bundle": false,
+      "url": "https://microsoft.github.io/cat-agent-skills/#meeting-prep",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/microsoft_ai_platform_advisor",
       "source_id": "cat-agent-skills",
       "source_slug": "microsoft-ai-platform-advisor",
@@ -5408,8 +5949,8 @@
       "platforms": [
         "Cowork"
       ],
-      "author": "Industry Templates",
-      "author_github": "SravaniSeethi",
+      "author": "Microsoft",
+      "author_github": "microsoft",
       "version": "1.0.0",
       "created_at": "2026-09-07T00:00:00.000Z",
       "has_bundle": true,
@@ -5592,6 +6133,56 @@
       "source_signal": {
         "downloads": 0,
         "featured": true
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/pipeline_prioritizer",
+      "source_id": "cat-agent-skills",
+      "source_slug": "pipeline-prioritizer",
+      "name": "Pipeline Prioritizer",
+      "description": "Rank open opportunities into an evidence-backed worklist explaining what to work on next and why.",
+      "kind": "skill",
+      "tags": [
+        "sales",
+        "pipeline",
+        "prioritization"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "",
+      "created_at": "2026-10-31T00:00:00.000Z",
+      "has_bundle": false,
+      "url": "https://microsoft.github.io/cat-agent-skills/#pipeline-prioritizer",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/post_meeting_follow_up",
+      "source_id": "cat-agent-skills",
+      "source_slug": "post-meeting-follow-up",
+      "name": "Post-Meeting Follow-Up",
+      "description": "Capture sales meeting decisions and commitments, propose next actions, and draft a reviewable customer follow-up.",
+      "kind": "skill",
+      "tags": [
+        "sales",
+        "meetings",
+        "follow-up"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "",
+      "created_at": "2026-10-31T00:00:00.000Z",
+      "has_bundle": false,
+      "url": "https://microsoft.github.io/cat-agent-skills/#post-meeting-follow-up",
+      "source_signal": {
+        "downloads": 0
       }
     },
     {
@@ -5796,6 +6387,34 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/prior_auth_assist",
+      "source_id": "cat-agent-skills",
+      "source_slug": "prior-auth-assist",
+      "name": "Prior Authorization Packet",
+      "description": "A cited prior authorization packet before the request goes to the payer: find the governing coverage policy, check the chart against each criterion, cite the notes that satisfy it, draft the medical necessity narrative and list what is still missing.",
+      "kind": "plugin",
+      "tags": [
+        "healthcare",
+        "prior-authorization",
+        "payer",
+        "utilization-management",
+        "medical-necessity",
+        "revenue-cycle"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "1.0.3",
+      "created_at": "2026-10-28T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#prior-auth-assist",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/process_sop_architect",
       "source_id": "cat-agent-skills",
       "source_slug": "process-sop-architect",
@@ -5840,8 +6459,8 @@
       "platforms": [
         "Cowork"
       ],
-      "author": "Industry Templates",
-      "author_github": "SravaniSeethi",
+      "author": "Microsoft",
+      "author_github": "microsoft",
       "version": "1.0.0",
       "created_at": "2026-09-05T00:00:00.000Z",
       "has_bundle": true,
@@ -5867,8 +6486,8 @@
       "platforms": [
         "Cowork"
       ],
-      "author": "Industry Templates",
-      "author_github": "SravaniSeethi",
+      "author": "Microsoft",
+      "author_github": "microsoft",
       "version": "1.0.0",
       "created_at": "2026-09-01T00:00:00.000Z",
       "has_bundle": true,
@@ -5922,8 +6541,8 @@
       "platforms": [
         "Cowork"
       ],
-      "author": "Industry Templates",
-      "author_github": "SravaniSeethi",
+      "author": "Microsoft",
+      "author_github": "microsoft",
       "version": "1.0.0",
       "created_at": "2026-09-01T00:00:00.000Z",
       "has_bundle": true,
@@ -5950,8 +6569,8 @@
       "platforms": [
         "Cowork"
       ],
-      "author": "Industry Templates",
-      "author_github": "SravaniSeethi",
+      "author": "Microsoft",
+      "author_github": "microsoft",
       "version": "2.0.0",
       "created_at": "2026-08-01T00:00:00.000Z",
       "has_bundle": true,
@@ -5986,6 +6605,34 @@
         "downloads": 109,
         "rating": 3,
         "featured": true
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/reg_submission_authoring",
+      "source_id": "cat-agent-skills",
+      "source_slug": "reg-submission-authoring",
+      "name": "Reg Submission Authoring",
+      "description": "A cited first draft of a clinical study report or 510(k) section set: plan the sections from the locked protocol, SAP and TLFs, draft each one from source facts, check every number and population against the sources and assemble the draft with its open items.",
+      "kind": "plugin",
+      "tags": [
+        "healthcare",
+        "life-sciences",
+        "regulatory",
+        "clinical-study-report",
+        "510k",
+        "medical-writing"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "1.0.3",
+      "created_at": "2026-10-28T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#reg-submission-authoring",
+      "source_signal": {
+        "downloads": 0
       }
     },
     {
@@ -6035,8 +6682,8 @@
       "platforms": [
         "Cowork"
       ],
-      "author": "Industry Templates",
-      "author_github": "SravaniSeethi",
+      "author": "Microsoft",
+      "author_github": "microsoft",
       "version": "1.0.0",
       "created_at": "2026-09-07T00:00:00.000Z",
       "has_bundle": true,
@@ -6063,8 +6710,8 @@
       "platforms": [
         "Cowork"
       ],
-      "author": "Industry Templates",
-      "author_github": "SravaniSeethi",
+      "author": "Microsoft",
+      "author_github": "microsoft",
       "version": "1.0.0",
       "created_at": "2026-09-05T00:00:00.000Z",
       "has_bundle": true,
@@ -6183,12 +6830,37 @@
       "platforms": [
         "Cowork"
       ],
-      "author": "Industry Templates",
-      "author_github": "SravaniSeethi",
+      "author": "Microsoft",
+      "author_github": "microsoft",
       "version": "1.0.0",
       "created_at": "2026-08-01T00:00:00.000Z",
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#safety-incident",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/sales_progress_update",
+      "source_id": "cat-agent-skills",
+      "source_slug": "sales-progress-update",
+      "name": "Sales Progress Update",
+      "description": "Create a sales progress update covering work completed, deal movement, forecast position, and help needed.",
+      "kind": "skill",
+      "tags": [
+        "sales",
+        "reporting",
+        "forecasting"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "",
+      "created_at": "2026-10-31T00:00:00.000Z",
+      "has_bundle": false,
+      "url": "https://microsoft.github.io/cat-agent-skills/#sales-progress-update",
       "source_signal": {
         "downloads": 0
       }
@@ -6417,6 +7089,31 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/stakeholder_and_decision_map",
+      "source_id": "cat-agent-skills",
+      "source_slug": "stakeholder-and-decision-map",
+      "name": "Stakeholder & Decision Map",
+      "description": "Map a deal's buying group, engagement, and decision process, highlighting missing stakeholders and evidence.",
+      "kind": "skill",
+      "tags": [
+        "sales",
+        "stakeholders",
+        "decision-making"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "",
+      "created_at": "2026-10-31T00:00:00.000Z",
+      "has_bundle": false,
+      "url": "https://microsoft.github.io/cat-agent-skills/#stakeholder-and-decision-map",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/stoic_negotiator",
       "source_id": "cat-agent-skills",
       "source_slug": "stoic-negotiator",
@@ -6468,8 +7165,8 @@
       "platforms": [
         "Cowork"
       ],
-      "author": "Industry Templates",
-      "author_github": "SravaniSeethi",
+      "author": "Microsoft",
+      "author_github": "microsoft",
       "version": "1.0.0",
       "created_at": "2026-09-05T00:00:00.000Z",
       "has_bundle": true,
@@ -6497,8 +7194,8 @@
       "platforms": [
         "Cowork"
       ],
-      "author": "Industry Templates",
-      "author_github": "SravaniSeethi",
+      "author": "Microsoft",
+      "author_github": "microsoft",
       "version": "1.0.0",
       "created_at": "2026-09-05T00:00:00.000Z",
       "has_bundle": true,
@@ -6582,8 +7279,8 @@
       "platforms": [
         "Cowork"
       ],
-      "author": "Industry Templates",
-      "author_github": "SravaniSeethi",
+      "author": "Microsoft",
+      "author_github": "microsoft",
       "version": "1.0.0",
       "created_at": "2026-08-01T00:00:00.000Z",
       "has_bundle": true,
@@ -6610,8 +7307,8 @@
       "platforms": [
         "Cowork"
       ],
-      "author": "Industry Templates",
-      "author_github": "SravaniSeethi",
+      "author": "Microsoft",
+      "author_github": "microsoft",
       "version": "1.0.0",
       "created_at": "2026-09-01T00:00:00.000Z",
       "has_bundle": true,
@@ -6638,8 +7335,8 @@
       "platforms": [
         "Cowork"
       ],
-      "author": "Industry Templates",
-      "author_github": "SravaniSeethi",
+      "author": "Microsoft",
+      "author_github": "microsoft",
       "version": "1.0.0",
       "created_at": "2026-09-07T00:00:00.000Z",
       "has_bundle": true,
@@ -6723,8 +7420,8 @@
       "platforms": [
         "Cowork"
       ],
-      "author": "Industry Templates",
-      "author_github": "SravaniSeethi",
+      "author": "Microsoft",
+      "author_github": "microsoft",
       "version": "1.0.0",
       "created_at": "2026-09-07T00:00:00.000Z",
       "has_bundle": true,
@@ -7012,8 +7709,8 @@
       "platforms": [
         "Cowork"
       ],
-      "author": "Industry Templates",
-      "author_github": "SravaniSeethi",
+      "author": "Microsoft",
+      "author_github": "microsoft",
       "version": "1.0.0",
       "created_at": "2026-08-01T00:00:00.000Z",
       "has_bundle": true,
@@ -7025,7 +7722,7 @@
   ],
   "totals": {
     "sources": 2,
-    "items": 227,
+    "items": 254,
     "source_downloads": 1589
   }
 }
