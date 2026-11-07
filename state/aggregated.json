@@ -15,7 +15,7 @@
       "license_url": "",
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
-      "item_count": 161,
+      "item_count": 155,
       "source_downloads": 1589
     },
     {
@@ -3545,34 +3545,6 @@
       }
     },
     {
-      "ref": "@cat-agent-skills/audit_readiness",
-      "source_id": "cat-agent-skills",
-      "source_slug": "audit-readiness",
-      "name": "Audit Readiness",
-      "description": "Walk into the audit prepared: map the audit scope to the standard's clauses, gather and complete the evidence register, validate each piece of evidence against what the clause actually requires, flag every gap with a severity, and draft the readiness pack with owners and actions.",
-      "kind": "plugin",
-      "tags": [
-        "quality",
-        "audit",
-        "compliance",
-        "iso-9001",
-        "iatf-16949",
-        "readiness"
-      ],
-      "platforms": [
-        "Cowork"
-      ],
-      "author": "Microsoft",
-      "author_github": "microsoft",
-      "version": "1.0.0",
-      "created_at": "2026-09-01T00:00:00.000Z",
-      "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#audit-readiness",
-      "source_signal": {
-        "downloads": 0
-      }
-    },
-    {
       "ref": "@cat-agent-skills/awaiting_reply",
       "source_id": "cat-agent-skills",
       "source_slug": "awaiting-reply",
@@ -4306,34 +4278,6 @@
       }
     },
     {
-      "ref": "@cat-agent-skills/consumer_market_insight_synthesis",
-      "source_id": "cat-agent-skills",
-      "source_slug": "consumer-market-insight-synthesis",
-      "name": "Consumer & Market Insight Synthesis",
-      "description": "Prior research reused instead of re-commissioned: retrieve and rank prior research and panel extracts, compare trends across markets and periods, flag contradictory evidence rather than smoothing it, check usage rights and claim provenance, and draft a cited insight brief with a provenance record.",
-      "kind": "plugin",
-      "tags": [
-        "cpg",
-        "insights",
-        "consumer-research",
-        "category",
-        "panel",
-        "provenance"
-      ],
-      "platforms": [
-        "Cowork"
-      ],
-      "author": "Microsoft",
-      "author_github": "microsoft",
-      "version": "1.0.0",
-      "created_at": "2026-09-07T00:00:00.000Z",
-      "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#consumer-market-insight-synthesis",
-      "source_signal": {
-        "downloads": 0
-      }
-    },
-    {
       "ref": "@cat-agent-skills/content_quality_auditor",
       "source_id": "cat-agent-skills",
       "source_slug": "content-quality-auditor",
@@ -4783,7 +4727,7 @@
       ],
       "author": "Microsoft",
       "author_github": "microsoft",
-      "version": "1.0.1",
+      "version": "1.0.4",
       "created_at": "2026-09-05T00:00:00.000Z",
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#customer-service-order-support",
@@ -4812,6 +4756,34 @@
       "created_at": "2026-10-31T00:00:00.000Z",
       "has_bundle": false,
       "url": "https://microsoft.github.io/cat-agent-skills/#deal-catchup",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/deliverable_review_quality_gate",
+      "source_id": "cat-agent-skills",
+      "source_slug": "deliverable-review-quality-gate",
+      "name": "Deliverable Quality Gate",
+      "description": "A cited partner review packet before a deliverable goes to the client: map each assertion to the support pack, run the firm's quality-gate criteria and required-language checks, rank the findings by severity and list every release blocker.",
+      "kind": "plugin",
+      "tags": [
+        "professional-services",
+        "quality-review",
+        "deliverable",
+        "qrm",
+        "evidence",
+        "release-gate"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "1.0.9",
+      "created_at": "2026-11-06T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#deliverable-review-quality-gate",
       "source_signal": {
         "downloads": 0
       }
@@ -4953,29 +4925,85 @@
       }
     },
     {
-      "ref": "@cat-agent-skills/engineering_change_bom",
+      "ref": "@cat-agent-skills/engagement_closeout_knowledge_harvest",
       "source_id": "cat-agent-skills",
-      "source_slug": "engineering-change-bom",
-      "name": "Engineering Change & BOM",
-      "description": "Turn a change request into a decision: read the ECR, spec delta and BOM, trace impact across the BOM with where-used, classify form/fit/function impact and flag interface violations, roll up document and inventory dispositions, and draft the ECN with the affected-item list.",
+      "source_slug": "engagement-closeout-knowledge-harvest",
+      "name": "Closeout Knowledge Harvest",
+      "description": "Reusable knowledge from a finished engagement without leaking client confidences: assemble the final deliverables, decision log and retrospective, score reusable assets, cluster lessons learned, hold anything that fails the confidentiality gate and draft a sanitised knowledge record for practice review.",
       "kind": "plugin",
       "tags": [
-        "engineering-change",
-        "ecr",
-        "ecn",
-        "bom",
-        "where-used",
-        "plm"
+        "professional-services",
+        "closeout",
+        "knowledge-management",
+        "lessons-learned",
+        "reuse",
+        "confidentiality"
       ],
       "platforms": [
         "Cowork"
       ],
       "author": "Microsoft",
       "author_github": "microsoft",
-      "version": "1.0.0",
-      "created_at": "2026-09-01T00:00:00.000Z",
+      "version": "1.0.5",
+      "created_at": "2026-11-06T00:00:00.000Z",
       "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#engineering-change-bom",
+      "url": "https://microsoft.github.io/cat-agent-skills/#engagement-closeout-knowledge-harvest",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/engagement_mobilization_onboarding_pack",
+      "source_id": "cat-agent-skills",
+      "source_slug": "engagement-mobilization-onboarding-pack",
+      "name": "Engagement Mobilization Pack",
+      "description": "A cited onboarding pack for a new engagement joiner: digest the SOW scope, separate confirmed from proposed staff, match only released prior knowledge, apply the ethical-wall register and draft least-privilege access requests and a first-week plan.",
+      "kind": "plugin",
+      "tags": [
+        "professional-services",
+        "onboarding",
+        "mobilization",
+        "ethical-walls",
+        "access",
+        "knowledge-reuse"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "1.0.7",
+      "created_at": "2026-11-06T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#engagement-mobilization-onboarding-pack",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/engagement_staffing_bench_match",
+      "source_id": "cat-agent-skills",
+      "source_slug": "engagement-staffing-bench-match",
+      "name": "Staffing & Bench Match",
+      "description": "A ranked, partner-ready staffing slate for a signed engagement: extract the roles from the SOW, score bench fit against availability and rates, refuse conflicted or unavailable candidates with the rule cited and draft the recommendation.",
+      "kind": "plugin",
+      "tags": [
+        "professional-services",
+        "staffing",
+        "resource-management",
+        "bench",
+        "independence",
+        "conflicts"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "1.1.14",
+      "created_at": "2026-11-06T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#engagement-staffing-bench-match",
       "source_signal": {
         "downloads": 0
       }
@@ -5740,12 +5768,13 @@
       ],
       "author": "Microsoft",
       "author_github": "microsoft",
-      "version": "1.0.0",
+      "version": "1.3.1",
       "created_at": "2026-08-01T00:00:00.000Z",
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#maintenance-triage",
       "source_signal": {
         "downloads": 0,
+        "rating": 1,
         "featured": true
       }
     },
@@ -5927,34 +5956,6 @@
       "created_at": "2026-07-31T00:00:00.000Z",
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#monte-carlo-analysis",
-      "source_signal": {
-        "downloads": 0
-      }
-    },
-    {
-      "ref": "@cat-agent-skills/order_intake_o2c_exception",
-      "source_id": "cat-agent-skills",
-      "source_slug": "order-intake-o2c-exception",
-      "name": "Order Intake & O2C Exception",
-      "description": "Orders arriving by email, PDF and portal validated and exceptions routed instead of rekeyed: extract and normalise order lines, validate against customer, pricing, product and credit master data, queue exceptions with reason codes and a recommended correction, and draft the customer response.",
-      "kind": "plugin",
-      "tags": [
-        "retailer",
-        "order-management",
-        "o2c",
-        "exception",
-        "validation",
-        "edi"
-      ],
-      "platforms": [
-        "Cowork"
-      ],
-      "author": "Microsoft",
-      "author_github": "microsoft",
-      "version": "1.0.0",
-      "created_at": "2026-09-07T00:00:00.000Z",
-      "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#order-intake-o2c-exception",
       "source_signal": {
         "downloads": 0
       }
@@ -6461,37 +6462,10 @@
       ],
       "author": "Microsoft",
       "author_github": "microsoft",
-      "version": "1.0.0",
+      "version": "1.0.5",
       "created_at": "2026-09-05T00:00:00.000Z",
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#product-content-catalog-enrichment",
-      "source_signal": {
-        "downloads": 0
-      }
-    },
-    {
-      "ref": "@cat-agent-skills/production_planning",
-      "source_id": "cat-agent-skills",
-      "source_slug": "production-planning",
-      "name": "Production Planning",
-      "description": "Turn demand into a publishable shift plan: pull the forecast and open orders, check capacity, constraints and material availability, sequence the week to minimise changeovers with a deterministic campaign heuristic, and draft the shift plan for the planner to publish.",
-      "kind": "plugin",
-      "tags": [
-        "operations",
-        "scheduling",
-        "production-planning",
-        "changeover",
-        "capacity"
-      ],
-      "platforms": [
-        "Cowork"
-      ],
-      "author": "Microsoft",
-      "author_github": "microsoft",
-      "version": "1.0.0",
-      "created_at": "2026-09-01T00:00:00.000Z",
-      "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#production-planning",
       "source_signal": {
         "downloads": 0
       }
@@ -6524,34 +6498,6 @@
       }
     },
     {
-      "ref": "@cat-agent-skills/quality_incident_capa",
-      "source_id": "cat-agent-skills",
-      "source_slug": "quality-incident-capa",
-      "name": "Quality Incident & CAPA",
-      "description": "Take an open NCR through to a closed CAPA: read the incident, complaint and inspection data, establish root cause with a structured method, build corrective and preventive actions with mandatory effectiveness checks, validate closure readiness, and draft the 8D report cited to the clause.",
-      "kind": "plugin",
-      "tags": [
-        "quality",
-        "capa",
-        "8d",
-        "root-cause",
-        "ncr",
-        "iso-9001"
-      ],
-      "platforms": [
-        "Cowork"
-      ],
-      "author": "Microsoft",
-      "author_github": "microsoft",
-      "version": "1.0.0",
-      "created_at": "2026-09-01T00:00:00.000Z",
-      "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#quality-incident-capa",
-      "source_signal": {
-        "downloads": 0
-      }
-    },
-    {
       "ref": "@cat-agent-skills/quality_inspection",
       "source_id": "cat-agent-skills",
       "source_slug": "quality-inspection",
@@ -6571,7 +6517,7 @@
       ],
       "author": "Microsoft",
       "author_github": "microsoft",
-      "version": "2.0.0",
+      "version": "3.1.1",
       "created_at": "2026-08-01T00:00:00.000Z",
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#quality-inspection",
@@ -6665,34 +6611,6 @@
       }
     },
     {
-      "ref": "@cat-agent-skills/retail_execution_perfect_store",
-      "source_id": "cat-agent-skills",
-      "source_slug": "retail-execution-perfect-store",
-      "name": "Retail Execution & Perfect Store",
-      "description": "A prepared call and a complete, evidenced visit report: assemble the pre-call plan, score the perfect-store gap deterministically against the channel standard, rank gaps by revenue impact rather than count, and draft the visit report, action register and suggested order for the rep to confirm.",
-      "kind": "plugin",
-      "tags": [
-        "cpg",
-        "field-sales",
-        "retail-execution",
-        "perfect-store",
-        "dsr",
-        "visit-report"
-      ],
-      "platforms": [
-        "Cowork"
-      ],
-      "author": "Microsoft",
-      "author_github": "microsoft",
-      "version": "1.0.0",
-      "created_at": "2026-09-07T00:00:00.000Z",
-      "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#retail-execution-perfect-store",
-      "source_signal": {
-        "downloads": 0
-      }
-    },
-    {
       "ref": "@cat-agent-skills/returns_refund_case",
       "source_id": "cat-agent-skills",
       "source_slug": "returns-refund-case",
@@ -6712,7 +6630,7 @@
       ],
       "author": "Microsoft",
       "author_github": "microsoft",
-      "version": "1.0.0",
+      "version": "1.0.4",
       "created_at": "2026-09-05T00:00:00.000Z",
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#returns-refund-case",
@@ -6808,34 +6726,6 @@
       "created_at": "2026-08-10T00:00:00.000Z",
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#route-map-visualizer",
-      "source_signal": {
-        "downloads": 0
-      }
-    },
-    {
-      "ref": "@cat-agent-skills/safety_incident",
-      "source_id": "cat-agent-skills",
-      "source_slug": "safety-incident",
-      "name": "Safety Incident Assist",
-      "description": "Handle an EHS incident the same way every time: take the report from a form, email or voice note, classify severity, near-miss status and OSHA recordability, route it to the right investigator with the regulatory clocks attached, and draft the incident summary and RCA template.",
-      "kind": "plugin",
-      "tags": [
-        "ehs",
-        "safety",
-        "incident",
-        "osha",
-        "recordable",
-        "iso-45001"
-      ],
-      "platforms": [
-        "Cowork"
-      ],
-      "author": "Microsoft",
-      "author_github": "microsoft",
-      "version": "1.0.0",
-      "created_at": "2026-08-01T00:00:00.000Z",
-      "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#safety-incident",
       "source_signal": {
         "downloads": 0
       }
@@ -7167,7 +7057,7 @@
       ],
       "author": "Microsoft",
       "author_github": "microsoft",
-      "version": "1.0.0",
+      "version": "1.0.9",
       "created_at": "2026-09-05T00:00:00.000Z",
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#store-associate-assist",
@@ -7196,7 +7086,7 @@
       ],
       "author": "Microsoft",
       "author_github": "microsoft",
-      "version": "1.0.0",
+      "version": "1.0.5",
       "created_at": "2026-09-05T00:00:00.000Z",
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#store-task-promotion-execution",
@@ -7281,66 +7171,10 @@
       ],
       "author": "Microsoft",
       "author_github": "microsoft",
-      "version": "1.0.0",
+      "version": "1.4.3",
       "created_at": "2026-08-01T00:00:00.000Z",
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#supplier-disruption",
-      "source_signal": {
-        "downloads": 0
-      }
-    },
-    {
-      "ref": "@cat-agent-skills/supplier_qualification",
-      "source_id": "cat-agent-skills",
-      "source_slug": "supplier-qualification",
-      "name": "Supplier Qualification",
-      "description": "Qualify a new supplier on the evidence: gather the dossier of certs, financials, audits and PPAP elements, score risk across quality, financial and geographic dimensions, compare against the approved vendor list and category requirements, and draft the qualification memo with conditions.",
-      "kind": "plugin",
-      "tags": [
-        "supply-chain",
-        "sourcing",
-        "supplier-qualification",
-        "ppap",
-        "apqp",
-        "risk"
-      ],
-      "platforms": [
-        "Cowork"
-      ],
-      "author": "Microsoft",
-      "author_github": "microsoft",
-      "version": "1.0.0",
-      "created_at": "2026-09-01T00:00:00.000Z",
-      "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#supplier-qualification",
-      "source_signal": {
-        "downloads": 0
-      }
-    },
-    {
-      "ref": "@cat-agent-skills/supplier_vendor_performance",
-      "source_id": "cat-agent-skills",
-      "source_slug": "supplier-vendor-performance",
-      "name": "Supplier & Vendor Performance Review",
-      "description": "A defensible supplier review pack assembled from records instead of a week of spreadsheet work: roll up the OTIF, defect and dispute scorecard with trends, cluster recurring issues with evidence, retrieve the governing trading term, and draft the agenda, corrective action request and commitment tracker.",
-      "kind": "plugin",
-      "tags": [
-        "retailer",
-        "merchandising",
-        "supplier",
-        "vendor",
-        "otif",
-        "scorecard"
-      ],
-      "platforms": [
-        "Cowork"
-      ],
-      "author": "Microsoft",
-      "author_github": "microsoft",
-      "version": "1.0.0",
-      "created_at": "2026-09-07T00:00:00.000Z",
-      "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#supplier-vendor-performance",
       "source_signal": {
         "downloads": 0
       }
@@ -7374,6 +7208,34 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/time_expense_narrative_compliance",
+      "source_id": "cat-agent-skills",
+      "source_slug": "time-expense-narrative-compliance",
+      "name": "Time & Expense Narrative Check",
+      "description": "Pre-bill-ready time narratives: gather cited calendar and document activity, draft grounded narratives, recommend phase and task codes, check entries against client billing guidelines and missing time, and build the pre-bill exception packet. Time entries only.",
+      "kind": "plugin",
+      "tags": [
+        "professional-services",
+        "time-entry",
+        "billing",
+        "pre-bill",
+        "billing-guidelines",
+        "wip"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "1.0.13",
+      "created_at": "2026-11-06T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#time-expense-narrative-compliance",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/tool_tracer",
       "source_id": "cat-agent-skills",
       "source_slug": "tool-tracer",
@@ -7398,34 +7260,6 @@
       "created_at": "2026-07-22T00:00:00.000Z",
       "has_bundle": false,
       "url": "https://microsoft.github.io/cat-agent-skills/#tool-tracer",
-      "source_signal": {
-        "downloads": 0
-      }
-    },
-    {
-      "ref": "@cat-agent-skills/trade_promotion_deduction_recovery",
-      "source_id": "cat-agent-skills",
-      "source_slug": "trade-promotion-deduction-recovery",
-      "name": "Trade Promotion & Deduction Recovery",
-      "description": "Invalid deductions caught and disputed with evidence: match each claim to the governing promotion, allowance or trade term, classify validity deterministically and quantify the disputable amount with the calculation shown, and draft the dispute packet and post-event brief.",
-      "kind": "plugin",
-      "tags": [
-        "cpg",
-        "rgm",
-        "trade-promotion",
-        "deduction",
-        "dispute",
-        "tpm"
-      ],
-      "platforms": [
-        "Cowork"
-      ],
-      "author": "Microsoft",
-      "author_github": "microsoft",
-      "version": "1.0.0",
-      "created_at": "2026-09-07T00:00:00.000Z",
-      "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#trade-promotion-deduction-recovery",
       "source_signal": {
         "downloads": 0
       }
@@ -7711,7 +7545,7 @@
       ],
       "author": "Microsoft",
       "author_github": "microsoft",
-      "version": "1.0.0",
+      "version": "4.0.1",
       "created_at": "2026-08-01T00:00:00.000Z",
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#work-order-assist",
@@ -7722,7 +7556,7 @@
   ],
   "totals": {
     "sources": 2,
-    "items": 254,
+    "items": 248,
     "source_downloads": 1589
   }
 }

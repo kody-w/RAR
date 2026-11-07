@@ -2178,6 +2178,21 @@
       "url": "https://github.com/kody-w/RAR/discussions/352",
       "number": 352
     },
+    "@kody-w/fragments_agent": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/1588",
+      "number": 1588
+    },
     "@kody-w/full_rapp_leviathan": {
       "upvotes": 0,
       "downloads": 0,
@@ -2282,6 +2297,21 @@
       },
       "url": "https://github.com/kody-w/RAR/discussions/356",
       "number": 356
+    },
+    "@kody-w/journal_recall_agent": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/1589",
+      "number": 1589
     },
     "@kody-w/kody2day_agent": {
       "upvotes": 0,
@@ -2762,6 +2792,21 @@
       },
       "url": "https://github.com/kody-w/RAR/discussions/503",
       "number": 503
+    },
+    "@kody-w/source_capture_agent": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/1590",
+      "number": 1590
     },
     "@kody-w/thread_tracker_agent": {
       "upvotes": 0,
