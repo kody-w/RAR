@@ -1,0 +1,50 @@
+{
+  "schema": "rapp-rar-stack/1.0",
+  "name": "trust-gate",
+  "display_name": "Trust Gate",
+  "version": "0.1.0",
+  "maturity": "staging",
+  "purpose": "Your Brainstem's credit score for its own claims. Before it says done, it bets part of its score that the claim is true; a judge or you settle the bet from evidence a stranger can open. A wrong confident claim costs the stake, a right one pays a little, and the score gates what it may do alone (80+ ordinary; 50-79 asks before anything irreversible; under 50 you verify every claim). One agent file; the kernel is untouched; the ledger is rapp-trust/1 frames (kody-w/rapp-1), recomputed every time, never stored as a number. STAGING: one install, one day of use; it moves down a layer only after real users on more than one install (proven-winner rule).",
+  "files": {
+    "trust_gate_agent.py": {
+      "purpose": "Drop into agents/. The model sees its score every turn and gets TrustGate(action=score|wager|settle|board) as a tool. Streams rapp.py, rapp_profile.py and rapp_trust.py from kody-w/rapp-1 at a pinned commit, sha256-checked and cached.",
+      "size": 8969,
+      "sha256": "8dd7a87f07e557139351a6b08a6b53fb94d99279c7ba3fb7c3db86371efb77f5"
+    }
+  },
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "stacks/trust-gate/trust_gate_agent.py"
+    ],
+    "destination": "agents/",
+    "notes": "Copy trust_gate_agent.py into your brainstem's agents/. It loads on the next /chat, no restart. Ask: 'what is your trust score?'. Before any 'done' the model is told to call TrustGate(action='wager', claim=..., confidence=0.5-1.0, klass=statement|done|release|destructive, needs='path: or https:// a stranger can open'). Settle with TrustGate(action='settle', wager=<id>, outcome=won|lost|void, evidence=...). Ledger: ~/.brainstem/data/trust/ledger.jsonl (set BRAINSTEM_DATA to move it)."
+  },
+  "agents_in_pack": 1,
+  "capabilities": [
+    "score",
+    "wager",
+    "settle",
+    "board",
+    "system_context score line",
+    "confidence-to-stake (Kelly-shaped, refuses below 0.5)",
+    "all_in",
+    "pinned public reference (no vendoring)"
+  ],
+  "protocol": {
+    "name": "rapp-trust/1",
+    "spec": "https://github.com/kody-w/rapp-1/blob/main/protocols/rapp-trust/1/SPEC.md",
+    "reference_commit": "fe141f4643f11fbee3f80edc386b7d2af0db2b6f"
+  },
+  "evidence": {
+    "first_live_loop": "2026-11-08: score 100 -> wager 41 at 0.9 on a checkable file claim -> settled won -> 104, three /chat turns on a live Brainstem; ledger 3 frames",
+    "where": "Wildhaven/climb/runs/trust-gate/chat1.json chat2.json chat3.json (owner's machine)"
+  },
+  "pairs_with": [
+    "grail-layers",
+    "judge"
+  ],
+  "see_also": [
+    "https://kody-w.github.io/rapp-1/"
+  ]
+}
