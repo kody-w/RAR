@@ -1,7 +1,7 @@
 {
   "schema": "rar-catalog/1.0",
   "description": "Every agent in RAR as a lean record. Fetch this one file to render a complete browsable catalog with no further requests, no backend, no authentication and no GitHub account. stack_packs lists every installable pack, including retired packs with status and retirement metadata.",
-  "generated": "2026-11-05T03:14:46Z",
+  "generated": "2026-11-08T17:12:02Z",
   "count": 226,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/catalog.json",
   "agents": [
@@ -11625,6 +11625,25 @@
       "shelf": "app",
       "_seed": 192799570479030272,
       "_incantation": "FORGE CHISEL PANTHER DAGGER ORBIT WARP FORGE"
+    },
+    {
+      "name": "trust-gate",
+      "display_name": "Trust Gate",
+      "version": "0.1.0",
+      "schema": "rapp-rar-stack/1.0",
+      "status": "current",
+      "path": "stacks/trust-gate",
+      "purpose": "Your Brainstem's credit score for its own claims. Before it says done, it bets part of its score that the claim is true; a judge or you settle the bet from evidence a stranger can open. A wrong confident claim costs the stake, a right one pays a little, and the score gates what it may do alone (80+ ",
+      "files": {
+        "trust_gate_agent.py": {
+          "sha256": "8dd7a87f07e557139351a6b08a6b53fb94d99279c7ba3fb7c3db86371efb77f5",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 3821656694871568665,
+      "_incantation": "GROWL STAMP CONDOR SWARM WILD STILL RUNE"
     },
     {
       "name": "vibe-coding-loop",
