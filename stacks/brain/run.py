@@ -18,7 +18,7 @@ import sys
 import types
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DEFAULT = os.path.join(HERE, "agents") if os.path.isdir(DEFAULT) else HERE
+DEFAULT = os.path.join(HERE, "agents") if os.path.isdir(os.path.join(HERE, "agents")) else HERE
 
 BASE = '''
 class BasicAgent:

@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-09T20:20:00Z",
+  "generated_at": "2026-11-09T23:57:08Z",
   "static_api": "rapp-static-api/1.1",
   "pages_base": "https://kody-w.github.io/RAR",
   "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
@@ -14640,7 +14640,7 @@
     {
       "name": "brain",
       "display_name": "Brain",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "schema": "rapp-rar-stack/1.1",
       "status": "current",
       "path": "stacks/brain",
@@ -14671,7 +14671,7 @@
           "verified": true
         },
         "run.py": {
-          "sha256": "ca3721c487bd6e3b5fda4eb41c9eddedcc771b40e0a3020078d01831191ad6cb",
+          "sha256": "17284b27294da1b8034fec6fc9d271fa1fb32fb0ebc9e165acb9b1febc5995f3",
           "verified": true
         }
       },

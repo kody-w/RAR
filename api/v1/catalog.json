@@ -1,7 +1,7 @@
 {
   "schema": "rar-catalog/1.0",
   "description": "Every agent in RAR as a lean record. Fetch this one file to render a complete browsable catalog with no further requests, no backend, no authentication and no GitHub account. stack_packs lists every installable pack, including retired packs with status and retirement metadata.",
-  "generated": "2026-11-09T20:20:00Z",
+  "generated": "2026-11-09T23:57:08Z",
   "count": 226,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/catalog.json",
   "agents": [
@@ -10703,7 +10703,7 @@
     {
       "name": "brain",
       "display_name": "Brain",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "schema": "rapp-rar-stack/1.1",
       "status": "current",
       "path": "stacks/brain",
@@ -10734,7 +10734,7 @@
           "verified": true
         },
         "run.py": {
-          "sha256": "ca3721c487bd6e3b5fda4eb41c9eddedcc771b40e0a3020078d01831191ad6cb",
+          "sha256": "17284b27294da1b8034fec6fc9d271fa1fb32fb0ebc9e165acb9b1febc5995f3",
           "verified": true
         }
       },

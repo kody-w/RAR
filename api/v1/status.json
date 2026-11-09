@@ -1,6 +1,6 @@
 {
   "schema": "rar-static-api-status/1.0",
-  "generated": "2026-11-09T20:20:00Z",
+  "generated": "2026-11-09T23:57:08Z",
   "summary": {
     "agents": 226,
     "publishers": 10,
@@ -14,8 +14,8 @@
     {
       "name": "catalog",
       "count": 226,
-      "sha8": "5de01112030d",
-      "version_path": "versions/api/v1/catalog/5de01112030d.json",
+      "sha8": "9968f80ac927",
+      "version_path": "versions/api/v1/catalog/9968f80ac927.json",
       "pages_url": "https://kody-w.github.io/RAR/api/v1/catalog.json"
     },
     {
