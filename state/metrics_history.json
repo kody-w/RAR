@@ -366,18 +366,22 @@
   "2026-11-07": {
    "count": 110,
    "uniques": 33
+  },
+  "2026-11-08": {
+   "count": 170,
+   "uniques": 55
   }
  },
  "last_known": {
-  "at": "2026-11-08T11:59:36Z",
-  "clone_uniques_14d": 336,
-  "clones_14d": 2634,
+  "at": "2026-11-09T14:01:11Z",
+  "clone_uniques_14d": 344,
+  "clones_14d": 2668,
   "paths": [
    {
-    "count": 10,
+    "count": 9,
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "uniques": 7
+    "uniques": 6
    },
    {
     "count": 2,
@@ -411,14 +415,14 @@
    },
    {
     "count": 1,
-    "path": "/kody-w/RAR/blob/main/agents/@cowork-cookbook/map_a_customer_journey_for_a_campaign_agent.py",
-    "title": "/blob/main/agents/@cowork-cookbook/map_a_customer_journey_for_a_campaign_agent.py",
+    "path": "/kody-w/RAR/blob/main/agents/@borg/borg_agent.py.card",
+    "title": "/blob/main/agents/@borg/borg_agent.py.card",
     "uniques": 1
    },
    {
     "count": 1,
-    "path": "/kody-w/RAR/blob/main/docs/FIELD-REQUIREMENTS.md",
-    "title": "/blob/main/docs/FIELD-REQUIREMENTS.md",
+    "path": "/kody-w/RAR/blob/main/agents/@cowork-cookbook/map_a_customer_journey_for_a_campaign_agent.py",
+    "title": "/blob/main/agents/@cowork-cookbook/map_a_customer_journey_for_a_campaign_agent.py",
     "uniques": 1
    },
    {
@@ -436,9 +440,9 @@
   ],
   "referrers": [
    {
-    "count": 8,
+    "count": 7,
     "referrer": "github.com",
-    "uniques": 5
+    "uniques": 4
    },
    {
     "count": 3,
@@ -446,12 +450,12 @@
     "uniques": 3
    },
    {
-    "count": 1,
+    "count": 2,
     "referrer": "Bing",
-    "uniques": 1
+    "uniques": 2
    }
   ],
-  "view_uniques_14d": 19,
+  "view_uniques_14d": 17,
   "views_14d": 37
  },
  "snapshots": [
@@ -2084,6 +2088,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 137,
    "views_all_time": 298
+  },
+  {
+   "at": "2026-11-09T14:01:11Z",
+   "cdn_all_time": 560,
+   "clone_uniques_all_time": 2795,
+   "clones_all_time": 15853,
+   "days_tracked": 90,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 138,
+   "views_all_time": 300
   }
  ],
  "views": {
@@ -2442,6 +2456,10 @@
   "2026-11-07": {
    "count": 0,
    "uniques": 0
+  },
+  "2026-11-08": {
+   "count": 2,
+   "uniques": 1
   }
  }
 }

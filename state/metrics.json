@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-11-08T11:59:36Z",
+ "generated_at": "2026-11-09T14:01:11Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -9,27 +9,27 @@
   "stars": 4,
   "forks": 1,
   "watchers": 0,
-  "open_issues": 20,
-  "size_kb": 127470,
+  "open_issues": 21,
+  "size_kb": 129193,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-11-08T08:25:35Z",
+  "pushed_at": "2026-11-09T08:56:03Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": "https://kody-w.github.io/RAR/"
  },
  "totals": {
-  "downloads": 16253,
-  "clones": 15683,
+  "downloads": 16423,
+  "clones": 15853,
   "cdn_hits": 560,
   "release_downloads": 10,
   "agent_file_downloads": 15,
-  "clones_excluding_ci_estimate": 10521,
-  "ci_clone_estimate": 5162,
-  "page_views": 298,
-  "clone_uniques_14d": 336,
-  "view_uniques_14d": 19,
-  "clone_uniques_daily_sum": 2740,
-  "view_uniques_daily_sum": 137,
-  "days_tracked": 89,
+  "clones_excluding_ci_estimate": 10633,
+  "ci_clone_estimate": 5220,
+  "page_views": 300,
+  "clone_uniques_14d": 344,
+  "view_uniques_14d": 17,
+  "clone_uniques_daily_sum": 2795,
+  "view_uniques_daily_sum": 138,
+  "days_tracked": 90,
   "tracking_since": "2026-07-14",
   "agents": 226,
   "swarms": 2,
@@ -48,13 +48,6 @@
   "agents_voted": 1
  },
  "daily": [
-  {
-   "date": "2026-07-14",
-   "clones": 180,
-   "clone_uniques": 45,
-   "views": 0,
-   "cdn": 0
-  },
   {
    "date": "2026-07-15",
    "clones": 387,
@@ -677,6 +670,13 @@
    "clone_uniques": 33,
    "views": 0,
    "cdn": 0
+  },
+  {
+   "date": "2026-11-08",
+   "clones": 170,
+   "clone_uniques": 55,
+   "views": 2,
+   "cdn": 0
   }
  ],
  "traffic": {
@@ -684,8 +684,8 @@
    {
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "count": 10,
-    "uniques": 7
+    "count": 9,
+    "uniques": 6
    },
    {
     "path": "/kody-w/RAR/discussions/15",
@@ -718,14 +718,14 @@
     "uniques": 1
    },
    {
-    "path": "/kody-w/RAR/blob/main/agents/@cowork-cookbook/map_a_customer_journey_for_a_campaign_agent.py",
-    "title": "/blob/main/agents/@cowork-cookbook/map_a_customer_journey_for_a_campaign_agent.py",
+    "path": "/kody-w/RAR/blob/main/agents/@borg/borg_agent.py.card",
+    "title": "/blob/main/agents/@borg/borg_agent.py.card",
     "count": 1,
     "uniques": 1
    },
    {
-    "path": "/kody-w/RAR/blob/main/docs/FIELD-REQUIREMENTS.md",
-    "title": "/blob/main/docs/FIELD-REQUIREMENTS.md",
+    "path": "/kody-w/RAR/blob/main/agents/@cowork-cookbook/map_a_customer_journey_for_a_campaign_agent.py",
+    "title": "/blob/main/agents/@cowork-cookbook/map_a_customer_journey_for_a_campaign_agent.py",
     "count": 1,
     "uniques": 1
    },
@@ -745,8 +745,8 @@
   "referrers": [
    {
     "referrer": "github.com",
-    "count": 8,
-    "uniques": 5
+    "count": 7,
+    "uniques": 4
    },
    {
     "referrer": "aocr.org",
@@ -755,19 +755,19 @@
    },
    {
     "referrer": "Bing",
-    "count": 1,
-    "uniques": 1
+    "count": 2,
+    "uniques": 2
    }
   ],
-  "clones_14d": 2634,
+  "clones_14d": 2668,
   "views_14d": 37,
   "live": true,
-  "as_of": "2026-11-08T11:59:36Z"
+  "as_of": "2026-11-09T14:01:11Z"
  },
  "cdn": {
   "total_hits": 560,
   "bandwidth": 7020284,
-  "rank": 780031,
+  "rank": 785582,
   "agent_hits": 15,
   "files": [
    {
