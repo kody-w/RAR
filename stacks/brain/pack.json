@@ -1,0 +1,48 @@
+{
+  "schema": "rapp-rar-stack/1.1",
+  "name": "brain",
+  "display_name": "Brain",
+  "version": "0.1.0",
+  "maturity": "staging",
+  "purpose": "Four agents that let a Brainstem sense itself: which agents fire together, learned reflexes you arm yourself, which agents keep failing, and your coding before and after the Brainstem. Includes a skill so any AI can host the agents itself.",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "brainstem_impact_agent.py",
+      "hebbian_synapse_agent.py",
+      "pain_receptor_agent.py",
+      "reflex_arc_agent.py"
+    ],
+    "destination": "agents/"
+  },
+  "files": {
+    "README.md": {
+      "size": 961,
+      "sha256": "54b7e8f51f251e0f0d3151175a5ee4d6eadca0344944bac11ab25f66997cb839"
+    },
+    "SKILL.md": {
+      "size": 2491,
+      "sha256": "91d4382c154662456f68b3194123d66a27d76a430b761a3ecf2aa507282a28b5"
+    },
+    "brainstem_impact_agent.py": {
+      "size": 8129,
+      "sha256": "37f8ed5f8c7380bbe898054f6f78f90981ca31afca5a594fe810d9a0c8d0bf94"
+    },
+    "hebbian_synapse_agent.py": {
+      "size": 6477,
+      "sha256": "69686f77b2954d10223f01b5753441085537014ba8b05b2a1335acf813168839"
+    },
+    "pain_receptor_agent.py": {
+      "size": 2914,
+      "sha256": "0dc1f8a4ca0a4f09d3176127ae6771fcd45ab70d870edb6277702a13cd4ceb6f"
+    },
+    "reflex_arc_agent.py": {
+      "size": 5298,
+      "sha256": "38d41d128df3922b56a16998cff26e9cc63d766a1d896442e16729bb14af4cae"
+    },
+    "run.py": {
+      "size": 4956,
+      "sha256": "ca3721c487bd6e3b5fda4eb41c9eddedcc771b40e0a3020078d01831191ad6cb"
+    }
+  }
+}

@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-08T17:12:02Z",
+  "generated_at": "2026-11-09T20:20:00Z",
   "static_api": "rapp-static-api/1.1",
   "pages_base": "https://kody-w.github.io/RAR",
   "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
@@ -14636,6 +14636,49 @@
       "shelf": "app",
       "_seed": 15167808110090788864,
       "_incantation": "FORGE CHISEL PANTHER COBALT SCYTHE HYMN ETCH"
+    },
+    {
+      "name": "brain",
+      "display_name": "Brain",
+      "version": "0.1.0",
+      "schema": "rapp-rar-stack/1.1",
+      "status": "current",
+      "path": "stacks/brain",
+      "purpose": "Four agents that let a Brainstem sense itself: which agents fire together, learned reflexes you arm yourself, which agents keep failing, and your coding before and after the Brainstem. Includes a skill so any AI can host the agents itself.",
+      "files": {
+        "README.md": {
+          "sha256": "54b7e8f51f251e0f0d3151175a5ee4d6eadca0344944bac11ab25f66997cb839",
+          "verified": true
+        },
+        "SKILL.md": {
+          "sha256": "91d4382c154662456f68b3194123d66a27d76a430b761a3ecf2aa507282a28b5",
+          "verified": true
+        },
+        "brainstem_impact_agent.py": {
+          "sha256": "37f8ed5f8c7380bbe898054f6f78f90981ca31afca5a594fe810d9a0c8d0bf94",
+          "verified": true
+        },
+        "hebbian_synapse_agent.py": {
+          "sha256": "69686f77b2954d10223f01b5753441085537014ba8b05b2a1335acf813168839",
+          "verified": true
+        },
+        "pain_receptor_agent.py": {
+          "sha256": "0dc1f8a4ca0a4f09d3176127ae6771fcd45ab70d870edb6277702a13cd4ceb6f",
+          "verified": true
+        },
+        "reflex_arc_agent.py": {
+          "sha256": "38d41d128df3922b56a16998cff26e9cc63d766a1d896442e16729bb14af4cae",
+          "verified": true
+        },
+        "run.py": {
+          "sha256": "ca3721c487bd6e3b5fda4eb41c9eddedcc771b40e0a3020078d01831191ad6cb",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 17857655508060635136,
+      "_incantation": "FORGE FIRE PANTHER CORRODE RAIDER ORDEAL BIND"
     },
     {
       "name": "claude-workflows",
