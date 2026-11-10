@@ -40,6 +40,26 @@
   }
   #copy-prompt-status { margin-top: 8px; color: #8b949e; font-size: 13px; }
   #copy-prompt-status:empty { margin: 0; }
+  .second-door {
+    max-width: 620px; width: 100%; padding: 20px 24px; margin-bottom: 24px;
+    background: #161b22; border: 1px solid #30363d; border-radius: 12px;
+  }
+  .second-door h2 { font-size: 20px; line-height: 1.2; margin-bottom: 8px; }
+  .second-door p { font-size: 14px; line-height: 1.5; color: #8b949e; }
+  #door-prompt {
+    margin: 12px 0; padding: 14px; background: #0d1117; color: #e6edf3;
+    border: 1px solid #30363d; border-radius: 8px;
+    font-size: 14px; line-height: 1.5; overflow-wrap: anywhere;
+  }
+  #copy-door {
+    width: 100%; min-height: 44px; padding: 10px 20px;
+    background: transparent; color: #e6edf3; border: 1px solid #30363d; border-radius: 8px;
+    font: inherit; font-weight: 600; cursor: pointer;
+  }
+  #copy-door:hover { border-color: #8b949e; }
+  #copy-door:focus-visible { outline: 2px solid #58a6ff; outline-offset: 4px; }
+  #copy-door-status { margin-top: 8px; color: #8b949e; font-size: 13px; }
+  #copy-door-status:empty { margin: 0; }
   .advanced-install { max-width: 620px; width: 100%; margin-bottom: 32px; }
   .advanced-install > summary { cursor: pointer; padding: 12px 0; font-size: 15px; }
   .advanced-install .hero { margin: 20px 0 24px; }
@@ -278,6 +298,15 @@
   <p id="copy-prompt-status" role="status" aria-live="polite"></p>
 </section>
 
+<section class="second-door" id="second-door" aria-labelledby="second-door-title">
+  <h2 id="second-door-title">Already have an AI? Say this to it.</h2>
+  <p>Works in an AI that can save a file and run Python, such as Claude Code or Copilot CLI. Nothing is installed.</p>
+  <p id="door-prompt">Go and read https://kody-w.github.io/RAR/stacks/brainstem-skill/SKILL.md and do what it says.</p>
+  <button type="button" id="copy-door" onclick="copyDoor()">Copy sentence</button>
+  <p id="copy-door-status" role="status" aria-live="polite"></p>
+  <p>Your AI asks you for one yes. After that it can bring tools from this catalog when you say their seven words, and it keeps them in a folder called <code>rapp</code>. To turn it off, delete the <code>agents</code> folder inside it. This is new and still being proven.</p>
+</section>
+
 <details class="advanced-install" id="advanced-install">
 <summary>Advanced: install from a terminal</summary>
 <div class="hero">
@@ -511,6 +540,22 @@
 </div>
 
 <script>
+  async function copyDoor() {
+    const text = document.getElementById('door-prompt').textContent;
+    const status = document.getElementById('copy-door-status');
+    try {
+      await navigator.clipboard.writeText(text);
+      status.textContent = 'Copied. Paste it into your AI.';
+    } catch (error) {
+      const range = document.createRange();
+      range.selectNodeContents(document.getElementById('door-prompt'));
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      status.textContent = 'Copy was blocked. The sentence is selected: copy it, then paste it into your AI.';
+    }
+  }
+
   async function copyPrompt() {
     const text = document.getElementById('install-prompt').textContent;
     const status = document.getElementById('copy-prompt-status');

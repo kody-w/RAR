@@ -2,7 +2,7 @@
 **[Agent Store](https://kody-w.github.io/RAR/)**
 
 <!-- rapp1:network-header:start -->
-[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/RAR.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/RAR.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here)
+[![RAPP/1](https://kody-w.github.io/rapp-hive-public/portfolio/badges/RAR.svg)](https://github.com/kody-w/rapp-hive-public/blob/main/portfolio/repos/RAR.md) · **New to RAPP?** [Start here: get your Brainstem →](https://github.com/kody-w/rapp-installer#start-here) · **Already have an AI?** [Say one sentence to it →](https://kody-w.github.io/RAR/install.html#second-door)
 <!-- rapp1:network-header:end -->
 
 > **Spec:** `rapp-registry/1.0` — the canonical agent registry + minting authority (peer to RAPP_Store/RAPP_Sense_Store).
