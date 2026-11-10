@@ -55,3 +55,43 @@ def test_removed_agents_keep_their_original_bytes():
     stones = {t["agent"]: t for t in json.loads((ROOT / "registry.json").read_text())["lifecycle"]["tombstones"]}
     for name, path in kept.items():
         assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == stones[name]["sha256"], f"{name}: kept bytes differ"
+
+
+def test_the_build_puts_a_stub_at_every_retired_address(tmp_path):
+    """Nobody places a stub by hand: backfill writes one wherever a retired address has no file."""
+    (tmp_path / "state").mkdir()
+    (tmp_path / "state" / "agent_lifecycle.json").write_text(json.dumps({"agents": {
+        "@x/gone_agent": {"canonical_path": "agents/@x/gone_agent.py", "status": "deleted",
+                          "sha256": "ab" * 32, "version": "1.0.0", "updated_at": "2026-07-23T00:00:00+00:00"},
+        "@x/card_agent": {"canonical_path": "agents/@x/card_agent.py.card", "status": "retired",
+                          "sha256": "cd" * 32, "version": "2.0.0", "updated_at": "2026-07-23T00:00:00+00:00"},
+        "@x/live_agent": {"canonical_path": "agents/@x/live_agent.py", "status": "active"}}}))
+    assert tombstone.backfill(tmp_path, write=False) == ["agents/@x/card_agent.py.card", "agents/@x/gone_agent.py"]
+    assert not (tmp_path / "agents").exists()
+    assert tombstone.backfill(tmp_path) == ["agents/@x/card_agent.py.card", "agents/@x/gone_agent.py"]
+    assert tombstone.is_tombstone((tmp_path / "agents/@x/gone_agent.py").read_text())
+    assert not (tmp_path / "agents/@x/live_agent.py").exists()
+    assert tombstone.backfill(tmp_path) == []  # second run changes nothing
+    assert tombstone.stub_paths(tmp_path) == ["agents/@x/card_agent.py.card", "agents/@x/gone_agent.py"]
+
+
+def test_backfill_never_overwrites_a_file_already_at_the_address(tmp_path):
+    (tmp_path / "state").mkdir(); (tmp_path / "agents/@x").mkdir(parents=True)
+    (tmp_path / "state" / "agent_lifecycle.json").write_text(json.dumps({"agents": {
+        "@x/gone_agent": {"canonical_path": "agents/@x/gone_agent.py", "status": "deleted", "sha256": "ab" * 32}}}))
+    (tmp_path / "agents/@x/gone_agent.py").write_text("someone's bytes")
+    assert tombstone.backfill(tmp_path) == []
+    assert (tmp_path / "agents/@x/gone_agent.py").read_text() == "someone's bytes"
+    assert tombstone.stub_paths(tmp_path) == []
+
+
+def test_receipt_check_accepts_a_stub_at_a_retired_address(tmp_path):
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import check_notarized_changes as c
+    stub = tombstone.render_stub("@x/gone_agent", "retired", "", "1.0.0").encode()
+    life = {"agents": {"@x/gone_agent": {"status": "deleted", "sha256": "ab" * 32, "latest_receipt": "rar_" + "0" * 64}}}
+    assert c.validate_agent_change(status="A", path="agents/@x/gone_agent.py", current_content=stub,
+                                   previous_content=None, lifecycle=life, receipts_dir=tmp_path) == []
+    life["agents"]["@x/gone_agent"]["status"] = "active"   # a stub may not stand in for a live agent
+    assert c.validate_agent_change(status="A", path="agents/@x/gone_agent.py", current_content=stub,
+                                   previous_content=None, lifecycle=life, receipts_dir=tmp_path) != []
