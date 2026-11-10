@@ -934,7 +934,8 @@ def _load_superseded() -> dict:
 
 
 def _is_tombstone_file(py_path) -> bool:
-    if py_path.suffix != ".py":
+    # A card agent (.py.card) retires the same way a plain one does (Article XXIII.3).
+    if py_path.suffix != ".py" and not py_path.name.endswith(".py.card"):
         return False
     head = py_path.read_text(encoding="utf-8", errors="ignore")[:4000]
     return "\nRAR_TOMBSTONE = " in head or head.startswith("RAR_TOMBSTONE = ")

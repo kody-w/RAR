@@ -33,3 +33,31 @@ def test_url_contract_holds_for_a_stub_path():
         p = pathlib.Path(d) / "agents" / "@x" / "gone_agent.py"; p.parent.mkdir(parents=True)
         p.write_text(tombstone.render_stub("@x/gone_agent", "retired", "", "1.0.0"))
         assert p.is_file()
+
+
+def test_a_card_agent_retires_the_same_way(tmp_path):
+    """Article XXIII.3 covers .py.card agents too: the stub at the old path is skipped, not listed."""
+    sys.path.insert(0, str(ROOT))
+    import build_registry
+    card = tmp_path / "old_agent.py.card"
+    card.write_text(tombstone.render_stub("@x/old_agent", "retired", "", "1.0.0"))
+    assert build_registry._is_tombstone_file(card)
+    live = tmp_path / "live_agent.py.card"
+    live.write_text('"""a live card agent"""\n__manifest__ = {}\n')
+    assert not build_registry._is_tombstone_file(live)
+
+
+def test_removed_agents_keep_their_paths_and_their_bytes():
+    """The two agents removed on 2026-07-23: a notice at the old path, the original kept byte for byte."""
+    import hashlib
+    sys.path.insert(0, str(ROOT))
+    import build_registry
+    root = ROOT
+    kept = {"@borg/hacker_news_agent": "versions/@borg/hacker_news_agent/e83a236ebf1f.py",
+            "@howardh/borg_agent": "versions/@howardh/borg_agent/14b1b1690457.py.card"}
+    stones = {t["agent"]: t for t in json.loads((root / "registry.json").read_text())["lifecycle"]["tombstones"]}
+    for name, path in kept.items():
+        stone = stones[name]
+        assert build_registry._is_tombstone_file(root / stone["canonical_path"]), f"{name}: no notice at its old path"
+        assert hashlib.sha256((root / path).read_bytes()).hexdigest() == stone["sha256"], f"{name}: kept bytes differ"
+        assert path in (root / stone["canonical_path"]).read_text(), f"{name}: the notice does not say where the original is"
