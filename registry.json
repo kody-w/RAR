@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-10T22:11:20Z",
+  "generated_at": "2026-11-10T22:17:23Z",
   "static_api": "rapp-static-api/1.1",
   "pages_base": "https://kody-w.github.io/RAR",
   "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
@@ -15537,12 +15537,16 @@
         "summond.py": {
           "sha256": "6a138073c2b5dddb8cf742b84f5049437be814e3cb45222c211310b4ddf82d07",
           "verified": true
+        },
+        "summon_chant_agent.py": {
+          "sha256": "2bd1226d9ea0867e34f3c2fee65e6262eb4616c39909878b4aa1cc28954ae431",
+          "verified": true
         }
       },
       "_verified": true,
       "shelf": "pack",
-      "_seed": 2288792079516053954,
-      "_incantation": "KNOLL SECT RAY ABYSS RAVAGE SAFFRON ANVIL"
+      "_seed": 2288792079516062146,
+      "_incantation": "KNOLL CLUTCH RAY ABYSS RAVAGE SAFFRON ANVIL"
     },
     {
       "name": "thoughtbox",
