@@ -19669,15 +19669,15 @@
       "version": "1.0.1"
     },
     "@rapp/egg_hatcher": {
-      "canonical_path": "agents/@rapp/egg_hatcher_agent.py",
-      "latest_receipt": "rar_96dd37e36b9d6ab392f779ea1ed2d3bc345ec99997d76ba06e30b0e4941a4045",
+      "status": "active",
+      "version": "1.2.0",
+      "quality_tier": "official",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
-      "quality_tier": "official",
-      "sha256": "7391fce3a02e8ee274332fbd71c5850495998d2e656732837b1ef104b99aef8e",
-      "status": "active",
-      "updated_at": "2026-11-04T19:45:01.364575+00:00",
-      "version": "1.1.1"
+      "canonical_path": "agents/@rapp/egg_hatcher_agent.py",
+      "sha256": "ff966a1f1d4990900f4cc038a32fb2c94d1b92b5c8a2b691c76e5aa062e5cd29",
+      "latest_receipt": "rar_924829cfb56dc34d007cbc545dcf23e86911e6cd279562a3d4e0b6fef7c23787",
+      "updated_at": "2026-11-10T21:38:07.900859+00:00"
     },
     "@rapp/estate_outbound": {
       "canonical_path": "agents/@rapp/estate_outbound_agent.py",
@@ -20209,5 +20209,5 @@
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-11-04T19:45:01.364575+00:00"
+  "updated_at": "2026-11-10T21:38:07.900859+00:00"
 }

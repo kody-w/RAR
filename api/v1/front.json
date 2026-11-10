@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-11-09T14:01:12Z",
+  "generated": "2026-11-10T21:37:22Z",
   "counts": {
     "native": 226,
     "aggregated": 152,
@@ -3839,6 +3839,64 @@
     },
     {
       "rank": 62,
+      "ref": "@rapp/egg_hatcher",
+      "title": "EggHatcher",
+      "description": "Introspects any .egg cartridge (local path or URL) and routes it by manifest schema/type to hatch, install, or mount; refuses unknown kinds.",
+      "origin": "native",
+      "category": "core",
+      "tags": [
+        "egg",
+        "cartridge",
+        "hatch",
+        "organism",
+        "rapplication",
+        "lifecycle"
+      ],
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fegg_hatcher",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/egg_hatcher_agent.py",
+      "source": null,
+      "score": 59.0,
+      "origin_rank": 37,
+      "origin_size": 226,
+      "components": {
+        "community": 0.2958,
+        "depth": 0.9031,
+        "freshness": 0.3569,
+        "tier": 1.0
+      },
+      "scores_on": [
+        "community",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [
+        "community"
+      ],
+      "signals": {
+        "rar": {
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "official",
+          "age_days": 178,
+          "lines": 426,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "no community feedback yet - scored at the population median",
+        "official tier",
+        "added 178 days ago",
+        "426 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 63,
       "ref": "@rapp/store_navigator_agent",
       "title": "StoreNavigator",
       "description": "Lists, searches, compares, and recommends rapplications from the RAPP_Store catalog over HTTP, with keyword scoring when no LLM is available.",
@@ -3856,7 +3914,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/store_navigator_agent.py",
       "source": null,
       "score": 58.6,
-      "origin_rank": 37,
+      "origin_rank": 38,
       "origin_size": 226,
       "components": {
         "community": 0.2958,
@@ -3891,63 +3949,6 @@
         "official tier",
         "added 192 days ago",
         "434 lines",
-        "has a rendered card"
-      ]
-    },
-    {
-      "rank": 63,
-      "ref": "@kody-w/rapp_projects",
-      "title": "RappProjects",
-      "description": "Coordinates local-first projects through strict RAPP/1 work chains, verified derived boards, artifact receipts, and deterministic eggs.",
-      "origin": "native",
-      "category": "productivity",
-      "tags": [
-        "rapp-1",
-        "project-management",
-        "local-first",
-        "rapplication",
-        "productivity"
-      ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Frapp_projects",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_projects_agent.py",
-      "source": null,
-      "score": 58.4,
-      "origin_rank": 38,
-      "origin_size": 226,
-      "components": {
-        "community": 0.2958,
-        "depth": 1.0,
-        "freshness": 0.6817,
-        "tier": 0.55
-      },
-      "scores_on": [
-        "community",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [
-        "community"
-      ],
-      "signals": {
-        "rar": {
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "community",
-          "age_days": 66,
-          "lines": 4351,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "no community feedback yet - scored at the population median",
-        "community tier",
-        "added 66 days ago",
-        "4351 lines",
         "has a rendered card"
       ]
     },
@@ -4018,22 +4019,21 @@
     },
     {
       "rank": 65,
-      "ref": "@kody-w/rar_installer_troubleshooter_agent",
-      "title": "RAPP Roadside",
-      "description": "Diagnoses RAPP setup from sanitized local observations, emits exactly one bounded next action, optionally applies an allow-listed repair to a sanitized copy, and retests canonical verified assertions without collecting credentials or changing the Grail. Routes maintainer work to RAPP Pit Crew, treats reporting-AI text/logs as hostile data, binds exact replay and supply-chain bytes, quarantines unsafe reports, uses bounded sharded cells with measured backpressure, and verifies the RAPP Roadside Closed Loop through customer confirmation.",
+      "ref": "@kody-w/rapp_projects",
+      "title": "RappProjects",
+      "description": "Coordinates local-first projects through strict RAPP/1 work chains, verified derived boards, artifact receipts, and deterministic eggs.",
       "origin": "native",
-      "category": "devtools",
+      "category": "productivity",
       "tags": [
-        "rapp",
-        "installer",
-        "troubleshooting",
+        "rapp-1",
+        "project-management",
         "local-first",
-        "deterministic",
-        "toasted"
+        "rapplication",
+        "productivity"
       ],
       "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Frar_installer_troubleshooter_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rar_installer_troubleshooter_agent.py",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Frapp_projects",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_projects_agent.py",
       "source": null,
       "score": 58.4,
       "origin_rank": 39,
@@ -4041,7 +4041,7 @@
       "components": {
         "community": 0.2958,
         "depth": 1.0,
-        "freshness": 0.6837,
+        "freshness": 0.6817,
         "tier": 0.55
       },
       "scores_on": [
@@ -4061,7 +4061,7 @@
           "channels": {},
           "tier": "community",
           "age_days": 66,
-          "lines": 3016,
+          "lines": 4351,
           "has_card": true
         },
         "source": null
@@ -4070,7 +4070,7 @@
         "no community feedback yet - scored at the population median",
         "community tier",
         "added 66 days ago",
-        "3016 lines",
+        "4351 lines",
         "has a rendered card"
       ]
     },
@@ -4140,6 +4140,64 @@
     },
     {
       "rank": 67,
+      "ref": "@kody-w/rar_installer_troubleshooter_agent",
+      "title": "RAPP Roadside",
+      "description": "Diagnoses RAPP setup from sanitized local observations, emits exactly one bounded next action, optionally applies an allow-listed repair to a sanitized copy, and retests canonical verified assertions without collecting credentials or changing the Grail. Routes maintainer work to RAPP Pit Crew, treats reporting-AI text/logs as hostile data, binds exact replay and supply-chain bytes, quarantines unsafe reports, uses bounded sharded cells with measured backpressure, and verifies the RAPP Roadside Closed Loop through customer confirmation.",
+      "origin": "native",
+      "category": "devtools",
+      "tags": [
+        "rapp",
+        "installer",
+        "troubleshooting",
+        "local-first",
+        "deterministic",
+        "toasted"
+      ],
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Frar_installer_troubleshooter_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rar_installer_troubleshooter_agent.py",
+      "source": null,
+      "score": 58.4,
+      "origin_rank": 40,
+      "origin_size": 226,
+      "components": {
+        "community": 0.2958,
+        "depth": 1.0,
+        "freshness": 0.6837,
+        "tier": 0.55
+      },
+      "scores_on": [
+        "community",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [
+        "community"
+      ],
+      "signals": {
+        "rar": {
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "community",
+          "age_days": 66,
+          "lines": 3016,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "no community feedback yet - scored at the population median",
+        "community tier",
+        "added 66 days ago",
+        "3016 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 68,
       "ref": "@kody-w/self_compact_agent",
       "title": "SelfCompact",
       "description": "The brainstem compacts its own context: a gauge on every chat, hints as it fills, and at the cutoff every other tool waits until the model writes a note to itself that survives when old turns drop out.",
@@ -4158,7 +4216,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/self_compact_agent.py",
       "source": null,
       "score": 58.2,
-      "origin_rank": 40,
+      "origin_rank": 41,
       "origin_size": 226,
       "components": {
         "community": 0.2958,
@@ -4193,64 +4251,6 @@
         "community tier",
         "added 13 days ago",
         "304 lines",
-        "has a rendered card"
-      ]
-    },
-    {
-      "rank": 68,
-      "ref": "@kody-w/launch_to_public_agent",
-      "title": "Launch to Public",
-      "description": "Snapshots the local brainstem via bond.py and plants it onto a public GitHub repo with a continuation manifest and launch fingerprint.",
-      "origin": "native",
-      "category": "platform",
-      "tags": [
-        "launch",
-        "publish",
-        "local-to-global",
-        "bond-technique",
-        "operator-mediated",
-        "platform"
-      ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Flaunch_to_public_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/launch_to_public_agent.py",
-      "source": null,
-      "score": 57.8,
-      "origin_rank": 41,
-      "origin_size": 226,
-      "components": {
-        "community": 0.2958,
-        "depth": 1.0,
-        "freshness": 0.3532,
-        "tier": 0.85
-      },
-      "scores_on": [
-        "community",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [
-        "community"
-      ],
-      "signals": {
-        "rar": {
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "verified",
-          "age_days": 180,
-          "lines": 807,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "no community feedback yet - scored at the population median",
-        "verified tier",
-        "added 180 days ago",
-        "807 lines",
         "has a rendered card"
       ]
     },
@@ -4323,23 +4323,22 @@
     },
     {
       "rank": 70,
-      "ref": "@kody-w/plant_seed_agent",
-      "title": "Plant Seed",
-      "description": "Creates a grail-complete public seed repo (neighborhood or twin) via the gh CLI, showing the full file plan first with dry-run on by default.",
+      "ref": "@kody-w/launch_to_public_agent",
+      "title": "Launch to Public",
+      "description": "Snapshots the local brainstem via bond.py and plants it onto a public GitHub repo with a continuation manifest and launch fingerprint.",
       "origin": "native",
       "category": "platform",
       "tags": [
-        "plant",
-        "seed",
-        "neighborhood",
-        "twin",
-        "holocard",
-        "grail",
-        "operator-mediated"
+        "launch",
+        "publish",
+        "local-to-global",
+        "bond-technique",
+        "operator-mediated",
+        "platform"
       ],
       "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fplant_seed_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/plant_seed_agent.py",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Flaunch_to_public_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/launch_to_public_agent.py",
       "source": null,
       "score": 57.8,
       "origin_rank": 42,
@@ -4367,7 +4366,7 @@
           "channels": {},
           "tier": "verified",
           "age_days": 180,
-          "lines": 588,
+          "lines": 807,
           "has_card": true
         },
         "source": null
@@ -4376,7 +4375,7 @@
         "no community feedback yet - scored at the population median",
         "verified tier",
         "added 180 days ago",
-        "588 lines",
+        "807 lines",
         "has a rendered card"
       ]
     },
@@ -4447,6 +4446,65 @@
     },
     {
       "rank": 72,
+      "ref": "@kody-w/plant_seed_agent",
+      "title": "Plant Seed",
+      "description": "Creates a grail-complete public seed repo (neighborhood or twin) via the gh CLI, showing the full file plan first with dry-run on by default.",
+      "origin": "native",
+      "category": "platform",
+      "tags": [
+        "plant",
+        "seed",
+        "neighborhood",
+        "twin",
+        "holocard",
+        "grail",
+        "operator-mediated"
+      ],
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fplant_seed_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/plant_seed_agent.py",
+      "source": null,
+      "score": 57.8,
+      "origin_rank": 43,
+      "origin_size": 226,
+      "components": {
+        "community": 0.2958,
+        "depth": 1.0,
+        "freshness": 0.3532,
+        "tier": 0.85
+      },
+      "scores_on": [
+        "community",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [
+        "community"
+      ],
+      "signals": {
+        "rar": {
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "verified",
+          "age_days": 180,
+          "lines": 588,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "no community feedback yet - scored at the population median",
+        "verified tier",
+        "added 180 days ago",
+        "588 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 73,
       "ref": "@kody-w/thread_tracker_agent",
       "title": "Thread Tracker",
       "description": "Routes remarks into durable local topic threads, lists open work, and parks or closes threads without deleting their history.",
@@ -4464,7 +4522,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/thread_tracker_agent.py",
       "source": null,
       "score": 57.4,
-      "origin_rank": 43,
+      "origin_rank": 44,
       "origin_size": 226,
       "components": {
         "community": 0.2958,
@@ -4499,63 +4557,6 @@
         "community tier",
         "added 13 days ago",
         "277 lines",
-        "has a rendered card"
-      ]
-    },
-    {
-      "rank": 73,
-      "ref": "@kody-w/windows_vm_install_lab_agent",
-      "title": "Windows VM Install Lab",
-      "description": "Runs an allowlisted Hyper-V Windows 11 lab for repeatable RAPP installer release testing with an embedded, hash-verified toolkit.",
-      "origin": "native",
-      "category": "devtools",
-      "tags": [
-        "windows",
-        "hyper-v",
-        "installer",
-        "testing",
-        "automation"
-      ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fwindows_vm_install_lab_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/windows_vm_install_lab_agent.py",
-      "source": null,
-      "score": 57.3,
-      "origin_rank": 44,
-      "origin_size": 226,
-      "components": {
-        "community": 0.2958,
-        "depth": 1.0,
-        "freshness": 0.6304,
-        "tier": 0.55
-      },
-      "scores_on": [
-        "community",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [
-        "community"
-      ],
-      "signals": {
-        "rar": {
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "community",
-          "age_days": 80,
-          "lines": 818,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "no community feedback yet - scored at the population median",
-        "community tier",
-        "added 80 days ago",
-        "818 lines",
         "has a rendered card"
       ]
     },
@@ -4628,29 +4629,29 @@
     },
     {
       "rank": 75,
-      "ref": "@kody-w/parallel_dimensions_agent",
-      "title": "Parallel Dimensions",
-      "description": "Tracks independent what-if branches, detects conflicting assertions, and merges only compatible dimensions using an append-only local record.",
+      "ref": "@kody-w/windows_vm_install_lab_agent",
+      "title": "Windows VM Install Lab",
+      "description": "Runs an allowlisted Hyper-V Windows 11 lab for repeatable RAPP installer release testing with an embedded, hash-verified toolkit.",
       "origin": "native",
-      "category": "productivity",
+      "category": "devtools",
       "tags": [
-        "planning",
-        "what-if",
-        "branches",
-        "append-only",
-        "offline"
+        "windows",
+        "hyper-v",
+        "installer",
+        "testing",
+        "automation"
       ],
       "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fparallel_dimensions_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/parallel_dimensions_agent.py",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fwindows_vm_install_lab_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/windows_vm_install_lab_agent.py",
       "source": null,
-      "score": 57.2,
+      "score": 57.3,
       "origin_rank": 45,
       "origin_size": 226,
       "components": {
         "community": 0.2958,
-        "depth": 0.6962,
-        "freshness": 0.9286,
+        "depth": 1.0,
+        "freshness": 0.6304,
         "tier": 0.55
       },
       "scores_on": [
@@ -4669,8 +4670,8 @@
           "engagement": 0,
           "channels": {},
           "tier": "community",
-          "age_days": 13,
-          "lines": 268,
+          "age_days": 80,
+          "lines": 818,
           "has_card": true
         },
         "source": null
@@ -4678,8 +4679,8 @@
       "why": [
         "no community feedback yet - scored at the population median",
         "community tier",
-        "added 13 days ago",
-        "268 lines",
+        "added 80 days ago",
+        "818 lines",
         "has a rendered card"
       ]
     },
@@ -4754,31 +4755,30 @@
     },
     {
       "rank": 77,
-      "ref": "@rapp/egg_hatcher",
-      "title": "EggHatcher",
-      "description": "Introspects any .egg cartridge (local path or URL) and routes it by manifest schema/type to hatch, install, or mount; refuses unknown kinds.",
+      "ref": "@kody-w/parallel_dimensions_agent",
+      "title": "Parallel Dimensions",
+      "description": "Tracks independent what-if branches, detects conflicting assertions, and merges only compatible dimensions using an append-only local record.",
       "origin": "native",
-      "category": "core",
+      "category": "productivity",
       "tags": [
-        "egg",
-        "cartridge",
-        "hatch",
-        "organism",
-        "rapplication",
-        "lifecycle"
+        "planning",
+        "what-if",
+        "branches",
+        "append-only",
+        "offline"
       ],
       "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fegg_hatcher",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/egg_hatcher_agent.py",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fparallel_dimensions_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/parallel_dimensions_agent.py",
       "source": null,
-      "score": 57.1,
+      "score": 57.2,
       "origin_rank": 46,
       "origin_size": 226,
       "components": {
         "community": 0.2958,
-        "depth": 0.8127,
-        "freshness": 0.3569,
-        "tier": 1.0
+        "depth": 0.6962,
+        "freshness": 0.9286,
+        "tier": 0.55
       },
       "scores_on": [
         "community",
@@ -4795,18 +4795,18 @@
           "comments": 0,
           "engagement": 0,
           "channels": {},
-          "tier": "official",
-          "age_days": 178,
-          "lines": 357,
+          "tier": "community",
+          "age_days": 13,
+          "lines": 268,
           "has_card": true
         },
         "source": null
       },
       "why": [
         "no community feedback yet - scored at the population median",
-        "official tier",
-        "added 178 days ago",
-        "357 lines",
+        "community tier",
+        "added 13 days ago",
+        "268 lines",
         "has a rendered card"
       ]
     },

@@ -49,6 +49,7 @@ the .egg in and mounts the embedded runtime.
 
 from __future__ import annotations
 
+import hashlib
 import io
 import json
 import os
@@ -62,7 +63,7 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/egg_hatcher",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "display_name": "EggHatcher",
     "description": "Introspects any .egg cartridge (local path or URL) and routes it by manifest schema/type to hatch, install, or mount; refuses unknown kinds.",
     "author": "RAPP",
@@ -287,6 +288,72 @@ def _route_estate(manifest: dict) -> str:
     )
 
 
+RAPP1_EGG = "rapp/1-egg"
+
+
+def _rapp1_files(manifest: dict, blob: bytes) -> dict:
+    """Every file a rapp/1 egg lists, each checked against its hash. Any mismatch refuses the whole egg."""
+    files = {}
+    with zipfile.ZipFile(io.BytesIO(blob)) as z:
+        names = set(z.namelist())
+        for item in manifest.get("contents") or []:
+            path, want = item["path"], item["hash"]
+            if path not in names:
+                raise ValueError(f"the egg lists {path} but does not carry it")
+            octets = z.read(path)
+            if hashlib.sha256(b"rapp/1:egg\n" + octets).hexdigest() != want:
+                raise ValueError(f"{path} does not match the hash on the egg's label")
+            files[path] = octets
+    return files
+
+
+def _twin_home(rappid: str) -> pathlib.Path:
+    return pathlib.Path(os.path.expanduser("~/.rapp/twins")) / rappid.rsplit(":", 1)[-1]
+
+
+def _route_rapp1(manifest: dict, blob: bytes, variant: str) -> str:
+    """rapp/1 eggs: check every file, then hatch by `variant`. Never guesses, never overwrites."""
+    rappid = manifest.get("rappid", "")
+    try:
+        files = _rapp1_files(manifest, blob)
+    except Exception as e:
+        return f"I refused this egg whole: {e}. Nothing was written."
+    payload = manifest.get("payload") or {}
+    if variant == "organism" and payload.get("kernel") and payload.get("run"):
+        return (f"This egg is a whole Brainstem ({len(files)} files, every one checked). It runs on its own, "
+                f"beside this one: {payload['run']}. Nothing was written.")
+    if variant == "organism":
+        try:
+            from utils.bond import hatch_organism  # type: ignore
+            return f"Egg hatched. rappid={rappid}\n{hatch_organism(blob)}"
+        except ImportError:
+            pass
+        home = _twin_home(rappid)
+        if home.exists():
+            return f"This egg is already hatched at {home}. I never overwrite; nothing was written."
+        root = home.resolve()
+        for path in files:
+            if not (root / path).resolve().is_relative_to(root):
+                return f"I refused this egg whole: {path} would land outside its own folder. Nothing was written."
+        for path, octets in files.items():
+            dest = root / path
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_bytes(octets)
+        agents = sum(1 for p in files if p.startswith("agents/") and p.endswith("_agent.py"))
+        return (f"Egg hatched: {len(files)} files, every one checked against the egg's label, now at {home}. "
+                f"It carries {agents} agents and its own soul. Undo is deleting that one folder.")
+    if variant == "rapplication":
+        return _route_rapplication(manifest, blob)
+    if variant == "session":
+        return _route_session(manifest)
+    if variant in ("neighborhood", "invite"):
+        return _route_neighborhood(manifest)
+    if variant == "estate":
+        return _route_estate(manifest)
+    return (f"This is a rapp/1 egg of a kind I don't hatch yet: '{variant or 'none'}'. "
+            f"Its {len(files)} files all checked out. Nothing was written.")
+
+
 def _route_unknown(manifest: dict) -> str:
     schema = manifest.get("schema", "(unknown)")
     kind = manifest.get("type", "(no type)")
@@ -341,7 +408,9 @@ class EggHatcherAgent(BasicAgent):
             return f"Couldn't introspect egg: {e}"
         manifest = info["manifest"]
         schema = manifest.get("schema", "")
-        kind = manifest.get("type", "")
+        kind = manifest.get("type", "") or manifest.get("variant", "")
+        if schema == RAPP1_EGG:
+            return _route_rapp1(manifest, blob, kind)
         # Session cartridges: schema is brainstem-egg/2.3-session OR legacy rappterbox-cart/0.1
         if schema in ("brainstem-egg/2.3-session", "rappterbox-cart/0.1") or kind == "session":
             return _route_session(manifest)
