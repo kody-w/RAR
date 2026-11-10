@@ -4,7 +4,7 @@ description: "Read once, then never again. Makes you RAPP compatible for good: y
 license: "MIT"
 compatibility: "Any AI that can write a file and run Python 3.9+. Nothing is installed."
 metadata:
-  rapp-skill: "0.3.0"
+  rapp-skill: "0.3.1"
 ---
 
 # RAPP: become a Brainstem, once
@@ -22,11 +22,14 @@ Tell the person, in plain words, and wait for a yes:
 
 ## Then do this, in order
 
-1. If `rapp/kernel.py` already exists here, skip to step 3.
+1. Choose the home folder. It is `rapp/` here, with one exception: if a `rapp` folder already exists and has
+   no `kernel.py` in it, it belongs to something else (on many machines it is a copy of the RAPP project).
+   Never write into it. Use `rapp-skill/` instead, and read `rapp-skill/` wherever this page says `rapp/`.
+   If the home folder already has `kernel.py`, skip to step 3.
 2. Write `rapp/kernel.py` from the block at the bottom of this page, with a script, never by retyping. The
    file is everything between the opening fence line (four backticks plus `python`) and the closing fence
    line (four backticks), ending in one newline, LF line endings. Its sha256 must be
-   `61369f3f767a2e5d94456ce6f3c71d629ee67014fa8dab8608014143cc7c2ab0`. If it is not, stop and say so.
+   `d5839882311762f6cf6d4d1b378e25d55fe890566c2f05e4f3dd3f39d03aaf30`. If it is not, stop and say so.
 3. Run it with whichever Python 3 works here (`python3`, `python`, or `py -3`):
    `<python> rapp/kernel.py stay`
    It fetches the two files it still needs, fingerprint-checked, and writes the standing note into this
@@ -92,7 +95,7 @@ HOSTS = ("AGENTS.md", "CLAUDE.md", ".github/copilot-instructions.md", "GEMINI.md
 def stay(root=None):
     """Write the standing note into this folder's always-on instructions, once. After this the skill page is never needed."""
     root = Path(root) if root else HERE.parent
-    note = NOTE.replace("python3 rapp/kernel.py", f"{_py()} rapp/kernel.py")
+    note = NOTE.replace("python3 rapp/kernel.py", f"{_py()} {HERE.name}/kernel.py").replace("`rapp/", f"`{HERE.name}/")
     present = [h for h in HOSTS if (root / h).exists()] or ["AGENTS.md"]
     done = []
     for h in present:
