@@ -3,26 +3,32 @@
 > Start here if you are an AI: https://kody-w.github.io/RAR/RAPP.md (the one page: rapp/1, agents, packs, lifecycle, how to participate).
 > Install for a person from any AI (GitHub Copilot Agent mode by default): the RAPP skill https://kody-w.github.io/grail-layers/skills/rar-easy-mode/SKILL.md — they say "Show me RAR" or "Give me <names> using RAR Easy Mode and test it for me".
 
-- Catalog (JSON): https://kody-w.github.io/RAR/registry.json
-- Agent tickets: rewrite https://kody-w.github.io/RAR/#agent/@pub/name to https://kody-w.github.io/RAR/a/@pub/name/agent.md and fetch it for the agent and the three load steps (no JavaScript required).
-- Packs and starters (one cart): https://kody-w.github.io/RAR/distros.html
-- Write a layer (contract, file-generated parts/proven engines, add/check/remove): https://kody-w.github.io/RAR/LAYERS.md
-- Agent template: https://kody-w.github.io/RAR/template_agent.py
-- Install anything: curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- <pack or @publisher/agent> ...
+## Fetch these first (two fetches answer almost everything)
+1. One agent: https://kody-w.github.io/RAR/a/{publisher}/{name}/agent.md (publisher has the @, e.g. @bill/neuron_agent). Plain text: dependencies, required env vars, three load steps. A browser link https://kody-w.github.io/RAR/#agent/@pub/name rewrites to this (no JavaScript needed).
+2. Everything else: https://kody-w.github.io/RAR/registry.json. Parse it; it is large. Fields:
+   - agents[]: name, description, tags, category, quality_tier, requires_env, dependencies, _sha256, _version.path.
+   - stack_packs[]: name, purpose, shelf, status (current or retired), files (name -> sha256, verified), retired (since, reason, replacement).
+   - lifecycle.tombstones[]: agent and status for deleted agents. superseded.rules[]: publishers withheld from lookups, with reason.
+   - stats.total_agents, generated_at: live count and build time.
+
+## Jobs
+- Find an agent for a need: search agents[].description, tags, category. https://kody-w.github.io/RAR/api/v1/match.json has ready use cases with ranked agents (use_cases[].matches); https://kody-w.github.io/RAR/api/v1/taxonomy.json lists categories, publishers, tiers, tags.
+- Install an agent or a stack (pack): curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- <pack or @publisher/agent> ...
+  Pack names are stack_packs[].name. Packs and starters (one cart): https://kody-w.github.io/RAR/distros.html
+- Check a file is genuine: SHA-256 of the downloaded bytes must equal agents[]._sha256. Immutable copy: https://kody-w.github.io/RAR/ plus agents[]._version.path. For a pack file, compare stack_packs[].files[file].sha256.
+- What an agent needs: requires_env, dependencies (or its agent.md).
+- Verified, retired, removed: quality_tier is the verification tier; retired packs keep their entry with a reason and replacement; lifecycle.tombstones holds deleted agents; superseded.rules holds withheld publishers.
+- What a stack contains: stack_packs[].files and purpose. Files live under https://kody-w.github.io/RAR/stacks/{name}/ (pack.json there has install.agents).
+- Write an agent or a layer: template https://kody-w.github.io/RAR/template_agent.py and https://kody-w.github.io/RAR/LAYERS.md (contract, parts/proven engines, add/check/remove).
+- A running Brainstem with the ticket-page pack explains itself at GET http://localhost:7071/api/ticket
+
+## Other addresses
+- Smaller catalog slices: https://kody-w.github.io/RAR/api/v1/index.json (one line per agent), https://kody-w.github.io/RAR/api/v1/skills.json (skills), https://kody-w.github.io/RAR/api/v1/status.json (counts, hashes of the served bytes, version_path).
+- Descriptor: https://kody-w.github.io/RAR/manifest.json (rapp-static-api/1.1).
 - Protocol: https://kody-w.github.io/rapp-1/llms.txt
 
-## Static API descriptor and deterministic content store
-- Descriptor: https://kody-w.github.io/RAR/manifest.json (rapp-static-api/1.1).
-- Build everything offline: `python3 build_registry.py`. Inputs include agent manifests, stack packs and marketplace metadata. `--registry-only` retains the low-level registry build for isolated tooling.
-- The descriptor exposes Pages URLs alongside all existing raw URLs. Browser transport and authenticated capabilities remain unchanged.
-- Every registry agent has `_version` with a SHA-256, 12-character `sha8`, and immutable `versions/<name>/<sha8><ext>` path. Verify the downloaded bytes before loading.
-- Status endpoint hashes cover the exact served JSON bytes and include `version_path`: https://kody-w.github.io/RAR/api/v1/status.json.
-- Frames are append-only. A changed input adds a frame; an existing frame is never deleted or overwritten, and a collision or corrupted frame fails the build.
-- Timestamps come from git commit time (or explicit `SOURCE_DATE_EPOCH` for exported inputs); unchanged documents keep their input timestamp. Rebuilds are byte-identical.
+## Build notes (only if you maintain RAR)
+- Build everything offline: `python3 build_registry.py` (inputs: agent manifests, stack packs, marketplace metadata); `--registry-only` is the low-level registry build.
+- `_version` holds sha256, a 12-character sha8 and the immutable `versions/<name>/<sha8><ext>` path.
+- Frames are append-only: a changed input adds one; none is deleted or overwritten; a collision or corrupted frame fails the build. Timestamps come from git commit time (or SOURCE_DATE_EPOCH); rebuilds are byte-identical.
 - Full rapp-static-api/1.1 conformance is pending Kody's decision on existing browser GitHub API calls, cache bypasses and workflow concurrency. No browser feature is removed to clear lint.
-
-## Endpoints for AIs
-- Guide (install packs and agents for your person, test them): https://kody-w.github.io/grail-layers/skills/rar-easy-mode/SKILL.md
-- Any agent, as plain text with load steps: https://kody-w.github.io/RAR/a/{publisher}/{name}/agent.md
-- Catalog: https://kody-w.github.io/RAR/registry.json · agents: https://kody-w.github.io/RAR/api/v1/index.json · skills: https://kody-w.github.io/RAR/api/v1/skills.json
-- A running Brainstem with the ticket-page pack explains itself at GET http://localhost:7071/api/ticket
