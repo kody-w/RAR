@@ -201,7 +201,7 @@
       ]
     },
     {
-      "bytes": 625278,
+      "bytes": 633152,
       "channel": "native",
       "files": 32,
       "id": "native-13",
@@ -16461,17 +16461,17 @@
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "9e38a493f12d37f8a2c4f41ece5273d11e047004817c6321e08b35feddf21c5a",
+          "sha256": "7d5f68e94cb050a0ce3207741fee398a67b714478b1ce01a1a7ddd5c0dfaebbb",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-egg-hatcher/SKILL.md"
         },
         {
           "path": "egg_hatcher_agent.py",
-          "sha256": "7391fce3a02e8ee274332fbd71c5850495998d2e656732837b1ef104b99aef8e",
+          "sha256": "ff966a1f1d4990900f4cc038a32fb2c94d1b92b5c8a2b691c76e5aa062e5cd29",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-egg-hatcher/egg_hatcher_agent.py"
         },
         {
           "path": "rapp/agent.lock.json",
-          "sha256": "0edec568315871d0789d6c081b118f78f9e7893a73f858209e1c5799652af928",
+          "sha256": "26320b985bc608000df4f4b053f879fa57e329551ab0eab65595e1ef469c4ac4",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-egg-hatcher/rapp/agent.lock.json"
         },
         {
@@ -16497,11 +16497,11 @@
       },
       "requires_env": [],
       "skill_name": "rar-rapp-egg-hatcher",
-      "skill_sha256": "9e38a493f12d37f8a2c4f41ece5273d11e047004817c6321e08b35feddf21c5a",
-      "source_commit": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
+      "skill_sha256": "7d5f68e94cb050a0ce3207741fee398a67b714478b1ce01a1a7ddd5c0dfaebbb",
+      "source_commit": "484a10cb2d3d421f88727b762634e9dd41a11fb2",
       "source_kind": "rar-agent",
-      "source_sha256": "7391fce3a02e8ee274332fbd71c5850495998d2e656732837b1ef104b99aef8e",
-      "version": "1.1.1"
+      "source_sha256": "ff966a1f1d4990900f4cc038a32fb2c94d1b92b5c8a2b691c76e5aa062e5cd29",
+      "version": "1.2.0"
     },
     {
       "bundle": "native-14",

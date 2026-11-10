@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/egg_hatcher",
   "agent_file": "egg_hatcher_agent.py",
-  "agent_sha256": "7391fce3a02e8ee274332fbd71c5850495998d2e656732837b1ef104b99aef8e",
+  "agent_sha256": "ff966a1f1d4990900f4cc038a32fb2c94d1b92b5c8a2b691c76e5aa062e5cd29",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "EggHatcherAgent",
   "host_dependencies": [],
@@ -30,7 +30,7 @@
       "rapplication",
       "lifecycle"
     ],
-    "version": "1.1.1"
+    "version": "1.2.0"
   },
   "runtime_name": "HatchEgg",
   "schema": "rapp-agent-lock/1.0",
@@ -46,5 +46,5 @@
     ],
     "type": "object"
   },
-  "version": "1.1.1"
+  "version": "1.2.0"
 }

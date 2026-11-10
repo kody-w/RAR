@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-10T21:37:22Z",
+  "generated_at": "2026-11-10T21:41:47Z",
   "static_api": "rapp-static-api/1.1",
   "pages_base": "https://kody-w.github.io/RAR",
   "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
@@ -12786,7 +12786,7 @@
       "_has_card": true,
       "_added_at": "2026-05-11T10:53:36-04:00",
       "_first_commit_sha": "b00529de70afc67aa4a79ef59bfc4d5818ea8c17",
-      "_latest_commit_sha": "bc0f16918fee9b223608e0f3967fa6e32ed8000b",
+      "_latest_commit_sha": "484a10cb2d3d421f88727b762634e9dd41a11fb2",
       "_card_sha256": "46c1f7e4a515b48b5245273bf7aa9385e0e711954a0ae4cfb339e024132ccffa",
       "_version": {
         "sha256": "ff966a1f1d4990900f4cc038a32fb2c94d1b92b5c8a2b691c76e5aa062e5cd29",
