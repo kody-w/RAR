@@ -14,6 +14,11 @@
       "purpose": "The sidecar. Fetched and sha256-checked by summon_agent.py from RAR; never run unverified.",
       "size": 26230,
       "sha256": "6a138073c2b5dddb8cf742b84f5049437be814e3cb45222c211310b4ddf82d07"
+    },
+    "summon_chant_agent.py": {
+      "purpose": "Drop into a Brainstem's agents/. Say a card's seven-word chant (or sing a verse that brings one) and the agent installs, fingerprint-checked, ready on the next message. No phone, no sidecar.",
+      "size": 13035,
+      "sha256": "2bd1226d9ea0867e34f3c2fee65e6262eb4616c39909878b4aa1cc28954ae431"
     }
   },
   "capabilities": [
@@ -25,7 +30,8 @@
   "install": {
     "type": "agent_pack",
     "agents": [
-      "stacks/summon/summon_agent.py"
+      "stacks/summon/summon_agent.py",
+      "stacks/summon/summon_chant_agent.py"
     ],
     "destination": "agents/",
     "notes": "Drop summon_agent.py into agents/, then say 'start summon'. Requires Tailscale for phones; qrencode for the pairing QR (otherwise a link is shown)."
