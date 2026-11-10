@@ -69,3 +69,22 @@ def test_install_prompt_is_primary_and_terminal_is_folded():
     for tier in ("ollama", "brainstem", "hippocampus", "nervous-system"):
         assert not any(parent[1] == "advanced-install"
                        for parent in elements[tier]["parents"])
+
+
+def test_second_door_sits_after_the_primary_install_and_before_the_terminal():
+    """Already have an AI: one sentence, readable without JS, quieter than the primary install."""
+    root = Path(__file__).resolve().parents[1]
+    html = (root / "install.html").read_text(encoding="utf-8")
+    parser = InstallParser()
+    parser.feed(html)
+    kids = [c for c in parser.body_children if c[0] in ("section", "details")]
+    assert kids[:3] == [("section", None, "copilot-install"), ("section", "second-door", "second-door"),
+                        ("details", "advanced-install", "advanced-install")]
+    e = parser.elements
+    assert e["second-door-title"]["tag"] == "h2"
+    assert e["door-prompt"]["text"] == ("Go and read https://kody-w.github.io/RAR/stacks/brainstem-skill/SKILL.md "
+                                        "and do what it says.")
+    assert (root / "stacks" / "brainstem-skill" / "SKILL.md").is_file()
+    assert e["copy-door"]["tag"] == "button" and e["copy-door-status"]["attrs"]["role"] == "status"
+    text = e["second-door"]["text"]
+    assert "one yes" in text and "delete the agents folder" in text and "still being proven" in text
