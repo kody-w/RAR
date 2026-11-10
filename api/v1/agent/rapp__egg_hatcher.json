@@ -3,14 +3,15 @@
   "id": "rapp__egg_hatcher",
   "name": "EggHatcher",
   "rar_name": "@rapp/egg_hatcher",
-  "rappid": "rappid:@rapp/egg_hatcher:3ae258d4ca414dc302bf8d87ed0640f5b6a00efa9b2e47f6f23a3b2b998eab95",
-  "_migrated_from": "rappid:@rapp/egg_hatcher:ce60d06a3865bddc3cb826ead0867d2be4b5811ce39d654693b4b9048aea0ee6",
+  "rappid": "rappid:@rapp/egg_hatcher:263bac5fa581cb0a74c9a23a6cca14ff53b3896b6fe7fd5bed8541cf3be289f3",
+  "_migrated_from": "rappid:@rapp/egg_hatcher:3ae258d4ca414dc302bf8d87ed0640f5b6a00efa9b2e47f6f23a3b2b998eab95",
   "_migrated_from_all": [
     "rappid:@rapp/egg_hatcher:30fa90dcb3f58852a3317d95d505e3308c9026277b6a7fa3ab1b6468a2aea526",
-    "rappid:@rapp/egg_hatcher:ce60d06a3865bddc3cb826ead0867d2be4b5811ce39d654693b4b9048aea0ee6"
+    "rappid:@rapp/egg_hatcher:ce60d06a3865bddc3cb826ead0867d2be4b5811ce39d654693b4b9048aea0ee6",
+    "rappid:@rapp/egg_hatcher:3ae258d4ca414dc302bf8d87ed0640f5b6a00efa9b2e47f6f23a3b2b998eab95"
   ],
   "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "publisher": "@rapp",
   "category": "core",
   "tags": [
@@ -28,9 +29,9 @@
   "dependencies": [
     "@rapp/basic_agent"
   ],
-  "lines": 357,
-  "size_kb": 15.6,
-  "sha256": "7391fce3a02e8ee274332fbd71c5850495998d2e656732837b1ef104b99aef8e",
+  "lines": 426,
+  "size_kb": 18.8,
+  "sha256": "ff966a1f1d4990900f4cc038a32fb2c94d1b92b5c8a2b691c76e5aa062e5cd29",
   "has_card": true,
   "added_at": "2026-05-11T10:53:36-04:00",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
