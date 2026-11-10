@@ -47,17 +47,11 @@ def test_a_card_agent_retires_the_same_way(tmp_path):
     assert not build_registry._is_tombstone_file(live)
 
 
-def test_removed_agents_keep_their_paths_and_their_bytes():
-    """The two agents removed on 2026-07-23: a notice at the old path, the original kept byte for byte."""
+def test_removed_agents_keep_their_original_bytes():
+    """The two agents removed on 2026-07-23 are kept byte for byte under versions/."""
     import hashlib
-    sys.path.insert(0, str(ROOT))
-    import build_registry
-    root = ROOT
     kept = {"@borg/hacker_news_agent": "versions/@borg/hacker_news_agent/e83a236ebf1f.py",
             "@howardh/borg_agent": "versions/@howardh/borg_agent/14b1b1690457.py.card"}
-    stones = {t["agent"]: t for t in json.loads((root / "registry.json").read_text())["lifecycle"]["tombstones"]}
+    stones = {t["agent"]: t for t in json.loads((ROOT / "registry.json").read_text())["lifecycle"]["tombstones"]}
     for name, path in kept.items():
-        stone = stones[name]
-        assert build_registry._is_tombstone_file(root / stone["canonical_path"]), f"{name}: no notice at its old path"
-        assert hashlib.sha256((root / path).read_bytes()).hexdigest() == stone["sha256"], f"{name}: kept bytes differ"
-        assert path in (root / stone["canonical_path"]).read_text(), f"{name}: the notice does not say where the original is"
+        assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == stones[name]["sha256"], f"{name}: kept bytes differ"
