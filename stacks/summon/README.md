@@ -7,3 +7,16 @@ Scan a RAR card's QR code with your phone, and it installs into your own Brainst
 3. Scan any card's QR code (`https://kody-w.github.io/RAR/s.html#<seed>`) and tap **Summon**.
 
 How it stays safe: the QR carries only a card's seed. The sidecar looks the seed up in RAR, downloads the file, checks its sha256, and installs through the Brainstem's own `/agents/import`, which checks it again. Only notarized agents and verified stacks can be summoned. The sidecar listens only on this Mac and its Tailscale address. The Brainstem kernel is never changed.
+
+## Summon by chant (no phone)
+
+Drop `summon_chant_agent.py` into your Brainstem's `agents/`. Then say a card's seven words in chat:
+
+> Summon by chant: SAGE ZAP SENTINEL PIVOT CRUX EXTINGUISH BIND
+
+The seven words are the card's seed. The agent looks the seed up in RAR, then across the card federation
+(any GitHub repo with a `seed-index.json`), checks the sha256, and installs through the Brainstem's own
+`/agents/import`. The agent is ready on the next message. A card from outside RAR is never installed unasked.
+
+A verse can bring one the same way: "R, A, P, P, verse. Bring MANTLE JAB DUSK PULSAR FULCRUM REVOKE SHARD.
+Check it answers. Show me. And seal."
