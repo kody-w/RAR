@@ -6693,6 +6693,187 @@ function showSummonToast(addedNames, registry) {
   }, 3500);
 }
 
+// ── Chant door ───────────────────────────────────────────────────────────────
+// The RAPPcards hash protocol (SPEC 5.1) on the Brainstem itself, so a chant or a
+// scanned card lands here and the agent is ready to run, with no second page:
+//   #incant=W1+W2+…+W7   seven words  -> 64-bit seed
+//   #seed=<decimal|0xhex>               the seed itself
+//   #add=@publisher/slug                a card by name
+// A seed is looked up in this catalog first, then across the federation (SPEC 5.4:
+// peers.json -> each peer's seed-index.json). A catalog agent is switched on at once,
+// like ?agent=. An agent from another repo is never run unasked: the page says which
+// repo it came from and waits for "Add agent".
+const CHANT_PEERS_URL = 'https://raw.githubusercontent.com/kody-w/RAPPcards/main/peers.json';
+let _chantWordIdx = null, _chantSeedMap = null;
+async function _chantWords() {
+  if (_chantWordIdx) return _chantWordIdx;
+  let src = '';
+  for (const u of ['rapp_sdk.py', RAW_BASE + 'rapp_sdk.py']) {
+    try { const r = await fetch(u, { cache: 'force-cache' }); if (r.ok) { src = await r.text(); if (src.includes('MNEMONIC_WORDS')) break; } } catch (_) {}
+  }
+  const m = src.match(/MNEMONIC_WORDS = """([\s\S]*?)"""/);
+  if (!m) throw new Error('The chant word list could not be loaded.');
+  _chantWordIdx = {};
+  m[1].trim().split(/\s+/).forEach((w, i) => { _chantWordIdx[w] = i; });
+  return _chantWordIdx;
+}
+async function chantToSeed(chant) {
+  const idx = await _chantWords();
+  const words = String(chant).toUpperCase().replace(/[+,.\-]/g, ' ').trim().split(/\s+/);
+  if (words.length !== 7) throw new Error('A chant is exactly 7 words.');
+  let seed = 0n;
+  for (let i = 0; i < 7; i++) {
+    if (!(words[i] in idx)) throw new Error('"' + words[i] + '" is not a chant word.');
+    seed |= BigInt(idx[words[i]]) << BigInt(10 * i);
+  }
+  return seed.toString();
+}
+// Seeds are 64-bit and JSON.parse rounds them, so read them from the registry text.
+async function _chantCatalogSeeds() {
+  if (_chantSeedMap) return _chantSeedMap;
+  const text = await (await fetch(REGISTRY_URL)).text();
+  const map = {};
+  const re = /"name"\s*:\s*"(@[^"]+)"|"_seed"\s*:\s*(\d+)|"_seed_aliases"\s*:\s*\[([^\]]*)\]/g;
+  let m, name = null;
+  while ((m = re.exec(text))) {
+    if (m[1]) name = m[1];
+    else if (m[2] && name) map[m[2]] = name;
+    else if (m[3] && name) (m[3].match(/\d+/g) || []).forEach(s => { map[s] = name; });
+  }
+  _chantSeedMap = map;
+  return map;
+}
+function _chantEnable(name) {
+  if (!enabledAgents.has(name)) {
+    enabledAgents.add(name);
+    localStorage.setItem('vb_enabled_agents', JSON.stringify([...enabledAgents]));
+  }
+  try { populateAgentDropdown(); } catch (_) {}
+  try { updateEnabledPills(); } catch (_) {}
+  try { showSummonToast([name], availableAgents); } catch (_) {}
+}
+// Fetch JSON, remembering the last good copy: a peer that is offline still resolves (stale beats gone).
+async function _chantJSON(url) {
+  const key = 'vb_chant_cache:' + url;
+  try {
+    const r = await fetch(url, { cache: 'no-cache' });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const text = await r.text(); const j = JSON.parse(text);
+    try { if (text.length < 400000) localStorage.setItem(key, text); } catch (_) {}
+    return j;
+  } catch (e) {
+    const kept = localStorage.getItem(key);
+    if (kept) return JSON.parse(kept);
+    throw e;
+  }
+}
+// Any GitHub repo with a seed-index.json at its root is a peer. A person adds one with
+// ?dial=owner/repo (kept on this device); nobody has to approve it or list it anywhere.
+function _chantDials() { try { return JSON.parse(localStorage.getItem('vb_chant_dials') || '[]'); } catch (_) { return []; } }
+function _chantDial(repo) {
+  if (!/^[A-Za-z0-9][A-Za-z0-9-]*\/[A-Za-z0-9._-]+$/.test(repo)) return false;
+  const d = _chantDials().filter(x => x !== repo); d.unshift(repo);
+  localStorage.setItem('vb_chant_dials', JSON.stringify(d.slice(0, 24)));
+  return true;
+}
+async function _chantFederation(seed) {
+  let peers = _chantDials().map(repo => ({ binder: repo, homepage: 'https://github.com/' + repo,
+    seed_index: 'https://raw.githubusercontent.com/' + repo + '/main/seed-index.json' }));
+  try { peers = peers.concat((await _chantJSON(CHANT_PEERS_URL)).peers || []); } catch (_) {}
+  const walked = new Set();
+  for (const peer of peers) {
+    const binder = peer.binder || peer.id || '';
+    if (!peer.seed_index || binder === 'rar' || binder === 'rappcards') continue;   // this catalog was checked first
+    if (walked.has(peer.seed_index)) continue; walked.add(peer.seed_index);
+    let idx; try { idx = await _chantJSON(peer.seed_index); } catch (_) { continue; }
+    let entry = idx && idx.seeds && idx.seeds[seed];
+    if (!entry) continue;
+    if (typeof entry === 'string') entry = { url: entry };
+    const base = peer.seed_index.replace(/[^/]*$/, '');
+    let card = {};
+    try {
+      let txt = await (await fetch(new URL(entry.url, base).href, { cache: 'no-cache' })).text();
+      txt = txt.replace(/("seed"\s*:\s*)(-?\d{10,})/g, '$1"$2"');
+      const blob = JSON.parse(txt);
+      card = (entry.url_is_bundle || blob.cards) ? ((blob.cards || blob)[entry.bundle_key || entry.id] || {}) : blob;
+    } catch (_) {}
+    const id = entry.id || card.id || '';
+    const slug = (id.split('/')[1] || '').replace(/_agent$/, '');
+    const meta = card.meta || {};
+    const tries = [entry.agent_url, card.agent_url, meta.agent_url, meta._file,
+                   slug && ('agents/' + slug + '_agent.py'), slug && ('agents/' + slug + '.py')].filter(Boolean);
+    for (const t of tries) {
+      try {
+        const r = await fetch(new URL(t, base).href, { cache: 'no-cache' });
+        if (!r.ok) continue;
+        const source = await r.text();
+        if (!/class\s+\w+/.test(source)) continue;
+        return { found: true, binder, home: peer.homepage || '', id, name: card.name || entry.name || id, source,
+                 file: (slug || 'card').replace(/[^A-Za-z0-9_]/g, '_') + '_agent.py' };
+      } catch (_) {}
+    }
+    return { found: true, binder, home: peer.homepage || '', id, name: card.name || entry.name || id, source: null };
+  }
+  return { found: false };
+}
+function _chantOffer(hit) {
+  const old = document.getElementById('shared-agent-offer'); if (old) old.remove();
+  const o = document.createElement('div'); o.id = 'shared-agent-offer';
+  o.style.cssText = 'position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:99999;background:#161b22;border:1px solid #30363d;border-radius:12px;padding:14px 18px;box-shadow:0 16px 50px rgba(0,0,0,.5);font:14px -apple-system,sans-serif;color:#e6edf3;max-width:min(92vw,440px)';
+  const b = document.createElement('b'); b.textContent = hit.name;
+  const from = document.createElement('div'); from.style.cssText = 'color:#8b949e;font-size:12.5px;margin:6px 0 10px';
+  from.textContent = 'This card comes from ' + hit.binder + ', not from this catalog, so nobody here has checked it. It runs in your browser sandbox. Add it?';
+  const add = document.createElement('button'); add.id = 'sa-add'; add.textContent = 'Add agent';
+  add.style.cssText = 'background:#238636;border:0;color:#fff;border-radius:8px;padding:7px 16px;font-weight:600;cursor:pointer;margin-right:8px';
+  const no = document.createElement('button'); no.id = 'sa-no'; no.textContent = 'Dismiss';
+  no.style.cssText = 'background:#21262d;border:1px solid #30363d;color:#8b949e;border-radius:8px;padding:7px 14px;cursor:pointer';
+  o.append(b, from, add, no); document.body.appendChild(o);
+  add.onclick = () => { hotLoadAgent(hit.file, hit.source); o.remove(); };
+  no.onclick = () => o.remove();
+}
+// Resolve one chant, seed or card name. opts.accept=true adds a foreign agent without the banner
+// (for automation only; a person always sees the banner).
+async function resolveChant(text, opts) {
+  opts = opts || {};
+  let t = String(text || '').trim(), seed = null, byName = null;
+  try { t = decodeURIComponent(t); } catch (_) {}
+  t = t.replace(/^#/, '');
+  if (/^add=/.test(t)) byName = t.slice(4);
+  else if (/^seed=/.test(t)) seed = BigInt(t.slice(5)).toString();
+  else if (/^@[^/\s]+\/\S+$/.test(t)) byName = t;
+  else if (/^(0x[0-9a-f]+|\d{6,})$/i.test(t)) seed = BigInt(t).toString();
+  else seed = await chantToSeed(t.replace(/^incant=/, ''));
+  if (!byName) byName = (await _chantCatalogSeeds())[seed] || null;
+  if (byName) {
+    const a = availableAgents.find(x => x.name === byName) ||
+              availableAgents.find(x => x.name.replace(/-/g, '_') === byName.replace(/-/g, '_'));
+    if (a) { _chantEnable(a.name); return { ok: true, from: 'catalog', name: a.name, seed }; }
+    if (!seed) return { ok: false, error: 'No card named ' + byName + ' in this catalog.' };
+  }
+  const hit = await _chantFederation(seed);
+  if (!hit.found) return { ok: false, seed, error: 'No card answers to that chant.' };
+  if (!hit.source) return { ok: false, seed, from: hit.binder, name: hit.id, error: 'The card is in ' + hit.binder + ', but it carries no agent file.' };
+  if (opts.accept) hotLoadAgent(hit.file, hit.source); else _chantOffer(hit);
+  return { ok: true, from: hit.binder, name: hit.id, seed, waiting: !opts.accept };
+}
+async function applyChantDeepLink() {
+  const q = new URLSearchParams(location.search);
+  const dial = q.get('dial');
+  if (dial && _chantDial(dial)) {
+    q.delete('dial');
+    try { history.replaceState(null, '', location.pathname + (q.toString() ? '?' + q : '') + location.hash); } catch (_) {}
+  }
+  const h = location.hash.slice(1);
+  if (!/^(incant|seed|add)=/.test(h)) return;
+  try { history.replaceState(null, '', location.pathname + location.search); } catch (_) {}   // a reload must not chant again
+  let res;
+  try { res = await resolveChant(h); } catch (e) { res = { ok: false, error: e.message || String(e) }; }
+  if (!res.ok) { try { showToast(res.error, true); } catch (_) {} }
+  window._lastChant = res;
+  return res;
+}
+window.addEventListener('hashchange', () => { applyChantDeepLink(); });
+
 async function applySummonDeepLink() {
   const params = new URLSearchParams(location.search);
   const slugs = params.getAll('agent');
@@ -6731,6 +6912,7 @@ async function applySummonDeepLink() {
 //   await rapp.run('@aibast-agents-library/account_intelligence', 'Acme Corp')
 //   await rapp.eval('import sys; print(sys.version)');  rapp.agents('fraud');  rapp.health()
 window.rapp = {
+  chant(text, opts) { return resolveChant(text, opts); },   // rapp.chant('W1 W2 … W7') = a chant or seed landing in the link
   health() {                                                   // = GET /health
     return { status: 'ok', agents: (availableAgents || []).length,
              runtime: 'CPython ' + ((_pyodide && _pyodide.version) || '(pyodide/wasm)'),
@@ -7164,6 +7346,9 @@ window.rapp.neighborhood = {
 
   // Apply summon deep-link (?agent=@pub/slug) if present — opens straight into chat.
   await applySummonDeepLink();
+
+  // A chant, seed or card name in the link (#incant= / #seed= / #add=): resolve it and get the agent ready.
+  await applyChantDeepLink();
 
   // Warm CPython in the background so the first agent run is instant.
   ensurePyodide().catch(() => {});
