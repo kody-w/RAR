@@ -47,7 +47,7 @@ HOSTS = ("AGENTS.md", "CLAUDE.md", ".github/copilot-instructions.md", "GEMINI.md
 def stay(root=None):
     """Write the standing note into this folder's always-on instructions, once. After this the skill page is never needed."""
     root = Path(root) if root else HERE.parent
-    note = NOTE.replace("python3 rapp/kernel.py", f"{_py()} rapp/kernel.py")
+    note = NOTE.replace("python3 rapp/kernel.py", f"{_py()} {HERE.name}/kernel.py").replace("`rapp/", f"`{HERE.name}/")
     present = [h for h in HOSTS if (root / h).exists()] or ["AGENTS.md"]
     done = []
     for h in present:

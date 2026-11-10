@@ -122,3 +122,21 @@ def test_the_door_answers_in_a_brainstems_shape(home):
     assert sorted(out) == ["agent_logs", "model", "requested_model", "response", "session_id", "voice_mode"]
     assert out["response"] == "pong" and out["session_id"] == "s-1"
     assert k.envelope("just words", "s-2")["response"] == "just words"
+
+
+def test_the_page_never_writes_into_a_rapp_folder_that_is_not_its_own():
+    assert "Never write into it. Use `rapp-skill/` instead" in PAGE
+
+
+def test_the_note_names_the_folder_it_actually_lives_in(tmp_path, monkeypatch):
+    home = tmp_path / "rapp-skill"
+    (home / "agents").mkdir(parents=True)
+    (home / "kernel.py").write_text((STACK / "kernel.py").read_text())
+    monkeypatch.delenv("CHANT_HOME", raising=False)
+    spec = importlib.util.spec_from_file_location("rapp_kernel_other_home", home / "kernel.py")
+    k = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(k)
+    k.stay()
+    note = (tmp_path / "AGENTS.md").read_text()
+    assert "rapp-skill/kernel.py tools" in note and "`rapp-skill/agents/`" in note
+    assert "rapp/kernel.py" not in note.replace("rapp-skill/kernel.py", "")
