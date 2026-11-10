@@ -1,0 +1,50 @@
+{
+  "acceptance": {
+    "checks": [
+      "manifest",
+      "namespace",
+      "content_sha256",
+      "base_precondition",
+      "security_scan",
+      "registry_build",
+      "card_forge",
+      "full_test_suite"
+    ],
+    "github_id": 1735900,
+    "github_login": "kody-w",
+    "policy": "rar-notary/1.0",
+    "workflow_run": "42911583395"
+  },
+  "action": "agent.update",
+  "agent": "@rapp/egg_hatcher",
+  "artifact": {
+    "algorithm": "sha256-lf-v1",
+    "digest": "c4b31f7bb445324c13b54bac009d2bb4f34de8212a3c6ca60757602254b348cf"
+  },
+  "canonical_path": "agents/@rapp/egg_hatcher_agent.py",
+  "controller": {
+    "github_id": 1735900,
+    "github_login": "kody-w"
+  },
+  "created_at": "2026-11-10T22:07:51.161463+00:00",
+  "id": "rar_49873e7221638484df5270484c33fbc5e9b214df8a505893e148e01485cdf919",
+  "issuer": "github:kody-w/RAR",
+  "previous": {
+    "digest": "ff966a1f1d4990900f4cc038a32fb2c94d1b92b5c8a2b691c76e5aa062e5cd29",
+    "receipt": "rar_924829cfb56dc34d007cbc545dcf23e86911e6cd279562a3d4e0b6fef7c23787",
+    "version": "1.2.0"
+  },
+  "quality_tier": "official",
+  "request_id": "req_fb87d7260354e227d1a55b1b",
+  "revision_id": "49873e7221638484df5270484c33fbc5e9b214df8a505893e148e01485cdf919",
+  "schema": "rar-receipt/1.0",
+  "status": "notarized",
+  "submission": {
+    "github_id": 1735900,
+    "github_login": "kody-w",
+    "issue_node_id": "I_kwDOR48twc8AAAABeIM1NA",
+    "issue_number": 1612,
+    "source_body_sha256": "0102d21bbe273c4ad80bf6b9600860274a9209e51693b7b70919c3922325bc3d"
+  },
+  "version": "1.2.1"
+}

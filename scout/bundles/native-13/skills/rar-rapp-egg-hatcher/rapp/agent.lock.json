@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/egg_hatcher",
   "agent_file": "egg_hatcher_agent.py",
-  "agent_sha256": "ff966a1f1d4990900f4cc038a32fb2c94d1b92b5c8a2b691c76e5aa062e5cd29",
+  "agent_sha256": "c4b31f7bb445324c13b54bac009d2bb4f34de8212a3c6ca60757602254b348cf",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "EggHatcherAgent",
   "host_dependencies": [],
@@ -13,6 +13,9 @@
     ],
     "description": "Introspects any .egg cartridge (local path or URL) and routes it by manifest schema/type to hatch, install, or mount; refuses unknown kinds.",
     "display_name": "EggHatcher",
+    "distinct_from": {
+      "@kody-w/twin_egg_hatcher": "That agent builds one twin from a repo, a folder or an egg. This one opens any kind of egg, checks every file against the egg's label, and routes it by kind."
+    },
     "example_call": {
       "args": {
         "egg_path": "~/Downloads/dad.egg"
@@ -30,7 +33,7 @@
       "rapplication",
       "lifecycle"
     ],
-    "version": "1.2.0"
+    "version": "1.2.1"
   },
   "runtime_name": "HatchEgg",
   "schema": "rapp-agent-lock/1.0",
@@ -46,5 +49,5 @@
     ],
     "type": "object"
   },
-  "version": "1.2.0"
+  "version": "1.2.1"
 }

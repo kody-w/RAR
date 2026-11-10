@@ -12,7 +12,7 @@
   },
   "inputs": {
     "canonical_manifests": "b3db907d4b20894ca52b84988590e7b577d561477cf6b48167b04f15c5e08e63",
-    "scout_catalog": "5d45787be46269951ad21e1ae85c23c73b105f9d31bce18457b89fb34a81b6a3",
+    "scout_catalog": "a863b86102d619c4399a64778be688e0a7dc524c575bfef8c159548a6b2d36c8",
     "scout_toaster": {
       "commit": "d54ba8484b5c5dae6406d2090c03115d12985446",
       "sha256": "d340043178aa4160f76a179b8b1086971e09207b212aff2ab2c0752b69173e17"
@@ -23079,23 +23079,23 @@
       ],
       "slug": "rar-rapp-egg-hatcher",
       "source": {
-        "artifact_sha256": "ff966a1f1d4990900f4cc038a32fb2c94d1b92b5c8a2b691c76e5aa062e5cd29",
+        "artifact_sha256": "c4b31f7bb445324c13b54bac009d2bb4f34de8212a3c6ca60757602254b348cf",
         "entrypoint": "scout/bundles/native-13/skills/rar-rapp-egg-hatcher/SKILL.md",
         "entrypoint_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-egg-hatcher/SKILL.md",
         "files": [
           {
             "path": "scout/bundles/native-13/skills/rar-rapp-egg-hatcher/SKILL.md",
-            "sha256": "7d5f68e94cb050a0ce3207741fee398a67b714478b1ce01a1a7ddd5c0dfaebbb",
+            "sha256": "79f543fc482fa4bef4577fc99c714ad198752b0b7c66b4bed675648835e67c5f",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-egg-hatcher/SKILL.md"
           },
           {
             "path": "scout/bundles/native-13/skills/rar-rapp-egg-hatcher/egg_hatcher_agent.py",
-            "sha256": "ff966a1f1d4990900f4cc038a32fb2c94d1b92b5c8a2b691c76e5aa062e5cd29",
+            "sha256": "c4b31f7bb445324c13b54bac009d2bb4f34de8212a3c6ca60757602254b348cf",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-egg-hatcher/egg_hatcher_agent.py"
           },
           {
             "path": "scout/bundles/native-13/skills/rar-rapp-egg-hatcher/rapp/agent.lock.json",
-            "sha256": "26320b985bc608000df4f4b053f879fa57e329551ab0eab65595e1ef469c4ac4",
+            "sha256": "dfa18cbafd96d3b4f0c9f4fd102d17f04a7fd5e24f1a5ea8c70b6e6d7cebb025",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-13/skills/rar-rapp-egg-hatcher/rapp/agent.lock.json"
           },
           {
@@ -23105,7 +23105,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "484a10cb2d3d421f88727b762634e9dd41a11fb2",
+        "input_revision": "14dedfd3910bd8d703499d911d4a919253e3f890",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -23119,7 +23119,7 @@
         "projection",
         "scout"
       ],
-      "version": "1.2.0"
+      "version": "1.2.1"
     },
     {
       "artifact_type": "skill",

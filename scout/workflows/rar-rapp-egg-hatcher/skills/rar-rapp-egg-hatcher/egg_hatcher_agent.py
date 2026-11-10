@@ -63,7 +63,7 @@ from agents.basic_agent import BasicAgent
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/egg_hatcher",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "display_name": "EggHatcher",
     "description": "Introspects any .egg cartridge (local path or URL) and routes it by manifest schema/type to hatch, install, or mount; refuses unknown kinds.",
     "author": "RAPP",
@@ -72,6 +72,7 @@ __manifest__ = {
     "quality_tier": "official",
     "requires_env": [],
     "dependencies": ["@rapp/basic_agent"],
+    "distinct_from": {"@kody-w/twin_egg_hatcher": "That agent builds one twin from a repo, a folder or an egg. This one opens any kind of egg, checks every file against the egg's label, and routes it by kind."},
     "example_call": {"args": {"egg_path": "~/Downloads/dad.egg"}},
 }
 
