@@ -137,3 +137,20 @@ def test_bad_chants_are_answered_in_plain_words(sc):
     assert "is not a chant word" in a.perform(chant="BANANA " + " ".join(chant(1).split()[1:]))
     assert a.perform(chant=chant(123456789012)) == "No card answers to that chant."
     assert sc.landed == []
+
+
+def test_the_rest_of_the_song_runs_once_what_was_brought_is_live(sc, monkeypatch):
+    asked = []
+    monkeypatch.setattr(sc, "carry_on", lambda then: (asked.append(then), "pong")[1])
+    said = sc.SummonChantAgent().perform(chant=chant(111111111), then="Check it answers. Show me. And seal.")
+    assert asked == ["(Just installed and live now: rar_t_hello_agent.py.) Check it answers. Show me"]
+    assert said.endswith("this came back: pong")
+    asked.clear()
+    assert "ready on your next message" in sc.SummonChantAgent().perform(chant=chant(111111111))
+    assert sc.SummonChantAgent().perform(chant="SAGE ZAP", then="Check it answers.") == "A chant is exactly 7 words."
+    assert asked == []
+
+
+def test_carrying_on_never_nests(sc):
+    sc._hop["busy"] = True
+    assert sc.carry_on("Check it answers.") is None

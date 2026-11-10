@@ -205,6 +205,25 @@ def summon(text):
     return {"ok": False, "error": "No card answers to that chant." if kind == "seed" else f"No card named {key} in the catalog."}
 
 
+_hop = {"busy": False}
+
+
+def carry_on(then):
+    """What was brought is live on the next message. Send that message ourselves, once."""
+    if _hop["busy"]:
+        return None
+    _hop["busy"] = True
+    try:
+        req = urllib.request.Request(f"{_brain()}/chat", json.dumps({"user_input": then}).encode(),
+                                     {"Content-Type": "application/json"})
+        with urllib.request.urlopen(req, timeout=240) as r:
+            return json.loads(r.read() or b"{}").get("response") or None
+    except Exception:
+        return None
+    finally:
+        _hop["busy"] = False
+
+
 class SummonChantAgent(BasicAgent):
     def __init__(self):
         self.name = "SummonByChant"
@@ -219,6 +238,10 @@ class SummonChantAgent(BasicAgent):
                 "properties": {
                     "chant": {"type": "string",
                               "description": "the seven words exactly as said, or a seed number, or @publisher/name"},
+                    "then": {"type": "string",
+                             "description": ("everything the person asked for after the bring, in their words "
+                                             "(for example 'Check it answers. Show me.'). It runs once what was "
+                                             "brought is live. Leave out if they only asked to bring.")},
                 },
                 "required": ["chant"],
             },
@@ -235,14 +258,21 @@ class SummonChantAgent(BasicAgent):
         if not r["ok"]:
             return r["error"]
         if r["kind"] == "stack" and r.get("eggs"):
-            egg = r["eggs"][0]
-            return (f"Summoned the {r['display']} stack: {len(r['files'])} agents and an egg, every fingerprint matched. "
-                    f"Nothing is hatched yet. The egg is kept at {egg['path']}; ask the egg hatcher to open it.")
-        if r["kind"] == "stack":
-            return (f"Summoned the {r['display']} stack: {len(r['files'])} agents, every fingerprint matched. "
-                    f"They are ready on your next message.")
-        return (f"Summoned {r['display']} from the catalog. Its fingerprint matched ({r['files'][0]['sha256'][:12]}). "
-                f"It is ready on your next message.")
+            said = (f"Summoned the {r['display']} stack: {len(r['files'])} agents and an egg, every fingerprint "
+                    f"matched. Nothing is hatched yet. The egg is kept at {r['eggs'][0]['path']}; ask the egg "
+                    f"hatcher to open it.")
+        elif r["kind"] == "stack":
+            said = f"Summoned the {r['display']} stack: {len(r['files'])} agents, every fingerprint matched."
+        else:
+            said = (f"Summoned {r['display']} from the catalog. Its fingerprint matched "
+                    f"({r['files'][0]['sha256'][:12]}).")
+        then = str(kwargs.get("then") or "").strip()
+        then = re.sub(r"\W*\b(and\s+)?seal\W*$", "", then, flags=re.I).strip()  # the seal closes the song; it is not a step
+        brought = ", ".join(f["file"] for f in r["files"])
+        answer = carry_on(f"(Just installed and live now: {brought}.) {then}") if then else None
+        if answer:
+            return f"{said} Then I carried on with what you asked, and this came back: {answer}"
+        return f"{said} It is ready on your next message."
 
 
 if __name__ == "__main__":
