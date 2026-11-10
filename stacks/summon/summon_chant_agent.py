@@ -1,14 +1,11 @@
-"""Summon by chant — say a card's seven words and its agent lands in this Brainstem.
+"""Summon by chant — say a card's seven words and it lands in this Brainstem.
 
 No phone, no pairing, no sidecar. The seven words are a 64-bit seed (the same word list
-every RAR card uses). The seed is looked up in the RAR catalog first, then across the
-card federation (any GitHub repo that publishes a seed-index.json). The agent file is
-downloaded, its sha256 is checked against the catalog, and it is installed through this
-Brainstem's own /agents/import, which checks it again. It is ready on the next message.
-
-An agent from a repo outside the catalog has no notary behind it, so it is never
-installed unasked: this agent says where it comes from and waits for a clear yes.
-Nothing in the Brainstem kernel changes.
+every RAR card uses). The seed is looked up in the RAR catalog: one agent, or a whole
+stack of agents, or a stack that carries an egg (an egg can hold anything under
+rapp/1; the catalog's own egg hatcher opens it). Each file is downloaded, its sha256 is checked against the catalog, and
+it is installed through this Brainstem's own /agents/import, which checks it again.
+Everything is ready on the next message. Nothing in the Brainstem kernel changes.
 """
 
 __manifest__ = {
@@ -16,7 +13,7 @@ __manifest__ = {
     "name": "@kody-w/summon_chant_agent",
     "version": "1.0.0",
     "display_name": "Summon by chant",
-    "description": "Say a card's seven-word chant (or its seed or @publisher/name) and the agent is installed into this Brainstem, fingerprint-checked, ready on the next message.",
+    "description": "Say a card's seven-word chant (or its seed or @publisher/name) and the agent, or the whole stack, is installed into this Brainstem, fingerprint-checked, ready on the next message.",
     "author": "kody-w",
     "tags": ["summon", "chant", "install", "stack"],
     "category": "core",
@@ -32,7 +29,6 @@ import os
 import re
 import time
 import urllib.error
-import urllib.parse
 import urllib.request
 import uuid
 from pathlib import Path
@@ -40,8 +36,7 @@ from pathlib import Path
 from agents.basic_agent import BasicAgent
 
 RAR_BASE = os.getenv("RAR_BASE", "https://raw.githubusercontent.com/kody-w/RAR/main")
-PEERS_URL = os.getenv("CHANT_PEERS_URL", "https://raw.githubusercontent.com/kody-w/RAPPcards/main/peers.json")
-_REPO = re.compile(r"^[A-Za-z0-9][A-Za-z0-9-]*/[A-Za-z0-9._-]+$")
+EGG_HATCHER = "@rapp/egg_hatcher"
 
 
 def _brain():
@@ -127,76 +122,6 @@ def in_catalog(kind, key):
     return None
 
 
-def dials():
-    f = _home() / "dials.json"
-    try:
-        return [d for d in json.loads(f.read_text()) if _REPO.match(d)]
-    except Exception:
-        return []
-
-
-def dial(repo):
-    """Any GitHub repo with a seed-index.json at its root is a peer. Remember one the owner names."""
-    if not _REPO.match(repo or ""):
-        return False
-    d = [repo] + [x for x in dials() if x != repo]
-    (_home() / "dials.json").write_text(json.dumps(d[:24]))
-    return True
-
-
-def is_brainstem_agent(source):
-    return bool(re.search(r"class\s+\w+\s*\(\s*BasicAgent\s*\)", source)) and "def perform" in source
-
-
-def in_federation(seed):
-    """Walk the owner's dialed repos, then the canonical peers. -> dict or None."""
-    peers = [{"binder": r, "seed_index": f"https://raw.githubusercontent.com/{r}/main/seed-index.json"} for r in dials()]
-    try:
-        peers += json.loads(_get(PEERS_URL, keep="peers.json")).get("peers", [])
-    except Exception:
-        pass
-    seen = set()
-    for peer in peers:
-        binder, url = peer.get("binder") or peer.get("id") or "", peer.get("seed_index")
-        if not url or binder in ("rar", "rappcards") or url in seen:  # the catalog was checked first
-            continue
-        seen.add(url)
-        try:
-            idx = json.loads(_get(url, keep="idx-" + hashlib.sha256(url.encode()).hexdigest()[:16] + ".json"))
-        except Exception:
-            continue
-        entry = (idx.get("seeds") or {}).get(seed)
-        if not entry:
-            continue
-        if isinstance(entry, str):
-            entry = {"url": entry}
-        base = url.rsplit("/", 1)[0] + "/"
-        card = {}
-        try:
-            blob = json.loads(_get(urllib.parse.urljoin(base, entry["url"])))
-            card = (blob.get("cards", blob).get(entry.get("bundle_key") or entry.get("id"), {})
-                    if (entry.get("url_is_bundle") or "cards" in blob) else blob)
-        except Exception:
-            pass
-        cid = entry.get("id") or card.get("id") or ""
-        slug = re.sub(r"_agent$", "", cid.split("/")[-1])
-        meta = card.get("meta") or {}
-        tries = [entry.get("agent_url"), card.get("agent_url"), meta.get("agent_url"), meta.get("_file"),
-                 slug and f"agents/{slug}_agent.py", slug and f"agents/{slug}.py"]
-        hit = {"binder": binder, "id": cid, "name": card.get("name") or entry.get("name") or cid,
-               "source": None, "sha256": entry.get("sha256") or meta.get("sha256"),
-               "file": re.sub(r"[^A-Za-z0-9_]", "_", slug or "card") + "_agent.py"}
-        for t in [t for t in tries if t]:
-            try:
-                src = _get(urllib.parse.urljoin(base, t))
-            except Exception:
-                continue
-            hit["source"] = src
-            break
-        return hit
-    return None
-
-
 def install(filename, payload, sha):
     """Multipart POST to this Brainstem's own /agents/import over loopback; it re-checks the sha256."""
     b = uuid.uuid4().hex
@@ -212,47 +137,72 @@ def install(filename, payload, sha):
         return e.code, json.loads(e.read() or b"{}")
 
 
-def summon(text, yes=False, from_repo=None):
-    """Resolve one chant, seed or card name and install it. Returns a result dict."""
-    if from_repo:
-        dial(from_repo)
+def in_stacks(kind, key):
+    for p in catalog().get("stack_packs", []):
+        if (kind == "seed" and str(p.get("_seed")) == key) or (kind == "name" and p.get("name") == key.lstrip("@").split("/")[-1]):
+            return p
+    return None
+
+
+def _put(filename, url, sha):
+    payload = _get(url)
+    got = hashlib.sha256(payload).hexdigest()
+    if got != sha:
+        return {"file": filename, "ok": False, "error": "did not match its catalog fingerprint"}
+    code, body = install(filename, payload, got)
+    ok = code == 200 and body.get("status") == "ok"
+    return {"file": filename, "ok": ok, "sha256": got, "error": None if ok else body.get("error", f"the Brainstem answered {code}")}
+
+
+def _keep_egg(filename, url, sha):
+    """Download an egg, check its catalog fingerprint, keep it on this device for the hatcher."""
+    payload = _get(url)
+    got = hashlib.sha256(payload).hexdigest()
+    if got != sha:
+        return {"file": filename, "ok": False, "error": "did not match its catalog fingerprint"}
+    d = _home() / "eggs"
+    d.mkdir(exist_ok=True)
+    f = d / os.path.basename(filename)
+    f.write_bytes(payload)
+    return {"file": filename, "ok": True, "sha256": got, "path": str(f), "error": None}
+
+
+def summon(text):
+    """Resolve one chant, seed or name in the catalog and install it. One agent, or a whole stack."""
     kind, key = parse(text)
     e = in_catalog(kind, key)
     if e:
         if e.get("_lifecycle") != "notarized":
             return {"ok": False, "error": f"{e['name']} is not notarized in the catalog, so I won't install it."}
-        payload = _get(f"{RAR_BASE}/{e['_file']}")
-        got = hashlib.sha256(payload).hexdigest()
-        if got != e["_sha256"]:
-            return {"ok": False, "error": f"{e['name']} did not match its catalog fingerprint, so I stopped."}
-        code, body = install(e["_install_filename"], payload, got)
-        ok = code == 200 and body.get("status") == "ok"
-        return {"ok": ok, "from": "catalog", "name": e["name"], "display": e.get("display_name", e["name"]),
-                "file": e["_install_filename"], "sha256": got, "kernel": body,
-                "error": None if ok else body.get("error", f"the Brainstem answered {code}")}
-    if kind == "name":
-        return {"ok": False, "error": f"No card named {key} in the catalog."}
-    hit = in_federation(key)
-    if not hit:
-        return {"ok": False, "seed": key, "error": "No card answers to that chant."}
-    if not hit["source"]:
-        return {"ok": False, "from": hit["binder"], "name": hit["id"],
-                "error": f"{hit['name']} is in {hit['binder']}, but that card carries no agent file."}
-    src = hit["source"].decode("utf-8", "replace")
-    if not is_brainstem_agent(src):
-        return {"ok": False, "from": hit["binder"], "name": hit["id"],
-                "error": f"{hit['name']} is in {hit['binder']}, but its file is not a Brainstem agent, so it cannot run here."}
-    got = hashlib.sha256(hit["source"]).hexdigest()
-    if hit["sha256"] and hit["sha256"] != got:
-        return {"ok": False, "from": hit["binder"], "name": hit["id"],
-                "error": f"{hit['name']} did not match the fingerprint its own repo lists, so I stopped."}
-    if not yes:
-        return {"ok": False, "ask": True, "from": hit["binder"], "name": hit["id"], "display": hit["name"],
-                "error": None}
-    code, body = install(hit["file"], hit["source"], got)
-    ok = code == 200 and body.get("status") == "ok"
-    return {"ok": ok, "from": hit["binder"], "name": hit["id"], "display": hit["name"], "file": hit["file"],
-            "sha256": got, "kernel": body, "error": None if ok else body.get("error", f"the Brainstem answered {code}")}
+        r = _put(e["_install_filename"], f"{RAR_BASE}/{e['_file']}", e["_sha256"])
+        return {"ok": r["ok"], "kind": "agent", "display": e.get("display_name", e["name"]), "name": e["name"],
+                "files": [r], "error": None if r["ok"] else f"{e['name']}: {r['error']}"}
+    p = in_stacks(kind, key)
+    if p:
+        if not p.get("_verified"):
+            return {"ok": False, "error": f"The {p['name']} stack is not verified in the catalog, so I won't install it."}
+        if p.get("status") == "retired":
+            why = (p.get("retired") or {})
+            return {"ok": False, "error": f"The {p['name']} stack is retired. {why.get('reason', '')} "
+                                          f"{('Use ' + why['replacement'] + ' instead.') if why.get('replacement') else ''}".strip()}
+        if p.get("kernel"):
+            return {"ok": False, "error": f"{p.get('display_name', p['name'])} is a whole Brainstem, not an add-on. Scan its card to hatch it beside this one."}
+        files = [(n, m) for n, m in p["files"].items() if n.endswith("_agent.py")]
+        done = [_put(n, f"{RAR_BASE}/{p['path']}/{n}", m["sha256"]) for n, m in files]
+        eggs = []
+        for n, m in p["files"].items():
+            if n.endswith(".egg"):
+                eggs.append(_keep_egg(n, f"{RAR_BASE}/{p['path']}/{n}", m["sha256"]))
+        if eggs:  # an egg can carry anything under rapp/1: the catalog's own hatcher opens it
+            h = in_catalog("name", EGG_HATCHER)
+            if h and h.get("_lifecycle") == "notarized":
+                done.append(_put(h["_install_filename"], f"{RAR_BASE}/{h['_file']}", h["_sha256"]))
+        parts = done + eggs
+        ok = bool(parts) and all(d["ok"] for d in parts)
+        bad = "; ".join(f"{d['file']} {d['error']}" for d in parts if not d["ok"])
+        return {"ok": ok, "kind": "stack", "display": re.sub(r"\s+stack$", "", p.get("display_name", p["name"]), flags=re.I), "name": p["name"],
+                "files": done, "eggs": eggs, "error": None if ok else (bad or "that stack carries nothing I can install")}
+    return {"ok": False, "error": "No card answers to that chant." if kind == "seed" else f"No card named {key} in the catalog."}
 
 
 class SummonChantAgent(BasicAgent):
@@ -260,20 +210,15 @@ class SummonChantAgent(BasicAgent):
         self.name = "SummonByChant"
         self.metadata = {
             "name": self.name,
-            "description": ("Install an agent into this Brainstem from its chant. Use when the person says a "
-                            "seven-word chant, a card seed, or a card name like @publisher/name, or asks to summon, "
-                            "bring or add a card. The agent is fingerprint-checked and ready on the next message. "
-                            "If the result says it is waiting for a yes, ask the person exactly that and call again "
-                            "with yes=true only after they clearly agree."),
+            "description": ("Install an agent or a whole stack into this Brainstem from its chant. Use when the person "
+                            "says a seven-word chant, a card seed, or a name like @publisher/name, or asks to summon, "
+                            "bring or add a card. Everything is fingerprint-checked against the catalog and ready on "
+                            "the next message."),
             "parameters": {
                 "type": "object",
                 "properties": {
                     "chant": {"type": "string",
                               "description": "the seven words exactly as said, or a seed number, or @publisher/name"},
-                    "yes": {"type": "boolean",
-                            "description": "true only after the person clearly agreed to add an agent from outside the catalog"},
-                    "from_repo": {"type": "string",
-                                  "description": "optional owner/repo to also look in (a GitHub repo with a seed-index.json)"},
                 },
                 "required": ["chant"],
             },
@@ -282,18 +227,21 @@ class SummonChantAgent(BasicAgent):
 
     def perform(self, **kwargs) -> str:
         try:
-            r = summon(kwargs.get("chant", ""), yes=bool(kwargs.get("yes")), from_repo=kwargs.get("from_repo"))
+            r = summon(kwargs.get("chant", ""))
         except ValueError as e:
             return str(e)
         except Exception as e:
             return f"I couldn't summon that: {e}"
-        if r.get("ask"):
-            return (f"{r['display']} comes from {r['from']}, not from the catalog, so nobody has checked it. "
-                    f"Should I add it to this Brainstem?")
         if not r["ok"]:
             return r["error"]
-        where = "the catalog" if r["from"] == "catalog" else r["from"]
-        return (f"Summoned {r['display']} from {where}. Its fingerprint matched ({r['sha256'][:12]}). "
+        if r["kind"] == "stack" and r.get("eggs"):
+            egg = r["eggs"][0]
+            return (f"Summoned the {r['display']} stack: {len(r['files'])} agents and an egg, every fingerprint matched. "
+                    f"Nothing is hatched yet. The egg is kept at {egg['path']}; ask the egg hatcher to open it.")
+        if r["kind"] == "stack":
+            return (f"Summoned the {r['display']} stack: {len(r['files'])} agents, every fingerprint matched. "
+                    f"They are ready on your next message.")
+        return (f"Summoned {r['display']} from the catalog. Its fingerprint matched ({r['files'][0]['sha256'][:12]}). "
                 f"It is ready on your next message.")
 
 

@@ -14,9 +14,16 @@ Drop `summon_chant_agent.py` into your Brainstem's `agents/`. Then say a card's 
 
 > Summon by chant: SAGE ZAP SENTINEL PIVOT CRUX EXTINGUISH BIND
 
-The seven words are the card's seed. The agent looks the seed up in RAR, then across the card federation
-(any GitHub repo with a `seed-index.json`), checks the sha256, and installs through the Brainstem's own
-`/agents/import`. The agent is ready on the next message. A card from outside RAR is never installed unasked.
+The seven words are the card's seed. The agent looks the seed up in this catalog, checks every sha256, and
+installs through the Brainstem's own `/agents/import`. Everything is ready on the next message.
+
+One chant, three sizes:
+
+- **an agent**: one file lands.
+- **a stack**: every agent file in a verified stack lands (`FORGE FUSE PANTHER BEREFT MARCH CREED TEMPER`
+  brings both Claude Workflows agents). A retired, unverified or whole-Brainstem stack is refused in plain words.
+- **a stack with an egg**: the agents land, the egg is fingerprint-checked and kept on the device, and the
+  catalog's own egg hatcher (`@rapp/egg_hatcher`) is brought to open it. An egg can carry anything under rapp/1.
 
 A verse can bring one the same way: "R, A, P, P, verse. Bring MANTLE JAB DUSK PULSAR FULCRUM REVOKE SHARD.
 Check it answers. Show me. And seal."
