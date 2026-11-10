@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-10T21:41:47Z",
+  "generated_at": "2026-11-10T22:06:53Z",
   "static_api": "rapp-static-api/1.1",
   "pages_base": "https://kody-w.github.io/RAR",
   "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
@@ -12733,7 +12733,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@rapp/egg_hatcher",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "display_name": "EggHatcher",
       "description": "Introspects any .egg cartridge (local path or URL) and routes it by manifest schema/type to hatch, install, or mount; refuses unknown kinds.",
       "author": "RAPP",
@@ -12751,6 +12751,9 @@
       "dependencies": [
         "@rapp/basic_agent"
       ],
+      "distinct_from": {
+        "@kody-w/twin_egg_hatcher": "That agent builds one twin from a repo, a folder or an egg. This one opens any kind of egg, checks every file against the egg's label, and routes it by kind."
+      },
       "example_call": {
         "args": {
           "egg_path": "~/Downloads/dad.egg"
@@ -12758,15 +12761,15 @@
       },
       "_file": "agents/@rapp/egg_hatcher_agent.py",
       "_install_filename": "rar_rapp_egg_hatcher_agent.py",
-      "_sha256": "ff966a1f1d4990900f4cc038a32fb2c94d1b92b5c8a2b691c76e5aa062e5cd29",
+      "_sha256": "c4b31f7bb445324c13b54bac009d2bb4f34de8212a3c6ca60757602254b348cf",
       "_lifecycle": "notarized",
-      "_receipt": "rar_924829cfb56dc34d007cbc545dcf23e86911e6cd279562a3d4e0b6fef7c23787",
+      "_receipt": "rar_49873e7221638484df5270484c33fbc5e9b214df8a505893e148e01485cdf919",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
       },
       "_provenance": {
-        "issue": 1610,
+        "issue": 1612,
         "submitted_by": "kody-w",
         "accepted_by": "kody-w",
         "checks": [
@@ -12781,17 +12784,17 @@
         ]
       },
       "_seed": 11747276046260251558,
-      "_size_kb": 18.8,
-      "_lines": 426,
+      "_size_kb": 19.0,
+      "_lines": 427,
       "_has_card": true,
       "_added_at": "2026-05-11T10:53:36-04:00",
       "_first_commit_sha": "b00529de70afc67aa4a79ef59bfc4d5818ea8c17",
       "_latest_commit_sha": "484a10cb2d3d421f88727b762634e9dd41a11fb2",
       "_card_sha256": "46c1f7e4a515b48b5245273bf7aa9385e0e711954a0ae4cfb339e024132ccffa",
       "_version": {
-        "sha256": "ff966a1f1d4990900f4cc038a32fb2c94d1b92b5c8a2b691c76e5aa062e5cd29",
-        "sha8": "ff966a1f1d49",
-        "path": "versions/@rapp/egg_hatcher/ff966a1f1d49.py"
+        "sha256": "c4b31f7bb445324c13b54bac009d2bb4f34de8212a3c6ca60757602254b348cf",
+        "sha8": "c4b31f7bb445",
+        "path": "versions/@rapp/egg_hatcher/c4b31f7bb445.py"
       }
     },
     {
@@ -15116,7 +15119,7 @@
           "verified": true
         },
         "egg_hatcher_agent.py": {
-          "sha256": "ff966a1f1d4990900f4cc038a32fb2c94d1b92b5c8a2b691c76e5aa062e5cd29",
+          "sha256": "c4b31f7bb445324c13b54bac009d2bb4f34de8212a3c6ca60757602254b348cf",
           "verified": true
         }
       },

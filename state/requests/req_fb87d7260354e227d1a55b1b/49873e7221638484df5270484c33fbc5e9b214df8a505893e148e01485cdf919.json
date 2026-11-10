@@ -3,6 +3,11 @@
   "actor_id": 1735900,
   "actor_login": "kody-w",
   "agent": "@rapp/egg_hatcher",
+  "applied_at": "2026-11-10T22:07:51.161463+00:00",
+  "approved_by": {
+    "github_id": 1735900,
+    "github_login": "kody-w"
+  },
   "base_lifecycle_receipt": "rar_924829cfb56dc34d007cbc545dcf23e86911e6cd279562a3d4e0b6fef7c23787",
   "base_lifecycle_sha256": "ff966a1f1d4990900f4cc038a32fb2c94d1b92b5c8a2b691c76e5aa062e5cd29",
   "base_lifecycle_version": "1.2.0",
@@ -22,6 +27,7 @@
   "issue_updated_at": "2026-11-10T22:06:21Z",
   "publisher": "@rapp",
   "reason": "",
+  "receipt": "rar_49873e7221638484df5270484c33fbc5e9b214df8a505893e148e01485cdf919",
   "repository_id": 1200565697,
   "request_id": "req_fb87d7260354e227d1a55b1b",
   "revision_id": "49873e7221638484df5270484c33fbc5e9b214df8a505893e148e01485cdf919",
@@ -29,5 +35,5 @@
   "slug": "egg_hatcher_agent",
   "source_body_sha256": "0102d21bbe273c4ad80bf6b9600860274a9209e51693b7b70919c3922325bc3d",
   "source_url": "",
-  "status": "pending_review"
+  "status": "applied"
 }

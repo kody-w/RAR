@@ -2,7 +2,7 @@
   "schema": "rar-catalog/1.0",
   "audience": "consumer",
   "description": "Agents appropriate for an individual audience. Enterprise-only agents are excluded.",
-  "generated": "2026-11-10T21:37:22Z",
+  "generated": "2026-11-10T22:06:53Z",
   "count": 199,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/consumer.json",
   "agents": [
@@ -8107,7 +8107,7 @@
       "name": "@rapp/egg_hatcher",
       "display_name": "EggHatcher",
       "description": "Introspects any .egg cartridge (local path or URL) and routes it by manifest schema/type to hatch, install, or mount; refuses unknown kinds.",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "publisher": "@rapp",
       "author": "RAPP",
       "category": "core",
@@ -8129,17 +8129,17 @@
         "path": "agents/@rapp/egg_hatcher_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/egg_hatcher_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/egg_hatcher_agent.py",
-        "sha256": "ff966a1f1d4990900f4cc038a32fb2c94d1b92b5c8a2b691c76e5aa062e5cd29",
+        "sha256": "c4b31f7bb445324c13b54bac009d2bb4f34de8212a3c6ca60757602254b348cf",
         "pages": "https://kody-w.github.io/RAR/agents/@rapp/egg_hatcher_agent.py",
         "version": {
-          "sha256": "ff966a1f1d4990900f4cc038a32fb2c94d1b92b5c8a2b691c76e5aa062e5cd29",
-          "sha8": "ff966a1f1d49",
-          "path": "versions/@rapp/egg_hatcher/ff966a1f1d49.py"
+          "sha256": "c4b31f7bb445324c13b54bac009d2bb4f34de8212a3c6ca60757602254b348cf",
+          "sha8": "c4b31f7bb445",
+          "path": "versions/@rapp/egg_hatcher/c4b31f7bb445.py"
         }
       },
       "stats": {
-        "lines": 426,
-        "size_kb": 18.8,
+        "lines": 427,
+        "size_kb": 19.0,
         "added_at": "2026-05-11T10:53:36-04:00"
       }
     },

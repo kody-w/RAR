@@ -15,7 +15,7 @@
       "purpose": "Universal .egg cartridge router. Source: agents/@rapp/egg_hatcher_agent.py.",
       "source": "agents/@rapp/egg_hatcher_agent.py",
       "size": 14802,
-      "sha256": "ff966a1f1d4990900f4cc038a32fb2c94d1b92b5c8a2b691c76e5aa062e5cd29"
+      "sha256": "c4b31f7bb445324c13b54bac009d2bb4f34de8212a3c6ca60757602254b348cf"
     }
   },
   "install": {

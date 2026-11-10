@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-11-10T21:37:22Z",
+  "generated": "2026-11-10T22:06:53Z",
   "counts": {
     "native": 226,
     "aggregated": 152,
@@ -3861,7 +3861,7 @@
       "origin_size": 226,
       "components": {
         "community": 0.2958,
-        "depth": 0.9031,
+        "depth": 0.9044,
         "freshness": 0.3569,
         "tier": 1.0
       },
@@ -3882,7 +3882,7 @@
           "channels": {},
           "tier": "official",
           "age_days": 178,
-          "lines": 426,
+          "lines": 427,
           "has_card": true
         },
         "source": null
@@ -3891,7 +3891,7 @@
         "no community feedback yet - scored at the population median",
         "official tier",
         "added 178 days ago",
-        "426 lines",
+        "427 lines",
         "has a rendered card"
       ]
     },
