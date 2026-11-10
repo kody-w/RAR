@@ -25,5 +25,17 @@ One chant, three sizes:
 - **a stack with an egg**: the agents land, the egg is fingerprint-checked and kept on the device, and the
   catalog's own egg hatcher (`@rapp/egg_hatcher`) is brought to open it. An egg can carry anything under rapp/1.
 
+### A team's own catalog
+
+A team catalog is a git repo, private if you like, with the same `registry.json` shape. It is read with your own
+GitHub sign-in. Say "Add the team catalog owner/name" once; after that its chants work like any other, and the
+reply says which catalog answered. A team card's seed can never equal a public card's seed.
+
+### Keep a song as a card
+
+Say "Keep this song as a card titled Morning Check:" and the song. It becomes one agent file with its own
+seven-word chant, working on your device at once. "Publish" tells you what will be sent and waits for a yes;
+then anyone on the team says the chant, hears the song word for word, or says "run it".
+
 A verse can bring one the same way: "R, A, P, P, verse. Bring MANTLE JAB DUSK PULSAR FULCRUM REVOKE SHARD.
 Check it answers. Show me. And seal."

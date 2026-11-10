@@ -27,6 +27,7 @@ import hashlib
 import json
 import os
 import re
+import subprocess
 import time
 import urllib.error
 import urllib.request
@@ -154,6 +155,224 @@ def _put(filename, url, sha):
     return {"file": filename, "ok": ok, "sha256": got, "error": None if ok else body.get("error", f"the Brainstem answered {code}")}
 
 
+# ── team catalogs ── a team's own shelf is a git repo (private is fine) holding a registry.json of the same shape.
+# It is kept as a clone on this device, read with the person's own git sign-in. No token ever passes through here.
+
+def _catalogs_dir():
+    d = _home() / "catalogs"
+    d.mkdir(exist_ok=True)
+    return d
+
+
+def _clone(repo):
+    return _catalogs_dir() / repo.replace("/", "--")
+
+
+def _own_sign_in():
+    """Git runs as the person, with their own GitHub sign-in, never with a token this Brainstem holds for its model."""
+    env = {k: v for k, v in os.environ.items() if k not in ("GH_TOKEN", "GITHUB_TOKEN", "GH_ENTERPRISE_TOKEN")}
+    env["GIT_TERMINAL_PROMPT"] = "0"
+    return env
+
+
+def _git(folder, *args):
+    return subprocess.run(["git", "-C", str(folder), *args], capture_output=True, text=True, timeout=120,
+                          env=_own_sign_in())
+
+
+def team_catalogs():
+    """-> [(repo, folder, registry)] for every team catalog on this device, freshened at most once a minute."""
+    out = []
+    for folder in sorted(_catalogs_dir().iterdir()):
+        if not (folder / ".git").exists():
+            continue
+        stamp = folder / ".git" / "chant-pulled"
+        if not stamp.exists() or time.time() - stamp.stat().st_mtime > 60:
+            _git(folder, "pull", "--ff-only", "-q")
+            stamp.write_text("")
+        reg = folder / "registry.json"
+        if reg.exists():
+            out.append((folder.name.replace("--", "/", 1), folder, json.loads(reg.read_text())))
+    return out
+
+
+def add_catalog(repo):
+    if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9-]*/[A-Za-z0-9._-]+", repo or ""):
+        return "A team catalog is named like owner/name."
+    folder = _clone(repo)
+    if not folder.exists():
+        r = subprocess.run(["git", "clone", "-q", f"https://github.com/{repo}.git", str(folder)],
+                           capture_output=True, text=True, timeout=180, env=_own_sign_in())
+        if r.returncode != 0:
+            return f"I couldn't reach {repo}. Check the name, and that you are signed in to GitHub with access to it."
+    if not (folder / "registry.json").exists():
+        build_catalog(folder, repo)
+    reg = json.loads((folder / "registry.json").read_text())
+    n = len(reg.get("agents", [])) + len(reg.get("stack_packs", []))
+    return f"Added the team catalog {repo}. Cards in it: {n}. Say a card's chant and it lands here."
+
+
+def team_seed(repo, name):
+    """A team card's seed comes from the catalog's name plus the card's name: it cannot shadow a public card."""
+    return int.from_bytes(hashlib.sha256(f"{repo}:{name}".encode()).digest()[:8], "big") | 1 << 63
+
+
+def build_catalog(folder, repo):
+    """One input (the folder's agents/ and stacks/) -> registry.json. Idempotent."""
+    folder = Path(folder)
+    agents, packs = [], []
+    for f in sorted((folder / "agents").glob("*_agent.py")) if (folder / "agents").exists() else []:
+        name = f"@{repo.split('/')[0]}/{f.stem}"
+        seed = team_seed(repo, name)
+        m = re.search(r'"display_name":\s*["\']([^"\']+)["\']', f.read_text())
+        agents.append({"name": name, "display_name": m.group(1) if m else f.stem, "_file": f"agents/{f.name}",
+                       "_install_filename": f.name, "_sha256": hashlib.sha256(f.read_bytes()).hexdigest(),
+                       "_seed": seed, "_incantation": seed_to_chant(seed), "_lifecycle": "team"})
+    for d in sorted((folder / "stacks").iterdir()) if (folder / "stacks").exists() else []:
+        files = {f.name: {"sha256": hashlib.sha256(f.read_bytes()).hexdigest()} for f in sorted(d.iterdir()) if f.is_file()}
+        seed = team_seed(repo, d.name)
+        packs.append({"name": d.name, "display_name": d.name.replace("-", " ").title(), "path": f"stacks/{d.name}",
+                      "files": files, "_verified": True, "status": "current", "_seed": seed,
+                      "_incantation": seed_to_chant(seed)})
+    reg = {"schema": "rapp-registry/1.1", "catalog": repo, "base": f"https://github.com/{repo}",
+           "agents": agents, "stack_packs": packs}
+    (folder / "registry.json").write_text(json.dumps(reg, indent=1, sort_keys=True) + "\n")
+    (folder / ".nojekyll").touch()
+    return reg
+
+
+def in_team(kind, key):
+    """-> (repo, folder, entry, is_stack) from the first team catalog that answers, else None."""
+    for repo, folder, reg in team_catalogs():
+        for e in reg.get("agents", []):
+            if (kind == "seed" and str(e.get("_seed")) == key) or (kind == "name" and e.get("name") == key):
+                return repo, folder, e, False
+        for p in reg.get("stack_packs", []):
+            if (kind == "seed" and str(p.get("_seed")) == key) or (kind == "name" and p.get("name") == key.split("/")[-1]):
+                return repo, folder, p, True
+    return None
+
+
+def _put_local(folder, rel, filename, sha):
+    payload = (Path(folder) / rel).read_bytes()
+    got = hashlib.sha256(payload).hexdigest()
+    if got != sha:
+        return {"file": filename, "ok": False, "error": "did not match its catalog fingerprint"}
+    code, body = install(filename, payload, got)
+    ok = code == 200 and body.get("status") == "ok"
+    return {"file": filename, "ok": ok, "sha256": got, "error": None if ok else body.get("error", f"the Brainstem answered {code}")}
+
+
+def summon_team(hit):
+    repo, folder, e, is_stack = hit
+    if not is_stack:
+        done = [_put_local(folder, e["_file"], e["_install_filename"], e["_sha256"])]
+    else:
+        done = [_put_local(folder, f"{e['path']}/{n}", n, m["sha256"]) for n, m in e["files"].items() if n.endswith("_agent.py")]
+    ok = bool(done) and all(d["ok"] for d in done)
+    bad = "; ".join(f"{d['file']} {d['error']}" for d in done if not d["ok"])
+    return {"ok": ok, "kind": "stack" if is_stack else "agent", "display": e.get("display_name", e["name"]),
+            "name": e["name"], "files": done, "eggs": [], "source": f"your team catalog {repo}",
+            "error": None if ok else (bad or "that card carries nothing I can install")}
+
+
+# ── keep a song as a card ── the job you just did, as one agent file that can say itself and run itself.
+
+CARD = '''"""{title}: a kept song. Say it to hear the job; go to run it again."""
+
+__manifest__ = {{
+    "schema": "rapp-agent/1.0", "name": "@{owner}/{slug}_song_agent", "version": "1.0.0",
+    "display_name": {title!r}, "description": {desc!r}, "author": {owner!r},
+    "tags": ["verse", "song"], "category": "operations", "quality_tier": "community",
+    "requires_env": [], "dependencies": ["@rapp/basic_agent"],
+}}
+
+import json
+import os
+import urllib.request
+
+from agents.basic_agent import BasicAgent
+
+SONG = {song!r}
+
+
+class {cls}(BasicAgent):
+    def __init__(self):
+        self.name = {tool!r}
+        self.metadata = {{
+            "name": self.name,
+            "description": {desc!r},
+            "parameters": {{"type": "object", "properties": {{"action": {{
+                "type": "string", "enum": ["say", "go"],
+                "description": "say = read the song aloud, word for word; go = run the job again"}}}}, "required": ["action"]}},
+        }}
+        super().__init__(self.name, self.metadata)
+
+    def perform(self, **kwargs) -> str:
+        if kwargs.get("action") != "go":
+            return SONG
+        url = os.getenv("BRAINSTEM_URL") or f"http://127.0.0.1:{{os.getenv('PORT', '7071')}}"
+        steps = SONG.split("verse.", 1)[-1].rsplit("And seal", 1)[0].strip()
+        req = urllib.request.Request(url + "/chat", json.dumps({{"user_input": "Do these steps in order and show me the result: " + steps}}).encode(),
+                                     {{"Content-Type": "application/json"}})
+        with urllib.request.urlopen(req, timeout=300) as r:
+            return json.loads(r.read() or b"{{}}").get("response", "")
+'''
+
+
+def keep_song(title, song, repo=None):
+    """Write the song as a card into a team catalog's folder, rebuild its registry, load it here. Nothing leaves this device."""
+    song = " ".join(str(song or "").split())
+    if not re.match(r"(?i)^r,? ?a,? ?p,? ?p,? verse\.", song) or not re.search(r"(?i)seal\W*$", song):
+        return ('A song starts "R, A, P, P, verse." and ends "And seal." I was handed: "' + song[:120] +
+                '". Pass the whole song, word for word.')
+    cats = team_catalogs()
+    if repo is None:
+        if len(cats) != 1:
+            return "Tell me which team catalog keeps it (owner/name)." if cats else "Add a team catalog first: say its owner/name."
+        repo = cats[0][0]
+    folder = _clone(repo)
+    if not (folder / ".git").exists():
+        return f"{repo} is not one of your team catalogs yet. Add it first."
+    slug = re.sub(r"[^a-z0-9]+", "_", str(title or "").lower()).strip("_")
+    if not slug:
+        return "Give the song a short title."
+    owner = repo.split("/")[0]
+    cls = "".join(w.title() for w in slug.split("_")) + "SongAgent"
+    desc = f"The kept song '{title}'. Use when the person asks to say, read aloud, hear, run or repeat {title}."
+    body = CARD.format(title=title, owner=owner, slug=slug, song=song, cls=cls, tool=cls[:-5], desc=desc)
+    (folder / "agents").mkdir(exist_ok=True)
+    f = folder / "agents" / f"{slug}_song_agent.py"
+    f.write_text(body)
+    reg = build_catalog(folder, repo)
+    e = [a for a in reg["agents"] if a["_install_filename"] == f.name][0]
+    install(f.name, f.read_bytes(), e["_sha256"])
+    return (f"Kept. '{title}' is a card now and its chant is {e['_incantation']}. It works on this device already. "
+            f"Your team can't reach it until you say publish.")
+
+
+def publish(repo=None, yes=False):
+    """Send kept cards to the team: commit and push the catalog folder. A send, so it waits for a yes."""
+    cats = team_catalogs()
+    if repo is None and len(cats) == 1:
+        repo = cats[0][0]
+    if not repo or not (_clone(repo) / ".git").exists():
+        return "Tell me which team catalog to publish to (owner/name)."
+    folder = _clone(repo)
+    build_catalog(folder, repo)
+    changed = [l[3:] for l in _git(folder, "status", "--porcelain").stdout.splitlines()]
+    if not changed:
+        return f"Nothing new to publish to {repo}."
+    if not yes:
+        return f"This sends {len(changed)} changed files to {repo} where your whole team can bring them: {', '.join(changed[:6])}. Say yes to send."
+    _git(folder, "add", "-A")
+    c = _git(folder, "commit", "-q", "-m", "Keep songs as cards")
+    r = _git(folder, "push", "-q")
+    if c.returncode != 0 or r.returncode != 0:
+        return f"The send to {repo} did not go through: {(r.stderr or c.stderr).strip()[:200]}"
+    return f"Published to {repo}. Anyone on the team who has added this catalog can now say the chant."
+
+
 def _keep_egg(filename, url, sha):
     """Download an egg, check its catalog fingerprint, keep it on this device for the hatcher."""
     payload = _get(url)
@@ -170,6 +389,9 @@ def _keep_egg(filename, url, sha):
 def summon(text):
     """Resolve one chant, seed or name in the catalog and install it. One agent, or a whole stack."""
     kind, key = parse(text)
+    hit = in_team(kind, key)  # the team's own shelf answers first, and the reply says so
+    if hit:
+        return summon_team(hit)
     e = in_catalog(kind, key)
     if e:
         if e.get("_lifecycle") != "notarized":
@@ -229,7 +451,8 @@ class SummonChantAgent(BasicAgent):
         self.name = "SummonByChant"
         self.metadata = {
             "name": self.name,
-            "description": ("Install an agent or a whole stack into this Brainstem from its chant. Use when the person "
+            "description": ("Also: add a team catalog (owner/name), keep a song as a card, publish kept cards to the team. "
+                            "Install an agent or a whole stack into this Brainstem from its chant. Use when the person "
                             "says a seven-word chant, a card seed, or a name like @publisher/name, or asks to summon, "
                             "bring or add a card. Everything is fingerprint-checked against the catalog and ready on "
                             "the next message."),
@@ -238,18 +461,32 @@ class SummonChantAgent(BasicAgent):
                 "properties": {
                     "chant": {"type": "string",
                               "description": "the seven words exactly as said, or a seed number, or @publisher/name"},
+                    "catalog": {"type": "string",
+                                "description": "owner/name of a team catalog: to add it, or to say which one a keep or publish is for"},
+                    "keep": {"type": "string",
+                             "description": ("the ENTIRE song to keep as a card, copied word for word in one string: it starts "
+                                             "'R, A, P, P, verse.', includes every step and every chant word, and ends 'And seal.' "
+                                             "When keeping, pass only keep and title; do not also pass chant.")},
+                    "title": {"type": "string", "description": "a short title for the song being kept"},
+                    "publish": {"type": "boolean", "description": "true when the person asks to publish kept cards to the team"},
+                    "yes": {"type": "boolean", "description": "true only when the person said yes to sending, in this message"},
                     "then": {"type": "string",
                              "description": ("everything the person asked for after the bring, in their words "
                                              "(for example 'Check it answers. Show me.'). It runs once what was "
                                              "brought is live. Leave out if they only asked to bring.")},
                 },
-                "required": ["chant"],
             },
         }
         super().__init__(self.name, self.metadata)
 
     def perform(self, **kwargs) -> str:
         try:
+            if kwargs.get("keep"):
+                return keep_song(kwargs.get("title"), kwargs["keep"], kwargs.get("catalog"))
+            if kwargs.get("publish"):
+                return publish(kwargs.get("catalog"), bool(kwargs.get("yes")))
+            if kwargs.get("catalog") and not kwargs.get("chant"):
+                return add_catalog(kwargs["catalog"])
             r = summon(kwargs.get("chant", ""))
         except ValueError as e:
             return str(e)
@@ -264,7 +501,7 @@ class SummonChantAgent(BasicAgent):
         elif r["kind"] == "stack":
             said = f"Summoned the {r['display']} stack: {len(r['files'])} agents, every fingerprint matched."
         else:
-            said = (f"Summoned {r['display']} from the catalog. Its fingerprint matched "
+            said = (f"Summoned {r['display']} from {r.get('source', 'the catalog')}. Its fingerprint matched "
                     f"({r['files'][0]['sha256'][:12]}).")
         then = str(kwargs.get("then") or "").strip()
         then = re.sub(r"\W*\b(and\s+)?seal\W*$", "", then, flags=re.I).strip()  # the seal closes the song; it is not a step
