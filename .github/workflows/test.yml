@@ -49,6 +49,8 @@ jobs:
           python-version: '3.11'
       - name: Verify RAR stays inside the RAPP/1 checker's bounded scan
         run: python scripts/check_rapp_scan_budget.py
+      - name: Clutter ratchet (top-level files, pages, folders, kinds and tiers may shrink, never grow)
+        run: python scripts/check_ratchet.py
 
   # ─── SMOKE (fast gate — runs on every PR) ───────────────────────
   smoke:
