@@ -506,6 +506,8 @@ class SummonChantAgent(BasicAgent):
         then = str(kwargs.get("then") or "").strip()
         then = re.sub(r"\W*\b(and\s+)?seal\W*$", "", then, flags=re.I).strip()  # the seal closes the song; it is not a step
         brought = ", ".join(f["file"] for f in r["files"])
+        for egg in r.get("eggs") or []:
+            brought += f"; its egg is kept at {egg['path']}, not hatched yet"
         answer = carry_on(f"(Just installed and live now: {brought}.) {then}") if then else None
         if answer:
             return f"{said} Then I carried on with what you asked, and this came back: {answer}"

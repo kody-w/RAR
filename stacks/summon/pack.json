@@ -18,7 +18,7 @@
     "summon_chant_agent.py": {
       "purpose": "Drop into a Brainstem's agents/. Say a card's seven-word chant (or sing a verse that brings one) and the agent installs, fingerprint-checked, ready on the next message. No phone, no sidecar.",
       "size": 13035,
-      "sha256": "ca6135a0b0e75442e60e7c5329965d23ee6fa888335af3100bb6c15ccef04ed9"
+      "sha256": "2bd1226d9ea0867e34f3c2fee65e6262eb4616c39909878b4aa1cc28954ae431"
     }
   },
   "capabilities": [
