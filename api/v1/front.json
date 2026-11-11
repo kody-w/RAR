@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-11-11T00:35:20Z",
+  "generated": "2026-11-11T02:36:31Z",
   "counts": {
     "native": 227,
     "aggregated": 152,
@@ -4201,31 +4201,29 @@
     },
     {
       "rank": 68,
-      "ref": "@kody-w/launch_to_public_agent",
-      "title": "Launch to Public",
-      "description": "Snapshots the local brainstem via bond.py and plants it onto a public GitHub repo with a continuation manifest and launch fingerprint.",
+      "ref": "@rapp/start_brainstem_agent",
+      "title": "Start Brainstem",
+      "description": "Starts the person's Brainstem for them: says if one is already up, starts an installed one, or (after a yes) installs and starts one. Never stops another program.",
       "origin": "native",
-      "category": "platform",
+      "category": "devtools",
       "tags": [
-        "launch",
-        "publish",
-        "local-to-global",
-        "bond-technique",
-        "operator-mediated",
-        "platform"
+        "brainstem",
+        "install",
+        "start",
+        "onboarding"
       ],
       "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Flaunch_to_public_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/launch_to_public_agent.py",
+      "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fstart_brainstem_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/start_brainstem_agent.py",
       "source": null,
-      "score": 57.6,
+      "score": 57.7,
       "origin_rank": 41,
       "origin_size": 227,
       "components": {
         "community": 0.2958,
-        "depth": 1.0,
-        "freshness": 0.3431,
-        "tier": 0.85
+        "depth": 0.6504,
+        "freshness": 1.0,
+        "tier": 0.55
       },
       "scores_on": [
         "community",
@@ -4242,18 +4240,18 @@
           "comments": 0,
           "engagement": 0,
           "channels": {},
-          "tier": "verified",
-          "age_days": 185,
-          "lines": 807,
+          "tier": "community",
+          "age_days": 0,
+          "lines": 233,
           "has_card": true
         },
         "source": null
       },
       "why": [
         "no community feedback yet - scored at the population median",
-        "verified tier",
-        "added 185 days ago",
-        "807 lines",
+        "community tier",
+        "newest in the registry",
+        "233 lines",
         "has a rendered card"
       ]
     },
@@ -4323,23 +4321,22 @@
     },
     {
       "rank": 70,
-      "ref": "@kody-w/plant_seed_agent",
-      "title": "Plant Seed",
-      "description": "Creates a grail-complete public seed repo (neighborhood or twin) via the gh CLI, showing the full file plan first with dry-run on by default.",
+      "ref": "@kody-w/launch_to_public_agent",
+      "title": "Launch to Public",
+      "description": "Snapshots the local brainstem via bond.py and plants it onto a public GitHub repo with a continuation manifest and launch fingerprint.",
       "origin": "native",
       "category": "platform",
       "tags": [
-        "plant",
-        "seed",
-        "neighborhood",
-        "twin",
-        "holocard",
-        "grail",
-        "operator-mediated"
+        "launch",
+        "publish",
+        "local-to-global",
+        "bond-technique",
+        "operator-mediated",
+        "platform"
       ],
       "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fplant_seed_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/plant_seed_agent.py",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Flaunch_to_public_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/launch_to_public_agent.py",
       "source": null,
       "score": 57.6,
       "origin_rank": 42,
@@ -4367,7 +4364,7 @@
           "channels": {},
           "tier": "verified",
           "age_days": 185,
-          "lines": 588,
+          "lines": 807,
           "has_card": true
         },
         "source": null
@@ -4376,7 +4373,7 @@
         "no community feedback yet - scored at the population median",
         "verified tier",
         "added 185 days ago",
-        "588 lines",
+        "807 lines",
         "has a rendered card"
       ]
     },
@@ -4447,6 +4444,65 @@
     },
     {
       "rank": 72,
+      "ref": "@kody-w/plant_seed_agent",
+      "title": "Plant Seed",
+      "description": "Creates a grail-complete public seed repo (neighborhood or twin) via the gh CLI, showing the full file plan first with dry-run on by default.",
+      "origin": "native",
+      "category": "platform",
+      "tags": [
+        "plant",
+        "seed",
+        "neighborhood",
+        "twin",
+        "holocard",
+        "grail",
+        "operator-mediated"
+      ],
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fplant_seed_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/plant_seed_agent.py",
+      "source": null,
+      "score": 57.6,
+      "origin_rank": 43,
+      "origin_size": 227,
+      "components": {
+        "community": 0.2958,
+        "depth": 1.0,
+        "freshness": 0.3431,
+        "tier": 0.85
+      },
+      "scores_on": [
+        "community",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [
+        "community"
+      ],
+      "signals": {
+        "rar": {
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "verified",
+          "age_days": 185,
+          "lines": 588,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "no community feedback yet - scored at the population median",
+        "verified tier",
+        "added 185 days ago",
+        "588 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 73,
       "ref": "@kody-w/self_compact_agent",
       "title": "SelfCompact",
       "description": "The brainstem compacts its own context: a gauge on every chat, hints as it fills, and at the cutoff every other tool waits until the model writes a note to itself that survives when old turns drop out.",
@@ -4465,7 +4521,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/self_compact_agent.py",
       "source": null,
       "score": 57.6,
-      "origin_rank": 43,
+      "origin_rank": 44,
       "origin_size": 227,
       "components": {
         "community": 0.2958,
@@ -4500,62 +4556,6 @@
         "community tier",
         "added 18 days ago",
         "304 lines",
-        "has a rendered card"
-      ]
-    },
-    {
-      "rank": 73,
-      "ref": "@rapp/start_brainstem_agent",
-      "title": "Start Brainstem",
-      "description": "Starts the person's Brainstem for them: says if one is already up, starts an installed one, or (after a yes) installs and starts one. Never stops another program.",
-      "origin": "native",
-      "category": "devtools",
-      "tags": [
-        "brainstem",
-        "install",
-        "start",
-        "onboarding"
-      ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fstart_brainstem_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/start_brainstem_agent.py",
-      "source": null,
-      "score": 57.6,
-      "origin_rank": 44,
-      "origin_size": 227,
-      "components": {
-        "community": 0.2958,
-        "depth": 0.6451,
-        "freshness": 1.0,
-        "tier": 0.55
-      },
-      "scores_on": [
-        "community",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [
-        "community"
-      ],
-      "signals": {
-        "rar": {
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "community",
-          "age_days": 0,
-          "lines": 229,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "no community feedback yet - scored at the population median",
-        "community tier",
-        "newest in the registry",
-        "229 lines",
         "has a rendered card"
       ]
     },

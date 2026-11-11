@@ -1,0 +1,50 @@
+{
+  "acceptance": {
+    "checks": [
+      "manifest",
+      "namespace",
+      "content_sha256",
+      "base_precondition",
+      "security_scan",
+      "registry_build",
+      "card_forge",
+      "full_test_suite"
+    ],
+    "github_id": 1735900,
+    "github_login": "kody-w",
+    "policy": "rar-notary/1.0",
+    "workflow_run": "42947271614"
+  },
+  "action": "agent.update",
+  "agent": "@rapp/start_brainstem_agent",
+  "artifact": {
+    "algorithm": "sha256-lf-v1",
+    "digest": "d79d1b29cebde0efd3d59750fe7291cd5bb2e8b84a5b752eec86a045fc345dc5"
+  },
+  "canonical_path": "agents/@rapp/start_brainstem_agent.py",
+  "controller": {
+    "github_id": 1735900,
+    "github_login": "kody-w"
+  },
+  "created_at": "2026-11-11T02:37:38.508615+00:00",
+  "id": "rar_fa20f4a0f4e0a5dff108db845a3100846ab0af7ccbfc6b7dc458a048cee71039",
+  "issuer": "github:kody-w/RAR",
+  "previous": {
+    "digest": "6949e75bf48aa12b8a04a81281db35e95b1f54f016bae4c2bf866b70d49df942",
+    "receipt": "rar_e8db144f617a4178f15eb84e74815efeac466ec39c6c40a816b7e5a35da6714d",
+    "version": "1.0.1"
+  },
+  "quality_tier": "community",
+  "request_id": "req_1b6307bfbdc9faf65a6d89c7",
+  "revision_id": "fa20f4a0f4e0a5dff108db845a3100846ab0af7ccbfc6b7dc458a048cee71039",
+  "schema": "rar-receipt/1.0",
+  "status": "notarized",
+  "submission": {
+    "github_id": 1735900,
+    "github_login": "kody-w",
+    "issue_node_id": "I_kwDOR48twc8AAAABeLnXGA",
+    "issue_number": 1628,
+    "source_body_sha256": "2b1f9de2fc73120bb5b4b8f6109b41ae848f310f74d37c4f9b7f04677f50a89a"
+  },
+  "version": "1.0.2"
+}
