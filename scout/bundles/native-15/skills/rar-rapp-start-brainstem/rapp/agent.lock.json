@@ -1,7 +1,7 @@
 {
   "agent": "@rapp/start_brainstem_agent",
   "agent_file": "start_brainstem_agent.py",
-  "agent_sha256": "6949e75bf48aa12b8a04a81281db35e95b1f54f016bae4c2bf866b70d49df942",
+  "agent_sha256": "d79d1b29cebde0efd3d59750fe7291cd5bb2e8b84a5b752eec86a045fc345dc5",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "StartBrainstemAgent",
   "host_dependencies": [],
@@ -23,7 +23,7 @@
       "start",
       "onboarding"
     ],
-    "version": "1.0.1"
+    "version": "1.0.2"
   },
   "runtime_name": "StartBrainstem",
   "schema": "rapp-agent-lock/1.0",
@@ -49,5 +49,5 @@
     "required": [],
     "type": "object"
   },
-  "version": "1.0.1"
+  "version": "1.0.2"
 }

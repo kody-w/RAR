@@ -235,7 +235,7 @@
       ]
     },
     {
-      "bytes": 1083633,
+      "bytes": 1084595,
       "channel": "native",
       "files": 32,
       "id": "native-15",
@@ -17653,12 +17653,12 @@
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "1f8ba7341e9adbbe3b5f6bd555ad4333c7df05d38260edce9adac1318feac9ba",
+          "sha256": "c7b10ca2adcc7539138c79abb145f86558571941bee502d7dbc727e40af312c4",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-start-brainstem/SKILL.md"
         },
         {
           "path": "rapp/agent.lock.json",
-          "sha256": "456e43b6a0d01d4e2c354ddbbe0c819890c2cdd563c947aebbd2033061cd1ae3",
+          "sha256": "18ddf4f03724cb4c095422b58219fb2134c4aa2a0db70cdc28858dc68f3e5cdd",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-start-brainstem/rapp/agent.lock.json"
         },
         {
@@ -17668,7 +17668,7 @@
         },
         {
           "path": "start_brainstem_agent.py",
-          "sha256": "6949e75bf48aa12b8a04a81281db35e95b1f54f016bae4c2bf866b70d49df942",
+          "sha256": "d79d1b29cebde0efd3d59750fe7291cd5bb2e8b84a5b752eec86a045fc345dc5",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-start-brainstem/start_brainstem_agent.py"
         }
       ],
@@ -17699,11 +17699,11 @@
       },
       "requires_env": [],
       "skill_name": "rar-rapp-start-brainstem",
-      "skill_sha256": "1f8ba7341e9adbbe3b5f6bd555ad4333c7df05d38260edce9adac1318feac9ba",
-      "source_commit": "fcb927883bdbe52c37698e09e2153daf4ddf045a",
+      "skill_sha256": "c7b10ca2adcc7539138c79abb145f86558571941bee502d7dbc727e40af312c4",
+      "source_commit": "a12ea00788f1f38a27375c04d8be93b7e62584be",
       "source_kind": "rar-agent",
-      "source_sha256": "6949e75bf48aa12b8a04a81281db35e95b1f54f016bae4c2bf866b70d49df942",
-      "version": "1.0.1"
+      "source_sha256": "d79d1b29cebde0efd3d59750fe7291cd5bb2e8b84a5b752eec86a045fc345dc5",
+      "version": "1.0.2"
     },
     {
       "bundle": "native-15",
