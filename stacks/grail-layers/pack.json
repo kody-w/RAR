@@ -114,6 +114,25 @@
         "wraps": [
           "requests.post"
         ]
+      },
+      {
+        "id": "@kody-w/own_ai",
+        "kind": "layer",
+        "point": "provider",
+        "file": "own_ai.py",
+        "sha256": "54d10cbef64981c4c77346ccea2bffb99f792268dcab9781b661b9bdbc4484bc",
+        "locator": "https://kody-w.github.io/RAR/stacks/grail-layers/own_ai.py",
+        "proven_grail": [
+          "84d86c3b29e111a2c1d1c68b67230e057261f7fc8a191dfefc0e3b26d6fcc99c",
+          "bd55a7f0bcf5efd3f7966ca39bb146da3c25fda9a0b1ce5ba587919d3c3775f4"
+        ],
+        "what": "Layer: own_ai \u2014 the unchanged grail thinks with the AI already on this device, with no sign-in.",
+        "status": "staging",
+        "touches": [],
+        "wraps": [
+          "requests.get",
+          "requests.post"
+        ]
       }
     ],
     "seed": [

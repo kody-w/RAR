@@ -117,5 +117,6 @@ Generated from `stacks/*/pack.json` identities/points and each part file's decla
 | [@kody-w/local_models](stacks/grail-layers/local_models.py) | grail-layers | layer / provider | no | alias of @kody-w/providers | 35618683ebc3 (v0.6.17), bd55a7f0bcf5 (v0.6.16) |
 | [@kody-w/lispy_brainstem](stacks/grail-layers/lispy_brainstem.py) | grail-layers | kernel / kernel | no | current | Not a layer; no PROVEN_GRAIL declaration |
 | [@kody-w/senses_and_pages](stacks/grail-layers/senses_and_pages.py) | grail-layers | layer / agents | yes | current | 35618683ebc3 (v0.6.17), bd55a7f0bcf5 (v0.6.16) |
+| [@kody-w/own_ai](stacks/grail-layers/own_ai.py) | grail-layers | layer / provider | no | staging | 84d86c3b29e1 (v0.6.17), bd55a7f0bcf5 (v0.6.16) |
 
 <!-- END GENERATED LAYER FACTS -->
