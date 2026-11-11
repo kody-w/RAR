@@ -1,0 +1,31 @@
+{
+ "schema": "rar-ratchet/1",
+ "about": "Limits only go down. See scripts/check_ratchet.py.",
+ "set": "2026-11-10",
+ "limits": {
+  "root_files": {
+   "limit": 63,
+   "ruling": "baseline 2026-11-10: the count on the day the ratchet was added"
+  },
+  "root_pages": {
+   "limit": 23,
+   "ruling": "baseline 2026-11-10: the count on the day the ratchet was added"
+  },
+  "top_folders": {
+   "limit": 24,
+   "ruling": "baseline 2026-11-10: the count on the day the ratchet was added"
+  },
+  "entry_kinds": {
+   "limit": 3,
+   "ruling": "baseline 2026-11-10: the count on the day the ratchet was added"
+  },
+  "quality_tiers": {
+   "limit": 5,
+   "ruling": "baseline 2026-11-10: the count on the day the ratchet was added"
+  },
+  "categories": {
+   "limit": 14,
+   "ruling": "baseline 2026-11-10: the count on the day the ratchet was added"
+  }
+ }
+}
