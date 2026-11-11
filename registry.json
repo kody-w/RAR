@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-11T16:29:21Z",
+  "generated_at": "2026-11-11T18:25:30Z",
   "static_api": "rapp-static-api/1.1",
   "pages_base": "https://kody-w.github.io/RAR",
   "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
@@ -15747,6 +15747,37 @@
       "shelf": "app",
       "_seed": 16756029940331192320,
       "_incantation": "FORGE CHISEL PANTHER COVE PULSAR THEFT CARVE"
+    },
+    {
+      "name": "walkthroughs",
+      "display_name": "Walkthroughs (simulated click-throughs)",
+      "version": "0.1.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/walkthroughs",
+      "purpose": "An optional SDK for showing an agent, stack or distro working as a simulated Windows 11 click-through. A walkthrough is one JSON file pinned to the file it shows; one shared player draws it as text only. People follow the click-through instead of reading.",
+      "files": {
+        "walkthrough.py": {
+          "sha256": "88c33c31057eefdabfba12df0fb233d95bbd1c81e5848eb8b2879d326ccfcdc9",
+          "verified": true
+        },
+        "player.html": {
+          "sha256": "8208e3c8def409d9aa3ec8528abc43db862de9e4cab76f6b89513471df93f13f",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "041156bc347c0e86fda952f6326b279781c18e1e42555b5595dd6d0306c2fd16",
+          "verified": true
+        },
+        "walkthroughs/brainstem-skill.json": {
+          "sha256": "8f9ac13c72a1547a87f12ced4763527793bcbfff9c6404a7e14496d02cde398e",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 6305768983199357049,
+      "_incantation": "RELIC URN PANTHER JOIST STRAIN RAMP SMELT"
     },
     {
       "name": "wildhaven-ceo",
