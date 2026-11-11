@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-11T03:09:36Z",
+  "generated_at": "2026-11-11T16:29:21Z",
   "static_api": "rapp-static-api/1.1",
   "pages_base": "https://kody-w.github.io/RAR",
   "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
@@ -14747,22 +14747,22 @@
     {
       "name": "brainstem-skill",
       "display_name": "Brainstem skill (any AI)",
-      "version": "0.4.0",
+      "version": "0.5.0",
       "schema": "rapp-rar-stack/1.2",
       "status": "current",
       "path": "stacks/brainstem-skill",
       "purpose": "One SKILL.md that makes any AI RAPP compatible. On first read the AI writes one small loop file, which fetches the chant agent from this catalog, fingerprint-checked, and writes a standing note into the AI's own always-on instructions, so the page is never needed again. Each turn the AI loads its ra",
       "files": {
         "SKILL.md": {
-          "sha256": "e251b431d1df9321970a6aaaadf5b69cb08785fe5e3ce1d82d8f7a2cb0ceab4d",
+          "sha256": "e4a499d859a1ddd1b5d6a03f061fc136fa5c3d672d9a308a436bb01d501215ff",
           "verified": true
         },
         "kernel.py": {
-          "sha256": "1f00210fba8224c034bca57f385726be7c5b3588af74a9846c07467f7a902d33",
+          "sha256": "4c782e49418aadcff2ede9cc2a985b4fabc04028db7a3cd14867e32bb0434971",
           "verified": true
         },
         "README.md": {
-          "sha256": "dd37159814d2fb3f43b8d69b12e2b3aa93d4379fb5457998822673d9ce8d253e",
+          "sha256": "3ba7b0e1d1a7e3e0c9da8fb2889bd963998f614ece9207e269cb720fe56bc063",
           "verified": true
         }
       },
