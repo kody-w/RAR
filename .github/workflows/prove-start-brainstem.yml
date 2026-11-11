@@ -1,0 +1,22 @@
+name: Prove Start Brainstem
+
+# Run by hand. On fresh Windows, Linux and macOS machines, the catalog's Start Brainstem agent is asked to
+# start a Brainstem where none is installed. It must ask first, then install, and a real Brainstem must answer.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  prove:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ask the agent to start a Brainstem on a machine that has none
+        run: python3 scripts/prove_start_brainstem.py
