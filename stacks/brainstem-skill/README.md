@@ -14,6 +14,10 @@ listen on a Brainstem's address (`kernel.py serve`), with that AI doing the thin
 **Off switch:** delete `rapp/agents/`. The next turn removes the standing note; the instructions file is
 byte for byte what it was before.
 
+**Build line:** asked to build something and get it ready, the AI writes one agent file and runs `kernel.py ready`.
+The file must describe itself, answer a real call with the expected words, and only then is handed,
+fingerprint-checked, to the person's Brainstem on the same device through its own import door.
+
 Nothing here touches or replaces the Brainstem kernel. It is the same contract (`agents/`, `perform`,
 `/chat`, `/health`) honoured by a hundred-line loop, for AIs that are not a Brainstem.
 
