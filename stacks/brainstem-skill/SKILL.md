@@ -4,7 +4,7 @@ description: "Read once, then never again. Makes you RAPP compatible for good: y
 license: "MIT"
 compatibility: "Any AI that can write a file and run Python 3.9+. Nothing is installed."
 metadata:
-  rapp-skill: "0.3.1"
+  rapp-skill: "0.3.2"
 ---
 
 # RAPP: become a Brainstem, once
@@ -24,7 +24,8 @@ Tell the person, in plain words, and wait for a yes:
 
 1. Choose the home folder. It is `rapp/` here, with one exception: if a `rapp` folder already exists and has
    no `kernel.py` in it, it belongs to something else (on many machines it is a copy of the RAPP project).
-   Never write into it. Use `rapp-skill/` instead, and read `rapp-skill/` wherever this page says `rapp/`.
+   Never write into it. Use `rapp-skill/` instead, or if that name is taken too, the first of `rapp-skill-2/`,
+   `rapp-skill-3/` and so on that does not exist yet. Read that name wherever this page says `rapp/`.
    If the home folder already has `kernel.py`, skip to step 3.
 2. Write `rapp/kernel.py` from the block at the bottom of this page, with a script, never by retyping. The
    file is everything between the opening fence line (four backticks plus `python`) and the closing fence

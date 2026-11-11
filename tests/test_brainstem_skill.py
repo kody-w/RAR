@@ -126,6 +126,7 @@ def test_the_door_answers_in_a_brainstems_shape(home):
 
 def test_the_page_never_writes_into_a_rapp_folder_that_is_not_its_own():
     assert "Never write into it. Use `rapp-skill/` instead" in PAGE
+    assert "if that name is taken too, the first of `rapp-skill-2/`" in PAGE
 
 
 def test_the_note_names_the_folder_it_actually_lives_in(tmp_path, monkeypatch):
