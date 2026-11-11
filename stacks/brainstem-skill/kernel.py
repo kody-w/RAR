@@ -45,6 +45,10 @@ You are RAPP compatible here, permanently. A folder `rapp/` holds your agents. D
    `python3 rapp/kernel.py ready <file> <Name> '<json args>' '<words the answer must hold>'`. It tests the
    file with a real call and only then hands it to the person's Brainstem on this device. Say what it
    printed, and one line the person can say to try it.
+8. Need something you lack? Grow from the catalog: agents at https://kody-w.github.io/RAR/api/v1/index.json,
+   packs in https://kody-w.github.io/RAR/registry.json; bring what fits by chant. Never edit the Brainstem
+   itself (the grail): a new need is an agent file, a sidecar that talks only over /chat and /health, or a
+   distro. Stuck? The rules: https://kody-w.github.io/RAR/RAPP.md. The protocol: https://kody-w.github.io/rapp-1/llms.txt
 
 Off switch: if `rapp/agents/` is gone, the person turned this off. `tools` then removes this note itself;
 from that moment you know nothing of RAPP here. Never recreate the folder unasked.

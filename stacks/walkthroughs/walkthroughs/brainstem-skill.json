@@ -5,7 +5,7 @@
  "machine": "windows-11",
  "shows": {
   "file": "stacks/brainstem-skill/SKILL.md",
-  "sha256": "e4a499d859a1ddd1b5d6a03f061fc136fa5c3d672d9a308a436bb01d501215ff"
+  "sha256": "27f0223a1e72b2175c974f67d2b0f0db59ca2e7b49d7dfcd3b5fe72bf1f72aee"
  },
  "simulated": true,
  "steps": [
