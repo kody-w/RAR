@@ -33,3 +33,14 @@ def test_approval_commits_the_page_it_builds(workflow):
     first_add = re.search(r"git add agents/[^\n]*", text).group(0)
     assert " a/ " in first_add + " ", "the agent's page under a/ is built at approval and must be committed with it"
 
+
+
+def test_the_nightly_job_rehearses_a_first_publish():
+    text = (ROOT / ".github" / "workflows" / "nightly.yml").read_text()
+    assert "python scripts/rehearse_first_publish.py" in text
+
+
+def test_the_rehearsal_reads_its_steps_from_the_approval_job_itself():
+    text = (ROOT / "scripts" / "rehearse_first_publish.py").read_text()
+    for name in ("Run admission checks", "Commit notarized mutation", "Refresh post-commit registry provenance"):
+        assert name in text and name in (ROOT / ".github" / "workflows" / "approve-agent.yml").read_text()

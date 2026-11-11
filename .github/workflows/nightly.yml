@@ -28,7 +28,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install test deps
-        run: pip install pytest pyyaml
+        run: pip install pytest pyyaml requests  # requests: the admission checks the rehearsal runs need it, as in approve-agent.yml
 
       # Snapshot BEFORE anything can rewrite it. The test suite itself runs
       # build_registry.py, so from the next step onward registry.json is a
@@ -43,6 +43,14 @@ jobs:
       - name: Full test suite
         shell: bash
         run: pytest -v --tb=short 2>&1 | tee /tmp/test_output.txt
+
+      # Updating an agent is exercised daily; a brand-new agent's first publish is the path that rots
+      # (PyPI, npm and crates all learned this). The rehearsal runs the real submit, intake, approval and
+      # admission steps in a throwaway copy and fails if approval would leave a built file uncommitted.
+      # It publishes nothing: no issue is opened and nothing is pushed.
+      - name: Rehearse a brand-new agent's first publish
+        shell: bash
+        run: python scripts/rehearse_first_publish.py 2>&1 | tee -a /tmp/test_output.txt
 
       - name: Rebuild registry (integrity check)
         shell: bash
