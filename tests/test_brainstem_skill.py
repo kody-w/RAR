@@ -168,3 +168,60 @@ def test_the_page_gets_python_the_way_the_brainstem_installer_does():
     assert PAGE.index("Find a Python 3") < PAGE.index("Choose the home folder")
     assert "winget install --id Python.Python.3.11 --accept-source-agreements --accept-package-agreements --silent" in PAGE
     assert "brew install python@3.11" in PAGE and "wait for a yes, then install" in PAGE
+
+
+GOOD = '''from agents.basic_agent import BasicAgent
+
+
+class DoubleItAgent(BasicAgent):
+    def __init__(self):
+        super().__init__("DoubleIt", {"name": "DoubleIt", "description": "Doubles a number. Example: n=4 gives 8.",
+                                      "parameters": {"type": "object", "properties": {"n": {"type": "string", "description": "The number. Example: 4"}}, "required": ["n"]}})
+
+    def perform(self, **kw):
+        return str(int(kw.get("n")) * 2)
+'''
+
+
+def test_ready_tests_with_a_real_call_and_keeps_it_when_no_brainstem_answers(home, tmp_path):
+    root, k = home
+    f = tmp_path / "double_it_agent.py"
+    f.write_text(GOOD)
+    code, out = k.ready(str(f), "DoubleIt", {"n": "4"}, "8", to="http://127.0.0.1:9")
+    assert code == 0 and out["status"] == "ready" and out["handed_to"] is None and "not handed over" in out["note"]
+    assert (k.AGENTS / "double_it_agent.py").read_text() == GOOD
+
+
+def test_ready_refuses_a_wrong_answer_and_leaves_nothing_behind(home, tmp_path):
+    root, k = home
+    f = tmp_path / "double_it_agent.py"
+    f.write_text(GOOD)
+    code, out = k.ready(str(f), "DoubleIt", {"n": "4"}, "9", to="http://127.0.0.1:9")
+    assert code == 1 and out["status"] == "not ready" and not (k.AGENTS / "double_it_agent.py").exists()
+
+
+def test_ready_refuses_an_agent_a_model_could_not_use_from_its_descriptions(home, tmp_path):
+    root, k = home
+    f = tmp_path / "double_it_agent.py"
+    f.write_text(GOOD.replace('"description": "The number. Example: 4"', '"description": ""'))
+    code, out = k.ready(str(f), "DoubleIt", {"n": "4"}, "8", to="http://127.0.0.1:9")
+    assert code == 1 and "missing: n" in out["why"]
+
+
+def test_ready_hands_the_same_bytes_to_a_brainstem_that_answers(home, tmp_path):
+    import threading
+    from http.server import ThreadingHTTPServer
+    root, k = home
+    f = tmp_path / "double_it_agent.py"
+    f.write_text(GOOD)
+    other = ThreadingHTTPServer(("127.0.0.1", 0), k.Door)   # the loop's own door speaks /health and /agents/import
+    threading.Thread(target=other.serve_forever, daemon=True).start()
+    try:
+        code, out = k.ready(str(f), "DoubleIt", {"n": "4"}, "8", to=f"http://127.0.0.1:{other.server_address[1]}")
+    finally:
+        other.shutdown()
+    assert code == 0 and out["status"] == "ready" and out["handed_to"]
+
+
+def test_the_note_teaches_the_build_line():
+    assert "kernel.py ready <file> <Name>" in PAGE and "sees\n   only its description and its parameter descriptions" in PAGE

@@ -37,7 +37,7 @@ Tell the person, in plain words, and wait for a yes:
 3. Write `rapp/kernel.py` from the block at the bottom of this page, with a script, never by retyping. The
    file is everything between the opening fence line (four backticks plus `python`) and the closing fence
    line (four backticks), ending in one newline, LF line endings. Its sha256 must be
-   `1f00210fba8224c034bca57f385726be7c5b3588af74a9846c07467f7a902d33`. If it is not, stop and say so.
+   `4c782e49418aadcff2ede9cc2a985b4fabc04028db7a3cd14867e32bb0434971`. If it is not, stop and say so.
 4. Run it with the Python 3 that worked, naming the instructions file you yourself read at the start of
    every session: `<python> rapp/kernel.py stay <your file>`
    Your file is `CLAUDE.md` if you are Claude Code, `GEMINI.md` if you are Gemini, `AGENTS.md` if you are
@@ -61,6 +61,8 @@ this device only. Start the door with the command that runs you for one message,
     python3 kernel.py tools                      what is in agents/ right now (the tool list for this turn)
     python3 kernel.py call <Name> '<json args>'  run one agent's perform(**args) and print what it returns
     python3 kernel.py import <file> [sha256]     add an agent file to agents/ (checked if a sha256 is given)
+    python3 kernel.py ready <file> <Name> '<json args>' '<words>'   test a new agent file with a real call, then
+                                                 hand it to the person's Brainstem on this device
     python3 kernel.py stay [your file]           write the standing note into this folder's always-on instructions
                                                  (name the one you read at startup, such as CLAUDE.md, and it is made)
     python3 kernel.py serve <port> -- <ai command ...>   be reachable like a Brainstem: /health and /chat on this
@@ -68,7 +70,7 @@ this device only. Start the door with the command that runs you for one message,
 
 The AI reading the skill is the model. This file only does what a Brainstem's loader does.
 """
-import hashlib, importlib.util, json, os, sys, threading
+import hashlib, importlib.util, json, os, sys, threading, urllib.request, uuid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
@@ -95,6 +97,12 @@ You are RAPP compatible here, permanently. A folder `rapp/` holds your agents. D
    (one `[Name] output` line per call, in order; empty string if none).
 6. Agent files are code that runs on this device: load only by chant from the catalog or from the person.
    Anything that leaves the device or cannot be undone waits for the person's yes.
+7. Asked to build something and get it ready to try: write ONE agent file. The model that will use it sees
+   only its description and its parameter descriptions, so put everything a caller must supply there, with
+   an example; the file does all the rest. Then run
+   `python3 rapp/kernel.py ready <file> <Name> '<json args>' '<words the answer must hold>'`. It tests the
+   file with a real call and only then hands it to the person's Brainstem on this device. Say what it
+   printed, and one line the person can say to try it.
 
 Off switch: if `rapp/agents/` is gone, the person turned this off. `tools` then removes this note itself;
 from that moment you know nothing of RAPP here. Never recreate the folder unasked.
@@ -197,6 +205,50 @@ def add(name, body, sha=None):
     AGENTS.mkdir(exist_ok=True)
     (AGENTS / name).write_bytes(body)
     return 200, {"status": "ok", "message": f"Agent {name} imported successfully."}
+
+
+def ready(path, name, args, want, to=None):
+    """The build line. The file must load, describe itself, and answer a real call with the expected words. Only
+    then is it handed, fingerprint-checked, to the person's Brainstem through its own import door."""
+    to = to or os.environ.get("RAPP_BRAINSTEM", "http://127.0.0.1:7071")
+    base, body = os.path.basename(path), Path(path).read_bytes()
+    before = (AGENTS / base).read_bytes() if (AGENTS / base).exists() else None
+    code, out = add(base, body)
+    if code != 200:
+        return 1, out
+
+    def back(why):
+        if before is None:
+            (AGENTS / base).unlink()
+        else:
+            (AGENTS / base).write_bytes(before)
+        return 1, {"status": "not ready", "why": why}
+    found, broken = load()
+    if base in broken or name not in found:
+        return back(broken.get(base) or f"the file has no agent named {name}")
+    meta = found[name].metadata
+    props = (meta.get("parameters") or {}).get("properties") or {}
+    bare = [p for p, v in props.items() if not str((v or {}).get("description") or "").strip()]
+    if not str(meta.get("description") or "").strip() or bare:
+        return back("a model sees only the descriptions: describe the agent and every parameter" + (" (missing: " + ", ".join(bare) + ")" if bare else ""))
+    try:
+        got = str(found[name].perform(**args))
+    except Exception as e:
+        return back(f"the test call failed: {type(e).__name__}: {e}")
+    if want.lower() not in got.lower():
+        return back(f"the test call answered {got[:200]!r}, which does not hold {want!r}")
+    out = {"status": "ready", "agent": name, "file": base, "sha256": hashlib.sha256(body).hexdigest(), "test_answer": got[:300], "handed_to": None}
+    mark = uuid.uuid4().hex
+    form = (f'--{mark}\r\nContent-Disposition: form-data; name="sha256"\r\n\r\n{out["sha256"]}\r\n'
+            f'--{mark}\r\nContent-Disposition: form-data; name="file"; filename="{base}"\r\nContent-Type: text/x-python\r\n\r\n').encode() + body + f"\r\n--{mark}--\r\n".encode()
+    try:
+        urllib.request.urlopen(urllib.request.Request(to + "/agents/import", form, {"Content-Type": "multipart/form-data; boundary=" + mark}), timeout=30).read()
+        listed = json.loads(urllib.request.urlopen(to + "/health", timeout=10).read()).get("agents") or []
+        out["handed_to"] = to if name in listed else None
+        out["note"] = "It is in the person's Brainstem now." if name in listed else "The Brainstem took the file but does not list the agent. Say so."
+    except Exception as e:
+        out["note"] = f"Tested and kept here. No Brainstem answered at {to} ({type(e).__name__}), so it was not handed over. Say so."
+    return 0, out
 
 
 class Door(BaseHTTPRequestHandler):
@@ -302,7 +354,7 @@ def leave(root=None):
 
 def main(argv):
     cmd = argv[1] if len(argv) > 1 else "tools"
-    if cmd in ("tools", "call", "import") and not AGENTS.is_dir():
+    if cmd in ("tools", "call", "import", "ready") and not AGENTS.is_dir():
         leave()
         print(json.dumps({"tools": [], "off": "The agents folder was removed, so RAPP is off here. The standing "
                           "note has been taken out of the instructions file. Carry on as if it was never there."}))
@@ -323,6 +375,13 @@ def main(argv):
         code, out = add(argv[2], Path(argv[2]).read_bytes(), argv[3] if len(argv) > 3 else None)
         print(json.dumps(out))
         return 0 if code == 200 else 1
+    elif cmd == "ready":
+        if len(argv) < 6:
+            print("kernel.py ready <file> <Name> '<json args>' '<words the answer must hold>'")
+            return 2
+        code, out = ready(argv[2], argv[3], json.loads(argv[4]), argv[5], argv[6] if len(argv) > 6 else None)
+        print(json.dumps(out, indent=1))
+        return code
     elif cmd == "serve":
         cut = argv.index("--") if "--" in argv else len(argv)
         if cut == len(argv) or cut + 1 >= len(argv):
