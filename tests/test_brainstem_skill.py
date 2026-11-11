@@ -141,3 +141,30 @@ def test_the_note_names_the_folder_it_actually_lives_in(tmp_path, monkeypatch):
     note = (tmp_path / "AGENTS.md").read_text()
     assert "rapp-skill/kernel.py tools" in note and "`rapp-skill/agents/`" in note
     assert "rapp/kernel.py" not in note.replace("rapp-skill/kernel.py", "")
+
+
+def test_an_ai_that_names_its_own_file_finds_the_note_there_in_an_empty_folder(home, capsys):
+    root, k = home
+    assert k.stay(mine=["CLAUDE.md"]) == ["CLAUDE.md"]
+    assert "rapp/kernel.py tools" in (root / "CLAUDE.md").read_text() and not (root / "AGENTS.md").exists()
+    _remove_agents(k)
+    k.main(["kernel.py", "tools"])
+    assert not (root / "CLAUDE.md").exists()
+
+
+def test_naming_a_file_keeps_the_ones_already_there(home):
+    root, k = home
+    (root / "AGENTS.md").write_text("# Mine\n")
+    assert k.stay(mine=["CLAUDE.md"]) == ["AGENTS.md", "CLAUDE.md"]
+    assert (root / "AGENTS.md").read_text().startswith("# Mine\n")
+
+
+def test_stay_refuses_a_file_it_could_not_later_clean_up(home, capsys, monkeypatch):
+    root, k = home
+    assert k.main(["kernel.py", "stay", "NOTES.md"]) == 2 and not (root / "NOTES.md").exists()
+
+
+def test_the_page_gets_python_the_way_the_brainstem_installer_does():
+    assert PAGE.index("Find a Python 3") < PAGE.index("Choose the home folder")
+    assert "winget install --id Python.Python.3.11 --accept-source-agreements --accept-package-agreements --silent" in PAGE
+    assert "brew install python@3.11" in PAGE and "wait for a yes, then install" in PAGE

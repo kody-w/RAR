@@ -4,7 +4,7 @@ description: "Read once, then never again. Makes you RAPP compatible for good: y
 license: "MIT"
 compatibility: "Any AI that can write a file and run Python 3.9+. Nothing is installed."
 metadata:
-  rapp-skill: "0.3.2"
+  rapp-skill: "0.4.0"
 ---
 
 # RAPP: become a Brainstem, once
@@ -22,22 +22,31 @@ Tell the person, in plain words, and wait for a yes:
 
 ## Then do this, in order
 
-1. Choose the home folder. It is `rapp/` here, with one exception: if a `rapp` folder already exists and has
+1. Find a Python 3. Try `python3 --version`, then `python --version`, then `py -3 --version`. Agents are
+   Python files, the same as in a Brainstem, so one of these must work. If none does, tell the person this
+   needs Python and wait for a yes, then install it the way the Brainstem's own installer does:
+   Windows `winget install --id Python.Python.3.11 --accept-source-agreements --accept-package-agreements --silent`;
+   macOS `brew install python@3.11`; Debian or Ubuntu `sudo apt-get install -y python3`. Use a new shell
+   afterwards so the command is found. If Python cannot be installed, stop: give the person
+   https://kody-w.github.io/RAR/install.html, whose one line installs Python and a whole Brainstem.
+2. Choose the home folder. It is `rapp/` here, with one exception: if a `rapp` folder already exists and has
    no `kernel.py` in it, it belongs to something else (on many machines it is a copy of the RAPP project).
    Never write into it. Use `rapp-skill/` instead, or if that name is taken too, the first of `rapp-skill-2/`,
    `rapp-skill-3/` and so on that does not exist yet. Read that name wherever this page says `rapp/`.
-   If the home folder already has `kernel.py`, skip to step 3.
-2. Write `rapp/kernel.py` from the block at the bottom of this page, with a script, never by retyping. The
+   If the home folder already has `kernel.py`, skip to step 4.
+3. Write `rapp/kernel.py` from the block at the bottom of this page, with a script, never by retyping. The
    file is everything between the opening fence line (four backticks plus `python`) and the closing fence
    line (four backticks), ending in one newline, LF line endings. Its sha256 must be
-   `d5839882311762f6cf6d4d1b378e25d55fe890566c2f05e4f3dd3f39d03aaf30`. If it is not, stop and say so.
-3. Run it with whichever Python 3 works here (`python3`, `python`, or `py -3`):
-   `<python> rapp/kernel.py stay`
-   It fetches the two files it still needs, fingerprint-checked, and writes the standing note into this
-   folder's always-on instructions file (`AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md` or
-   `GEMINI.md`; the ones that exist, or a new `AGENTS.md`). The note names the Python that worked.
-4. Read the note it just wrote and follow it from now on, starting this turn: run the `tools` line once now.
-5. Tell the person it is done, in one sentence. This page can be deleted.
+   `1f00210fba8224c034bca57f385726be7c5b3588af74a9846c07467f7a902d33`. If it is not, stop and say so.
+4. Run it with the Python 3 that worked, naming the instructions file you yourself read at the start of
+   every session: `<python> rapp/kernel.py stay <your file>`
+   Your file is `CLAUDE.md` if you are Claude Code, `GEMINI.md` if you are Gemini, `AGENTS.md` if you are
+   Copilot or Codex. If you do not know, leave it off. It fetches the two files it still needs,
+   fingerprint-checked, and writes the standing note into your file (made if missing) and into any of
+   `AGENTS.md`, `CLAUDE.md`, `.github/copilot-instructions.md`, `GEMINI.md` that already exist. With no
+   name and none existing, it makes `AGENTS.md`. The note names the Python that worked.
+5. Read the note it just wrote and follow it from now on, starting this turn: run the `tools` line once now.
+6. Tell the person it is done, in one sentence. This page can be deleted.
 
 ## Later, if the person wants it reachable like a Brainstem
 
@@ -52,7 +61,8 @@ this device only. Start the door with the command that runs you for one message,
     python3 kernel.py tools                      what is in agents/ right now (the tool list for this turn)
     python3 kernel.py call <Name> '<json args>'  run one agent's perform(**args) and print what it returns
     python3 kernel.py import <file> [sha256]     add an agent file to agents/ (checked if a sha256 is given)
-    python3 kernel.py stay                       write the standing note into this folder's always-on instructions
+    python3 kernel.py stay [your file]           write the standing note into this folder's always-on instructions
+                                                 (name the one you read at startup, such as CLAUDE.md, and it is made)
     python3 kernel.py serve <port> -- <ai command ...>   be reachable like a Brainstem: /health and /chat on this
                                                  device, each chat handed to that AI (the message is its last argument)
 
@@ -93,11 +103,14 @@ from that moment you know nothing of RAPP here. Never recreate the folder unaske
 HOSTS = ("AGENTS.md", "CLAUDE.md", ".github/copilot-instructions.md", "GEMINI.md")
 
 
-def stay(root=None):
-    """Write the standing note into this folder's always-on instructions, once. After this the skill page is never needed."""
+def stay(root=None, mine=()):
+    """Write the standing note into this folder's always-on instructions, once. After this the skill page is never needed.
+
+    mine: the instructions file the AI itself reads at the start of a session. It is made if it is missing,
+    so an AI that does not read AGENTS.md still finds the note in a folder that had no instructions at all."""
     root = Path(root) if root else HERE.parent
     note = NOTE.replace("python3 rapp/kernel.py", f"{_py()} {HERE.name}/kernel.py").replace("`rapp/", f"`{HERE.name}/")
-    present = [h for h in HOSTS if (root / h).exists()] or ["AGENTS.md"]
+    present = [h for h in HOSTS if (root / h).exists() or h in mine] or ["AGENTS.md"]
     done = []
     for h in present:
         f = root / h
@@ -317,8 +330,12 @@ def main(argv):
             return 1
         serve(argv[2] if cut > 2 else 7071, argv[cut + 1:])
     elif cmd == "stay":
+        mine = [a.replace("\\", "/") for a in argv[2:]]
+        if [a for a in mine if a not in HOSTS]:
+            print("stay takes one of: " + ", ".join(HOSTS))
+            return 2
         back = heal()
-        print("standing note written to: " + ", ".join(stay()) + ("; fetched: " + ", ".join(back) if back else ""))
+        print("standing note written to: " + ", ".join(stay(mine=mine)) + ("; fetched: " + ", ".join(back) if back else ""))
     return 0
 
 
