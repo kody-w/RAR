@@ -1,9 +1,9 @@
 {
   "artifact_type": "skill-catalog",
   "counts": {
-    "generated_projections": 244,
+    "generated_projections": 245,
     "reviewed_submissions": 2,
-    "total": 246
+    "total": 247
   },
   "description": "Static catalog of reviewed portable skills and generated Scout projections. Skill artifact kind is independent from protocol conformance; catalog admission never implies runtime or authenticated RAPP/1 compliance.",
   "hashing": {
@@ -12,7 +12,7 @@
   },
   "inputs": {
     "canonical_manifests": "b3db907d4b20894ca52b84988590e7b577d561477cf6b48167b04f15c5e08e63",
-    "scout_catalog": "a863b86102d619c4399a64778be688e0a7dc524c575bfef8c159548a6b2d36c8",
+    "scout_catalog": "10d10178cc823d04281f2b291d54587a2a1385f2f7291f0549d492c03ec44afd",
     "scout_toaster": {
       "commit": "d54ba8484b5c5dae6406d2090c03115d12985446",
       "sha256": "d340043178aa4160f76a179b8b1086971e09207b212aff2ab2c0752b69173e17"
@@ -24620,6 +24620,116 @@
       "catalog_origin": "generated-projection",
       "category": "projection",
       "compatibility": {},
+      "description": "Start the person's Brainstem on this computer. Use when they say 'start my Brainstem', 'install a Brainstem' or 'is my Brainstem up'. It reports one already running, starts an installed one, or installs one after the person says yes. Pass yes=true only after the person has agreed to the install.",
+      "display_name": "rar-rapp-start-brainstem",
+      "install": {
+        "bundle": "native-15",
+        "entrypoint": "SKILL.md",
+        "import_url": "https://github.com/kody-w/RAR/tree/main/scout/bundles/native-15",
+        "skill_name": "rar-rapp-start-brainstem",
+        "strategy": "scout-import",
+        "verify": "sha256-before-use"
+      },
+      "license": "",
+      "manifest": null,
+      "name": "@rar-scout/rar-rapp-start-brainstem",
+      "namespace": "@rar-scout",
+      "protocol_conformance": {
+        "evidence": [],
+        "profile": null,
+        "status": "not_assessed"
+      },
+      "relationships": [
+        {
+          "artifact_type": "agent",
+          "name": "@rapp/start_brainstem_agent",
+          "type": "projection_of"
+        }
+      ],
+      "search_terms": [
+        "rar",
+        "rapp",
+        "start",
+        "brainstem",
+        "agent",
+        "person",
+        "on",
+        "computer",
+        "use",
+        "when",
+        "they",
+        "say",
+        "my",
+        "install",
+        "or",
+        "is",
+        "up",
+        "it",
+        "reports",
+        "one",
+        "already",
+        "running",
+        "starts",
+        "an",
+        "installed",
+        "installs",
+        "after",
+        "says",
+        "yes",
+        "pass",
+        "true",
+        "only"
+      ],
+      "slug": "rar-rapp-start-brainstem",
+      "source": {
+        "artifact_sha256": "f07dc57512a2a1b5d8b72aa69f3536b4512cdfb3f59d08d5e2be0076d3484fa9",
+        "entrypoint": "scout/bundles/native-15/skills/rar-rapp-start-brainstem/SKILL.md",
+        "entrypoint_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-start-brainstem/SKILL.md",
+        "files": [
+          {
+            "path": "scout/bundles/native-15/skills/rar-rapp-start-brainstem/SKILL.md",
+            "sha256": "ccaf941141db125fb2e1a0404ee9b700a80f2385f524c40a77e3b2000562b32b",
+            "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-start-brainstem/SKILL.md"
+          },
+          {
+            "path": "scout/bundles/native-15/skills/rar-rapp-start-brainstem/rapp/agent.lock.json",
+            "sha256": "cdc27ec177cc0a26099a34bf78fb7b4f9c8420d03fc12a664237ff15dbdfd54e",
+            "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-start-brainstem/rapp/agent.lock.json"
+          },
+          {
+            "path": "scout/bundles/native-15/skills/rar-rapp-start-brainstem/scripts/run_agent.py",
+            "sha256": "0e91afc74150f12fa53e52e0e498b9c81046204a9af7470fe584dacdc1c06742",
+            "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-start-brainstem/scripts/run_agent.py"
+          },
+          {
+            "path": "scout/bundles/native-15/skills/rar-rapp-start-brainstem/start_brainstem_agent.py",
+            "sha256": "f07dc57512a2a1b5d8b72aa69f3536b4512cdfb3f59d08d5e2be0076d3484fa9",
+            "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-start-brainstem/start_brainstem_agent.py"
+          }
+        ],
+        "hash_algorithm": "sha256",
+        "input_revision": "06760087109e14174031ee39b3dcb4bca4d70f93",
+        "projection_generator": {
+          "schema": "rar-scout/1.0",
+          "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
+        },
+        "repository": "kody-w/RAR",
+        "revision": null,
+        "source_kind": "rar-agent"
+      },
+      "tags": [
+        "native",
+        "projection",
+        "scout"
+      ],
+      "version": "1.0.0"
+    },
+    {
+      "artifact_type": "skill",
+      "author": "RAR Scout projection",
+      "catalog_origin": "generated-projection",
+      "category": "projection",
+      "compatibility": {},
       "description": "Help the user navigate the kody-w/RAPP_Store catalog. Call this whenever the user asks what's in the store, what they should install, what categories exist, how to install a rapplication, or how two rapplications compare. Actions: list (browse all, optional category/tag filter), search (keyword match), describe (full details by id), recommend (natural-language goal → top 3 with rationale), install (curl one-liner), compare (side-by-side two ids), categories (facet counts), spec (explain the spec).",
       "display_name": "rar-rapp-store-navigator",
       "install": {
@@ -24733,9 +24843,9 @@
       "description": "Generate, build, install, list, and uninstall RAPP swarms.\n\nA SWARM is a multi-persona pipeline collapsed into ONE shareable agent file — like BookFactory (Writer→Editor→CEO→Publisher→Reviewer all inlined as _Internal* classes behind one public entrypoint). Each persona has its own SOUL/system prompt; deterministic Python in perform() orchestrates them — the LLM calls are leaf nodes, the control flow is code.\n\nROLE BOUNDARY:\n • Single one-shot agent (fetch xkcd, roll dice) → LearnNew with action='create'. Do NOT use SwarmFactory.\n • Multi-persona converged singleton (research→write→critique, write→edit→publish) → SwarmFactory.generate.\n • Existing multi-file agents to collapse into one shippable file → SwarmFactory.build.\n\nActions:\n • 'generate' — Design a BRAND-NEW converged swarm. YOU (the LLM) compose the full Python source — multiple _Internal persona classes (each with its own SOUL) plus ONE public composite — and pass it as 'agent_code'. Hot-loads on the next request. If the request is single-persona, REFUSE and route to LearnNew.create.\n • 'build' — Converge existing local agents into a singleton .py.\n • 'list' / 'install' / 'uninstall' — RAPP Store catalog ops.\n\nHARD RULES for generated swarm code (each maps to a shipped pattern in @rarbookworld/bookfactory v0.4 — read it as the exemplar):\n 1. ERRORS ARE DATA, NEVER CONTENT. _post retries once on 429/5xx/network then RAISES RuntimeError. perform() wraps the pipeline in ONE try/except and returns json.dumps({'status':'error','failed_stage':...,'completed_stages':[...]}). NEVER return '(LLM HTTP ...)' strings — the next persona would edit the error as if it were prose and every downstream call burns on garbage.\n 2. GATES ACTUALLY GATE. When a persona renders a verdict (ship/hold, a score), obtain it via _llm_json (stdlib parse + required-keys check + one re-prompt-with-the-error) and BRANCH on it in code; honor 'hold' by halting with a partial report. Use _llm_json ONLY for verdict-shaped outputs — prose stages stay raw text (JSON-wrapping a draft corrupts code fences and voice).\n 3. PER-RUN WORKSPACE. Artifacts go under a fresh subdir per run (timestamp+uuid). The brainstem serves requests threaded; fixed paths make concurrent runs clobber each other.\n 4. STATIC BOUNDS. Every revision/retry cycle is capped by a hard-coded constant, and a run-scoped counter inside _llm_call refuses past _MAX_LLM_CALLS with a clear error. Refusal is a feature.\n 5. PARALLEL ONLY WHEN SAFE. If ≥2 stages consume the SAME input and NEITHER writes a shared memory GUID, you may inline a 6-line ThreadPoolExecutor helper (cap 3 branches). Personas sharing a memory GUID must stay sequential — the local storage shim has no file locking, so concurrent writers lose updates.\n 6. TIERING IS OPPORTUNISTIC. _llm_call(soul, prompt, tier=None); tier='small' reads AZURE_OPENAI_DEPLOYMENT_SMALL / OPENAI_MODEL_SMALL when set and silently falls back to the primary deployment. Never hard-code a literal model name — on Azure the 'model' is a per-tenant deployment name; a baked-in id 404s on every box but the author's.\n\nMemory architecture (each swarm picks its own):\nPersonas use AzureFileStorageManager().set_memory_context(<guid>) to read/write a NAMESPACED memory file. Strategies:\n • SHARED — one _SWARM_MEMORY_GUID = '<slug>-shared-v1' module constant; every persona uses it (researcher→writer pipelines).\n • SEGMENTED — per-persona GUID constants (a critic that must review fresh, with no prior bias).\n • MIXED — shared GUID for coordinating personas, private for the isolated ones. • USER-SCOPED — pipe the caller's user_guid through.  • EPHEMERAL — don't import the storage manager at all.\nBake GUIDs as MODULE CONSTANTS at code-write time (deterministic and portable). Remember rule 5: shared-GUID personas never run in parallel.\n\nRequired shape for 'generate':\n    from agents.basic_agent import BasicAgent\n    import json, os, time, uuid, threading, urllib.request, urllib.error\n\n    __manifest__ = {\"schema\": \"rapp-agent/1.0\", \"name\": \"@user/<slug>\",\n                     \"version\": \"0.1.0\",\n                     \"tags\": [\"composite\", \"swarm-factory-generated\"],\n                     \"delegates_to_inlined\": [\"<persona1>\", \"<persona2>\"]}\n\n    _MAX_LLM_CALLS = 30   # static bound (rule 4)\n    _SOUL_RESEARCHER = \"You are a researcher...\"  # one SOUL per persona\n    _SOUL_WRITER     = \"You are a writer...\"\n    _SOUL_CRITIC     = \"You are a brutal critic...\"\n\n    _calls = {\"n\": 0}; _lock = threading.Lock()\n    def _llm_call(soul, prompt, tier=None):\n        with _lock:\n            _calls[\"n\"] += 1\n            if _calls[\"n\"] > _MAX_LLM_CALLS:\n                raise RuntimeError(f\"call budget exceeded ({_MAX_LLM_CALLS})\")\n        msgs = [{\"role\": \"system\", \"content\": soul},\n                {\"role\": \"user\", \"content\": prompt}]\n        ep, key = os.environ.get(\"AZURE_OPENAI_ENDPOINT\", \"\"),\\\n                  os.environ.get(\"AZURE_OPENAI_API_KEY\", \"\")\n        dep = os.environ.get(\"AZURE_OPENAI_DEPLOYMENT\", \"\")\n        if tier == \"small\":\n            dep = os.environ.get(\"AZURE_OPENAI_DEPLOYMENT_SMALL\") or dep  # graceful fallback (rule 6)\n        if ep and key:\n            url = ep.rstrip(\"/\") + f\"/openai/deployments/{dep}/chat/completions?api-version=2025-01-01-preview\"\n            return _post(url, {\"messages\": msgs, \"model\": dep},\n                          {\"Content-Type\": \"application/json\", \"api-key\": key})\n        if os.environ.get(\"OPENAI_API_KEY\"):\n            m = os.environ.get(\"OPENAI_MODEL\", \"gpt-4o\")\n            if tier == \"small\": m = os.environ.get(\"OPENAI_MODEL_SMALL\") or m\n            return _post(\"https://api.openai.com/v1/chat/completions\",\n                          {\"model\": m, \"messages\": msgs},\n                          {\"Content-Type\": \"application/json\",\n                           \"Authorization\": \"Bearer \" + os.environ[\"OPENAI_API_KEY\"]})\n        raise RuntimeError(\"no LLM configured\")  # raise — never return error text (rule 1)\n\n    def _post(url, body, headers):\n        for attempt in (1, 2):\n            req = urllib.request.Request(url, data=json.dumps(body).encode(\"utf-8\"),\n                                          headers=headers, method=\"POST\")\n            try:\n                with urllib.request.urlopen(req, timeout=120) as r:\n                    c = json.loads(r.read().decode(\"utf-8\")).get(\"choices\") or []\n                return (c[0][\"message\"].get(\"content\") or \"\") if c else \"\"\n            except urllib.error.HTTPError as e:\n                if (e.code == 429 or e.code >= 500) and attempt == 1:\n                    time.sleep(2); continue\n                raise RuntimeError(f\"LLM HTTP {e.code}\")\n            except urllib.error.URLError as e:\n                if attempt == 1: time.sleep(2); continue\n                raise RuntimeError(f\"LLM network error: {e}\")\n\n    def _llm_json(soul, prompt, required_keys, retries=1):  # verdicts ONLY (rule 2)\n        err = \"\"\n        for _ in range(retries + 1):\n            nudge = f\"\\nPrevious reply invalid ({err}); reply with ONLY the JSON object.\" if err else \"\"\n            raw = _llm_call(soul, prompt + \"\\nReply with ONLY a JSON object with keys: \"\n                            + \", \".join(required_keys) + nudge)\n            s, e = raw.find(\"{\"), raw.rfind(\"}\")\n            try:\n                obj = json.loads(raw[s:e + 1])\n            except ValueError as ex:\n                err = str(ex); continue\n            if all(k in obj for k in required_keys):\n                return obj\n            err = \"missing keys\"\n        raise RuntimeError(\"structured handoff failed: \" + err)\n\n    # _Internal prefix keeps personas out of *Agent auto-discovery.\n    class _InternalResearcher:\n        def perform(self, topic): return _llm_call(_SOUL_RESEARCHER, topic)\n    class _InternalWriter:\n        def perform(self, research): return _llm_call(_SOUL_WRITER, research)\n    class _InternalCritic:  # renders a verdict the orchestrator branches on\n        def verdict(self, draft):\n            return _llm_json(_SOUL_CRITIC, \"Judge this draft:\\n\" + draft +\n                '\\n\"verdict\" is \"ship\" or \"revise\"; \"note\" is one sentence.',\n                [\"verdict\", \"note\"])\n\n    class <PascalCase>Agent(BasicAgent):\n        def __init__(self):\n            self.name = \"<PascalCase>\"\n            self.metadata = {\"name\": \"<PascalCase>\",\n                             \"description\": \"<what the swarm does — one line>\",\n                             \"parameters\": {\"type\": \"object\",\n                                            \"properties\": {\"topic\": {\"type\": \"string\"}},\n                                            \"required\": [\"topic\"]}}\n            super().__init__(self.name, self.metadata)\n        def perform(self, topic=\"\", **kwargs):\n            ws = os.path.join(\"/tmp/<slug>\",  # per-run dir (rule 3)\n                              time.strftime(\"%Y%m%dT%H%M%S\") + \"-\" + uuid.uuid4().hex[:6])\n            os.makedirs(ws, exist_ok=True)\n            stage = \"start\"\n            try:\n                stage = \"researcher\"; research = _InternalResearcher().perform(topic)\n                stage = \"writer\";     draft = _InternalWriter().perform(research)\n                stage = \"critic\";     v = _InternalCritic().verdict(draft)\n                if v[\"verdict\"] != \"ship\":  # the gate is real (rule 2)\n                    return json.dumps({\"status\": \"held\", \"reason\": v[\"note\"],\n                                       \"draft\": draft, \"workspace\": ws})\n                return json.dumps({\"status\": \"ok\", \"final\": draft, \"workspace\": ws})\n            except RuntimeError as e:  # errors are data (rule 1)\n                return json.dumps({\"status\": \"error\", \"failed_stage\": stage,\n                                   \"message\": str(e), \"workspace\": ws})",
       "display_name": "rar-rapp-swarm-factory",
       "install": {
-        "bundle": "native-15",
+        "bundle": "native-16",
         "entrypoint": "SKILL.md",
-        "import_url": "https://github.com/kody-w/RAR/tree/main/scout/bundles/native-15",
+        "import_url": "https://github.com/kody-w/RAR/tree/main/scout/bundles/native-16",
         "skill_name": "rar-rapp-swarm-factory",
         "strategy": "scout-import",
         "verify": "sha256-before-use"
@@ -24793,28 +24903,28 @@
       "slug": "rar-rapp-swarm-factory",
       "source": {
         "artifact_sha256": "54ef914e46c15b4127235a1e17dd3a1d0257fbae0f9cede71a33173d52da4d93",
-        "entrypoint": "scout/bundles/native-15/skills/rar-rapp-swarm-factory/SKILL.md",
-        "entrypoint_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-swarm-factory/SKILL.md",
+        "entrypoint": "scout/bundles/native-16/skills/rar-rapp-swarm-factory/SKILL.md",
+        "entrypoint_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-16/skills/rar-rapp-swarm-factory/SKILL.md",
         "files": [
           {
-            "path": "scout/bundles/native-15/skills/rar-rapp-swarm-factory/SKILL.md",
+            "path": "scout/bundles/native-16/skills/rar-rapp-swarm-factory/SKILL.md",
             "sha256": "480905b0ad9f98cac95caf1b81052791f9f2d475b92cee7238c468bc8e291da3",
-            "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-swarm-factory/SKILL.md"
+            "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-16/skills/rar-rapp-swarm-factory/SKILL.md"
           },
           {
-            "path": "scout/bundles/native-15/skills/rar-rapp-swarm-factory/rapp/agent.lock.json",
+            "path": "scout/bundles/native-16/skills/rar-rapp-swarm-factory/rapp/agent.lock.json",
             "sha256": "614bb5e2af40b4a433e71327b7ddaf6a268cc09b2bb5d16cd6dac087206f904d",
-            "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-swarm-factory/rapp/agent.lock.json"
+            "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-16/skills/rar-rapp-swarm-factory/rapp/agent.lock.json"
           },
           {
-            "path": "scout/bundles/native-15/skills/rar-rapp-swarm-factory/scripts/run_agent.py",
+            "path": "scout/bundles/native-16/skills/rar-rapp-swarm-factory/scripts/run_agent.py",
             "sha256": "0e91afc74150f12fa53e52e0e498b9c81046204a9af7470fe584dacdc1c06742",
-            "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-swarm-factory/scripts/run_agent.py"
+            "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-16/skills/rar-rapp-swarm-factory/scripts/run_agent.py"
           },
           {
-            "path": "scout/bundles/native-15/skills/rar-rapp-swarm-factory/swarm_factory_agent.py",
+            "path": "scout/bundles/native-16/skills/rar-rapp-swarm-factory/swarm_factory_agent.py",
             "sha256": "54ef914e46c15b4127235a1e17dd3a1d0257fbae0f9cede71a33173d52da4d93",
-            "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-swarm-factory/swarm_factory_agent.py"
+            "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-16/skills/rar-rapp-swarm-factory/swarm_factory_agent.py"
           }
         ],
         "hash_algorithm": "sha256",
@@ -25602,9 +25712,9 @@
       "description": "Builds a paste-ready self-critique 'doubledown' prompt for ten escalating ideas, persisting a local kill log so each loop learns from the last.",
       "display_name": "rar-wildhaven-bellows",
       "install": {
-        "bundle": "native-16",
+        "bundle": "native-17",
         "entrypoint": "SKILL.md",
-        "import_url": "https://github.com/kody-w/RAR/tree/main/scout/bundles/native-16",
+        "import_url": "https://github.com/kody-w/RAR/tree/main/scout/bundles/native-17",
         "skill_name": "rar-wildhaven-bellows",
         "strategy": "scout-import",
         "verify": "sha256-before-use"
@@ -25654,28 +25764,28 @@
       "slug": "rar-wildhaven-bellows",
       "source": {
         "artifact_sha256": "b80d52b3ed24ff6b50e1be11b08117c7581b0b6563f7a4ad01738963c901bc00",
-        "entrypoint": "scout/bundles/native-16/skills/rar-wildhaven-bellows/SKILL.md",
-        "entrypoint_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-16/skills/rar-wildhaven-bellows/SKILL.md",
+        "entrypoint": "scout/bundles/native-17/skills/rar-wildhaven-bellows/SKILL.md",
+        "entrypoint_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-17/skills/rar-wildhaven-bellows/SKILL.md",
         "files": [
           {
-            "path": "scout/bundles/native-16/skills/rar-wildhaven-bellows/SKILL.md",
+            "path": "scout/bundles/native-17/skills/rar-wildhaven-bellows/SKILL.md",
             "sha256": "bc41620f78e964f11c571bb6cf491c8861c3f8518f79b37c1b82644d5ebd100a",
-            "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-16/skills/rar-wildhaven-bellows/SKILL.md"
+            "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-17/skills/rar-wildhaven-bellows/SKILL.md"
           },
           {
-            "path": "scout/bundles/native-16/skills/rar-wildhaven-bellows/bellows_agent.py",
+            "path": "scout/bundles/native-17/skills/rar-wildhaven-bellows/bellows_agent.py",
             "sha256": "b80d52b3ed24ff6b50e1be11b08117c7581b0b6563f7a4ad01738963c901bc00",
-            "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-16/skills/rar-wildhaven-bellows/bellows_agent.py"
+            "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-17/skills/rar-wildhaven-bellows/bellows_agent.py"
           },
           {
-            "path": "scout/bundles/native-16/skills/rar-wildhaven-bellows/rapp/agent.lock.json",
+            "path": "scout/bundles/native-17/skills/rar-wildhaven-bellows/rapp/agent.lock.json",
             "sha256": "0d5c839d2b5ec636b5cd66c69dd700ee4719a48a9197fa01462f93fec8cbea93",
-            "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-16/skills/rar-wildhaven-bellows/rapp/agent.lock.json"
+            "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-17/skills/rar-wildhaven-bellows/rapp/agent.lock.json"
           },
           {
-            "path": "scout/bundles/native-16/skills/rar-wildhaven-bellows/scripts/run_agent.py",
+            "path": "scout/bundles/native-17/skills/rar-wildhaven-bellows/scripts/run_agent.py",
             "sha256": "0e91afc74150f12fa53e52e0e498b9c81046204a9af7470fe584dacdc1c06742",
-            "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-16/skills/rar-wildhaven-bellows/scripts/run_agent.py"
+            "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-17/skills/rar-wildhaven-bellows/scripts/run_agent.py"
           }
         ],
         "hash_algorithm": "sha256",

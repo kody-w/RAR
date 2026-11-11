@@ -1,6 +1,6 @@
 {
   "schema": "rar-taxonomy/1.0",
-  "generated": "2026-11-04T23:12:23Z",
+  "generated": "2026-11-11T00:24:09Z",
   "categories": [
     {
       "name": "productivity",
@@ -16,7 +16,7 @@
     },
     {
       "name": "devtools",
-      "count": 27
+      "count": 28
     },
     {
       "name": "integrations",
@@ -70,7 +70,7 @@
     },
     {
       "name": "@rapp",
-      "count": 23
+      "count": 24
     },
     {
       "name": "@discreetRappers",
@@ -108,7 +108,7 @@
     },
     {
       "name": "community",
-      "count": 73
+      "count": 74
     },
     {
       "name": "official",
@@ -421,6 +421,10 @@
       "count": 4
     },
     {
+      "name": "brainstem",
+      "count": 4
+    },
+    {
       "name": "estate",
       "count": 4
     },
@@ -545,6 +549,10 @@
       "count": 3
     },
     {
+      "name": "onboarding",
+      "count": 3
+    },
+    {
       "name": "publishing",
       "count": 3
     },
@@ -569,15 +577,15 @@
       "count": 3
     },
     {
-      "name": "brainstem",
-      "count": 3
-    },
-    {
       "name": "private",
       "count": 3
     },
     {
       "name": "protocol",
+      "count": 3
+    },
+    {
+      "name": "install",
       "count": 3
     },
     {
@@ -837,10 +845,6 @@
       "count": 2
     },
     {
-      "name": "onboarding",
-      "count": 2
-    },
-    {
       "name": "wiki",
       "count": 2
     },
@@ -922,10 +926,6 @@
     },
     {
       "name": "package-manager",
-      "count": 2
-    },
-    {
-      "name": "install",
       "count": 2
     },
     {

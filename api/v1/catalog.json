@@ -1,8 +1,8 @@
 {
   "schema": "rar-catalog/1.0",
   "description": "Every agent in RAR as a lean record. Fetch this one file to render a complete browsable catalog with no further requests, no backend, no authentication and no GitHub account. stack_packs lists every installable pack, including retired packs with status and retirement metadata.",
-  "generated": "2026-11-10T23:11:51Z",
-  "count": 226,
+  "generated": "2026-11-11T00:35:20Z",
+  "count": 227,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/catalog.json",
   "agents": [
     {
@@ -10083,6 +10083,51 @@
         "status": "not_assessed",
         "evidence": []
       },
+      "id": "rapp__start_brainstem_agent",
+      "name": "@rapp/start_brainstem_agent",
+      "display_name": "Start Brainstem",
+      "description": "Starts the person's Brainstem for them: says if one is already up, starts an installed one, or (after a yes) installs and starts one. Never stops another program.",
+      "version": "1.0.0",
+      "publisher": "@rapp",
+      "author": "RAPP",
+      "category": "devtools",
+      "tags": [
+        "brainstem",
+        "install",
+        "start",
+        "onboarding"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@rapp/start_brainstem_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/start_brainstem_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/start_brainstem_agent.py",
+        "sha256": "f07dc57512a2a1b5d8b72aa69f3536b4512cdfb3f59d08d5e2be0076d3484fa9",
+        "pages": "https://kody-w.github.io/RAR/agents/@rapp/start_brainstem_agent.py",
+        "version": {
+          "sha256": "f07dc57512a2a1b5d8b72aa69f3536b4512cdfb3f59d08d5e2be0076d3484fa9",
+          "sha8": "f07dc57512a2",
+          "path": "versions/@rapp/start_brainstem_agent/f07dc57512a2.py"
+        }
+      },
+      "stats": {
+        "lines": 229,
+        "size_kb": 9.6,
+        "added_at": "2026-11-11T00:35:20Z"
+      }
+    },
+    {
+      "artifact_type": "agent",
+      "protocol_conformance": {
+        "profile": null,
+        "status": "not_assessed",
+        "evidence": []
+      },
       "id": "rapp__store_navigator_agent",
       "name": "@rapp/store_navigator_agent",
       "display_name": "StoreNavigator",
@@ -10746,18 +10791,18 @@
     {
       "name": "brainstem-skill",
       "display_name": "Brainstem skill (any AI)",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "schema": "rapp-rar-stack/1.2",
       "status": "current",
       "path": "stacks/brainstem-skill",
       "purpose": "One SKILL.md that makes any AI RAPP compatible. On first read the AI writes one small loop file, which fetches the chant agent from this catalog, fingerprint-checked, and writes a standing note into the AI's own always-on instructions, so the page is never needed again. Each turn the AI loads its ra",
       "files": {
         "SKILL.md": {
-          "sha256": "46bca9b45fc2cecce9302bd95d98fb682519bb18b067506373c11a3308236b3b",
+          "sha256": "be2af43efa736547294862a3e050ac474ce36247beb716ff6decb33d60d15940",
           "verified": true
         },
         "kernel.py": {
-          "sha256": "61369f3f767a2e5d94456ce6f3c71d629ee67014fa8dab8608014143cc7c2ab0",
+          "sha256": "d5839882311762f6cf6d4d1b378e25d55fe890566c2f05e4f3dd3f39d03aaf30",
           "verified": true
         },
         "README.md": {

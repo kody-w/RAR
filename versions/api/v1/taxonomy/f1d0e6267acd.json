@@ -1,0 +1,1328 @@
+{
+  "schema": "rar-taxonomy/1.0",
+  "generated": "2026-11-11T00:24:09Z",
+  "categories": [
+    {
+      "name": "productivity",
+      "count": 48
+    },
+    {
+      "name": "general",
+      "count": 43
+    },
+    {
+      "name": "core",
+      "count": 35
+    },
+    {
+      "name": "devtools",
+      "count": 28
+    },
+    {
+      "name": "integrations",
+      "count": 19
+    },
+    {
+      "name": "pipeline",
+      "count": 18
+    },
+    {
+      "name": "creative",
+      "count": 10
+    },
+    {
+      "name": "analysis",
+      "count": 9
+    },
+    {
+      "name": "platform",
+      "count": 7
+    },
+    {
+      "name": "workflow",
+      "count": 5
+    },
+    {
+      "name": "memory",
+      "count": 2
+    },
+    {
+      "name": "b2b_sales",
+      "count": 1
+    },
+    {
+      "name": "meta",
+      "count": 1
+    },
+    {
+      "name": "energy",
+      "count": 1
+    }
+  ],
+  "publishers": [
+    {
+      "name": "@cat-agent-skills",
+      "count": 97
+    },
+    {
+      "name": "@kody-w",
+      "count": 75
+    },
+    {
+      "name": "@rapp",
+      "count": 24
+    },
+    {
+      "name": "@discreetRappers",
+      "count": 13
+    },
+    {
+      "name": "@howardh",
+      "count": 8
+    },
+    {
+      "name": "@rapter",
+      "count": 3
+    },
+    {
+      "name": "@wildhaven",
+      "count": 3
+    },
+    {
+      "name": "@rarbookworld",
+      "count": 2
+    },
+    {
+      "name": "@bill",
+      "count": 1
+    },
+    {
+      "name": "@borg",
+      "count": 1
+    }
+  ],
+  "quality_tiers": [
+    {
+      "name": "frontier",
+      "count": 97
+    },
+    {
+      "name": "community",
+      "count": 74
+    },
+    {
+      "name": "official",
+      "count": 46
+    },
+    {
+      "name": "verified",
+      "count": 8
+    },
+    {
+      "name": "private",
+      "count": 2
+    }
+  ],
+  "tags": [
+    {
+      "name": "productivity",
+      "count": 42
+    },
+    {
+      "name": "automation",
+      "count": 18
+    },
+    {
+      "name": "content",
+      "count": 18
+    },
+    {
+      "name": "writing",
+      "count": 15
+    },
+    {
+      "name": "rapplication",
+      "count": 13
+    },
+    {
+      "name": "documents",
+      "count": 12
+    },
+    {
+      "name": "teams",
+      "count": 12
+    },
+    {
+      "name": "email",
+      "count": 12
+    },
+    {
+      "name": "copilot_studio",
+      "count": 12
+    },
+    {
+      "name": "pipeline",
+      "count": 12
+    },
+    {
+      "name": "meta",
+      "count": 10
+    },
+    {
+      "name": "powerpoint",
+      "count": 9
+    },
+    {
+      "name": "testing",
+      "count": 9
+    },
+    {
+      "name": "video",
+      "count": 9
+    },
+    {
+      "name": "presentations",
+      "count": 8
+    },
+    {
+      "name": "governance",
+      "count": 8
+    },
+    {
+      "name": "sharepoint",
+      "count": 8
+    },
+    {
+      "name": "m365",
+      "count": 8
+    },
+    {
+      "name": "rapp",
+      "count": 8
+    },
+    {
+      "name": "memory",
+      "count": 7
+    },
+    {
+      "name": "copilot-studio",
+      "count": 7
+    },
+    {
+      "name": "scripts",
+      "count": 7
+    },
+    {
+      "name": "python",
+      "count": 7
+    },
+    {
+      "name": "factory",
+      "count": 7
+    },
+    {
+      "name": "microsoft_365",
+      "count": 6
+    },
+    {
+      "name": "assessment",
+      "count": 6
+    },
+    {
+      "name": "html",
+      "count": 6
+    },
+    {
+      "name": "marketing",
+      "count": 6
+    },
+    {
+      "name": "audit",
+      "count": 6
+    },
+    {
+      "name": "design",
+      "count": 6
+    },
+    {
+      "name": "power_platform",
+      "count": 6
+    },
+    {
+      "name": "singleton",
+      "count": 6
+    },
+    {
+      "name": "drift",
+      "count": 6
+    },
+    {
+      "name": "core",
+      "count": 5
+    },
+    {
+      "name": "analysis",
+      "count": 5
+    },
+    {
+      "name": "quality",
+      "count": 5
+    },
+    {
+      "name": "decision_making",
+      "count": 5
+    },
+    {
+      "name": "agent",
+      "count": 5
+    },
+    {
+      "name": "playwright",
+      "count": 5
+    },
+    {
+      "name": "data",
+      "count": 5
+    },
+    {
+      "name": "architecture",
+      "count": 5
+    },
+    {
+      "name": "knowledge",
+      "count": 5
+    },
+    {
+      "name": "planning",
+      "count": 5
+    },
+    {
+      "name": "visualization",
+      "count": 5
+    },
+    {
+      "name": "microsoft",
+      "count": 5
+    },
+    {
+      "name": "deck",
+      "count": 5
+    },
+    {
+      "name": "composite",
+      "count": 5
+    },
+    {
+      "name": "operator-mediated",
+      "count": 5
+    },
+    {
+      "name": "commons",
+      "count": 5
+    },
+    {
+      "name": "local-first",
+      "count": 5
+    },
+    {
+      "name": "neighborhood",
+      "count": 5
+    },
+    {
+      "name": "twin",
+      "count": 5
+    },
+    {
+      "name": "egg",
+      "count": 5
+    },
+    {
+      "name": "knowledge-base",
+      "count": 4
+    },
+    {
+      "name": "bootstrap",
+      "count": 4
+    },
+    {
+      "name": "dataverse",
+      "count": 4
+    },
+    {
+      "name": "power-platform",
+      "count": 4
+    },
+    {
+      "name": "meetings",
+      "count": 4
+    },
+    {
+      "name": "monitoring",
+      "count": 4
+    },
+    {
+      "name": "authoring",
+      "count": 4
+    },
+    {
+      "name": "calendar",
+      "count": 4
+    },
+    {
+      "name": "charts",
+      "count": 4
+    },
+    {
+      "name": "news",
+      "count": 4
+    },
+    {
+      "name": "review",
+      "count": 4
+    },
+    {
+      "name": "compliance",
+      "count": 4
+    },
+    {
+      "name": "routing",
+      "count": 4
+    },
+    {
+      "name": "crm",
+      "count": 4
+    },
+    {
+      "name": "discovery",
+      "count": 4
+    },
+    {
+      "name": "sales",
+      "count": 4
+    },
+    {
+      "name": "generator",
+      "count": 4
+    },
+    {
+      "name": "scaffolding",
+      "count": 4
+    },
+    {
+      "name": "integrations",
+      "count": 4
+    },
+    {
+      "name": "devtools",
+      "count": 4
+    },
+    {
+      "name": "creative",
+      "count": 4
+    },
+    {
+      "name": "brainstem",
+      "count": 4
+    },
+    {
+      "name": "estate",
+      "count": 4
+    },
+    {
+      "name": "interop",
+      "count": 4
+    },
+    {
+      "name": "publish",
+      "count": 4
+    },
+    {
+      "name": "federation",
+      "count": 4
+    },
+    {
+      "name": "github",
+      "count": 3
+    },
+    {
+      "name": "accessibility",
+      "count": 3
+    },
+    {
+      "name": "pdf",
+      "count": 3
+    },
+    {
+      "name": "demo",
+      "count": 3
+    },
+    {
+      "name": "copilot",
+      "count": 3
+    },
+    {
+      "name": "sales_enablement",
+      "count": 3
+    },
+    {
+      "name": "process_improvement",
+      "count": 3
+    },
+    {
+      "name": "privacy",
+      "count": 3
+    },
+    {
+      "name": "linkedin",
+      "count": 3
+    },
+    {
+      "name": "blog",
+      "count": 3
+    },
+    {
+      "name": "templates",
+      "count": 3
+    },
+    {
+      "name": "matplotlib",
+      "count": 3
+    },
+    {
+      "name": "agents",
+      "count": 3
+    },
+    {
+      "name": "orchestration",
+      "count": 3
+    },
+    {
+      "name": "education",
+      "count": 3
+    },
+    {
+      "name": "handoff",
+      "count": 3
+    },
+    {
+      "name": "documentation",
+      "count": 3
+    },
+    {
+      "name": "social_media",
+      "count": 3
+    },
+    {
+      "name": "mcp",
+      "count": 3
+    },
+    {
+      "name": "insights",
+      "count": 3
+    },
+    {
+      "name": "foundry",
+      "count": 3
+    },
+    {
+      "name": "observability",
+      "count": 3
+    },
+    {
+      "name": "legal",
+      "count": 3
+    },
+    {
+      "name": "transpiler",
+      "count": 3
+    },
+    {
+      "name": "slides",
+      "count": 3
+    },
+    {
+      "name": "presentation",
+      "count": 3
+    },
+    {
+      "name": "converter",
+      "count": 3
+    },
+    {
+      "name": "onboarding",
+      "count": 3
+    },
+    {
+      "name": "publishing",
+      "count": 3
+    },
+    {
+      "name": "loop",
+      "count": 3
+    },
+    {
+      "name": "ecosystem",
+      "count": 3
+    },
+    {
+      "name": "frames",
+      "count": 3
+    },
+    {
+      "name": "deploy",
+      "count": 3
+    },
+    {
+      "name": "context",
+      "count": 3
+    },
+    {
+      "name": "private",
+      "count": 3
+    },
+    {
+      "name": "protocol",
+      "count": 3
+    },
+    {
+      "name": "install",
+      "count": 3
+    },
+    {
+      "name": "starter",
+      "count": 3
+    },
+    {
+      "name": "dogg",
+      "count": 3
+    },
+    {
+      "name": "installer",
+      "count": 3
+    },
+    {
+      "name": "organism",
+      "count": 3
+    },
+    {
+      "name": "rapp-1",
+      "count": 3
+    },
+    {
+      "name": "engine",
+      "count": 3
+    },
+    {
+      "name": "deterministic",
+      "count": 3
+    },
+    {
+      "name": "registry",
+      "count": 3
+    },
+    {
+      "name": "spec",
+      "count": 3
+    },
+    {
+      "name": "store",
+      "count": 3
+    },
+    {
+      "name": "platform",
+      "count": 2
+    },
+    {
+      "name": "web",
+      "count": 2
+    },
+    {
+      "name": "evaluation",
+      "count": 2
+    },
+    {
+      "name": "analytics",
+      "count": 2
+    },
+    {
+      "name": "operations",
+      "count": 2
+    },
+    {
+      "name": "security",
+      "count": 2
+    },
+    {
+      "name": "risk",
+      "count": 2
+    },
+    {
+      "name": "use_case",
+      "count": 2
+    },
+    {
+      "name": "report",
+      "count": 2
+    },
+    {
+      "name": "follow_up",
+      "count": 2
+    },
+    {
+      "name": "multilingual",
+      "count": 2
+    },
+    {
+      "name": "animation",
+      "count": 2
+    },
+    {
+      "name": "ffmpeg",
+      "count": 2
+    },
+    {
+      "name": "voice",
+      "count": 2
+    },
+    {
+      "name": "speaking",
+      "count": 2
+    },
+    {
+      "name": "conference",
+      "count": 2
+    },
+    {
+      "name": "advisor",
+      "count": 2
+    },
+    {
+      "name": "digest",
+      "count": 2
+    },
+    {
+      "name": "qa",
+      "count": 2
+    },
+    {
+      "name": "markdown",
+      "count": 2
+    },
+    {
+      "name": "enterprise",
+      "count": 2
+    },
+    {
+      "name": "sustainability",
+      "count": 2
+    },
+    {
+      "name": "greenwashing",
+      "count": 2
+    },
+    {
+      "name": "learning",
+      "count": 2
+    },
+    {
+      "name": "training",
+      "count": 2
+    },
+    {
+      "name": "communication",
+      "count": 2
+    },
+    {
+      "name": "files",
+      "count": 2
+    },
+    {
+      "name": "leadership",
+      "count": 2
+    },
+    {
+      "name": "workflow",
+      "count": 2
+    },
+    {
+      "name": "healthcare",
+      "count": 2
+    },
+    {
+      "name": "azure",
+      "count": 2
+    },
+    {
+      "name": "personas",
+      "count": 2
+    },
+    {
+      "name": "risk_assessment",
+      "count": 2
+    },
+    {
+      "name": "csv",
+      "count": 2
+    },
+    {
+      "name": "extraction",
+      "count": 2
+    },
+    {
+      "name": "tables",
+      "count": 2
+    },
+    {
+      "name": "power_automate",
+      "count": 2
+    },
+    {
+      "name": "dashboard",
+      "count": 2
+    },
+    {
+      "name": "skills",
+      "count": 2
+    },
+    {
+      "name": "out_of_office",
+      "count": 2
+    },
+    {
+      "name": "commerce",
+      "count": 2
+    },
+    {
+      "name": "style",
+      "count": 2
+    },
+    {
+      "name": "logging",
+      "count": 2
+    },
+    {
+      "name": "json",
+      "count": 2
+    },
+    {
+      "name": "contracts",
+      "count": 2
+    },
+    {
+      "name": "diagrams",
+      "count": 2
+    },
+    {
+      "name": "briefing",
+      "count": 2
+    },
+    {
+      "name": "demos",
+      "count": 2
+    },
+    {
+      "name": "scripted",
+      "count": 2
+    },
+    {
+      "name": "project-management",
+      "count": 2
+    },
+    {
+      "name": "interactive",
+      "count": 2
+    },
+    {
+      "name": "workiq",
+      "count": 2
+    },
+    {
+      "name": "executive",
+      "count": 2
+    },
+    {
+      "name": "recon",
+      "count": 2
+    },
+    {
+      "name": "wiki",
+      "count": 2
+    },
+    {
+      "name": "competition",
+      "count": 2
+    },
+    {
+      "name": "self-improvement",
+      "count": 2
+    },
+    {
+      "name": "tournament",
+      "count": 2
+    },
+    {
+      "name": "heartbeat",
+      "count": 2
+    },
+    {
+      "name": "verification",
+      "count": 2
+    },
+    {
+      "name": "determinism",
+      "count": 2
+    },
+    {
+      "name": "chain",
+      "count": 2
+    },
+    {
+      "name": "virtual-world",
+      "count": 2
+    },
+    {
+      "name": "integration",
+      "count": 2
+    },
+    {
+      "name": "recall",
+      "count": 2
+    },
+    {
+      "name": "pac",
+      "count": 2
+    },
+    {
+      "name": "assimilated",
+      "count": 2
+    },
+    {
+      "name": "forge",
+      "count": 2
+    },
+    {
+      "name": "deployment",
+      "count": 2
+    },
+    {
+      "name": "parity",
+      "count": 2
+    },
+    {
+      "name": "hyperframes",
+      "count": 2
+    },
+    {
+      "name": "stub",
+      "count": 2
+    },
+    {
+      "name": "learn",
+      "count": 2
+    },
+    {
+      "name": "leviathan",
+      "count": 2
+    },
+    {
+      "name": "package-manager",
+      "count": 2
+    },
+    {
+      "name": "rar",
+      "count": 2
+    },
+    {
+      "name": "summon",
+      "count": 2
+    },
+    {
+      "name": "claude-code",
+      "count": 2
+    },
+    {
+      "name": "rappter",
+      "count": 2
+    },
+    {
+      "name": "search",
+      "count": 2
+    },
+    {
+      "name": "youtube",
+      "count": 2
+    },
+    {
+      "name": "swarm",
+      "count": 2
+    },
+    {
+      "name": "multi-agent",
+      "count": 2
+    },
+    {
+      "name": "append-only",
+      "count": 2
+    },
+    {
+      "name": "offline",
+      "count": 2
+    },
+    {
+      "name": "codegen",
+      "count": 2
+    },
+    {
+      "name": "aibast",
+      "count": 2
+    },
+    {
+      "name": "prototype",
+      "count": 2
+    },
+    {
+      "name": "builder",
+      "count": 2
+    },
+    {
+      "name": "rappterbook",
+      "count": 2
+    },
+    {
+      "name": "community",
+      "count": 2
+    },
+    {
+      "name": "cubby",
+      "count": 2
+    },
+    {
+      "name": "alignment",
+      "count": 2
+    },
+    {
+      "name": "steward",
+      "count": 2
+    },
+    {
+      "name": "hatch",
+      "count": 2
+    },
+    {
+      "name": "lifecycle",
+      "count": 2
+    },
+    {
+      "name": "fleet",
+      "count": 2
+    },
+    {
+      "name": "moment-pipeline",
+      "count": 2
+    },
+    {
+      "name": "rappterbook-engine",
+      "count": 2
+    },
+    {
+      "name": "canon",
+      "count": 2
+    },
+    {
+      "name": "anchor",
+      "count": 2
+    },
+    {
+      "name": "build",
+      "count": 2
+    },
+    {
+      "name": "census",
+      "count": 2
+    },
+    {
+      "name": "hive",
+      "count": 2
+    },
+    {
+      "name": "shape",
+      "count": 2
+    },
+    {
+      "name": "daemon",
+      "count": 2
+    },
+    {
+      "name": "neuron",
+      "count": 1
+    },
+    {
+      "name": "d365",
+      "count": 1
+    },
+    {
+      "name": "assimilation",
+      "count": 1
+    },
+    {
+      "name": "acroform",
+      "count": 1
+    },
+    {
+      "name": "forms",
+      "count": 1
+    },
+    {
+      "name": "tasks",
+      "count": 1
+    },
+    {
+      "name": "action_items",
+      "count": 1
+    },
+    {
+      "name": "quality_assurance",
+      "count": 1
+    },
+    {
+      "name": "go_live",
+      "count": 1
+    },
+    {
+      "name": "diagnostics",
+      "count": 1
+    },
+    {
+      "name": "runtime",
+      "count": 1
+    },
+    {
+      "name": "capabilities",
+      "count": 1
+    },
+    {
+      "name": "snapshots",
+      "count": 1
+    },
+    {
+      "name": "optimization",
+      "count": 1
+    },
+    {
+      "name": "post_launch",
+      "count": 1
+    },
+    {
+      "name": "backlog",
+      "count": 1
+    },
+    {
+      "name": "prompt_injection",
+      "count": 1
+    },
+    {
+      "name": "responsible_ai",
+      "count": 1
+    },
+    {
+      "name": "agentic_workflow",
+      "count": 1
+    },
+    {
+      "name": "ai",
+      "count": 1
+    },
+    {
+      "name": "scoring",
+      "count": 1
+    },
+    {
+      "name": "intake",
+      "count": 1
+    },
+    {
+      "name": "case_study",
+      "count": 1
+    },
+    {
+      "name": "inbox",
+      "count": 1
+    },
+    {
+      "name": "reminder",
+      "count": 1
+    },
+    {
+      "name": "seo",
+      "count": 1
+    },
+    {
+      "name": "structure",
+      "count": 1
+    },
+    {
+      "name": "events",
+      "count": 1
+    },
+    {
+      "name": "branding",
+      "count": 1
+    },
+    {
+      "name": "word",
+      "count": 1
+    },
+    {
+      "name": "workload",
+      "count": 1
+    },
+    {
+      "name": "focus",
+      "count": 1
+    },
+    {
+      "name": "work_life_balance",
+      "count": 1
+    },
+    {
+      "name": "deep_work",
+      "count": 1
+    },
+    {
+      "name": "self_service",
+      "count": 1
+    },
+    {
+      "name": "uat",
+      "count": 1
+    },
+    {
+      "name": "business",
+      "count": 1
+    },
+    {
+      "name": "problem_solving",
+      "count": 1
+    },
+    {
+      "name": "project_planning",
+      "count": 1
+    },
+    {
+      "name": "skill_generation",
+      "count": 1
+    },
+    {
+      "name": "adventure",
+      "count": 1
+    },
+    {
+      "name": "game",
+      "count": 1
+    },
+    {
+      "name": "narration",
+      "count": 1
+    },
+    {
+      "name": "clipchamp",
+      "count": 1
+    },
+    {
+      "name": "tts",
+      "count": 1
+    },
+    {
+      "name": "rh",
+      "count": 1
+    },
+    {
+      "name": "folha",
+      "count": 1
+    },
+    {
+      "name": "clt",
+      "count": 1
+    },
+    {
+      "name": "brasil",
+      "count": 1
+    },
+    {
+      "name": "trabalhista",
+      "count": 1
+    },
+    {
+      "name": "rescisao",
+      "count": 1
+    },
+    {
+      "name": "inss",
+      "count": 1
+    },
+    {
+      "name": "irrf",
+      "count": 1
+    },
+    {
+      "name": "comparison",
+      "count": 1
+    },
+    {
+      "name": "reminders",
+      "count": 1
+    },
+    {
+      "name": "abstract",
+      "count": 1
+    },
+    {
+      "name": "decision_support",
+      "count": 1
+    },
+    {
+      "name": "weekly",
+      "count": 1
+    },
+    {
+      "name": "cowork",
+      "count": 1
+    },
+    {
+      "name": "agent_design",
+      "count": 1
+    },
+    {
+      "name": "licensing",
+      "count": 1
+    },
+    {
+      "name": "rag",
+      "count": 1
+    },
+    {
+      "name": "readiness",
+      "count": 1
+    },
+    {
+      "name": "eval",
+      "count": 1
+    },
+    {
+      "name": "regression",
+      "count": 1
+    },
+    {
+      "name": "blueprint",
+      "count": 1
+    },
+    {
+      "name": "topics",
+      "count": 1
+    },
+    {
+      "name": "adaptive_card",
+      "count": 1
+    }
+  ]
+}
