@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-11T02:22:43Z",
+  "generated_at": "2026-11-11T02:36:31Z",
   "static_api": "rapp-static-api/1.1",
   "pages_base": "https://kody-w.github.io/RAR",
   "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
@@ -13573,7 +13573,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@rapp/start_brainstem_agent",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "display_name": "Start Brainstem",
       "description": "Starts the person's Brainstem for them: says if one is already up, starts an installed one, or (after a yes) installs and starts one. Never stops another program.",
       "author": "RAPP",
@@ -13591,15 +13591,15 @@
       ],
       "_file": "agents/@rapp/start_brainstem_agent.py",
       "_install_filename": "rar_rapp_start_brainstem_agent.py",
-      "_sha256": "6949e75bf48aa12b8a04a81281db35e95b1f54f016bae4c2bf866b70d49df942",
+      "_sha256": "d79d1b29cebde0efd3d59750fe7291cd5bb2e8b84a5b752eec86a045fc345dc5",
       "_lifecycle": "notarized",
-      "_receipt": "rar_e8db144f617a4178f15eb84e74815efeac466ec39c6c40a816b7e5a35da6714d",
+      "_receipt": "rar_fa20f4a0f4e0a5dff108db845a3100846ab0af7ccbfc6b7dc458a048cee71039",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
       },
       "_provenance": {
-        "issue": 1626,
+        "issue": 1628,
         "submitted_by": "kody-w",
         "accepted_by": "kody-w",
         "checks": [
@@ -13614,17 +13614,17 @@
         ]
       },
       "_seed": 10303543564592233151,
-      "_size_kb": 9.7,
-      "_lines": 229,
+      "_size_kb": 10.0,
+      "_lines": 233,
       "_has_card": true,
       "_added_at": "2026-11-11T00:35:20Z",
       "_first_commit_sha": "06760087109e14174031ee39b3dcb4bca4d70f93",
       "_latest_commit_sha": "fcb927883bdbe52c37698e09e2153daf4ddf045a",
       "_card_sha256": "90a8ba4d7794e50e1e1d868ad0c5e287f3d18560273308ae87d0382e848bf240",
       "_version": {
-        "sha256": "6949e75bf48aa12b8a04a81281db35e95b1f54f016bae4c2bf866b70d49df942",
-        "sha8": "6949e75bf48a",
-        "path": "versions/@rapp/start_brainstem_agent/6949e75bf48a.py"
+        "sha256": "d79d1b29cebde0efd3d59750fe7291cd5bb2e8b84a5b752eec86a045fc345dc5",
+        "sha8": "d79d1b29cebd",
+        "path": "versions/@rapp/start_brainstem_agent/d79d1b29cebd.py"
       }
     },
     {

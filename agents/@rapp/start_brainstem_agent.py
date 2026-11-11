@@ -23,7 +23,7 @@ Ask it "status" at any time. It only talks to this computer and to the installer
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/start_brainstem_agent",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "Start Brainstem",
     "description": "Starts the person's Brainstem for them: says if one is already up, starts an installed one, or (after a yes) installs and starts one. Never stops another program.",
     "author": "RAPP",
@@ -137,7 +137,11 @@ def fetch_installer():
     if len(body) < 2000 or (os.name != "nt" and not body.startswith(b"#!")):
         raise ValueError("the installer did not download whole")
     path = Path(tempfile.mkdtemp(prefix="brainstem-install-")) / INSTALLER.rsplit("/", 1)[1]
-    path.write_bytes(body)
+    # Windows PowerShell reads a saved script without an encoding mark as the local code page and then
+    # cannot parse it (9 errors, seen 2026-11-10). The mark is added to the saved copy only; the
+    # fingerprint reported is of the bytes as downloaded.
+    mark = b"\xef\xbb\xbf" if os.name == "nt" and not body.startswith(b"\xef\xbb\xbf") else b""
+    path.write_bytes(mark + body)
     return path, hashlib.sha256(body).hexdigest()
 
 

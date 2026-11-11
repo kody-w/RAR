@@ -1,6 +1,6 @@
 {
   "schema": "rar-static-api-status/1.0",
-  "generated": "2026-11-11T02:16:51Z",
+  "generated": "2026-11-11T02:36:31Z",
   "summary": {
     "agents": 227,
     "publishers": 10,
@@ -14,8 +14,8 @@
     {
       "name": "catalog",
       "count": 227,
-      "sha8": "08b6b4d6d474",
-      "version_path": "versions/api/v1/catalog/08b6b4d6d474.json",
+      "sha8": "11739261a5b1",
+      "version_path": "versions/api/v1/catalog/11739261a5b1.json",
       "pages_url": "https://kody-w.github.io/RAR/api/v1/catalog.json"
     },
     {
@@ -35,15 +35,15 @@
     {
       "name": "audience/business",
       "count": 224,
-      "sha8": "866d20f4d7f6",
-      "version_path": "versions/api/v1/audience/business/866d20f4d7f6.json",
+      "sha8": "500ca036b4d4",
+      "version_path": "versions/api/v1/audience/business/500ca036b4d4.json",
       "pages_url": "https://kody-w.github.io/RAR/api/v1/audience/business.json"
     },
     {
       "name": "audience/consumer",
       "count": 200,
-      "sha8": "dc7780c99fce",
-      "version_path": "versions/api/v1/audience/consumer/dc7780c99fce.json",
+      "sha8": "9f92343d078d",
+      "version_path": "versions/api/v1/audience/consumer/9f92343d078d.json",
       "pages_url": "https://kody-w.github.io/RAR/api/v1/audience/consumer.json"
     },
     {
