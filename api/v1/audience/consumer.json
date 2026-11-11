@@ -2,8 +2,8 @@
   "schema": "rar-catalog/1.0",
   "audience": "consumer",
   "description": "Agents appropriate for an individual audience. Enterprise-only agents are excluded.",
-  "generated": "2026-11-10T22:06:53Z",
-  "count": 199,
+  "generated": "2026-11-11T00:24:09Z",
+  "count": 200,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/consumer.json",
   "agents": [
     {
@@ -8795,6 +8795,51 @@
         "lines": 485,
         "size_kb": 24.6,
         "added_at": "2026-06-09T21:45:37-04:00"
+      }
+    },
+    {
+      "artifact_type": "agent",
+      "protocol_conformance": {
+        "profile": null,
+        "status": "not_assessed",
+        "evidence": []
+      },
+      "id": "rapp__start_brainstem_agent",
+      "name": "@rapp/start_brainstem_agent",
+      "display_name": "Start Brainstem",
+      "description": "Starts the person's Brainstem for them: says if one is already up, starts an installed one, or (after a yes) installs and starts one. Never stops another program.",
+      "version": "1.0.0",
+      "publisher": "@rapp",
+      "author": "RAPP",
+      "category": "devtools",
+      "tags": [
+        "brainstem",
+        "install",
+        "start",
+        "onboarding"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@rapp/start_brainstem_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/start_brainstem_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@rapp/start_brainstem_agent.py",
+        "sha256": "f07dc57512a2a1b5d8b72aa69f3536b4512cdfb3f59d08d5e2be0076d3484fa9",
+        "pages": "https://kody-w.github.io/RAR/agents/@rapp/start_brainstem_agent.py",
+        "version": {
+          "sha256": "f07dc57512a2a1b5d8b72aa69f3536b4512cdfb3f59d08d5e2be0076d3484fa9",
+          "sha8": "f07dc57512a2",
+          "path": "versions/@rapp/start_brainstem_agent/f07dc57512a2.py"
+        }
+      },
+      "stats": {
+        "lines": 229,
+        "size_kb": 9.6,
+        "added_at": null
       }
     },
     {

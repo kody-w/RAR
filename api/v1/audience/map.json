@@ -1,7 +1,7 @@
 {
   "schema": "rar-audience-map/1.0",
   "description": "Compact audience verdict per agent, for clients that already have the registry and only need to filter it. b=business, c=consumer, x=both. Absent means both.",
-  "generated": "2026-11-04T23:12:23Z",
+  "generated": "2026-11-11T00:24:09Z",
   "legend": {
     "b": "business",
     "c": "consumer",
@@ -10,9 +10,9 @@
   "counts": {
     "business_only": 27,
     "consumer_only": 3,
-    "both": 196,
-    "in_business_mode": 223,
-    "in_consumer_mode": 199
+    "both": 197,
+    "in_business_mode": 224,
+    "in_consumer_mode": 200
   },
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/map.json",
   "map": {
@@ -230,6 +230,7 @@
     "@rapp/rapp_publish_agent": "x",
     "@rapp/rapplication_agent": "x",
     "@rapp/rar_steward": "x",
+    "@rapp/start_brainstem_agent": "x",
     "@rapp/store_navigator_agent": "x",
     "@rapp/swarm_factory_agent": "x",
     "@rapp/twin_agent": "x",
@@ -1098,6 +1099,10 @@
     },
     "@rapp/rar_steward": {
       "b": 0.0,
+      "c": 0.0
+    },
+    "@rapp/start_brainstem_agent": {
+      "b": 1.5,
       "c": 0.0
     },
     "@rapp/store_navigator_agent": {

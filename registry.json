@@ -1,12 +1,12 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-10T23:56:09Z",
+  "generated_at": "2026-11-11T00:24:09Z",
   "static_api": "rapp-static-api/1.1",
   "pages_base": "https://kody-w.github.io/RAR",
   "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
   "stats": {
-    "total_agents": 226,
+    "total_agents": 227,
     "total_swarms": 2,
     "total_stubs": 2,
     "publishers": 10,
@@ -13572,6 +13572,63 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@rapp/start_brainstem_agent",
+      "version": "1.0.0",
+      "display_name": "Start Brainstem",
+      "description": "Starts the person's Brainstem for them: says if one is already up, starts an installed one, or (after a yes) installs and starts one. Never stops another program.",
+      "author": "RAPP",
+      "tags": [
+        "brainstem",
+        "install",
+        "start",
+        "onboarding"
+      ],
+      "category": "devtools",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@rapp/start_brainstem_agent.py",
+      "_install_filename": "rar_rapp_start_brainstem_agent.py",
+      "_sha256": "f07dc57512a2a1b5d8b72aa69f3536b4512cdfb3f59d08d5e2be0076d3484fa9",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_d9126da93abec281e0a6e2b391f7016fb5fd96cbb7b239c08f4cfb2c132f27a0",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": 1620,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "namespace",
+          "content_sha256",
+          "base_precondition",
+          "security_scan",
+          "registry_build",
+          "card_forge",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 10303543564592233151,
+      "_size_kb": 9.6,
+      "_lines": 229,
+      "_has_card": true,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null,
+      "_card_sha256": "90a8ba4d7794e50e1e1d868ad0c5e287f3d18560273308ae87d0382e848bf240",
+      "_version": {
+        "sha256": "f07dc57512a2a1b5d8b72aa69f3536b4512cdfb3f59d08d5e2be0076d3484fa9",
+        "sha8": "f07dc57512a2",
+        "path": "versions/@rapp/start_brainstem_agent/f07dc57512a2.py"
+      }
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@rapp/store_navigator_agent",
       "display_name": "StoreNavigator",
       "description": "Lists, searches, compares, and recommends rapplications from the RAPP_Store catalog over HTTP, with keyword scoring when no LLM is available.",
@@ -15789,7 +15846,7 @@
     "upstream": null
   },
   "summary": {
-    "total_agents": 226,
+    "total_agents": 227,
     "total_swarms": 2,
     "total_stubs": 2,
     "publishers": 10,

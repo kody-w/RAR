@@ -1,56 +1,56 @@
 {
   "schema": "rar-static-api-status/1.0",
-  "generated": "2026-11-10T23:56:09Z",
+  "generated": "2026-11-11T00:24:09Z",
   "summary": {
-    "agents": 226,
+    "agents": 227,
     "publishers": 10,
     "categories": 14,
-    "business": 223,
-    "consumer": 199,
+    "business": 224,
+    "consumer": 200,
     "use_cases": 23,
-    "index_terms": 2309
+    "index_terms": 2314
   },
   "endpoints": [
     {
       "name": "catalog",
-      "count": 226,
-      "sha8": "5a86319aa807",
-      "version_path": "versions/api/v1/catalog/5a86319aa807.json",
+      "count": 227,
+      "sha8": "c6cf168eaa94",
+      "version_path": "versions/api/v1/catalog/c6cf168eaa94.json",
       "pages_url": "https://kody-w.github.io/RAR/api/v1/catalog.json"
     },
     {
       "name": "taxonomy",
       "count": 14,
-      "sha8": "3ba8f1b9f339",
-      "version_path": "versions/api/v1/taxonomy/3ba8f1b9f339.json",
+      "sha8": "f1d0e6267acd",
+      "version_path": "versions/api/v1/taxonomy/f1d0e6267acd.json",
       "pages_url": "https://kody-w.github.io/RAR/api/v1/taxonomy.json"
     },
     {
       "name": "match",
       "count": 23,
-      "sha8": "8ed5abc60c6a",
-      "version_path": "versions/api/v1/match/8ed5abc60c6a.json",
+      "sha8": "63da5f76cbc9",
+      "version_path": "versions/api/v1/match/63da5f76cbc9.json",
       "pages_url": "https://kody-w.github.io/RAR/api/v1/match.json"
     },
     {
       "name": "audience/business",
-      "count": 223,
-      "sha8": "ee3b1aadcf1f",
-      "version_path": "versions/api/v1/audience/business/ee3b1aadcf1f.json",
+      "count": 224,
+      "sha8": "108a66cdc2b9",
+      "version_path": "versions/api/v1/audience/business/108a66cdc2b9.json",
       "pages_url": "https://kody-w.github.io/RAR/api/v1/audience/business.json"
     },
     {
       "name": "audience/consumer",
-      "count": 199,
-      "sha8": "3a3b8cba0366",
-      "version_path": "versions/api/v1/audience/consumer/3a3b8cba0366.json",
+      "count": 200,
+      "sha8": "d1b24b951479",
+      "version_path": "versions/api/v1/audience/consumer/d1b24b951479.json",
       "pages_url": "https://kody-w.github.io/RAR/api/v1/audience/consumer.json"
     },
     {
       "name": "audience/map",
-      "count": 226,
-      "sha8": "130a92017a8e",
-      "version_path": "versions/api/v1/audience/map/130a92017a8e.json",
+      "count": 227,
+      "sha8": "76254ac3c275",
+      "version_path": "versions/api/v1/audience/map/76254ac3c275.json",
       "pages_url": "https://kody-w.github.io/RAR/api/v1/audience/map.json"
     },
     {
