@@ -3,11 +3,13 @@
   "id": "rapp__start_brainstem_agent",
   "name": "Start Brainstem",
   "rar_name": "@rapp/start_brainstem_agent",
-  "rappid": "rappid:@rapp/start_brainstem_agent:fc2de3af72a29b2bc9f93c7e48ad23ebab68f8c7e0fd0496ecbf839c8992ba66",
-  "_migrated_from": null,
-  "_migrated_from_all": [],
-  "_migrated_from_note": null,
-  "version": "1.0.0",
+  "rappid": "rappid:@rapp/start_brainstem_agent:ec29d17030365cba77eedc6c40623f263699e4724d15a883460345353aecdd1e",
+  "_migrated_from": "rappid:@rapp/start_brainstem_agent:fc2de3af72a29b2bc9f93c7e48ad23ebab68f8c7e0fd0496ecbf839c8992ba66",
+  "_migrated_from_all": [
+    "rappid:@rapp/start_brainstem_agent:fc2de3af72a29b2bc9f93c7e48ad23ebab68f8c7e0fd0496ecbf839c8992ba66"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
   "publisher": "@rapp",
   "category": "devtools",
   "tags": [
@@ -24,8 +26,8 @@
     "@rapp/basic_agent"
   ],
   "lines": 229,
-  "size_kb": 9.6,
-  "sha256": "f07dc57512a2a1b5d8b72aa69f3536b4512cdfb3f59d08d5e2be0076d3484fa9",
+  "size_kb": 9.7,
+  "sha256": "6949e75bf48aa12b8a04a81281db35e95b1f54f016bae4c2bf866b70d49df942",
   "has_card": true,
   "added_at": "2026-11-11T00:35:20Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",

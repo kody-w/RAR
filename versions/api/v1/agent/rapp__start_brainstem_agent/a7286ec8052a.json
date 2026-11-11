@@ -1,0 +1,41 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "rapp__start_brainstem_agent",
+  "name": "Start Brainstem",
+  "rar_name": "@rapp/start_brainstem_agent",
+  "rappid": "rappid:@rapp/start_brainstem_agent:ec29d17030365cba77eedc6c40623f263699e4724d15a883460345353aecdd1e",
+  "_migrated_from": "rappid:@rapp/start_brainstem_agent:fc2de3af72a29b2bc9f93c7e48ad23ebab68f8c7e0fd0496ecbf839c8992ba66",
+  "_migrated_from_all": [
+    "rappid:@rapp/start_brainstem_agent:fc2de3af72a29b2bc9f93c7e48ad23ebab68f8c7e0fd0496ecbf839c8992ba66"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.1",
+  "publisher": "@rapp",
+  "category": "devtools",
+  "tags": [
+    "brainstem",
+    "install",
+    "start",
+    "onboarding"
+  ],
+  "description": "Starts the person's Brainstem for them: says if one is already up, starts an installed one, or (after a yes) installs and starts one. Never stops another program.",
+  "author": "RAPP",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 229,
+  "size_kb": 9.7,
+  "sha256": "6949e75bf48aa12b8a04a81281db35e95b1f54f016bae4c2bf866b70d49df942",
+  "has_card": true,
+  "added_at": "2026-11-11T00:35:20Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__start_brainstem_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/start_brainstem_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__start_brainstem_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/rapp__start_brainstem_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@rapp/start_brainstem_agent.py"
+}

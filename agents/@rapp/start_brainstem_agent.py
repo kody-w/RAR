@@ -23,7 +23,7 @@ Ask it "status" at any time. It only talks to this computer and to the installer
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@rapp/start_brainstem_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "Start Brainstem",
     "description": "Starts the person's Brainstem for them: says if one is already up, starts an installed one, or (after a yes) installs and starts one. Never stops another program.",
     "author": "RAPP",
@@ -143,7 +143,7 @@ def fetch_installer():
 
 def up(h, how):
     say = f"Your Brainstem is up ({how}). Open {URL}"
-    if h.get("copilot") != "✓":
+    if h.get("status") == "unauthenticated":
         say += f" . It still needs you to sign in once: {URL}/login"
     return {"status": "up", "say": say, "url": URL, "version": h.get("version"), "agents": len(h.get("agents") or [])}
 

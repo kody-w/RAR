@@ -3,6 +3,11 @@
   "actor_id": 1735900,
   "actor_login": "kody-w",
   "agent": "@rapp/start_brainstem_agent",
+  "applied_at": "2026-11-11T02:17:45.327710+00:00",
+  "approved_by": {
+    "github_id": 1735900,
+    "github_login": "kody-w"
+  },
   "base_lifecycle_receipt": "rar_d9126da93abec281e0a6e2b391f7016fb5fd96cbb7b239c08f4cfb2c132f27a0",
   "base_lifecycle_sha256": "f07dc57512a2a1b5d8b72aa69f3536b4512cdfb3f59d08d5e2be0076d3484fa9",
   "base_lifecycle_version": "1.0.0",
@@ -22,6 +27,7 @@
   "issue_updated_at": "2026-11-11T02:16:28Z",
   "publisher": "@rapp",
   "reason": "",
+  "receipt": "rar_e8db144f617a4178f15eb84e74815efeac466ec39c6c40a816b7e5a35da6714d",
   "repository_id": 1200565697,
   "request_id": "req_162e0729451e18db2655c59d",
   "revision_id": "e8db144f617a4178f15eb84e74815efeac466ec39c6c40a816b7e5a35da6714d",
@@ -29,5 +35,5 @@
   "slug": "start_brainstem_agent",
   "source_body_sha256": "a605f8b84db25bae8a5ac22b456d72cf52e78027a3f4de218bd241e1a4e2cb22",
   "source_url": "",
-  "status": "pending_review"
+  "status": "applied"
 }

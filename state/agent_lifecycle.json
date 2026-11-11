@@ -20209,16 +20209,16 @@
     },
     "@rapp/start_brainstem_agent": {
       "status": "active",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "quality_tier": "community",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "canonical_path": "agents/@rapp/start_brainstem_agent.py",
-      "sha256": "f07dc57512a2a1b5d8b72aa69f3536b4512cdfb3f59d08d5e2be0076d3484fa9",
-      "latest_receipt": "rar_d9126da93abec281e0a6e2b391f7016fb5fd96cbb7b239c08f4cfb2c132f27a0",
-      "updated_at": "2026-11-11T00:30:24.065311+00:00"
+      "sha256": "6949e75bf48aa12b8a04a81281db35e95b1f54f016bae4c2bf866b70d49df942",
+      "latest_receipt": "rar_e8db144f617a4178f15eb84e74815efeac466ec39c6c40a816b7e5a35da6714d",
+      "updated_at": "2026-11-11T02:17:45.327710+00:00"
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-11-11T00:30:24.065311+00:00"
+  "updated_at": "2026-11-11T02:17:45.327710+00:00"
 }
