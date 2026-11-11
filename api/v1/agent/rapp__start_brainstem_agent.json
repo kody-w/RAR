@@ -27,7 +27,7 @@
   "size_kb": 9.6,
   "sha256": "f07dc57512a2a1b5d8b72aa69f3536b4512cdfb3f59d08d5e2be0076d3484fa9",
   "has_card": true,
-  "added_at": null,
+  "added_at": "2026-11-11T00:35:20Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/rapp__start_brainstem_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/start_brainstem_agent.py",
