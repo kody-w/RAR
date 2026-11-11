@@ -3,7 +3,8 @@
     python3 kernel.py tools                      what is in agents/ right now (the tool list for this turn)
     python3 kernel.py call <Name> '<json args>'  run one agent's perform(**args) and print what it returns
     python3 kernel.py import <file> [sha256]     add an agent file to agents/ (checked if a sha256 is given)
-    python3 kernel.py stay                       write the standing note into this folder's always-on instructions
+    python3 kernel.py stay [your file]           write the standing note into this folder's always-on instructions
+                                                 (name the one you read at startup, such as CLAUDE.md, and it is made)
     python3 kernel.py serve <port> -- <ai command ...>   be reachable like a Brainstem: /health and /chat on this
                                                  device, each chat handed to that AI (the message is its last argument)
 
@@ -44,11 +45,14 @@ from that moment you know nothing of RAPP here. Never recreate the folder unaske
 HOSTS = ("AGENTS.md", "CLAUDE.md", ".github/copilot-instructions.md", "GEMINI.md")
 
 
-def stay(root=None):
-    """Write the standing note into this folder's always-on instructions, once. After this the skill page is never needed."""
+def stay(root=None, mine=()):
+    """Write the standing note into this folder's always-on instructions, once. After this the skill page is never needed.
+
+    mine: the instructions file the AI itself reads at the start of a session. It is made if it is missing,
+    so an AI that does not read AGENTS.md still finds the note in a folder that had no instructions at all."""
     root = Path(root) if root else HERE.parent
     note = NOTE.replace("python3 rapp/kernel.py", f"{_py()} {HERE.name}/kernel.py").replace("`rapp/", f"`{HERE.name}/")
-    present = [h for h in HOSTS if (root / h).exists()] or ["AGENTS.md"]
+    present = [h for h in HOSTS if (root / h).exists() or h in mine] or ["AGENTS.md"]
     done = []
     for h in present:
         f = root / h
@@ -268,8 +272,12 @@ def main(argv):
             return 1
         serve(argv[2] if cut > 2 else 7071, argv[cut + 1:])
     elif cmd == "stay":
+        mine = [a.replace("\\", "/") for a in argv[2:]]
+        if [a for a in mine if a not in HOSTS]:
+            print("stay takes one of: " + ", ".join(HOSTS))
+            return 2
         back = heal()
-        print("standing note written to: " + ", ".join(stay()) + ("; fetched: " + ", ".join(back) if back else ""))
+        print("standing note written to: " + ", ".join(stay(mine=mine)) + ("; fetched: " + ", ".join(back) if back else ""))
     return 0
 
 
