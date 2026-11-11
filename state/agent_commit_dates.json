@@ -7324,6 +7324,10 @@
    "added": "2026-06-09T21:45:37-04:00",
    "updated": "2026-11-04T15:05:48-05:00"
   },
+  "agents/@rapp/start_brainstem_agent.py": {
+   "added": "2026-11-11T00:35:20Z",
+   "updated": "2026-11-11T00:35:20Z"
+  },
   "agents/@rapp/store_navigator_agent.py": {
    "added": "2026-04-27T21:52:47Z",
    "updated": "2026-11-04T15:05:48-05:00"
