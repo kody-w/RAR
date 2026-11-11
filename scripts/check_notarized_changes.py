@@ -60,6 +60,14 @@ def validate_agent_change(
     record = lifecycle.get("agents", {}).get(name)
     if not record:
         return [f"{path}: {name} changed without lifecycle evidence"]
+    if (
+        status != "D"
+        and record.get("status") in {"deleted", "retired"}
+        and b"\nRAR_TOMBSTONE = " in content[:4000]
+    ):
+        # Article XXIII.3: the main build keeps a retired address alive with a stub.
+        return []
+
     receipt_id = str(record.get("latest_receipt", ""))
     if not receipt_id.startswith("rar_"):
         return [f"{path}: {name} changed without a RAR receipt"]

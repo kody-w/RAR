@@ -129,6 +129,11 @@ jobs:
       - name: Verify generated layer facts and tickets
         run: python tools/sync_layers.py --check
 
+      # Article XXIII.3: a retired agent keeps its address. Any retired address with
+      # no file gets a stub here, before the build, so the address never 404s.
+      - name: Keep retired addresses alive
+        run: python scripts/tombstone.py --backfill
+
       - name: Build registry
         run: python build_registry.py
 
@@ -190,6 +195,7 @@ jobs:
                   api/v1/status.json api/v1/badge.json \
                   api/v1/audience api/v1/index.json api/v1/agent api/v1/sprite
           git add versions api/v1/front.json
+          python scripts/tombstone.py --list | while IFS= read -r stub; do git add -- "$stub"; done
           git diff --cached --quiet || git commit -m "Auto-build registry.json [skip ci]"
           git push
 
