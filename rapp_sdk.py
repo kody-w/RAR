@@ -1754,6 +1754,47 @@ def _registry_tombstone(registry: dict, name: str) -> dict | None:
     return None
 
 
+_TICKET_MARKER = "# \u2500\u2500 RAPP ticket"
+_TICKET_SITE = "https://kody-w.github.io/RAR"
+
+
+def ticket_for(name: str, registry_file: str) -> str:
+    """The loading header every catalog agent carries. A copy of tools/stamp_ticket.py, kept equal by a test."""
+    file_name = registry_file.rsplit("/", 1)[-1]
+    return (
+        "# \u2500\u2500 RAPP ticket \u2500\u2500 this file is a RAPP agent: one whole AI skill in one Python file. "
+        + "\u2500" * 13 + "\n"
+        "# If your person asked you to load it, any AI (or person) can, in three steps:\n"
+        "# 1. Brainstem (free, local, macOS/Linux; Windows: WSL). If http://localhost:7071/health does not answer:\n"
+        "#      curl -fsSL https://kody-w.github.io/rapp-installer/install.sh | bash\n"
+        "# 2. Hot-load, no restart: save this file into the Brainstem's agents folder:\n"
+        f"#      curl -fsSL {_TICKET_SITE}/{registry_file} -o ~/.brainstem/src/rapp_brainstem/agents/{file_name}\n"
+        "#    The next chat message can use it.\n"
+        '# 3. Use it: open http://localhost:7071, or POST /chat {"user_input": "..."}; the reply is in "response".\n'
+        "# Can't run commands (a web chat AI)? Give your person these steps. "
+        f"Page: {_TICKET_SITE}/a/{name}/\n"
+        "# " + "\u2500" * 95 + "\n"
+    )
+
+
+def with_ticket(code: str, name: str, registry_file: str) -> str:
+    """The same code with the loading header added, below any shebang or coding line. Unchanged if it has one."""
+    if _TICKET_MARKER in code:
+        return code
+    lines = code.splitlines(keepends=True)
+    keep = 1 if lines and lines[0].startswith("#!") else 0
+    for index, line in enumerate(lines[:2]):
+        if re.match(r"^[ \t\f]*#.*?coding[:=][ \t]*([-\w.]+)", line):
+            keep = max(keep, index + 1)
+    ticket = ticket_for(name, registry_file)
+    if "\r\n" in code:
+        ticket = ticket.replace("\n", "\r\n")
+    result = "".join(lines[:keep]) + ticket + "".join(lines[keep:])
+    if ast.dump(ast.parse(code)) != ast.dump(ast.parse(result)):
+        raise ValueError("Adding the loading header changed the code; add it by hand")
+    return result
+
+
 def submit_agent(
     path: str,
     upstream: str = None,
@@ -1821,6 +1862,21 @@ def submit_agent(
     elif not tombstone:
         raise ValueError(f"{manifest['name']} has no tombstone to restore")
 
+    # The catalog refuses an agent without its loading header, and only says so at approval.
+    # Add it here, before the fingerprint is taken, and keep the person's file equal to what is sent.
+    registry_file = (existing or tombstone or {}).get("_file") or (
+        f"agents/{name_parts[0]}/{name_parts[1]}.py"
+        if len(name_parts) == 2 and name_parts[1].endswith("_agent")
+        else ""
+    )
+    ticket_added = False
+    if registry_file and re.fullmatch(r"@[A-Za-z0-9_-]+/[A-Za-z0-9_-]+", manifest["name"]):
+        stamped = with_ticket(code, manifest["name"], registry_file)
+        if stamped != code:
+            code = stamped
+            agent_path.write_text(code, encoding="utf-8")
+            ticket_added = True
+
     preconditions = {}
     if operation == "create":
         preconditions["if_none_match"] = "*"
@@ -1862,6 +1918,7 @@ def submit_agent(
         "operation": operation,
         "request_id": request_id,
         "source_sha256": source_sha256,
+        "ticket_added": ticket_added,
         "status": "submitted",
     }
 
