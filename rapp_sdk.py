@@ -1664,8 +1664,7 @@ def _post_change_issue(
     command: dict,
     token: str,
 ) -> dict:
-    issue_body = f"```json\n{json.dumps(command, indent=2)}\n```"
-    payload = json.dumps({"title": title, "body": issue_body}).encode()
+    payload = json.dumps({"title": title, "body": issue_body(command)}).encode()
     req = urllib.request.Request(
         f"https://api.github.com/repos/{upstream}/issues",
         data=payload,
@@ -1795,6 +1794,29 @@ def with_ticket(code: str, name: str, registry_file: str) -> str:
     return result
 
 
+def change_command(operation: str, name: str, code: str, preconditions: dict, request_id: str) -> dict:
+    """The change request an agent submission carries. The issue body is issue_body(command)."""
+    return {
+        "schema": "rar-change-request/1.0",
+        "request_id": request_id,
+        "idempotency_key": request_id,
+        "operation": operation,
+        "resource": {"kind": "agent", "id": name},
+        "preconditions": preconditions,
+        "payload": {"source": {
+            "media_type": "text/x-python",
+            "encoding": "utf-8",
+            "sha256": f"sha256:{hashlib.sha256(code.encode('utf-8')).hexdigest()}",
+            "content": code,
+        }},
+        "client": {"name": "rapp_sdk", "version": __version__},
+    }
+
+
+def issue_body(command: dict) -> str:
+    return f"```json\n{json.dumps(command, indent=2)}\n```"
+
+
 def submit_agent(
     path: str,
     upstream: str = None,
@@ -1884,23 +1906,9 @@ def submit_agent(
         preconditions["if_match"] = f"sha256:{existing.get('_sha256', '')}"
 
     request_id = f"req_{uuid.uuid4().hex}"
-    source_sha256 = hashlib.sha256(code.encode("utf-8")).hexdigest()
-    source = {
-        "media_type": "text/x-python",
-        "encoding": "utf-8",
-        "sha256": f"sha256:{source_sha256}",
-        "content": code,
-    }
-    command = {
-        "schema": "rar-change-request/1.0",
-        "request_id": request_id,
-        "idempotency_key": request_id,
-        "operation": operation,
-        "resource": {"kind": "agent", "id": manifest["name"]},
-        "preconditions": preconditions,
-        "payload": {"source": source},
-        "client": {"name": "rapp_sdk", "version": __version__},
-    }
+    command = change_command(operation, manifest["name"], code, preconditions, request_id)
+    source = command["payload"]["source"]
+    source_sha256 = source["sha256"].split(":", 1)[1]
     if len(json.dumps(command).encode("utf-8")) > INLINE_ISSUE_COMMAND_LIMIT:
         source.pop("content")
         source["url"] = _create_source_gist(code, agent_path.name, token)
