@@ -1,7 +1,7 @@
 {
   "schema": "rar-catalog/1.0",
   "description": "Every agent in RAR as a lean record. Fetch this one file to render a complete browsable catalog with no further requests, no backend, no authentication and no GitHub account. stack_packs lists every installable pack, including retired packs with status and retirement metadata.",
-  "generated": "2026-11-11T02:36:31Z",
+  "generated": "2026-11-11T03:09:36Z",
   "count": 227,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/catalog.json",
   "agents": [
@@ -10791,18 +10791,18 @@
     {
       "name": "brainstem-skill",
       "display_name": "Brainstem skill (any AI)",
-      "version": "0.3.2",
+      "version": "0.4.0",
       "schema": "rapp-rar-stack/1.2",
       "status": "current",
       "path": "stacks/brainstem-skill",
       "purpose": "One SKILL.md that makes any AI RAPP compatible. On first read the AI writes one small loop file, which fetches the chant agent from this catalog, fingerprint-checked, and writes a standing note into the AI's own always-on instructions, so the page is never needed again. Each turn the AI loads its ra",
       "files": {
         "SKILL.md": {
-          "sha256": "ac96d0deb843219c76a37c687942851357b5cfc0a106133d1dff359b2bb79351",
+          "sha256": "e251b431d1df9321970a6aaaadf5b69cb08785fe5e3ce1d82d8f7a2cb0ceab4d",
           "verified": true
         },
         "kernel.py": {
-          "sha256": "d5839882311762f6cf6d4d1b378e25d55fe890566c2f05e4f3dd3f39d03aaf30",
+          "sha256": "1f00210fba8224c034bca57f385726be7c5b3588af74a9846c07467f7a902d33",
           "verified": true
         },
         "README.md": {
