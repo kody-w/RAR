@@ -1,0 +1,143 @@
+{
+ "schema": "rapp-walkthrough/0.1",
+ "name": "brainstem-skill",
+ "title": "Give your AI a Brainstem",
+ "machine": "windows-11",
+ "shows": {
+  "file": "stacks/brainstem-skill/SKILL.md",
+  "sha256": "e4a499d859a1ddd1b5d6a03f061fc136fa5c3d672d9a308a436bb01d501215ff"
+ },
+ "simulated": true,
+ "steps": [
+  {
+   "caption": "Open the Brainstem skill page in the RAPP catalog and copy it.",
+   "window": "browser",
+   "title": "kody-w.github.io/RAR · Brainstem skill (any AI)",
+   "rows": [
+    [
+     "Brainstem skill",
+     "staging",
+     "blue"
+    ],
+    [
+     "What it does",
+     "Makes any AI RAPP compatible, once",
+     ""
+    ],
+    [
+     "You need",
+     "An AI that can write a file and run Python 3",
+     ""
+    ]
+   ],
+   "button": "Copy SKILL.md",
+   "click": "button"
+  },
+  {
+   "caption": "Open your AI in a folder and hand it the page with one sentence.",
+   "window": "terminal",
+   "title": "Terminal · my-work",
+   "type": "Read this skill and make yourself RAPP compatible. [SKILL.md attached]"
+  },
+  {
+   "caption": "It asks for one yes. That yes covers the whole setup.",
+   "window": "chat",
+   "title": "Your AI · my-work",
+   "chat": [
+    [
+     "you",
+     "Read this skill and make yourself RAPP compatible."
+    ],
+    [
+     "ai",
+     "This sets up a Brainstem in this folder: a rapp/ folder with an agents/ folder, and a short note in my instructions. OK?"
+    ]
+   ],
+   "button": "Yes",
+   "click": "button"
+  },
+  {
+   "caption": "It builds the Brainstem and leaves itself a standing note.",
+   "window": "terminal",
+   "title": "Terminal · my-work",
+   "lines": [
+    "created rapp/kernel.py",
+    "fetched summon_chant_agent.py from the catalog: fingerprint matches",
+    "wrote the RAPP note into AGENTS.md",
+    "Done. You can delete the skill page."
+   ]
+  },
+  {
+   "caption": "Two new things in the folder: rapp/ (your agents) and the note.",
+   "window": "explorer",
+   "title": "my-work",
+   "files": [
+    [
+     "folder",
+     "rapp"
+    ],
+    [
+     "folder",
+     "rapp/agents"
+    ],
+    [
+     "file",
+     "AGENTS.md"
+    ],
+    [
+     "file",
+     "your files…"
+    ]
+   ]
+  },
+  {
+   "caption": "Next day, new session, no page attached. It still knows its tools.",
+   "window": "chat",
+   "title": "Your AI · my-work · new session",
+   "chat": [
+    [
+     "you",
+     "What tools do you have here?"
+    ],
+    [
+     "ai",
+     "From rapp/agents right now: SummonByChant. Say seven chant words to bring a new one."
+    ]
+   ]
+  },
+  {
+   "caption": "Say an agent's seven chant words: it arrives, fingerprint checked, ready on the same turn.",
+   "window": "chat",
+   "title": "Your AI · my-work",
+   "chat": [
+    [
+     "you",
+     "Bring [the seven chant words on the tip calculator's catalog page]."
+    ],
+    [
+     "ai",
+     "Brought TipCalculator from the catalog, fingerprint checked. A $50 bill with 18% tip for 2 people is $29.50 each."
+    ]
+   ]
+  },
+  {
+   "caption": "To turn it off, delete rapp/agents. The note removes itself next time.",
+   "window": "explorer",
+   "title": "my-work",
+   "files": [
+    [
+     "folder",
+     "rapp"
+    ],
+    [
+     "file",
+     "AGENTS.md (note removed)"
+    ],
+    [
+     "file",
+     "your files…"
+    ]
+   ]
+  }
+ ]
+}

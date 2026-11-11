@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>RAPP walkthrough</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- One player for every walkthrough. A walkthrough is data (walkthroughs/<name>.json); this page only ever
+     shows its words as text (textContent), so a submitted walkthrough can never run code here. -->
+<style>
+*{box-sizing:border-box}html,body{margin:0;height:100%;font-family:"Segoe UI Variable","Segoe UI",system-ui,sans-serif;background:#e9ecf3;color:#1b1b1f;overflow:hidden}
+.top{display:flex;align-items:center;gap:12px;padding:10px 20px;height:52px}.top b{font-size:16px}
+.tag{margin-left:auto;font-size:12px;color:#5b5f6b;background:#fff;border:1px solid #dde;padding:4px 10px;border-radius:20px}
+.stage{position:absolute;top:52px;left:0;right:0;bottom:88px;display:flex;justify-content:center;align-items:center;padding:6px 20px}
+.pc{position:relative;aspect-ratio:16/10;height:100%;max-width:100%;border-radius:12px;overflow:hidden;box-shadow:0 18px 60px #0003;border:8px solid #1c1c1e;
+ background:radial-gradient(60% 80% at 70% 30%,#7aa7ff 0%,#3b6fd8 35%,transparent 70%),radial-gradient(50% 70% at 30% 80%,#a5c8ff 0%,#2958c2 45%,transparent 75%),linear-gradient(135deg,#0d2a6b,#1d4fb8 50%,#0a1f55)}
+.taskbar{position:absolute;left:0;right:0;bottom:0;height:42px;background:#f3f3f3e6;border-top:1px solid #0001;display:flex;justify-content:center;align-items:center;gap:8px}
+.taskbar i{width:20px;height:20px;border-radius:4px;display:block}.clock{position:absolute;right:12px;bottom:6px;font-size:11px;text-align:right}
+.win{position:absolute;inset:14px 18px 54px 18px;background:#fff;border-radius:8px;box-shadow:0 10px 40px #0005;overflow:hidden;display:flex;flex-direction:column;animation:pop .25s}
+@keyframes pop{from{transform:scale(.97);opacity:0}to{transform:none;opacity:1}}
+.tbar{height:34px;display:flex;align-items:center;padding:0 12px;background:#f3f3f3;font-size:12px;border-bottom:1px solid #e5e5e5}.tbar span{margin-left:auto;color:#555}
+.body{flex:1;padding:20px 26px;overflow:hidden;font-size:14px}
+.dark .tbar{background:#1f1f1f;color:#ddd;border:0}.dark .body{background:#0c0c0c;color:#ccc;font-family:"Cascadia Mono",Consolas,Menlo,monospace;font-size:13px;white-space:pre-wrap;line-height:1.6}
+.row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f0f0f2}
+.pill{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:600;background:#e8eefc;color:#0f4fa8}.pill.green{background:#dff6dd;color:#107c10}.pill.amber{background:#fff4ce;color:#8a5300}
+.btn{display:inline-block;margin-top:16px;padding:8px 16px;border-radius:6px;background:#0f6cbd;color:#fff;font-weight:600;font-size:13px}
+.bub{max-width:78%;padding:10px 13px;border-radius:12px;margin-bottom:10px;line-height:1.45}.you{margin-left:auto;background:#e8eefc}.ai{background:#f4f4f6}
+.files{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.files div{text-align:center;font-size:12px}
+.ico{width:44px;height:34px;margin:0 auto 6px;border-radius:3px;background:linear-gradient(#ffd666,#f2b927)}.ico.file{width:30px;height:38px;background:#fff;border:1px solid #ccd}
+.toast{position:absolute;right:14px;bottom:56px;width:320px;background:#fbfbfb;border-radius:8px;box-shadow:0 8px 30px #0004;padding:14px 16px}
+.g{color:#16c60c}
+#cursor{position:absolute;z-index:9;pointer-events:none;transition:left .9s,top .9s;left:60%;top:60%}
+.ripple{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;border:3px solid #0f6cbd;animation:rip .5s forwards;pointer-events:none;z-index:8}
+@keyframes rip{from{transform:scale(.3);opacity:1}to{transform:scale(1.6);opacity:0}}
+.bar{position:absolute;left:0;right:0;bottom:0;height:88px;display:flex;align-items:center;gap:14px;padding:0 24px;background:#fff;border-top:1px solid #dde}
+.cap{flex:1}.cap small{color:#0f6cbd;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.04em}.cap div{font-size:17px;margin-top:3px}
+.bar button{font:inherit;font-size:15px;padding:10px 18px;border-radius:10px;border:1px solid #ccd;background:#fff;cursor:pointer}.bar button.go{background:#0f6cbd;color:#fff;border-color:#0f6cbd;font-weight:600}
+#err{padding:40px;font-size:16px}
+</style></head><body>
+<div class="top"><b id="ttl">RAPP walkthrough</b><span class="tag" id="tag">Simulated Windows 11</span></div>
+<div class="stage"><div class="pc" id="pc"><div id="scr"></div>
+<div class="taskbar"><i style="background:linear-gradient(135deg,#1f8ef1 50%,#59b4ff 50%)"></i><i style="border-radius:50%;background:conic-gradient(#0c59a4,#1b9de2,#36d07d,#0c59a4)"></i><i style="background:#2b2b2b"></i><i style="background:linear-gradient(#ffd666,#f2b927)"></i></div>
+<div class="clock">9:41 AM</div>
+<svg id="cursor" width="22" height="22" viewBox="0 0 22 22"><path d="M3 2 L3 18 L7.5 13.8 L10.5 20 L13 19 L10 12.8 L16 12.8 Z" fill="#fff" stroke="#000" stroke-width="1.2"/></svg></div></div>
+<div class="bar"><div class="cap"><small id="sn"></small><div id="sc"></div></div><button id="back">Back</button><button id="play">▶ Play</button><button id="next" class="go">Next</button></div>
+<script>
+const $=s=>document.querySelector(s);
+function el(tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=String(text);return e}
+const TONE={blue:'',green:'green',amber:'amber'};
+let W=null,i=0,tok=0,timer=null;
+function render(s){const scr=$('#scr');scr.replaceChildren();let target=null;
+ if(s.window==='desktop'){if(s.toast){const t=el('div','toast');t.append(el('b',null,s.title||''),el('div',null,s.toast));if(s.button){target=el('span','btn',s.button);t.append(target)}scr.append(t)}return target}
+ const w=el('div','win'+(s.window==='terminal'?' dark':''));const tb=el('div','tbar',s.title||'');tb.append(el('span',null,'— ▢ ✕'));const b=el('div','body');w.append(tb,b);scr.append(w);
+ if(s.window==='terminal'){if(s.type){const p=el('span',null,'> ');const t=el('span');b.append(p,t);b.dataset.type=s.type}
+  (s.lines||[]).forEach(l=>{const d=el('div');d.append(el('span','g','✓ '),document.createTextNode(l));b.append(d)})}
+ (s.rows||[]).forEach(([k,v,tone])=>{const r=el('div','row');r.append(el('b',null,k));r.append(tone!=null&&tone!==''?el('span','pill '+(TONE[tone]||''),v):el('span',null,v));b.append(r)});
+ (s.chat||[]).forEach(([who,text])=>b.append(el('div','bub '+(who==='you'?'you':'ai'),text)));
+ if(s.files){const g=el('div','files');s.files.forEach(([kind,name])=>{const d=el('div');d.append(el('div','ico'+(kind==='file'?' file':'')),el('div',null,name));g.append(d)});b.append(g)}
+ if(s.button){target=el('span','btn',s.button);b.append(target)}
+ return target}
+function clickOn(e,t){const p=$('#pc').getBoundingClientRect(),r=e.getBoundingClientRect(),x=r.left-p.left+r.width/2,y=r.top-p.top+r.height/2;const c=$('#cursor');c.style.left=x-3+'px';c.style.top=y-2+'px';
+ setTimeout(()=>{if(t!==tok)return;const rp=el('div','ripple');rp.style.left=x+'px';rp.style.top=y+'px';$('#pc').append(rp);setTimeout(()=>rp.remove(),600);e.textContent='✓ '+e.textContent;e.style.background='#107c10'},1000)}
+function show(n){i=Math.max(0,Math.min(W.steps.length-1,n));const s=W.steps[i],t=++tok;const target=render(s);
+ $('#sn').textContent=`Step ${i+1} of ${W.steps.length}`;$('#sc').textContent=s.caption;$('#back').disabled=i===0;$('#next').textContent=i===W.steps.length-1?'Start again':'Next';
+ history.replaceState(null,'',`?w=${encodeURIComponent(W.name)}#${i+1}`);
+ const ty=document.querySelector('[data-type]');if(ty){const txt=ty.dataset.type,span=ty.lastChild;let k=0;const tick=()=>{if(t!==tok)return;span.textContent=txt.slice(0,++k);if(k<txt.length)setTimeout(tick,35)};setTimeout(tick,400)}
+ if(target&&s.click==='button')clickOn(target,t)}
+function stop(){clearInterval(timer);timer=null;$('#play').textContent='▶ Play'}
+$('#next').onclick=()=>{stop();show(i===W.steps.length-1?0:i+1)};$('#back').onclick=()=>{stop();show(i-1)};
+$('#play').onclick=()=>{if(timer)return stop();$('#play').textContent='❚❚ Pause';timer=setInterval(()=>{if(i===W.steps.length-1)stop();else show(i+1)},5000)};
+addEventListener('keydown',e=>{if(e.key==='ArrowRight')$('#next').click();if(e.key==='ArrowLeft')$('#back').click()});
+const name=(new URLSearchParams(location.search).get('w')||'brainstem-skill').replace(/[^a-z0-9-]/g,'');
+fetch(`walkthroughs/${name}.json`).then(r=>{if(!r.ok)throw new Error(r.status);return r.json()}).then(d=>{W=d;$('#ttl').textContent=d.title;document.title=d.title+' · RAPP walkthrough';
+ $('#tag').textContent=(d.simulated?'Simulated ':'')+'Windows 11 · shows '+d.shows.file;show((+location.hash.slice(1)||1)-1)})
+ .catch(e=>{$('#scr').replaceChildren(el('div','',''));$('#sc').textContent='Walkthrough "'+name+'" not found ('+e.message+').'});
+</script></body></html>

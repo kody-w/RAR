@@ -1,0 +1,39 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "walkthroughs",
+  "display_name": "Walkthroughs (simulated click-throughs)",
+  "version": "0.1.0",
+  "maturity": "staging",
+  "purpose": "An optional SDK for showing an agent, stack or distro working as a simulated Windows 11 click-through. A walkthrough is one JSON file pinned to the file it shows; one shared player draws it as text only. People follow the click-through instead of reading.",
+  "files": {
+    "walkthrough.py": {
+      "purpose": "The SDK: new, check, repin. Optional for any publisher.",
+      "size": 5811,
+      "sha256": "88c33c31057eefdabfba12df0fb233d95bbd1c81e5848eb8b2879d326ccfcdc9"
+    },
+    "player.html": {
+      "purpose": "The one player for every walkthrough; shows walkthrough words as text only.",
+      "size": 8842,
+      "sha256": "8208e3c8def409d9aa3ec8528abc43db862de9e4cab76f6b89513471df93f13f"
+    },
+    "README.md": {
+      "purpose": "What a walkthrough is and how to make one.",
+      "size": 1109,
+      "sha256": "041156bc347c0e86fda952f6326b279781c18e1e42555b5595dd6d0306c2fd16"
+    },
+    "walkthroughs/brainstem-skill.json": {
+      "purpose": "First walkthrough: give your AI a Brainstem.",
+      "size": 3241,
+      "sha256": "8f9ac13c72a1547a87f12ced4763527793bcbfff9c6404a7e14496d02cde398e"
+    }
+  },
+  "capabilities": [
+    "walkthrough",
+    "onboarding",
+    "sdk"
+  ],
+  "install": {
+    "type": "static",
+    "notes": "Open player.html?w=<name>. To make one: python3 walkthrough.py new <name> <file it shows>."
+  }
+}
