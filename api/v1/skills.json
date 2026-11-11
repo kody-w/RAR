@@ -12,7 +12,7 @@
   },
   "inputs": {
     "canonical_manifests": "b3db907d4b20894ca52b84988590e7b577d561477cf6b48167b04f15c5e08e63",
-    "scout_catalog": "10d10178cc823d04281f2b291d54587a2a1385f2f7291f0549d492c03ec44afd",
+    "scout_catalog": "e71b00f62d129e1589812126b5999c5cc920d1b7b289154bcbfea1c62ee185a9",
     "scout_toaster": {
       "commit": "d54ba8484b5c5dae6406d2090c03115d12985446",
       "sha256": "d340043178aa4160f76a179b8b1086971e09207b212aff2ab2c0752b69173e17"
@@ -24682,18 +24682,18 @@
       ],
       "slug": "rar-rapp-start-brainstem",
       "source": {
-        "artifact_sha256": "f07dc57512a2a1b5d8b72aa69f3536b4512cdfb3f59d08d5e2be0076d3484fa9",
+        "artifact_sha256": "6949e75bf48aa12b8a04a81281db35e95b1f54f016bae4c2bf866b70d49df942",
         "entrypoint": "scout/bundles/native-15/skills/rar-rapp-start-brainstem/SKILL.md",
         "entrypoint_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-start-brainstem/SKILL.md",
         "files": [
           {
             "path": "scout/bundles/native-15/skills/rar-rapp-start-brainstem/SKILL.md",
-            "sha256": "ccaf941141db125fb2e1a0404ee9b700a80f2385f524c40a77e3b2000562b32b",
+            "sha256": "1f8ba7341e9adbbe3b5f6bd555ad4333c7df05d38260edce9adac1318feac9ba",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-start-brainstem/SKILL.md"
           },
           {
             "path": "scout/bundles/native-15/skills/rar-rapp-start-brainstem/rapp/agent.lock.json",
-            "sha256": "cdc27ec177cc0a26099a34bf78fb7b4f9c8420d03fc12a664237ff15dbdfd54e",
+            "sha256": "456e43b6a0d01d4e2c354ddbbe0c819890c2cdd563c947aebbd2033061cd1ae3",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-start-brainstem/rapp/agent.lock.json"
           },
           {
@@ -24703,12 +24703,12 @@
           },
           {
             "path": "scout/bundles/native-15/skills/rar-rapp-start-brainstem/start_brainstem_agent.py",
-            "sha256": "f07dc57512a2a1b5d8b72aa69f3536b4512cdfb3f59d08d5e2be0076d3484fa9",
+            "sha256": "6949e75bf48aa12b8a04a81281db35e95b1f54f016bae4c2bf866b70d49df942",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-15/skills/rar-rapp-start-brainstem/start_brainstem_agent.py"
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "06760087109e14174031ee39b3dcb4bca4d70f93",
+        "input_revision": "fcb927883bdbe52c37698e09e2153daf4ddf045a",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -24722,7 +24722,7 @@
         "projection",
         "scout"
       ],
-      "version": "1.0.0"
+      "version": "1.0.1"
     },
     {
       "artifact_type": "skill",
