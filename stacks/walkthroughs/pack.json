@@ -24,7 +24,7 @@
     "walkthroughs/brainstem-skill.json": {
       "purpose": "First walkthrough: give your AI a Brainstem.",
       "size": 3242,
-      "sha256": "fc6eca9a00731e1786e2caab35435897f0bb8261fb93c93fbbaa48d8b18de923"
+      "sha256": "9521c58487bbf8301d903c0effc473752dc7cfcb308f6ea225fbbf3facb0d6a3"
     }
   },
   "capabilities": [

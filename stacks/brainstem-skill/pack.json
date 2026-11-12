@@ -8,18 +8,18 @@
   "files": {
     "SKILL.md": {
       "purpose": "The one page. Hand it to any AI that can write a file and run Python 3.",
-      "size": 24159,
-      "sha256": "8e52233e3530d0c8de6bd6223b5c550c728d7ae910bb82612a113849ca287a37"
+      "size": 28338,
+      "sha256": "e4495957131c3d8e5ad7394157eedb83efb4c8b25ffb5d54462273cbdd38d103"
     },
     "kernel.py": {
-      "purpose": "The loop the page carries: tools, call, import, ready, stay, serve. Identical to the block inside SKILL.md.",
-      "size": 20055,
-      "sha256": "978f447e548101b01bb1933772d4e841efb08df022a5a619bfa28c51ae87d1b7"
+      "purpose": "The loop the page carries: tools, call, import, ready, stay, serve, and omni routing (map, load, shelve, undo). Identical to the block inside SKILL.md.",
+      "size": 24234,
+      "sha256": "47053015e077bf3fda3d887b419e3622831eae3bd80df95059bfa69e0b6268d0"
     },
     "README.md": {
       "purpose": "What it is, the off switch, and what has been seen so far.",
-      "size": 1773,
-      "sha256": "3ba7b0e1d1a7e3e0c9da8fb2889bd963998f614ece9207e269cb720fe56bc063"
+      "size": 2184,
+      "sha256": "3f002f0d8dc97e54edb941131aa59af3d0529b1c42f78ca6bc9f8a677fc3b4c3"
     }
   },
   "capabilities": [

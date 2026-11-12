@@ -37,7 +37,7 @@ Tell the person, in plain words, and wait for a yes:
 3. Write `rapp/kernel.py` from the block at the bottom of this page, with a script, never by retyping. The
    file is everything between the opening fence line (four backticks plus `python`) and the closing fence
    line (four backticks), ending in one newline, LF line endings. Its sha256 must be
-   `978f447e548101b01bb1933772d4e841efb08df022a5a619bfa28c51ae87d1b7`. If it is not, stop and say so.
+   `47053015e077bf3fda3d887b419e3622831eae3bd80df95059bfa69e0b6268d0`. If it is not, stop and say so.
 4. Run it with the Python 3 that worked, naming the instructions file you yourself read at the start of
    every session: `<python> rapp/kernel.py stay <your file>`
    Your file is `CLAUDE.md` if you are Claude Code, `GEMINI.md` if you are Gemini, `AGENTS.md` if you are
@@ -65,12 +65,20 @@ this device only. Start the door with the command that runs you for one message,
                                                  hand it to the person's Brainstem on this device
     python3 kernel.py stay [your file]           write the standing note into this folder's always-on instructions
                                                  (name the one you read at startup, such as CLAUDE.md, and it is made)
+    python3 kernel.py map [--dir <agents>]           intelligent omni routing, read only: what is loaded (top of agents/)
+                                                 and every shelf (a subfolder, never loaded) with each agent's own
+                                                 name and description, read as text, never run
+    python3 kernel.py load <shelf>[/<file>] [--dir <agents>]    put a shelf's agents (or one) on top, so they load
+    python3 kernel.py shelve <file> <shelf> [--dir <agents>]    move a loaded agent onto a shelf (made if missing)
+    python3 kernel.py undo [--dir <agents>]          put the last load or shelve back
+                                                 (--dir defaults to this folder's agents/; name the person's
+                                                 own Brainstem's agents/ folder to route that one)
     python3 kernel.py serve <port> -- <ai command ...>   be reachable like a Brainstem: /health and /chat on this
                                                  device, each chat handed to that AI (the message is its last argument)
 
 The AI reading the skill is the model. This file only does what a Brainstem's loader does.
 """
-import hashlib, importlib.util, json, os, sys, threading, urllib.request, uuid
+import ast, hashlib, importlib.util, json, os, shutil, sys, time, threading, urllib.request, uuid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
@@ -108,20 +116,22 @@ You are RAPP compatible here, permanently. A folder `rapp/` holds your agents. D
    itself (the grail): a new need is an agent file, a sidecar that talks only over /chat and /health, or a
    distro. Stuck? The rules: https://kody-w.github.io/RAR/RAPP.md. The protocol: https://kody-w.github.io/rapp-1/llms.txt
 
-9. Keep it tidy so the person never has to think about folders. Only agent files at the top of
-   `rapp/agents/` are loaded; a subfolder there is a shelf and is never loaded. Give each job its own
-   project, `rapp/agents/<project>/`, named from the person's own words, holding that job's agent files
-   and its saved songs (`songs/<name>.txt`, one sentence per line). When the person turns to a job, pick
-   the project from what they say (ask only if two fit), move its agents to the top and shelve the rest;
-   `basic_agent.py` and `summon_chant_agent.py` always stay on top. Move, never delete. When a job works,
-   save it as a song in its project, so "do it again" or "do it for these 50" needs nothing else. Over
-   time, merge duplicate agents and shelve what has not been used in 30 days. Tell the person each move
-   in one plain line; "undo that" moves it back. Asked "where is everything?", answer one line per project.
-10. The person never runs a command, opens a folder or drags a file: you do all of it. If their Brainstem
-   on this device is not answering (http://localhost:7071/health), start it yourself the way it was
-   installed; hand new agents to it with `ready`; keep its agents folder in the same tidy projects (only
-   the top of its `agents/` folder is loaded there too). Only a yes, a sign-in or a payment is theirs:
-   ask for it in one plain sentence, then carry on.
+9. Intelligent omni routing: keep the agents folder lean and organized so the person never thinks about
+   it. Only agent files at the top of `rapp/agents/` load; each subfolder is a shelf for one engagement,
+   named from the person's own words, holding its agent files and saved songs (`songs/<name>.txt`, one
+   sentence per line). Each turn, read `python3 rapp/kernel.py map` (every shelf and each agent's own
+   description, read as text, never run) beside what the person is saying, and route: `load <shelf>` or
+   `load <shelf>/<file>` what this need calls for, `shelve <file> <shelf>` what it no longer needs, so the
+   top holds only what is in play. A new engagement gets a new shelf; never ask "which project?" unless
+   two fit equally. When a job works, save it as a song on its shelf, so "do it again" needs nothing else.
+   Never delete; merge duplicates and shelve what has gone unused. Tell the person each move in one plain
+   line; "undo that" is `undo`. Asked "where is everything?", answer one line per shelf.
+10. The person never runs a command, opens a folder or drags a file: you do all of it. Their own Brainstem
+   (usually http://localhost:7071, its `/health` answers) is routed the same way with `--dir <its agents
+   folder>`; it also loads only the top of its `agents/`. If it is not answering, start it yourself the
+   way it was installed; hand it new agents with `ready`. Only a yes, a sign-in or a payment is theirs:
+   ask in one plain sentence, then carry on.
+
 Off switch: if `rapp/agents/` is gone, the person turned this off. `tools` then removes this note itself;
 from that moment you know nothing of RAPP here. Never recreate the folder unasked.
 <!-- rapp:end -->
@@ -369,6 +379,73 @@ def leave(root=None):
         new = (old[:a].rstrip("\n") + "\n" + old[b:]).lstrip("\n") if old[:a].strip() or old[b:].strip() else ""
         f.write_text(new) if new.strip() else f.unlink()
 
+KEEP = ("basic_agent.py", "summon_chant_agent.py")  # always on top
+
+
+def _about(f):
+    """An agent file's own name and description, read as text (ast), never executed."""
+    name = desc = None
+    try:
+        for node in ast.walk(ast.parse(f.read_text(encoding="utf-8", errors="replace"))):
+            if isinstance(node, ast.Dict):
+                for k, v in zip(node.keys, node.values):
+                    if isinstance(k, ast.Constant) and isinstance(v, ast.Constant) and isinstance(v.value, str):
+                        if k.value == "name" and not name: name = v.value
+                        if k.value == "description" and not desc: desc = v.value
+    except SyntaxError:
+        pass
+    return {"file": f.name, "name": name or f.stem, "description": (desc or "")[:300]}
+
+
+def route_map(d):
+    log = d / ".routing.jsonl"
+    moves = [json.loads(l) for l in log.read_text().splitlines()[-5:]] if log.exists() else []
+    return {"agents_dir": str(d),
+            "loaded": [_about(f) for f in sorted(d.glob("*_agent.py")) if f.name not in KEEP],
+            "shelves": {s.name: [_about(f) for f in sorted(s.glob("*_agent.py"))]
+                        for s in sorted(d.iterdir()) if s.is_dir() and not s.name.startswith((".", "_"))},
+            "last_moves": moves}
+
+
+def _move(d, src, dst, kind):
+    if dst.exists():
+        return {"error": f"{dst.relative_to(d)} already exists; nothing moved"}
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    shutil.move(str(src), str(dst))
+    rec = {"at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "kind": kind,
+           "from": str(src.relative_to(d)), "to": str(dst.relative_to(d))}
+    with open(d / ".routing.jsonl", "a") as fh:
+        fh.write(json.dumps(rec) + "\n")
+    return rec
+
+
+def route(cmd, args):
+    d = AGENTS
+    if "--dir" in args:
+        i = args.index("--dir"); d = Path(args[i + 1]).expanduser(); args = args[:i] + args[i + 2:]
+    if cmd == "map":
+        return route_map(d)
+    if cmd == "load":
+        shelf, _, one = args[0].partition("/")
+        files = [d / shelf / one] if one else sorted((d / shelf).glob("*_agent.py"))
+        if not files or not all(f.exists() for f in files):
+            return {"error": f"nothing to load at {args[0]}", "shelves": list(route_map(d)["shelves"])}
+        return {"moved": [_move(d, f, d / f.name, "load") for f in files]}
+    if cmd == "shelve":
+        f = d / args[0]
+        if args[0] in KEEP or not f.exists():
+            return {"error": f"{args[0]} cannot be shelved" if args[0] in KEEP else f"no {args[0]} on top"}
+        return {"moved": [_move(d, f, d / args[1] / f.name, "shelve")]}
+    if cmd == "undo":
+        log = d / ".routing.jsonl"
+        lines = log.read_text().splitlines() if log.exists() else []
+        if not lines:
+            return {"error": "nothing to undo"}
+        last = json.loads(lines[-1])
+        shutil.move(str(d / last["to"]), str(d / last["from"]))
+        log.write_text("".join(l + "\n" for l in lines[:-1]))
+        return {"undone": last}
+
 
 def main(argv):
     cmd = argv[1] if len(argv) > 1 else "tools"
@@ -400,6 +477,10 @@ def main(argv):
         code, out = ready(argv[2], argv[3], json.loads(argv[4]), argv[5], argv[6] if len(argv) > 6 else None)
         print(json.dumps(out, indent=1))
         return code
+    elif cmd in ("map", "load", "shelve", "undo"):
+        out = route(cmd, argv[2:])
+        print(json.dumps(out, indent=1))
+        return 1 if "error" in out else 0
     elif cmd == "serve":
         cut = argv.index("--") if "--" in argv else len(argv)
         if cut == len(argv) or cut + 1 >= len(argv):
