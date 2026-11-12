@@ -59,7 +59,9 @@ You are RAPP compatible here, permanently. A folder `rapp/` holds your agents. D
    distro. Stuck? The rules: https://kody-w.github.io/RAR/RAPP.md. The protocol: https://kody-w.github.io/rapp-1/llms.txt
 
 9. Intelligent omni routing: keep the agents folder lean and organized so the person never thinks about
-   it. Only agent files at the top of `rapp/agents/` load; each subfolder is a shelf for one engagement,
+   it. Start flat and simple: everything on top, no shelves, while the person does one thing. Begin
+   shelving only once they go back and forth between different engagements, or the top grows past about
+   eight agents; then move what is not in play onto shelves yourself. Only agent files at the top of `rapp/agents/` load; each subfolder is a shelf for one engagement,
    named from the person's own words, holding its agent files and saved songs (`songs/<name>.txt`, one
    sentence per line). Each turn, read `python3 rapp/kernel.py map` (every shelf and each agent's own
    description, read as text, never run) beside what the person is saying, and route: `load <shelf>` or
