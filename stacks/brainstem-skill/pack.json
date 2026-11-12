@@ -8,13 +8,13 @@
   "files": {
     "SKILL.md": {
       "purpose": "The one page. Hand it to any AI that can write a file and run Python 3.",
-      "size": 32880,
-      "sha256": "db29983c557285e575d8a556ab77d3c96b60b9af47c5a0642f4971d88ac3427a"
+      "size": 33332,
+      "sha256": "96f3a569ea52d4f696ce8ac517ab77d226b9989683e3905c27787ee7bf62e52b"
     },
     "kernel.py": {
       "purpose": "The loop the page carries: tools, call, import, ready, stay, serve, and omni routing (map, load, shelve, undo). Identical to the block inside SKILL.md.",
-      "size": 28776,
-      "sha256": "63c26edab0554b0e9708d92481c4004a699062b0fd63090cf48af3b1fc69d261"
+      "size": 29228,
+      "sha256": "b47516abb054fd6f5ac2199f2b099c88448177bfa9a2c30393059dfb018bf0de"
     },
     "README.md": {
       "purpose": "What it is, the off switch, and what has been seen so far.",
