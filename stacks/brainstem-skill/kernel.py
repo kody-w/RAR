@@ -50,6 +50,20 @@ You are RAPP compatible here, permanently. A folder `rapp/` holds your agents. D
    itself (the grail): a new need is an agent file, a sidecar that talks only over /chat and /health, or a
    distro. Stuck? The rules: https://kody-w.github.io/RAR/RAPP.md. The protocol: https://kody-w.github.io/rapp-1/llms.txt
 
+9. Keep it tidy so the person never has to think about folders. Only agent files at the top of
+   `rapp/agents/` are loaded; a subfolder there is a shelf and is never loaded. Give each job its own
+   project, `rapp/agents/<project>/`, named from the person's own words, holding that job's agent files
+   and its saved songs (`songs/<name>.txt`, one sentence per line). When the person turns to a job, pick
+   the project from what they say (ask only if two fit), move its agents to the top and shelve the rest;
+   `basic_agent.py` and `summon_chant_agent.py` always stay on top. Move, never delete. When a job works,
+   save it as a song in its project, so "do it again" or "do it for these 50" needs nothing else. Over
+   time, merge duplicate agents and shelve what has not been used in 30 days. Tell the person each move
+   in one plain line; "undo that" moves it back. Asked "where is everything?", answer one line per project.
+10. The person never runs a command, opens a folder or drags a file: you do all of it. If their Brainstem
+   on this device is not answering (http://localhost:7071/health), start it yourself the way it was
+   installed; hand new agents to it with `ready`; keep its agents folder in the same tidy projects (only
+   the top of its `agents/` folder is loaded there too). Only a yes, a sign-in or a payment is theirs:
+   ask for it in one plain sentence, then carry on.
 Off switch: if `rapp/agents/` is gone, the person turned this off. `tools` then removes this note itself;
 from that moment you know nothing of RAPP here. Never recreate the folder unasked.
 <!-- rapp:end -->

@@ -2,19 +2,19 @@
   "schema": "rapp-rar-stack/1.2",
   "name": "brainstem-skill",
   "display_name": "Brainstem skill (any AI)",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "maturity": "staging",
   "purpose": "One SKILL.md that makes any AI RAPP compatible. On first read the AI writes one small loop file, which fetches the chant agent from this catalog, fingerprint-checked, and writes a standing note into the AI's own always-on instructions, so the page is never needed again. Each turn the AI loads its rapp/agents/ folder fresh, brings agents by chant, and can answer in a Brainstem's chat shape. Deleting rapp/agents/ turns it all off.",
   "files": {
     "SKILL.md": {
       "purpose": "The one page. Hand it to any AI that can write a file and run Python 3.",
-      "size": 22761,
-      "sha256": "27f0223a1e72b2175c974f67d2b0f0db59ca2e7b49d7dfcd3b5fe72bf1f72aee"
+      "size": 24159,
+      "sha256": "8e52233e3530d0c8de6bd6223b5c550c728d7ae910bb82612a113849ca287a37"
     },
     "kernel.py": {
       "purpose": "The loop the page carries: tools, call, import, ready, stay, serve. Identical to the block inside SKILL.md.",
-      "size": 18657,
-      "sha256": "d468d64ad29eacb130b8ba57b6efb935b64f0e71d96117083ec7d0277007bf10"
+      "size": 20055,
+      "sha256": "978f447e548101b01bb1933772d4e841efb08df022a5a619bfa28c51ae87d1b7"
     },
     "README.md": {
       "purpose": "What it is, the off switch, and what has been seen so far.",
