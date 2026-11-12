@@ -15,7 +15,7 @@
       "license_url": "",
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
-      "item_count": 155,
+      "item_count": 156,
       "source_downloads": 1589
     },
     {
@@ -6761,6 +6761,34 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/safety_incident_assist",
+      "source_id": "cat-agent-skills",
+      "source_slug": "safety-incident-assist",
+      "name": "Safety Incident Assist",
+      "description": "Prepare cited incident drafts from supplied local evidence, with draft classification, proposed unsent routing, and a write-up for qualified EHS review.",
+      "kind": "plugin",
+      "tags": [
+        "safety",
+        "ehs",
+        "incident",
+        "manufacturing",
+        "drafting"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "2.0.0-rc.7",
+      "created_at": "2026-11-10T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#safety-incident-assist",
+      "source_signal": {
+        "downloads": 0,
+        "rating": 1
+      }
+    },
+    {
       "ref": "@cat-agent-skills/sales_progress_update",
       "source_id": "cat-agent-skills",
       "source_slug": "sales-progress-update",
@@ -7586,7 +7614,7 @@
   ],
   "totals": {
     "sources": 2,
-    "items": 249,
+    "items": 250,
     "source_downloads": 1589
   }
 }

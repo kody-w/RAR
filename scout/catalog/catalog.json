@@ -18662,6 +18662,11 @@
       "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
     },
     {
+      "aggregate_id": "safety-incident-assist",
+      "identity": "@cat-agent-skills/safety_incident_assist",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
       "aggregate_id": "sales-progress-update",
       "identity": "@cat-agent-skills/sales_progress_update",
       "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"

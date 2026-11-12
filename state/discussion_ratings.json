@@ -3213,6 +3213,21 @@
       "url": "https://github.com/kody-w/RAR/discussions/396",
       "number": 396
     },
+    "@rapp/start_brainstem_agent": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/1622",
+      "number": 1622
+    },
     "@rapp/store_navigator_agent": {
       "upvotes": 0,
       "downloads": 0,
