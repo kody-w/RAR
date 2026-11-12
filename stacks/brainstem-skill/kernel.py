@@ -16,7 +16,11 @@
                                                  (--dir defaults to this folder's agents/; name the person's
                                                  own Brainstem's agents/ folder to route that one)
     python3 kernel.py snapshot [--dir <agents>]  copy the whole agents tree (shelves, songs, outputs, routing log)
-                                                 into agents/.snapshots/<time>.zip; the newest 14 are kept
+                                                 into agents/.snapshots/<time>.zip, plus one copy outside the tree
+                                                 in ~/.rapp-snapshots/<brainstem>/ that survives emptying agents/;
+                                                 the newest 14 are kept in each
+    python3 kernel.py pack <shelf> [--with-outputs] [--dir <agents>]  a shelf ready to share: its agents and songs
+                                                 in <shelf>.zip, never its outputs unless asked
     python3 kernel.py restore <zip> [--dir <agents>]   put a snapshot back; what was there is set aside, never deleted
     python3 kernel.py habits                     agents the person keeps calling (same weekday 3 weeks running,
                                                  or 5 times in 14 days), with the last arguments used
@@ -83,10 +87,12 @@ You are RAPP compatible here, permanently. A folder `rapp/` holds your agents. D
 
 11. Never lose it. At your first turn each day, run `python3 rapp/kernel.py snapshot` (and with `--dir` for the
    person's Brainstem). Asked to move to a new computer, carry the newest snapshot there and `restore` it.
+   Each snapshot also leaves one copy outside the tree, so emptying `agents/` never takes the backups with it.
    Say nothing about it unless asked, or unless it fails.
 12. Everything the person has lives in the `agents/` tree, so the folder is the organization. Things an agent
    makes (pages, sheets, reports) go in `agents/<shelf>/outputs/`, beside the agents and songs of that job
-   (`agents/outputs/` while still flat). Asked "where is the thing you made?", find it there.
+   (`agents/outputs/` while still flat). Asked "where is the thing you made?", find it there. To share a shelf,
+   use `pack`: it leaves outputs out, because they are the person's own. Include them only on their yes.
 13. Now and then run `habits`. When something shows up, offer once, in one line: "You score a house most
    Mondays. Want it done automatically?" With a yes, set it up with this computer's own scheduler to call
    that agent with those arguments, and say in one line how to stop it. Never ask twice about the same one.
@@ -415,9 +421,25 @@ def snapshot(d):
                 for f in sorted(top.rglob("*")):
                     if f.is_file() and "__pycache__" not in f.parts and ".snapshots" not in f.parts:
                         z.write(f, f.relative_to(base)); n += 1
-    old = sorted(snaps.glob("*.zip"))[:-14]
-    for f in old: f.unlink()
-    return {"snapshot": str(out), "files": n, "kept": len(sorted(snaps.glob("*.zip")))}
+    away = Path.home() / ".rapp-snapshots" / hashlib.sha256(str(d.resolve()).encode()).hexdigest()[:12]
+    away.mkdir(parents=True, exist_ok=True); shutil.copy2(out, away / out.name)
+    (away / "from.txt").write_text(str(d.resolve()) + "\n")
+    for place in (snaps, away):
+        for f in sorted(place.glob("*.zip"))[:-14]: f.unlink()
+    return {"snapshot": str(out), "outside_copy": str(away / out.name), "files": n, "kept": len(sorted(snaps.glob("*.zip")))}
+
+
+def pack(shelf, d, with_outputs=False):
+    """One shelf as <shelf>.zip to share: agents and songs; outputs only when the person said so."""
+    src = d / shelf
+    if not src.is_dir(): return {"error": f"no shelf {shelf!r}", "try": "map"}
+    out = d.parent / f"{shelf}.zip"; files, left = [], 0
+    with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
+        for f in sorted(src.rglob("*")):
+            if not f.is_file() or ({"__pycache__", ".snapshots"} & set(f.parts)) or f.name.startswith(".routing"): continue
+            if "outputs" in f.relative_to(src).parts and not with_outputs: left += 1; continue
+            z.write(f, Path(shelf) / f.relative_to(src)); files.append(str(f.relative_to(src)))
+    return {"pack": str(out), "files": files, "outputs_left_out": left}
 
 
 def restore(zpath, d):
@@ -485,11 +507,13 @@ def main(argv):
         code, out = ready(argv[2], argv[3], json.loads(argv[4]), argv[5], argv[6] if len(argv) > 6 else None)
         print(json.dumps(out, indent=1))
         return code
-    elif cmd in ("snapshot", "restore", "habits"):
+    elif cmd in ("snapshot", "restore", "habits", "pack"):
         rest = argv[2:]; d = AGENTS
         if "--dir" in rest:
             i = rest.index("--dir"); d = Path(rest[i + 1]).expanduser(); rest = rest[:i] + rest[i + 2:]
-        out = snapshot(d) if cmd == "snapshot" else restore(rest[0], d) if cmd == "restore" else habits()
+        wo = "--with-outputs" in rest; rest = [a for a in rest if a != "--with-outputs"]
+        out = (snapshot(d) if cmd == "snapshot" else restore(rest[0], d) if cmd == "restore"
+               else pack(rest[0], d, wo) if cmd == "pack" else habits())
         print(json.dumps(out, indent=1))
         return 1 if "error" in out else 0
     elif cmd in ("map", "load", "shelve", "undo"):
