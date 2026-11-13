@@ -11,6 +11,11 @@ After that, each turn, the AI reads its `rapp/agents/` folder fresh, uses what i
 new ones by a seven-word chant, and can answer in a Brainstem's chat shape. On the person's ask it can also
 listen on a Brainstem's address (`kernel.py serve`), with that AI doing the thinking.
 
+**Intelligent omni routing:** each engagement lives on its own shelf (a subfolder of `agents/`, never loaded).
+Each turn the AI reads `kernel.py map` (every shelf and each agent's own description, read as text) beside what
+the person says, and loads or shelves agents so only what is in play is on top. Every move is one line and `undo`
+puts it back. The same works on the person's own Brainstem with `--dir`.
+
 **Off switch:** delete `rapp/agents/`. The next turn removes the standing note; the instructions file is
 byte for byte what it was before.
 
