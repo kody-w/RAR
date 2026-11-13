@@ -15,7 +15,7 @@
       "license_url": "",
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
-      "item_count": 156,
+      "item_count": 157,
       "source_downloads": 1589
     },
     {
@@ -7584,6 +7584,35 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/work_iq_sphere",
+      "source_id": "cat-agent-skills",
+      "source_slug": "work-iq-sphere",
+      "name": "Work IQ Sphere",
+      "description": "Turn your Microsoft 365 work into an interactive 3D Work IQ sphere, a customer-safe view, and a matching PowerPoint slide.",
+      "kind": "skill",
+      "tags": [
+        "productivity",
+        "work-iq",
+        "microsoft-365",
+        "data-visualization",
+        "powerpoint"
+      ],
+      "platforms": [
+        "Cowork",
+        "Copilot Studio",
+        "Scout"
+      ],
+      "author": "raemone",
+      "author_github": "raemone",
+      "version": "2.0.0",
+      "created_at": null,
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#work-iq-sphere",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/work_order_assist",
       "source_id": "cat-agent-skills",
       "source_slug": "work-order-assist",
@@ -7614,7 +7643,7 @@
   ],
   "totals": {
     "sources": 2,
-    "items": 250,
+    "items": 251,
     "source_downloads": 1589
   }
 }
