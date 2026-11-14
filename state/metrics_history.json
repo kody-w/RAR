@@ -388,12 +388,16 @@
   "2026-11-12": {
    "count": 376,
    "uniques": 103
+  },
+  "2026-11-13": {
+   "count": 125,
+   "uniques": 46
   }
  },
  "last_known": {
-  "at": "2026-11-13T13:13:18Z",
-  "clone_uniques_14d": 419,
-  "clones_14d": 3601,
+  "at": "2026-11-14T12:17:12Z",
+  "clone_uniques_14d": 430,
+  "clones_14d": 3634,
   "paths": [
    {
     "count": 10,
@@ -458,19 +462,14 @@
   ],
   "referrers": [
    {
-    "count": 7,
+    "count": 8,
     "referrer": "github.com",
-    "uniques": 4
+    "uniques": 5
    },
    {
     "count": 3,
     "referrer": "Bing",
     "uniques": 3
-   },
-   {
-    "count": 1,
-    "referrer": "aocr.org",
-    "uniques": 1
    }
   ],
   "view_uniques_14d": 15,
@@ -2156,6 +2155,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 144,
    "views_all_time": 312
+  },
+  {
+   "at": "2026-11-14T12:17:12Z",
+   "cdn_all_time": 577,
+   "clone_uniques_all_time": 3059,
+   "clones_all_time": 17340,
+   "days_tracked": 95,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 145,
+   "views_all_time": 313
   }
  ],
  "views": {
@@ -2534,6 +2543,10 @@
   "2026-11-12": {
    "count": 2,
    "uniques": 2
+  },
+  "2026-11-13": {
+   "count": 1,
+   "uniques": 1
   }
  }
 }

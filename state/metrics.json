@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-11-13T13:13:18Z",
+ "generated_at": "2026-11-14T12:17:12Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -8,19 +8,19 @@
   "site": "https://kody-w.github.io/RAR/"
  },
  "totals": {
-  "downloads": 17792,
-  "clones": 17215,
+  "downloads": 17917,
+  "clones": 17340,
   "cdn_hits": 577,
   "release_downloads": 0,
   "agent_file_downloads": 32,
-  "clones_excluding_ci_estimate": 11763,
-  "ci_clone_estimate": 5452,
-  "page_views": 312,
-  "clone_uniques_14d": 419,
+  "clones_excluding_ci_estimate": 11830,
+  "ci_clone_estimate": 5510,
+  "page_views": 313,
+  "clone_uniques_14d": 430,
   "view_uniques_14d": 15,
-  "clone_uniques_daily_sum": 3013,
-  "view_uniques_daily_sum": 144,
-  "days_tracked": 94,
+  "clone_uniques_daily_sum": 3059,
+  "view_uniques_daily_sum": 145,
+  "days_tracked": 95,
   "tracking_since": "2026-07-14",
   "agents": 227,
   "swarms": 2,
@@ -39,13 +39,6 @@
   "agents_voted": 1
  },
  "daily": [
-  {
-   "date": "2026-07-19",
-   "clones": 196,
-   "clone_uniques": 45,
-   "views": 1,
-   "cdn": 0
-  },
   {
    "date": "2026-07-20",
    "clones": 154,
@@ -668,6 +661,13 @@
    "clone_uniques": 103,
    "views": 2,
    "cdn": 0
+  },
+  {
+   "date": "2026-11-13",
+   "clones": 125,
+   "clone_uniques": 46,
+   "views": 1,
+   "cdn": 0
   }
  ],
  "traffic": {
@@ -736,29 +736,24 @@
   "referrers": [
    {
     "referrer": "github.com",
-    "count": 7,
-    "uniques": 4
+    "count": 8,
+    "uniques": 5
    },
    {
     "referrer": "Bing",
     "count": 3,
     "uniques": 3
-   },
-   {
-    "referrer": "aocr.org",
-    "count": 1,
-    "uniques": 1
    }
   ],
-  "clones_14d": 3601,
+  "clones_14d": 3634,
   "views_14d": 35,
   "live": true,
-  "as_of": "2026-11-13T13:13:18Z"
+  "as_of": "2026-11-14T12:17:12Z"
  },
  "cdn": {
   "total_hits": 577,
   "bandwidth": 7196782,
-  "rank": 785781,
+  "rank": 789649,
   "agent_hits": 32,
   "files": [
    {
