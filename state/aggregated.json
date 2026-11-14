@@ -15,7 +15,7 @@
       "license_url": "",
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
-      "item_count": 157,
+      "item_count": 156,
       "source_downloads": 1589
     },
     {
@@ -3204,31 +3204,6 @@
       }
     },
     {
-      "ref": "@cat-agent-skills/accounting_for_cowork",
-      "source_id": "cat-agent-skills",
-      "source_slug": "accounting-for-cowork",
-      "name": "Accounting",
-      "description": "Reconcile accounts, prepare journal entries, analyze variances, and report. Frontier only.",
-      "kind": "plugin",
-      "tags": [
-        "accounting",
-        "reconciliation",
-        "financial-reporting"
-      ],
-      "platforms": [
-        "Cowork"
-      ],
-      "author": "Microsoft",
-      "author_github": "microsoft",
-      "version": "1.0.2",
-      "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#accounting-for-cowork",
-      "source_signal": {
-        "downloads": 0
-      }
-    },
-    {
       "ref": "@cat-agent-skills/acroform_writer",
       "source_id": "cat-agent-skills",
       "source_slug": "acroform-writer",
@@ -3568,7 +3543,7 @@
       "author_github": "microsoft",
       "version": "",
       "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": false,
+      "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#answer-research",
       "source_signal": {
         "downloads": 0
@@ -3857,7 +3832,7 @@
       "author_github": "microsoft",
       "version": "",
       "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": false,
+      "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#business-case-composer",
       "source_signal": {
         "downloads": 0
@@ -3993,7 +3968,7 @@
       "author_github": "microsoft",
       "version": "",
       "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": false,
+      "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#case-preparation-brief",
       "source_signal": {
         "downloads": 0
@@ -4018,7 +3993,7 @@
       "author_github": "microsoft",
       "version": "",
       "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": false,
+      "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#case-triage",
       "source_signal": {
         "downloads": 0
@@ -4242,7 +4217,7 @@
       "author_github": "microsoft",
       "version": "",
       "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": false,
+      "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#competitive-strategy",
       "source_signal": {
         "downloads": 0
@@ -4731,7 +4706,7 @@
       "author_github": "microsoft",
       "version": "",
       "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": false,
+      "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#customer-engagement-and-deal-risk-insights",
       "source_signal": {
         "downloads": 0
@@ -4784,7 +4759,7 @@
       "author_github": "microsoft",
       "version": "",
       "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": false,
+      "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#deal-catchup",
       "source_signal": {
         "downloads": 0
@@ -4923,7 +4898,7 @@
       "author_github": "microsoft",
       "version": "",
       "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": false,
+      "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#draft-customer-reply",
       "source_signal": {
         "downloads": 0
@@ -5569,7 +5544,7 @@
       "author_github": "microsoft",
       "version": "",
       "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": false,
+      "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#knowledge-harvest",
       "source_signal": {
         "downloads": 0
@@ -5921,7 +5896,7 @@
       "author_github": "microsoft",
       "version": "",
       "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": false,
+      "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#meeting-prep",
       "source_signal": {
         "downloads": 0
@@ -6185,7 +6160,7 @@
       "author_github": "microsoft",
       "version": "",
       "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": false,
+      "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#pipeline-prioritizer",
       "source_signal": {
         "downloads": 0
@@ -6210,7 +6185,7 @@
       "author_github": "microsoft",
       "version": "",
       "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": false,
+      "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#post-meeting-follow-up",
       "source_signal": {
         "downloads": 0
@@ -6524,7 +6499,8 @@
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#qr-code-builder",
       "source_signal": {
-        "downloads": 0
+        "downloads": 0,
+        "rating": 1
       }
     },
     {
@@ -6807,7 +6783,7 @@
       "author_github": "microsoft",
       "version": "",
       "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": false,
+      "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#sales-progress-update",
       "source_signal": {
         "downloads": 0
@@ -7055,7 +7031,7 @@
       "author_github": "microsoft",
       "version": "",
       "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": false,
+      "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#stakeholder-and-decision-map",
       "source_signal": {
         "downloads": 0
@@ -7643,7 +7619,7 @@
   ],
   "totals": {
     "sources": 2,
-    "items": 251,
+    "items": 250,
     "source_downloads": 1589
   }
 }
