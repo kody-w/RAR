@@ -392,18 +392,22 @@
   "2026-11-13": {
    "count": 125,
    "uniques": 46
+  },
+  "2026-11-14": {
+   "count": 95,
+   "uniques": 26
   }
  },
  "last_known": {
-  "at": "2026-11-14T12:17:12Z",
-  "clone_uniques_14d": 430,
-  "clones_14d": 3634,
+  "at": "2026-11-15T12:49:38Z",
+  "clone_uniques_14d": 438,
+  "clones_14d": 3651,
   "paths": [
    {
-    "count": 10,
+    "count": 11,
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "uniques": 4
+    "uniques": 5
    },
    {
     "count": 2,
@@ -419,52 +423,52 @@
    },
    {
     "count": 1,
-    "path": "/kody-w/RAR/blob/cd878a5d7586116958f87f0979cc65e5aef85edc/scout/bundles/powercat-06/skills/rar-cat-agent-skills-exam-prep-learning-plan-builder/SKILL.md",
-    "title": "/blob/cd878a5d7586116958f87f0979cc65e5aef85edc/scout/bundles/powercat-06/skills/rar-cat-agent-skills-exam-prep-learning-plan-builder/SKILL.md",
+    "path": "/kody-w/RAR/blob/925b507572b30cb716a48ccd8b9cdfc9a5745f08/api/v1/agent/kody-w__connected_solution_agent.py",
+    "title": "/blob/925b507572b30cb716a48ccd8b9cdfc9a5745f08/api/v1/agent/kody-w__connected_solution_agent.py",
     "uniques": 1
    },
    {
     "count": 1,
-    "path": "/kody-w/RAR/blob/main/CONSTITUTION.md",
-    "title": "/blob/main/CONSTITUTION.md",
+    "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/brain/SKILL.md",
+    "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/brain/SKILL.md",
     "uniques": 1
    },
    {
     "count": 1,
-    "path": "/kody-w/RAR/blob/main/RAPP.md",
-    "title": "/blob/main/RAPP.md",
+    "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/brainstem-skill/README.md",
+    "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/brainstem-skill/README.md",
     "uniques": 1
    },
    {
     "count": 1,
-    "path": "/kody-w/RAR/blob/main/agents/@borg/borg_agent.py.card",
-    "title": "/blob/main/agents/@borg/borg_agent.py.card",
+    "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/claude-workflows/README.md",
+    "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/claude-workflows/README.md",
     "uniques": 1
    },
    {
     "count": 1,
-    "path": "/kody-w/RAR/blob/main/agents/@cowork-cookbook/map_a_customer_journey_for_a_campaign_agent.py",
-    "title": "/blob/main/agents/@cowork-cookbook/map_a_customer_journey_for_a_campaign_agent.py",
+    "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/claude-workflows/pack.json",
+    "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/claude-workflows/pack.json",
     "uniques": 1
    },
    {
     "count": 1,
-    "path": "/kody-w/RAR/blob/main/stacks/brain/brainstem_impact_agent.py",
-    "title": "/blob/main/stacks/brain/brainstem_impact_agent.py",
+    "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/markdown-medic/README.md",
+    "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/markdown-medic/README.md",
     "uniques": 1
    },
    {
     "count": 1,
-    "path": "/kody-w/RAR/blob/main/stacks/brain/hebbian_synapse_agent.py",
-    "title": "/blob/main/stacks/brain/hebbian_synapse_agent.py",
+    "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-business/README.md",
+    "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-business/README.md",
     "uniques": 1
    }
   ],
   "referrers": [
    {
-    "count": 8,
+    "count": 10,
     "referrer": "github.com",
-    "uniques": 5
+    "uniques": 6
    },
    {
     "count": 3,
@@ -472,8 +476,8 @@
     "uniques": 3
    }
   ],
-  "view_uniques_14d": 15,
-  "views_14d": 35
+  "view_uniques_14d": 17,
+  "views_14d": 49
  },
  "snapshots": [
   {
@@ -2165,6 +2169,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 145,
    "views_all_time": 313
+  },
+  {
+   "at": "2026-11-15T12:49:38Z",
+   "cdn_all_time": 577,
+   "clone_uniques_all_time": 3085,
+   "clones_all_time": 17435,
+   "days_tracked": 96,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 147,
+   "views_all_time": 327
   }
  ],
  "views": {
@@ -2547,6 +2561,10 @@
   "2026-11-13": {
    "count": 1,
    "uniques": 1
+  },
+  "2026-11-14": {
+   "count": 14,
+   "uniques": 2
   }
  }
 }
