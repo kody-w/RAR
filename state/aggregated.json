@@ -15,7 +15,7 @@
       "license_url": "",
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
-      "item_count": 156,
+      "item_count": 160,
       "source_downloads": 1589
     },
     {
@@ -5936,6 +5936,35 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/missed_meeting_recovery",
+      "source_id": "cat-agent-skills",
+      "source_slug": "missed-meeting-recovery",
+      "name": "Missed-Meeting Recovery",
+      "description": "When you miss or decline a calendar meeting, pulls the transcript, meeting chat, or event details and produces a recap with the decisions made and the action items assigned to you, then sends it to you by email and Teams chat.",
+      "kind": "automation",
+      "tags": [
+        "automation",
+        "meetings",
+        "calendar",
+        "transcripts",
+        "action-items",
+        "email",
+        "teams"
+      ],
+      "platforms": [
+        "Scout"
+      ],
+      "author": "Payal Awasthi",
+      "author_github": "awasthipayal07-tech",
+      "version": "1.1.0",
+      "created_at": "2026-10-24T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#missed-meeting-recovery",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/monte_carlo_analysis",
       "source_id": "cat-agent-skills",
       "source_slug": "monte-carlo-analysis",
@@ -5961,6 +5990,35 @@
       "created_at": "2026-07-31T00:00:00.000Z",
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#monte-carlo-analysis",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/nudge_for_response",
+      "source_id": "cat-agent-skills",
+      "source_slug": "nudge-for-response",
+      "name": "Nudge for Response",
+      "description": "Every weekday at 9:00 AM, finds sent emails with an ask that has gone unanswered for 3+ business days, saves brief polite nudge replies as drafts for manual review, and posts a Teams summary. Never sends mail.",
+      "kind": "automation",
+      "tags": [
+        "automation",
+        "email",
+        "follow-up",
+        "drafts",
+        "teams",
+        "workiq",
+        "productivity"
+      ],
+      "platforms": [
+        "Scout"
+      ],
+      "author": "Payal Awasthi",
+      "author_github": "awasthipayal07-tech",
+      "version": "1.1.0",
+      "created_at": "2026-10-24T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#nudge-for-response",
       "source_signal": {
         "downloads": 0
       }
@@ -6476,6 +6534,35 @@
       }
     },
     {
+      "ref": "@cat-agent-skills/prompt_to_set_agenda",
+      "source_id": "cat-agent-skills",
+      "source_slug": "prompt-to-set-agenda",
+      "name": "Prompt to Set Agenda",
+      "description": "Every weekday at 9:00 AM, flags newly set up meetings in the next 3 days that have no agenda, saves one draft email per meeting asking the organizer for an agenda and pre-read, and sends a run summary to Teams and email.",
+      "kind": "automation",
+      "tags": [
+        "automation",
+        "meetings",
+        "agenda",
+        "calendar",
+        "outlook",
+        "teams",
+        "productivity"
+      ],
+      "platforms": [
+        "Scout"
+      ],
+      "author": "Payal Awasthi",
+      "author_github": "awasthipayal07-tech",
+      "version": "1.0.0",
+      "created_at": "2026-10-24T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#prompt-to-set-agenda",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
       "ref": "@cat-agent-skills/qr_code_builder",
       "source_id": "cat-agent-skills",
       "source_slug": "qr-code-builder",
@@ -6614,6 +6701,36 @@
       "source_signal": {
         "downloads": 0,
         "rating": 1
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/reschedule_declined_1_1",
+      "source_id": "cat-agent-skills",
+      "source_slug": "reschedule-declined-1-1",
+      "name": "Reschedule Declined 1:1",
+      "description": "When a one-on-one meeting is declined \u2014 by you or by the other person \u2014 finds the three best replacement slots in the next 7 business days, creates a real Outlook draft proposing them, and sends you a Teams and email summary. Never sends the draft automatically.",
+      "kind": "automation",
+      "tags": [
+        "automation",
+        "meetings",
+        "calendar",
+        "scheduling",
+        "one-on-one",
+        "outlook",
+        "teams",
+        "email"
+      ],
+      "platforms": [
+        "Scout"
+      ],
+      "author": "Payal Awasthi",
+      "author_github": "awasthipayal07-tech",
+      "version": "1.1.0",
+      "created_at": "2026-10-24T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#reschedule-declined-1-1",
+      "source_signal": {
+        "downloads": 0
       }
     },
     {
@@ -7619,7 +7736,7 @@
   ],
   "totals": {
     "sources": 2,
-    "items": 250,
+    "items": 254,
     "source_downloads": 1589
   }
 }
