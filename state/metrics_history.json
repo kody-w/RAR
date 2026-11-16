@@ -399,7 +399,7 @@
   }
  },
  "last_known": {
-  "at": "2026-11-15T12:49:38Z",
+  "at": "2026-11-16T13:46:35Z",
   "clone_uniques_14d": 438,
   "clones_14d": 3651,
   "paths": [
@@ -2172,6 +2172,16 @@
   },
   {
    "at": "2026-11-15T12:49:38Z",
+   "cdn_all_time": 577,
+   "clone_uniques_all_time": 3085,
+   "clones_all_time": 17435,
+   "days_tracked": 96,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 147,
+   "views_all_time": 327
+  },
+  {
+   "at": "2026-11-16T13:46:35Z",
    "cdn_all_time": 577,
    "clone_uniques_all_time": 3085,
    "clones_all_time": 17435,
