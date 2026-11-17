@@ -396,29 +396,31 @@
   "2026-11-14": {
    "count": 95,
    "uniques": 26
+  },
+  "2026-11-15": {
+   "count": 61,
+   "uniques": 13
+  },
+  "2026-11-16": {
+   "count": 75,
+   "uniques": 25
   }
  },
  "last_known": {
-  "at": "2026-11-16T13:46:35Z",
-  "clone_uniques_14d": 438,
-  "clones_14d": 3651,
+  "at": "2026-11-17T14:38:42Z",
+  "clone_uniques_14d": 412,
+  "clones_14d": 3521,
   "paths": [
    {
-    "count": 11,
+    "count": 12,
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "uniques": 5
+    "uniques": 6
    },
    {
     "count": 2,
-    "path": "/kody-w/RAR/blame/main/agents/@cowork-cookbook/map_a_customer_journey_for_a_campaign_agent.py",
-    "title": "/blame/main/agents/@cowork-cookbook/map_a_customer_journey_for_a_campaign_agent.py",
-    "uniques": 1
-   },
-   {
-    "count": 2,
-    "path": "/kody-w/RAR/discussions/1540",
-    "title": "/discussions/1540",
+    "path": "/kody-w/RAR/stargazers",
+    "title": "/stargazers",
     "uniques": 1
    },
    {
@@ -462,6 +464,12 @@
     "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-business/README.md",
     "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-business/README.md",
     "uniques": 1
+   },
+   {
+    "count": 1,
+    "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-business/pack.json",
+    "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-business/pack.json",
+    "uniques": 1
    }
   ],
   "referrers": [
@@ -471,13 +479,13 @@
     "uniques": 6
    },
    {
-    "count": 3,
+    "count": 2,
     "referrer": "Bing",
-    "uniques": 3
+    "uniques": 2
    }
   ],
   "view_uniques_14d": 17,
-  "views_14d": 49
+  "views_14d": 46
  },
  "snapshots": [
   {
@@ -2189,6 +2197,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 147,
    "views_all_time": 327
+  },
+  {
+   "at": "2026-11-17T14:38:42Z",
+   "cdn_all_time": 577,
+   "clone_uniques_all_time": 3123,
+   "clones_all_time": 17571,
+   "days_tracked": 98,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 150,
+   "views_all_time": 330
   }
  ],
  "views": {
@@ -2575,6 +2593,14 @@
   "2026-11-14": {
    "count": 14,
    "uniques": 2
+  },
+  "2026-11-15": {
+   "count": 3,
+   "uniques": 3
+  },
+  "2026-11-16": {
+   "count": 0,
+   "uniques": 0
   }
  }
 }
