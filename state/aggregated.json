@@ -31,7 +31,7 @@
       "license_url": "",
       "license_verified": true,
       "license_note": "Public Microsoft repository with an MIT LICENSE file at the root; indexed as catalog metadata only, bodies stay upstream.",
-      "item_count": 94,
+      "item_count": 95,
       "source_downloads": 0
     }
   ],
@@ -2443,6 +2443,36 @@
       "vertical": "slg_government",
       "upstream_path": "agents/@aibast-agents-library/slg_government_stacks/public_correspondence_response_stack/public_correspondence_response_agent.py",
       "upstream_sha256": "45564b5071ed5c0d1577e8a82d49b969f2d96a23615d505bbbaa29d4c2b7d09e"
+    },
+    {
+      "ref": "@aibast-library/recorded_demo",
+      "source_id": "aibast-agents-library",
+      "source_slug": "recorded-demo",
+      "name": "Recorded demo",
+      "description": "Runs a step-by-step demo of an AIBAST library solution in the standard Brainstem chat page from its recorded answers. No AI call, no sign-in.",
+      "kind": "agent",
+      "tags": [
+        "demo",
+        "recorded",
+        "walkthrough"
+      ],
+      "platforms": [
+        "rapp-brainstem"
+      ],
+      "author": "AIBAST",
+      "author_github": null,
+      "version": "0.1.0",
+      "created_at": null,
+      "has_bundle": false,
+      "url": "https://github.com/microsoft/aibast-agents-library/blob/main/agents/@aibast-agents-library/templates/recorded_demo_agent.py",
+      "source_signal": {
+        "quality_tier": "pilot"
+      },
+      "category": "general",
+      "stack": "",
+      "vertical": "",
+      "upstream_path": "agents/@aibast-agents-library/templates/recorded_demo_agent.py",
+      "upstream_sha256": "cfdbf1caf9df7cdaec99c1701c6d37d0e94fbb25f3474772cf151079f368ea69"
     },
     {
       "ref": "@aibast-library/reporting_package_validation",
@@ -7736,7 +7766,7 @@
   ],
   "totals": {
     "sources": 2,
-    "items": 254,
+    "items": 255,
     "source_downloads": 1589
   }
 }
