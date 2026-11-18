@@ -404,15 +404,19 @@
   "2026-11-16": {
    "count": 75,
    "uniques": 25
+  },
+  "2026-11-17": {
+   "count": 79,
+   "uniques": 36
   }
  },
  "last_known": {
-  "at": "2026-11-17T14:38:42Z",
-  "clone_uniques_14d": 412,
-  "clones_14d": 3521,
+  "at": "2026-11-18T14:15:37Z",
+  "clone_uniques_14d": 422,
+  "clones_14d": 3232,
   "paths": [
    {
-    "count": 12,
+    "count": 11,
     "path": "/kody-w/RAR",
     "title": "Overview",
     "uniques": 6
@@ -474,7 +478,7 @@
   ],
   "referrers": [
    {
-    "count": 10,
+    "count": 9,
     "referrer": "github.com",
     "uniques": 6
    },
@@ -485,7 +489,7 @@
    }
   ],
   "view_uniques_14d": 17,
-  "views_14d": 46
+  "views_14d": 45
  },
  "snapshots": [
   {
@@ -2207,6 +2211,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 150,
    "views_all_time": 330
+  },
+  {
+   "at": "2026-11-18T14:15:37Z",
+   "cdn_all_time": 577,
+   "clone_uniques_all_time": 3159,
+   "clones_all_time": 17650,
+   "days_tracked": 99,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 150,
+   "views_all_time": 330
   }
  ],
  "views": {
@@ -2599,6 +2613,10 @@
    "uniques": 3
   },
   "2026-11-16": {
+   "count": 0,
+   "uniques": 0
+  },
+  "2026-11-17": {
    "count": 0,
    "uniques": 0
   }

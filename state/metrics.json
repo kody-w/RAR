@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-11-17T14:38:42Z",
+ "generated_at": "2026-11-18T14:15:37Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -9,27 +9,27 @@
   "stars": 4,
   "forks": 1,
   "watchers": 0,
-  "open_issues": 28,
-  "size_kb": 132740,
+  "open_issues": 29,
+  "size_kb": 134011,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-11-17T06:08:27Z",
+  "pushed_at": "2026-11-18T09:35:33Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": "https://kody-w.github.io/RAR/"
  },
  "totals": {
-  "downloads": 18158,
-  "clones": 17571,
+  "downloads": 18276,
+  "clones": 17650,
   "cdn_hits": 577,
-  "release_downloads": 10,
+  "release_downloads": 49,
   "agent_file_downloads": 32,
-  "clones_excluding_ci_estimate": 11887,
-  "ci_clone_estimate": 5684,
+  "clones_excluding_ci_estimate": 11908,
+  "ci_clone_estimate": 5742,
   "page_views": 330,
-  "clone_uniques_14d": 412,
+  "clone_uniques_14d": 422,
   "view_uniques_14d": 17,
-  "clone_uniques_daily_sum": 3123,
+  "clone_uniques_daily_sum": 3159,
   "view_uniques_daily_sum": 150,
-  "days_tracked": 98,
+  "days_tracked": 99,
   "tracking_since": "2026-07-14",
   "agents": 227,
   "swarms": 2,
@@ -48,13 +48,6 @@
   "agents_voted": 1
  },
  "daily": [
-  {
-   "date": "2026-07-23",
-   "clones": 196,
-   "clone_uniques": 38,
-   "views": 10,
-   "cdn": 0
-  },
   {
    "date": "2026-07-24",
    "clones": 156,
@@ -677,6 +670,13 @@
    "clone_uniques": 25,
    "views": 0,
    "cdn": 0
+  },
+  {
+   "date": "2026-11-17",
+   "clones": 79,
+   "clone_uniques": 36,
+   "views": 0,
+   "cdn": 0
   }
  ],
  "traffic": {
@@ -684,7 +684,7 @@
    {
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "count": 12,
+    "count": 11,
     "uniques": 6
    },
    {
@@ -745,7 +745,7 @@
   "referrers": [
    {
     "referrer": "github.com",
-    "count": 10,
+    "count": 9,
     "uniques": 6
    },
    {
@@ -754,15 +754,15 @@
     "uniques": 2
    }
   ],
-  "clones_14d": 3521,
-  "views_14d": 46,
+  "clones_14d": 3232,
+  "views_14d": 45,
   "live": true,
-  "as_of": "2026-11-17T14:38:42Z"
+  "as_of": "2026-11-18T14:15:37Z"
  },
  "cdn": {
   "total_hits": 577,
   "bandwidth": 7196782,
-  "rank": 800480,
+  "rank": 803634,
   "agent_hits": 32,
   "files": [
    {
@@ -1008,14 +1008,14 @@
   ]
  },
  "releases": {
-  "total_downloads": 10,
+  "total_downloads": 49,
   "count": 2,
   "releases": [
    {
     "tag": "v2.0.0",
     "name": "Autumn 2026 (v2.0.0)",
     "published_at": "2026-10-24T04:44:17Z",
-    "downloads": 10,
+    "downloads": 49,
     "assets": [
      {
       "name": "rar_bill_neuron_agent.py",
@@ -1969,7 +1969,7 @@
      },
      {
       "name": "rar_rapp_basic_agent.py",
-      "downloads": 0,
+      "downloads": 19,
       "size": 1345
      },
      {
@@ -2029,7 +2029,7 @@
      },
      {
       "name": "rar_rapp_ping_agent.py",
-      "downloads": 0,
+      "downloads": 20,
       "size": 1206
      },
      {
