@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-11-17T14:38:42Z",
+  "generated": "2026-11-18T14:15:37Z",
   "counts": {
     "native": 227,
     "aggregated": 158,
@@ -23250,7 +23250,7 @@
           "id": "cat-agent-skills",
           "display_name": "CAT Agent Skills",
           "downloads": 142,
-          "rating": 3,
+          "rating": 4,
           "featured": false,
           "has_bundle": true,
           "author": "Henry Jammes",

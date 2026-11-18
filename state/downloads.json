@@ -765,7 +765,7 @@
       "asset": "rar_kody_w_wp_publish_agent.py"
     },
     "@rapp/basic_agent": {
-      "downloads": 0,
+      "downloads": 19,
       "asset": "rar_rapp_basic_agent.py"
     },
     "@rapp/commons_post": {
@@ -813,7 +813,7 @@
       "asset": "rar_rapp_moment_factory_agent.py"
     },
     "@rapp/ping_agent": {
-      "downloads": 0,
+      "downloads": 20,
       "asset": "rar_rapp_ping_agent.py"
     },
     "@rapp/pitch_deck_agent": {
@@ -890,10 +890,10 @@
     }
   },
   "totals": {
-    "downloads": 10,
-    "attributed_downloads": 10,
+    "downloads": 49,
+    "attributed_downloads": 49,
     "unattributed_downloads": 0,
     "assets_published": 222,
-    "agents_with_downloads": 3
+    "agents_with_downloads": 5
   }
 }

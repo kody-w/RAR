@@ -2930,8 +2930,8 @@
     },
     "@rapp/basic_agent": {
       "upvotes": 1,
-      "downloads": 0,
-      "score": 2,
+      "downloads": 1,
+      "score": 3,
       "comments": 0,
       "signals": {
         "worked": 0,
@@ -3110,8 +3110,8 @@
     },
     "@rapp/ping_agent": {
       "upvotes": 0,
-      "downloads": 0,
-      "score": 0,
+      "downloads": 1,
+      "score": 1,
       "comments": 0,
       "signals": {
         "worked": 0,
