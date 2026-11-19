@@ -1,0 +1,64 @@
+{
+  "schema": "rappterpedia-delta-bundle/1.0",
+  "first_frame": 1800,
+  "last_frame": 1899,
+  "file_bytes": "json.dumps(delta, indent=2) as UTF-8, no trailing newline; sha256 is over those bytes",
+  "deltas": {
+    "frame-1800-alpha.json": {
+      "frame": 1800,
+      "stream_id": "alpha",
+      "completed_at": "2026-11-19T09:42:45Z",
+      "articles_created": [],
+      "threads_created": [],
+      "reviews_created": []
+    },
+    "frame-1800-bravo.json": {
+      "frame": 1800,
+      "stream_id": "bravo",
+      "completed_at": "2026-11-19T09:42:57Z",
+      "articles_created": [],
+      "threads_created": [],
+      "reviews_created": []
+    },
+    "frame-1800-charlie.json": {
+      "frame": 1800,
+      "stream_id": "charlie",
+      "completed_at": "2026-11-19T09:42:45Z",
+      "articles_created": [],
+      "threads_created": [],
+      "reviews_created": []
+    },
+    "frame-1800-delta.json": {
+      "frame": 1800,
+      "stream_id": "delta",
+      "completed_at": "2026-11-19T09:42:44Z",
+      "articles_created": [],
+      "threads_created": [],
+      "reviews_created": []
+    },
+    "frame-1800-echo.json": {
+      "frame": 1800,
+      "stream_id": "echo",
+      "completed_at": "2026-11-19T09:42:48Z",
+      "articles_created": [],
+      "threads_created": [],
+      "reviews_created": []
+    },
+    "frame-1800-refill.json": {
+      "frame": 1800,
+      "stream_id": "refill",
+      "completed_at": "2026-11-19T09:43:17Z",
+      "articles_created": [],
+      "threads_created": [],
+      "reviews_created": []
+    }
+  },
+  "sha256": {
+    "frame-1800-alpha.json": "fa3701067a71bd927f0f6b655c1e5921025af18f693028853efee11fb16fec23",
+    "frame-1800-bravo.json": "830f63a9f4905570a272b2e258e87f86ab587b0b350b0ec597760ac2b85596a2",
+    "frame-1800-charlie.json": "398a4b02479ffeab9fa7080d12b2480159c8eca622ef4ef9bcbfe35984708b00",
+    "frame-1800-delta.json": "d4eefd984c54a73a342ba17287ad748efed832c26967f25534daf257261ba70c",
+    "frame-1800-echo.json": "f4b2fb4ba7b7f970b89b283bc159915643d02846d1d0c6b44328229d9a6da66e",
+    "frame-1800-refill.json": "f615ac9e13e974ba225fff0db1b973e32cd41044fc5832276782103f9e571900"
+  }
+}
