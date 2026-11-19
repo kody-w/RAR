@@ -1,0 +1,30 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "browser",
+  "display_name": "Browser",
+  "version": "0.1.0",
+  "status": "staging",
+  "purpose": "Use your own signed-in browser by page labels: open, search, read, outline, click, type, back, new tabs. Refuses pay/delete/allow/sign-in buttons and never types passwords; writes a plain-words receipt of every step. Needs the rapp-copilot-in-chrome browser link.",
+  "kind_label": "agent",
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "browser_agent.py"
+    ],
+    "destination": "agents/",
+    "one_liner": "curl -fsSL https://kody-w.github.io/grail-layers/add.sh | bash -s -- browser"
+  },
+  "requires": [
+    "https://github.com/kody-w/rapp-copilot-in-chrome"
+  ],
+  "files": {
+    "browser_agent.py": {
+      "size": 16866,
+      "sha256": "474930b219e4649634a466b33108b7d837ef762cac3a5dee7a282a3c9ce090b2"
+    },
+    "README.md": {
+      "size": 738,
+      "sha256": "a7672a7b28c372eb15ee3080d7d147bbc254cc68e31a49948829b592f9619451"
+    }
+  }
+}
