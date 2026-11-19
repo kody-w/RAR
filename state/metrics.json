@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-11-18T14:15:37Z",
+ "generated_at": "2026-11-19T14:30:24Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -9,27 +9,27 @@
   "stars": 4,
   "forks": 1,
   "watchers": 0,
-  "open_issues": 29,
-  "size_kb": 134011,
+  "open_issues": 30,
+  "size_kb": 135469,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-11-18T09:35:33Z",
+  "pushed_at": "2026-11-19T09:43:19Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": "https://kody-w.github.io/RAR/"
  },
  "totals": {
-  "downloads": 18276,
-  "clones": 17650,
+  "downloads": 18332,
+  "clones": 17706,
   "cdn_hits": 577,
   "release_downloads": 49,
   "agent_file_downloads": 32,
-  "clones_excluding_ci_estimate": 11908,
-  "ci_clone_estimate": 5742,
-  "page_views": 330,
-  "clone_uniques_14d": 422,
+  "clones_excluding_ci_estimate": 12106,
+  "ci_clone_estimate": 5600,
+  "page_views": 331,
+  "clone_uniques_14d": 401,
   "view_uniques_14d": 17,
-  "clone_uniques_daily_sum": 3159,
-  "view_uniques_daily_sum": 150,
-  "days_tracked": 99,
+  "clone_uniques_daily_sum": 3172,
+  "view_uniques_daily_sum": 151,
+  "days_tracked": 100,
   "tracking_since": "2026-07-14",
   "agents": 227,
   "swarms": 2,
@@ -48,13 +48,6 @@
   "agents_voted": 1
  },
  "daily": [
-  {
-   "date": "2026-07-24",
-   "clones": 156,
-   "clone_uniques": 29,
-   "views": 7,
-   "cdn": 0
-  },
   {
    "date": "2026-07-25",
    "clones": 138,
@@ -677,6 +670,13 @@
    "clone_uniques": 36,
    "views": 0,
    "cdn": 0
+  },
+  {
+   "date": "2026-11-18",
+   "clones": 56,
+   "clone_uniques": 13,
+   "views": 1,
+   "cdn": 0
   }
  ],
  "traffic": {
@@ -684,14 +684,8 @@
    {
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "count": 11,
-    "uniques": 6
-   },
-   {
-    "path": "/kody-w/RAR/stargazers",
-    "title": "/stargazers",
-    "count": 2,
-    "uniques": 1
+    "count": 6,
+    "uniques": 4
    },
    {
     "path": "/kody-w/RAR/blob/925b507572b30cb716a48ccd8b9cdfc9a5745f08/api/v1/agent/kody-w__connected_solution_agent.py",
@@ -740,13 +734,19 @@
     "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-business/pack.json",
     "count": 1,
     "uniques": 1
+   },
+   {
+    "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-personal/README.md",
+    "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-personal/README.md",
+    "count": 1,
+    "uniques": 1
    }
   ],
   "referrers": [
    {
     "referrer": "github.com",
-    "count": 9,
-    "uniques": 6
+    "count": 6,
+    "uniques": 5
    },
    {
     "referrer": "Bing",
@@ -754,15 +754,15 @@
     "uniques": 2
    }
   ],
-  "clones_14d": 3232,
-  "views_14d": 45,
+  "clones_14d": 2687,
+  "views_14d": 39,
   "live": true,
-  "as_of": "2026-11-18T14:15:37Z"
+  "as_of": "2026-11-19T14:30:24Z"
  },
  "cdn": {
   "total_hits": 577,
   "bandwidth": 7196782,
-  "rank": 803634,
+  "rank": 807248,
   "agent_hits": 32,
   "files": [
    {

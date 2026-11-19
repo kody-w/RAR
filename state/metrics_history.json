@@ -408,24 +408,22 @@
   "2026-11-17": {
    "count": 79,
    "uniques": 36
+  },
+  "2026-11-18": {
+   "count": 56,
+   "uniques": 13
   }
  },
  "last_known": {
-  "at": "2026-11-18T14:15:37Z",
-  "clone_uniques_14d": 422,
-  "clones_14d": 3232,
+  "at": "2026-11-19T14:30:24Z",
+  "clone_uniques_14d": 401,
+  "clones_14d": 2687,
   "paths": [
    {
-    "count": 11,
+    "count": 6,
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "uniques": 6
-   },
-   {
-    "count": 2,
-    "path": "/kody-w/RAR/stargazers",
-    "title": "/stargazers",
-    "uniques": 1
+    "uniques": 4
    },
    {
     "count": 1,
@@ -474,13 +472,19 @@
     "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-business/pack.json",
     "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-business/pack.json",
     "uniques": 1
+   },
+   {
+    "count": 1,
+    "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-personal/README.md",
+    "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-personal/README.md",
+    "uniques": 1
    }
   ],
   "referrers": [
    {
-    "count": 9,
+    "count": 6,
     "referrer": "github.com",
-    "uniques": 6
+    "uniques": 5
    },
    {
     "count": 2,
@@ -489,7 +493,7 @@
    }
   ],
   "view_uniques_14d": 17,
-  "views_14d": 45
+  "views_14d": 39
  },
  "snapshots": [
   {
@@ -2221,6 +2225,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 150,
    "views_all_time": 330
+  },
+  {
+   "at": "2026-11-19T14:30:24Z",
+   "cdn_all_time": 577,
+   "clone_uniques_all_time": 3172,
+   "clones_all_time": 17706,
+   "days_tracked": 100,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 151,
+   "views_all_time": 331
   }
  ],
  "views": {
@@ -2619,6 +2633,10 @@
   "2026-11-17": {
    "count": 0,
    "uniques": 0
+  },
+  "2026-11-18": {
+   "count": 1,
+   "uniques": 1
   }
  }
 }
