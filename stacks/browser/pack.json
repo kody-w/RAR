@@ -3,8 +3,7 @@
   "name": "browser",
   "display_name": "Browser",
   "version": "0.1.0",
-  "status": "staging",
-  "purpose": "Use your own signed-in browser by page labels: open, search, read, outline, click, type, back, new tabs. Refuses pay/delete/allow/sign-in buttons and never types passwords; writes a plain-words receipt of every step. Needs the rapp-copilot-in-chrome browser link.",
+  "purpose": "Staging (proven on one Mac). Use your own signed-in browser by page labels: open, search, read, outline, click, type, back, new tabs. Refuses pay/delete/allow/sign-in buttons and never types passwords; writes a plain-words receipt of every step. Needs the rapp-copilot-in-chrome browser link.",
   "kind_label": "agent",
   "install": {
     "type": "agent_pack",
