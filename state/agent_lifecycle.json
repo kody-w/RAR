@@ -20217,8 +20217,19 @@
       "sha256": "d79d1b29cebde0efd3d59750fe7291cd5bb2e8b84a5b752eec86a045fc345dc5",
       "latest_receipt": "rar_fa20f4a0f4e0a5dff108db845a3100846ab0af7ccbfc6b7dc458a048cee71039",
       "updated_at": "2026-11-11T02:37:38.508615+00:00"
+    },
+    "@kody-w/replay_agent": {
+      "status": "active",
+      "version": "0.1.0",
+      "quality_tier": "community",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "agents/@kody-w/replay_agent.py",
+      "sha256": "337b4b6d960fbe4a96a89547311f090d1b621befec25974c588779075654d974",
+      "latest_receipt": "rar_e45cfd6851d5e521c24ff289553e1f5f010834609f17e5a3b463fe6c00255ae8",
+      "updated_at": "2026-11-20T00:25:41.576154+00:00"
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-11-11T02:37:38.508615+00:00"
+  "updated_at": "2026-11-20T00:25:41.576154+00:00"
 }

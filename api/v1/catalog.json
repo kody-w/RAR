@@ -1,8 +1,8 @@
 {
   "schema": "rar-catalog/1.0",
   "description": "Every agent in RAR as a lean record. Fetch this one file to render a complete browsable catalog with no further requests, no backend, no authentication and no GitHub account. stack_packs lists every installable pack, including retired packs with status and retirement metadata.",
-  "generated": "2026-11-11T18:40:20Z",
-  "count": 227,
+  "generated": "2026-11-20T00:25:05Z",
+  "count": 228,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/catalog.json",
   "agents": [
     {
@@ -8620,6 +8620,52 @@
         "lines": 185,
         "size_kb": 8.1,
         "added_at": "2026-05-24T21:45:25-04:00"
+      }
+    },
+    {
+      "artifact_type": "agent",
+      "protocol_conformance": {
+        "profile": null,
+        "status": "not_assessed",
+        "evidence": []
+      },
+      "id": "kody-w__replay_agent",
+      "name": "@kody-w/replay_agent",
+      "display_name": "Replay",
+      "description": "Make a shared chat file run on this Brainstem: loads the exact agent versions the file points to, checked by fingerprint, and unloads them again.",
+      "version": "0.1.0",
+      "publisher": "@kody-w",
+      "author": "kody-w",
+      "category": "core",
+      "tags": [
+        "replay",
+        "chat-file",
+        "pointer",
+        "hotload",
+        "share"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/replay_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/replay_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/replay_agent.py",
+        "sha256": "337b4b6d960fbe4a96a89547311f090d1b621befec25974c588779075654d974",
+        "pages": "https://kody-w.github.io/RAR/agents/@kody-w/replay_agent.py",
+        "version": {
+          "sha256": "337b4b6d960fbe4a96a89547311f090d1b621befec25974c588779075654d974",
+          "sha8": "337b4b6d960f",
+          "path": "versions/@kody-w/replay_agent/337b4b6d960f.py"
+        }
+      },
+      "stats": {
+        "lines": 123,
+        "size_kb": 7.4,
+        "added_at": null
       }
     },
     {
