@@ -28,7 +28,7 @@
   "size_kb": 7.4,
   "sha256": "337b4b6d960fbe4a96a89547311f090d1b621befec25974c588779075654d974",
   "has_card": true,
-  "added_at": null,
+  "added_at": "2026-11-20T00:30:03Z",
   "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
   "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__replay_agent.svg",
   "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/replay_agent.py",

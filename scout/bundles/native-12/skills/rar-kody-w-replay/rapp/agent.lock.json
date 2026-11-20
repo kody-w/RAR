@@ -1,0 +1,53 @@
+{
+  "agent": "@kody-w/replay_agent",
+  "agent_file": "replay_agent.py",
+  "agent_sha256": "337b4b6d960fbe4a96a89547311f090d1b621befec25974c588779075654d974",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "ReplayAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "core",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Make a shared chat file run on this Brainstem: loads the exact agent versions the file points to, checked by fingerprint, and unloads them again.",
+    "display_name": "Replay",
+    "example_call": "Use Replay to load the chat file ~/Downloads/room.json",
+    "name": "@kody-w/replay_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "replay",
+      "chat-file",
+      "pointer",
+      "hotload",
+      "share"
+    ],
+    "version": "0.1.0"
+  },
+  "runtime_name": "Replay",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "action": {
+        "enum": [
+          "load",
+          "unload",
+          "status"
+        ],
+        "type": "string"
+      },
+      "file": {
+        "description": "For load: full path of the chat or room file.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ],
+    "type": "object"
+  },
+  "version": "0.1.0"
+}

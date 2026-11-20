@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__replay_agent",
+  "name": "Replay",
+  "rar_name": "@kody-w/replay_agent",
+  "rappid": "rappid:@kody-w/replay_agent:2ff245b0cb7c2b5ca7ccd8973180e0cba24ef72cdff9fba8cf6ad0c31779ac21",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "0.1.0",
+  "publisher": "@kody-w",
+  "category": "core",
+  "tags": [
+    "replay",
+    "chat-file",
+    "pointer",
+    "hotload",
+    "share"
+  ],
+  "description": "Make a shared chat file run on this Brainstem: loads the exact agent versions the file points to, checked by fingerprint, and unloads them again.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 123,
+  "size_kb": 7.4,
+  "sha256": "337b4b6d960fbe4a96a89547311f090d1b621befec25974c588779075654d974",
+  "has_card": true,
+  "added_at": "2026-11-20T00:30:03Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__replay_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/replay_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__replay_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__replay_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/replay_agent.py"
+}
