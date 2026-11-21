@@ -412,18 +412,32 @@
   "2026-11-18": {
    "count": 56,
    "uniques": 13
+  },
+  "2026-11-19": {
+   "count": 85,
+   "uniques": 18
+  },
+  "2026-11-20": {
+   "count": 81,
+   "uniques": 22
   }
  },
  "last_known": {
-  "at": "2026-11-20T14:08:12Z",
-  "clone_uniques_14d": 401,
-  "clones_14d": 2687,
+  "at": "2026-11-21T13:33:30Z",
+  "clone_uniques_14d": 357,
+  "clones_14d": 2299,
   "paths": [
    {
-    "count": 6,
+    "count": 8,
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "uniques": 4
+    "uniques": 6
+   },
+   {
+    "count": 2,
+    "path": "/kody-w/RAR/issues",
+    "title": "/issues",
+    "uniques": 1
    },
    {
     "count": 1,
@@ -472,19 +486,13 @@
     "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-business/pack.json",
     "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-business/pack.json",
     "uniques": 1
-   },
-   {
-    "count": 1,
-    "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-personal/README.md",
-    "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-personal/README.md",
-    "uniques": 1
    }
   ],
   "referrers": [
    {
-    "count": 6,
+    "count": 8,
     "referrer": "github.com",
-    "uniques": 5
+    "uniques": 7
    },
    {
     "count": 2,
@@ -492,8 +500,8 @@
     "uniques": 2
    }
   ],
-  "view_uniques_14d": 17,
-  "views_14d": 39
+  "view_uniques_14d": 14,
+  "views_14d": 38
  },
  "snapshots": [
   {
@@ -2245,6 +2253,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 151,
    "views_all_time": 331
+  },
+  {
+   "at": "2026-11-21T13:33:30Z",
+   "cdn_all_time": 577,
+   "clone_uniques_all_time": 3212,
+   "clones_all_time": 17872,
+   "days_tracked": 102,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 154,
+   "views_all_time": 336
   }
  ],
  "views": {
@@ -2645,6 +2663,14 @@
    "uniques": 0
   },
   "2026-11-18": {
+   "count": 1,
+   "uniques": 1
+  },
+  "2026-11-19": {
+   "count": 4,
+   "uniques": 2
+  },
+  "2026-11-20": {
    "count": 1,
    "uniques": 1
   }
