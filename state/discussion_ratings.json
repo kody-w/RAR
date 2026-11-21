@@ -2748,6 +2748,21 @@
       "url": "https://github.com/kody-w/RAR/discussions/373",
       "number": 373
     },
+    "@kody-w/replay_agent": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/1642",
+      "number": 1642
+    },
     "@kody-w/second_life_agent": {
       "upvotes": 0,
       "downloads": 0,

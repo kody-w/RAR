@@ -18536,6 +18536,11 @@
       "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
     },
     {
+      "aggregate_id": "copilot-studio-agent-inventory-audit",
+      "identity": "@cat-agent-skills/copilot_studio_agent_inventory_audit",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
       "aggregate_id": "copilot-studio-mcp-readiness",
       "identity": "@cat-agent-skills/copilot_studio_mcp_readiness",
       "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
@@ -18613,6 +18618,11 @@
     {
       "aggregate_id": "finance-for-cowork",
       "identity": "@cat-agent-skills/finance_for_cowork",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
+      "aggregate_id": "financial-statement-spreading",
+      "identity": "@cat-agent-skills/financial_statement_spreading",
       "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
     },
     {
@@ -18698,6 +18708,11 @@
     {
       "aggregate_id": "product-content-catalog-enrichment",
       "identity": "@cat-agent-skills/product_content_catalog_enrichment",
+      "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
+    },
+    {
+      "aggregate_id": "project-planning-cowork",
+      "identity": "@cat-agent-skills/project_planning_cowork",
       "reason": "aggregated PowerCAT entry has no notarized RAR container agent to Toast reversibly"
     },
     {
