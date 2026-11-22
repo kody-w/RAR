@@ -5245,7 +5245,8 @@
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#financial-statement-spreading",
       "source_signal": {
-        "downloads": 0
+        "downloads": 0,
+        "rating": 1
       }
     },
     {
