@@ -420,18 +420,22 @@
   "2026-11-20": {
    "count": 81,
    "uniques": 22
+  },
+  "2026-11-21": {
+   "count": 90,
+   "uniques": 28
   }
  },
  "last_known": {
-  "at": "2026-11-21T13:33:30Z",
-  "clone_uniques_14d": 357,
-  "clones_14d": 2299,
+  "at": "2026-11-22T13:26:25Z",
+  "clone_uniques_14d": 352,
+  "clones_14d": 2279,
   "paths": [
    {
-    "count": 8,
+    "count": 10,
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "uniques": 6
+    "uniques": 7
    },
    {
     "count": 2,
@@ -500,8 +504,8 @@
     "uniques": 2
    }
   ],
-  "view_uniques_14d": 14,
-  "views_14d": 38
+  "view_uniques_14d": 15,
+  "views_14d": 40
  },
  "snapshots": [
   {
@@ -2263,6 +2267,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 154,
    "views_all_time": 336
+  },
+  {
+   "at": "2026-11-22T13:26:25Z",
+   "cdn_all_time": 577,
+   "clone_uniques_all_time": 3240,
+   "clones_all_time": 17962,
+   "days_tracked": 103,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 155,
+   "views_all_time": 338
   }
  ],
  "views": {
@@ -2672,6 +2686,10 @@
   },
   "2026-11-20": {
    "count": 1,
+   "uniques": 1
+  },
+  "2026-11-21": {
+   "count": 2,
    "uniques": 1
   }
  }
