@@ -37,7 +37,7 @@ Tell the person, in plain words, and wait for a yes:
 3. Write `rapp/kernel.py` from the block at the bottom of this page, with a script, never by retyping. The
    file is everything between the opening fence line (four backticks plus `python`) and the closing fence
    line (four backticks), ending in one newline, LF line endings. Its sha256 must be
-   `d468d64ad29eacb130b8ba57b6efb935b64f0e71d96117083ec7d0277007bf10`. If it is not, stop and say so.
+   `5f0bde38db74f9d2513082d6b9683f2125edf9d4eaccfb00a560a6c91237c6d5`. If it is not, stop and say so.
 4. Run it with the Python 3 that worked, naming the instructions file you yourself read at the start of
    every session: `<python> rapp/kernel.py stay <your file>`
    Your file is `CLAUDE.md` if you are Claude Code, `GEMINI.md` if you are Gemini, `AGENTS.md` if you are
@@ -65,12 +65,29 @@ this device only. Start the door with the command that runs you for one message,
                                                  hand it to the person's Brainstem on this device
     python3 kernel.py stay [your file]           write the standing note into this folder's always-on instructions
                                                  (name the one you read at startup, such as CLAUDE.md, and it is made)
+    python3 kernel.py map [--dir <agents>]           intelligent omni routing, read only: what is loaded (top of agents/)
+                                                 and every shelf (a subfolder, never loaded) with each agent's own
+                                                 name and description, read as text, never run
+    python3 kernel.py load <shelf>[/<file>] [--dir <agents>]    put a shelf's agents (or one) on top, so they load
+    python3 kernel.py shelve <file> <shelf> [--dir <agents>]    move a loaded agent onto a shelf (made if missing)
+    python3 kernel.py undo [--dir <agents>]          put the last load or shelve back
+                                                 (--dir defaults to this folder's agents/; name the person's
+                                                 own Brainstem's agents/ folder to route that one)
+    python3 kernel.py snapshot [--dir <agents>]  copy the whole agents tree (shelves, songs, outputs, routing log)
+                                                 into agents/.snapshots/<time>.zip, plus one copy outside the tree
+                                                 in ~/.rapp-snapshots/<brainstem>/ that survives emptying agents/;
+                                                 the newest 14 are kept in each
+    python3 kernel.py pack <shelf> [--with-outputs] [--dir <agents>]  a shelf ready to share: its agents and songs
+                                                 in <shelf>.zip, never its outputs unless asked
+    python3 kernel.py restore <zip> [--dir <agents>]   put a snapshot back; what was there is set aside, never deleted
+    python3 kernel.py habits                     agents the person keeps calling (same weekday 3 weeks running,
+                                                 or 5 times in 14 days), with the last arguments used
     python3 kernel.py serve <port> -- <ai command ...>   be reachable like a Brainstem: /health and /chat on this
                                                  device, each chat handed to that AI (the message is its last argument)
 
 The AI reading the skill is the model. This file only does what a Brainstem's loader does.
 """
-import hashlib, importlib.util, json, os, sys, threading, urllib.request, uuid
+import ast, datetime, hashlib, zipfile, importlib.util, json, os, shutil, sys, time, threading, urllib.request, uuid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
@@ -108,6 +125,35 @@ You are RAPP compatible here, permanently. A folder `rapp/` holds your agents. D
    itself (the grail): a new need is an agent file, a sidecar that talks only over /chat and /health, or a
    distro. Stuck? The rules: https://kody-w.github.io/RAR/RAPP.md. The protocol: https://kody-w.github.io/rapp-1/llms.txt
 
+9. Intelligent omni routing: keep the agents folder lean and organized so the person never thinks about
+   it. Start flat and simple: everything on top, no shelves, while the person does one thing. Begin
+   shelving only once they go back and forth between different engagements, or the top grows past about
+   eight agents; then move what is not in play onto shelves yourself. Only agent files at the top of `rapp/agents/` load; each subfolder is a shelf for one engagement,
+   named from the person's own words, holding its agent files and saved songs (`songs/<name>.txt`, one
+   sentence per line). Each turn, read `python3 rapp/kernel.py map` (every shelf and each agent's own
+   description, read as text, never run) beside what the person is saying, and route: `load <shelf>` or
+   `load <shelf>/<file>` what this need calls for, `shelve <file> <shelf>` what it no longer needs, so the
+   top holds only what is in play. A new engagement gets a new shelf; never ask "which project?" unless
+   two fit equally. When a job works, save it as a song on its shelf, so "do it again" needs nothing else.
+   Never delete; merge duplicates and shelve what has gone unused. Tell the person each move in one plain
+   line; "undo that" is `undo`. Asked "where is everything?", answer one line per shelf.
+10. The person never runs a command, opens a folder or drags a file: you do all of it. Their own Brainstem
+   (usually http://localhost:7071, its `/health` answers) is routed the same way with `--dir <its agents
+   folder>`; it also loads only the top of its `agents/`. If it is not answering, start it yourself the
+   way it was installed; hand it new agents with `ready`. Only a yes, a sign-in or a payment is theirs:
+   ask in one plain sentence, then carry on.
+
+11. Never lose it. At your first turn each day, run `python3 rapp/kernel.py snapshot` (and with `--dir` for the
+   person's Brainstem). Asked to move to a new computer, carry the newest snapshot there and `restore` it.
+   Each snapshot also leaves one copy outside the tree, so emptying `agents/` never takes the backups with it.
+   Say nothing about it unless asked, or unless it fails.
+12. Everything the person has lives in the `agents/` tree, so the folder is the organization. Things an agent
+   makes (pages, sheets, reports) go in `agents/<shelf>/outputs/`, beside the agents and songs of that job
+   (`agents/outputs/` while still flat). Asked "where is the thing you made?", find it there. To share a shelf,
+   use `pack`: it leaves outputs out, because they are the person's own. Include them only on their yes.
+13. Now and then run `habits`. When something shows up, offer once, in one line: "You score a house most
+   Mondays. Want it done automatically?" With a yes, set it up with this computer's own scheduler to call
+   that agent with those arguments, and say in one line how to stop it. Never ask twice about the same one.
 Off switch: if `rapp/agents/` is gone, the person turned this off. `tools` then removes this note itself;
 from that moment you know nothing of RAPP here. Never recreate the folder unasked.
 <!-- rapp:end -->
@@ -355,6 +401,136 @@ def leave(root=None):
         new = (old[:a].rstrip("\n") + "\n" + old[b:]).lstrip("\n") if old[:a].strip() or old[b:].strip() else ""
         f.write_text(new) if new.strip() else f.unlink()
 
+KEEP = ("basic_agent.py", "summon_chant_agent.py")  # always on top
+
+
+def _about(f):
+    """An agent file's own name and description, read as text (ast), never executed."""
+    name = desc = None
+    try:
+        for node in ast.walk(ast.parse(f.read_text(encoding="utf-8", errors="replace"))):
+            if isinstance(node, ast.Dict):
+                for k, v in zip(node.keys, node.values):
+                    if isinstance(k, ast.Constant) and isinstance(v, ast.Constant) and isinstance(v.value, str):
+                        if k.value == "name" and not name: name = v.value
+                        if k.value == "description" and not desc: desc = v.value
+    except SyntaxError:
+        pass
+    return {"file": f.name, "name": name or f.stem, "description": (desc or "")[:300]}
+
+
+def route_map(d):
+    log = d / ".routing.jsonl"
+    moves = [json.loads(l) for l in log.read_text().splitlines()[-5:]] if log.exists() else []
+    return {"agents_dir": str(d),
+            "loaded": [_about(f) for f in sorted(d.glob("*_agent.py")) if f.name not in KEEP],
+            "shelves": {s.name: [_about(f) for f in sorted(s.glob("*_agent.py"))]
+                        for s in sorted(d.iterdir()) if s.is_dir() and not s.name.startswith((".", "_")) and s.name not in ("outputs", "songs")},
+            "last_moves": moves}
+
+
+def _move(d, src, dst, kind):
+    if dst.exists():
+        return {"error": f"{dst.relative_to(d)} already exists; nothing moved"}
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    shutil.move(str(src), str(dst))
+    rec = {"at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "kind": kind,
+           "from": str(src.relative_to(d)), "to": str(dst.relative_to(d))}
+    with open(d / ".routing.jsonl", "a") as fh:
+        fh.write(json.dumps(rec) + "\n")
+    return rec
+
+
+def route(cmd, args):
+    d = AGENTS
+    if "--dir" in args:
+        i = args.index("--dir"); d = Path(args[i + 1]).expanduser(); args = args[:i] + args[i + 2:]
+    if cmd == "map":
+        return route_map(d)
+    if cmd == "load":
+        shelf, _, one = args[0].partition("/")
+        files = [d / shelf / one] if one else sorted((d / shelf).glob("*_agent.py"))
+        if not files or not all(f.exists() for f in files):
+            return {"error": f"nothing to load at {args[0]}", "shelves": list(route_map(d)["shelves"])}
+        return {"moved": [_move(d, f, d / f.name, "load") for f in files]}
+    if cmd == "shelve":
+        f = d / args[0]
+        if args[0] in KEEP or not f.exists():
+            return {"error": f"{args[0]} cannot be shelved" if args[0] in KEEP else f"no {args[0]} on top"}
+        return {"moved": [_move(d, f, d / args[1] / f.name, "shelve")]}
+    if cmd == "undo":
+        log = d / ".routing.jsonl"
+        lines = log.read_text().splitlines() if log.exists() else []
+        if not lines:
+            return {"error": "nothing to undo"}
+        last = json.loads(lines[-1])
+        shutil.move(str(d / last["to"]), str(d / last["from"]))
+        log.write_text("".join(l + "\n" for l in lines[:-1]))
+        return {"undone": last}
+
+
+def snapshot(d):
+    """The whole agents/ tree into agents/.snapshots/<time>.zip; keep the newest 14."""
+    base = d.parent; snaps = d / ".snapshots"; snaps.mkdir(exist_ok=True)
+    out = snaps / (time.strftime("%Y-%m-%dT%H%M%S") + ".zip"); n = 0
+    with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
+        for top in (d,):
+            if top.is_dir():
+                for f in sorted(top.rglob("*")):
+                    if f.is_file() and "__pycache__" not in f.parts and ".snapshots" not in f.parts:
+                        z.write(f, f.relative_to(base)); n += 1
+    away = Path.home() / ".rapp-snapshots" / hashlib.sha256(str(d.resolve()).encode()).hexdigest()[:12]
+    away.mkdir(parents=True, exist_ok=True); shutil.copy2(out, away / out.name)
+    (away / "from.txt").write_text(str(d.resolve()) + "\n")
+    for place in (snaps, away):
+        for f in sorted(place.glob("*.zip"))[:-14]: f.unlink()
+    return {"snapshot": str(out), "outside_copy": str(away / out.name), "files": n, "kept": len(sorted(snaps.glob("*.zip")))}
+
+
+def pack(shelf, d, with_outputs=False):
+    """One shelf as <shelf>.zip to share: agents and songs; outputs only when the person said so."""
+    src = d / shelf
+    if not src.is_dir(): return {"error": f"no shelf {shelf!r}", "try": "map"}
+    out = d.parent / f"{shelf}.zip"; files, left = [], 0
+    with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
+        for f in sorted(src.rglob("*")):
+            if not f.is_file() or ({"__pycache__", ".snapshots"} & set(f.parts)) or f.name.startswith(".routing"): continue
+            if "outputs" in f.relative_to(src).parts and not with_outputs: left += 1; continue
+            z.write(f, Path(shelf) / f.relative_to(src)); files.append(str(f.relative_to(src)))
+    return {"pack": str(out), "files": files, "outputs_left_out": left}
+
+
+def restore(zpath, d):
+    base = d.parent; aside = base / f"set-aside-{time.strftime('%Y-%m-%dT%H%M%S')}"
+    zpath = Path(zpath).resolve(); keep = d / ".snapshots"
+    if d.exists():
+        aside.mkdir(exist_ok=True); shutil.move(str(d), str(aside / d.name))
+        if (aside / d.name / ".snapshots").is_dir():  # snapshots stay with the person
+            shutil.copytree(aside / d.name / ".snapshots", keep, dirs_exist_ok=True)
+            if str(zpath).startswith(str(d)): zpath = aside / d.name / zpath.relative_to(d)
+    with zipfile.ZipFile(zpath) as z:
+        bad = [m for m in z.namelist() if m.startswith(("/", "..")) or ".." in Path(m).parts]
+        if bad: return {"error": f"refused: unsafe paths {bad[:3]}"}
+        z.extractall(base)
+    return {"restored": str(zpath), "into": str(base), "set_aside": str(aside) if aside.exists() else None}
+
+
+def habits():
+    log = HERE / ".calls.jsonl"
+    calls = [json.loads(l) for l in log.read_text().splitlines()] if log.exists() else []
+    now = datetime.datetime.now(datetime.timezone.utc); out = []
+    for name in sorted({c["name"] for c in calls}):
+        mine = [c for c in calls if c["name"] == name]
+        at = [datetime.datetime.strptime(c["at"], "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=datetime.timezone.utc) for c in mine]
+        recent = [t for t in at if (now - t).days < 14]
+        weeks = {}
+        for t in at: weeks.setdefault(t.strftime("%A"), set()).add(t.strftime("%G-%V"))
+        day = max(weeks, key=lambda k: len(weeks[k])) if weeks else None
+        if len(recent) >= 5 or (day and len(weeks[day]) >= 3):
+            out.append({"agent": name, "calls_14_days": len(recent), "usual_day": day if day and len(weeks[day]) >= 3 else None,
+                        "last_args": mine[-1]["args"]})
+    return {"habits": out}
+
 
 def main(argv):
     cmd = argv[1] if len(argv) > 1 else "tools"
@@ -374,7 +550,10 @@ def main(argv):
         door = ThreadingHTTPServer(("127.0.0.1", 0), Door)
         threading.Thread(target=door.serve_forever, daemon=True).start()
         os.environ["BRAINSTEM_URL"] = f"http://127.0.0.1:{door.server_address[1]}"
-        print(found[argv[2]].perform(**json.loads(argv[3] if len(argv) > 3 else "{}")))
+        args = json.loads(argv[3] if len(argv) > 3 else "{}")
+        with open(HERE / ".calls.jsonl", "a") as fh:  # what the person keeps doing, for habits
+            fh.write(json.dumps({"at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "name": argv[2], "args": args}) + "\n")
+        print(found[argv[2]].perform(**args))
     elif cmd == "import":
         code, out = add(argv[2], Path(argv[2]).read_bytes(), argv[3] if len(argv) > 3 else None)
         print(json.dumps(out))
@@ -386,6 +565,19 @@ def main(argv):
         code, out = ready(argv[2], argv[3], json.loads(argv[4]), argv[5], argv[6] if len(argv) > 6 else None)
         print(json.dumps(out, indent=1))
         return code
+    elif cmd in ("snapshot", "restore", "habits", "pack"):
+        rest = argv[2:]; d = AGENTS
+        if "--dir" in rest:
+            i = rest.index("--dir"); d = Path(rest[i + 1]).expanduser(); rest = rest[:i] + rest[i + 2:]
+        wo = "--with-outputs" in rest; rest = [a for a in rest if a != "--with-outputs"]
+        out = (snapshot(d) if cmd == "snapshot" else restore(rest[0], d) if cmd == "restore"
+               else pack(rest[0], d, wo) if cmd == "pack" else habits())
+        print(json.dumps(out, indent=1))
+        return 1 if "error" in out else 0
+    elif cmd in ("map", "load", "shelve", "undo"):
+        out = route(cmd, argv[2:])
+        print(json.dumps(out, indent=1))
+        return 1 if "error" in out else 0
     elif cmd == "serve":
         cut = argv.index("--") if "--" in argv else len(argv)
         if cut == len(argv) or cut + 1 >= len(argv):
