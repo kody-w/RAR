@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-11-22T13:26:25Z",
+ "generated_at": "2026-11-23T16:09:17Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -9,27 +9,27 @@
   "stars": 4,
   "forks": 1,
   "watchers": 0,
-  "open_issues": 34,
-  "size_kb": 126890,
+  "open_issues": 35,
+  "size_kb": 128536,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-11-22T04:29:26Z",
+  "pushed_at": "2026-11-23T13:55:42Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": "https://kody-w.github.io/RAR/"
  },
  "totals": {
-  "downloads": 18588,
-  "clones": 17962,
+  "downloads": 18688,
+  "clones": 18062,
   "cdn_hits": 577,
   "release_downloads": 49,
   "agent_file_downloads": 32,
-  "clones_excluding_ci_estimate": 12194,
-  "ci_clone_estimate": 5768,
-  "page_views": 338,
-  "clone_uniques_14d": 352,
+  "clones_excluding_ci_estimate": 12238,
+  "ci_clone_estimate": 5824,
+  "page_views": 339,
+  "clone_uniques_14d": 342,
   "view_uniques_14d": 15,
-  "clone_uniques_daily_sum": 3240,
-  "view_uniques_daily_sum": 155,
-  "days_tracked": 103,
+  "clone_uniques_daily_sum": 3276,
+  "view_uniques_daily_sum": 156,
+  "days_tracked": 104,
   "tracking_since": "2026-07-14",
   "agents": 228,
   "swarms": 2,
@@ -48,13 +48,6 @@
   "agents_voted": 1
  },
  "daily": [
-  {
-   "date": "2026-08-01",
-   "clones": 0,
-   "clone_uniques": 0,
-   "views": 0,
-   "cdn": 7
-  },
   {
    "date": "2026-08-25",
    "clones": 113,
@@ -677,6 +670,13 @@
    "clone_uniques": 28,
    "views": 2,
    "cdn": 0
+  },
+  {
+   "date": "2026-11-22",
+   "clones": 100,
+   "clone_uniques": 36,
+   "views": 1,
+   "cdn": 0
   }
  ],
  "traffic": {
@@ -684,7 +684,7 @@
    {
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "count": 10,
+    "count": 11,
     "uniques": 7
    },
    {
@@ -750,19 +750,19 @@
    },
    {
     "referrer": "Bing",
-    "count": 2,
-    "uniques": 2
+    "count": 1,
+    "uniques": 1
    }
   ],
-  "clones_14d": 2279,
-  "views_14d": 40,
+  "clones_14d": 2209,
+  "views_14d": 39,
   "live": true,
-  "as_of": "2026-11-22T13:26:25Z"
+  "as_of": "2026-11-23T16:09:17Z"
  },
  "cdn": {
   "total_hits": 577,
   "bandwidth": 7196782,
-  "rank": 816974,
+  "rank": 820251,
   "agent_hits": 32,
   "files": [
    {
