@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-11-24T15:58:37Z",
+ "generated_at": "2026-11-25T15:45:59Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -9,27 +9,27 @@
   "stars": 4,
   "forks": 1,
   "watchers": 0,
-  "open_issues": 36,
-  "size_kb": 129552,
+  "open_issues": 37,
+  "size_kb": 130443,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-11-24T11:53:50Z",
+  "pushed_at": "2026-11-25T04:44:07Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": "https://kody-w.github.io/RAR/"
  },
  "totals": {
-  "downloads": 18777,
-  "clones": 18151,
+  "downloads": 18839,
+  "clones": 18213,
   "cdn_hits": 577,
   "release_downloads": 49,
   "agent_file_downloads": 32,
-  "clones_excluding_ci_estimate": 12271,
-  "ci_clone_estimate": 5880,
-  "page_views": 340,
-  "clone_uniques_14d": 346,
-  "view_uniques_14d": 15,
-  "clone_uniques_daily_sum": 3307,
-  "view_uniques_daily_sum": 157,
-  "days_tracked": 105,
+  "clones_excluding_ci_estimate": 12277,
+  "ci_clone_estimate": 5936,
+  "page_views": 341,
+  "clone_uniques_14d": 341,
+  "view_uniques_14d": 13,
+  "clone_uniques_daily_sum": 3324,
+  "view_uniques_daily_sum": 158,
+  "days_tracked": 106,
   "tracking_since": "2026-07-14",
   "agents": 228,
   "swarms": 2,
@@ -48,13 +48,6 @@
   "agents_voted": 1
  },
  "daily": [
-  {
-   "date": "2026-08-26",
-   "clones": 215,
-   "clone_uniques": 21,
-   "views": 2,
-   "cdn": 0
-  },
   {
    "date": "2026-08-27",
    "clones": 62,
@@ -677,92 +670,94 @@
    "clone_uniques": 31,
    "views": 1,
    "cdn": 0
+  },
+  {
+   "date": "2026-11-24",
+   "clones": 62,
+   "clone_uniques": 17,
+   "views": 1,
+   "cdn": 0
   }
  ],
  "traffic": {
   "paths": [
    {
+    "count": 11,
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "count": 11,
     "uniques": 7
    },
    {
+    "count": 2,
     "path": "/kody-w/RAR/issues",
     "title": "/issues",
-    "count": 2,
     "uniques": 1
    },
    {
+    "count": 1,
     "path": "/kody-w/RAR/blob/925b507572b30cb716a48ccd8b9cdfc9a5745f08/api/v1/agent/kody-w__connected_solution_agent.py",
     "title": "/blob/925b507572b30cb716a48ccd8b9cdfc9a5745f08/api/v1/agent/kody-w__connected_solution_agent.py",
-    "count": 1,
     "uniques": 1
    },
    {
+    "count": 1,
     "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/brain/SKILL.md",
     "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/brain/SKILL.md",
-    "count": 1,
     "uniques": 1
    },
    {
+    "count": 1,
     "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/brainstem-skill/README.md",
     "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/brainstem-skill/README.md",
-    "count": 1,
     "uniques": 1
    },
    {
+    "count": 1,
     "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/claude-workflows/README.md",
     "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/claude-workflows/README.md",
-    "count": 1,
     "uniques": 1
    },
    {
+    "count": 1,
     "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/claude-workflows/pack.json",
     "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/claude-workflows/pack.json",
-    "count": 1,
     "uniques": 1
    },
    {
+    "count": 1,
     "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/markdown-medic/README.md",
     "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/markdown-medic/README.md",
-    "count": 1,
     "uniques": 1
    },
    {
+    "count": 1,
     "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-business/README.md",
     "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-business/README.md",
-    "count": 1,
     "uniques": 1
    },
    {
+    "count": 1,
     "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-business/pack.json",
     "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-business/pack.json",
-    "count": 1,
     "uniques": 1
    }
   ],
   "referrers": [
    {
     "referrer": "github.com",
-    "count": 8,
+    "count": 9,
     "uniques": 7
-   },
-   {
-    "referrer": "Bing",
-    "count": 1,
-    "uniques": 1
    }
   ],
-  "clones_14d": 2143,
-  "views_14d": 39,
+  "clones_14d": 1856,
+  "views_14d": 31,
   "live": true,
-  "as_of": "2026-11-24T15:58:37Z"
+  "as_of": "2026-11-25T15:45:59Z"
  },
  "cdn": {
   "total_hits": 577,
   "bandwidth": 7196782,
-  "rank": 823536,
+  "rank": 826900,
   "agent_hits": 32,
   "files": [
    {
