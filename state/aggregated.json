@@ -15,7 +15,7 @@
       "license_url": "",
       "license_verified": false,
       "license_note": "The GitHub repository is behind organization SAML enforcement, so the LICENSE file cannot be read programmatically. The Pages site and skills.json are publicly served. Index-only: metadata and links, never content.",
-      "item_count": 164,
+      "item_count": 152,
       "source_downloads": 1589
     },
     {
@@ -3580,31 +3580,6 @@
       }
     },
     {
-      "ref": "@cat-agent-skills/answer_research",
-      "source_id": "cat-agent-skills",
-      "source_slug": "answer-research",
-      "name": "Answer Research",
-      "description": "Research source-backed answers to support, policy, eligibility, and troubleshooting questions with explicit evidence gaps.",
-      "kind": "skill",
-      "tags": [
-        "customer-service",
-        "research",
-        "troubleshooting"
-      ],
-      "platforms": [
-        "Cowork"
-      ],
-      "author": "Microsoft",
-      "author_github": "microsoft",
-      "version": "",
-      "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#answer-research",
-      "source_signal": {
-        "downloads": 0
-      }
-    },
-    {
       "ref": "@cat-agent-skills/awaiting_reply",
       "source_id": "cat-agent-skills",
       "source_slug": "awaiting-reply",
@@ -3869,31 +3844,6 @@
       }
     },
     {
-      "ref": "@cat-agent-skills/business_case_composer",
-      "source_id": "cat-agent-skills",
-      "source_slug": "business-case-composer",
-      "name": "Business Case Composer",
-      "description": "Draft a customer-specific business case connecting the problem, investment, and evidence-backed value.",
-      "kind": "skill",
-      "tags": [
-        "sales",
-        "business-case",
-        "customer-value"
-      ],
-      "platforms": [
-        "Cowork"
-      ],
-      "author": "Microsoft",
-      "author_github": "microsoft",
-      "version": "",
-      "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#business-case-composer",
-      "source_signal": {
-        "downloads": 0
-      }
-    },
-    {
       "ref": "@cat-agent-skills/business_os",
       "source_id": "cat-agent-skills",
       "source_slug": "business-os",
@@ -4000,56 +3950,6 @@
       "created_at": "2026-10-31T00:00:00.000Z",
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#capital-markets-for-cowork",
-      "source_signal": {
-        "downloads": 0
-      }
-    },
-    {
-      "ref": "@cat-agent-skills/case_preparation_brief",
-      "source_id": "cat-agent-skills",
-      "source_slug": "case-preparation-brief",
-      "name": "Case Preparation Brief",
-      "description": "Prepare a decision-ready support case brief with status, history, open commitments, and the recommended next step.",
-      "kind": "skill",
-      "tags": [
-        "customer-service",
-        "case-management",
-        "handoff"
-      ],
-      "platforms": [
-        "Cowork"
-      ],
-      "author": "Microsoft",
-      "author_github": "microsoft",
-      "version": "",
-      "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#case-preparation-brief",
-      "source_signal": {
-        "downloads": 0
-      }
-    },
-    {
-      "ref": "@cat-agent-skills/case_triage",
-      "source_id": "cat-agent-skills",
-      "source_slug": "case-triage",
-      "name": "Case Triage",
-      "description": "Prioritize support issues using impact, deadlines, commitments, and evidence-backed urgency.",
-      "kind": "skill",
-      "tags": [
-        "customer-service",
-        "triage",
-        "prioritization"
-      ],
-      "platforms": [
-        "Cowork"
-      ],
-      "author": "Microsoft",
-      "author_github": "microsoft",
-      "version": "",
-      "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#case-triage",
       "source_signal": {
         "downloads": 0
       }
@@ -4249,31 +4149,6 @@
       "created_at": null,
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#competitive-battlecard-builder",
-      "source_signal": {
-        "downloads": 0
-      }
-    },
-    {
-      "ref": "@cat-agent-skills/competitive_strategy",
-      "source_id": "cat-agent-skills",
-      "source_slug": "competitive-strategy",
-      "name": "Competitive Strategy",
-      "description": "Build customer-specific competitive positioning with supported differentiators, tradeoffs, and objection responses.",
-      "kind": "skill",
-      "tags": [
-        "sales",
-        "competitive-strategy",
-        "positioning"
-      ],
-      "platforms": [
-        "Cowork"
-      ],
-      "author": "Microsoft",
-      "author_github": "microsoft",
-      "version": "",
-      "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#competitive-strategy",
       "source_signal": {
         "downloads": 0
       }
@@ -4776,31 +4651,6 @@
       }
     },
     {
-      "ref": "@cat-agent-skills/customer_engagement_and_deal_risk_insights",
-      "source_id": "cat-agent-skills",
-      "source_slug": "customer-engagement-and-deal-risk-insights",
-      "name": "Customer Engagement and Deal Risk Insights",
-      "description": "Explain customer engagement and deal momentum with evidence-backed risks, blockers, and next actions.",
-      "kind": "skill",
-      "tags": [
-        "sales",
-        "customer-engagement",
-        "deal-risk"
-      ],
-      "platforms": [
-        "Cowork"
-      ],
-      "author": "Microsoft",
-      "author_github": "microsoft",
-      "version": "",
-      "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#customer-engagement-and-deal-risk-insights",
-      "source_signal": {
-        "downloads": 0
-      }
-    },
-    {
       "ref": "@cat-agent-skills/customer_service_order_support",
       "source_id": "cat-agent-skills",
       "source_slug": "customer-service-order-support",
@@ -4824,31 +4674,6 @@
       "created_at": "2026-09-05T00:00:00.000Z",
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#customer-service-order-support",
-      "source_signal": {
-        "downloads": 0
-      }
-    },
-    {
-      "ref": "@cat-agent-skills/deal_catchup",
-      "source_id": "cat-agent-skills",
-      "source_slug": "deal-catchup",
-      "name": "Deal Catch-up",
-      "description": "Summarize what changed across a scoped set of deals, separating customer movement from record housekeeping.",
-      "kind": "skill",
-      "tags": [
-        "sales",
-        "deal-updates",
-        "pipeline"
-      ],
-      "platforms": [
-        "Cowork"
-      ],
-      "author": "Microsoft",
-      "author_github": "microsoft",
-      "version": "",
-      "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#deal-catchup",
       "source_signal": {
         "downloads": 0
       }
@@ -4965,31 +4790,6 @@
         "downloads": 211,
         "rating": 5,
         "featured": true
-      }
-    },
-    {
-      "ref": "@cat-agent-skills/draft_customer_reply",
-      "source_id": "cat-agent-skills",
-      "source_slug": "draft-customer-reply",
-      "name": "Draft Customer Reply",
-      "description": "Draft a reviewable customer support reply grounded in known facts, applicable policy, and customer needs.",
-      "kind": "skill",
-      "tags": [
-        "customer-service",
-        "communication",
-        "customer-replies"
-      ],
-      "platforms": [
-        "Cowork"
-      ],
-      "author": "Microsoft",
-      "author_github": "microsoft",
-      "version": "",
-      "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#draft-customer-reply",
-      "source_signal": {
-        "downloads": 0
       }
     },
     {
@@ -5648,31 +5448,6 @@
       }
     },
     {
-      "ref": "@cat-agent-skills/knowledge_harvest",
-      "source_id": "cat-agent-skills",
-      "source_slug": "knowledge-harvest",
-      "name": "Knowledge Harvest",
-      "description": "Turn verified support resolutions into reviewable, reusable knowledge while removing identifying details.",
-      "kind": "skill",
-      "tags": [
-        "customer-service",
-        "knowledge-management",
-        "case-resolution"
-      ],
-      "platforms": [
-        "Cowork"
-      ],
-      "author": "Microsoft",
-      "author_github": "microsoft",
-      "version": "",
-      "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#knowledge-harvest",
-      "source_signal": {
-        "downloads": 0
-      }
-    },
-    {
       "ref": "@cat-agent-skills/knowledge_source_router",
       "source_id": "cat-agent-skills",
       "source_slug": "knowledge-source-router",
@@ -6000,31 +5775,6 @@
       }
     },
     {
-      "ref": "@cat-agent-skills/meeting_prep",
-      "source_id": "cat-agent-skills",
-      "source_slug": "meeting-prep",
-      "name": "Meeting Prep",
-      "description": "Prepare an evidence-backed brief for an upcoming customer conversation, including what to learn, say, prove, and ask.",
-      "kind": "skill",
-      "tags": [
-        "sales",
-        "meeting-preparation",
-        "customer-engagement"
-      ],
-      "platforms": [
-        "Cowork"
-      ],
-      "author": "Microsoft",
-      "author_github": "microsoft",
-      "version": "",
-      "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#meeting-prep",
-      "source_signal": {
-        "downloads": 0
-      }
-    },
-    {
       "ref": "@cat-agent-skills/microsoft_ai_platform_advisor",
       "source_id": "cat-agent-skills",
       "source_slug": "microsoft-ai-platform-advisor",
@@ -6319,56 +6069,6 @@
       "source_signal": {
         "downloads": 0,
         "featured": true
-      }
-    },
-    {
-      "ref": "@cat-agent-skills/pipeline_prioritizer",
-      "source_id": "cat-agent-skills",
-      "source_slug": "pipeline-prioritizer",
-      "name": "Pipeline Prioritizer",
-      "description": "Rank open opportunities into an evidence-backed worklist explaining what to work on next and why.",
-      "kind": "skill",
-      "tags": [
-        "sales",
-        "pipeline",
-        "prioritization"
-      ],
-      "platforms": [
-        "Cowork"
-      ],
-      "author": "Microsoft",
-      "author_github": "microsoft",
-      "version": "",
-      "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#pipeline-prioritizer",
-      "source_signal": {
-        "downloads": 0
-      }
-    },
-    {
-      "ref": "@cat-agent-skills/post_meeting_follow_up",
-      "source_id": "cat-agent-skills",
-      "source_slug": "post-meeting-follow-up",
-      "name": "Post-Meeting Follow-Up",
-      "description": "Capture sales meeting decisions and commitments, propose next actions, and draft a reviewable customer follow-up.",
-      "kind": "skill",
-      "tags": [
-        "sales",
-        "meetings",
-        "follow-up"
-      ],
-      "platforms": [
-        "Cowork"
-      ],
-      "author": "Microsoft",
-      "author_github": "microsoft",
-      "version": "",
-      "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#post-meeting-follow-up",
-      "source_signal": {
-        "downloads": 0
       }
     },
     {
@@ -7032,26 +6732,27 @@
       }
     },
     {
-      "ref": "@cat-agent-skills/sales_progress_update",
+      "ref": "@cat-agent-skills/sales_for_cowork",
       "source_id": "cat-agent-skills",
-      "source_slug": "sales-progress-update",
-      "name": "Sales Progress Update",
-      "description": "Create a sales progress update covering work completed, deal movement, forecast position, and help needed.",
-      "kind": "skill",
+      "source_slug": "sales-for-cowork",
+      "name": "Sales",
+      "description": "Delegate sales work and turn customer context into action with Copilot Cowork.",
+      "kind": "plugin",
       "tags": [
         "sales",
-        "reporting",
-        "forecasting"
+        "pipeline",
+        "customer-engagement",
+        "presentations"
       ],
       "platforms": [
         "Cowork"
       ],
       "author": "Microsoft",
       "author_github": "microsoft",
-      "version": "",
+      "version": "1.0.3",
       "created_at": "2026-10-31T00:00:00.000Z",
       "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#sales-progress-update",
+      "url": "https://microsoft.github.io/cat-agent-skills/#sales-for-cowork",
       "source_signal": {
         "downloads": 0
       }
@@ -7137,6 +6838,31 @@
       "created_at": null,
       "has_bundle": true,
       "url": "https://microsoft.github.io/cat-agent-skills/#semantic-pdf-image-extractor",
+      "source_signal": {
+        "downloads": 0
+      }
+    },
+    {
+      "ref": "@cat-agent-skills/service_for_cowork",
+      "source_id": "cat-agent-skills",
+      "source_slug": "service-for-cowork",
+      "name": "Service",
+      "description": "Investigate, respond, and resolve customer needs faster.",
+      "kind": "plugin",
+      "tags": [
+        "customer-service",
+        "case-management",
+        "knowledge"
+      ],
+      "platforms": [
+        "Cowork"
+      ],
+      "author": "Microsoft",
+      "author_github": "microsoft",
+      "version": "1.0.1",
+      "created_at": "2026-10-31T00:00:00.000Z",
+      "has_bundle": true,
+      "url": "https://microsoft.github.io/cat-agent-skills/#service-for-cowork",
       "source_signal": {
         "downloads": 0
       }
@@ -7277,31 +7003,6 @@
       "source_signal": {
         "downloads": 0,
         "rating": 1
-      }
-    },
-    {
-      "ref": "@cat-agent-skills/stakeholder_and_decision_map",
-      "source_id": "cat-agent-skills",
-      "source_slug": "stakeholder-and-decision-map",
-      "name": "Stakeholder & Decision Map",
-      "description": "Map a deal's buying group, engagement, and decision process, highlighting missing stakeholders and evidence.",
-      "kind": "skill",
-      "tags": [
-        "sales",
-        "stakeholders",
-        "decision-making"
-      ],
-      "platforms": [
-        "Cowork"
-      ],
-      "author": "Microsoft",
-      "author_github": "microsoft",
-      "version": "",
-      "created_at": "2026-10-31T00:00:00.000Z",
-      "has_bundle": true,
-      "url": "https://microsoft.github.io/cat-agent-skills/#stakeholder-and-decision-map",
-      "source_signal": {
-        "downloads": 0
       }
     },
     {
@@ -7886,7 +7587,7 @@
   ],
   "totals": {
     "sources": 2,
-    "items": 259,
+    "items": 247,
     "source_downloads": 1589
   }
 }
