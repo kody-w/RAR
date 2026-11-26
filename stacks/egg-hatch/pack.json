@@ -1,0 +1,50 @@
+{
+  "schema": "rapp-rar-stack/1.2",
+  "name": "egg-hatch",
+  "display_name": "Egg hatch (your Brainstem, anywhere)",
+  "version": "0.1.0",
+  "maturity": "staging",
+  "purpose": "Carry your Brainstem as one rapp/1 egg: hatch it on your computer, wake the same egg inside any AI that runs Python, and bring the chat home with the Brainstem page's Import.",
+  "files": {
+    "hatch_app.py": {
+      "purpose": "The app: one page on this computer to hatch an egg, take it to any AI, bring the chat home.",
+      "size": 10045,
+      "sha256": "d860e3367e1fd5937967bdcf7edc118f2a11d8dba8ccf03093a21c0e72271f39"
+    },
+    "lay_egg.py": {
+      "purpose": "Makes a wake egg from a packed Brainstem, verified before it is written.",
+      "size": 2510,
+      "sha256": "3000b7fa367b79b04a20bef0ebb38dd4b86fc0c54d283085bfdb0f0aada26732"
+    },
+    "skill.md": {
+      "purpose": "Inside every egg: how any AI wakes the Brainstem, talks through it, sends it home, and uses rapp/1.",
+      "size": 3822,
+      "sha256": "503df8a51a1d5bb2758d7af8e4fd7150ee20bcbbed3d3bf29acd3223879c2360"
+    },
+    "rapp1.py": {
+      "purpose": "The rapp/1 reference implementation, vendored verbatim (commit 591e014a).",
+      "size": 39186,
+      "sha256": "1a04362b02f14c1e37b70c6b4f72d79e92df1cc9c2b5b394e8e1b141fc0b6050"
+    },
+    "test_egg_hatch.py": {
+      "purpose": "The egg check: good egg passes, changed or empty egg is refused.",
+      "size": 1420,
+      "sha256": "fd96652b2733484ca9a5d3495fbf9eac9af7c78016bc2489e3abb60a3de8b3fa"
+    },
+    "README.md": {
+      "purpose": "What it is and the three steps.",
+      "size": 1299,
+      "sha256": "f749003985fb5324e19f499e0f04aa968598afe792590d003833e7ff7f503a79"
+    }
+  },
+  "capabilities": [
+    "egg",
+    "hatch",
+    "portable",
+    "any-ai"
+  ],
+  "install": {
+    "type": "local",
+    "notes": "python3 hatch_app.py (stdlib only). Make an egg: python3 lay_egg.py <your.brainstem.py> <login> <name>."
+  }
+}
