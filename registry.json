@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-20T00:30:03Z",
+  "generated_at": "2026-11-26T19:59:46Z",
   "static_api": "rapp-static-api/1.1",
   "pages_base": "https://kody-w.github.io/RAR",
   "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
@@ -14902,6 +14902,45 @@
       "shelf": "app",
       "_seed": 17329503791988350976,
       "_incantation": "FORGE CHISEL PANTHER SANCTIFY THROW STOKE BIND"
+    },
+    {
+      "name": "egg-hatch",
+      "display_name": "Egg hatch (your Brainstem, anywhere)",
+      "version": "0.1.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/egg-hatch",
+      "purpose": "Carry your Brainstem as one rapp/1 egg: hatch it on your computer, wake the same egg inside any AI that runs Python, and bring the chat home with the Brainstem page's Import.",
+      "files": {
+        "hatch_app.py": {
+          "sha256": "d860e3367e1fd5937967bdcf7edc118f2a11d8dba8ccf03093a21c0e72271f39",
+          "verified": true
+        },
+        "lay_egg.py": {
+          "sha256": "3000b7fa367b79b04a20bef0ebb38dd4b86fc0c54d283085bfdb0f0aada26732",
+          "verified": true
+        },
+        "skill.md": {
+          "sha256": "503df8a51a1d5bb2758d7af8e4fd7150ee20bcbbed3d3bf29acd3223879c2360",
+          "verified": true
+        },
+        "rapp1.py": {
+          "sha256": "1a04362b02f14c1e37b70c6b4f72d79e92df1cc9c2b5b394e8e1b141fc0b6050",
+          "verified": true
+        },
+        "test_egg_hatch.py": {
+          "sha256": "fd96652b2733484ca9a5d3495fbf9eac9af7c78016bc2489e3abb60a3de8b3fa",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "f749003985fb5324e19f499e0f04aa968598afe792590d003833e7ff7f503a79",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 16249993045108855891,
+      "_incantation": "GLEN MARK RAY TERSE TREATY DEN CARVE"
     },
     {
       "name": "fleet-management",
