@@ -14,7 +14,8 @@ artifacts themselves say. RAR crossed the JSON-file bound once, with more than
     discovery  every regular `*.json` file of at most 1 MiB, in sorted path
                order, except `rappid.json`, `rapp-frame-index.json`, files a
                frame index lists and numeric `frames/<n>.json`; at most 10,000
-               files and 256 MiB in total (kody-w/rapp-1#75)
+               files and 256 MiB in total (kody-w/rapp-1#75); content-addressed
+               copies under versions/ (named by their own SHA-256) never count (kody-w/rapp-1#76)
 
 It fails at 90% of any bound, while there is still room to act, and names the
 largest discovery populations. It reads no file contents except frame indexes,
@@ -160,6 +161,27 @@ def index_members(root, index_path):
     return {path for path in (_index_member(root, index_path, m) for m in members) if path}
 
 
+COPY_NAME = re.compile(r"^[0-9a-f]{8,64}$")
+
+
+def content_addressed_copies(root, json_paths):
+    """kody-w/rapp-1#76 (Git's object rule): a *.json under a versions/ directory named by the start of its own
+    SHA-256 is an immutable snapshot; the checker hashes it, never parses it, and does not count it."""
+    import hashlib
+    found = set()
+    for path in json_paths:
+        parts = os.path.relpath(path, root).split(os.sep)
+        stem = os.path.basename(path)[:-5]
+        if "versions" in parts[:-1] and COPY_NAME.fullmatch(stem):
+            try:
+                with open(path, "rb") as handle:
+                    if hashlib.sha256(handle.read()).hexdigest().startswith(stem):
+                        found.add(path)
+            except OSError:
+                pass
+    return found
+
+
 def measure(root=REPO_ROOT):
     """Every bound the checker applies, with RAR's current value and the fail threshold."""
     root = os.path.abspath(root)
@@ -170,6 +192,8 @@ def measure(root=REPO_ROOT):
     for path in json_paths:
         if os.path.basename(path) == INDEX_NAME:
             excluded |= index_members(root, path)
+    copies = content_addressed_copies(root, json_paths)
+    excluded |= copies
     count = total = oversized = 0
     populations = collections.Counter()
     for path in json_paths:
@@ -196,7 +220,7 @@ def measure(root=REPO_ROOT):
     }
     return {
         "schema": "rar-rapp-scan-budget/1.0",
-        "rules": "kody-w/rapp-1 rapp_check.py @ 591e014ad39e223b00ab343ae26e5d9a867ebeee",
+        "rules": "kody-w/rapp-1 rapp_check.py @ 5bb94ab9ca7e5c4d9cba32350b5ddc8bde74ce19",
         "ok": not issues and all(b["ok"] for b in bounds.values()),
         "bounds": bounds,
         "walk_issues": issues,
