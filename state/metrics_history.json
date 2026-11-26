@@ -436,23 +436,33 @@
   "2026-11-24": {
    "count": 62,
    "uniques": 17
+  },
+  "2026-11-25": {
+   "count": 69,
+   "uniques": 29
   }
  },
  "last_known": {
-  "at": "2026-11-25T15:45:59Z",
-  "clone_uniques_14d": 341,
-  "clones_14d": 1856,
+  "at": "2026-11-26T15:27:03Z",
+  "clone_uniques_14d": 344,
+  "clones_14d": 1443,
   "paths": [
    {
-    "count": 11,
+    "count": 8,
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "uniques": 7
+    "uniques": 6
    },
    {
     "count": 2,
     "path": "/kody-w/RAR/issues",
     "title": "/issues",
+    "uniques": 1
+   },
+   {
+    "count": 2,
+    "path": "/kody-w/RAR/stargazers",
+    "title": "/stargazers",
     "uniques": 1
    },
    {
@@ -495,12 +505,6 @@
     "count": 1,
     "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-business/README.md",
     "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-business/README.md",
-    "uniques": 1
-   },
-   {
-    "count": 1,
-    "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-business/pack.json",
-    "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-business/pack.json",
     "uniques": 1
    }
   ],
@@ -2314,6 +2318,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 158,
    "views_all_time": 341
+  },
+  {
+   "at": "2026-11-26T15:27:03Z",
+   "cdn_all_time": 577,
+   "clone_uniques_all_time": 3353,
+   "clones_all_time": 18282,
+   "days_tracked": 107,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 158,
+   "views_all_time": 341
   }
  ],
  "views": {
@@ -2740,6 +2754,10 @@
   "2026-11-24": {
    "count": 1,
    "uniques": 1
+  },
+  "2026-11-25": {
+   "count": 0,
+   "uniques": 0
   }
  }
 }

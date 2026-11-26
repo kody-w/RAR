@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-11-25T15:45:59Z",
+ "generated_at": "2026-11-26T15:27:03Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -9,27 +9,27 @@
   "stars": 4,
   "forks": 1,
   "watchers": 0,
-  "open_issues": 37,
-  "size_kb": 130443,
+  "open_issues": 38,
+  "size_kb": 131703,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-11-25T04:44:07Z",
+  "pushed_at": "2026-11-26T10:17:48Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": "https://kody-w.github.io/RAR/"
  },
  "totals": {
-  "downloads": 18839,
-  "clones": 18213,
+  "downloads": 18908,
+  "clones": 18282,
   "cdn_hits": 577,
   "release_downloads": 49,
   "agent_file_downloads": 32,
-  "clones_excluding_ci_estimate": 12277,
-  "ci_clone_estimate": 5936,
+  "clones_excluding_ci_estimate": 12290,
+  "ci_clone_estimate": 5992,
   "page_views": 341,
-  "clone_uniques_14d": 341,
+  "clone_uniques_14d": 344,
   "view_uniques_14d": 13,
-  "clone_uniques_daily_sum": 3324,
+  "clone_uniques_daily_sum": 3353,
   "view_uniques_daily_sum": 158,
-  "days_tracked": 106,
+  "days_tracked": 107,
   "tracking_since": "2026-07-14",
   "agents": 228,
   "swarms": 2,
@@ -48,13 +48,6 @@
   "agents_voted": 1
  },
  "daily": [
-  {
-   "date": "2026-08-27",
-   "clones": 62,
-   "clone_uniques": 14,
-   "views": 8,
-   "cdn": 0
-  },
   {
    "date": "2026-08-28",
    "clones": 258,
@@ -677,68 +670,75 @@
    "clone_uniques": 17,
    "views": 1,
    "cdn": 0
+  },
+  {
+   "date": "2026-11-25",
+   "clones": 69,
+   "clone_uniques": 29,
+   "views": 0,
+   "cdn": 0
   }
  ],
  "traffic": {
   "paths": [
    {
-    "count": 11,
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "uniques": 7
+    "count": 8,
+    "uniques": 6
    },
    {
-    "count": 2,
     "path": "/kody-w/RAR/issues",
     "title": "/issues",
+    "count": 2,
     "uniques": 1
    },
    {
-    "count": 1,
+    "path": "/kody-w/RAR/stargazers",
+    "title": "/stargazers",
+    "count": 2,
+    "uniques": 1
+   },
+   {
     "path": "/kody-w/RAR/blob/925b507572b30cb716a48ccd8b9cdfc9a5745f08/api/v1/agent/kody-w__connected_solution_agent.py",
     "title": "/blob/925b507572b30cb716a48ccd8b9cdfc9a5745f08/api/v1/agent/kody-w__connected_solution_agent.py",
+    "count": 1,
     "uniques": 1
    },
    {
-    "count": 1,
     "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/brain/SKILL.md",
     "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/brain/SKILL.md",
+    "count": 1,
     "uniques": 1
    },
    {
-    "count": 1,
     "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/brainstem-skill/README.md",
     "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/brainstem-skill/README.md",
+    "count": 1,
     "uniques": 1
    },
    {
-    "count": 1,
     "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/claude-workflows/README.md",
     "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/claude-workflows/README.md",
+    "count": 1,
     "uniques": 1
    },
    {
-    "count": 1,
     "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/claude-workflows/pack.json",
     "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/claude-workflows/pack.json",
+    "count": 1,
     "uniques": 1
    },
    {
-    "count": 1,
     "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/markdown-medic/README.md",
     "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/markdown-medic/README.md",
+    "count": 1,
     "uniques": 1
    },
    {
-    "count": 1,
     "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-business/README.md",
     "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-business/README.md",
-    "uniques": 1
-   },
-   {
     "count": 1,
-    "path": "/kody-w/RAR/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-business/pack.json",
-    "title": "/blob/cc8fb37bd1fee38aa5f9661052872f7424974453/stacks/starter-business/pack.json",
     "uniques": 1
    }
   ],
@@ -749,15 +749,15 @@
     "uniques": 7
    }
   ],
-  "clones_14d": 1856,
+  "clones_14d": 1443,
   "views_14d": 31,
   "live": true,
-  "as_of": "2026-11-25T15:45:59Z"
+  "as_of": "2026-11-26T15:27:03Z"
  },
  "cdn": {
   "total_hits": 577,
   "bandwidth": 7196782,
-  "rank": 826900,
+  "rank": 830144,
   "agent_hits": 32,
   "files": [
    {
