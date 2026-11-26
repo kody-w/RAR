@@ -14,7 +14,7 @@ artifacts themselves say. RAR crossed the JSON-file bound once, with more than
     discovery  every regular `*.json` file of at most 1 MiB, in sorted path
                order, except `rappid.json`, `rapp-frame-index.json`, files a
                frame index lists and numeric `frames/<n>.json`; at most 10,000
-               files and 64 MiB in total
+               files and 256 MiB in total (kody-w/rapp-1#75)
 
 It fails at 90% of any bound, while there is still room to act, and names the
 largest discovery populations. It reads no file contents except frame indexes,
@@ -40,7 +40,7 @@ MAX_WALK_ENTRIES = 100_000
 MAX_WALK_DIRS = 10_000
 MAX_WALK_DEPTH = 32
 MAX_JSON_FILES = 10_000
-MAX_JSON_BYTES = 64 * 1024 * 1024
+MAX_JSON_BYTES = 256 * 1024 * 1024   # raised with kody-w/rapp-1#75 (2026-11-26)
 MAX_CANONICAL_BYTES = 1024 * 1024
 FAIL_FRACTION = 0.9
 
