@@ -1,0 +1,34 @@
+{
+ "schema": "rapp-rar-stack/1.0",
+ "name": "agentcard-bundles",
+ "display_name": "Agent card bundles",
+ "version": "0.1.0",
+ "purpose": "Staging. Builds one .agentcard per catalog agent that needs a package a phone's Python lacks, carrying pure-Python wheels and sibling files inside the card so it runs on a phone (Hive). Adds _agentcard and _agentcard_sha256 to those registry entries.",
+ "files": {
+  "bundle_card.py": {
+   "purpose": "One agent.py in, one .agentcard out that carries its pure-Python needs.",
+   "size": 9012,
+   "sha256": "14f2d92fa32b28d9830cce26df4718822e4efc7e66a4ac3451838fa10efad00a"
+  },
+  "build_bundles.py": {
+   "purpose": "Bundle every catalog agent that needs something extra; writes cards/ and index.json.",
+   "size": 3111,
+   "sha256": "d439e7e266a0d1d26d4e191dbf3106c735aeaad25922fa1fb204419dd894cce2"
+  },
+  "vendor/agentcard_core.py": {
+   "purpose": "The card format and its checks (copied from the Hive app).",
+   "size": 8498,
+   "sha256": "ecab68983136441f80816c722ffe28c6097e8b211a8e2e0c5cae965cf56a4c4e"
+  },
+  "vendor/pocket_host.py": {
+   "purpose": "The phone host's loader, used to read an agent's metadata (copied from the Hive app).",
+   "size": 34191,
+   "sha256": "1bdd6c298d4e8f4cf78aa91cfa56d55ba2946fe717d0e8d1065745c714ca4bce"
+  },
+  "README.md": {
+   "purpose": "What this stack does and the rules it follows.",
+   "size": 1800,
+   "sha256": "c81f4cecd9d016864bf2a8da830c67f0bc364d8ec16a7b23356af40e1dfd60d8"
+  }
+ }
+}
