@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-27T16:54:41Z",
+  "generated_at": "2026-11-27T17:50:59Z",
   "static_api": "rapp-static-api/1.1",
   "pages_base": "https://kody-w.github.io/RAR",
   "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
@@ -14930,6 +14930,33 @@
       "shelf": "pack",
       "_seed": 704495441362295112,
       "_incantation": "JUST SEAL RAY TRANSCEND FROZEN WEDGE FORGE"
+    },
+    {
+      "name": "chat-cartridge",
+      "display_name": "Chat cartridge (any AI)",
+      "version": "0.1.0",
+      "schema": "rapp-rar-stack/1.2",
+      "status": "current",
+      "path": "stacks/chat-cartridge",
+      "purpose": "Take your chat with you. One SKILL.md any AI can read: 'wrap up' writes the chat as one plain file you own (the Brainstem chat export shape, with three next jobs after |||NEXT|||), and 'carry on' starts from that file in any other AI. An AI that carries on writes only its new turns; a small tool joi",
+      "files": {
+        "SKILL.md": {
+          "sha256": "c7d042c941a3c91bb2e18c5d3fd7972d5e6f058582a9ffa6ab84ec164663eaff",
+          "verified": true
+        },
+        "cartridge.py": {
+          "sha256": "f3989e003f2ca60bd35e8eceb3761bd4ef268ad128ff15d0d0c7225816af3983",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "35ce8bf7474fc83ccb986f2ff6109324c56e9278b590fb5995dfab8627ae51f8",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 6545101049194749234,
+      "_incantation": "DEEP TUSK RAY TYPHOON SPITE THEME SMELT"
     },
     {
       "name": "claude-workflows",
