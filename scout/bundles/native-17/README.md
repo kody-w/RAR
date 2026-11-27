@@ -1,3 +1,3 @@
 # RAR Scout bundle: native-17
 
-Channel: `native`. Skills: 4. Import this directory in Microsoft Scout.
+Channel: `native`. Skills: 5. Import this directory in Microsoft Scout.

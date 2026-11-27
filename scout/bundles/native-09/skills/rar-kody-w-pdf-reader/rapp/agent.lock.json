@@ -1,0 +1,42 @@
+{
+  "agent": "@kody-w/pdf_reader_agent",
+  "agent_file": "pdf_reader_agent.py",
+  "agent_sha256": "79d90ed177b957de0b2d8deadee3d51bc172ce4e5201a971948ea63bae347e51",
+  "digest_algorithm": "sha256-lf-v1",
+  "entry_class": "PdfReaderAgent",
+  "host_dependencies": [],
+  "manifest": {
+    "author": "kody-w",
+    "category": "productivity",
+    "dependencies": [
+      "@rapp/basic_agent"
+    ],
+    "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
+    "display_name": "PDF Reader",
+    "name": "@kody-w/pdf_reader_agent",
+    "quality_tier": "community",
+    "requires_env": [],
+    "schema": "rapp-agent/1.0",
+    "tags": [
+      "pdf",
+      "documents",
+      "reader",
+      "phone",
+      "offline"
+    ],
+    "version": "1.0.0"
+  },
+  "runtime_name": "PdfReader",
+  "schema": "rapp-agent-lock/1.0",
+  "tool_schema": {
+    "properties": {
+      "file": {
+        "description": "The PDF's file name from the list, or \"\" to list the PDFs available.",
+        "type": "string"
+      }
+    },
+    "required": [],
+    "type": "object"
+  },
+  "version": "1.0.0"
+}

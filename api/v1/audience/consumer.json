@@ -2,7 +2,7 @@
   "schema": "rar-catalog/1.0",
   "audience": "consumer",
   "description": "Agents appropriate for an individual audience. Enterprise-only agents are excluded.",
-  "generated": "2026-11-27T05:15:41Z",
+  "generated": "2026-11-27T05:22:10Z",
   "count": 202,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/consumer.json",
   "agents": [
@@ -6586,7 +6586,7 @@
       "stats": {
         "lines": 113,
         "size_kb": 5.1,
-        "added_at": null
+        "added_at": "2026-11-27T05:22:10Z"
       }
     },
     {
