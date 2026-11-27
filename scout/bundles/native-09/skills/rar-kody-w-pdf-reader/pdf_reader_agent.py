@@ -24,7 +24,7 @@ import os
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/pdf_reader_agent",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "display_name": "PDF Reader",
     "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
     "author": "kody-w",
@@ -48,6 +48,40 @@ MAX_CHARS = 6000
 
 def _folder():
     return os.path.expanduser(os.environ.get("BRAINSTEM_FILES") or "~/Documents")
+
+
+_STOP = {"the", "and", "for", "what", "when", "does", "say", "about", "how", "much", "this", "that", "with",
+         "my", "is", "are", "of", "on", "in", "to", "a", "an", "it", "do", "i", "pdf", "file", "document"}
+
+
+def _words(text):
+    """Lowercased search words without filler; "dates" also matches "date"."""
+    out = []
+    for w in "".join(c.lower() if c.isalnum() else " " for c in str(text or "")).split():
+        if len(w) > 2 and w not in _STOP:
+            out.append(w[:-1] if w.endswith("s") and len(w) > 4 else w)
+    return out
+
+
+def _find(reader, name, total, words, limit=12, cap=2500):
+    """The lines that mention the most search words, best first, each tagged with its page."""
+    hits = []
+    for i in range(total):
+        for line in (reader.pages[i].extract_text() or "").splitlines():
+            low = line.lower()
+            score = sum(1 for w in set(words) if w in low)
+            if score:
+                hits.append((-score, i + 1, line.strip()))
+    hits.sort()
+    lines, size = [], 0
+    for _, page, line in hits[:limit]:
+        if size + len(line) > cap:
+            break
+        lines.append(f"page {page}: {line}")
+        size += len(line)
+    if not lines:
+        return {"file": name, "pages": total, "found": [], "note": f"Nothing in {name} mentions {' '.join(words)}."}
+    return {"file": name, "pages": total, "found": lines}
 
 
 _PREVIEWS = {}
@@ -88,6 +122,7 @@ class PdfReaderAgent(BasicAgent):
                 "type": "object",
                 "properties": {
                     "file": {"type": "string", "description": "The PDF's file name from the list, or \"\" to list the PDFs available."},
+                    "look_for": {"type": "string", "description": "A few words for what they asked about, like \"rent\" or \"start date\". Fill it whenever they ask a question, so the answer is found on any page."},
                 },
                 "required": [],
             },
@@ -108,7 +143,7 @@ class PdfReaderAgent(BasicAgent):
         return (f"The person has given you these PDFs: {'; '.join(shown)}{more}. When they ask about anything "
                 f"these could answer, even as \"my lease\" or \"that document\", call PdfReader with the file name first.")
 
-    def perform(self, file="", first_page=1, last_page=None, **kwargs):
+    def perform(self, file="", first_page=1, last_page=None, look_for="", **kwargs):
         folder, names = _pdfs()
         if not str(file or "").strip():
             if not names:
@@ -132,6 +167,9 @@ class PdfReaderAgent(BasicAgent):
                 except (TypeError, ValueError):
                     return default
                 return v if v > 0 else default
+            words = _words(look_for)
+            if words:
+                return json.dumps(_find(reader, match, total, words))
             first = min(num(first_page, 1), total)
             last = min(max(num(last_page, first + 2), first), total)
             parts = []
@@ -141,5 +179,8 @@ class PdfReaderAgent(BasicAgent):
         except Exception as e:  # a damaged or locked PDF should say so, not crash the chat
             return json.dumps({"error": f"Could not read {match}: {type(e).__name__}: {e}"})
         cut = len(text) > MAX_CHARS
-        return json.dumps({"file": match, "pages": total, "read": [first, last],
-                           "text": text[:MAX_CHARS], "truncated": cut})
+        out = {"file": match, "pages": total, "read": [first, last], "text": text[:MAX_CHARS], "truncated": cut}
+        if last < total or cut:
+            out["more"] = (f"This is only part of a {total}-page PDF. If the answer is not here, call PdfReader again "
+                           f"with look_for set to a few words for what they asked.")
+        return json.dumps(out)

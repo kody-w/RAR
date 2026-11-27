@@ -133,7 +133,7 @@
       ]
     },
     {
-      "bytes": 590470,
+      "bytes": 596118,
       "channel": "native",
       "files": 32,
       "id": "native-09",
@@ -13833,17 +13833,17 @@
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "1c755f605236e6ddcf810cdaa475a34f286148a74df7c59750a49675fefdde45",
+          "sha256": "0f0375871e88bce6ea3128d7a904e970704a0d89098d77ab7a266d4a2cd7da1e",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-09/skills/rar-kody-w-pdf-reader/SKILL.md"
         },
         {
           "path": "pdf_reader_agent.py",
-          "sha256": "96c6f0c340e78db12732e86ef28038d0f30a5ba1db225888bad665e675579d05",
+          "sha256": "9ec0f532ccdc706c1c217241536823ab03a1310f95ea8ba5cfb34281e242e0fb",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-09/skills/rar-kody-w-pdf-reader/pdf_reader_agent.py"
         },
         {
           "path": "rapp/agent.lock.json",
-          "sha256": "cff8aead27d909e314f472df4b6560bde17fd57b8826ec1ce5287b8410ec105b",
+          "sha256": "fbcdd7d60a6c4288c58eb737e97afb16fec370e8062d6bb5e9375eed19e3bb39",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-09/skills/rar-kody-w-pdf-reader/rapp/agent.lock.json"
         },
         {
@@ -13860,6 +13860,10 @@
           "file": {
             "description": "The PDF's file name from the list, or \"\" to list the PDFs available.",
             "type": "string"
+          },
+          "look_for": {
+            "description": "A few words for what they asked about, like \"rent\" or \"start date\". Fill it whenever they ask a question, so the answer is found on any page.",
+            "type": "string"
           }
         },
         "required": [],
@@ -13867,11 +13871,11 @@
       },
       "requires_env": [],
       "skill_name": "rar-kody-w-pdf-reader",
-      "skill_sha256": "1c755f605236e6ddcf810cdaa475a34f286148a74df7c59750a49675fefdde45",
-      "source_commit": "0eaae8dad7392645d9dcaf60d13dba2fa4624d44",
+      "skill_sha256": "0f0375871e88bce6ea3128d7a904e970704a0d89098d77ab7a266d4a2cd7da1e",
+      "source_commit": "d28f8ea9dbfb92c646c182fa375cfff7b9fb2a72",
       "source_kind": "rar-agent",
-      "source_sha256": "96c6f0c340e78db12732e86ef28038d0f30a5ba1db225888bad665e675579d05",
-      "version": "1.0.2"
+      "source_sha256": "9ec0f532ccdc706c1c217241536823ab03a1310f95ea8ba5cfb34281e242e0fb",
+      "version": "1.0.3"
     },
     {
       "bundle": "native-09",

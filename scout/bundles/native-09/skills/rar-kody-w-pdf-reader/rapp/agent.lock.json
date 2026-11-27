@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/pdf_reader_agent",
   "agent_file": "pdf_reader_agent.py",
-  "agent_sha256": "96c6f0c340e78db12732e86ef28038d0f30a5ba1db225888bad665e675579d05",
+  "agent_sha256": "9ec0f532ccdc706c1c217241536823ab03a1310f95ea8ba5cfb34281e242e0fb",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PdfReaderAgent",
   "host_dependencies": [],
@@ -24,7 +24,7 @@
       "phone",
       "offline"
     ],
-    "version": "1.0.2"
+    "version": "1.0.3"
   },
   "runtime_name": "PdfReader",
   "schema": "rapp-agent-lock/1.0",
@@ -33,10 +33,14 @@
       "file": {
         "description": "The PDF's file name from the list, or \"\" to list the PDFs available.",
         "type": "string"
+      },
+      "look_for": {
+        "description": "A few words for what they asked about, like \"rent\" or \"start date\". Fill it whenever they ask a question, so the answer is found on any page.",
+        "type": "string"
       }
     },
     "required": [],
     "type": "object"
   },
-  "version": "1.0.2"
+  "version": "1.0.3"
 }
