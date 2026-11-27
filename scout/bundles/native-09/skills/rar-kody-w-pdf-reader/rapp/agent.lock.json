@@ -1,7 +1,7 @@
 {
   "agent": "@kody-w/pdf_reader_agent",
   "agent_file": "pdf_reader_agent.py",
-  "agent_sha256": "f32c63b6bf188ad530fec3f956c43a342f2ca399dad7031ae5a2c9e1e7379fc4",
+  "agent_sha256": "ca40733518a8bc1efca3eecb91f159ade3ea75e1d216e8adf27b31ded68aefde",
   "digest_algorithm": "sha256-lf-v1",
   "entry_class": "PdfReaderAgent",
   "host_dependencies": [],
@@ -24,7 +24,7 @@
       "phone",
       "offline"
     ],
-    "version": "1.0.4"
+    "version": "1.0.6"
   },
   "runtime_name": "PdfReader",
   "schema": "rapp-agent-lock/1.0",
@@ -42,5 +42,5 @@
     "required": [],
     "type": "object"
   },
-  "version": "1.0.4"
+  "version": "1.0.6"
 }
