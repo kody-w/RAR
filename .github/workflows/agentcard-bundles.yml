@@ -14,6 +14,11 @@ on:
       - 'stacks/agentcard-bundles/vendor/**'
       - '.github/workflows/agentcard-bundles.yml'
   workflow_dispatch:
+  # The notary publishes with the built-in token, and GitHub never starts workflows from those pushes
+  # (its loop guard), so a notarized agent got no card until something else touched agents/.
+  workflow_run:
+    workflows: ["Notarize Agent Mutation", "Notarize Agent Mutation Batch"]
+    types: [completed]
 
 concurrency:
   group: agentcard-bundles
@@ -21,6 +26,7 @@ concurrency:
 
 jobs:
   bundle:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     permissions:
       contents: read
