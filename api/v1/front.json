@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-11-27T05:22:10Z",
+  "generated": "2026-11-27T14:08:10Z",
   "counts": {
     "native": 229,
     "aggregated": 150,
@@ -5738,6 +5738,63 @@
     },
     {
       "rank": 93,
+      "ref": "@kody-w/pdf_reader_agent",
+      "title": "PDF Reader",
+      "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
+      "origin": "native",
+      "category": "productivity",
+      "tags": [
+        "pdf",
+        "documents",
+        "reader",
+        "phone",
+        "offline"
+      ],
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fpdf_reader_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/pdf_reader_agent.py",
+      "source": null,
+      "score": 54.6,
+      "origin_rank": 56,
+      "origin_size": 229,
+      "components": {
+        "community": 0.2958,
+        "depth": 0.505,
+        "freshness": 1.0,
+        "tier": 0.55
+      },
+      "scores_on": [
+        "community",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [
+        "community"
+      ],
+      "signals": {
+        "rar": {
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "community",
+          "age_days": 0,
+          "lines": 122,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "no community feedback yet - scored at the population median",
+        "community tier",
+        "newest in the registry",
+        "122 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 94,
       "ref": "@wildhaven/penumbra_agent",
       "title": "Penumbra",
       "description": "Returns any input as twin lines — the surface text plus a whispered heuristic read of what was almost said; no LLM or network calls.",
@@ -5757,7 +5814,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@wildhaven/penumbra_agent.py",
       "source": null,
       "score": 54.6,
-      "origin_rank": 56,
+      "origin_rank": 57,
       "origin_size": 229,
       "components": {
         "community": 0.2958,
@@ -5792,63 +5849,6 @@
         "official tier",
         "added 195 days ago",
         "295 lines",
-        "has a rendered card"
-      ]
-    },
-    {
-      "rank": 94,
-      "ref": "@kody-w/pdf_reader_agent",
-      "title": "PDF Reader",
-      "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
-      "origin": "native",
-      "category": "productivity",
-      "tags": [
-        "pdf",
-        "documents",
-        "reader",
-        "phone",
-        "offline"
-      ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fpdf_reader_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/pdf_reader_agent.py",
-      "source": null,
-      "score": 54.3,
-      "origin_rank": 57,
-      "origin_size": 229,
-      "components": {
-        "community": 0.2958,
-        "depth": 0.4932,
-        "freshness": 1.0,
-        "tier": 0.55
-      },
-      "scores_on": [
-        "community",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [
-        "community"
-      ],
-      "signals": {
-        "rar": {
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "community",
-          "age_days": 0,
-          "lines": 113,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "no community feedback yet - scored at the population median",
-        "community tier",
-        "newest in the registry",
-        "113 lines",
         "has a rendered card"
       ]
     },

@@ -24,7 +24,7 @@ import os
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/pdf_reader_agent",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "display_name": "PDF Reader",
     "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
     "author": "kody-w",
@@ -74,6 +74,15 @@ class PdfReaderAgent(BasicAgent):
             },
         }
         super().__init__(self.name, self.metadata)
+
+    def system_context(self):
+        """Tells the chat which PDFs it holds, so "my lease" or "that document" reaches this agent."""
+        _, names = _pdfs()
+        if not names:
+            return None
+        shown = ", ".join(names[:12]) + (f", and {len(names) - 12} more" if len(names) > 12 else "")
+        return (f"The person has given you these PDFs: {shown}. When they ask about any of them, even as "
+                f"\"my lease\" or \"that document\", call PdfReader with the file name first.")
 
     def perform(self, file="", first_page=1, last_page=None, **kwargs):
         folder, names = _pdfs()
