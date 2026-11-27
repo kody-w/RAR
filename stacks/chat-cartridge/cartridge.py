@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""cartridge.py check <file> | next <file> | join <old> <continuation> <out> | grew <older> <newer> | from-claude <session.jsonl> <out.json>
+"""cartridge.py check <file> | repair <file> <out> | next <file> | join <old> <continuation> <out> | grew <older> <newer> | from-claude <session.jsonl> <out.json>
 
 The checker and tools for a chat cartridge (SKILL.md): the Brainstem chat export shape, carrying the NEXT sense.
   check        CARTRIDGE ok | CARTRIDGE fail <reason>   (shape, roles, the handover turn, exactly three next jobs)
@@ -25,6 +25,32 @@ def load(p):
     i, j = t.find("{"), t.rfind("}")               # a chatty AI says a line before or after: take the outermost object
     if i < 0 or j < i: raise ValueError("no JSON object found")
     return json.loads(t[i:j + 1])
+
+def repair(c):
+    """Be liberal in what you accept (Postel). An AI that only got a summary of the page drifts in known ways: a made-up
+    'handover' role with its own fields, extra keys on turns, jobs as plain strings. The person's and assistant's words
+    are never touched; only the handover is put back into shape. Returns the cartridge and a list of what was repaired."""
+    fixed = []
+    if not isinstance(c, dict) or not isinstance(c.get("turns"), list): return c, fixed
+    T = []
+    for t in c["turns"]:
+        if not isinstance(t, dict): continue
+        if t.get("role") in ("user", "assistant") and isinstance(t.get("content"), str): T.append(t); continue
+        said, jobs = [], None   # a turn in some other shape: read its fields as the handover
+        for k, v in t.items():
+            if k == "role": continue
+            if isinstance(v, list) and "next" in k.lower(): jobs = v
+            elif isinstance(v, list): said.append("%s: %s" % (k.replace("_", " ").capitalize(), "; ".join(str(x) for x in v) or "nothing"))
+            elif isinstance(v, str) and v.strip(): said.append(v.strip() if k == "content" else "%s: %s" % (k.replace("_", " ").capitalize(), v.strip()))
+        body = "\n".join(said)
+        if jobs is not None: body += "\n|||NEXT|||" + json.dumps([j if isinstance(j, dict) else {"n": i + 1, "job": str(j)} for i, j in enumerate(jobs)], ensure_ascii=False)
+        T.append({"role": "assistant", "content": body or "(empty)"}); fixed.append("a '%s' turn was read as the handover" % t.get("role"))
+    for k in ("next", "next_jobs", "NEXT"):   # jobs left at the top of the file
+        if isinstance(c.get(k), list) and T and T[-1]["role"] == "assistant" and "|||NEXT|||" not in T[-1]["content"]:
+            T[-1] = dict(T[-1], content=T[-1]["content"] + "\n|||NEXT|||" + json.dumps([j if isinstance(j, dict) else {"n": i + 1, "job": str(j)} for i, j in enumerate(c[k])], ensure_ascii=False)); fixed.append("jobs at the top of the file were moved into the handover")
+    c = dict(c, turns=T)
+    if fixed: c["repaired"] = fixed
+    return c, fixed
 
 def split_next(text):
     if "|||NEXT|||" not in text:   # be liberal in what you accept (Postel): a plain 1. 2. 3. list at the very end is read as the three jobs
@@ -93,7 +119,12 @@ def from_claude(src, out):
 if __name__ == "__main__":
     a = sys.argv[1:]
     try:
-        if a[:1] == ["check"]: w = check(load(a[1])); print("CARTRIDGE ok" if not w else "CARTRIDGE fail " + w); sys.exit(1 if w else 0)
+        if a[:1] == ["check"]:
+            c, fx = repair(load(a[1])); w = check(c); print(("CARTRIDGE ok" + (" after repair (%s)" % "; ".join(fx) if fx else "")) if not w else "CARTRIDGE fail " + w); sys.exit(1 if w else 0)
+        elif a[:1] == ["repair"]:
+            c, fx = repair(load(a[1])); w = check(c)
+            if w: print("CARTRIDGE fail " + w); sys.exit(1)
+            json.dump(c, open(a[2], "w", encoding="utf-8"), indent=1, ensure_ascii=False); print("REPAIRED %s: %s" % (a[2], "; ".join(fx) or "nothing needed"))
         elif a[:1] == ["next"]: print("\n".join("%s. %s" % (j.get("n", i + 1), j["job"]) for i, j in enumerate(split_next(load(a[1])["turns"][-1]["content"])[1] or [])))
         elif a[:1] == ["grew"]: w = grew(load(a[1]), load(a[2])); print("RELAY ok" if not w else "RELAY fail " + w); sys.exit(1 if w else 0)
         elif a[:1] == ["join"]:
