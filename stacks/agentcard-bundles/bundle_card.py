@@ -110,7 +110,6 @@ def bundle(agent: Path, name=None, author="", cache=None):
     cache = cache or Path(tempfile.mkdtemp(prefix="wheels-"))
     home = Path(tempfile.mkdtemp(prefix="bundle-home-"))
     h.handle(json.dumps({"op": "init", "home": str(home)}))
-    card = h.pack_file(agent, author=author, name=name)   # raises when the agent cannot even load here
     files, report, done = {}, {"carried": [], "left_out": [], "skipped_optional": []}, set()
     queue = [(agent, agent.read_text(encoding="utf-8"))]
     while queue:
@@ -146,6 +145,17 @@ def bundle(agent: Path, name=None, author="", cache=None):
                 else:
                     for w in what: files[f"lib/{w.name}"] = w.read_bytes()
                     report["carried"].append(f"{m} ({', '.join(w.name for w in what)})")
+    # Load the agent (to read its name and parameters) WITH what it will carry, exactly as the phone will.
+    stage = Path(tempfile.mkdtemp(prefix="bundle-lib-"))
+    import zipfile, io as _io
+    for p, b in files.items():
+        if p.endswith(".whl"): zipfile.ZipFile(_io.BytesIO(b)).extractall(stage)
+        else: (stage / p.split("/", 1)[1]).write_bytes(b)
+    sys.path.insert(0, str(stage))
+    try:
+        card = h.pack_file(agent, author=author, name=name)   # raises when the agent cannot load even with its files
+    finally:
+        sys.path.remove(str(stage)); h._forget_modules_under(stage); shutil.rmtree(stage, ignore_errors=True)
     if files:
         card["files"] = [{"path": p, "sha256": hashlib.sha256(b).hexdigest(), "b64": base64.b64encode(b).decode()}
                          for p, b in sorted(files.items())]

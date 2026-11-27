@@ -18,6 +18,10 @@ YOUR AGENT NAME — Describe what your agent does in one sentence.
 ║  - perform() MUST return a string                            ║
 ║  - No network calls in __init__()                            ║
 ║  - No hardcoded secrets — use os.environ.get()               ║
+║  - Needs a pip package? Declare it at the top (PEP 723):     ║
+║      # /// script                                            ║
+║      # dependencies = ["pypdf>=5"]                          ║
+║      # ///                                                   ║
 ╚══════════════════════════════════════════════════════════════╝
 
 Example prompt for your LLM:
