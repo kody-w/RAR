@@ -27,7 +27,12 @@ def load(p):
     return json.loads(t[i:j + 1])
 
 def split_next(text):
-    if "|||NEXT|||" not in text: return text.strip(), None
+    if "|||NEXT|||" not in text:   # be liberal in what you accept (Postel): a plain 1. 2. 3. list at the very end is read as the three jobs
+        L = text.rstrip().split("\n"); got = []
+        while L and re.match(r"\s*(\d)[.)]\s+\S", L[-1]): got.insert(0, L.pop())
+        if [int(re.match(r"\s*(\d)", g).group(1)) for g in got] == [1, 2, 3]:
+            return "\n".join(L).strip(" \n-"), [{"n": i + 1, "job": re.sub(r"^\s*\d[.)]\s+", "", g).strip()} for i, g in enumerate(got)]
+        return text.strip(), None
     a, b = text.split("|||NEXT|||", 1); m = re.search(r"\[.*\]", b, re.S)
     try: return a.strip(), json.loads(m.group(0)) if m else None
     except Exception: return a.strip(), None
