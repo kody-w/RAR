@@ -1,0 +1,47 @@
+{
+  "schema": "rapp-rar-stack/1.0",
+  "name": "blackbox",
+  "display_name": "Blackbox",
+  "version": "0.1.0",
+  "maturity": "staging",
+  "purpose": "Ask your Brainstem what your computer did while you were not looking: what is using the most memory, why it restarted, what is frozen, what the guard did overnight, and let a frozen job carry on or stop it. One agent file that speaks for a recorder running beside the Brainstem; the kernel is untouched. STAGING: one install, one day of use; it moves down a layer only after real users on more than one install (proven-winner rule).",
+  "files": {
+    "blackbox_agent.py": {
+      "size": 6620,
+      "sha256": "434caff7bd41a24ab22053a42a6e0d89d7f7ea657c37b29815365c34bd987eb7",
+      "purpose": "Drop into agents/. Blackbox(ask=biggest|why_restarted|frozen|what_it_did|carry_on|stop, job=<id>) reads a recorder at ~/.blackbox/blackbox.py (or BLACKBOX_PATH). Stop needs one job id and never accepts 'all'."
+    },
+    "README.md": {
+      "size": 1695,
+      "sha256": "862b6fd7158f714b5e80fe073b14e0c7cbec7d718187c6b88f278ff11401c7d5"
+    }
+  },
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "stacks/blackbox/blackbox_agent.py"
+    ],
+    "destination": "agents/",
+    "notes": "Copy blackbox_agent.py into your brainstem's agents/. It loads on the next /chat, no restart. Ask: 'what happened on my computer overnight?'. Needs a recorder beside the Brainstem; without one it says so."
+  },
+  "agents_in_pack": 1,
+  "capabilities": [
+    "biggest five jobs by memory",
+    "why it restarted",
+    "what is frozen",
+    "morning note",
+    "carry on",
+    "stop one named job"
+  ],
+  "withheld": {
+    "what": "the recorder",
+    "sha256": "c1e9f11d800678bda412ba7cfd6a30d636f1509fd6e9785442c40da5db26c677"
+  },
+  "evidence": {
+    "first_live_loop": "2026-11-27: 4 of 4 /chat turns on a throwaway Brainstem (two small test jobs frozen; one let go, one stopped; nothing left frozen)",
+    "where": "owner's machine"
+  },
+  "pairs_with": [
+    "night-watch"
+  ]
+}
