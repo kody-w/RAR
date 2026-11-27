@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-27T15:23:40Z",
+  "generated_at": "2026-11-27T15:25:27Z",
   "static_api": "rapp-static-api/1.1",
   "pages_base": "https://kody-w.github.io/RAR",
   "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
@@ -10734,7 +10734,7 @@
       "_install_filename": "rar_kody_w_pdf_reader_agent.py",
       "_sha256": "9ec0f532ccdc706c1c217241536823ab03a1310f95ea8ba5cfb34281e242e0fb",
       "_agentcard": "stacks/agentcard-bundles/cards/@kody-w/pdf_reader_agent.agentcard",
-      "_agentcard_sha256": "e7b0ea50286cf6bc2d8a4ffa750bc23eeb898021d4d95310f717dd9ff0f41c41",
+      "_agentcard_sha256": "324647204f6b21b52bc8a680344a59a43f2cb40680eb3a9c2b40e53638014a98",
       "_lifecycle": "notarized",
       "_receipt": "rar_0f85dee9368ffe9f006b9d836aa85810baa9b15a7359297fee8d86c5f9ed91f2",
       "_controller": {
