@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-27T18:40:38Z",
+  "generated_at": "2026-11-27T18:52:14Z",
   "static_api": "rapp-static-api/1.1",
   "pages_base": "https://kody-w.github.io/RAR",
   "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
@@ -14837,6 +14837,29 @@
       "shelf": "pack",
       "_seed": 5816856406170533888,
       "_incantation": "FORGE FORGE PANTHER VALE GNU FLARE SMELT"
+    },
+    {
+      "name": "blackbox",
+      "display_name": "Blackbox",
+      "version": "0.1.0",
+      "schema": "rapp-rar-stack/1.0",
+      "status": "current",
+      "path": "stacks/blackbox",
+      "purpose": "Ask your Brainstem what your computer did while you were not looking: what is using the most memory, why it restarted, what is frozen, what the guard did overnight, and let a frozen job carry on or stop it. One agent file that speaks for a recorder running beside the Brainstem; the kernel is untouch",
+      "files": {
+        "blackbox_agent.py": {
+          "sha256": "434caff7bd41a24ab22053a42a6e0d89d7f7ea657c37b29815365c34bd987eb7",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "862b6fd7158f714b5e80fe073b14e0c7cbec7d718187c6b88f278ff11401c7d5",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 7315072644058721906,
+      "_incantation": "DREDGE MONARCH PANTHER MOTE REEF ECLIPSE TEMPER"
     },
     {
       "name": "bookfactory",
