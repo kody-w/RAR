@@ -1,8 +1,8 @@
 {
   "schema": "rar-catalog/1.0",
   "description": "Every agent in RAR as a lean record. Fetch this one file to render a complete browsable catalog with no further requests, no backend, no authentication and no GitHub account. stack_packs lists every installable pack, including retired packs with status and retirement metadata.",
-  "generated": "2026-11-27T03:46:21Z",
-  "count": 228,
+  "generated": "2026-11-27T05:15:41Z",
+  "count": 229,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/catalog.json",
   "agents": [
     {
@@ -7677,6 +7677,52 @@
         "lines": 268,
         "size_kb": 10.6,
         "added_at": "2026-10-24T04:16:07Z"
+      }
+    },
+    {
+      "artifact_type": "agent",
+      "protocol_conformance": {
+        "profile": null,
+        "status": "not_assessed",
+        "evidence": []
+      },
+      "id": "kody-w__pdf_reader_agent",
+      "name": "@kody-w/pdf_reader_agent",
+      "display_name": "PDF Reader",
+      "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
+      "version": "1.0.0",
+      "publisher": "@kody-w",
+      "author": "kody-w",
+      "category": "productivity",
+      "tags": [
+        "pdf",
+        "documents",
+        "reader",
+        "phone",
+        "offline"
+      ],
+      "quality_tier": "community",
+      "audience": "both",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "source": {
+        "path": "agents/@kody-w/pdf_reader_agent.py",
+        "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/pdf_reader_agent.py",
+        "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/pdf_reader_agent.py",
+        "sha256": "79d90ed177b957de0b2d8deadee3d51bc172ce4e5201a971948ea63bae347e51",
+        "pages": "https://kody-w.github.io/RAR/agents/@kody-w/pdf_reader_agent.py",
+        "version": {
+          "sha256": "79d90ed177b957de0b2d8deadee3d51bc172ce4e5201a971948ea63bae347e51",
+          "sha8": "79d90ed177b9",
+          "path": "versions/@kody-w/pdf_reader_agent/79d90ed177b9.py"
+        }
+      },
+      "stats": {
+        "lines": 113,
+        "size_kb": 5.1,
+        "added_at": null
       }
     },
     {

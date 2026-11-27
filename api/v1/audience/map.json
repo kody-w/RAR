@@ -1,7 +1,7 @@
 {
   "schema": "rar-audience-map/1.0",
   "description": "Compact audience verdict per agent, for clients that already have the registry and only need to filter it. b=business, c=consumer, x=both. Absent means both.",
-  "generated": "2026-11-20T00:25:05Z",
+  "generated": "2026-11-27T05:15:41Z",
   "legend": {
     "b": "business",
     "c": "consumer",
@@ -10,9 +10,9 @@
   "counts": {
     "business_only": 27,
     "consumer_only": 3,
-    "both": 198,
-    "in_business_mode": 225,
-    "in_consumer_mode": 201
+    "both": 199,
+    "in_business_mode": 226,
+    "in_consumer_mode": 202
   },
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/map.json",
   "map": {
@@ -179,6 +179,7 @@
     "@kody-w/microsoft_deck_studio_agent": "x",
     "@kody-w/neuron_swarm": "x",
     "@kody-w/parallel_dimensions_agent": "x",
+    "@kody-w/pdf_reader_agent": "x",
     "@kody-w/perpetual_loop_factory": "x",
     "@kody-w/plant_seed_agent": "x",
     "@kody-w/play_youtube_video_agent": "x",
@@ -895,6 +896,10 @@
       "c": 0.0
     },
     "@kody-w/parallel_dimensions_agent": {
+      "b": 1.5,
+      "c": 1.5
+    },
+    "@kody-w/pdf_reader_agent": {
       "b": 1.5,
       "c": 1.5
     },

@@ -20228,8 +20228,19 @@
       "sha256": "337b4b6d960fbe4a96a89547311f090d1b621befec25974c588779075654d974",
       "latest_receipt": "rar_e45cfd6851d5e521c24ff289553e1f5f010834609f17e5a3b463fe6c00255ae8",
       "updated_at": "2026-11-20T00:25:41.576154+00:00"
+    },
+    "@kody-w/pdf_reader_agent": {
+      "status": "active",
+      "version": "1.0.0",
+      "quality_tier": "community",
+      "owner_github_id": 1735900,
+      "owner_github_login": "kody-w",
+      "canonical_path": "agents/@kody-w/pdf_reader_agent.py",
+      "sha256": "79d90ed177b957de0b2d8deadee3d51bc172ce4e5201a971948ea63bae347e51",
+      "latest_receipt": "rar_00ec07854bdbcb670e3d8d3353b36949956b9e27bdc5a8322a487e82ec95bbb8",
+      "updated_at": "2026-11-27T05:17:46.173737+00:00"
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-11-20T00:25:41.576154+00:00"
+  "updated_at": "2026-11-27T05:17:46.173737+00:00"
 }

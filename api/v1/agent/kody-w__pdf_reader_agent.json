@@ -1,0 +1,40 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__pdf_reader_agent",
+  "name": "PDF Reader",
+  "rar_name": "@kody-w/pdf_reader_agent",
+  "rappid": "rappid:@kody-w/pdf_reader_agent:13d0337982f6bfcb17ae223b6cbf63603a5dc6dac1340bcba0d6a3dfe11bf22c",
+  "_migrated_from": null,
+  "_migrated_from_all": [],
+  "_migrated_from_note": null,
+  "version": "1.0.0",
+  "publisher": "@kody-w",
+  "category": "productivity",
+  "tags": [
+    "pdf",
+    "documents",
+    "reader",
+    "phone",
+    "offline"
+  ],
+  "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 113,
+  "size_kb": 5.1,
+  "sha256": "79d90ed177b957de0b2d8deadee3d51bc172ce4e5201a971948ea63bae347e51",
+  "has_card": true,
+  "added_at": null,
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__pdf_reader_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/pdf_reader_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__pdf_reader_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__pdf_reader_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/pdf_reader_agent.py"
+}

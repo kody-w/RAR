@@ -1,12 +1,12 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-27T03:46:21Z",
+  "generated_at": "2026-11-27T05:15:41Z",
   "static_api": "rapp-static-api/1.1",
   "pages_base": "https://kody-w.github.io/RAR",
   "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
   "stats": {
-    "total_agents": 228,
+    "total_agents": 229,
     "total_swarms": 2,
     "total_stubs": 2,
     "publishers": 10,
@@ -10712,6 +10712,64 @@
     },
     {
       "schema": "rapp-agent/1.0",
+      "name": "@kody-w/pdf_reader_agent",
+      "version": "1.0.0",
+      "display_name": "PDF Reader",
+      "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
+      "author": "kody-w",
+      "tags": [
+        "pdf",
+        "documents",
+        "reader",
+        "phone",
+        "offline"
+      ],
+      "category": "productivity",
+      "quality_tier": "community",
+      "requires_env": [],
+      "dependencies": [
+        "@rapp/basic_agent"
+      ],
+      "_file": "agents/@kody-w/pdf_reader_agent.py",
+      "_install_filename": "rar_kody_w_pdf_reader_agent.py",
+      "_sha256": "79d90ed177b957de0b2d8deadee3d51bc172ce4e5201a971948ea63bae347e51",
+      "_lifecycle": "notarized",
+      "_receipt": "rar_00ec07854bdbcb670e3d8d3353b36949956b9e27bdc5a8322a487e82ec95bbb8",
+      "_controller": {
+        "github_id": 1735900,
+        "github_login": "kody-w"
+      },
+      "_provenance": {
+        "issue": 1655,
+        "submitted_by": "kody-w",
+        "accepted_by": "kody-w",
+        "checks": [
+          "manifest",
+          "namespace",
+          "content_sha256",
+          "base_precondition",
+          "security_scan",
+          "registry_build",
+          "card_forge",
+          "full_test_suite"
+        ]
+      },
+      "_seed": 3942455493607960042,
+      "_size_kb": 5.1,
+      "_lines": 113,
+      "_has_card": true,
+      "_added_at": null,
+      "_first_commit_sha": null,
+      "_latest_commit_sha": null,
+      "_card_sha256": "7746956891ffaadfcee008ac2efcee3b8363aa064d2495621bd9b82862e72afd",
+      "_version": {
+        "sha256": "79d90ed177b957de0b2d8deadee3d51bc172ce4e5201a971948ea63bae347e51",
+        "sha8": "79d90ed177b9",
+        "path": "versions/@kody-w/pdf_reader_agent/79d90ed177b9.py"
+      }
+    },
+    {
+      "schema": "rapp-agent/1.0",
       "name": "@kody-w/perpetual_loop_factory",
       "display_name": "PerpetualLoopFactory",
       "description": "Spawns a self-running loop of local twin brainstems that take turns appending frames to a git-tracked artifact, with audit and dashboard daemons.",
@@ -16016,7 +16074,7 @@
     "upstream": null
   },
   "summary": {
-    "total_agents": 228,
+    "total_agents": 229,
     "total_swarms": 2,
     "total_stubs": 2,
     "publishers": 10,
