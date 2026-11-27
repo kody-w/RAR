@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-11-27T15:55:31Z",
+  "generated": "2026-11-27T16:46:56Z",
   "counts": {
     "native": 229,
     "aggregated": 150,
@@ -3606,6 +3606,63 @@
     },
     {
       "rank": 58,
+      "ref": "@kody-w/pdf_reader_agent",
+      "title": "PDF Reader",
+      "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
+      "origin": "native",
+      "category": "productivity",
+      "tags": [
+        "pdf",
+        "documents",
+        "reader",
+        "phone",
+        "offline"
+      ],
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fpdf_reader_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/pdf_reader_agent.py",
+      "source": null,
+      "score": 58.8,
+      "origin_rank": 35,
+      "origin_size": 229,
+      "components": {
+        "community": 0.2958,
+        "depth": 0.7001,
+        "freshness": 1.0,
+        "tier": 0.55
+      },
+      "scores_on": [
+        "community",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [
+        "community"
+      ],
+      "signals": {
+        "rar": {
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "community",
+          "age_days": 0,
+          "lines": 271,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "no community feedback yet - scored at the population median",
+        "community tier",
+        "newest in the registry",
+        "271 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 59,
       "ref": "@rapter/hive_shape_agent",
       "title": "Hive Shape",
       "description": "Look at every cubby in a hive at once and report its SHAPE — divergence (who disagrees about what the world is), silence (who did not answer, always named), mass (where the population actually lives), and spread (how unlike each other the members are). Private by construction: publishes nothing, writes no frame, and leaves the picture on the operator's machine.",
@@ -3626,7 +3683,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapter/hive_shape_agent.py",
       "source": null,
       "score": 58.5,
-      "origin_rank": 35,
+      "origin_rank": 36,
       "origin_size": 229,
       "components": {
         "community": 0.2958,
@@ -3661,64 +3718,6 @@
         "verified tier",
         "added 92 days ago",
         "348 lines",
-        "has a rendered card"
-      ]
-    },
-    {
-      "rank": 59,
-      "ref": "@rapp/egg_hatcher",
-      "title": "EggHatcher",
-      "description": "Introspects any .egg cartridge (local path or URL) and routes it by manifest schema/type to hatch, install, or mount; refuses unknown kinds.",
-      "origin": "native",
-      "category": "core",
-      "tags": [
-        "egg",
-        "cartridge",
-        "hatch",
-        "organism",
-        "rapplication",
-        "lifecycle"
-      ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fegg_hatcher",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/egg_hatcher_agent.py",
-      "source": null,
-      "score": 58.1,
-      "origin_rank": 36,
-      "origin_size": 229,
-      "components": {
-        "community": 0.2958,
-        "depth": 0.9044,
-        "freshness": 0.3157,
-        "tier": 1.0
-      },
-      "scores_on": [
-        "community",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [
-        "community"
-      ],
-      "signals": {
-        "rar": {
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "official",
-          "age_days": 200,
-          "lines": 427,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "no community feedback yet - scored at the population median",
-        "official tier",
-        "added 200 days ago",
-        "427 lines",
         "has a rendered card"
       ]
     },
@@ -3791,29 +3790,30 @@
     },
     {
       "rank": 61,
-      "ref": "@rapp/store_navigator_agent",
-      "title": "StoreNavigator",
-      "description": "Lists, searches, compares, and recommends rapplications from the RAPP_Store catalog over HTTP, with keyword scoring when no LLM is available.",
+      "ref": "@rapp/egg_hatcher",
+      "title": "EggHatcher",
+      "description": "Introspects any .egg cartridge (local path or URL) and routes it by manifest schema/type to hatch, install, or mount; refuses unknown kinds.",
       "origin": "native",
-      "category": "platform",
+      "category": "core",
       "tags": [
-        "meta",
-        "navigator",
-        "store",
-        "discovery",
-        "rapplication"
+        "egg",
+        "cartridge",
+        "hatch",
+        "organism",
+        "rapplication",
+        "lifecycle"
       ],
       "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fstore_navigator_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/store_navigator_agent.py",
+      "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fegg_hatcher",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/egg_hatcher_agent.py",
       "source": null,
-      "score": 57.8,
+      "score": 58.1,
       "origin_rank": 37,
       "origin_size": 229,
       "components": {
         "community": 0.2958,
-        "depth": 0.9136,
-        "freshness": 0.2917,
+        "depth": 0.9044,
+        "freshness": 0.3157,
         "tier": 1.0
       },
       "scores_on": [
@@ -3832,8 +3832,8 @@
           "engagement": 0,
           "channels": {},
           "tier": "official",
-          "age_days": 213,
-          "lines": 434,
+          "age_days": 200,
+          "lines": 427,
           "has_card": true
         },
         "source": null
@@ -3841,8 +3841,8 @@
       "why": [
         "no community feedback yet - scored at the population median",
         "official tier",
-        "added 213 days ago",
-        "434 lines",
+        "added 200 days ago",
+        "427 lines",
         "has a rendered card"
       ]
     },
@@ -3915,6 +3915,63 @@
     },
     {
       "rank": 63,
+      "ref": "@rapp/store_navigator_agent",
+      "title": "StoreNavigator",
+      "description": "Lists, searches, compares, and recommends rapplications from the RAPP_Store catalog over HTTP, with keyword scoring when no LLM is available.",
+      "origin": "native",
+      "category": "platform",
+      "tags": [
+        "meta",
+        "navigator",
+        "store",
+        "discovery",
+        "rapplication"
+      ],
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40rapp%2Fstore_navigator_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/store_navigator_agent.py",
+      "source": null,
+      "score": 57.8,
+      "origin_rank": 38,
+      "origin_size": 229,
+      "components": {
+        "community": 0.2958,
+        "depth": 0.9136,
+        "freshness": 0.2917,
+        "tier": 1.0
+      },
+      "scores_on": [
+        "community",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [
+        "community"
+      ],
+      "signals": {
+        "rar": {
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "official",
+          "age_days": 213,
+          "lines": 434,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "no community feedback yet - scored at the population median",
+        "official tier",
+        "added 213 days ago",
+        "434 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 64,
       "ref": "@kody-w/host_compat_agent",
       "title": "Host Compat",
       "description": "Makes a Brainstem speak every agent-host dialect from one file: Claude Code, GitHub Copilot CLI and open Agent Skills — skills, plugins, slash commands/prompts, subagent personas, hooks, MCP servers, instruction files — plus cross-host search of your local Claude Code and Copilot CLI session transcripts.",
@@ -3937,7 +3994,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/host_compat_agent.py",
       "source": null,
       "score": 57.3,
-      "origin_rank": 38,
+      "origin_rank": 39,
       "origin_size": 229,
       "components": {
         "community": 0.2958,
@@ -3972,63 +4029,6 @@
         "community tier",
         "added 80 days ago",
         "1627 lines",
-        "has a rendered card"
-      ]
-    },
-    {
-      "rank": 64,
-      "ref": "@kody-w/pdf_reader_agent",
-      "title": "PDF Reader",
-      "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
-      "origin": "native",
-      "category": "productivity",
-      "tags": [
-        "pdf",
-        "documents",
-        "reader",
-        "phone",
-        "offline"
-      ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fpdf_reader_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/pdf_reader_agent.py",
-      "source": null,
-      "score": 57.0,
-      "origin_rank": 39,
-      "origin_size": 229,
-      "components": {
-        "community": 0.2958,
-        "depth": 0.6189,
-        "freshness": 1.0,
-        "tier": 0.55
-      },
-      "scores_on": [
-        "community",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [
-        "community"
-      ],
-      "signals": {
-        "rar": {
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "community",
-          "age_days": 0,
-          "lines": 209,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "no community feedback yet - scored at the population median",
-        "community tier",
-        "newest in the registry",
-        "209 lines",
         "has a rendered card"
       ]
     },

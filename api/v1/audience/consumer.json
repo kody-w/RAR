@@ -2,7 +2,7 @@
   "schema": "rar-catalog/1.0",
   "audience": "consumer",
   "description": "Agents appropriate for an individual audience. Enterprise-only agents are excluded.",
-  "generated": "2026-11-27T15:55:31Z",
+  "generated": "2026-11-27T16:46:56Z",
   "count": 202,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/audience/consumer.json",
   "agents": [
@@ -6554,7 +6554,7 @@
       "name": "@kody-w/pdf_reader_agent",
       "display_name": "PDF Reader",
       "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
-      "version": "1.0.4",
+      "version": "1.0.6",
       "publisher": "@kody-w",
       "author": "kody-w",
       "category": "productivity",
@@ -6575,17 +6575,17 @@
         "path": "agents/@kody-w/pdf_reader_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/pdf_reader_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/pdf_reader_agent.py",
-        "sha256": "f32c63b6bf188ad530fec3f956c43a342f2ca399dad7031ae5a2c9e1e7379fc4",
+        "sha256": "ca40733518a8bc1efca3eecb91f159ade3ea75e1d216e8adf27b31ded68aefde",
         "pages": "https://kody-w.github.io/RAR/agents/@kody-w/pdf_reader_agent.py",
         "version": {
-          "sha256": "f32c63b6bf188ad530fec3f956c43a342f2ca399dad7031ae5a2c9e1e7379fc4",
-          "sha8": "f32c63b6bf18",
-          "path": "versions/@kody-w/pdf_reader_agent/f32c63b6bf18.py"
+          "sha256": "ca40733518a8bc1efca3eecb91f159ade3ea75e1d216e8adf27b31ded68aefde",
+          "sha8": "ca40733518a8",
+          "path": "versions/@kody-w/pdf_reader_agent/ca40733518a8.py"
         }
       },
       "stats": {
-        "lines": 209,
-        "size_kb": 9.2,
+        "lines": 271,
+        "size_kb": 11.5,
         "added_at": "2026-11-27T05:22:10Z"
       }
     },

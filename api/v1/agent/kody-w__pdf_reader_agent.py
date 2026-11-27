@@ -24,7 +24,7 @@ import os
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/pdf_reader_agent",
-    "version": "1.0.4",
+    "version": "1.0.6",
     "display_name": "PDF Reader",
     "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
     "author": "kody-w",
@@ -63,29 +63,62 @@ def _words(text):
     return out
 
 
-def _find(reader, name, total, words, limit=12, cap=2500):
-    """The lines that mention the most search words, best first, each tagged with its page."""
-    hits = []
+def _lines(reader, total):
+    """(page, line) for every non-empty line."""
+    out = []
     for i in range(total):
         for line in (reader.pages[i].extract_text() or "").splitlines():
-            low = line.lower()
-            score = sum(1 for w in set(words) if w in low)
-            if score:
-                hits.append((-score, i + 1, line.strip()))
+            if line.strip():
+                out.append((i + 1, line.strip()))
+    return out
+
+
+def _shape(line):
+    """A line with its numbers removed, to spot repeated headers and boilerplate."""
+    import re
+    return re.sub(r"\d+", "#", line.lower())
+
+
+def _distinct(lines, cap, limit=40):
+    """Lines that occur once in the document (numbers ignored): its real content, like a table of contents."""
+    seen = {}
+    for _, line in lines:
+        seen[_shape(line)] = seen.get(_shape(line), 0) + 1
+    out, size = [], 0
+    for page, line in lines:
+        if seen[_shape(line)] == 1 and len(line) > 25 and size + len(line) <= cap and len(out) < limit:
+            out.append(f"page {page}: {line}")
+            size += len(line)
+    return out
+
+
+def _find(reader, name, total, words, limit=12, cap=2500):
+    """The lines that mention the most search words (stems, rare words weigh more), best first, with their pages."""
+    lines = _lines(reader, total)
+    stems = {w[:4] if len(w) >= 5 else w for w in words}
+    pages_with = {st: len({p for p, l in lines if st in l.lower()}) for st in stems}
+    common = {st for st, n in pages_with.items() if total >= 5 and n > total / 2}
+    useful = stems - common or stems
+    hits = []
+    for page, line in lines:
+        low = line.lower()
+        score = sum(1.0 / (1 + pages_with[st]) for st in useful if st in low)
+        if score:
+            hits.append((-score, page, line))
     hits.sort()
-    lines, size = [], 0
+    out, size = [], 0
     for _, page, line in hits[:limit]:
         if size + len(line) > cap:
             break
-        lines.append(f"page {page}: {line}")
+        out.append(f"page {page}: {line}")
         size += len(line)
-    if not lines:
-        facts = _facts(reader, total, cap)
+    if not out or useful != stems and not any(st in l.lower() for _, _, l in hits[:1] for st in useful):
+        facts = _facts(reader, total, cap // 2)
         return {"file": name, "pages": total, "found": [],
-                "note": f"Nothing in {name} uses the words {' '.join(words)}. These lines hold its dates and amounts; "
-                        f"quote the line that best answers them (a move-in or handover date is usually the start date), with its page.",
-                "dates_and_amounts": facts}
-    return {"file": name, "pages": total, "found": lines}
+                "note": f"Nothing in {name} uses the words {' '.join(words)}. Below are its dates and amounts and its "
+                        f"distinct lines; if one answers them under other words, quote it with its page.",
+                "dates_and_amounts": facts, "distinct_lines": _distinct(lines, cap)}
+    return {"file": name, "pages": total, "found": out}
 
 
 _FACT = None
@@ -125,6 +158,33 @@ def _preview(path, limit=80):
     return _PREVIEWS[key]
 
 
+_TOPICS = {}
+
+
+def _topics(path, limit=10):
+    """A short list of what a PDF covers, from its distinct lines (cached by modification time)."""
+    try:
+        key = (path, os.path.getmtime(path))
+    except OSError:
+        return ""
+    if key not in _TOPICS:
+        try:
+            from pypdf import PdfReader
+            reader = PdfReader(path)
+            total = min(len(reader.pages), 300)
+            names = []
+            for line in _distinct(_lines(reader, total), 4000, 60):
+                text = line.split(": ", 1)[1]
+                head = text.split(":", 1)[0] if ":" in text[:40] else " ".join(text.split()[:3])
+                head = head.strip(" .,;").lower()
+                if head and head not in names:
+                    names.append(head)
+            _TOPICS[key] = ", ".join(names[:limit])
+        except Exception:
+            _TOPICS[key] = ""
+    return _TOPICS[key]
+
+
 def _pdfs():
     folder = _folder()
     try:
@@ -160,7 +220,9 @@ class PdfReaderAgent(BasicAgent):
         shown = []
         for n in names[:12]:
             hint = _preview(os.path.join(folder, n))
-            shown.append(f"{n} (starts: \"{hint}\")" if hint else n)
+            topics = _topics(os.path.join(folder, n))
+            about = f"; covers: {topics}" if topics else ""
+            shown.append(f"{n} (starts: \"{hint}\"{about})" if hint else n)
         more = f", and {len(names) - 12} more" if len(names) > 12 else ""
         return (f"The person has given you these PDFs: {'; '.join(shown)}{more}. When they ask about anything "
                 f"these could answer, even as \"my lease\" or \"that document\", call PdfReader with the file name first.")

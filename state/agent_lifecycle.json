@@ -20231,16 +20231,16 @@
     },
     "@kody-w/pdf_reader_agent": {
       "status": "active",
-      "version": "1.0.4",
+      "version": "1.0.6",
       "quality_tier": "community",
       "owner_github_id": 1735900,
       "owner_github_login": "kody-w",
       "canonical_path": "agents/@kody-w/pdf_reader_agent.py",
-      "sha256": "f32c63b6bf188ad530fec3f956c43a342f2ca399dad7031ae5a2c9e1e7379fc4",
-      "latest_receipt": "rar_708f7089a346f6d931a926a9b38dfe042eec564b3b39c14362d5a83063cac5e7",
-      "updated_at": "2026-11-27T15:56:20.622555+00:00"
+      "sha256": "ca40733518a8bc1efca3eecb91f159ade3ea75e1d216e8adf27b31ded68aefde",
+      "latest_receipt": "rar_8aa9d86baf97d2f443196718e0669bc7a0cb7d280ac241daccfdb9c39ebefb81",
+      "updated_at": "2026-11-27T16:47:30.829314+00:00"
     }
   },
   "schema": "rar-agent-lifecycle/1.0",
-  "updated_at": "2026-11-27T15:56:20.622555+00:00"
+  "updated_at": "2026-11-27T16:47:30.829314+00:00"
 }
