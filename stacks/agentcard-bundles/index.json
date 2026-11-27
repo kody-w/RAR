@@ -1,0 +1,304 @@
+{
+ "schema": "rapp-agentcard-bundles/1",
+ "status": "staging",
+ "count": 3,
+ "agents": [
+  {
+   "agent": "@discreetRappers/architecture_diagram_agent",
+   "file": "agents/@discreetRappers/architecture_diagram_agent.py",
+   "carried": [],
+   "left_out": [],
+   "skipped_optional": [
+    {
+     "modules": [
+      "diagrams"
+     ],
+     "compiled": "diagrams"
+    }
+   ],
+   "status": "nothing to carry"
+  },
+  {
+   "agent": "@discreetRappers/copilot_studio_transpiler_agent",
+   "file": "agents/@discreetRappers/copilot_studio_transpiler_agent.py",
+   "carried": [],
+   "left_out": [],
+   "skipped_optional": [
+    {
+     "modules": [
+      "yaml"
+     ],
+     "compiled": "yaml"
+    }
+   ],
+   "status": "nothing to carry"
+  },
+  {
+   "agent": "@discreetRappers/demo_script_generator_agent",
+   "file": "agents/@discreetRappers/demo_script_generator_agent.py",
+   "carried": [],
+   "left_out": [],
+   "skipped_optional": [
+    {
+     "modules": [
+      "openai",
+      "azure"
+     ],
+     "compiled": "azure"
+    }
+   ],
+   "status": "nothing to carry"
+  },
+  {
+   "agent": "@discreetRappers/dynamics_crud_agent",
+   "file": "agents/@discreetRappers/dynamics_crud_agent.py",
+   "carried": [],
+   "left_out": [],
+   "skipped_optional": [
+    {
+     "modules": [
+      "azure"
+     ],
+     "compiled": "azure"
+    }
+   ],
+   "status": "nothing to carry"
+  },
+  {
+   "agent": "@discreetRappers/powerpoint_generator_agent",
+   "file": "agents/@discreetRappers/powerpoint_generator_agent.py",
+   "carried": [],
+   "left_out": [],
+   "skipped_optional": [
+    {
+     "modules": [
+      "pptx"
+     ],
+     "compiled": "pptx"
+    }
+   ],
+   "status": "nothing to carry"
+  },
+  {
+   "agent": "@discreetRappers/rapp_pipeline_agent",
+   "file": "agents/@discreetRappers/rapp_pipeline_agent.py",
+   "carried": [],
+   "left_out": [],
+   "skipped_optional": [
+    {
+     "modules": [
+      "openai",
+      "azure"
+     ],
+     "compiled": "azure"
+    }
+   ],
+   "status": "nothing to carry"
+  },
+  {
+   "agent": "@discreetRappers/sharepoint_contract_analysis_agent",
+   "file": "agents/@discreetRappers/sharepoint_contract_analysis_agent.py",
+   "carried": [
+    "pypdf (pypdf-7.1.1-py3-none-any.whl)"
+   ],
+   "left_out": [],
+   "skipped_optional": [
+    {
+     "modules": [
+      "reportlab"
+     ],
+     "compiled": "reportlab"
+    },
+    {
+     "modules": [
+      "docx"
+     ],
+     "compiled": "docx"
+    },
+    {
+     "modules": [
+      "azure",
+      "openai"
+     ],
+     "compiled": "azure"
+    }
+   ],
+   "status": "card",
+   "agentcard": "stacks/agentcard-bundles/cards/@discreetRappers/sharepoint_contract_analysis_agent.agentcard"
+  },
+  {
+   "agent": "@kody-w/art_generator_agent",
+   "file": "agents/@kody-w/art_generator_agent.py",
+   "carried": [],
+   "left_out": [],
+   "skipped_optional": [
+    {
+     "modules": [
+      "azure"
+     ],
+     "compiled": "azure"
+    }
+   ],
+   "status": "nothing to carry"
+  },
+  {
+   "agent": "@kody-w/commons_life_agent",
+   "file": "agents/@kody-w/commons_life_agent.py",
+   "carried": [
+    "ez_sharpen_agent (sibling file)"
+   ],
+   "left_out": [],
+   "skipped_optional": [],
+   "status": "card",
+   "agentcard": "stacks/agentcard-bundles/cards/@kody-w/commons_life_agent.agentcard"
+  },
+  {
+   "agent": "@kody-w/copilot_studio_forge_agent",
+   "file": "agents/@kody-w/copilot_studio_forge_agent.py",
+   "carried": [
+    "jsonschema (attrs-26.1.0-py3-none-any.whl, jsonschema-4.17.3-py3-none-any.whl, pyrsistent-0.20.0-py3-none-any.whl)"
+   ],
+   "left_out": [],
+   "skipped_optional": [
+    {
+     "modules": [
+      "yaml"
+     ],
+     "compiled": "yaml"
+    }
+   ],
+   "status": "card",
+   "agentcard": "stacks/agentcard-bundles/cards/@kody-w/copilot_studio_forge_agent.agentcard"
+  },
+  {
+   "agent": "@kody-w/copilot_studio_parity_deploy",
+   "status": "needs compiled code (not for iPhone)",
+   "why": "cannot start without yaml"
+  },
+  {
+   "agent": "@kody-w/launch_to_public_agent",
+   "file": "agents/@kody-w/ecosystem-grail-stack/launch_to_public_agent.py",
+   "carried": [],
+   "left_out": [],
+   "skipped_optional": [
+    {
+     "modules": [
+      "bond"
+     ],
+     "compiled": "bond"
+    }
+   ],
+   "status": "nothing to carry"
+  },
+  {
+   "agent": "@kody-w/plant_seed_agent",
+   "file": "agents/@kody-w/ecosystem-grail-stack/plant_seed_agent.py",
+   "carried": [],
+   "left_out": [],
+   "skipped_optional": [
+    {
+     "modules": [
+      "holo_card_generator",
+      "front_door_specs"
+     ],
+     "compiled": "holo_card_generator"
+    }
+   ],
+   "status": "nothing to carry"
+  },
+  {
+   "agent": "@kody-w/education_shorts_agent",
+   "file": "agents/@kody-w/education_shorts_agent.py",
+   "carried": [],
+   "left_out": [],
+   "skipped_optional": [
+    {
+     "modules": [
+      "eshorts"
+     ],
+     "compiled": "eshorts"
+    }
+   ],
+   "status": "nothing to carry"
+  },
+  {
+   "agent": "@kody-w/flight_recorder",
+   "file": "agents/@kody-w/flight_recorder_agent.py",
+   "carried": [],
+   "left_out": [],
+   "skipped_optional": [
+    {
+     "modules": [
+      "flask"
+     ],
+     "compiled": "flask"
+    }
+   ],
+   "status": "nothing to carry"
+  },
+  {
+   "agent": "@kody-w/microsoft_deck_studio_agent",
+   "file": "agents/@kody-w/microsoft_deck_studio_agent.py",
+   "carried": [],
+   "left_out": [],
+   "skipped_optional": [
+    {
+     "modules": [
+      "pptx"
+     ],
+     "compiled": "pptx"
+    }
+   ],
+   "status": "nothing to carry"
+  },
+  {
+   "agent": "@kody-w/prompt_extractor",
+   "status": "file name is not *_agent.py (cards need it)"
+  },
+  {
+   "agent": "@kody-w/self_compact_agent",
+   "file": "agents/@kody-w/self_compact_agent.py",
+   "carried": [],
+   "left_out": [],
+   "skipped_optional": [
+    {
+     "modules": [
+      "flask"
+     ],
+     "compiled": "flask"
+    }
+   ],
+   "status": "nothing to carry"
+  },
+  {
+   "agent": "@rapp/egg_hatcher",
+   "file": "agents/@rapp/egg_hatcher_agent.py",
+   "carried": [],
+   "left_out": [],
+   "skipped_optional": [
+    {
+     "modules": [
+      "door_address"
+     ],
+     "compiled": "door_address"
+    }
+   ],
+   "status": "nothing to carry"
+  },
+  {
+   "agent": "@rapp/hacker_news",
+   "file": "agents/@rapp/hacker_news_agent.py",
+   "carried": [],
+   "left_out": [],
+   "skipped_optional": [
+    {
+     "modules": [
+      "pyodide"
+     ],
+     "compiled": "pyodide"
+    }
+   ],
+   "status": "nothing to carry"
+  }
+ ]
+}

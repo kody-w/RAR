@@ -1,0 +1,84 @@
+name: Agent card bundles (staging)
+
+# Builds one .agentcard per agent that needs something a phone's Python lacks: pure-Python wheels and
+# sibling files ride INSIDE the card, fingerprinted. See stacks/agentcard-bundles/README.md.
+# Two jobs on purpose: bundling loads each agent (runs its import-time code), so it gets NO write token.
+# The commit job never runs agent code; it only checks each card's shape and fingerprints, then commits.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'agents/**/*.py'
+      - 'stacks/agentcard-bundles/*.py'
+      - 'stacks/agentcard-bundles/vendor/**'
+      - '.github/workflows/agentcard-bundles.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: agentcard-bundles
+  cancel-in-progress: false
+
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'   # the phone's Python
+      - name: Packages the phone app already includes (so agents that import them can load)
+        run: pip install requests
+      - name: Bundle every agent that needs something extra
+        run: |
+          rm -rf stacks/agentcard-bundles/cards
+          python stacks/agentcard-bundles/build_bundles.py "$RUNNER_TEMP/wheels"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: agentcards
+          path: |
+            stacks/agentcard-bundles/cards
+            stacks/agentcard-bundles/index.json
+          if-no-files-found: warn
+
+  commit:
+    needs: bundle
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - uses: actions/download-artifact@v4
+        with:
+          name: agentcards
+          path: ${{ runner.temp }}/agentcards
+      - name: Check every card without running it (shape, fingerprints, pure Python only)
+        run: |
+          python - "$RUNNER_TEMP/agentcards" <<'PY'
+          import sys, json
+          from pathlib import Path
+          sys.path.insert(0, "stacks/agentcard-bundles/vendor")
+          import agentcard_core as cards
+          root = Path(sys.argv[1]); bad = 0
+          for f in sorted(root.rglob("*.agentcard")):
+              probs = cards.problems(json.loads(f.read_text()))
+              if probs: bad += 1; print(f"::error::{f.relative_to(root)}: {'; '.join(probs)}")
+          sys.exit(1 if bad else 0)
+          PY
+      - name: Commit the cards
+        run: |
+          rm -rf stacks/agentcard-bundles/cards
+          mkdir -p stacks/agentcard-bundles
+          cp -R "$RUNNER_TEMP/agentcards/." stacks/agentcard-bundles/
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add stacks/agentcard-bundles/cards stacks/agentcard-bundles/index.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Agent card bundles: rebuild"
+          for i in 1 2 3; do git pull --rebase -q && git push && exit 0; sleep 5; done
+          exit 1

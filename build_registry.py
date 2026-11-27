@@ -1098,6 +1098,13 @@ def build_registry():
             manifest["_stack"] = stack_name
             manifest["_stack_vertical"] = stack_vertical
         manifest["_sha256"] = sha256
+        # stacks/agentcard-bundles (status: staging): an .agentcard that carries what this agent needs
+        # (pure-Python wheels, sibling files) so it can run on a phone. Absent for most agents.
+        _ac = Path("stacks/agentcard-bundles/cards") / Path(serialized_path).relative_to("agents").with_suffix(".agentcard") \
+            if serialized_path.startswith("agents/") else None
+        if _ac is not None and _ac.is_file():
+            manifest["_agentcard"] = _ac.as_posix()
+            manifest["_agentcard_sha256"] = compute_sha256(_ac)
         manifest.update(_lifecycle_metadata(
             name=name,
             version=str(manifest.get("version", "")),
