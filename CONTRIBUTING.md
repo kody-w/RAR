@@ -104,6 +104,22 @@ Every agent is **one `.py` file**. No manifest.json. No README.md. No subdirecto
 agents/@yourname/my_agent.py    ← this is the entire package
 ```
 
+## Packages Your Agent Needs (optional)
+
+If your agent imports a package that is not in Python's standard library, declare it at the very top of the file
+with Python's own inline-metadata block ([PEP 723](https://peps.python.org/pep-0723/)):
+
+```python
+# /// script
+# dependencies = ["pypdf>=5"]
+# ///
+```
+
+Why: phone hosts (Hive) have no pip. RAR builds an agent card that carries your declared packages inside the
+one file, so your agent runs on a phone too (`stacks/agentcard-bundles`). Only pure-Python packages can ride
+(wheels ending `-none-any.whl`); compiled ones are listed as not for iPhone. Undeclared packages are never
+guessed from the import name, so declaring is what makes your agent phone-ready.
+
 ## Naming Rules
 
 **snake_case everywhere. No dashes. No exceptions.**
