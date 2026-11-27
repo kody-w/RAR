@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-11-27T14:08:10Z",
+  "generated": "2026-11-27T14:40:11Z",
   "counts": {
     "native": 229,
     "aggregated": 150,
@@ -5131,6 +5131,63 @@
     },
     {
       "rank": 83,
+      "ref": "@kody-w/pdf_reader_agent",
+      "title": "PDF Reader",
+      "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
+      "origin": "native",
+      "category": "productivity",
+      "tags": [
+        "pdf",
+        "documents",
+        "reader",
+        "phone",
+        "offline"
+      ],
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fpdf_reader_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/pdf_reader_agent.py",
+      "source": null,
+      "score": 55.3,
+      "origin_rank": 50,
+      "origin_size": 229,
+      "components": {
+        "community": 0.2958,
+        "depth": 0.5364,
+        "freshness": 1.0,
+        "tier": 0.55
+      },
+      "scores_on": [
+        "community",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [
+        "community"
+      ],
+      "signals": {
+        "rar": {
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "community",
+          "age_days": 0,
+          "lines": 146,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "no community feedback yet - scored at the population median",
+        "community tier",
+        "newest in the registry",
+        "146 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 84,
       "ref": "@rapter/hive_census_agent",
       "title": "Hive Census",
       "description": "Emit this box's census as deterministic static JSON — protocol revision, anchor hash, resident populations, posture, trust — computed from local filesystem and git facts with NO language-model call. Byte-stable for the same inputs, sorted and string-valued so it drops straight into a rapp/1 frame payload and two boxes computing the same census produce the same hash. Counts things, never names them.",
@@ -5150,7 +5207,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapter/hive_census_agent.py",
       "source": null,
       "score": 55.3,
-      "origin_rank": 50,
+      "origin_rank": 51,
       "origin_size": 229,
       "components": {
         "community": 0.2958,
@@ -5185,64 +5242,6 @@
         "verified tier",
         "added 92 days ago",
         "232 lines",
-        "has a rendered card"
-      ]
-    },
-    {
-      "rank": 84,
-      "ref": "@kody-w/prototype_lock_factory_agent",
-      "title": "Prototype Lock Factory",
-      "description": "Locks an accepted prototype into a canonical project, enforces local-before-cloud causal evidence, prevents post-acceptance scope drift, and exports a hash-verified no-PII handoff.",
-      "origin": "native",
-      "category": "pipeline",
-      "tags": [
-        "prototype",
-        "factory",
-        "local_first",
-        "acceptance",
-        "handoff",
-        "no_pii"
-      ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fprototype_lock_factory_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/prototype_lock_factory_agent.py",
-      "source": null,
-      "score": 55.1,
-      "origin_rank": 51,
-      "origin_size": 229,
-      "components": {
-        "community": 0.2958,
-        "depth": 0.9712,
-        "freshness": 0.557,
-        "tier": 0.55
-      },
-      "scores_on": [
-        "community",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [
-        "community"
-      ],
-      "signals": {
-        "rar": {
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "community",
-          "age_days": 101,
-          "lines": 478,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "no community feedback yet - scored at the population median",
-        "community tier",
-        "added 101 days ago",
-        "478 lines",
         "has a rendered card"
       ]
     },
@@ -5315,29 +5314,30 @@
     },
     {
       "rank": 86,
-      "ref": "@kody-w/thread_tracker_agent",
-      "title": "Thread Tracker",
-      "description": "Routes remarks into durable local topic threads, lists open work, and parks or closes threads without deleting their history.",
+      "ref": "@kody-w/prototype_lock_factory_agent",
+      "title": "Prototype Lock Factory",
+      "description": "Locks an accepted prototype into a canonical project, enforces local-before-cloud causal evidence, prevents post-acceptance scope drift, and exports a hash-verified no-PII handoff.",
       "origin": "native",
-      "category": "productivity",
+      "category": "pipeline",
       "tags": [
-        "threads",
-        "notes",
-        "routing",
-        "append-only",
-        "offline"
+        "prototype",
+        "factory",
+        "local_first",
+        "acceptance",
+        "handoff",
+        "no_pii"
       ],
       "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fthread_tracker_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/thread_tracker_agent.py",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fprototype_lock_factory_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/prototype_lock_factory_agent.py",
       "source": null,
       "score": 55.1,
       "origin_rank": 52,
       "origin_size": 229,
       "components": {
         "community": 0.2958,
-        "depth": 0.708,
-        "freshness": 0.8214,
+        "depth": 0.9712,
+        "freshness": 0.557,
         "tier": 0.55
       },
       "scores_on": [
@@ -5356,8 +5356,8 @@
           "engagement": 0,
           "channels": {},
           "tier": "community",
-          "age_days": 34,
-          "lines": 277,
+          "age_days": 101,
+          "lines": 478,
           "has_card": true
         },
         "source": null
@@ -5365,8 +5365,8 @@
       "why": [
         "no community feedback yet - scored at the population median",
         "community tier",
-        "added 34 days ago",
-        "277 lines",
+        "added 101 days ago",
+        "478 lines",
         "has a rendered card"
       ]
     },
@@ -5437,6 +5437,63 @@
     },
     {
       "rank": 88,
+      "ref": "@kody-w/thread_tracker_agent",
+      "title": "Thread Tracker",
+      "description": "Routes remarks into durable local topic threads, lists open work, and parks or closes threads without deleting their history.",
+      "origin": "native",
+      "category": "productivity",
+      "tags": [
+        "threads",
+        "notes",
+        "routing",
+        "append-only",
+        "offline"
+      ],
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fthread_tracker_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/thread_tracker_agent.py",
+      "source": null,
+      "score": 55.1,
+      "origin_rank": 53,
+      "origin_size": 229,
+      "components": {
+        "community": 0.2958,
+        "depth": 0.708,
+        "freshness": 0.8214,
+        "tier": 0.55
+      },
+      "scores_on": [
+        "community",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [
+        "community"
+      ],
+      "signals": {
+        "rar": {
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "community",
+          "age_days": 34,
+          "lines": 277,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "no community feedback yet - scored at the population median",
+        "community tier",
+        "added 34 days ago",
+        "277 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 89,
       "ref": "@kody-w/parallel_dimensions_agent",
       "title": "Parallel Dimensions",
       "description": "Tracks independent what-if branches, detects conflicting assertions, and merges only compatible dimensions using an append-only local record.",
@@ -5454,7 +5511,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/parallel_dimensions_agent.py",
       "source": null,
       "score": 54.9,
-      "origin_rank": 53,
+      "origin_rank": 54,
       "origin_size": 229,
       "components": {
         "community": 0.2958,
@@ -5489,63 +5546,6 @@
         "community tier",
         "added 34 days ago",
         "268 lines",
-        "has a rendered card"
-      ]
-    },
-    {
-      "rank": 89,
-      "ref": "@kody-w/prompt_extractor",
-      "title": "Prompt Extractor",
-      "description": "Extract the prompts shown on screen in a video by OCRing it frame by frame, merging scrolled and repeated views into one entry each, so prompts demoed in a screen recording do not have to be transcribed by hand.",
-      "origin": "native",
-      "category": "productivity",
-      "tags": [
-        "ocr",
-        "video",
-        "prompts",
-        "extraction",
-        "vision"
-      ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fprompt_extractor",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/prompt_extractor.py",
-      "source": null,
-      "score": 54.8,
-      "origin_rank": 54,
-      "origin_size": 229,
-      "components": {
-        "community": 0.2958,
-        "depth": 1.0,
-        "freshness": 0.5127,
-        "tier": 0.55
-      },
-      "scores_on": [
-        "community",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [
-        "community"
-      ],
-      "signals": {
-        "rar": {
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "community",
-          "age_days": 116,
-          "lines": 745,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "no community feedback yet - scored at the population median",
-        "community tier",
-        "added 116 days ago",
-        "745 lines",
         "has a rendered card"
       ]
     },
@@ -5616,31 +5616,30 @@
     },
     {
       "rank": 91,
-      "ref": "@kody-w/chain_composer_agent",
-      "title": "Chain Composer",
-      "description": "Composes multi-primitive RAPP chain plans from a natural-language prompt via the claude CLI, writing a plan envelope and reviewable bash script.",
+      "ref": "@kody-w/prompt_extractor",
+      "title": "Prompt Extractor",
+      "description": "Extract the prompts shown on screen in a video by OCRing it frame by frame, merging scrolled and repeated views into one entry each, so prompts demoed in a screen recording do not have to be transcribed by hand.",
       "origin": "native",
-      "category": "platform",
+      "category": "productivity",
       "tags": [
-        "compose",
-        "chain",
-        "planning",
-        "claude-cli",
-        "operator-mediated",
-        "meta"
+        "ocr",
+        "video",
+        "prompts",
+        "extraction",
+        "vision"
       ],
       "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fchain_composer_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/chain_composer_agent.py",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fprompt_extractor",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/prompt_extractor.py",
       "source": null,
-      "score": 54.6,
+      "score": 54.8,
       "origin_rank": 55,
       "origin_size": 229,
       "components": {
         "community": 0.2958,
-        "depth": 0.8939,
-        "freshness": 0.3124,
-        "tier": 0.85
+        "depth": 1.0,
+        "freshness": 0.5127,
+        "tier": 0.55
       },
       "scores_on": [
         "community",
@@ -5657,18 +5656,18 @@
           "comments": 0,
           "engagement": 0,
           "channels": {},
-          "tier": "verified",
-          "age_days": 201,
-          "lines": 419,
+          "tier": "community",
+          "age_days": 116,
+          "lines": 745,
           "has_card": true
         },
         "source": null
       },
       "why": [
         "no community feedback yet - scored at the population median",
-        "verified tier",
-        "added 201 days ago",
-        "419 lines",
+        "community tier",
+        "added 116 days ago",
+        "745 lines",
         "has a rendered card"
       ]
     },
@@ -5738,30 +5737,31 @@
     },
     {
       "rank": 93,
-      "ref": "@kody-w/pdf_reader_agent",
-      "title": "PDF Reader",
-      "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
+      "ref": "@kody-w/chain_composer_agent",
+      "title": "Chain Composer",
+      "description": "Composes multi-primitive RAPP chain plans from a natural-language prompt via the claude CLI, writing a plan envelope and reviewable bash script.",
       "origin": "native",
-      "category": "productivity",
+      "category": "platform",
       "tags": [
-        "pdf",
-        "documents",
-        "reader",
-        "phone",
-        "offline"
+        "compose",
+        "chain",
+        "planning",
+        "claude-cli",
+        "operator-mediated",
+        "meta"
       ],
       "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fpdf_reader_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/pdf_reader_agent.py",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fchain_composer_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/chain_composer_agent.py",
       "source": null,
       "score": 54.6,
       "origin_rank": 56,
       "origin_size": 229,
       "components": {
         "community": 0.2958,
-        "depth": 0.505,
-        "freshness": 1.0,
-        "tier": 0.55
+        "depth": 0.8939,
+        "freshness": 0.3124,
+        "tier": 0.85
       },
       "scores_on": [
         "community",
@@ -5778,18 +5778,18 @@
           "comments": 0,
           "engagement": 0,
           "channels": {},
-          "tier": "community",
-          "age_days": 0,
-          "lines": 122,
+          "tier": "verified",
+          "age_days": 201,
+          "lines": 419,
           "has_card": true
         },
         "source": null
       },
       "why": [
         "no community feedback yet - scored at the population median",
-        "community tier",
-        "newest in the registry",
-        "122 lines",
+        "verified tier",
+        "added 201 days ago",
+        "419 lines",
         "has a rendered card"
       ]
     },

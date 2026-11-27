@@ -24,7 +24,7 @@ import os
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/pdf_reader_agent",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "display_name": "PDF Reader",
     "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
     "author": "kody-w",
@@ -48,6 +48,25 @@ MAX_CHARS = 6000
 
 def _folder():
     return os.path.expanduser(os.environ.get("BRAINSTEM_FILES") or "~/Documents")
+
+
+_PREVIEWS = {}
+
+
+def _preview(path, limit=80):
+    """The first words of page 1, cached by modification time; "" when unreadable."""
+    try:
+        key = (path, os.path.getmtime(path))
+    except OSError:
+        return ""
+    if key not in _PREVIEWS:
+        try:
+            from pypdf import PdfReader
+            text = (PdfReader(path).pages[0].extract_text() or "").split()
+            _PREVIEWS[key] = " ".join(text)[:limit]
+        except Exception:
+            _PREVIEWS[key] = ""
+    return _PREVIEWS[key]
 
 
 def _pdfs():
@@ -76,13 +95,18 @@ class PdfReaderAgent(BasicAgent):
         super().__init__(self.name, self.metadata)
 
     def system_context(self):
-        """Tells the chat which PDFs it holds, so "my lease" or "that document" reaches this agent."""
-        _, names = _pdfs()
+        """Tells the chat which PDFs it holds, each with its opening words, so "my lease", "that document"
+        or "is a burst pipe covered?" reaches this agent."""
+        folder, names = _pdfs()
         if not names:
             return None
-        shown = ", ".join(names[:12]) + (f", and {len(names) - 12} more" if len(names) > 12 else "")
-        return (f"The person has given you these PDFs: {shown}. When they ask about any of them, even as "
-                f"\"my lease\" or \"that document\", call PdfReader with the file name first.")
+        shown = []
+        for n in names[:12]:
+            hint = _preview(os.path.join(folder, n))
+            shown.append(f"{n} (starts: \"{hint}\")" if hint else n)
+        more = f", and {len(names) - 12} more" if len(names) > 12 else ""
+        return (f"The person has given you these PDFs: {'; '.join(shown)}{more}. When they ask about anything "
+                f"these could answer, even as \"my lease\" or \"that document\", call PdfReader with the file name first.")
 
     def perform(self, file="", first_page=1, last_page=None, **kwargs):
         folder, names = _pdfs()
