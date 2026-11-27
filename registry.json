@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-27T01:48:44Z",
+  "generated_at": "2026-11-27T03:17:58Z",
   "static_api": "rapp-static-api/1.1",
   "pages_base": "https://kody-w.github.io/RAR",
   "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
@@ -7715,6 +7715,8 @@
       "_file": "agents/@discreetRappers/sharepoint_contract_analysis_agent.py",
       "_install_filename": "rar_discreetrappers_sharepoint_contract_analysis_agent.py",
       "_sha256": "6bfac36ced9e10e89b7a35b6e3a7464d3cc66e4f8832feedbbde899852aa3893",
+      "_agentcard": "stacks/agentcard-bundles/cards/@discreetRappers/sharepoint_contract_analysis_agent.agentcard",
+      "_agentcard_sha256": "afa4a78e7aaf6c57d9ecc0a655a3ff9fc9704d1960b0934ca3c42ffd5785b89c",
       "_lifecycle": "notarized",
       "_receipt": "rar_4b7017d3cc98ed91c57ed861d656e008e6b664c5440ed4b91de0dd3ca0620608",
       "_controller": {
@@ -8598,6 +8600,8 @@
       "_file": "agents/@kody-w/commons_life_agent.py",
       "_install_filename": "rar_kody_w_commons_life_agent.py",
       "_sha256": "4d130862e28b92a3a3519a8b823905bffb90f35678565bb1743a714f20d0da70",
+      "_agentcard": "stacks/agentcard-bundles/cards/@kody-w/commons_life_agent.agentcard",
+      "_agentcard_sha256": "cadeb6e0f3f2e8e19ba1c5ca3be030c1905c43402c111ff2a608018619d8bbe4",
       "_lifecycle": "notarized",
       "_receipt": "rar_870e71ba79d094c80479ba967e94b7175fd869079d80d920769f989a20373302",
       "_controller": {
@@ -8892,6 +8896,8 @@
       "_file": "agents/@kody-w/copilot_studio_forge_agent.py",
       "_install_filename": "rar_kody_w_copilot_studio_forge_agent.py",
       "_sha256": "f30e91e542090161fd2b559f4565c5c63b0fd93cb51f9a208256eb6c2d689667",
+      "_agentcard": "stacks/agentcard-bundles/cards/@kody-w/copilot_studio_forge_agent.agentcard",
+      "_agentcard_sha256": "0b1f6d31fd0550b3c419b1ff4eff20f6c4d608b9e62b14d21bc3f1198d2f1d51",
       "_lifecycle": "notarized",
       "_receipt": "rar_03c96e4652d2535c3a4443b2dc3f8384cd3b669310d547780fd6de1903018643",
       "_controller": {
@@ -14736,6 +14742,41 @@
       "shelf": "app",
       "_seed": 3321709878707232768,
       "_incantation": "FORGE CHISEL PANTHER BEREFT SHRIEK COMMAND BLADE"
+    },
+    {
+      "name": "agentcard-bundles",
+      "display_name": "Agent card bundles",
+      "version": "0.1.0",
+      "schema": "rapp-rar-stack/1.0",
+      "status": "current",
+      "path": "stacks/agentcard-bundles",
+      "purpose": "Staging. Builds one .agentcard per catalog agent that needs a package a phone's Python lacks, carrying pure-Python wheels and sibling files inside the card so it runs on a phone (Hive). Adds _agentcard and _agentcard_sha256 to those registry entries.",
+      "files": {
+        "bundle_card.py": {
+          "sha256": "14f2d92fa32b28d9830cce26df4718822e4efc7e66a4ac3451838fa10efad00a",
+          "verified": true
+        },
+        "build_bundles.py": {
+          "sha256": "d439e7e266a0d1d26d4e191dbf3106c735aeaad25922fa1fb204419dd894cce2",
+          "verified": true
+        },
+        "vendor/agentcard_core.py": {
+          "sha256": "ecab68983136441f80816c722ffe28c6097e8b211a8e2e0c5cae965cf56a4c4e",
+          "verified": true
+        },
+        "vendor/pocket_host.py": {
+          "sha256": "1bdd6c298d4e8f4cf78aa91cfa56d55ba2946fe717d0e8d1065745c714ca4bce",
+          "verified": true
+        },
+        "README.md": {
+          "sha256": "c81f4cecd9d016864bf2a8da830c67f0bc364d8ec16a7b23356af40e1dfd60d8",
+          "verified": true
+        }
+      },
+      "_verified": true,
+      "shelf": "pack",
+      "_seed": 5816856406170533888,
+      "_incantation": "FORGE FORGE PANTHER VALE GNU FLARE SMELT"
     },
     {
       "name": "bookfactory",
