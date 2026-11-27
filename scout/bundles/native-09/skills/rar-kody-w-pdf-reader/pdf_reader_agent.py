@@ -24,7 +24,7 @@ import os
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/pdf_reader_agent",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "display_name": "PDF Reader",
     "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
     "author": "kody-w",
@@ -80,8 +80,30 @@ def _find(reader, name, total, words, limit=12, cap=2500):
         lines.append(f"page {page}: {line}")
         size += len(line)
     if not lines:
-        return {"file": name, "pages": total, "found": [], "note": f"Nothing in {name} mentions {' '.join(words)}."}
+        facts = _facts(reader, total, cap)
+        return {"file": name, "pages": total, "found": [],
+                "note": f"Nothing in {name} uses the words {' '.join(words)}. These lines hold its dates and amounts; "
+                        f"quote the line that best answers them (a move-in or handover date is usually the start date), with its page.",
+                "dates_and_amounts": facts}
     return {"file": name, "pages": total, "found": lines}
+
+
+_FACT = None
+
+
+def _facts(reader, total, cap, limit=15):
+    """Lines carrying a date, a year or an amount: what people usually ask a document for."""
+    import re
+    global _FACT
+    _FACT = _FACT or re.compile(r"(\b(19|20)\d\d\b|\$\s?\d|\b\d[\d,.]*\s*(dollars?|percent|%|days|months|years)\b|"
+                                r"\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.? \d)", re.I)
+    out, size = [], 0
+    for i in range(total):
+        for line in (reader.pages[i].extract_text() or "").splitlines():
+            if _FACT.search(line) and size + len(line) <= cap and len(out) < limit:
+                out.append(f"page {i + 1}: {line.strip()}")
+                size += len(line)
+    return out
 
 
 _PREVIEWS = {}
