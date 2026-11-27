@@ -99,7 +99,7 @@
    "agent": "@discreetRappers/sharepoint_contract_analysis_agent",
    "file": "agents/@discreetRappers/sharepoint_contract_analysis_agent.py",
    "carried": [
-    "pypdf (pypdf-7.1.1-py3-none-any.whl)"
+    "pypdf (pypdf-7.2.0-py3-none-any.whl)"
    ],
    "left_out": [],
    "skipped_optional": [
