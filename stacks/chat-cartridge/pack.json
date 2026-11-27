@@ -2,7 +2,7 @@
   "schema": "rapp-rar-stack/1.2",
   "name": "chat-cartridge",
   "display_name": "Chat cartridge (any AI)",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "maturity": "staging",
   "purpose": "Take your chat with you. One SKILL.md any AI can read: 'wrap up' writes the chat as one plain file you own (the Brainstem chat export shape, with three next jobs after |||NEXT|||), and 'carry on' starts from that file in any other AI. An AI that carries on writes only its new turns; a small tool joins the files so nothing said earlier can change. STAGING: one relay across three vendors on one machine; it moves down a layer only after real users on more than one install (proven-winner rule).",
   "files": {
@@ -13,8 +13,8 @@
     },
     "cartridge.py": {
       "purpose": "Optional checker and joiner: check, next, join, grew, from-claude. Python 3, standard library only.",
-      "size": 10071,
-      "sha256": "900776a40046c15f80a354ee72bf4cee71f1c6ec9b0c48670347a8a5d0da36d2"
+      "size": 10295,
+      "sha256": "6fa311a32f961f1064038306ed9a76d1a944a59df053f14ce1d7969a0ae5aa44"
     },
     "README.md": {
       "purpose": "What it is, the two lines you say, and what has been seen so far.",
