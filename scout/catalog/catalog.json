@@ -133,7 +133,7 @@
       ]
     },
     {
-      "bytes": 604242,
+      "bytes": 604544,
       "channel": "native",
       "files": 32,
       "id": "native-09",
@@ -13833,17 +13833,17 @@
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "aa525ac076e5e2eab0327c51610842818ae18fc80dd797c3b425c23de6e98cfc",
+          "sha256": "e62e78ba224a94a153c0fd6a0252731d6a806051c8879e36f2a42b8714d40d5a",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-09/skills/rar-kody-w-pdf-reader/SKILL.md"
         },
         {
           "path": "pdf_reader_agent.py",
-          "sha256": "ca40733518a8bc1efca3eecb91f159ade3ea75e1d216e8adf27b31ded68aefde",
+          "sha256": "aead7efc9eca21d1fff112ee0657a10a097b88516de1a8b5bc91fa3f69dc3aa4",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-09/skills/rar-kody-w-pdf-reader/pdf_reader_agent.py"
         },
         {
           "path": "rapp/agent.lock.json",
-          "sha256": "c67df636c3a2d3460d61e453f1def89ad78f8f95a2ff1c638454d9f84b475ef0",
+          "sha256": "3eae0d54b2a53c096847d85043c6c1d008cb12a81a770623cc19c20da533617d",
           "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-09/skills/rar-kody-w-pdf-reader/rapp/agent.lock.json"
         },
         {
@@ -13871,11 +13871,11 @@
       },
       "requires_env": [],
       "skill_name": "rar-kody-w-pdf-reader",
-      "skill_sha256": "aa525ac076e5e2eab0327c51610842818ae18fc80dd797c3b425c23de6e98cfc",
-      "source_commit": "fa6ec14804a94ec0b3f2f4a3970dcb6f18aac266",
+      "skill_sha256": "e62e78ba224a94a153c0fd6a0252731d6a806051c8879e36f2a42b8714d40d5a",
+      "source_commit": "699bbd0e9cb73876bf536cc3ed7d57c07b5b9873",
       "source_kind": "rar-agent",
-      "source_sha256": "ca40733518a8bc1efca3eecb91f159ade3ea75e1d216e8adf27b31ded68aefde",
-      "version": "1.0.6"
+      "source_sha256": "aead7efc9eca21d1fff112ee0657a10a097b88516de1a8b5bc91fa3f69dc3aa4",
+      "version": "1.0.7"
     },
     {
       "bundle": "native-09",

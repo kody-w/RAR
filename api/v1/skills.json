@@ -12,7 +12,7 @@
   },
   "inputs": {
     "canonical_manifests": "b3db907d4b20894ca52b84988590e7b577d561477cf6b48167b04f15c5e08e63",
-    "scout_catalog": "d8965e76a1cffa2e077d12f0cf1e379f92bc84a9c599fcf52e22db8ecb9aea48",
+    "scout_catalog": "51a1740e6b110b0592020093144237d99a5169aab0ed850c9c50cae097d43089",
     "scout_toaster": {
       "commit": "d54ba8484b5c5dae6406d2090c03115d12985446",
       "sha256": "d340043178aa4160f76a179b8b1086971e09207b212aff2ab2c0752b69173e17"
@@ -19411,23 +19411,23 @@
       ],
       "slug": "rar-kody-w-pdf-reader",
       "source": {
-        "artifact_sha256": "ca40733518a8bc1efca3eecb91f159ade3ea75e1d216e8adf27b31ded68aefde",
+        "artifact_sha256": "aead7efc9eca21d1fff112ee0657a10a097b88516de1a8b5bc91fa3f69dc3aa4",
         "entrypoint": "scout/bundles/native-09/skills/rar-kody-w-pdf-reader/SKILL.md",
         "entrypoint_url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-09/skills/rar-kody-w-pdf-reader/SKILL.md",
         "files": [
           {
             "path": "scout/bundles/native-09/skills/rar-kody-w-pdf-reader/SKILL.md",
-            "sha256": "aa525ac076e5e2eab0327c51610842818ae18fc80dd797c3b425c23de6e98cfc",
+            "sha256": "e62e78ba224a94a153c0fd6a0252731d6a806051c8879e36f2a42b8714d40d5a",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-09/skills/rar-kody-w-pdf-reader/SKILL.md"
           },
           {
             "path": "scout/bundles/native-09/skills/rar-kody-w-pdf-reader/pdf_reader_agent.py",
-            "sha256": "ca40733518a8bc1efca3eecb91f159ade3ea75e1d216e8adf27b31ded68aefde",
+            "sha256": "aead7efc9eca21d1fff112ee0657a10a097b88516de1a8b5bc91fa3f69dc3aa4",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-09/skills/rar-kody-w-pdf-reader/pdf_reader_agent.py"
           },
           {
             "path": "scout/bundles/native-09/skills/rar-kody-w-pdf-reader/rapp/agent.lock.json",
-            "sha256": "c67df636c3a2d3460d61e453f1def89ad78f8f95a2ff1c638454d9f84b475ef0",
+            "sha256": "3eae0d54b2a53c096847d85043c6c1d008cb12a81a770623cc19c20da533617d",
             "url": "https://raw.githubusercontent.com/kody-w/RAR/main/scout/bundles/native-09/skills/rar-kody-w-pdf-reader/rapp/agent.lock.json"
           },
           {
@@ -19437,7 +19437,7 @@
           }
         ],
         "hash_algorithm": "sha256",
-        "input_revision": "fa6ec14804a94ec0b3f2f4a3970dcb6f18aac266",
+        "input_revision": "699bbd0e9cb73876bf536cc3ed7d57c07b5b9873",
         "projection_generator": {
           "schema": "rar-scout/1.0",
           "toaster_commit": "d54ba8484b5c5dae6406d2090c03115d12985446"
@@ -19451,7 +19451,7 @@
         "projection",
         "scout"
       ],
-      "version": "1.0.6"
+      "version": "1.0.7"
     },
     {
       "artifact_type": "skill",
