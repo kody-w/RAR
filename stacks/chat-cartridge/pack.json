@@ -2,7 +2,7 @@
   "schema": "rapp-rar-stack/1.2",
   "name": "chat-cartridge",
   "display_name": "Chat cartridge (any AI)",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "maturity": "staging",
   "purpose": "Take your chat with you. One SKILL.md any AI can read: 'wrap up' writes the chat as one plain file you own (the Brainstem chat export shape, with three next jobs after |||NEXT|||), and 'carry on' starts from that file in any other AI. An AI that carries on writes only its new turns; a small tool joins the files so nothing said earlier can change. STAGING: one relay across three vendors on one machine; it moves down a layer only after real users on more than one install (proven-winner rule).",
   "files": {
@@ -18,8 +18,13 @@
     },
     "README.md": {
       "purpose": "What it is, the two lines you say, and what has been seen so far.",
-      "size": 1840,
-      "sha256": "35ce8bf7474fc83ccb986f2ff6109324c56e9278b590fb5995dfab8627ae51f8"
+      "size": 2198,
+      "sha256": "0b8ee3f048842259122d98c2cb3b36a82564fec7beb332a3e40ad15bdd099890"
+    },
+    "read_page_agent.py": {
+      "purpose": "Optional. Drop into an on-device Brainstem's agents/ so it can take the one-line prompt: reads one public https page word for word. Refuses addresses on the device or home network, sign-ins inside addresses, redirects, non-text pages and oversized or slow pages.",
+      "size": 10253,
+      "sha256": "5a36597b1d418517326015955e300da2c6905cbfba9fb39cc3aca4d9fd128248"
     }
   },
   "capabilities": [
@@ -32,5 +37,13 @@
   "pairs_with": [
     "brainstem-skill",
     "senses"
-  ]
+  ],
+  "install": {
+    "type": "agent_pack",
+    "agents": [
+      "stacks/chat-cartridge/read_page_agent.py"
+    ],
+    "destination": "agents/",
+    "notes": "Only needed for an on-device Brainstem, which cannot open web pages on its own. Copy read_page_agent.py into agents/; it loads on the next chat. Hosted web chats need nothing installed."
+  }
 }
