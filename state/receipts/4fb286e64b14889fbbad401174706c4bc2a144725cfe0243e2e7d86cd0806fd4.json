@@ -1,0 +1,50 @@
+{
+  "acceptance": {
+    "checks": [
+      "manifest",
+      "namespace",
+      "content_sha256",
+      "base_precondition",
+      "security_scan",
+      "registry_build",
+      "card_forge",
+      "full_test_suite"
+    ],
+    "github_id": 1735900,
+    "github_login": "kody-w",
+    "policy": "rar-notary/1.0",
+    "workflow_run": "46045957412"
+  },
+  "action": "agent.update",
+  "agent": "@kody-w/pdf_reader_agent",
+  "artifact": {
+    "algorithm": "sha256-lf-v1",
+    "digest": "aead7efc9eca21d1fff112ee0657a10a097b88516de1a8b5bc91fa3f69dc3aa4"
+  },
+  "canonical_path": "agents/@kody-w/pdf_reader_agent.py",
+  "controller": {
+    "github_id": 1735900,
+    "github_login": "kody-w"
+  },
+  "created_at": "2026-11-27T17:59:15.130069+00:00",
+  "id": "rar_4fb286e64b14889fbbad401174706c4bc2a144725cfe0243e2e7d86cd0806fd4",
+  "issuer": "github:kody-w/RAR",
+  "previous": {
+    "digest": "ca40733518a8bc1efca3eecb91f159ade3ea75e1d216e8adf27b31ded68aefde",
+    "receipt": "rar_8aa9d86baf97d2f443196718e0669bc7a0cb7d280ac241daccfdb9c39ebefb81",
+    "version": "1.0.6"
+  },
+  "quality_tier": "community",
+  "request_id": "req_ccc507db9930ffbf72f01a87",
+  "revision_id": "4fb286e64b14889fbbad401174706c4bc2a144725cfe0243e2e7d86cd0806fd4",
+  "schema": "rar-receipt/1.0",
+  "status": "notarized",
+  "submission": {
+    "github_id": 1735900,
+    "github_login": "kody-w",
+    "issue_node_id": "I_kwDOR48twc8AAAABjH0giQ",
+    "issue_number": 1666,
+    "source_body_sha256": "d2e6be1e112c5d28cf62b6e19ff684b9d2b722f175a3969158e030e8de50a0c3"
+  },
+  "version": "1.0.7"
+}

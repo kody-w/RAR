@@ -24,7 +24,7 @@ import os
 __manifest__ = {
     "schema": "rapp-agent/1.0",
     "name": "@kody-w/pdf_reader_agent",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "display_name": "PDF Reader",
     "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
     "author": "kody-w",
@@ -265,6 +265,7 @@ class PdfReaderAgent(BasicAgent):
         cut = len(text) > MAX_CHARS
         out = {"file": match, "pages": total, "read": [first, last], "text": text[:MAX_CHARS], "truncated": cut}
         if last < total or cut:
-            out["more"] = (f"This is only part of a {total}-page PDF. If the answer is not here, call PdfReader again "
-                           f"with look_for set to a few words for what they asked.")
+            out["more"] = (f"This is only part of a {total}-page PDF. Its distinct lines from every page are below; "
+                           f"answer from one with its page, or call PdfReader again with look_for.")
+            out["distinct_lines"] = _distinct(_lines(reader, total), 2000)
         return json.dumps(out)
