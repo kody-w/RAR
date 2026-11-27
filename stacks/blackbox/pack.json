@@ -2,9 +2,9 @@
   "schema": "rapp-rar-stack/1.0",
   "name": "blackbox",
   "display_name": "Blackbox",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "maturity": "staging",
-  "purpose": "Ask your Brainstem what your computer did while you were not looking: what is using the most memory, why it restarted, what is frozen, what the guard did overnight, and let a frozen job carry on or stop it. One agent file that speaks for a recorder running beside the Brainstem; the kernel is untouched. STAGING: one install, one day of use; it moves down a layer only after real users on more than one install (proven-winner rule).",
+  "purpose": "Ask your Brainstem what your computer did while you were not looking: what is using the most memory, why it restarted, what is frozen, what the guard did overnight, and let a frozen job carry on or stop it. A recorder that runs beside the Brainstem and one agent file that speaks for it; the kernel is untouched. STAGING: one install, one day of use; it moves down a layer only after real users on more than one install (proven-winner rule).",
   "files": {
     "blackbox_agent.py": {
       "size": 6620,
@@ -12,8 +12,13 @@
       "purpose": "Drop into agents/. Blackbox(ask=biggest|why_restarted|frozen|what_it_did|carry_on|stop, job=<id>) reads a recorder at ~/.blackbox/blackbox.py (or BLACKBOX_PATH). Stop needs one job id and never accepts 'all'."
     },
     "README.md": {
-      "size": 1695,
-      "sha256": "862b6fd7158f714b5e80fe073b14e0c7cbec7d718187c6b88f278ff11401c7d5"
+      "size": 2304,
+      "sha256": "e1451c7e3701c2937bab023d7fc6cd0774ae2226907a9c5208e0f407ae3fce14"
+    },
+    "blackbox.py": {
+      "size": 37836,
+      "sha256": "f04a71755ced74999ded8008fb44e06415d3f2778024bbf2a589eed0231011b6",
+      "purpose": "The recorder and guard. Not an agent: run 'python3 blackbox.py install' once per Mac. It keeps itself running beside the Brainstem."
     }
   },
   "install": {
@@ -22,7 +27,7 @@
       "stacks/blackbox/blackbox_agent.py"
     ],
     "destination": "agents/",
-    "notes": "Copy blackbox_agent.py into your brainstem's agents/. It loads on the next /chat, no restart. Ask: 'what happened on my computer overnight?'. Needs a recorder beside the Brainstem; without one it says so."
+    "notes": "First: python3 blackbox.py install (once per Mac; macOS). Then copy blackbox_agent.py into your brainstem's agents/. Ask: 'what happened on my computer overnight?'."
   },
   "agents_in_pack": 1,
   "capabilities": [
@@ -34,8 +39,8 @@
     "stop one named job"
   ],
   "withheld": {
-    "what": "the recorder",
-    "sha256": "c1e9f11d800678bda412ba7cfd6a30d636f1509fd6e9785442c40da5db26c677"
+    "what": "one component",
+    "sha256": "398a242a5934707e8d3dc1e64004aeac95783046bae4817400a71589de7187a1"
   },
   "evidence": {
     "first_live_loop": "2026-11-27: 4 of 4 /chat turns on a throwaway Brainstem (two small test jobs frozen; one let go, one stopped; nothing left frozen)",
