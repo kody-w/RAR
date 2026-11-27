@@ -4,12 +4,12 @@
   "display_name": "Egg hatch (your Brainstem, anywhere)",
   "version": "0.1.0",
   "maturity": "staging",
-  "purpose": "Carry your Brainstem as one rapp/1 egg: hatch it on your computer, wake the same egg inside any AI that runs Python, and bring the chat home with the Brainstem page's Import.",
+  "purpose": "Carry your Brainstem as one rapp/1 egg: hatch it on your computer, wake the same egg inside any AI that runs Python, and bring the chat and its memory home.",
   "files": {
     "hatch_app.py": {
-      "purpose": "The app: one page on this computer to hatch an egg, take it to any AI, bring the chat home.",
-      "size": 10045,
-      "sha256": "d860e3367e1fd5937967bdcf7edc118f2a11d8dba8ccf03093a21c0e72271f39"
+      "purpose": "The app: one page on this computer to hatch an egg, take it to any AI, bring the chat and its memory home.",
+      "size": 13033,
+      "sha256": "6a84bc9f3eba54eec4e156cfe01c80ca1e32cb1a8d39181fe6f3d110fa8f2981"
     },
     "lay_egg.py": {
       "purpose": "Makes a wake egg from a packed Brainstem, verified before it is written.",
