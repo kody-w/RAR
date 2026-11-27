@@ -1,7 +1,7 @@
 {
   "schema": "rar-catalog/1.0",
   "description": "Every agent in RAR as a lean record. Fetch this one file to render a complete browsable catalog with no further requests, no backend, no authentication and no GitHub account. stack_packs lists every installable pack, including retired packs with status and retirement metadata.",
-  "generated": "2026-11-26T19:59:46Z",
+  "generated": "2026-11-27T01:48:44Z",
   "count": 228,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/catalog.json",
   "agents": [
@@ -10941,10 +10941,10 @@
       "schema": "rapp-rar-stack/1.2",
       "status": "current",
       "path": "stacks/egg-hatch",
-      "purpose": "Carry your Brainstem as one rapp/1 egg: hatch it on your computer, wake the same egg inside any AI that runs Python, and bring the chat home with the Brainstem page's Import.",
+      "purpose": "Carry your Brainstem as one rapp/1 egg: hatch it on your computer, wake the same egg inside any AI that runs Python, and bring the chat and its memory home.",
       "files": {
         "hatch_app.py": {
-          "sha256": "d860e3367e1fd5937967bdcf7edc118f2a11d8dba8ccf03093a21c0e72271f39",
+          "sha256": "6a84bc9f3eba54eec4e156cfe01c80ca1e32cb1a8d39181fe6f3d110fa8f2981",
           "verified": true
         },
         "lay_egg.py": {

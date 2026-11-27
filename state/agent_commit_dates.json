@@ -518,7 +518,7 @@
   },
   "agents/@borg/hacker_news_agent.py": {
    "added": "2026-07-01T15:15:15-04:00",
-   "updated": "2026-07-22T21:30:44-04:00"
+   "updated": "2026-11-26T20:00:39Z"
   },
   "agents/@cat-agent-skills/accessibility_pass_agent.py": {
    "added": "2026-07-31T22:43:16-04:00",
@@ -6886,7 +6886,7 @@
   },
   "agents/@howardh/borg_agent.py.card": {
    "added": "2026-05-24T21:45:25-04:00",
-   "updated": "2026-07-22T21:30:44-04:00"
+   "updated": "2026-11-26T20:00:39Z"
   },
   "agents/@howardh/cardsmith_agent.py": {
    "added": "2026-05-24T21:45:25-04:00",
