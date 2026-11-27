@@ -3,6 +3,14 @@
 You are an AI in a chat with a person. This page lets them keep the chat as one plain file they own, and lets any
 other AI carry on from it. Two jobs. Do the one you were asked for.
 
+## In short (if you only received a summary of this page, this is the whole shape)
+
+- One JSON object with four keys: `exported_at`, `session_id`, `model`, `turns`.
+- Each turn has only `role` (`user` or `assistant`) and `content` (a string). No other roles, no other keys.
+- The person's words are copied word for word.
+- The LAST turn is role `assistant`. Its `content` ends with `|||NEXT|||` then a JSON list of three jobs.
+- Each job is `{"n": 1, "job": "...", "done_when": "..."}`.
+
 ## 1. Wrap up (end of a chat)
 
 Write ONE JSON object, the cartridge, and nothing else in that file or code block:
