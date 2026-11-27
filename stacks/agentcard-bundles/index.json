@@ -1,7 +1,7 @@
 {
  "schema": "rapp-agentcard-bundles/1",
  "status": "staging",
- "count": 3,
+ "count": 4,
  "agents": [
   {
    "agent": "@discreetRappers/architecture_diagram_agent",
@@ -250,6 +250,17 @@
     }
    ],
    "status": "nothing to carry"
+  },
+  {
+   "agent": "@kody-w/pdf_reader_agent",
+   "file": "agents/@kody-w/pdf_reader_agent.py",
+   "carried": [
+    "pypdf (pypdf-7.2.0-py3-none-any.whl)"
+   ],
+   "left_out": [],
+   "skipped_optional": [],
+   "status": "card",
+   "agentcard": "stacks/agentcard-bundles/cards/@kody-w/pdf_reader_agent.agentcard"
   },
   {
    "agent": "@kody-w/prompt_extractor",
