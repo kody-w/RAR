@@ -84,6 +84,40 @@ def hatch(blob, filename):
     STATE.update(egg=folder / f"{stem}.egg", name=stem, port=port, proc=proc, error=None)
 
 
+def memory_home(chat_bytes):
+    """Step 3: add what the Brainstem remembered in the other AI (the `memory` a chat.json carries) to the
+    Brainstem hatched here. Add-only: an entry already here is never changed; each touched file is copied to
+    <file>.before-<time> first, so one copy back undoes it. Same rule as `brainfreeze memory-home`."""
+    if not STATE["port"]:
+        raise ValueError("hatch your egg first")
+    with urllib.request.urlopen(f"http://127.0.0.1:{STATE['port']}/health", timeout=10) as r:
+        home = Path(json.load(r)["brainstem_dir"])
+    if not (home / "soul.md").is_file():
+        raise ValueError("your hatched Brainstem could not be found")
+    try:
+        chat = json.loads(chat_bytes)
+    except ValueError:
+        raise ValueError("that is not a chat.json")
+    memory = chat.get("memory") if isinstance(chat, dict) else None
+    if not isinstance(memory, dict):
+        return {}
+    base, added, stamp = (home / ".brainstem_data").resolve(), {}, time.strftime("%Y%m%d-%H%M%S")
+    for rel, incoming in memory.items():
+        target = (base / rel).resolve()
+        if base not in target.parents or not rel.endswith(".json") or not isinstance(incoming, dict):
+            continue
+        current = json.loads(target.read_text()) if target.is_file() else {}
+        new = {k: v for k, v in incoming.items() if k not in current} if isinstance(current, dict) else {}
+        if not new:
+            continue
+        if target.is_file():
+            target.with_name(target.name + ".before-" + stamp).write_bytes(target.read_bytes())
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(json.dumps({**current, **new}, indent=2))
+        added[rel] = len(new)
+    return added
+
+
 def stop():
     if STATE["proc"] and STATE["proc"].poll() is None:
         STATE["proc"].terminate()
@@ -121,7 +155,10 @@ padding:12px 18px;font:inherit;font-weight:600;cursor:pointer;text-decoration:no
 <button class="btn" id="copy">Copy the sentence</button> <a class="btn alt" id="egg" href="/egg">Download my egg</a></section>
 
 <section class="step" id="s3"><h2>3. Bring it home</h2>
-<p>When you're done there, ask the AI for <b>chat.json</b>. Then open your Brainstem, click <b>Import</b>, and choose it. The conversation carries on here.</p>
+<p>When you're done there, ask the AI for <b>chat.json</b> and drop it here. What your Brainstem learned there comes home.</p>
+<label class="drop" id="drop2">Choose or drop chat.json<input type="file" accept=".json" id="file2" hidden></label>
+<p id="status2" style="margin-top:12px"></p>
+<p>Then open your Brainstem, click <b>Import</b>, and choose the same file. The conversation carries on here.</p>
 <a class="btn alt" id="open2" href="#" target="_blank">Open my Brainstem</a></section>
 
 <script>
@@ -136,6 +173,12 @@ async function send(f){$("status").textContent="Checking and hatching… (the fi
 $("file").onchange=e=>e.target.files[0]&&send(e.target.files[0]);
 const d=$("drop");d.ondragover=e=>{e.preventDefault();d.classList.add("on")};d.ondragleave=()=>d.classList.remove("on");
 d.ondrop=e=>{e.preventDefault();d.classList.remove("on");e.dataTransfer.files[0]&&send(e.dataTransfer.files[0])};
+async function home(f){$("status2").textContent="Bringing it home…";
+ const r=await(await fetch("/home",{method:"POST",body:f})).json();
+ $("status2").innerHTML=r.error?`<span class="bad">${r.error}</span>`:`<span class="ok">${r.added?`Remembered ${r.added} new thing${r.added>1?"s":""} from there.`:"Nothing new to remember; already home."}</span>`;}
+$("file2").onchange=e=>e.target.files[0]&&home(e.target.files[0]);
+const d2=$("drop2");d2.ondragover=e=>{e.preventDefault();d2.classList.add("on")};d2.ondragleave=()=>d2.classList.remove("on");
+d2.ondrop=e=>{e.preventDefault();d2.classList.remove("on");e.dataTransfer.files[0]&&home(e.dataTransfer.files[0])};
 $("copy").onclick=async()=>{try{await navigator.clipboard.writeText($("sentence").textContent);$("copy").textContent="Copied"}catch(e){$("copy").textContent="Select the sentence and copy it"}};
 </script></main></body></html>"""
 
@@ -169,7 +212,7 @@ class Handler(BaseHTTPRequestHandler):
             self._send(404, '{"error":"not here"}')
 
     def do_POST(self):
-        if not self.path.startswith("/hatch"):
+        if not (self.path.startswith("/hatch") or self.path == "/home"):
             return self._send(404, '{"error":"not here"}')
         if self.headers.get("Origin") not in (None, f"http://127.0.0.1:{self.server.server_port}",
                                               f"http://localhost:{self.server.server_port}"):
@@ -177,6 +220,12 @@ class Handler(BaseHTTPRequestHandler):
         n = int(self.headers.get("Content-Length") or 0)
         if n > 64 * 1024 * 1024:
             return self._send(413, '{"error":"that file is too big to be an egg"}')
+        if self.path == "/home":
+            try:
+                added = memory_home(self.rfile.read(n))
+                return self._send(200, json.dumps({"added": sum(added.values())}))
+            except (ValueError, OSError) as e:
+                return self._send(200, json.dumps({"error": str(e)}))
         from urllib.parse import parse_qs, urlparse
         name = (parse_qs(urlparse(self.path).query).get("name") or ["brainstem.egg"])[0]
         try:
