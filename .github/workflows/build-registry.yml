@@ -58,6 +58,11 @@ on:
       - 'scripts/check_skill_url_stability.py'
       - 'api/v1/skills.json'
   workflow_dispatch:
+  # The card build commits with the built-in token, which never starts workflows (GitHub's loop guard),
+  # so a new .agentcard under stacks/ reached registry.json only on an unrelated push.
+  workflow_run:
+    workflows: ["Agent card bundles (staging)"]
+    types: [completed]
 
 permissions:
   contents: write
@@ -65,6 +70,7 @@ permissions:
 
 jobs:
   build-registry:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
