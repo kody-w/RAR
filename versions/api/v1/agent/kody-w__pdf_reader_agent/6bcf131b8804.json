@@ -1,0 +1,44 @@
+{
+  "schema": "rar-pokedex-agent/1.0",
+  "id": "kody-w__pdf_reader_agent",
+  "name": "PDF Reader",
+  "rar_name": "@kody-w/pdf_reader_agent",
+  "rappid": "rappid:@kody-w/pdf_reader_agent:11f107372a62d1ec9dd7ec794fab0edd2d2cac23370cd67633d74fb4f9979ad4",
+  "_migrated_from": "rappid:@kody-w/pdf_reader_agent:f4364f878df6b7556e80cdc2936c60d2d49f97c8b3983777b69fe80770b64a7a",
+  "_migrated_from_all": [
+    "rappid:@kody-w/pdf_reader_agent:13d0337982f6bfcb17ae223b6cbf63603a5dc6dac1340bcba0d6a3dfe11bf22c",
+    "rappid:@kody-w/pdf_reader_agent:331f186c35cf5731d55d1ccbf5885767beb199847b264c52f516d5f9cc0d0404",
+    "rappid:@kody-w/pdf_reader_agent:f4364f878df6b7556e80cdc2936c60d2d49f97c8b3983777b69fe80770b64a7a"
+  ],
+  "_migrated_from_note": "legacy identity string, read-forever; the canonical rappid above is authoritative",
+  "version": "1.0.3",
+  "publisher": "@kody-w",
+  "category": "productivity",
+  "tags": [
+    "pdf",
+    "documents",
+    "reader",
+    "phone",
+    "offline"
+  ],
+  "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
+  "author": "kody-w",
+  "quality_tier": "community",
+  "requires_env": [],
+  "dependencies": [
+    "@rapp/basic_agent"
+  ],
+  "lines": 187,
+  "size_kb": 8.3,
+  "sha256": "9ec0f532ccdc706c1c217241536823ab03a1310f95ea8ba5cfb34281e242e0fb",
+  "has_card": true,
+  "added_at": "2026-11-27T05:22:10Z",
+  "parent_rappid": "rappid:@kody-w/rapp:9a8f0a4b5a710e20f4d819a0f37d2a4c9f113b5e78fb3c29e70b54fff48a38f9",
+  "sprite_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/sprite/kody-w__pdf_reader_agent.svg",
+  "py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/pdf_reader_agent.py",
+  "card_url": null,
+  "api_py_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__pdf_reader_agent.py",
+  "api_card_url": null,
+  "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/agent/kody-w__pdf_reader_agent.json",
+  "github_url": "https://github.com/kody-w/RAR/blob/main/agents/@kody-w/pdf_reader_agent.py"
+}

@@ -1,7 +1,7 @@
 {
   "schema": "rar-catalog/1.0",
   "description": "Every agent in RAR as a lean record. Fetch this one file to render a complete browsable catalog with no further requests, no backend, no authentication and no GitHub account. stack_packs lists every installable pack, including retired packs with status and retirement metadata.",
-  "generated": "2026-11-27T14:40:11Z",
+  "generated": "2026-11-27T15:19:37Z",
   "count": 229,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/catalog.json",
   "agents": [
@@ -7690,7 +7690,7 @@
       "name": "@kody-w/pdf_reader_agent",
       "display_name": "PDF Reader",
       "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "publisher": "@kody-w",
       "author": "kody-w",
       "category": "productivity",
@@ -7711,17 +7711,17 @@
         "path": "agents/@kody-w/pdf_reader_agent.py",
         "raw": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/pdf_reader_agent.py",
         "cdn": "https://cdn.jsdelivr.net/gh/kody-w/RAR@main/agents/@kody-w/pdf_reader_agent.py",
-        "sha256": "96c6f0c340e78db12732e86ef28038d0f30a5ba1db225888bad665e675579d05",
+        "sha256": "9ec0f532ccdc706c1c217241536823ab03a1310f95ea8ba5cfb34281e242e0fb",
         "pages": "https://kody-w.github.io/RAR/agents/@kody-w/pdf_reader_agent.py",
         "version": {
-          "sha256": "96c6f0c340e78db12732e86ef28038d0f30a5ba1db225888bad665e675579d05",
-          "sha8": "96c6f0c340e7",
-          "path": "versions/@kody-w/pdf_reader_agent/96c6f0c340e7.py"
+          "sha256": "9ec0f532ccdc706c1c217241536823ab03a1310f95ea8ba5cfb34281e242e0fb",
+          "sha8": "9ec0f532ccdc",
+          "path": "versions/@kody-w/pdf_reader_agent/9ec0f532ccdc.py"
         }
       },
       "stats": {
-        "lines": 146,
-        "size_kb": 6.3,
+        "lines": 187,
+        "size_kb": 8.3,
         "added_at": "2026-11-27T05:22:10Z"
       }
     },

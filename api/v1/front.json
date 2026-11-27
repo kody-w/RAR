@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-11-27T14:40:11Z",
+  "generated": "2026-11-27T15:19:37Z",
   "counts": {
     "native": 229,
     "aggregated": 150,
@@ -4409,30 +4409,29 @@
     },
     {
       "rank": 71,
-      "ref": "@kody-w/self_compact_agent",
-      "title": "SelfCompact",
-      "description": "The brainstem compacts its own context: a gauge on every chat, hints as it fills, and at the cutoff every other tool waits until the model writes a note to itself that survives when old turns drop out.",
+      "ref": "@kody-w/pdf_reader_agent",
+      "title": "PDF Reader",
+      "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
       "origin": "native",
-      "category": "core",
+      "category": "productivity",
       "tags": [
-        "context",
-        "memory",
-        "compaction",
-        "handoff",
-        "long-conversations",
-        "pi"
+        "pdf",
+        "documents",
+        "reader",
+        "phone",
+        "offline"
       ],
       "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fself_compact_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/self_compact_agent.py",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fpdf_reader_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/pdf_reader_agent.py",
       "source": null,
-      "score": 55.9,
+      "score": 56.4,
       "origin_rank": 43,
       "origin_size": 229,
       "components": {
         "community": 0.2958,
-        "depth": 0.7433,
-        "freshness": 0.8214,
+        "depth": 0.5901,
+        "freshness": 1.0,
         "tier": 0.55
       },
       "scores_on": [
@@ -4451,8 +4450,8 @@
           "engagement": 0,
           "channels": {},
           "tier": "community",
-          "age_days": 34,
-          "lines": 304,
+          "age_days": 0,
+          "lines": 187,
           "has_card": true
         },
         "source": null
@@ -4460,8 +4459,8 @@
       "why": [
         "no community feedback yet - scored at the population median",
         "community tier",
-        "added 34 days ago",
-        "304 lines",
+        "newest in the registry",
+        "187 lines",
         "has a rendered card"
       ]
     },
@@ -4532,6 +4531,64 @@
     },
     {
       "rank": 73,
+      "ref": "@kody-w/self_compact_agent",
+      "title": "SelfCompact",
+      "description": "The brainstem compacts its own context: a gauge on every chat, hints as it fills, and at the cutoff every other tool waits until the model writes a note to itself that survives when old turns drop out.",
+      "origin": "native",
+      "category": "core",
+      "tags": [
+        "context",
+        "memory",
+        "compaction",
+        "handoff",
+        "long-conversations",
+        "pi"
+      ],
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fself_compact_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/self_compact_agent.py",
+      "source": null,
+      "score": 55.9,
+      "origin_rank": 44,
+      "origin_size": 229,
+      "components": {
+        "community": 0.2958,
+        "depth": 0.7433,
+        "freshness": 0.8214,
+        "tier": 0.55
+      },
+      "scores_on": [
+        "community",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [
+        "community"
+      ],
+      "signals": {
+        "rar": {
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "community",
+          "age_days": 34,
+          "lines": 304,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "no community feedback yet - scored at the population median",
+        "community tier",
+        "added 34 days ago",
+        "304 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 74,
       "ref": "@rapp/start_brainstem_agent",
       "title": "Start Brainstem",
       "description": "Starts the person's Brainstem for them: says if one is already up, starts an installed one, or (after a yes) installs and starts one. Never stops another program.",
@@ -4548,7 +4605,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@rapp/start_brainstem_agent.py",
       "source": null,
       "score": 55.8,
-      "origin_rank": 44,
+      "origin_rank": 45,
       "origin_size": 229,
       "components": {
         "community": 0.2958,
@@ -4583,61 +4640,6 @@
         "community tier",
         "added 16 days ago",
         "233 lines",
-        "has a rendered card"
-      ]
-    },
-    {
-      "rank": 74,
-      "ref": "@borg/borg_agent",
-      "title": "Borg",
-      "description": "Assimilates knowledge from GitHub repos and web URLs into structured reports.",
-      "origin": "native",
-      "category": "core",
-      "tags": [
-        "core",
-        "analysis",
-        "github",
-        "web",
-        "assimilation"
-      ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40borg%2Fborg_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@borg/borg_agent.py.card",
-      "source": null,
-      "score": 55.7,
-      "origin_rank": 45,
-      "origin_size": 229,
-      "components": {
-        "community": 0.2958,
-        "depth": 1.0,
-        "freshness": 0.255,
-        "tier": 0.85
-      },
-      "scores_on": [
-        "community",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [],
-      "signals": {
-        "rar": {
-          "upvotes": 1,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "verified",
-          "age_days": 237,
-          "lines": 1000,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "1 upvote",
-        "verified tier",
-        "added 237 days ago",
-        "1000 lines",
         "has a rendered card"
       ]
     },
@@ -4708,21 +4710,21 @@
     },
     {
       "rank": 76,
-      "ref": "@kody-w/windows_vm_install_lab_agent",
-      "title": "Windows VM Install Lab",
-      "description": "Runs an allowlisted Hyper-V Windows 11 lab for repeatable RAPP installer release testing with an embedded, hash-verified toolkit.",
+      "ref": "@borg/borg_agent",
+      "title": "Borg",
+      "description": "Assimilates knowledge from GitHub repos and web URLs into structured reports.",
       "origin": "native",
-      "category": "devtools",
+      "category": "core",
       "tags": [
-        "windows",
-        "hyper-v",
-        "installer",
-        "testing",
-        "automation"
+        "core",
+        "analysis",
+        "github",
+        "web",
+        "assimilation"
       ],
       "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fwindows_vm_install_lab_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/windows_vm_install_lab_agent.py",
+      "url": "https://kody-w.github.io/RAR/#agent/%40borg%2Fborg_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@borg/borg_agent.py.card",
       "source": null,
       "score": 55.7,
       "origin_rank": 46,
@@ -4730,8 +4732,8 @@
       "components": {
         "community": 0.2958,
         "depth": 1.0,
-        "freshness": 0.5577,
-        "tier": 0.55
+        "freshness": 0.255,
+        "tier": 0.85
       },
       "scores_on": [
         "community",
@@ -4739,27 +4741,25 @@
         "freshness",
         "tier"
       ],
-      "scored_at_median": [
-        "community"
-      ],
+      "scored_at_median": [],
       "signals": {
         "rar": {
-          "upvotes": 0,
+          "upvotes": 1,
           "comments": 0,
           "engagement": 0,
           "channels": {},
-          "tier": "community",
-          "age_days": 101,
-          "lines": 818,
+          "tier": "verified",
+          "age_days": 237,
+          "lines": 1000,
           "has_card": true
         },
         "source": null
       },
       "why": [
-        "no community feedback yet - scored at the population median",
-        "community tier",
-        "added 101 days ago",
-        "818 lines",
+        "1 upvote",
+        "verified tier",
+        "added 237 days ago",
+        "1000 lines",
         "has a rendered card"
       ]
     },
@@ -4829,6 +4829,63 @@
     },
     {
       "rank": 78,
+      "ref": "@kody-w/windows_vm_install_lab_agent",
+      "title": "Windows VM Install Lab",
+      "description": "Runs an allowlisted Hyper-V Windows 11 lab for repeatable RAPP installer release testing with an embedded, hash-verified toolkit.",
+      "origin": "native",
+      "category": "devtools",
+      "tags": [
+        "windows",
+        "hyper-v",
+        "installer",
+        "testing",
+        "automation"
+      ],
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fwindows_vm_install_lab_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/windows_vm_install_lab_agent.py",
+      "source": null,
+      "score": 55.7,
+      "origin_rank": 47,
+      "origin_size": 229,
+      "components": {
+        "community": 0.2958,
+        "depth": 1.0,
+        "freshness": 0.5577,
+        "tier": 0.55
+      },
+      "scores_on": [
+        "community",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [
+        "community"
+      ],
+      "signals": {
+        "rar": {
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "community",
+          "age_days": 101,
+          "lines": 818,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "no community feedback yet - scored at the population median",
+        "community tier",
+        "added 101 days ago",
+        "818 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 79,
       "ref": "@kody-w/copilot_studio_parity_deploy",
       "title": "Copilot Studio Parity Deploy",
       "description": "Compiles caller-selected local RAPP agents into a provisioned, functionally parity-tested Copilot Studio Draft.",
@@ -4846,7 +4903,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/copilot_studio_parity_deploy_agent.py",
       "source": null,
       "score": 55.3,
-      "origin_rank": 47,
+      "origin_rank": 48,
       "origin_size": 229,
       "components": {
         "community": 0.2958,
@@ -4881,63 +4938,6 @@
         "community tier",
         "added 107 days ago",
         "7540 lines",
-        "has a rendered card"
-      ]
-    },
-    {
-      "rank": 79,
-      "ref": "@kody-w/factory",
-      "title": "RAPP to Copilot Studio Factory",
-      "description": "Turns any caller-selected group of local RAPP agent.py files into one provisioned, functionally parity-tested Copilot Studio Draft.",
-      "origin": "native",
-      "category": "pipeline",
-      "tags": [
-        "copilot_studio",
-        "factory",
-        "pipeline",
-        "deployment",
-        "parity"
-      ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Ffactory",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/factory_agent.py",
-      "source": null,
-      "score": 55.3,
-      "origin_rank": 48,
-      "origin_size": 229,
-      "components": {
-        "community": 0.2958,
-        "depth": 1.0,
-        "freshness": 0.5375,
-        "tier": 0.55
-      },
-      "scores_on": [
-        "community",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [
-        "community"
-      ],
-      "signals": {
-        "rar": {
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "community",
-          "age_days": 107,
-          "lines": 505,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "no community feedback yet - scored at the population median",
-        "community tier",
-        "added 107 days ago",
-        "505 lines",
         "has a rendered card"
       ]
     },
@@ -5007,24 +5007,21 @@
     },
     {
       "rank": 81,
-      "ref": "@kody-w/full_rapp_leviathan",
-      "title": "FullRappLeviathan",
-      "description": "Compiles and assesses public-safe Full RAPP Leviathan blueprints across identity, intelligence, production, truth, and commerce.",
+      "ref": "@kody-w/factory",
+      "title": "RAPP to Copilot Studio Factory",
+      "description": "Turns any caller-selected group of local RAPP agent.py files into one provisioned, functionally parity-tested Copilot Studio Draft.",
       "origin": "native",
-      "category": "core",
+      "category": "pipeline",
       "tags": [
-        "leviathan",
-        "protocol",
-        "brainstem",
-        "foundry",
-        "evidence",
-        "commerce",
-        "x402",
-        "enterprise"
+        "copilot_studio",
+        "factory",
+        "pipeline",
+        "deployment",
+        "parity"
       ],
       "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Ffull_rapp_leviathan",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/full_rapp_leviathan_agent.py",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Ffactory",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/factory_agent.py",
       "source": null,
       "score": 55.3,
       "origin_rank": 49,
@@ -5032,7 +5029,7 @@
       "components": {
         "community": 0.2958,
         "depth": 1.0,
-        "freshness": 0.5364,
+        "freshness": 0.5375,
         "tier": 0.55
       },
       "scores_on": [
@@ -5051,8 +5048,8 @@
           "engagement": 0,
           "channels": {},
           "tier": "community",
-          "age_days": 108,
-          "lines": 1556,
+          "age_days": 107,
+          "lines": 505,
           "has_card": true
         },
         "source": null
@@ -5060,8 +5057,8 @@
       "why": [
         "no community feedback yet - scored at the population median",
         "community tier",
-        "added 108 days ago",
-        "1556 lines",
+        "added 107 days ago",
+        "505 lines",
         "has a rendered card"
       ]
     },
@@ -5131,29 +5128,32 @@
     },
     {
       "rank": 83,
-      "ref": "@kody-w/pdf_reader_agent",
-      "title": "PDF Reader",
-      "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
+      "ref": "@kody-w/full_rapp_leviathan",
+      "title": "FullRappLeviathan",
+      "description": "Compiles and assesses public-safe Full RAPP Leviathan blueprints across identity, intelligence, production, truth, and commerce.",
       "origin": "native",
-      "category": "productivity",
+      "category": "core",
       "tags": [
-        "pdf",
-        "documents",
-        "reader",
-        "phone",
-        "offline"
+        "leviathan",
+        "protocol",
+        "brainstem",
+        "foundry",
+        "evidence",
+        "commerce",
+        "x402",
+        "enterprise"
       ],
       "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fpdf_reader_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/pdf_reader_agent.py",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Ffull_rapp_leviathan",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/full_rapp_leviathan_agent.py",
       "source": null,
       "score": 55.3,
       "origin_rank": 50,
       "origin_size": 229,
       "components": {
         "community": 0.2958,
-        "depth": 0.5364,
-        "freshness": 1.0,
+        "depth": 1.0,
+        "freshness": 0.5364,
         "tier": 0.55
       },
       "scores_on": [
@@ -5172,8 +5172,8 @@
           "engagement": 0,
           "channels": {},
           "tier": "community",
-          "age_days": 0,
-          "lines": 146,
+          "age_days": 108,
+          "lines": 1556,
           "has_card": true
         },
         "source": null
@@ -5181,8 +5181,8 @@
       "why": [
         "no community feedback yet - scored at the population median",
         "community tier",
-        "newest in the registry",
-        "146 lines",
+        "added 108 days ago",
+        "1556 lines",
         "has a rendered card"
       ]
     },
