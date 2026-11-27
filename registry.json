@@ -1,7 +1,7 @@
 {
   "schema": "rapp-registry/1.1",
   "version": "1.1.0",
-  "generated_at": "2026-11-27T15:25:27Z",
+  "generated_at": "2026-11-27T15:55:31Z",
   "static_api": "rapp-static-api/1.1",
   "pages_base": "https://kody-w.github.io/RAR",
   "raw_base": "https://raw.githubusercontent.com/kody-w/RAR/main",
@@ -10713,7 +10713,7 @@
     {
       "schema": "rapp-agent/1.0",
       "name": "@kody-w/pdf_reader_agent",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "display_name": "PDF Reader",
       "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
       "author": "kody-w",
@@ -10732,17 +10732,17 @@
       ],
       "_file": "agents/@kody-w/pdf_reader_agent.py",
       "_install_filename": "rar_kody_w_pdf_reader_agent.py",
-      "_sha256": "9ec0f532ccdc706c1c217241536823ab03a1310f95ea8ba5cfb34281e242e0fb",
+      "_sha256": "f32c63b6bf188ad530fec3f956c43a342f2ca399dad7031ae5a2c9e1e7379fc4",
       "_agentcard": "stacks/agentcard-bundles/cards/@kody-w/pdf_reader_agent.agentcard",
       "_agentcard_sha256": "324647204f6b21b52bc8a680344a59a43f2cb40680eb3a9c2b40e53638014a98",
       "_lifecycle": "notarized",
-      "_receipt": "rar_0f85dee9368ffe9f006b9d836aa85810baa9b15a7359297fee8d86c5f9ed91f2",
+      "_receipt": "rar_708f7089a346f6d931a926a9b38dfe042eec564b3b39c14362d5a83063cac5e7",
       "_controller": {
         "github_id": 1735900,
         "github_login": "kody-w"
       },
       "_provenance": {
-        "issue": 1662,
+        "issue": 1663,
         "submitted_by": "kody-w",
         "accepted_by": "kody-w",
         "checks": [
@@ -10757,17 +10757,17 @@
         ]
       },
       "_seed": 3942455493607960042,
-      "_size_kb": 8.3,
-      "_lines": 187,
+      "_size_kb": 9.2,
+      "_lines": 209,
       "_has_card": true,
       "_added_at": "2026-11-27T05:22:10Z",
       "_first_commit_sha": "2f5c2b3882956962f4c915df5872636a026d48bd",
       "_latest_commit_sha": "d28f8ea9dbfb92c646c182fa375cfff7b9fb2a72",
       "_card_sha256": "7746956891ffaadfcee008ac2efcee3b8363aa064d2495621bd9b82862e72afd",
       "_version": {
-        "sha256": "9ec0f532ccdc706c1c217241536823ab03a1310f95ea8ba5cfb34281e242e0fb",
-        "sha8": "9ec0f532ccdc",
-        "path": "versions/@kody-w/pdf_reader_agent/9ec0f532ccdc.py"
+        "sha256": "f32c63b6bf188ad530fec3f956c43a342f2ca399dad7031ae5a2c9e1e7379fc4",
+        "sha8": "f32c63b6bf18",
+        "path": "versions/@kody-w/pdf_reader_agent/f32c63b6bf18.py"
       }
     },
     {

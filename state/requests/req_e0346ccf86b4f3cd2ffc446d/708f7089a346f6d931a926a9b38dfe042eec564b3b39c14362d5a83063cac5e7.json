@@ -3,6 +3,11 @@
   "actor_id": 1735900,
   "actor_login": "kody-w",
   "agent": "@kody-w/pdf_reader_agent",
+  "applied_at": "2026-11-27T15:56:20.622555+00:00",
+  "approved_by": {
+    "github_id": 1735900,
+    "github_login": "kody-w"
+  },
   "base_lifecycle_receipt": "rar_0f85dee9368ffe9f006b9d836aa85810baa9b15a7359297fee8d86c5f9ed91f2",
   "base_lifecycle_sha256": "9ec0f532ccdc706c1c217241536823ab03a1310f95ea8ba5cfb34281e242e0fb",
   "base_lifecycle_version": "1.0.3",
@@ -22,6 +27,7 @@
   "issue_updated_at": "2026-11-27T15:55:03Z",
   "publisher": "@kody-w",
   "reason": "",
+  "receipt": "rar_708f7089a346f6d931a926a9b38dfe042eec564b3b39c14362d5a83063cac5e7",
   "repository_id": 1200565697,
   "request_id": "req_e0346ccf86b4f3cd2ffc446d",
   "revision_id": "708f7089a346f6d931a926a9b38dfe042eec564b3b39c14362d5a83063cac5e7",
@@ -29,5 +35,5 @@
   "slug": "pdf_reader_agent",
   "source_body_sha256": "6afc15a51f5cfa29a041167136ae82e96d2628db8dcb5ddc414f05936f933dd1",
   "source_url": "",
-  "status": "pending_review"
+  "status": "applied"
 }

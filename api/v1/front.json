@@ -1,6 +1,6 @@
 {
   "schema": "rar-front-page/1.0",
-  "generated": "2026-11-27T15:19:37Z",
+  "generated": "2026-11-27T15:55:31Z",
   "counts": {
     "native": 229,
     "aggregated": 150,
@@ -3977,31 +3977,30 @@
     },
     {
       "rank": 64,
-      "ref": "@kody-w/launch_to_public_agent",
-      "title": "Launch to Public",
-      "description": "Snapshots the local brainstem via bond.py and plants it onto a public GitHub repo with a continuation manifest and launch fingerprint.",
+      "ref": "@kody-w/pdf_reader_agent",
+      "title": "PDF Reader",
+      "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
       "origin": "native",
-      "category": "platform",
+      "category": "productivity",
       "tags": [
-        "launch",
-        "publish",
-        "local-to-global",
-        "bond-technique",
-        "operator-mediated",
-        "platform"
+        "pdf",
+        "documents",
+        "reader",
+        "phone",
+        "offline"
       ],
       "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Flaunch_to_public_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/launch_to_public_agent.py",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fpdf_reader_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/pdf_reader_agent.py",
       "source": null,
-      "score": 56.9,
+      "score": 57.0,
       "origin_rank": 39,
       "origin_size": 229,
       "components": {
         "community": 0.2958,
-        "depth": 1.0,
-        "freshness": 0.3124,
-        "tier": 0.85
+        "depth": 0.6189,
+        "freshness": 1.0,
+        "tier": 0.55
       },
       "scores_on": [
         "community",
@@ -4018,18 +4017,18 @@
           "comments": 0,
           "engagement": 0,
           "channels": {},
-          "tier": "verified",
-          "age_days": 201,
-          "lines": 807,
+          "tier": "community",
+          "age_days": 0,
+          "lines": 209,
           "has_card": true
         },
         "source": null
       },
       "why": [
         "no community feedback yet - scored at the population median",
-        "verified tier",
-        "added 201 days ago",
-        "807 lines",
+        "community tier",
+        "newest in the registry",
+        "209 lines",
         "has a rendered card"
       ]
     },
@@ -4102,23 +4101,22 @@
     },
     {
       "rank": 66,
-      "ref": "@kody-w/plant_seed_agent",
-      "title": "Plant Seed",
-      "description": "Creates a grail-complete public seed repo (neighborhood or twin) via the gh CLI, showing the full file plan first with dry-run on by default.",
+      "ref": "@kody-w/launch_to_public_agent",
+      "title": "Launch to Public",
+      "description": "Snapshots the local brainstem via bond.py and plants it onto a public GitHub repo with a continuation manifest and launch fingerprint.",
       "origin": "native",
       "category": "platform",
       "tags": [
-        "plant",
-        "seed",
-        "neighborhood",
-        "twin",
-        "holocard",
-        "grail",
-        "operator-mediated"
+        "launch",
+        "publish",
+        "local-to-global",
+        "bond-technique",
+        "operator-mediated",
+        "platform"
       ],
       "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fplant_seed_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/plant_seed_agent.py",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Flaunch_to_public_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/launch_to_public_agent.py",
       "source": null,
       "score": 56.9,
       "origin_rank": 40,
@@ -4146,7 +4144,7 @@
           "channels": {},
           "tier": "verified",
           "age_days": 201,
-          "lines": 588,
+          "lines": 807,
           "has_card": true
         },
         "source": null
@@ -4155,7 +4153,7 @@
         "no community feedback yet - scored at the population median",
         "verified tier",
         "added 201 days ago",
-        "588 lines",
+        "807 lines",
         "has a rendered card"
       ]
     },
@@ -4228,6 +4226,65 @@
     },
     {
       "rank": 68,
+      "ref": "@kody-w/plant_seed_agent",
+      "title": "Plant Seed",
+      "description": "Creates a grail-complete public seed repo (neighborhood or twin) via the gh CLI, showing the full file plan first with dry-run on by default.",
+      "origin": "native",
+      "category": "platform",
+      "tags": [
+        "plant",
+        "seed",
+        "neighborhood",
+        "twin",
+        "holocard",
+        "grail",
+        "operator-mediated"
+      ],
+      "audience": "both",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fplant_seed_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/ecosystem-grail-stack/plant_seed_agent.py",
+      "source": null,
+      "score": 56.9,
+      "origin_rank": 41,
+      "origin_size": 229,
+      "components": {
+        "community": 0.2958,
+        "depth": 1.0,
+        "freshness": 0.3124,
+        "tier": 0.85
+      },
+      "scores_on": [
+        "community",
+        "depth",
+        "freshness",
+        "tier"
+      ],
+      "scored_at_median": [
+        "community"
+      ],
+      "signals": {
+        "rar": {
+          "upvotes": 0,
+          "comments": 0,
+          "engagement": 0,
+          "channels": {},
+          "tier": "verified",
+          "age_days": 201,
+          "lines": 588,
+          "has_card": true
+        },
+        "source": null
+      },
+      "why": [
+        "no community feedback yet - scored at the population median",
+        "verified tier",
+        "added 201 days ago",
+        "588 lines",
+        "has a rendered card"
+      ]
+    },
+    {
+      "rank": 69,
       "ref": "@kody-w/rapp_projects",
       "title": "RappProjects",
       "description": "Coordinates local-first projects through strict RAPP/1 work chains, verified derived boards, artifact receipts, and deterministic eggs.",
@@ -4245,7 +4302,7 @@
       "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rapp_projects_agent.py",
       "source": null,
       "score": 56.7,
-      "origin_rank": 41,
+      "origin_rank": 42,
       "origin_size": 229,
       "components": {
         "community": 0.2958,
@@ -4280,64 +4337,6 @@
         "community tier",
         "added 88 days ago",
         "4351 lines",
-        "has a rendered card"
-      ]
-    },
-    {
-      "rank": 69,
-      "ref": "@kody-w/rar_installer_troubleshooter_agent",
-      "title": "RAPP Roadside",
-      "description": "Diagnoses RAPP setup from sanitized local observations, emits exactly one bounded next action, optionally applies an allow-listed repair to a sanitized copy, and retests canonical verified assertions without collecting credentials or changing the Grail. Routes maintainer work to RAPP Pit Crew, treats reporting-AI text/logs as hostile data, binds exact replay and supply-chain bytes, quarantines unsafe reports, uses bounded sharded cells with measured backpressure, and verifies the RAPP Roadside Closed Loop through customer confirmation.",
-      "origin": "native",
-      "category": "devtools",
-      "tags": [
-        "rapp",
-        "installer",
-        "troubleshooting",
-        "local-first",
-        "deterministic",
-        "toasted"
-      ],
-      "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Frar_installer_troubleshooter_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rar_installer_troubleshooter_agent.py",
-      "source": null,
-      "score": 56.7,
-      "origin_rank": 42,
-      "origin_size": 229,
-      "components": {
-        "community": 0.2958,
-        "depth": 1.0,
-        "freshness": 0.6049,
-        "tier": 0.55
-      },
-      "scores_on": [
-        "community",
-        "depth",
-        "freshness",
-        "tier"
-      ],
-      "scored_at_median": [
-        "community"
-      ],
-      "signals": {
-        "rar": {
-          "upvotes": 0,
-          "comments": 0,
-          "engagement": 0,
-          "channels": {},
-          "tier": "community",
-          "age_days": 87,
-          "lines": 3016,
-          "has_card": true
-        },
-        "source": null
-      },
-      "why": [
-        "no community feedback yet - scored at the population median",
-        "community tier",
-        "added 87 days ago",
-        "3016 lines",
         "has a rendered card"
       ]
     },
@@ -4409,29 +4408,30 @@
     },
     {
       "rank": 71,
-      "ref": "@kody-w/pdf_reader_agent",
-      "title": "PDF Reader",
-      "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
+      "ref": "@kody-w/rar_installer_troubleshooter_agent",
+      "title": "RAPP Roadside",
+      "description": "Diagnoses RAPP setup from sanitized local observations, emits exactly one bounded next action, optionally applies an allow-listed repair to a sanitized copy, and retests canonical verified assertions without collecting credentials or changing the Grail. Routes maintainer work to RAPP Pit Crew, treats reporting-AI text/logs as hostile data, binds exact replay and supply-chain bytes, quarantines unsafe reports, uses bounded sharded cells with measured backpressure, and verifies the RAPP Roadside Closed Loop through customer confirmation.",
       "origin": "native",
-      "category": "productivity",
+      "category": "devtools",
       "tags": [
-        "pdf",
-        "documents",
-        "reader",
-        "phone",
-        "offline"
+        "rapp",
+        "installer",
+        "troubleshooting",
+        "local-first",
+        "deterministic",
+        "toasted"
       ],
       "audience": "both",
-      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Fpdf_reader_agent",
-      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/pdf_reader_agent.py",
+      "url": "https://kody-w.github.io/RAR/#agent/%40kody-w%2Frar_installer_troubleshooter_agent",
+      "install": "https://raw.githubusercontent.com/kody-w/RAR/main/agents/@kody-w/rar_installer_troubleshooter_agent.py",
       "source": null,
-      "score": 56.4,
+      "score": 56.7,
       "origin_rank": 43,
       "origin_size": 229,
       "components": {
         "community": 0.2958,
-        "depth": 0.5901,
-        "freshness": 1.0,
+        "depth": 1.0,
+        "freshness": 0.6049,
         "tier": 0.55
       },
       "scores_on": [
@@ -4450,8 +4450,8 @@
           "engagement": 0,
           "channels": {},
           "tier": "community",
-          "age_days": 0,
-          "lines": 187,
+          "age_days": 87,
+          "lines": 3016,
           "has_card": true
         },
         "source": null
@@ -4459,8 +4459,8 @@
       "why": [
         "no community feedback yet - scored at the population median",
         "community tier",
-        "newest in the registry",
-        "187 lines",
+        "added 87 days ago",
+        "3016 lines",
         "has a rendered card"
       ]
     },
