@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-11-26T15:27:03Z",
+ "generated_at": "2026-11-27T15:16:39Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -9,34 +9,34 @@
   "stars": 4,
   "forks": 1,
   "watchers": 0,
-  "open_issues": 38,
-  "size_kb": 131703,
+  "open_issues": 39,
+  "size_kb": 136933,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-11-26T10:17:48Z",
+  "pushed_at": "2026-11-27T14:49:35Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": "https://kody-w.github.io/RAR/"
  },
  "totals": {
-  "downloads": 18908,
-  "clones": 18282,
+  "downloads": 19052,
+  "clones": 18426,
   "cdn_hits": 577,
   "release_downloads": 49,
   "agent_file_downloads": 32,
-  "clones_excluding_ci_estimate": 12290,
-  "ci_clone_estimate": 5992,
+  "clones_excluding_ci_estimate": 12378,
+  "ci_clone_estimate": 6048,
   "page_views": 341,
-  "clone_uniques_14d": 344,
-  "view_uniques_14d": 13,
-  "clone_uniques_daily_sum": 3353,
+  "clone_uniques_14d": 286,
+  "view_uniques_14d": 11,
+  "clone_uniques_daily_sum": 3377,
   "view_uniques_daily_sum": 158,
-  "days_tracked": 107,
+  "days_tracked": 108,
   "tracking_since": "2026-07-14",
-  "agents": 228,
+  "agents": 229,
   "swarms": 2,
   "publishers": 10,
   "categories": 14,
-  "total_lines": 142590,
-  "total_kb": 6768.6,
+  "total_lines": 142736,
+  "total_kb": 6774.9,
   "votes": 1,
   "upvotes": 1,
   "voters": 1,
@@ -48,13 +48,6 @@
   "agents_voted": 1
  },
  "daily": [
-  {
-   "date": "2026-08-28",
-   "clones": 258,
-   "clone_uniques": 24,
-   "views": 0,
-   "cdn": 0
-  },
   {
    "date": "2026-08-29",
    "clones": 116,
@@ -677,6 +670,13 @@
    "clone_uniques": 29,
    "views": 0,
    "cdn": 0
+  },
+  {
+   "date": "2026-11-26",
+   "clones": 144,
+   "clone_uniques": 24,
+   "views": 0,
+   "cdn": 0
   }
  ],
  "traffic": {
@@ -684,8 +684,8 @@
    {
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "count": 8,
-    "uniques": 6
+    "count": 7,
+    "uniques": 5
    },
    {
     "path": "/kody-w/RAR/issues",
@@ -745,19 +745,19 @@
   "referrers": [
    {
     "referrer": "github.com",
-    "count": 9,
-    "uniques": 7
+    "count": 8,
+    "uniques": 6
    }
   ],
-  "clones_14d": 1443,
-  "views_14d": 31,
+  "clones_14d": 1211,
+  "views_14d": 29,
   "live": true,
-  "as_of": "2026-11-26T15:27:03Z"
+  "as_of": "2026-11-27T15:16:39Z"
  },
  "cdn": {
   "total_hits": 577,
   "bandwidth": 7196782,
-  "rank": 830144,
+  "rank": 833409,
   "agent_hits": 32,
   "files": [
    {
@@ -2529,6 +2529,23 @@
   ],
   "newest": [
    {
+    "name": "@kody-w/pdf_reader_agent",
+    "display_name": "PDF Reader",
+    "publisher": "@kody-w",
+    "category": "productivity",
+    "tier": "community",
+    "downloads": 0,
+    "up": 0,
+    "score": 0,
+    "reviews": 0,
+    "rating": 0.0,
+    "lines": 146,
+    "size_kb": 6.3,
+    "added_at": "2026-11-27T05:22:10Z",
+    "file": "agents/@kody-w/pdf_reader_agent.py",
+    "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network."
+   },
+   {
     "name": "@kody-w/replay_agent",
     "display_name": "Replay",
     "publisher": "@kody-w",
@@ -2765,23 +2782,6 @@
     "added_at": "2026-08-31T11:52:12-04:00",
     "file": "agents/@kody-w/rapp_projects_agent.py",
     "description": "Coordinates local-first projects through strict RAPP/1 work chains, verified derived boards, artifact receipts, and deterministic eggs."
-   },
-   {
-    "name": "@kody-w/hologram_dogg",
-    "display_name": "HologramDOGG",
-    "publisher": "@kody-w",
-    "category": "integrations",
-    "tier": "community",
-    "downloads": 0,
-    "up": 0,
-    "score": 0,
-    "reviews": 0,
-    "rating": 0.0,
-    "lines": 235,
-    "size_kb": 9.4,
-    "added_at": "2026-08-29T00:44:02Z",
-    "file": "agents/@kody-w/hologram_dogg_agent.py",
-    "description": "Lists the public RAR hologram DOGG channel and asks a local RAPP Zoo to summon a named, hash-verified character or data projection. Downloads data only; the zoo owns the sandboxed renderer."
    }
   ],
   "publishers": [
@@ -2796,11 +2796,11 @@
    },
    {
     "name": "@kody-w",
-    "agents": 76,
+    "agents": 77,
     "downloads": 4,
     "score": 1,
     "reviews": 1,
-    "lines": 69496,
+    "lines": 69642,
     "rating": 5.0
    },
    {
@@ -2879,7 +2879,7 @@
   "categories": [
    {
     "name": "productivity",
-    "agents": 48,
+    "agents": 49,
     "downloads": 4,
     "score": 0,
     "reviews": 0
@@ -2978,7 +2978,7 @@
   ],
   "tiers": {
    "frontier": 97,
-   "community": 75,
+   "community": 76,
    "official": 46,
    "verified": 8,
    "private": 2
