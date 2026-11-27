@@ -2448,6 +2448,21 @@
       "url": "https://github.com/kody-w/RAR/discussions/1579",
       "number": 1579
     },
+    "@kody-w/pdf_reader_agent": {
+      "upvotes": 0,
+      "downloads": 0,
+      "score": 0,
+      "comments": 0,
+      "signals": {
+        "worked": 0,
+        "regular_use": 0,
+        "shipped": 0,
+        "want_to_try": 0,
+        "saved_time": 0
+      },
+      "url": "https://github.com/kody-w/RAR/discussions/1658",
+      "number": 1658
+    },
     "@kody-w/perpetual_loop_factory": {
       "upvotes": 0,
       "downloads": 0,
