@@ -14,7 +14,8 @@ Write ONE JSON object, the cartridge, and nothing else in that file or code bloc
   "model": "your own model name",
   "turns": [
     {"role": "user", "content": "what the person said, word for word"},
-    {"role": "assistant", "content": "what you answered"}
+    {"role": "assistant", "content": "what you answered"},
+    {"role": "assistant", "content": "Where things stand: the question is answered. Not done: nothing is saved outside this app yet.\n|||NEXT|||[{\"n\": 1, \"job\": \"Save this file somewhere you control.\", \"done_when\": \"A second copy opens from that place.\"}, {\"n\": 2, \"job\": \"...\", \"done_when\": \"...\"}, {\"n\": 3, \"job\": \"...\", \"done_when\": \"...\"}]"}
   ]
 }
 ```
@@ -32,7 +33,8 @@ Rules:
    you know), what is not, and anything blocked and on whom. It ends with the line `|||NEXT|||` followed by a JSON list
    of exactly three next jobs, your pick first, numbered 1, 2, 3:
    `[{"n": 1, "job": "one plain sentence", "done_when": "what someone would see when it is done"}, ...]`
-   Always three. A job that is finished leaves the list and a new one takes its place; a job you could not do stays.
+   The marker `|||NEXT|||` and the JSON list go INSIDE that turn's `content` string, exactly as in the example above;
+   a plain "1. 2. 3." list is not enough, because the next AI's tools look for the marker. Always three. A job that is finished leaves the list and a new one takes its place; a job you could not do stays.
 7. If you can write files, save it as `cartridge-<date>.json` where the person says. If you cannot, print it in one
    `json` code block so they can save it.
 
