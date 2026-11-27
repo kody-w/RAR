@@ -183,7 +183,8 @@ jobs:
         # when the catalog looks stale could not actually fix it.
         if: >-
           github.ref == 'refs/heads/main' &&
-          (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+          (github.event_name == 'push' || github.event_name == 'workflow_dispatch' ||
+           github.event_name == 'workflow_run')
         run: |
           git config user.name "RAPP Registry Bot"
           git config user.email "rapp-bot@users.noreply.github.com"
