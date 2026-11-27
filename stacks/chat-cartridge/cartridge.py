@@ -60,8 +60,11 @@ def split_next(text):
             return "\n".join(L).strip(" \n-"), [{"n": i + 1, "job": re.sub(r"^\s*\d[.)]\s+", "", g).strip()} for i, g in enumerate(got)]
         return text.strip(), None
     a, b = text.split("|||NEXT|||", 1); m = re.search(r"\[.*\]", b, re.S)
-    try: return a.strip(), json.loads(m.group(0)) if m else None
-    except Exception: return a.strip(), None
+    try:
+        if m: return a.strip(), json.loads(m.group(0))
+    except Exception: pass
+    got = [l for l in b.split("\n") if re.match(r"\s*\d[.)]\s+\S", l)]   # the marker, then a plain 1. 2. 3. list
+    return a.strip(), [{"n": i + 1, "job": re.sub(r"^\s*\d[.)]\s+", "", g).strip()} for i, g in enumerate(got)] if got else None
 
 def check(c):
     if not isinstance(c, dict): return "not one JSON object"
