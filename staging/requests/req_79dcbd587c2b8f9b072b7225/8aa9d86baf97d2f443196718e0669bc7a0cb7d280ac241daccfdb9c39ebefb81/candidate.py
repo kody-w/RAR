@@ -1,0 +1,270 @@
+# ── RAPP ticket ── this file is a RAPP agent: one whole AI skill in one Python file. ─────────────
+# If your person asked you to load it, any AI (or person) can, in three steps:
+# 1. Brainstem (free, local, macOS/Linux; Windows: WSL). If http://localhost:7071/health does not answer:
+#      curl -fsSL https://kody-w.github.io/rapp-installer/install.sh | bash
+# 2. Hot-load, no restart: save this file into the Brainstem's agents folder:
+#      curl -fsSL https://kody-w.github.io/RAR/agents/@kody-w/pdf_reader_agent.py -o ~/.brainstem/src/rapp_brainstem/agents/pdf_reader_agent.py
+#    The next chat message can use it.
+# 3. Use it: open http://localhost:7071, or POST /chat {"user_input": "..."}; the reply is in "response".
+# Can't run commands (a web chat AI)? Give your person these steps. Page: https://kody-w.github.io/RAR/a/@kody-w/pdf_reader_agent/
+# ───────────────────────────────────────────────────────────────────────────────────────────────
+# /// script
+# dependencies = ["pypdf>=5"]
+# ///
+"""
+PDF Reader — lists the PDFs you have handed to your Brainstem and reads the text of one, page by page.
+
+Where it looks: the folder named by the BRAINSTEM_FILES setting (on a phone, the files you give your agents),
+otherwise ~/Documents. It only reads; it never changes or sends a file.
+"""
+
+import json
+import os
+
+__manifest__ = {
+    "schema": "rapp-agent/1.0",
+    "name": "@kody-w/pdf_reader_agent",
+    "version": "1.0.6",
+    "display_name": "PDF Reader",
+    "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network.",
+    "author": "kody-w",
+    "tags": ["pdf", "documents", "reader", "phone", "offline"],
+    "category": "productivity",
+    "quality_tier": "community",
+    "requires_env": [],
+    "dependencies": ["@rapp/basic_agent"],
+}
+
+try:
+    from agents.basic_agent import BasicAgent
+except ImportError:  # other hosts
+    try:
+        from basic_agent import BasicAgent  # type: ignore
+    except ImportError:
+        from openrappter.agents.basic_agent import BasicAgent  # type: ignore
+
+MAX_CHARS = 6000
+
+
+def _folder():
+    return os.path.expanduser(os.environ.get("BRAINSTEM_FILES") or "~/Documents")
+
+
+_STOP = {"the", "and", "for", "what", "when", "does", "say", "about", "how", "much", "this", "that", "with",
+         "my", "is", "are", "of", "on", "in", "to", "a", "an", "it", "do", "i", "pdf", "file", "document"}
+
+
+def _words(text):
+    """Lowercased search words without filler; "dates" also matches "date"."""
+    out = []
+    for w in "".join(c.lower() if c.isalnum() else " " for c in str(text or "")).split():
+        if len(w) > 2 and w not in _STOP:
+            out.append(w[:-1] if w.endswith("s") and len(w) > 4 else w)
+    return out
+
+
+def _lines(reader, total):
+    """(page, line) for every non-empty line."""
+    out = []
+    for i in range(total):
+        for line in (reader.pages[i].extract_text() or "").splitlines():
+            if line.strip():
+                out.append((i + 1, line.strip()))
+    return out
+
+
+def _shape(line):
+    """A line with its numbers removed, to spot repeated headers and boilerplate."""
+    import re
+    return re.sub(r"\d+", "#", line.lower())
+
+
+def _distinct(lines, cap, limit=40):
+    """Lines that occur once in the document (numbers ignored): its real content, like a table of contents."""
+    seen = {}
+    for _, line in lines:
+        seen[_shape(line)] = seen.get(_shape(line), 0) + 1
+    out, size = [], 0
+    for page, line in lines:
+        if seen[_shape(line)] == 1 and len(line) > 25 and size + len(line) <= cap and len(out) < limit:
+            out.append(f"page {page}: {line}")
+            size += len(line)
+    return out
+
+
+def _find(reader, name, total, words, limit=12, cap=2500):
+    """The lines that mention the most search words (stems, rare words weigh more), best first, with their pages."""
+    lines = _lines(reader, total)
+    stems = {w[:4] if len(w) >= 5 else w for w in words}
+    pages_with = {st: len({p for p, l in lines if st in l.lower()}) for st in stems}
+    common = {st for st, n in pages_with.items() if total >= 5 and n > total / 2}
+    useful = stems - common or stems
+    hits = []
+    for page, line in lines:
+        low = line.lower()
+        score = sum(1.0 / (1 + pages_with[st]) for st in useful if st in low)
+        if score:
+            hits.append((-score, page, line))
+    hits.sort()
+    out, size = [], 0
+    for _, page, line in hits[:limit]:
+        if size + len(line) > cap:
+            break
+        out.append(f"page {page}: {line}")
+        size += len(line)
+    if not out or useful != stems and not any(st in l.lower() for _, _, l in hits[:1] for st in useful):
+        facts = _facts(reader, total, cap // 2)
+        return {"file": name, "pages": total, "found": [],
+                "note": f"Nothing in {name} uses the words {' '.join(words)}. Below are its dates and amounts and its "
+                        f"distinct lines; if one answers them under other words, quote it with its page.",
+                "dates_and_amounts": facts, "distinct_lines": _distinct(lines, cap)}
+    return {"file": name, "pages": total, "found": out}
+
+
+_FACT = None
+
+
+def _facts(reader, total, cap, limit=15):
+    """Lines carrying a date, a year or an amount: what people usually ask a document for."""
+    import re
+    global _FACT
+    _FACT = _FACT or re.compile(r"(\b(19|20)\d\d\b|\$\s?\d|\b\d[\d,.]*\s*(dollars?|percent|%|days|months|years)\b|"
+                                r"\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.? \d)", re.I)
+    out, size = [], 0
+    for i in range(total):
+        for line in (reader.pages[i].extract_text() or "").splitlines():
+            if _FACT.search(line) and size + len(line) <= cap and len(out) < limit:
+                out.append(f"page {i + 1}: {line.strip()}")
+                size += len(line)
+    return out
+
+
+_PREVIEWS = {}
+
+
+def _preview(path, limit=80):
+    """The first words of page 1, cached by modification time; "" when unreadable."""
+    try:
+        key = (path, os.path.getmtime(path))
+    except OSError:
+        return ""
+    if key not in _PREVIEWS:
+        try:
+            from pypdf import PdfReader
+            text = (PdfReader(path).pages[0].extract_text() or "").split()
+            _PREVIEWS[key] = " ".join(text)[:limit]
+        except Exception:
+            _PREVIEWS[key] = ""
+    return _PREVIEWS[key]
+
+
+_TOPICS = {}
+
+
+def _topics(path, limit=10):
+    """A short list of what a PDF covers, from its distinct lines (cached by modification time)."""
+    try:
+        key = (path, os.path.getmtime(path))
+    except OSError:
+        return ""
+    if key not in _TOPICS:
+        try:
+            from pypdf import PdfReader
+            reader = PdfReader(path)
+            total = min(len(reader.pages), 300)
+            names = []
+            for line in _distinct(_lines(reader, total), 4000, 60):
+                text = line.split(": ", 1)[1]
+                head = text.split(":", 1)[0] if ":" in text[:40] else " ".join(text.split()[:3])
+                head = head.strip(" .,;").lower()
+                if head and head not in names:
+                    names.append(head)
+            _TOPICS[key] = ", ".join(names[:limit])
+        except Exception:
+            _TOPICS[key] = ""
+    return _TOPICS[key]
+
+
+def _pdfs():
+    folder = _folder()
+    try:
+        names = sorted(n for n in os.listdir(folder) if n.lower().endswith(".pdf"))
+    except OSError:
+        names = []
+    return folder, names
+
+
+class PdfReaderAgent(BasicAgent):
+    def __init__(self):
+        self.name = "PdfReader"
+        self.metadata = {
+            "name": self.name,
+            "description": "Reads a PDF the person has handed to this Brainstem and returns its text. Call it whenever they name a PDF or ask what is in one. With no file it lists their PDFs.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "file": {"type": "string", "description": "The PDF's file name from the list, or \"\" to list the PDFs available."},
+                    "look_for": {"type": "string", "description": "A few words for what they asked about, like \"rent\" or \"start date\". Fill it whenever they ask a question, so the answer is found on any page."},
+                },
+                "required": [],
+            },
+        }
+        super().__init__(self.name, self.metadata)
+
+    def system_context(self):
+        """Tells the chat which PDFs it holds, each with its opening words, so "my lease", "that document"
+        or "is a burst pipe covered?" reaches this agent."""
+        folder, names = _pdfs()
+        if not names:
+            return None
+        shown = []
+        for n in names[:12]:
+            hint = _preview(os.path.join(folder, n))
+            topics = _topics(os.path.join(folder, n))
+            about = f"; covers: {topics}" if topics else ""
+            shown.append(f"{n} (starts: \"{hint}\"{about})" if hint else n)
+        more = f", and {len(names) - 12} more" if len(names) > 12 else ""
+        return (f"The person has given you these PDFs: {'; '.join(shown)}{more}. When they ask about anything "
+                f"these could answer, even as \"my lease\" or \"that document\", call PdfReader with the file name first.")
+
+    def perform(self, file="", first_page=1, last_page=None, look_for="", **kwargs):
+        folder, names = _pdfs()
+        if not str(file or "").strip():
+            if not names:
+                return json.dumps({"pdfs": [], "note": "No PDFs here yet. Hand one to your agents first."})
+            return json.dumps({"pdfs": names})
+        want = os.path.basename(str(file)).strip().lower()
+        match = next((n for n in names if n.lower() == want), None) or \
+            next((n for n in names if want.replace(".pdf", "") in n.lower()), None)
+        if not match:
+            return json.dumps({"error": f"No PDF named {file!r}.", "pdfs": names})
+        try:
+            from pypdf import PdfReader
+        except ImportError:
+            return json.dumps({"error": "pypdf is not installed here (pip install pypdf, or install this agent's card)."})
+        try:
+            reader = PdfReader(os.path.join(folder, match))
+            total = len(reader.pages)
+            def num(v, default):
+                try:
+                    v = int(float(v))
+                except (TypeError, ValueError):
+                    return default
+                return v if v > 0 else default
+            words = _words(look_for)
+            if words:
+                return json.dumps(_find(reader, match, total, words))
+            first = min(num(first_page, 1), total)
+            last = min(max(num(last_page, first + 2), first), total)
+            parts = []
+            for i in range(first - 1, last):
+                parts.append(f"--- page {i + 1} ---\n{(reader.pages[i].extract_text() or '').strip()}")
+            text = "\n".join(parts)
+        except Exception as e:  # a damaged or locked PDF should say so, not crash the chat
+            return json.dumps({"error": f"Could not read {match}: {type(e).__name__}: {e}"})
+        cut = len(text) > MAX_CHARS
+        out = {"file": match, "pages": total, "read": [first, last], "text": text[:MAX_CHARS], "truncated": cut}
+        if last < total or cut:
+            out["more"] = (f"This is only part of a {total}-page PDF. If the answer is not here, call PdfReader again "
+                           f"with look_for set to a few words for what they asked.")
+        return json.dumps(out)
