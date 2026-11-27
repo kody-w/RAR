@@ -1,7 +1,7 @@
 {
   "schema": "rar-catalog/1.0",
   "description": "Every agent in RAR as a lean record. Fetch this one file to render a complete browsable catalog with no further requests, no backend, no authentication and no GitHub account. stack_packs lists every installable pack, including retired packs with status and retirement metadata.",
-  "generated": "2026-11-27T03:17:58Z",
+  "generated": "2026-11-27T03:46:21Z",
   "count": 228,
   "self_url": "https://raw.githubusercontent.com/kody-w/RAR/main/api/v1/catalog.json",
   "agents": [
@@ -10771,14 +10771,14 @@
     {
       "name": "agentcard-bundles",
       "display_name": "Agent card bundles",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "schema": "rapp-rar-stack/1.0",
       "status": "current",
       "path": "stacks/agentcard-bundles",
       "purpose": "Staging. Builds one .agentcard per catalog agent that needs a package a phone's Python lacks, carrying pure-Python wheels and sibling files inside the card so it runs on a phone (Hive). Adds _agentcard and _agentcard_sha256 to those registry entries.",
       "files": {
         "bundle_card.py": {
-          "sha256": "14f2d92fa32b28d9830cce26df4718822e4efc7e66a4ac3451838fa10efad00a",
+          "sha256": "35bbe5c113dd7f410896db550b485bcc47184acefdea2bdfc35399abd27acb12",
           "verified": true
         },
         "build_bundles.py": {
