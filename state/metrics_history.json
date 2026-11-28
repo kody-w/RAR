@@ -444,29 +444,33 @@
   "2026-11-26": {
    "count": 144,
    "uniques": 24
+  },
+  "2026-11-27": {
+   "count": 524,
+   "uniques": 40
   }
  },
  "last_known": {
-  "at": "2026-11-27T15:16:39Z",
-  "clone_uniques_14d": 286,
-  "clones_14d": 1211,
+  "at": "2026-11-28T14:19:18Z",
+  "clone_uniques_14d": 278,
+  "clones_14d": 1610,
   "paths": [
    {
-    "count": 7,
+    "count": 9,
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "uniques": 5
+    "uniques": 6
+   },
+   {
+    "count": 3,
+    "path": "/kody-w/RAR/stargazers",
+    "title": "/stargazers",
+    "uniques": 1
    },
    {
     "count": 2,
     "path": "/kody-w/RAR/issues",
     "title": "/issues",
-    "uniques": 1
-   },
-   {
-    "count": 2,
-    "path": "/kody-w/RAR/stargazers",
-    "title": "/stargazers",
     "uniques": 1
    },
    {
@@ -514,13 +518,13 @@
   ],
   "referrers": [
    {
-    "count": 8,
+    "count": 7,
     "referrer": "github.com",
-    "uniques": 6
+    "uniques": 5
    }
   ],
   "view_uniques_14d": 11,
-  "views_14d": 29
+  "views_14d": 32
  },
  "snapshots": [
   {
@@ -2342,6 +2346,16 @@
    "first_day": "2026-07-14",
    "view_uniques_all_time": 158,
    "views_all_time": 341
+  },
+  {
+   "at": "2026-11-28T14:19:18Z",
+   "cdn_all_time": 577,
+   "clone_uniques_all_time": 3417,
+   "clones_all_time": 18950,
+   "days_tracked": 109,
+   "first_day": "2026-07-14",
+   "view_uniques_all_time": 160,
+   "views_all_time": 345
   }
  ],
  "views": {
@@ -2776,6 +2790,10 @@
   "2026-11-26": {
    "count": 0,
    "uniques": 0
+  },
+  "2026-11-27": {
+   "count": 4,
+   "uniques": 2
   }
  }
 }

@@ -1,6 +1,6 @@
 {
  "schema": "rar-metrics/1.0",
- "generated_at": "2026-11-27T15:16:39Z",
+ "generated_at": "2026-11-28T14:19:18Z",
  "repo": {
   "owner": "kody-w",
   "name": "RAR",
@@ -10,33 +10,33 @@
   "forks": 1,
   "watchers": 0,
   "open_issues": 39,
-  "size_kb": 136933,
+  "size_kb": 132379,
   "created_at": "2026-04-03T15:06:54Z",
-  "pushed_at": "2026-11-27T14:49:35Z",
+  "pushed_at": "2026-11-28T05:48:25Z",
   "description": "The open single-file AI agent registry. Browse, vote, share agent.py files. Pokemon-card-style sharing via QR codes.",
   "homepage": "https://kody-w.github.io/RAR/"
  },
  "totals": {
-  "downloads": 19052,
-  "clones": 18426,
+  "downloads": 19576,
+  "clones": 18950,
   "cdn_hits": 577,
   "release_downloads": 49,
   "agent_file_downloads": 32,
-  "clones_excluding_ci_estimate": 12378,
-  "ci_clone_estimate": 6048,
-  "page_views": 341,
-  "clone_uniques_14d": 286,
+  "clones_excluding_ci_estimate": 12846,
+  "ci_clone_estimate": 6104,
+  "page_views": 345,
+  "clone_uniques_14d": 278,
   "view_uniques_14d": 11,
-  "clone_uniques_daily_sum": 3377,
-  "view_uniques_daily_sum": 158,
-  "days_tracked": 108,
+  "clone_uniques_daily_sum": 3417,
+  "view_uniques_daily_sum": 160,
+  "days_tracked": 109,
   "tracking_since": "2026-07-14",
   "agents": 229,
   "swarms": 2,
   "publishers": 10,
   "categories": 14,
-  "total_lines": 142736,
-  "total_kb": 6774.9,
+  "total_lines": 142862,
+  "total_kb": 6780.2,
   "votes": 1,
   "upvotes": 1,
   "voters": 1,
@@ -48,13 +48,6 @@
   "agents_voted": 1
  },
  "daily": [
-  {
-   "date": "2026-08-29",
-   "clones": 116,
-   "clone_uniques": 19,
-   "views": 5,
-   "cdn": 0
-  },
   {
    "date": "2026-08-30",
    "clones": 86,
@@ -677,6 +670,13 @@
    "clone_uniques": 24,
    "views": 0,
    "cdn": 0
+  },
+  {
+   "date": "2026-11-27",
+   "clones": 524,
+   "clone_uniques": 40,
+   "views": 4,
+   "cdn": 0
   }
  ],
  "traffic": {
@@ -684,18 +684,18 @@
    {
     "path": "/kody-w/RAR",
     "title": "Overview",
-    "count": 7,
-    "uniques": 5
-   },
-   {
-    "path": "/kody-w/RAR/issues",
-    "title": "/issues",
-    "count": 2,
-    "uniques": 1
+    "count": 9,
+    "uniques": 6
    },
    {
     "path": "/kody-w/RAR/stargazers",
     "title": "/stargazers",
+    "count": 3,
+    "uniques": 1
+   },
+   {
+    "path": "/kody-w/RAR/issues",
+    "title": "/issues",
     "count": 2,
     "uniques": 1
    },
@@ -745,19 +745,19 @@
   "referrers": [
    {
     "referrer": "github.com",
-    "count": 8,
-    "uniques": 6
+    "count": 7,
+    "uniques": 5
    }
   ],
-  "clones_14d": 1211,
-  "views_14d": 29,
+  "clones_14d": 1610,
+  "views_14d": 32,
   "live": true,
-  "as_of": "2026-11-27T15:16:39Z"
+  "as_of": "2026-11-28T14:19:18Z"
  },
  "cdn": {
   "total_hits": 577,
   "bandwidth": 7196782,
-  "rank": 833409,
+  "rank": 836340,
   "agent_hits": 32,
   "files": [
    {
@@ -2539,8 +2539,8 @@
     "score": 0,
     "reviews": 0,
     "rating": 0.0,
-    "lines": 146,
-    "size_kb": 6.3,
+    "lines": 272,
+    "size_kb": 11.6,
     "added_at": "2026-11-27T05:22:10Z",
     "file": "agents/@kody-w/pdf_reader_agent.py",
     "description": "Lists the PDFs handed to this Brainstem and reads the text of one, a page range at a time; read-only, no network."
@@ -2800,7 +2800,7 @@
     "downloads": 4,
     "score": 1,
     "reviews": 1,
-    "lines": 69642,
+    "lines": 69768,
     "rating": 5.0
    },
    {
